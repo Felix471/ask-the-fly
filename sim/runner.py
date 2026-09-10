@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: MIT
 # Derived from Shiu et al. (2024) model.py, used under the MIT License.
-"""Condition expansion, worker sharding, and Phase-0 result writing."""
+"""Condition expansion, worker sharding, and result writing."""
 
 from __future__ import annotations
 
@@ -14,10 +14,16 @@ from typing import Iterable
 
 import numpy as np
 import pandas as pd
-from joblib import Parallel, delayed
 
-from sim.network import ROOT, build_network, channel_cell_sets, load_cells, load_protocol
 from sim.readout import mn9_rate
+
+ROOT = Path(__file__).resolve().parents[1]
+
+
+def _load_json(relative_path: str) -> dict:
+    import json
+
+    return json.loads((ROOT / relative_path).read_text(encoding="utf-8"))
 
 
 def expand_conditions(protocol: dict, condition_keys: Iterable[str]) -> list[dict]:
@@ -79,7 +85,16 @@ def _rss_mb() -> float:
         return float("nan")
 
 
-def _run_shard(worker_id: int, jobs: list[tuple], protocol: dict, cells: dict, duration_ms: float) -> dict:
+def _run_shard(
+    worker_id: int,
+    jobs: list[tuple],
+    protocol: dict,
+    cells: dict,
+    duration_ms: float,
+    channels: list[str] | None,
+) -> dict:
+    from sim.network import build_network, channel_cell_sets
+
     network = None
     current_signature = None
     output = []
@@ -94,13 +109,15 @@ def _run_shard(worker_id: int, jobs: list[tuple], protocol: dict, cells: dict, d
             network = None
             gc.collect()
             mappings = channel_cell_sets(protocol, override)
-            # Phase 0 uses only the channels named by its frozen conditions.
-            phase0_channels = {
-                name for spec in protocol["phase0_conditions"].values()
-                for name in (field[:-3] for field in spec if field.endswith("_hz"))
-            }
+            selected_channels = channels
+            if selected_channels is None:
+                # Preserve Phase 0's channel inference when none are supplied.
+                selected_channels = sorted({
+                    name for spec in protocol["phase0_conditions"].values()
+                    for name in (field[:-3] for field in spec if field.endswith("_hz"))
+                })
             network = build_network(
-                protocol, cells, {name: mappings[name] for name in mappings if name in phase0_channels}
+                protocol, cells, {name: mappings[name] for name in selected_channels}
             )
             current_signature = signature
         start = time.perf_counter()
@@ -122,12 +139,16 @@ def run_conditions(
     stage: str = "full",
     duration_ms: float | None = None,
     force: bool = True,
+    channels: list[str] | None = None,
+    results_subdir: str = "phase0",
 ) -> pd.DataFrame:
     """Run round-robin worker shards and write one parquet per condition."""
-    protocol = load_protocol() if protocol is None else protocol
-    cells = load_cells() if cells is None else cells
+    from joblib import Parallel, delayed
+
+    protocol = _load_json("data/stim_protocol.json") if protocol is None else protocol
+    cells = _load_json("data/cells.json") if cells is None else cells
     duration_ms = float(protocol["trial"]["duration_ms"] if duration_ms is None else duration_ms)
-    output_dir = ROOT / "results" / "phase0" / stage
+    output_dir = ROOT / "results" / results_subdir / stage
     output_dir.mkdir(parents=True, exist_ok=True)
     pending = []
     skipped = []
@@ -150,18 +171,34 @@ def run_conditions(
 
     started = time.perf_counter()
     worker_results = Parallel(n_jobs=workers, backend="loky")(
-        delayed(_run_shard)(worker, shard, protocol, cells, duration_ms)
+        delayed(_run_shard)(worker, shard, protocol, cells, duration_ms, channels)
         for worker, shard in enumerate(shards)
     ) if shards else []
     elapsed_total = time.perf_counter() - started
-    flat = [item for result in worker_results for item in result["output"]]
-    rss_values = [item[4] for item in flat if item[4] is not None]
+    rss_values = [
+        item[4]
+        for result in worker_results
+        for item in result["output"]
+        if item[4] is not None
+    ]
     if rss_values:
         print(f"worker 0 RSS after first job: {rss_values[0]:.1f} MiB")
 
     summaries = []
     for index, condition in pending:
-        items = [(trial, spikes) for ci, trial, spikes, _, _ in flat if ci == index]
+        items = []
+        condition_walltime = 0.0
+        # Consume matching tuples in place so completed conditions release their
+        # spike arrays without constructing a second flattened result list.
+        for result in worker_results:
+            output = result["output"]
+            for position in range(len(output) - 1, -1, -1):
+                ci, trial, spikes, trial_walltime, _ = output[position]
+                if ci == index:
+                    items.append((trial, spikes))
+                    condition_walltime += trial_walltime
+                    del output[position]
+        items.sort(key=lambda item: item[0])
         frame = spikes_dataframe(items)
         frame.to_parquet(output_dir / f"{condition['cond_id']}.parquet", index=False)
         # Use the actual duration for stage-specific readout calculations.
@@ -177,9 +214,10 @@ def run_conditions(
                 "mn9_aggregated_mean_hz": rates["aggregated"]["mean"],
                 "mn9_aggregated_std_hz": rates["aggregated"]["std"],
                 "n_trials": n_trials,
-                "walltime_s": sum(item[3] for item in flat if item[0] == index),
+                "walltime_s": condition_walltime,
             }
         )
+        del items, frame
     for _, condition, path in skipped:
         frame = pd.read_parquet(path)
         stage_protocol = {**protocol, "trial": {**protocol["trial"], "duration_ms": duration_ms}}

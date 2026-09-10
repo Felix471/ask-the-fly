@@ -1,1 +1,1125 @@
-[]
+[
+  {
+    "key": "85% dark chocolate",
+    "aliases": [
+      "黑巧克力",
+      "85% dark chocolate",
+      "hei qiaokeli",
+      "dark chocolate",
+      "dark chocolate 85%",
+      "黑巧克力85%"
+    ],
+    "display": {
+      "zh": "黑巧克力",
+      "en": "85% dark chocolate"
+    },
+    "sugar": "low",
+    "bitter": "high",
+    "water": "none",
+    "reason": {
+      "sugar": "very low sugar content compared to milk chocolate",
+      "bitter": "high cocoa solids content creates strong bitterness",
+      "water": "solid fat-based confection with negligible moisture"
+    },
+    "confidence": {
+      "sugar": 0.9,
+      "bitter": 0.95,
+      "water": 1.0
+    },
+    "review": "llm_v1",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v1"
+  },
+  {
+    "key": "apple",
+    "aliases": [
+      "苹果",
+      "apple",
+      "pingguo"
+    ],
+    "display": {
+      "zh": "苹果",
+      "en": "apple"
+    },
+    "sugar": "medium",
+    "bitter": "none",
+    "water": "low",
+    "reason": {
+      "sugar": "contains natural fructose providing noticeable sweetness",
+      "bitter": "no bitter compounds present in the flesh",
+      "water": "fleshy fruit with high moisture content but solid structure"
+    },
+    "confidence": {
+      "sugar": 0.9,
+      "bitter": 1.0,
+      "water": 0.9
+    },
+    "review": "llm_v1",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v1"
+  },
+  {
+    "key": "banana",
+    "aliases": [
+      "香蕉",
+      "banana",
+      "xiangjiao"
+    ],
+    "display": {
+      "zh": "香蕉",
+      "en": "banana"
+    },
+    "sugar": "medium",
+    "bitter": "none",
+    "water": "low",
+    "reason": {
+      "sugar": "contains natural fructose and glucose",
+      "bitter": "lacks bitter compounds",
+      "water": "fleshy fruit with moderate moisture content"
+    },
+    "confidence": {
+      "sugar": 0.9542,
+      "bitter": 0.9917,
+      "water": 0.9
+    },
+    "review": "llm_v1",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v1"
+  },
+  {
+    "key": "beef jerky",
+    "aliases": [
+      "牛肉干",
+      "beef jerky",
+      "niurougan",
+      "牛肉乾"
+    ],
+    "display": {
+      "zh": "牛肉干",
+      "en": "beef jerky"
+    },
+    "sugar": "low",
+    "bitter": "none",
+    "water": "none",
+    "reason": {
+      "sugar": "often contains a small amount of sugar in the marinade",
+      "bitter": "no bitter ingredients are typically used",
+      "water": "dehydrated meat product with very low moisture content"
+    },
+    "confidence": {
+      "sugar": 0.9,
+      "bitter": 1.0,
+      "water": 1.0
+    },
+    "review": "llm_v1",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v1"
+  },
+  {
+    "key": "beer",
+    "aliases": [
+      "啤酒",
+      "beer",
+      "pijiu",
+      "ale",
+      "lager"
+    ],
+    "display": {
+      "zh": "啤酒",
+      "en": "beer"
+    },
+    "sugar": "low",
+    "bitter": "medium",
+    "water": "high",
+    "reason": {
+      "sugar": "contains residual malt sugars from the brewing process",
+      "bitter": "derived from hops used in brewing",
+      "water": "primarily composed of water"
+    },
+    "confidence": {
+      "sugar": 0.9,
+      "bitter": 0.9708,
+      "water": 0.9958
+    },
+    "review": "llm_v1",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v1"
+  },
+  {
+    "key": "bitter melon",
+    "aliases": [
+      "苦瓜",
+      "bitter melon",
+      "kugua",
+      "bitter gourd",
+      "balsam pear"
+    ],
+    "display": {
+      "zh": "苦瓜",
+      "en": "bitter melon"
+    },
+    "sugar": "none",
+    "bitter": "very_high",
+    "water": "low",
+    "reason": {
+      "sugar": "contains no inherent sweet components",
+      "bitter": "contains high levels of cucurbitacins causing intense bitterness",
+      "water": "fleshy vegetable with moderate moisture content"
+    },
+    "confidence": {
+      "sugar": 1.0,
+      "bitter": 1.0,
+      "water": 0.9
+    },
+    "review": "llm_v1",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v1"
+  },
+  {
+    "key": "black coffee",
+    "aliases": [
+      "黑咖啡",
+      "black coffee",
+      "hei kafei",
+      "americano"
+    ],
+    "display": {
+      "zh": "黑咖啡",
+      "en": "black coffee"
+    },
+    "sugar": "none",
+    "bitter": "high",
+    "water": "high",
+    "reason": {
+      "sugar": "contains no added sweeteners",
+      "bitter": "naturally high concentration of caffeine and chlorogenic acid lactones",
+      "water": "primarily composed of water"
+    },
+    "confidence": {
+      "sugar": 1.0,
+      "bitter": 0.95,
+      "water": 1.0
+    },
+    "review": "llm_v1",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v1"
+  },
+  {
+    "key": "braised pork belly",
+    "aliases": [
+      "红烧肉",
+      "braised pork belly",
+      "hongshaorou",
+      "red cooked pork",
+      "hong shao rou",
+      "red braised pork belly"
+    ],
+    "display": {
+      "zh": "红烧肉",
+      "en": "braised pork belly"
+    },
+    "sugar": "medium",
+    "bitter": "none",
+    "water": "medium",
+    "reason": {
+      "sugar": "caramelized sugar is a key component of the red braising sauce",
+      "bitter": "no bitter ingredients are used in the traditional preparation",
+      "water": "the dish consists of meat served in a reduced, saucy braising liquid"
+    },
+    "confidence": {
+      "sugar": 0.9,
+      "bitter": 1.0,
+      "water": 0.9
+    },
+    "review": "llm_v1",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v1"
+  },
+  {
+    "key": "bubble tea",
+    "aliases": [
+      "珍珠奶茶",
+      "bubble tea",
+      "zhenzhunaicha",
+      "boba tea",
+      "pearl milk tea"
+    ],
+    "display": {
+      "zh": "珍珠奶茶",
+      "en": "bubble tea"
+    },
+    "sugar": "high",
+    "bitter": "low",
+    "water": "high",
+    "reason": {
+      "sugar": "typically contains significant amounts of added syrup or sugar",
+      "bitter": "contains tea base which has mild tannins",
+      "water": "primarily a liquid-based beverage"
+    },
+    "confidence": {
+      "sugar": 0.95,
+      "bitter": 0.85,
+      "water": 1.0
+    },
+    "review": "llm_v1",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v1"
+  },
+  {
+    "key": "cake",
+    "aliases": [
+      "蛋糕",
+      "cake",
+      "dangao",
+      "gateau"
+    ],
+    "display": {
+      "zh": "蛋糕",
+      "en": "cake"
+    },
+    "sugar": "high",
+    "bitter": "none",
+    "water": "low",
+    "reason": {
+      "sugar": "primary flavor profile is sweet",
+      "bitter": "no bitter ingredients used",
+      "water": "moist solid texture"
+    },
+    "confidence": {
+      "sugar": 0.975,
+      "bitter": 0.9,
+      "water": 0.9
+    },
+    "review": "llm_v1",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v1"
+  },
+  {
+    "key": "candy",
+    "aliases": [
+      "糖果",
+      "candy",
+      "tangguo",
+      "sweets",
+      "confectionery"
+    ],
+    "display": {
+      "zh": "糖果",
+      "en": "candy"
+    },
+    "sugar": "very_high",
+    "bitter": "none",
+    "water": "none",
+    "reason": {
+      "sugar": "composed almost entirely of sucrose or corn syrup",
+      "bitter": "lacks bitter compounds",
+      "water": "solid state with minimal moisture content"
+    },
+    "confidence": {
+      "sugar": 1.0,
+      "bitter": 0.9,
+      "water": 0.9
+    },
+    "review": "llm_v1",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v1"
+  },
+  {
+    "key": "clear broth",
+    "aliases": [
+      "清汤",
+      "clear broth",
+      "qingtang",
+      "clear soup",
+      "consomme"
+    ],
+    "display": {
+      "zh": "清汤",
+      "en": "clear broth"
+    },
+    "sugar": "none",
+    "bitter": "none",
+    "water": "very_high",
+    "reason": {
+      "sugar": "savory preparation without added sweeteners",
+      "bitter": "no bitter ingredients used in standard preparation",
+      "water": "consists almost entirely of water and dissolved minerals"
+    },
+    "confidence": {
+      "sugar": 1.0,
+      "bitter": 1.0,
+      "water": 1.0
+    },
+    "review": "llm_v1",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v1"
+  },
+  {
+    "key": "cola",
+    "aliases": [
+      "可乐",
+      "cola",
+      "可口可乐",
+      "百事可乐",
+      "coca-cola",
+      "pepsi",
+      "coke",
+      "carbonated soft drink"
+    ],
+    "display": {
+      "zh": "可乐",
+      "en": "cola"
+    },
+    "sugar": "very_high",
+    "bitter": "low",
+    "water": "very_high",
+    "reason": {
+      "sugar": "contains high concentrations of high-fructose corn syrup or sugar",
+      "bitter": "contains trace bitterness from caramel coloring and caffeine",
+      "water": "primarily composed of carbonated water"
+    },
+    "confidence": {
+      "sugar": 1.0,
+      "bitter": 0.9,
+      "water": 1.0
+    },
+    "review": "llm_v1",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v1"
+  },
+  {
+    "key": "curry",
+    "aliases": [
+      "咖喱",
+      "curry"
+    ],
+    "display": {
+      "zh": "咖喱",
+      "en": "curry"
+    },
+    "sugar": "low",
+    "bitter": "low",
+    "water": "medium",
+    "reason": {
+      "sugar": "often contains a small amount of sugar or fruit to balance spices",
+      "bitter": "spices like turmeric and cumin can have faint bitter notes",
+      "water": "typically a saucy consistency served over rice"
+    },
+    "confidence": {
+      "sugar": 0.8,
+      "bitter": 0.75,
+      "water": 0.9
+    },
+    "review": "llm_v1",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v1"
+  },
+  {
+    "key": "dumplings",
+    "aliases": [
+      "饺子",
+      "dumplings",
+      "jiaozi",
+      "potstickers"
+    ],
+    "display": {
+      "zh": "饺子",
+      "en": "dumplings"
+    },
+    "sugar": "low",
+    "bitter": "none",
+    "water": "low",
+    "reason": {
+      "sugar": "small amounts of sugar are often added to the filling for flavor balance",
+      "bitter": "standard ingredients like meat and vegetables are not bitter",
+      "water": "the filling is moist and the wrapper is soft, but it is not a liquid dish"
+    },
+    "confidence": {
+      "sugar": 0.8,
+      "bitter": 0.95,
+      "water": 0.9
+    },
+    "review": "llm_v1",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v1"
+  },
+  {
+    "key": "endive",
+    "aliases": [
+      "苦菊",
+      "endive",
+      "kuju",
+      "苦苣",
+      "curly endive",
+      "frisée",
+      "菊苣",
+      "chicory"
+    ],
+    "display": {
+      "zh": "苦菊",
+      "en": "endive"
+    },
+    "sugar": "none",
+    "bitter": "high",
+    "water": "low",
+    "reason": {
+      "sugar": "contains no inherent sweet components",
+      "bitter": "naturally contains high levels of sesquiterpene lactones",
+      "water": "crisp leafy vegetable with moderate moisture content"
+    },
+    "confidence": {
+      "sugar": 1.0,
+      "bitter": 1.0,
+      "water": 0.9
+    },
+    "review": "llm_v1",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v1"
+  },
+  {
+    "key": "espresso",
+    "aliases": [
+      "浓缩咖啡",
+      "espresso",
+      "nongsuokafei",
+      "nongsuo kafei"
+    ],
+    "display": {
+      "zh": "浓缩咖啡",
+      "en": "espresso"
+    },
+    "sugar": "none",
+    "bitter": "very_high",
+    "water": "medium",
+    "reason": {
+      "sugar": "pure coffee contains no added sugar",
+      "bitter": "highly concentrated extraction of coffee compounds",
+      "water": "liquid-based beverage with small volume"
+    },
+    "confidence": {
+      "sugar": 1.0,
+      "bitter": 1.0,
+      "water": 0.9
+    },
+    "review": "llm_v1",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v1"
+  },
+  {
+    "key": "fried chicken",
+    "aliases": [
+      "炸鸡",
+      "fried chicken",
+      "zhaji",
+      "炸雞"
+    ],
+    "display": {
+      "zh": "炸鸡",
+      "en": "fried chicken"
+    },
+    "sugar": "low",
+    "bitter": "none",
+    "water": "low",
+    "reason": {
+      "sugar": "often contains a small amount of sugar in the breading or marinade",
+      "bitter": "no significant bitter components in standard preparation",
+      "water": "moist interior but generally considered a dry solid dish"
+    },
+    "confidence": {
+      "sugar": 0.8,
+      "bitter": 0.9,
+      "water": 0.9
+    },
+    "review": "llm_v1",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v1"
+  },
+  {
+    "key": "gai lan",
+    "aliases": [
+      "芥蓝",
+      "gai lan",
+      "jielan",
+      "chinese broccoli",
+      "芥兰",
+      "kai-lan",
+      "gailan"
+    ],
+    "display": {
+      "zh": "芥蓝",
+      "en": "Gai lan"
+    },
+    "sugar": "none",
+    "bitter": "low",
+    "water": "low",
+    "reason": {
+      "sugar": "vegetable contains no inherent sugar",
+      "bitter": "contains mild glucosinolates typical of brassicas",
+      "water": "moist vegetable tissue but not liquid"
+    },
+    "confidence": {
+      "sugar": 1.0,
+      "bitter": 0.9,
+      "water": 0.9
+    },
+    "review": "llm_v1",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v1"
+  },
+  {
+    "key": "grapefruit",
+    "aliases": [
+      "西柚",
+      "grapefruit",
+      "xiyou",
+      "葡萄柚"
+    ],
+    "display": {
+      "zh": "西柚",
+      "en": "grapefruit"
+    },
+    "sugar": "low",
+    "bitter": "high",
+    "water": "high",
+    "reason": {
+      "sugar": "contains natural fruit sugars but is primarily tart",
+      "bitter": "contains naringin which provides a distinct bitter flavor",
+      "water": "high water content typical of citrus fruits"
+    },
+    "confidence": {
+      "sugar": 0.9,
+      "bitter": 0.975,
+      "water": 0.975
+    },
+    "review": "llm_v1",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v1"
+  },
+  {
+    "key": "green tea",
+    "aliases": [
+      "绿茶",
+      "green tea",
+      "lvcha",
+      "lucha",
+      "japanese green tea",
+      "sencha"
+    ],
+    "display": {
+      "zh": "绿茶",
+      "en": "green tea"
+    },
+    "sugar": "none",
+    "bitter": "medium",
+    "water": "very_high",
+    "reason": {
+      "sugar": "unadulterated tea contains no sugar",
+      "bitter": "contains tannins and catechins that provide a distinct bitterness",
+      "water": "it is a liquid infusion"
+    },
+    "confidence": {
+      "sugar": 1.0,
+      "bitter": 0.9,
+      "water": 1.0
+    },
+    "review": "llm_v1",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v1"
+  },
+  {
+    "key": "honey",
+    "aliases": [
+      "蜂蜜",
+      "honey",
+      "fengmi",
+      "bee honey",
+      "pure honey"
+    ],
+    "display": {
+      "zh": "蜂蜜",
+      "en": "honey"
+    },
+    "sugar": "very_high",
+    "bitter": "none",
+    "water": "low",
+    "reason": {
+      "sugar": "composed almost entirely of fructose and glucose",
+      "bitter": "contains no bitter compounds",
+      "water": "viscous liquid with low water activity"
+    },
+    "confidence": {
+      "sugar": 1.0,
+      "bitter": 0.96,
+      "water": 0.9
+    },
+    "review": "llm_v1",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v1"
+  },
+  {
+    "key": "ice cream",
+    "aliases": [
+      "冰淇淋",
+      "ice cream",
+      "bingqilin",
+      "雪糕"
+    ],
+    "display": {
+      "zh": "冰淇淋",
+      "en": "ice cream"
+    },
+    "sugar": "high",
+    "bitter": "none",
+    "water": "low",
+    "reason": {
+      "sugar": "contains significant amounts of added sugar for flavor",
+      "bitter": "lacks bitter components in standard vanilla or fruit flavors",
+      "water": "semi-solid frozen emulsion with low free liquid content"
+    },
+    "confidence": {
+      "sugar": 1.0,
+      "bitter": 0.95,
+      "water": 0.9
+    },
+    "review": "llm_v1",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v1"
+  },
+  {
+    "key": "ipa beer",
+    "aliases": [
+      "印度淡色艾尔",
+      "ipa beer",
+      "india pale ale",
+      "ipa",
+      "印度淡色啤酒"
+    ],
+    "display": {
+      "zh": "印度淡色艾尔",
+      "en": "IPA beer"
+    },
+    "sugar": "none",
+    "bitter": "high",
+    "water": "high",
+    "reason": {
+      "sugar": "fermentation consumes almost all sugars",
+      "bitter": "high concentration of hops creates strong bitterness",
+      "water": "primarily composed of water"
+    },
+    "confidence": {
+      "sugar": 0.95,
+      "bitter": 1.0,
+      "water": 1.0
+    },
+    "review": "llm_v1",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v1"
+  },
+  {
+    "key": "latte",
+    "aliases": [
+      "拿铁",
+      "latte",
+      "caffe latte"
+    ],
+    "display": {
+      "zh": "拿铁",
+      "en": "latte"
+    },
+    "sugar": "none",
+    "bitter": "medium",
+    "water": "high",
+    "reason": {
+      "sugar": "standard preparation contains no added sugar",
+      "bitter": "espresso base provides a distinct coffee bitterness",
+      "water": "primarily composed of steamed milk and espresso"
+    },
+    "confidence": {
+      "sugar": 0.8917,
+      "bitter": 0.9458,
+      "water": 0.9292
+    },
+    "review": "llm_v1",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v1"
+  },
+  {
+    "key": "mapo tofu",
+    "aliases": [
+      "麻婆豆腐",
+      "mapo tofu",
+      "mapo doufu",
+      "mapo_tofu"
+    ],
+    "display": {
+      "zh": "麻婆豆腐",
+      "en": "mapo tofu"
+    },
+    "sugar": "low",
+    "bitter": "low",
+    "water": "medium",
+    "reason": {
+      "sugar": "small amount of sugar often added to balance the spicy sauce",
+      "bitter": "faint bitterness from Sichuan peppercorns and fermented bean paste",
+      "water": "served in a thick, saucy gravy"
+    },
+    "confidence": {
+      "sugar": 0.9,
+      "bitter": 0.8,
+      "water": 0.925
+    },
+    "review": "llm_v1",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v1"
+  },
+  {
+    "key": "milk",
+    "aliases": [
+      "牛奶",
+      "milk",
+      "niunai",
+      "cow milk",
+      "dairy milk"
+    ],
+    "display": {
+      "zh": "牛奶",
+      "en": "milk"
+    },
+    "sugar": "low",
+    "bitter": "none",
+    "water": "high",
+    "reason": {
+      "sugar": "contains natural lactose sugar",
+      "bitter": "no bitter compounds present",
+      "water": "primarily composed of water"
+    },
+    "confidence": {
+      "sugar": 0.9,
+      "bitter": 1.0,
+      "water": 1.0
+    },
+    "review": "llm_v1",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v1"
+  },
+  {
+    "key": "miso soup",
+    "aliases": [
+      "味噌汤",
+      "miso soup",
+      "misoshiru",
+      "味噌汁",
+      "miso shiru",
+      "味增汤"
+    ],
+    "display": {
+      "zh": "味噌汤",
+      "en": "miso soup"
+    },
+    "sugar": "low",
+    "bitter": "low",
+    "water": "high",
+    "reason": {
+      "sugar": "fermented soybean paste contains trace natural sugars",
+      "bitter": "fermented miso has a mild earthy bitterness",
+      "water": "primarily a broth-based liquid dish"
+    },
+    "confidence": {
+      "sugar": 0.9,
+      "bitter": 0.8,
+      "water": 1.0
+    },
+    "review": "llm_v1",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v1"
+  },
+  {
+    "key": "mixed nuts",
+    "aliases": [
+      "坚果",
+      "mixed nuts",
+      "jian guo",
+      "nuts",
+      "混合坚果"
+    ],
+    "display": {
+      "zh": "坚果",
+      "en": "mixed nuts"
+    },
+    "sugar": "none",
+    "bitter": "low",
+    "water": "none",
+    "reason": {
+      "sugar": "typically unsweetened roasted nuts",
+      "bitter": "natural tannins present in nut skins",
+      "water": "dehydrated or roasted dry solid"
+    },
+    "confidence": {
+      "sugar": 0.9,
+      "bitter": 0.8,
+      "water": 0.975
+    },
+    "review": "llm_v1",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v1"
+  },
+  {
+    "key": "mooncake",
+    "aliases": [
+      "月饼",
+      "mooncake",
+      "yuebing",
+      "moon cake"
+    ],
+    "display": {
+      "zh": "月饼",
+      "en": "mooncake"
+    },
+    "sugar": "high",
+    "bitter": "none",
+    "water": "low",
+    "reason": {
+      "sugar": "contains high amounts of sugar in the lotus paste or bean paste filling",
+      "bitter": "no bitter ingredients are typically used in traditional recipes",
+      "water": "the pastry crust and dense filling result in a moist solid texture"
+    },
+    "confidence": {
+      "sugar": 0.975,
+      "bitter": 0.9,
+      "water": 0.9
+    },
+    "review": "llm_v1",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v1"
+  },
+  {
+    "key": "orange juice",
+    "aliases": [
+      "橙汁",
+      "orange juice",
+      "cheng zhi",
+      "oj"
+    ],
+    "display": {
+      "zh": "橙汁",
+      "en": "orange juice"
+    },
+    "sugar": "high",
+    "bitter": "low",
+    "water": "very_high",
+    "reason": {
+      "sugar": "naturally high in fructose and sucrose",
+      "bitter": "contains trace amounts of limonoids and peel oils",
+      "water": "primarily composed of water"
+    },
+    "confidence": {
+      "sugar": 0.95,
+      "bitter": 0.8,
+      "water": 1.0
+    },
+    "review": "llm_v1",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v1"
+  },
+  {
+    "key": "pizza",
+    "aliases": [
+      "披萨",
+      "pizza",
+      "比萨"
+    ],
+    "display": {
+      "zh": "披萨",
+      "en": "pizza"
+    },
+    "sugar": "low",
+    "bitter": "none",
+    "water": "low",
+    "reason": {
+      "sugar": "tomato sauce often contains a small amount of added sugar",
+      "bitter": "standard ingredients do not contain significant bitter compounds",
+      "water": "the dough is a moist solid with some moisture from toppings"
+    },
+    "confidence": {
+      "sugar": 0.9,
+      "bitter": 0.95,
+      "water": 0.9
+    },
+    "review": "llm_v1",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v1"
+  },
+  {
+    "key": "potato chips",
+    "aliases": [
+      "薯片",
+      "potato chips",
+      "shu pian",
+      "crisps",
+      "potato crisps"
+    ],
+    "display": {
+      "zh": "薯片",
+      "en": "potato chips"
+    },
+    "sugar": "none",
+    "bitter": "none",
+    "water": "none",
+    "reason": {
+      "sugar": "standard potato chips are savory and contain no added sugar",
+      "bitter": "potatoes are processed to remove bitter glycoalkaloids",
+      "water": "chips are deep-fried to a very low moisture content"
+    },
+    "confidence": {
+      "sugar": 0.9,
+      "bitter": 0.9,
+      "water": 1.0
+    },
+    "review": "llm_v1",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v1"
+  },
+  {
+    "key": "steamed white rice",
+    "aliases": [
+      "白米饭",
+      "steamed white rice",
+      "baimifan",
+      "plain rice",
+      "bai mi fan",
+      "steamed rice"
+    ],
+    "display": {
+      "zh": "白米饭",
+      "en": "steamed white rice"
+    },
+    "sugar": "low",
+    "bitter": "none",
+    "water": "low",
+    "reason": {
+      "sugar": "contains natural starch that breaks down into simple sugars",
+      "bitter": "no bitter compounds present",
+      "water": "moistened by the steaming process but remains a solid"
+    },
+    "confidence": {
+      "sugar": 0.9,
+      "bitter": 1.0,
+      "water": 0.9
+    },
+    "review": "llm_v1",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v1"
+  },
+  {
+    "key": "sweet red bean soup",
+    "aliases": [
+      "红豆汤",
+      "sweet red bean soup",
+      "hongdoutang",
+      "red bean soup",
+      "azuki bean soup",
+      "hongdou tang"
+    ],
+    "display": {
+      "zh": "红豆汤",
+      "en": "sweet red bean soup"
+    },
+    "sugar": "high",
+    "bitter": "none",
+    "water": "high",
+    "reason": {
+      "sugar": "typically prepared as a sweetened dessert soup",
+      "bitter": "red beans are not inherently bitter when cooked",
+      "water": "consists primarily of a liquid base"
+    },
+    "confidence": {
+      "sugar": 0.925,
+      "bitter": 1.0,
+      "water": 1.0
+    },
+    "review": "llm_v1",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v1"
+  },
+  {
+    "key": "tomato and egg stir-fry",
+    "aliases": [
+      "番茄炒蛋",
+      "tomato and egg stir-fry",
+      "fanqie chaodan",
+      "西红柿炒鸡蛋",
+      "tomato scrambled eggs",
+      "xihongshi chao jidan",
+      "tomato egg stir-fry"
+    ],
+    "display": {
+      "zh": "番茄炒蛋",
+      "en": "tomato and egg stir-fry"
+    },
+    "sugar": "low",
+    "bitter": "none",
+    "water": "medium",
+    "reason": {
+      "sugar": "a small amount of sugar is often added to balance the acidity of the tomatoes",
+      "bitter": "no bitter ingredients are typically used in this dish",
+      "water": "tomatoes release significant juices during cooking creating a saucy consistency"
+    },
+    "confidence": {
+      "sugar": 0.9,
+      "bitter": 1.0,
+      "water": 0.9
+    },
+    "review": "llm_v1",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v1"
+  },
+  {
+    "key": "tonic water",
+    "aliases": [
+      "汤力水",
+      "tonic water",
+      "tanglishui",
+      "奎宁水",
+      "tonic"
+    ],
+    "display": {
+      "zh": "汤力水",
+      "en": "tonic water"
+    },
+    "sugar": "high",
+    "bitter": "high",
+    "water": "very_high",
+    "reason": {
+      "sugar": "contains significant amounts of high fructose corn syrup or sugar",
+      "bitter": "contains quinine which provides a distinct bitter flavor",
+      "water": "is a carbonated water-based beverage"
+    },
+    "confidence": {
+      "sugar": 0.9,
+      "bitter": 1.0,
+      "water": 1.0
+    },
+    "review": "llm_v1",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v1"
+  },
+  {
+    "key": "water",
+    "aliases": [
+      "水",
+      "water",
+      "shui",
+      "pure water",
+      "h2o"
+    ],
+    "display": {
+      "zh": "水",
+      "en": "water"
+    },
+    "sugar": "none",
+    "bitter": "none",
+    "water": "very_high",
+    "reason": {
+      "sugar": "pure water contains no sugars",
+      "bitter": "pure water has no bitter compounds",
+      "water": "it is entirely composed of water"
+    },
+    "confidence": {
+      "sugar": 1.0,
+      "bitter": 1.0,
+      "water": 1.0
+    },
+    "review": "llm_v1",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v1"
+  },
+  {
+    "key": "watermelon",
+    "aliases": [
+      "西瓜",
+      "watermelon",
+      "xigua"
+    ],
+    "display": {
+      "zh": "西瓜",
+      "en": "watermelon"
+    },
+    "sugar": "medium",
+    "bitter": "none",
+    "water": "high",
+    "reason": {
+      "sugar": "contains natural fructose providing noticeable sweetness",
+      "bitter": "no bitter compounds present in the edible flesh",
+      "water": "composed of approximately 92 percent water"
+    },
+    "confidence": {
+      "sugar": 0.9542,
+      "bitter": 1.0,
+      "water": 1.0
+    },
+    "review": "llm_v1",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v1"
+  }
+]

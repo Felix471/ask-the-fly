@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "rule": "A name listed here never becomes a key or alias. It is replaced by the listed dishes, which are encoded separately.",
+  "names": {
+    "饼干": {
+      "reason": "zh 饼干 covers both savory crackers and sweet cookies; stability run split on sugar (zh medium vs en none)",
+      "split_into": [
+        {"zh": "咸饼干", "en": "crackers", "aliases": ["苏打饼干", "saltine", "saltines", "cracker"]},
+        {"zh": "曲奇", "en": "cookies", "aliases": ["曲奇饼干", "甜饼干", "cookie", "biscuit", "biscuits"]}
+      ]
+    }
+  }
+}

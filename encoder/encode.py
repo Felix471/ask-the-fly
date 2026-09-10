@@ -1,9 +1,10 @@
-"""Encode one dish with Gemini and validate its v1 schema."""
+"""Encode one dish with Gemini and validate its taste-level schema."""
 
 from __future__ import annotations
 
 import argparse
 import json
+import re
 from pathlib import Path
 from typing import Literal
 
@@ -11,15 +12,26 @@ from .client import GeminiEncoder
 from .levels import LEVELS
 from .normalize import normalize_name
 
-PROMPT_VERSION = "encode_v1"
-_PROMPT_PATH = Path(__file__).parent / "prompts" / f"{PROMPT_VERSION}.md"
+PROMPT_VERSION = "encode_v2"
+_PROMPTS_DIR = Path(__file__).parent / "prompts"
 _DIMENSIONS = ("sugar", "bitter", "water")
 _MODEL_FIELDS = {"key", "aliases", "display", *_DIMENSIONS, "reason", "confidence"}
 
 
-def _validate_model_entry(value: object, model_id: str) -> dict:
-    if not isinstance(value, dict) or set(value) != _MODEL_FIELDS:
-        raise ValueError(f"response fields must be exactly {sorted(_MODEL_FIELDS)}")
+def _loads_model_json(text: str) -> object:
+    try:
+        return json.loads(text)
+    except json.JSONDecodeError:
+        cleaned = re.sub(r",(?=\s*[}\]])", "", text)
+        if cleaned == text:
+            raise
+        return json.loads(cleaned)
+
+
+def _validate_model_entry(value: object, model_id: str, prompt_version: str = PROMPT_VERSION) -> dict:
+    if not isinstance(value, dict) or not _MODEL_FIELDS <= set(value):
+        raise ValueError(f"response must contain fields {sorted(_MODEL_FIELDS)}")
+    value = {field: value[field] for field in _MODEL_FIELDS}
     key = normalize_name(value["key"])
     if not key:
         raise ValueError("key must be non-empty")
@@ -27,16 +39,16 @@ def _validate_model_entry(value: object, model_id: str) -> dict:
     if not isinstance(aliases, list) or not all(isinstance(x, str) for x in aliases):
         raise ValueError("aliases must be a list of strings")
     display = value["display"]
-    if not isinstance(display, dict) or set(display) != {"zh", "en"} or not all(
+    if not isinstance(display, dict) or not {"zh", "en"} <= set(display) or not all(
         isinstance(display[x], str) for x in ("zh", "en")
     ):
         raise ValueError("display must contain string zh and en fields")
     reason = value["reason"]
     confidence = value["confidence"]
-    if not isinstance(reason, dict) or set(reason) != set(_DIMENSIONS):
-        raise ValueError("reason must contain exactly sugar, bitter, and water")
-    if not isinstance(confidence, dict) or set(confidence) != set(_DIMENSIONS):
-        raise ValueError("confidence must contain exactly sugar, bitter, and water")
+    if not isinstance(reason, dict) or not set(_DIMENSIONS) <= set(reason):
+        raise ValueError("reason must contain sugar, bitter, and water")
+    if not isinstance(confidence, dict) or not set(_DIMENSIONS) <= set(confidence):
+        raise ValueError("confidence must contain sugar, bitter, and water")
     for dimension in _DIMENSIONS:
         if value[dimension] not in LEVELS:
             raise ValueError(f"invalid {dimension} level: {value[dimension]!r}")
@@ -48,34 +60,52 @@ def _validate_model_entry(value: object, model_id: str) -> dict:
     entry = dict(value)
     entry["key"] = key
     entry["aliases"] = list(dict.fromkeys(filter(None, (normalize_name(x) for x in aliases))))
+    entry["display"] = {field: display[field] for field in ("zh", "en")}
+    entry["reason"] = {dimension: reason[dimension] for dimension in _DIMENSIONS}
+    entry["confidence"] = {dimension: confidence[dimension] for dimension in _DIMENSIONS}
     entry["review"] = "llm_v1"
-    entry["encoder_version"] = f"{model_id}@{PROMPT_VERSION}"
+    entry["encoder_version"] = f"{model_id}@{prompt_version}"
     return entry
 
 
-def encode_dish(name: str, lang: Literal["zh", "en"]) -> dict:
+def encode_dish(
+    name: str, lang: Literal["zh", "en"], prompt_version: str | None = None
+) -> dict:
     if lang not in ("zh", "en"):
         raise ValueError("lang must be 'zh' or 'en'")
     if not normalize_name(name):
         raise ValueError("name must be non-empty")
+    selected_prompt = prompt_version or PROMPT_VERSION
+    if not re.fullmatch(r"encode_v[0-9]+", selected_prompt):
+        raise ValueError("prompt_version must look like 'encode_vN'")
+    prompt_path = _PROMPTS_DIR / f"{selected_prompt}.md"
+    if not prompt_path.is_file():
+        raise ValueError(f"unknown prompt version: {selected_prompt}")
     client = GeminiEncoder()
-    template = _PROMPT_PATH.read_text(encoding="utf-8")
+    template = prompt_path.read_text(encoding="utf-8")
     prompt = template.replace("{dish}", name).replace("{input_language}", lang)
     last_error: Exception | None = None
     for _ in range(2):
         try:
-            return _validate_model_entry(json.loads(client.generate(prompt)), client.model_id)
+            return _validate_model_entry(
+                _loads_model_json(client.generate(prompt)), client.model_id, selected_prompt
+            )
         except (json.JSONDecodeError, ValueError, TypeError, KeyError) as exc:
             last_error = exc
     raise ValueError(f"model output failed validation twice: {last_error}")
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Encode one dish into v1 taste levels")
+    parser = argparse.ArgumentParser(description="Encode one dish into qualitative taste levels")
     parser.add_argument("name")
     parser.add_argument("--lang", choices=("zh", "en"), required=True)
+    parser.add_argument("--prompt-version", default=PROMPT_VERSION)
     args = parser.parse_args()
-    print(json.dumps(encode_dish(args.name, args.lang), ensure_ascii=False, indent=2))
+    print(
+        json.dumps(
+            encode_dish(args.name, args.lang, args.prompt_version), ensure_ascii=False, indent=2
+        )
+    )
 
 
 if __name__ == "__main__":

@@ -101,8 +101,13 @@ def build_network(
     protocol: dict,
     cells: dict,
     stim_channels: Mapping[str, str] | Sequence[str],
+    zero_refractory_for: Sequence[str] | set[str] | None = None,
 ) -> SimNet:
-    """Build and store one resettable connectome network."""
+    """Build and store one resettable connectome network.
+
+    By default every built stimulus channel retains the historical ``rfc=0``
+    behaviour.  Passing channel names limits that change to those channels.
+    """
     if isinstance(stim_channels, Mapping):
         channels = dict(stim_channels)
     else:
@@ -183,10 +188,22 @@ def build_network(
     )
     stimulus.connect(i=np.arange(len(target_indices)), j=np.asarray(target_indices))
     stimulus.w_stim = params["w_syn"] * params["f_poi"]
-    neurons.rfc[np.unique(target_indices)] = 0 * ms
+    if zero_refractory_for is None:
+        zero_channels = set(channels)
+    else:
+        zero_channels = set(zero_refractory_for)
+        unknown = zero_channels - set(channels)
+        if unknown:
+            raise KeyError(f"Unknown zero-refractory channel(s): {sorted(unknown)}")
+    zero_indices = [
+        index
+        for channel in zero_channels
+        for index in target_indices[channel_slices[channel]]
+    ]
+    if zero_indices:
+        neurons.rfc[np.unique(zero_indices)] = 0 * ms
 
     monitor = SpikeMonitor(neurons)
     net = Network(neurons, synapses, poisson, stimulus, monitor)
     net.store("init")
     return SimNet(net, neurons, poisson, monitor, channel_slices, i2flyid)
-
