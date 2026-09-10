@@ -73,8 +73,18 @@ class SimNet:
     monitor: SpikeMonitor
     channel_slices: dict[str, slice]
     i2flyid: dict[int, int]
+    target_indices: np.ndarray = None
+    t_rfc: object = None
+    rate_based_refractory: bool = True
 
     def set_rates(self, rates: Mapping[str, float]) -> None:
+        """Set stimulus rates and, by default, apply model.py's refractory rule.
+
+        model.py sets rfc = 0 only for neurons that receive Poisson input in the
+        current experiment. The reusable network holds every stimulable GRN, so
+        the rule is applied per trial: channels with a nonzero rate get rfc = 0,
+        every other stimulable GRN keeps t_rfc. (Equivalence study, 2026-09-10.)
+        """
         unknown = set(rates) - set(self.channel_slices)
         if unknown:
             raise KeyError(f"Unknown stimulus channel(s): {sorted(unknown)}")
@@ -83,6 +93,11 @@ class SimNet:
             if hz < 0:
                 raise ValueError(f"Negative rate for {channel}: {hz}")
             self.poisson.rates[self.channel_slices[channel]] = float(hz) * Hz
+        if self.rate_based_refractory:
+            for channel, sl in self.channel_slices.items():
+                driven = float(rates.get(channel, 0.0)) > 0
+                idx = np.unique(self.target_indices[sl])
+                self.neurons.rfc[idx] = 0 * ms if driven else self.t_rfc
 
     def run_trial(self, rates: dict[str, float], seed: int, duration_ms: float) -> dict[int, np.ndarray]:
         """Restore, stimulate, run, and return seconds keyed by FlyWire ID."""
@@ -188,22 +203,29 @@ def build_network(
     )
     stimulus.connect(i=np.arange(len(target_indices)), j=np.asarray(target_indices))
     stimulus.w_stim = params["w_syn"] * params["f_poi"]
-    if zero_refractory_for is None:
-        zero_channels = set(channels)
-    else:
+    # Default (zero_refractory_for=None): no build-time zeroing; SimNet.set_rates
+    # applies model.py's rule per trial (rfc = 0 only for driven channels).
+    # Explicit zero_refractory_for = experiment mode: fixed build-time zeroing,
+    # and set_rates leaves rfc alone.
+    rate_based = zero_refractory_for is None
+    if not rate_based:
         zero_channels = set(zero_refractory_for)
         unknown = zero_channels - set(channels)
         if unknown:
             raise KeyError(f"Unknown zero-refractory channel(s): {sorted(unknown)}")
-    zero_indices = [
-        index
-        for channel in zero_channels
-        for index in target_indices[channel_slices[channel]]
-    ]
-    if zero_indices:
-        neurons.rfc[np.unique(zero_indices)] = 0 * ms
+        zero_indices = [
+            index
+            for channel in zero_channels
+            for index in target_indices[channel_slices[channel]]
+        ]
+        if zero_indices:
+            neurons.rfc[np.unique(zero_indices)] = 0 * ms
 
     monitor = SpikeMonitor(neurons)
     net = Network(neurons, synapses, poisson, stimulus, monitor)
     net.store("init")
-    return SimNet(net, neurons, poisson, monitor, channel_slices, i2flyid)
+    return SimNet(
+        net, neurons, poisson, monitor, channel_slices, i2flyid,
+        target_indices=np.asarray(target_indices), t_rfc=params["t_rfc"],
+        rate_based_refractory=rate_based,
+    )

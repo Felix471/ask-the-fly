@@ -172,13 +172,15 @@ def run_trial_poissongroup(
     )
     stimulus.connect(i=np.arange(len(target_indices)), j=np.asarray(target_indices))
     stimulus.w_stim = params["w_syn"] * params["f_poi"]
-    neurons.rfc[np.unique(target_indices)] = 0 * ms
+    # model.py rule: rfc = 0 only for neurons that actually receive Poisson input.
     for channel, rate in rates.items():
         if channel not in channel_slices:
             raise KeyError(f"Unknown stimulus channel: {channel}")
         if float(rate) < 0:
             raise ValueError(f"Negative rate for {channel}: {rate}")
         poisson.rates[channel_slices[channel]] = float(rate) * Hz
+        if float(rate) > 0:
+            neurons.rfc[np.unique(np.asarray(target_indices)[channel_slices[channel]])] = 0 * ms
 
     monitor = SpikeMonitor(neurons)
     net = Network(neurons, synapses, poisson, stimulus, monitor)
