@@ -1,0 +1,20 @@
+# Ground-truth simulation environment (WSL2 Ubuntu). Create with:
+#   mamba env create -f env/flybrain.yml
+# then: pip install torch --index-url https://download.pytorch.org/whl/cu126
+name: flybrain
+channels:
+  - conda-forge
+dependencies:
+  - python=3.10
+  - numpy=1.26.4
+  - brian2
+  - cython
+  - gxx_linux-64
+  - gcc_linux-64
+  - make
+  - pandas
+  - pyarrow
+  - joblib
+  - scipy
+  - matplotlib
+  - tqdm
