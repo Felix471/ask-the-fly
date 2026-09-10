@@ -15,7 +15,7 @@ from pathlib import Path
 from dotenv import load_dotenv
 
 from .client import RESPONSE_SCHEMA_VERSION
-from .encode import PROMPT_VERSION, encode_dish
+from .encode import PROMPT_VERSION, _PROMPT_PATH_FOR, encode_dish
 from .levels import LEVELS
 from .normalize import normalize_name
 
@@ -397,8 +397,9 @@ def main() -> None:
     ):
         parser.error("--dimensions must be a unique comma-separated subset of sugar,bitter,water")
     if (
-        not re.fullmatch(r"encode_v[0-9]+", args.prompt_version)
-        or not (Path(__file__).with_name("prompts") / f"{args.prompt_version}.md").is_file()
+        not re.fullmatch(r"encode_v[0-9]+(?:\.[0-9]+)?", args.prompt_version)
+        or args.prompt_version not in _PROMPT_PATH_FOR
+        or not _PROMPT_PATH_FOR[args.prompt_version].is_file()
     ):
         parser.error(f"unknown prompt version: {args.prompt_version}")
 

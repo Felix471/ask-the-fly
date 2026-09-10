@@ -15,7 +15,7 @@ ROOT = Path(__file__).resolve().parents[1]
 FOODS_PATH = Path(__file__).with_name("foods_stability.json")
 AMBIGUOUS_PATH = ROOT / "data" / "ambiguous_names.json"
 DIMENSIONS = ("sugar", "bitter", "water")
-REVIEWS = {"llm_v1", "human_checked", "proxy"}
+REVIEWS = {"llm_v1", "needs_review", "human_checked", "proxy"}
 
 
 class MergeError(ValueError):
@@ -150,9 +150,10 @@ def _raw_food(records: list[dict], fallback: dict[str, str]) -> dict[str, str]:
     return food
 
 
-def _modal_reason(records: list[dict], normalized: list[dict], dimension: str) -> str:
-    """Return a real model reason for the modal level, preferring the English run."""
-    modal = _mode([entry[dimension] for entry in normalized])
+def _modal_reason(
+    records: list[dict], normalized: list[dict], dimension: str, modal: str
+) -> str:
+    """Return a real model reason for the selected level, preferring the English run."""
     candidates = []
     for record, entry in zip(records, normalized):
         if entry[dimension] == modal:
@@ -163,6 +164,51 @@ def _modal_reason(records: list[dict], normalized: list[dict], dimension: str) -
         return "modal level across zh/en stability runs"
     candidates.sort(key=lambda item: item[0])
     return candidates[0][1]
+
+
+def _arbitrate_dimension(
+    records: list[dict], normalized: list[dict], dimension: str
+) -> tuple[str, dict[str, str] | None]:
+    """Choose a level from per-language modes and describe any disagreement."""
+    by_language = {
+        lang: [
+            entry
+            for record, entry in zip(records, normalized)
+            if record.get("lang") == lang
+        ]
+        for lang in ("zh", "en")
+    }
+    if not by_language["zh"] or not by_language["en"]:
+        return _mode([entry[dimension] for entry in normalized]), None
+
+    zh_level = _mode([entry[dimension] for entry in by_language["zh"]])
+    en_level = _mode([entry[dimension] for entry in by_language["en"]])
+    if zh_level == en_level:
+        return zh_level, None
+
+    distance = abs(LEVELS.index(zh_level) - LEVELS.index(en_level))
+    if distance >= 2:
+        chosen = en_level
+        rule = "needs_review"
+    else:
+        mean_confidence = {
+            lang: sum(
+                float(entry.get("confidence", {}).get(dimension, 0.0))
+                for entry in entries
+            ) / len(entries)
+            for lang, entries in by_language.items()
+        }
+        # Product-owner rule (2026-09-10): one step apart -> higher mean confidence;
+        # if the confidences differ by less than 0.1, take the LOWER level.
+        # Never default to English on a tie.
+        if abs(mean_confidence["zh"] - mean_confidence["en"]) < 0.1:
+            chosen = min((zh_level, en_level), key=LEVELS.index)
+            rule = "lower_level"
+        else:
+            chosen = max(mean_confidence, key=mean_confidence.get)
+            chosen = zh_level if chosen == "zh" else en_level
+            rule = "confidence"
+    return chosen, {"zh": zh_level, "en": en_level, "chosen": chosen, "rule": rule}
 
 
 def _from_stability(records: list[object]) -> list[dict]:
@@ -207,13 +253,23 @@ def _from_stability(records: list[object]) -> list[dict]:
             or entry.get("encoder_version", "unknown@encode_v1")
             for record, entry in zip(food_records, normalized)
         ).most_common(1)[0][0]
+        levels = {}
+        arbitration = {}
+        for dimension in DIMENSIONS:
+            levels[dimension], detail = _arbitrate_dimension(
+                food_records, normalized, dimension
+            )
+            if detail is not None:
+                arbitration[dimension] = detail
         result = {
             "key": key,
             "aliases": aliases,
             "display": {"zh": food["zh"], "en": food["en"]},
-            **{dimension: _mode([e[dimension] for e in normalized]) for dimension in DIMENSIONS},
+            **levels,
             "reason": {
-                dimension: _modal_reason(food_records, normalized, dimension)
+                dimension: _modal_reason(
+                    food_records, normalized, dimension, levels[dimension]
+                )
                 for dimension in DIMENSIONS
             },
             "confidence": {
@@ -224,9 +280,15 @@ def _from_stability(records: list[object]) -> list[dict]:
                 )
                 for dimension in DIMENSIONS
             },
-            "review": "llm_v1",
+            "review": (
+                "needs_review"
+                if any(detail["rule"] == "needs_review" for detail in arbitration.values())
+                else "llm_v1"
+            ),
             "encoder_version": encoder_version,
         }
+        if arbitration:
+            result["arbitration"] = arbitration
         merged.append(_normalized_entry(result, f"food_index {food_index} merged entry"))
     canonical_owner = {
         normalize_name(name): entry["key"]
@@ -325,7 +387,10 @@ def _read_dictionary(path: Path) -> list[dict]:
 
 
 def merge(
-    source: Path, destination: Path, replace_llm: bool = False
+    source: Path,
+    destination: Path,
+    replace_llm: bool = False,
+    arbitration_report: bool = False,
 ) -> tuple[int, int, list[dict]]:
     """Merge entries; replace_llm explicitly requests the existing default LLM replacement."""
     incoming = _read_source(source)
@@ -368,6 +433,14 @@ def merge(
         print("key | dimension | old -> new")
         for key, dimension, old, new in level_changes:
             print(f"{key} | {dimension} | {old} -> {new}")
+    if arbitration_report:
+        print("dish | dimension | zh | en | chosen | rule")
+        for entry in incoming:
+            for dimension, detail in entry.get("arbitration", {}).items():
+                print(
+                    f"{entry['key']} | {dimension} | {detail['zh']} | {detail['en']} | "
+                    f"{detail['chosen']} | {detail['rule']}"
+                )
     return len(incoming) - skipped, skipped, result
 
 
@@ -380,7 +453,10 @@ def _print_split_list() -> None:
 
 def _review_counts(entries: list[dict]) -> str:
     counts = Counter(entry["review"] for entry in entries)
-    return "; ".join(f"{review}: {counts[review]}" for review in ("llm_v1", "human_checked", "proxy"))
+    return "; ".join(
+        f"{review}: {counts[review]}"
+        for review in ("llm_v1", "needs_review", "human_checked", "proxy")
+    )
 
 
 def _sample(path: Path, count: int, seed: int | None) -> None:
@@ -388,12 +464,19 @@ def _sample(path: Path, count: int, seed: int | None) -> None:
         raise MergeError("--sample must be non-negative")
     entries = _read_dictionary(path)
     _assert_unique(entries, "destination")
-    candidates = [entry for entry in entries if entry["review"] == "llm_v1"]
+    needs_review = [entry for entry in entries if entry["review"] == "needs_review"]
+    llm_entries = [entry for entry in entries if entry["review"] == "llm_v1"]
+    candidates = [*needs_review, *llm_entries]
     if count > len(candidates):
-        raise MergeError(f"--sample requested {count}, but only {len(candidates)} llm_v1 entries exist")
+        raise MergeError(
+            f"--sample requested {count}, but only {len(candidates)} review candidates exist"
+        )
+    rng = random.Random(seed)
+    selected_needs_review = rng.sample(needs_review, min(count, len(needs_review)))
+    selected_llm = rng.sample(llm_entries, count - len(selected_needs_review))
     print(_review_counts(entries))
-    print("key | display zh / en | sugar | bitter | water | min confidence | one-line reasons")
-    for entry in random.Random(seed).sample(candidates, count):
+    print("review | key | display zh / en | sugar | bitter | water | min confidence | one-line reasons")
+    for entry in [*selected_needs_review, *selected_llm]:
         display = entry.get("display", {})
         confidence = entry.get("confidence", {})
         reasons = entry.get("reason", {})
@@ -402,7 +485,7 @@ def _sample(path: Path, count: int, seed: int | None) -> None:
             for dimension in DIMENSIONS
         ).replace("|", "\\|")
         print(
-            f"{entry['key']} | {display.get('zh', '')} / {display.get('en', '')} | "
+            f"{entry['review']} | {entry['key']} | {display.get('zh', '')} / {display.get('en', '')} | "
             f"{entry['sugar']} | {entry['bitter']} | {entry['water']} | "
             f"{min(float(confidence.get(dimension, 0.0)) for dimension in DIMENSIONS):.4f} | "
             f"{one_line}"
@@ -418,6 +501,11 @@ def _mark_checked(path: Path, keys: list[str]) -> None:
     if missing:
         raise MergeError("cannot mark missing key(s): " + ", ".join(repr(key) for key in missing))
     for key in requested:
+        if by_key[key]["review"] not in {"llm_v1", "needs_review"}:
+            raise MergeError(
+                f"cannot mark {key!r}: review is {by_key[key]['review']!r}, "
+                "expected llm_v1 or needs_review"
+            )
         by_key[key]["review"] = "human_checked"
     path.write_text(json.dumps(entries, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print("Marked human_checked: " + ", ".join(requested))
@@ -435,7 +523,12 @@ def main() -> None:
     parser.add_argument(
         "--replace-llm",
         action="store_true",
-        help="replace matching llm_v1 entries even when encoder_version differs (the merge default)",
+        help="replace matching llm_v1 and needs_review entries (the merge default)",
+    )
+    parser.add_argument(
+        "--arbitration-report",
+        action="store_true",
+        help="print every cross-language arbitration performed by the merge",
     )
     args = parser.parse_args()
     try:
@@ -448,7 +541,9 @@ def main() -> None:
         else:
             if args.source is None:
                 parser.error("source is required unless --split-list, --sample, or --mark-checked is used")
-            merged, skipped, result = merge(args.source, args.into, args.replace_llm)
+            merged, skipped, result = merge(
+                args.source, args.into, args.replace_llm, args.arbitration_report
+            )
             print(f"Merged {merged} entries; skipped {skipped}; dictionary count: {len(result)}")
     except (OSError, MergeError) as exc:
         parser.exit(1, f"merge error: {exc}\n")

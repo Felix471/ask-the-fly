@@ -15,6 +15,10 @@
 | Total simulated trials | 540 |
 | Parallel walltime | 218.0 s |
 
+## Provenance note (2026-09-10)
+
+This report was produced with the reusable Brian2 path BEFORE the refractory fix of 2026-09-10: every stimulable GRN (sugar, bitter) had its refractory period set to 0 at build time, whereas the paper's model.py sets rfc = 0 only for neurons that receive Poisson input. The equivalence study (docs/equivalence_study.md) measured the pure effect of this rule with the random stream held fixed: zero (10/10 seeds spike-for-spike identical at sugar 100 Hz, bitter 0 Hz), i.e. the undriven GRNs never fired in that condition. The rule was corrected for fidelity to model.py, not because it changes results. Any difference between pre-fix and fixed runs is sampling noise from different random streams (the stimulus group size changed the draws). The lookup grid uses the corrected per-channel rule. Measured delta at sugar 100 Hz, fixed minus pre-fix (condition A, 30 trials each): +0.1 Hz (pre-fix 67.2, fixed 67.3). See docs/fixed_path_recheck.md.
+
 The paper calibrated w_syn on FlyWire v630; all runs here use v783 only. Absolute Hz may therefore differ from the paper; directions are the acceptance criteria.
 
 MN9 aggregation = left_only (contralateral to the right-hemisphere sugar GRNs), frozen in data/stim_protocol.json.

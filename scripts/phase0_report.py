@@ -80,6 +80,28 @@ def elapsed(meta: dict) -> str:
         return "not available"
 
 
+def provenance_note() -> list[str]:
+    pre_path = ROOT / "results" / "phase0" / "full" / "summary.csv"
+    fixed_path = ROOT / "results" / "phase0_fixed" / "full" / "summary.csv"
+    measurement = "pending"
+    if pre_path.exists() and fixed_path.exists():
+        cond_id = "A_sugar_dose_sugar100Hz_bitter0Hz"
+        pre = pd.read_csv(pre_path).set_index("cond_id")
+        fixed = pd.read_csv(fixed_path).set_index("cond_id")
+        if cond_id in pre.index and cond_id in fixed.index:
+            pre_mean = float(pre.loc[cond_id, "mn9_aggregated_mean_hz"])
+            fixed_mean = float(fixed.loc[cond_id, "mn9_aggregated_mean_hz"])
+            measurement = (
+                f"{fixed_mean - pre_mean:+.1f} Hz (pre-fix {pre_mean:.1f}, "
+                f"fixed {fixed_mean:.1f})"
+            )
+    return [
+        "## Provenance note (2026-09-10)", "",
+        "This report was produced with the reusable Brian2 path BEFORE the refractory fix of 2026-09-10: every stimulable GRN (sugar, bitter) had its refractory period set to 0 at build time, whereas the paper's model.py sets rfc = 0 only for neurons that receive Poisson input. The equivalence study (docs/equivalence_study.md) measured the pure effect of this rule with the random stream held fixed: zero (10/10 seeds spike-for-spike identical at sugar 100 Hz, bitter 0 Hz), i.e. the undriven GRNs never fired in that condition. The rule was corrected for fidelity to model.py, not because it changes results. Any difference between pre-fix and fixed runs is sampling noise from different random streams (the stimulus group size changed the draws). The lookup grid uses the corrected per-channel rule. Measured delta at sugar 100 Hz, fixed minus pre-fix (condition A, 30 trials each): "
+        + measurement + ". See docs/fixed_path_recheck.md.", "",
+    ]
+
+
 def results_table(groups: dict[str, list[tuple[float, pd.Series]]]) -> list[str]:
     lines = [
         "| Gate | Stimulus | Aggregated mean ± std (Hz) | Left mean ± std (Hz) | Right mean ± std (Hz) | Right/left | n trials |",
@@ -150,6 +172,7 @@ def generate(stage: str) -> str:
         f"| Cells sha256 | {meta.get('cells_sha256', 'unknown')} |",
         f"| Total simulated trials | {int(frame.n_trials.sum())} |",
         f"| Parallel walltime | {elapsed(meta)} |", "",
+        *provenance_note(),
         "The paper calibrated w_syn on FlyWire v630; all runs here use v783 only. Absolute Hz may therefore differ from the paper; directions are the acceptance criteria.", "",
         "MN9 aggregation = left_only (contralateral to the right-hemisphere sugar GRNs), frozen in data/stim_protocol.json.", "",
         "## Results", "", *results_table(groups), "", "## Hard gates", "",

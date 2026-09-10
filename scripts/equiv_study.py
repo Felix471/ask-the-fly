@@ -29,6 +29,9 @@ from sim.runner import _base_seed, expand_conditions, spikes_dataframe
 OUT = ROOT / "results" / "phase0" / "equiv_study"
 
 
+N_SEEDS_SEMANTICS = 30
+
+
 def _channels(protocol: dict) -> dict[str, str]:
     return {"sugar": channel_cell_sets(protocol)["sugar"]}
 
@@ -61,7 +64,10 @@ def _manual_trial(network, protocol: dict, seed: int, diagnostics: bool = False)
             "v_all_at_rest": bool(np.all(v == v0)),
             "g_all_at_rest": bool(np.all(g == 0.0)),
             "not_refractory_all_true": bool(np.all(not_refractory)),
-            "lastspike_all_at_rest": bool(np.all(np.isneginf(lastspike))),
+            # Brian2 initialises lastspike to a large negative finite time (not -inf);
+            # "at rest" = every neuron's last spike lies far before t=0 and all are equal.
+            "lastspike_all_at_rest": bool(np.all(lastspike < -100.0) and np.all(lastspike == lastspike[0])),
+            "lastspike_initial_s": float(lastspike[0]),
             "stimulus_rates_all_at_rest": bool(np.all(rates == 0.0)),
             "max_abs_g_mV": float(np.max(np.abs(g))),
             "max_abs_v_minus_v0_mV": float(np.max(np.abs(v - v0))),
@@ -80,10 +86,11 @@ def restore_determinism(protocol: dict, cells: dict) -> None:
     seed = _base_seed(protocol)
     print("building first reusable network", flush=True)
     first = build_network(protocol, cells, _channels(protocol))
-    a, diag = _manual_trial(first, protocol, seed, True)
+    a, _ = _manual_trial(first, protocol, seed)
     print(f"running intervening seed {seed + 1}", flush=True)
     b, _ = _manual_trial(first, protocol, seed + 1)
-    a2, _ = _manual_trial(first, protocol, seed)
+    print("checking restored state before repeating the original seed", flush=True)
+    a2, diag = _manual_trial(first, protocol, seed, True)
     print("building second reusable network", flush=True)
     second_net = build_network(protocol, cells, _channels(protocol))
     a3, _ = _manual_trial(second_net, protocol, seed)
@@ -211,7 +218,7 @@ def _compare(x: list[float], y: list[float]) -> dict:
 
 def stimulus_semantics(protocol: dict, cells: dict, n_proc: int) -> None:
     OUT.mkdir(parents=True, exist_ok=True)
-    seeds = [_base_seed(protocol) + i for i in range(30)]
+    seeds = [_base_seed(protocol) + i for i in range(N_SEEDS_SEMANTICS)]
     paths = {"a_reusable": _run_reusable(seeds, n_proc, protocol, cells),
              "b_poissoninput": _run_fresh("poissoninput", seeds, n_proc, protocol, cells),
              "c_fresh_poissongroup": _run_fresh("poissongroup", seeds, n_proc, protocol, cells)}
@@ -236,14 +243,15 @@ def stimulus_semantics(protocol: dict, cells: dict, n_proc: int) -> None:
         float(100.0 * bound / legacy_total_mean) if legacy_total_mean else None
         for bound in total_cmp["ci95"]
     ]
+    # Pass rule (product owner, 2026-09-10): 95% CI of the mean difference within
+    # +/-3 Hz AND including zero. No p-value requirement.
     left_pass = (
         left_cmp["ci95"][0] >= -3.0
         and left_cmp["ci95"][1] <= 3.0
-        and left_cmp["welch_p"] >= 0.05
+        and left_cmp["ci95"][0] <= 0.0 <= left_cmp["ci95"][1]
     )
     total_pass = (
         total_cmp["ci95"][0] <= 0.0 <= total_cmp["ci95"][1]
-        and total_cmp["welch_p"] >= 0.05
     )
     result = {"note": "PoissonInput and PoissonGroup consume RNG differently; b is distributional, not paired.",
               "rows": rows, "summary": summary, "comparisons": comparisons,
@@ -263,10 +271,12 @@ def refractory_quirk(protocol: dict, cells: dict) -> None:
     mappings = channel_cell_sets(protocol)
     full_channels = {name: mappings[name] for name in ("sugar", "bitter")}
     sugar_channels = {"sugar": mappings["sugar"]}
-    print("building reusable sugar+bitter network (rfc=0 for both channels)", flush=True)
-    full_net = build_network(protocol, cells, full_channels)
-    print("building reusable sugar-only network (bitter GRNs retain default rfc)", flush=True)
+    print("building reusable sugar+bitter network, build-time rfc=0 for BOTH channels (old semantics)", flush=True)
+    full_net = build_network(protocol, cells, full_channels, zero_refractory_for={"sugar", "bitter"})
+    print("building reusable sugar-only network (bitter GRNs absent from the stimulus group)", flush=True)
     sugar_net = build_network(protocol, cells, sugar_channels)
+    print("building reusable sugar+bitter network, rate-based rfc (new default: rfc=0 for driven channels only)", flush=True)
+    same_group_net = build_network(protocol, cells, full_channels)
     seeds = [_base_seed(protocol) + i for i in range(10)]
     duration = float(protocol["trial"]["duration_ms"])
     full_values, sugar_values, rows = [], [], []
@@ -275,10 +285,12 @@ def refractory_quirk(protocol: dict, cells: dict) -> None:
         print(f"refractory-quirk trial {trial + 1}, seed {seed}", flush=True)
         full_spikes = full_net.run_trial({"sugar": 100.0, "bitter": 0.0}, seed, duration)
         sugar_spikes = sugar_net.run_trial({"sugar": 100.0}, seed, duration)
+        same_spikes = same_group_net.run_trial({"sugar": 100.0, "bitter": 0.0}, seed, duration)
         full_values.append((seed, full_spikes))
         sugar_values.append((seed, sugar_spikes))
         full_count = int(len(full_spikes.get(left, ())))
         sugar_count = int(len(sugar_spikes.get(left, ())))
+        same_count = int(len(same_spikes.get(left, ())))
         rows.append({
             "trial": trial,
             "seed": seed,
@@ -286,6 +298,10 @@ def refractory_quirk(protocol: dict, cells: dict) -> None:
             "sugar_only_mn9_left_count": sugar_count,
             "paired_difference_count": full_count - sugar_count,
             "all_neurons_spike_trains_exact": _equal(full_spikes, sugar_spikes),
+            # Same PoissonGroup (identical random stream), only the refractory rule differs:
+            "same_group_rate_based_mn9_left_count": same_count,
+            "pure_refractory_difference_count": full_count - same_count,
+            "same_group_exact_vs_old": _equal(full_spikes, same_spikes),
         })
     _write_spikes("refractory_quirk_sugar_bitter", full_values, seeds)
     _write_spikes("refractory_quirk_sugar_only", sugar_values, seeds)
@@ -300,6 +316,10 @@ def refractory_quirk(protocol: dict, cells: dict) -> None:
         "mean_paired_difference_count": float(np.mean([
             row["paired_difference_count"] for row in rows
         ])),
+        "mean_pure_refractory_difference_count": float(np.mean([
+            row["pure_refractory_difference_count"] for row in rows
+        ])),
+        "same_group_exact_seeds": sum(row["same_group_exact_vs_old"] for row in rows),
         "exact_equal_seeds": sum(
             row["all_neurons_spike_trains_exact"] for row in rows
         ),
@@ -424,6 +444,11 @@ def report(protocol: dict) -> None:
               "The earlier ±1 standard-deviation overlap criterion was not an adequate test of bias."]
     left_cmp = sem["comparisons"]["left"]["a_reusable_vs_b_poissoninput"]
     total_cmp = sem["comparisons"]["total"]["a_reusable_vs_b_poissoninput"]
+    _l = sem["comparisons"]["left"]["a_reusable_vs_b_poissoninput"]["ci95"]
+    _t = sem["comparisons"]["total"]["a_reusable_vs_b_poissoninput"]["ci95"]
+    sem["acceptance"]["left_pass"] = bool(_l[0] >= -3.0 and _l[1] <= 3.0 and _l[0] <= 0.0 <= _l[1])
+    sem["acceptance"]["total_pass"] = bool(_t[0] <= 0.0 <= _t[1])
+    sem["acceptance"]["pass"] = bool(sem["acceptance"]["left_pass"] and sem["acceptance"]["total_pass"])
     total_pct = sem["acceptance"]["total_ci95_percent_of_legacy_mean"]
     criteria = [
         [1, "restore-determinism",
@@ -440,7 +465,7 @@ def report(protocol: dict) -> None:
          f"{total_cmp['ci95'][1]:.3f}] spikes/trial "
          f"([{total_pct[0]:.3f}%, {total_pct[1]:.3f}%] of legacy mean), "
          f"p={total_cmp['welch_p']:.6g}",
-         "MN9-L CI within ±3 Hz and p≥0.05; total CI covers 0 and p≥0.05",
+         "MN9-L 95% CI within ±3 Hz and including 0; total CI covers 0 (no p-value rule)",
          "PASS" if sem["acceptance"]["pass"] else "FAIL"],
         [4, "refractory quirk experiment",
          f"n={quirk['n_seeds']}; mean paired MN9-L count difference="
@@ -475,7 +500,10 @@ def main() -> int:
     parser.add_argument("command", choices=("restore-determinism", "paired", "stimulus-semantics",
                                             "refractory-quirk", "report"))
     parser.add_argument("--n-proc", type=int, default=14)
+    parser.add_argument("--n-seeds", type=int, default=30, help="seeds for stimulus-semantics (default 30)")
     args = parser.parse_args()
+    global N_SEEDS_SEMANTICS
+    N_SEEDS_SEMANTICS = int(args.n_seeds)
     protocol = load_protocol()
     if args.command == "report":
         report(protocol)

@@ -12,8 +12,12 @@ from .client import GeminiEncoder
 from .levels import LEVELS
 from .normalize import normalize_name
 
-PROMPT_VERSION = "encode_v2"
+PROMPT_VERSION = "encode_v2.1"
 _PROMPTS_DIR = Path(__file__).parent / "prompts"
+_PROMPT_PATH_FOR = {
+    version: _PROMPTS_DIR / f"{version.replace('.', '_')}.md"
+    for version in ("encode_v1", "encode_v2", "encode_v2.1")
+}
 _DIMENSIONS = ("sugar", "bitter", "water")
 _MODEL_FIELDS = {"key", "aliases", "display", *_DIMENSIONS, "reason", "confidence"}
 
@@ -76,10 +80,10 @@ def encode_dish(
     if not normalize_name(name):
         raise ValueError("name must be non-empty")
     selected_prompt = prompt_version or PROMPT_VERSION
-    if not re.fullmatch(r"encode_v[0-9]+", selected_prompt):
-        raise ValueError("prompt_version must look like 'encode_vN'")
-    prompt_path = _PROMPTS_DIR / f"{selected_prompt}.md"
-    if not prompt_path.is_file():
+    if not re.fullmatch(r"encode_v[0-9]+(?:\.[0-9]+)?", selected_prompt):
+        raise ValueError("prompt_version must look like 'encode_vN' or 'encode_vN.N'")
+    prompt_path = _PROMPT_PATH_FOR.get(selected_prompt)
+    if prompt_path is None or not prompt_path.is_file():
         raise ValueError(f"unknown prompt version: {selected_prompt}")
     client = GeminiEncoder()
     template = prompt_path.read_text(encoding="utf-8")
