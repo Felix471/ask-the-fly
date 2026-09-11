@@ -286,3 +286,55 @@ test("neuropil outlines share the neuron frame and stay inside it", () => {
   assert.ok(left < 0.4 && right > 0.6, "optic lobes sit on opposite sides");
   assert.ok(BFLAG.named === 64);
 });
+
+// ---- share links, QR code, provenance ----
+import { COMMIT_REWRITE, currentCommit, parseShareParams, resolveShared, shareParams, shareUrl, slugFor, SITE_URL } from "../app.js";
+import { qrcode } from "../vendor/qrcode-generator/qrcode.mjs";
+
+test("share link round-trips known dishes as slugs and unknown names as typed", () => {
+  const dictionary = buildDictionary(dishes);
+  const lookup = buildLookup(table);
+  const decision = decide(scoreOptions(["火锅", "black coffee", "not a dish"], dictionary, lookup), "ask");
+  const url = shareUrl(decision, "zh");
+  assert.equal(url, `${SITE_URL}?d=hotpot,black-coffee,not%20a%20dish&lang=zh`);
+  const parsed = parseShareParams(new URL(url).search);
+  assert.deepEqual(parsed, { names: ["hotpot", "black-coffee", "not a dish"], lang: "zh", mode: "ask" });
+  const options = resolveShared(parsed.names, dictionary, "zh");
+  const again = decide(scoreOptions(options, dictionary, lookup), "ask");
+  assert.deepEqual(again.known.map((i) => i.entry.key), decision.known.map((i) => i.entry.key));
+  assert.deepEqual(again.misses.map((i) => i.name), ["not a dish"]);
+  assert.equal(again.winner.entry.key, decision.winner.entry.key);
+  assert.match(shareParams(decide(scoreOptions(["火锅", "black coffee"], dictionary, lookup), "opposite"), "en"), /&lang=en&m=opposite$/);
+  assert.equal(parseShareParams("?lang=zh"), null);
+  assert.equal(parseShareParams("?d=&lang=zh"), null);
+  assert.equal(parseShareParams("?d=a,b&lang=fr").lang, null);
+  assert.equal(slugFor("Black Coffee"), "black-coffee");
+});
+
+test("every dictionary key survives the slug round trip", () => {
+  const dictionary = buildDictionary(dishes);
+  for (const entry of dishes) {
+    const [name] = resolveShared([slugFor(entry.key)], dictionary, "en");
+    assert.equal(dictionary.find(name), entry, `${entry.key} -> ${slugFor(entry.key)} -> ${name}`);
+  }
+});
+
+test("vendored QR generator encodes a share link at error correction M", () => {
+  const url = `${SITE_URL}?d=teriyaki-chicken,sour-plum-drink,hot-and-sour-noodles,lemon&lang=zh`;
+  const qr = qrcode(0, "M");
+  qr.addData(url);
+  qr.make();
+  const n = qr.getModuleCount();
+  assert.ok(n >= 41 && n <= 57, `version fits a ~100-char URL, got ${n} modules`);
+  // finder pattern: dark corner module, light ring at (1, 1), dark centre at (3, 3)
+  assert.equal(qr.isDark(0, 0), true);
+  assert.equal(qr.isDark(1, 1), false);
+  assert.equal(qr.isDark(3, 3), true);
+});
+
+test("footer shows the post-rewrite hash for the grid commit the table records", () => {
+  assert.equal(currentCommit(table.git_commit).slice(0, 7), "01a798e");
+  assert.equal(COMMIT_REWRITE[table.git_commit].slice(0, 7), "01a798e");
+  assert.equal(currentCommit("deadbeef"), "deadbeef");
+  assert.equal(currentCommit(undefined), "");
+});

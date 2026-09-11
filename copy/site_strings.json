@@ -100,6 +100,13 @@
       "max_length": 30
     },
     {
+      "key": "cardScan",
+      "context": "Tiny caption above the share card's QR code; scanning opens the same comparison",
+      "en": "Scan to replay this choice",
+      "zh": "扫码重现这次选择",
+      "max_length": 30
+    },
+    {
       "key": "cardTie",
       "context": "Card line for an exact tie",
       "en": "The fly calls it a tie",

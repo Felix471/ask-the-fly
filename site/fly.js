@@ -63,6 +63,13 @@ async function loadImage(url) {
   });
 }
 
+// Loads (once) and returns the sprite for a dish slug, or null when none exists.
+export async function loadDishSprite(sprites, slug) {
+  if (!slug) return null;
+  if (!sprites.dishCache.has(slug)) sprites.dishCache.set(slug, await loadImage(`${sprites.base}dishes/${slug}.png`));
+  return sprites.dishCache.get(slug);
+}
+
 export async function loadSprites(base = "assets/") {
   const fly = {};
   const frames = { idle: 2, fly: 4, land: 1, proboscis: 3 };
@@ -96,11 +103,7 @@ export class FlyScene {
     this.canvas.style.height = `${height}px`;
     this.fly.x = width / 2;
     this.fly.y = 34;
-    for (const plate of plates) {
-      if (plate.slug && !this.sprites.dishCache.has(plate.slug)) {
-        this.sprites.dishCache.set(plate.slug, await loadImage(`${this.sprites.base}dishes/${plate.slug}.png`));
-      }
-    }
+    for (const plate of plates) await loadDishSprite(this.sprites, plate.slug);
     this.start();
   }
 

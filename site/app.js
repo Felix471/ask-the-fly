@@ -3,7 +3,8 @@
 // Pure functions are exported so they can be unit-tested with node (see test/).
 
 import { BrainView, RasterView, SpikeClick, cellIdFor, decodeNeurons, makeReplayLoader, rasterRows, replayStats } from "./brain.js";
-import { FlyScene, loadSprites, makeToken } from "./fly.js";
+import { FlyScene, loadDishSprite, loadSprites, makeToken } from "./fly.js";
+import { qrcode } from "./vendor/qrcode-generator/qrcode.mjs";
 
 export const LEVELS = ["none", "low", "medium", "high", "very_high"];
 export const DIMENSIONS = ["sugar", "bitter", "water", "ir94e"];
@@ -25,17 +26,22 @@ export function normalizeName(name) {
 
 export function buildDictionary(entries) {
   const index = new Map();
+  const slugs = new Map(); // sprite slug (share links, file names) -> entry
   for (const entry of entries) {
     const names = [entry.key, ...(entry.aliases || [])];
     for (const name of names) {
       const key = normalizeName(name);
       if (key && !index.has(key)) index.set(key, entry);
     }
+    if (!slugs.has(slugFor(entry.key))) slugs.set(slugFor(entry.key), entry);
   }
   return {
     entries,
     find(name) {
       return index.get(normalizeName(name)) || null;
+    },
+    findSlug(slug) {
+      return slugs.get(String(slug).toLowerCase()) || null;
     },
   };
 }
@@ -212,6 +218,63 @@ export function cardLines(decision, lang) {
   return { fixed: t.fixedLines.map((line) => fmt(line, values)), bottom: t.cardBottom };
 }
 
+// ---------- share links ----------
+
+export const SITE_URL = "https://felix471.github.io/ask-the-fly/";
+
+// Commits recorded by data files before the 2026-09-11 history rewrite (commit
+// trailers stripped), mapped to the same commits' current hashes. The lookup
+// table keeps the hash its run wrote; the footer shows the current one.
+// Mapping documented in docs/site.md and docs/grid_provenance.md.
+export const COMMIT_REWRITE = {
+  "4d66cfcc6d080da46e316bf57dabe30132e0d5eb": "01a798e042a412edcb44f482ec6c9706c585d767",
+};
+
+export function currentCommit(hash) {
+  return COMMIT_REWRITE[hash] || hash || "";
+}
+
+export function slugFor(key) {
+  return String(key).normalize("NFKD").replace(/[^\x00-\x7f]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "") || "dish";
+}
+
+// ?d=slug,slug,…&lang=zh[&m=opposite] replays a comparison on load. Known dishes
+// travel as their sprite slug (short, scannable); unknown names as typed, encoded.
+export function shareParams(decision, lang) {
+  const parts = [...decision.known, ...decision.misses].map((item) =>
+    (item.entry ? slugFor(item.entry.key) : encodeURIComponent(item.name)));
+  let query = `?d=${parts.join(",")}&lang=${lang === "zh" ? "zh" : "en"}`;
+  if (decision.mode === "opposite") query += "&m=opposite";
+  return query;
+}
+
+export function shareUrl(decision, lang) {
+  return SITE_URL + shareParams(decision, lang);
+}
+
+export function parseShareParams(search) {
+  const params = new URLSearchParams(search || "");
+  const d = params.get("d");
+  if (!d) return null;
+  const names = d.split(",").map((s) => s.trim()).filter(Boolean);
+  if (!names.length) return null;
+  const lang = params.get("lang");
+  return {
+    names,
+    lang: lang === "zh" || lang === "en" ? lang : null,
+    mode: params.get("m") === "opposite" ? "opposite" : "ask",
+  };
+}
+
+// Turns shared names back into option strings: a slug or name that resolves to a
+// dictionary entry becomes that entry's display name; anything else stays as typed.
+export function resolveShared(names, dictionary, lang) {
+  return names.map((name) => {
+    const entry = dictionary.find(name) || dictionary.findSlug(name) || dictionary.find(name.replace(/-/g, " "));
+    return entry ? (entry.display?.[lang] || entry.key) : name;
+  });
+}
+
 // ---------- share card (3:4, canvas) ----------
 
 function wrapLines(ctx, text, maxWidth) {
@@ -232,12 +295,126 @@ function wrapLines(ctx, text, maxWidth) {
   return lines;
 }
 
+// Monospace URL wrapped by character count (the card has no word breaks to use).
+function wrapChars(text, perLine) {
+  const lines = [];
+  for (let i = 0; i < text.length; i += perLine) lines.push(text.slice(i, i + perLine));
+  return lines;
+}
+
+// Greyscale copy of a sprite, done per pixel so it also works where canvas
+// filters are unsupported.
+function greyscaleSprite(img, size) {
+  const off = document.createElement("canvas");
+  off.width = size;
+  off.height = size;
+  const c = off.getContext("2d");
+  c.imageSmoothingEnabled = false;
+  c.drawImage(img, 0, 0, size, size);
+  const data = c.getImageData(0, 0, size, size);
+  const p = data.data;
+  for (let i = 0; i < p.length; i += 4) {
+    const l = Math.round(0.299 * p[i] + 0.587 * p[i + 1] + 0.114 * p[i + 2]);
+    p[i] = p[i + 1] = p[i + 2] = l;
+  }
+  c.putImageData(data, 0, 0);
+  return off;
+}
+
+// A dish sprite (drawn with its own plate) at x, y with a soft shadow; `struck`
+// draws it greyscale at 40% with a thin line through the plate.
+function drawDish(ctx, img, x, y, size, struck) {
+  ctx.save();
+  ctx.beginPath();
+  ctx.ellipse(x + size / 2, y + size * 0.82, size * 0.5, size * 0.13, 0, 0, Math.PI * 2);
+  ctx.fillStyle = struck ? "rgba(0, 0, 0, 0.05)" : "rgba(0, 0, 0, 0.10)";
+  ctx.fill();
+  ctx.imageSmoothingEnabled = false;
+  if (img) {
+    if (struck) {
+      ctx.globalAlpha = 0.4;
+      ctx.drawImage(greyscaleSprite(img, size), x, y, size, size);
+      ctx.globalAlpha = 1;
+    } else {
+      ctx.drawImage(img, x, y, size, size);
+    }
+  } else {
+    // No sprite: plate and a neutral circle, like the scene's placeholder.
+    ctx.globalAlpha = struck ? 0.4 : 1;
+    ctx.beginPath();
+    ctx.ellipse(x + size / 2, y + size * 0.7, size * 0.48, size * 0.2, 0, 0, Math.PI * 2);
+    ctx.fillStyle = "#f4efe7";
+    ctx.strokeStyle = "#d8cfc2";
+    ctx.lineWidth = 2;
+    ctx.fill();
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.arc(x + size / 2, y + size * 0.55, size * 0.26, 0, Math.PI * 2);
+    ctx.fillStyle = struck ? "#9a928a" : "#c9a86a";
+    ctx.fill();
+    ctx.globalAlpha = 1;
+  }
+  if (struck) {
+    ctx.strokeStyle = "rgba(31, 26, 23, 0.75)";
+    ctx.lineWidth = Math.max(2, Math.round(size / 40));
+    ctx.beginPath();
+    ctx.moveTo(x + size * 0.04, y + size * 0.66);
+    ctx.lineTo(x + size * 0.96, y + size * 0.66);
+    ctx.stroke();
+  }
+  ctx.restore();
+}
+
+// The fly sprite, proboscis fully out, sitting on a dish drawn at x, y, size.
+function drawFlyOn(ctx, frames, x, y, size, proboscis) {
+  const list = frames && (proboscis ? frames.proboscis : frames.idle);
+  const frame = list && list[list.length - 1];
+  const fs = Math.round(size * 0.52);
+  const fx = x + size * 0.5 - fs * 0.42;
+  const fy = y + size * 0.18 - fs * 0.35;
+  ctx.save();
+  ctx.imageSmoothingEnabled = false;
+  if (frame) {
+    ctx.drawImage(frame, fx, fy, fs, fs);
+  } else {
+    ctx.fillStyle = "#2a2420";
+    ctx.beginPath();
+    ctx.ellipse(fx + fs / 2, fy + fs / 2, fs * 0.22, fs * 0.12, 0, 0, Math.PI * 2);
+    ctx.fill();
+  }
+  ctx.restore();
+}
+
+function drawQr(ctx, text, x, y, size) {
+  const qr = qrcode(0, "M");
+  qr.addData(text);
+  qr.make();
+  const n = qr.getModuleCount();
+  const quiet = 4; // modules of quiet zone, per the QR spec
+  const cell = Math.max(1, Math.floor(size / (n + quiet * 2)));
+  const total = cell * (n + quiet * 2);
+  const ox = x + Math.floor((size - total) / 2);
+  const oy = y + Math.floor((size - total) / 2);
+  ctx.fillStyle = "#ffffff";
+  ctx.fillRect(ox, oy, total, total);
+  ctx.fillStyle = "#1f1a17";
+  for (let r = 0; r < n; r += 1) {
+    for (let c = 0; c < n; c += 1) {
+      if (qr.isDark(r, c)) ctx.fillRect(ox + (c + quiet) * cell, oy + (r + quiet) * cell, cell, cell);
+    }
+  }
+  return { x: ox, y: oy, size: total, modules: n };
+}
+
+// options: stub, sprites ({ fly, dishCache }), spriteFor(item) -> image | null.
 export function drawShareCard(canvas, decision, lang, options = {}) {
   const t = STRINGS[lang];
   const ctx = canvas.getContext("2d");
   const W = canvas.width;
   const H = canvas.height;
   const pad = 64;
+  const spriteFor = options.spriteFor || (() => null);
+  const flyFrames = options.sprites ? options.sprites.fly : null;
   ctx.fillStyle = options.stub ? "#fff3c4" : "#fbf8f2";
   ctx.fillRect(0, 0, W, H);
   ctx.fillStyle = "#b5471f";
@@ -245,13 +422,15 @@ export function drawShareCard(canvas, decision, lang, options = {}) {
 
   const font = (size, weight = 400) =>
     `${weight} ${size}px system-ui, -apple-system, "Segoe UI", "PingFang SC", "Noto Sans CJK SC", "Microsoft YaHei", sans-serif`;
+  const mono = (size) => `${size}px ui-monospace, Menlo, Consolas, "Courier New", monospace`;
 
+  // Header: title, headline, the chosen name(s).
   ctx.fillStyle = "#1f1a17";
-  ctx.font = font(56, 700);
-  ctx.fillText(t.cardTitle, pad, 130);
-
-  let y = 230;
-  ctx.font = font(30);
+  ctx.font = font(50, 700);
+  ctx.textAlign = "left";
+  ctx.fillText(t.cardTitle, pad, 108);
+  let y = 172;
+  ctx.font = font(27);
   ctx.fillStyle = "#6b625b";
   let headline;
   if (!decision.winner) headline = t.verdictNone;
@@ -260,86 +439,156 @@ export function drawShareCard(canvas, decision, lang, options = {}) {
   else headline = t.cardPicked;
   for (const line of wrapLines(ctx, headline, W - 2 * pad)) {
     ctx.fillText(line, pad, y);
-    y += 40;
+    y += 36;
   }
-
-  if (decision.winner) {
+  const chosen = decision.winner ? (decision.tie.length ? decision.tie : [decision.winner]) : [];
+  if (chosen.length) {
     ctx.fillStyle = "#1f1a17";
-    ctx.font = font(72, 700);
-    const names = decision.tie.length ? decision.tie.map((i) => displayName(i, lang)).join(" / ") : displayName(decision.winner, lang);
+    ctx.font = font(chosen.length > 1 ? 44 : 56, 700);
+    const names = chosen.map((i) => displayName(i, lang)).join(" / ");
     for (const line of wrapLines(ctx, names, W - 2 * pad)) {
-      y += 70;
+      y += chosen.length > 1 ? 50 : 62;
       ctx.fillText(line, pad, y);
     }
-    y += 30;
   }
+  y += 28;
 
-  // Middle third: horizontal-bar comparison of every option's MN9 (monochrome;
-  // the winner takes the card's accent). Bars share one scale so lengths compare.
-  const bottomStart = H - 440;
-  y += 36;
+  // Bottom block is fixed: the four lines and the honesty line on the left, the
+  // QR code and its URL on the right. Everything above shares the rest.
+  const qrSize = 220;
+  const qrX = W - pad - qrSize;
+  const bottomTop = H - 330;
+  const textWidth = qrX - 28 - pad;
+
+  // Middle: the chosen dish large with the fly on it; the others small, grey,
+  // struck. Ties: every tied dish in colour, side by side, fly hovering above.
   const ranked = [...decision.known].sort((a, b) => b.cell.mn9_mean - a.cell.mn9_mean);
+  const others = ranked.filter((item) => !chosen.includes(item));
+  const barRows = Math.min(ranked.length, 4);
+  const barsHeight = ranked.length ? 24 + barRows * 44 + (ranked.length > barRows ? 28 : 0) : 0;
+  const missHeight = Math.min(decision.misses.length, 2) * 28;
+  const spriteTop = y;
+  const spriteBottom = bottomTop - barsHeight - missHeight - 24;
+  const spriteRoom = Math.max(0, spriteBottom - spriteTop);
+  let sy = spriteTop;
+  if (chosen.length && spriteRoom >= 150) {
+    const smallSize = others.length ? 88 : 0;
+    const smallBlock = others.length ? smallSize + 46 : 0;
+    const bigSize = Math.max(110, Math.min(chosen.length > 1 ? 170 : 240, spriteRoom - smallBlock - 12));
+    const gap = 24;
+    const rowWidth = chosen.length * bigSize + (chosen.length - 1) * gap;
+    const x0 = (W - rowWidth) / 2;
+    if (chosen.length > 1) drawFlyOn(ctx, flyFrames, W / 2 - bigSize / 2, sy - bigSize * 0.16, bigSize, false);
+    chosen.forEach((item, i) => {
+      const x = x0 + i * (bigSize + gap);
+      drawDish(ctx, spriteFor(item), x, sy, bigSize, false);
+      if (chosen.length === 1 && decision.mode !== "opposite") drawFlyOn(ctx, flyFrames, x, sy, bigSize, true);
+    });
+    sy += bigSize + 12;
+    if (others.length) {
+      const maxCols = Math.max(1, Math.floor((W - 2 * pad + 20) / (smallSize + 20)));
+      const shownOthers = others.slice(0, maxCols);
+      const rw = shownOthers.length * smallSize + (shownOthers.length - 1) * 20;
+      let x = (W - rw) / 2;
+      ctx.textAlign = "center";
+      for (const item of shownOthers) {
+        const flyPick = decision.mode === "opposite" && item === decision.flyPick;
+        drawDish(ctx, spriteFor(item), x, sy, smallSize, !flyPick);
+        if (flyPick) drawFlyOn(ctx, flyFrames, x, sy, smallSize, true);
+        ctx.font = font(17, flyPick ? 600 : 400);
+        ctx.fillStyle = flyPick ? "#1f1a17" : "#9a928a";
+        const label = displayName(item, lang);
+        const short = ctx.measureText(label).width > smallSize + 16 ? wrapLines(ctx, label, smallSize + 16)[0] : label;
+        ctx.fillText(short, x + smallSize / 2, sy + smallSize + 22);
+        x += smallSize + 20;
+      }
+      if (others.length > shownOthers.length) {
+        ctx.font = font(17);
+        ctx.fillStyle = "#9a928a";
+        ctx.fillText(fmt(t.cardMore, { n: others.length - shownOthers.length }), W / 2, sy + smallSize + 44);
+      }
+      ctx.textAlign = "left";
+      sy += smallBlock;
+    }
+  }
+  y = Math.max(sy, spriteTop) + 8;
+
+  // Bars carry the numbers: one shared scale, the chosen dish in the accent.
   const scale = Math.max(100, ...ranked.map((item) => item.cell.mn9_mean));
-  const rowHeight = 58;
-  const barHeight = 14;
   const trackWidth = W - 2 * pad;
-  const maxRows = Math.max(1, Math.floor((bottomStart - y) / rowHeight));
-  const shown = ranked.slice(0, maxRows);
+  const shown = ranked.slice(0, barRows);
+  y += 16;
   for (const item of shown) {
-    const isWinner = decision.winner && (item === decision.winner || decision.tie.includes(item));
-    ctx.font = font(26, isWinner ? 700 : 400);
-    ctx.fillStyle = isWinner ? "#b5471f" : "#1f1a17";
+    const isChosen = chosen.includes(item);
+    ctx.font = font(22, isChosen ? 700 : 400);
+    ctx.fillStyle = isChosen ? "#b5471f" : "#1f1a17";
     ctx.textAlign = "left";
     ctx.fillText(displayName(item, lang), pad, y);
     ctx.textAlign = "right";
     ctx.fillText(fmt(t.hzValue, { hz: item.cell.mn9_mean.toFixed(1) }), W - pad, y);
     ctx.textAlign = "left";
-    const barY = y + 12;
+    const barY = y + 10;
     ctx.fillStyle = "#e2dbd0";
-    ctx.fillRect(pad, barY, trackWidth, barHeight);
+    ctx.fillRect(pad, barY, trackWidth, 10);
     const width = Math.max(0, Math.round((item.cell.mn9_mean / scale) * trackWidth));
-    ctx.fillStyle = isWinner ? "#b5471f" : "#1f1a17";
-    if (width > 0) ctx.fillRect(pad, barY, width, barHeight);
-    y += rowHeight;
+    ctx.fillStyle = isChosen ? "#b5471f" : "#1f1a17";
+    if (width > 0) ctx.fillRect(pad, barY, width, 10);
+    y += 44;
   }
   if (ranked.length > shown.length) {
-    ctx.font = font(22);
+    ctx.font = font(20);
     ctx.fillStyle = "#6b625b";
     ctx.fillText(fmt(t.cardMore, { n: ranked.length - shown.length }), pad, y);
-    y += 34;
+    y += 28;
   }
-  ctx.font = font(22);
-  for (const item of decision.misses) {
-    if (y > bottomStart - 10) break;
+  ctx.font = font(20);
+  for (const item of decision.misses.slice(0, 2)) {
     ctx.fillStyle = "#6b625b";
     ctx.fillText(`${item.name} · ${t.missTitle}`, pad, y);
-    y += 32;
+    y += 28;
   }
 
-  // Four fixed lines, then the front-bottom line
+  // Bottom block: four fixed lines, honesty line, QR code with its URL.
   const lines = cardLines(decision, lang);
-  let fy = H - 400;
+  let fy = bottomTop;
   ctx.fillStyle = "#e2dbd0";
-  ctx.fillRect(pad, fy - 40, W - 2 * pad, 2);
-  ctx.font = font(24);
+  ctx.fillRect(pad, fy - 30, W - 2 * pad, 2);
+  ctx.font = font(20);
   ctx.fillStyle = "#1f1a17";
   for (const line of lines.fixed) {
-    for (const part of wrapLines(ctx, line, W - 2 * pad)) {
+    for (const part of wrapLines(ctx, line, textWidth)) {
       ctx.fillText(part, pad, fy);
-      fy += 34;
+      fy += 28;
     }
   }
-  fy += 12;
-  ctx.font = font(22, 600);
+  fy += 10;
+  ctx.font = font(19, 600);
   ctx.fillStyle = "#b5471f";
-  for (const part of wrapLines(ctx, lines.bottom, W - 2 * pad)) {
+  for (const part of wrapLines(ctx, lines.bottom, textWidth)) {
     ctx.fillText(part, pad, fy);
-    fy += 30;
+    fy += 26;
   }
+
+  const url = shareUrl(decision, lang);
+  const qr = drawQr(ctx, url, qrX, bottomTop - 20, qrSize);
+  ctx.font = font(15);
+  ctx.fillStyle = "#6b625b";
+  ctx.textAlign = "center";
+  ctx.fillText(t.cardScan, qr.x + qr.size / 2, qr.y - 8);
+  ctx.font = mono(13);
+  ctx.fillStyle = "#1f1a17";
+  const shortUrl = url.replace(/^https?:\/\//, "");
+  let uy = qr.y + qr.size + 22;
+  for (const part of wrapChars(shortUrl, 27).slice(0, 5)) {
+    ctx.fillText(part, qr.x + qr.size / 2, uy);
+    uy += 17;
+  }
+  ctx.textAlign = "left";
+
   if (options.stub) {
     ctx.font = font(20, 700);
     ctx.fillStyle = "#4a3a00";
-    ctx.fillText(t.stubStamp, pad, H - 30);
+    ctx.fillText(t.stubStamp, pad, H - 14);
   }
   return canvas;
 }
@@ -395,7 +644,7 @@ if (isBrowser) {
     if (state.lookup) {
       const table = state.lookup.table;
       $("table-meta").textContent = fmt(t.tableMeta, {
-        version: table.stub ? "stub" : (table.git_commit || "").slice(0, 7),
+        version: table.stub ? "stub" : currentCommit(table.git_commit).slice(0, 7),
         cells: table.cells.length,
         trials: table.n_trials_per_cell,
       });
@@ -761,10 +1010,6 @@ if (isBrowser) {
     $("input-panel").hidden = true;
   }
 
-  function slugFor(key) {
-    return String(key).normalize("NFKD").replace(/[^\x00-\x7f]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "") || "dish";
-  }
-
   function speed() {
     return Number($("speed").value) || 1;
   }
@@ -779,7 +1024,7 @@ if (isBrowser) {
       key: item.entry ? item.entry.key : item.name,
       label: displayName(item, state.lang),
       sub: item.cell ? tr("hzValue", { hz: item.cell.mn9_mean.toFixed(1) }) : STRINGS[state.lang].plateUnknown,
-      slug: item.entry ? (state.spriteFallbacks[slugFor(item.entry.key)] || slugFor(item.entry.key)) : null,
+      slug: spriteSlug(item),
     }));
     const indexOf = (item) => scored.indexOf(item);
     const plan = {
@@ -868,9 +1113,21 @@ if (isBrowser) {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
-  function showCard() {
+  function spriteSlug(item) {
+    return item.entry ? (state.spriteFallbacks[slugFor(item.entry.key)] || slugFor(item.entry.key)) : null;
+  }
+
+  async function showCard() {
     const canvas = $("share-card");
-    drawShareCard(canvas, state.decision, state.lang, { stub: Boolean(state.lookup.table.stub) });
+    const sprites = state.scene ? state.scene.sprites : null;
+    if (sprites) {
+      await Promise.all(state.decision.known.map((item) => loadDishSprite(sprites, spriteSlug(item)).catch(() => null)));
+    }
+    drawShareCard(canvas, state.decision, state.lang, {
+      stub: Boolean(state.lookup.table.stub),
+      sprites,
+      spriteFor: (item) => (sprites && spriteSlug(item) ? sprites.dishCache.get(spriteSlug(item)) || null : null),
+    });
     try {
       $("download-link").href = canvas.toDataURL("image/png");
     } catch (_) {
@@ -979,7 +1236,7 @@ if (isBrowser) {
   });
   $("ask-btn").addEventListener("click", () => run("ask"));
   $("opposite-btn").addEventListener("click", () => run("opposite"));
-  $("share-btn").addEventListener("click", showCard);
+  $("share-btn").addEventListener("click", () => { showCard().catch((error) => console.warn("share card failed:", error)); });
   $("close-card-btn").addEventListener("click", () => { $("card-panel").hidden = true; });
   $("again-btn").addEventListener("click", () => {
     reset();
@@ -1002,7 +1259,17 @@ if (isBrowser) {
   });
 
   applyStrings();
-  loadData().catch((error) => {
+  loadData().then(() => {
+    // A shared link (?d=…&lang=…) fills the options and runs the sequence.
+    const shared = parseShareParams(window.location.search);
+    if (!shared || !state.dictionary) return;
+    if (shared.lang && shared.lang !== state.lang) {
+      state.lang = shared.lang; // for this view only; the saved preference is untouched
+      applyStrings();
+    }
+    for (const name of resolveShared(shared.names, state.dictionary, state.lang)) addOption(name);
+    if (state.options.length >= 2) run(shared.mode);
+  }).catch((error) => {
     console.warn("data load failed:", error);
     notice("stateDataFailed");
   });
