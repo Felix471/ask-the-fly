@@ -194,3 +194,5 @@ body { padding: 0 16px 32px; max-width: 640px; margin: 0 auto; }
 .replay-honesty { margin: 10px 0 0; font-size: 0.85rem; color: var(--ink); }
 .details { margin-top: 8px; }
 .details summary { cursor: pointer; color: var(--muted); font-size: 0.9rem; padding: 6px 0; }
+
+.notice { background: var(--soft); border: 1px solid var(--line); color: var(--ink); padding: 8px 12px; margin: 12px 0 0; border-radius: 8px; font-size: 0.9rem; }

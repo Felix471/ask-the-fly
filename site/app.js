@@ -56,6 +56,11 @@ export const STRINGS = {
     sceneNone: "Nothing here the fly has tasted",
     brainCaption: "Replay of recorded simulation: {cell} · 1 s · ~{n} spikes",
     brainIdle: "Brain view: waiting for the first plate",
+    stateNoOptions: "Add at least two dishes first. Type a name and press Add.",
+    stateAllUnknown: "The fly hasn't tasted any of these. Report them below and try known dishes.",
+    stateReplayFailed: "Replay file could not be loaded; the numbers below still stand.",
+    stateOffline: "You're offline. Dishes already loaded still work; new replays can't be fetched.",
+    stateDataFailed: "The dictionary or lookup table failed to load. Reload the page.",
     stubBanner: "STUB DATA: the lookup table on this page is a placeholder, not simulation output.",
     tableMeta: "Lookup table {version} · {cells} cells · {trials} trials per cell",
     cardTitle: "Ask the Fly",
@@ -116,6 +121,11 @@ export const STRINGS = {
     sceneNone: "这里没有果蝇尝过的东西",
     brainCaption: "仿真记录回放：{cell} · 1 秒 · 约 {n} 个 spike",
     brainIdle: "脑图：等第一盘",
+    stateNoOptions: "先加至少两道菜：输入名字，按添加。",
+    stateAllUnknown: "这些果蝇都没尝过。可以在下面报上去，或换几道它认识的菜。",
+    stateReplayFailed: "回放文件没加载出来；下面的数字仍然有效。",
+    stateOffline: "现在离线。已加载的菜还能用，新的回放取不到。",
+    stateDataFailed: "词典或查找表没加载出来，请刷新页面。",
     stubBanner: "占位数据：本页的查找表是占位符，不是仿真结果。",
     tableMeta: "查找表 {version} · {cells} 个格子 · 每格 {trials} 次试验",
     cardTitle: "问问果蝇",
@@ -417,6 +427,12 @@ if (isBrowser) {
 
   const $ = (id) => document.getElementById(id);
   const tr = (key, values) => fmt(STRINGS[state.lang][key], values || {});
+  function notice(key, values) {
+    const el = $("notice");
+    if (!key) { el.hidden = true; el.textContent = ""; return; }
+    el.textContent = tr(key, values);
+    el.hidden = false;
+  }
 
   function applyStrings() {
     const t = STRINGS[state.lang];
@@ -455,9 +471,10 @@ if (isBrowser) {
       li.append(span, remove);
       list.append(li);
     });
-    const ready = state.options.length >= 2 && state.lookup && state.dictionary;
+    const ready = Boolean(state.lookup && state.dictionary);
     $("ask-btn").disabled = !ready;
     $("opposite-btn").disabled = !ready;
+    if (state.options.length >= 2) notice(null);
   }
 
   function levelText(level) {
@@ -591,7 +608,9 @@ if (isBrowser) {
         try {
           replay = await state.loadReplay(cellId);
         } catch (error) {
-          $("brain-caption").textContent = `replay unavailable: ${error.message}`;
+          console.warn("replay load failed:", error);
+          $("brain-caption").textContent = navigator.onLine === false ? tr("stateOffline") : tr("stateReplayFailed");
+          notice(navigator.onLine === false ? "stateOffline" : "stateReplayFailed");
           return;
         }
         if (token.cancelled) return;
@@ -614,9 +633,17 @@ if (isBrowser) {
   }
 
   function run(mode) {
-    if (!state.lookup || !state.dictionary) return;
+    if (!state.lookup || !state.dictionary) { notice("stateDataFailed"); return; }
+    if (state.options.length < 2) { notice("stateNoOptions"); return; }
+    notice(null);
     const scored = scoreOptions(state.options, state.dictionary, state.lookup);
     state.decision = decide(scored, mode);
+    if (state.decision.known.length === 0) {
+      notice("stateAllUnknown");
+      $("card-panel").hidden = true;
+      renderDecision();
+      return;
+    }
     if (state.brain && state.scene) {
       runScene(state.decision).catch((error) => {
         $("scene-status").textContent = `scene error: ${error.message}`;
@@ -728,7 +755,9 @@ if (isBrowser) {
 
   applyStrings();
   loadData().catch((error) => {
-    $("verdict").textContent = `Failed to load data: ${error.message}`;
-    $("result-panel").hidden = false;
+    console.warn("data load failed:", error);
+    notice("stateDataFailed");
   });
+  window.addEventListener("offline", () => notice("stateOffline"));
+  window.addEventListener("online", () => { if ($("notice").textContent === tr("stateOffline")) notice(null); });
 }
