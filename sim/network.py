@@ -117,11 +117,17 @@ def build_network(
     cells: dict,
     stim_channels: Mapping[str, str] | Sequence[str],
     zero_refractory_for: Sequence[str] | set[str] | None = None,
+    silence_ids: Sequence[int] | None = None,
 ) -> SimNet:
     """Build and store one resettable connectome network.
 
     By default every built stimulus channel retains the historical ``rfc=0``
     behaviour.  Passing channel names limits that change to those channels.
+
+    ``silence_ids``: FlyWire IDs whose synapses are removed from the network
+    (every incoming and outgoing weight set to 0, as in the silencing experiments
+    of Tastekin et al. 2026). The neurons stay in the group but can neither drive
+    nor be driven; the network's own dynamics are otherwise untouched.
     """
     if isinstance(stim_channels, Mapping):
         channels = dict(stim_channels)
@@ -180,7 +186,17 @@ def build_network(
         i=connectivity["Presynaptic_Index"].to_numpy(),
         j=connectivity["Postsynaptic_Index"].to_numpy(),
     )
-    synapses.w = connectivity["Excitatory x Connectivity"].to_numpy() * params["w_syn"]
+    weights = connectivity["Excitatory x Connectivity"].to_numpy() * params["w_syn"]
+    if silence_ids:
+        missing = [int(flyid) for flyid in silence_ids if int(flyid) not in flyid2i]
+        if missing:
+            raise ValueError(f"silence_ids absent from the connectome: {missing}")
+        silenced = np.array([flyid2i[int(flyid)] for flyid in silence_ids])
+        pre = connectivity["Presynaptic_Index"].to_numpy()
+        post = connectivity["Postsynaptic_Index"].to_numpy()
+        mask = np.isin(pre, silenced) | np.isin(post, silenced)
+        weights = np.where(mask, 0.0, weights / mV) * mV
+    synapses.w = weights
 
     target_indices: list[int] = []
     channel_slices: dict[str, slice] = {}

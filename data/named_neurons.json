@@ -1,0 +1,232 @@
+{
+  "schema_version": "named_neurons_v1",
+  "generated_at": "2026-09-11T05:52:04.587405+00:00",
+  "data_version": "flywire_v783",
+  "sources": {
+    "shiu_2024_sez_pickle": "vendor/fly-brain/data/sez_neurons.pickle (loaded by the paper's figures.ipynb; MIT)",
+    "flywire_annotations": "data/external/Supplemental_file1_neuron_annotations.tsv (Schlegel et al. 2024, CC BY 4.0)"
+  },
+  "neurons": [
+    {
+      "key": "clavicle",
+      "label": "Clavicle",
+      "code": "ANXXX462a",
+      "root_ids": [
+        "720575940632648868",
+        "720575940655014049"
+      ],
+      "cells": [
+        {
+          "root_id": "720575940632648868",
+          "side": "right",
+          "annotation_cell_type": "AN_GNG_30"
+        },
+        {
+          "root_id": "720575940655014049",
+          "side": "left",
+          "annotation_cell_type": "AN_GNG_30"
+        }
+      ],
+      "source": "Shiu et al. 2024 sez_neurons.pickle key 'clavicle' (MIT)",
+      "note": null
+    },
+    {
+      "key": "quasimodo",
+      "label": "Quasimodo",
+      "code": "GNG042",
+      "root_ids": [],
+      "cells": [],
+      "source": null,
+      "note": "no FlyWire v783 match in the Shiu 2024 SEZ dictionary or the Schlegel 2024 annotation table (cell_type / hemibrain_type / synonyms); skipped on the site"
+    },
+    {
+      "key": "bract",
+      "label": "Bract I/II",
+      "code": null,
+      "root_ids": [
+        "720575940626557442",
+        "720575940645045527",
+        "720575940627285267",
+        "720575940610001220"
+      ],
+      "cells": [
+        {
+          "root_id": "720575940626557442",
+          "side": "right",
+          "annotation_cell_type": "DNge173"
+        },
+        {
+          "root_id": "720575940645045527",
+          "side": "left",
+          "annotation_cell_type": "DNge174"
+        },
+        {
+          "root_id": "720575940627285267",
+          "side": "right",
+          "annotation_cell_type": "DNge174"
+        },
+        {
+          "root_id": "720575940610001220",
+          "side": "left",
+          "annotation_cell_type": "DNge173"
+        }
+      ],
+      "source": "Shiu et al. 2024 sez_neurons.pickle key 'bract' (MIT)",
+      "note": null
+    },
+    {
+      "key": "roundup",
+      "label": "Roundup",
+      "code": null,
+      "root_ids": [
+        "720575940607272649",
+        "720575940623211725"
+      ],
+      "cells": [
+        {
+          "root_id": "720575940607272649",
+          "side": "right",
+          "annotation_cell_type": "CB0553"
+        },
+        {
+          "root_id": "720575940623211725",
+          "side": "left",
+          "annotation_cell_type": "CB0553"
+        }
+      ],
+      "source": "Shiu et al. 2024 sez_neurons.pickle key 'roundup' (MIT)",
+      "note": null
+    },
+    {
+      "key": "sink_synch",
+      "label": "Sink and Synch",
+      "code": null,
+      "root_ids": [
+        "720575940622624214",
+        "720575940638001498",
+        "720575940628029180",
+        "720575940647560500"
+      ],
+      "cells": [
+        {
+          "root_id": "720575940622624214",
+          "side": "left",
+          "annotation_cell_type": "CB0434"
+        },
+        {
+          "root_id": "720575940638001498",
+          "side": "right",
+          "annotation_cell_type": "CB0434"
+        },
+        {
+          "root_id": "720575940628029180",
+          "side": "right",
+          "annotation_cell_type": "CB0225"
+        },
+        {
+          "root_id": "720575940647560500",
+          "side": "left",
+          "annotation_cell_type": "DNg61"
+        }
+      ],
+      "source": "Shiu et al. 2024 sez_neurons.pickle key 'sink_sync' (MIT)",
+      "note": null
+    },
+    {
+      "key": "scapula",
+      "label": "Scapula",
+      "code": "GNG087",
+      "root_ids": [],
+      "cells": [],
+      "source": null,
+      "note": "no FlyWire v783 match in the Shiu 2024 SEZ dictionary or the Schlegel 2024 annotation table (cell_type / hemibrain_type / synonyms); skipped on the site"
+    },
+    {
+      "key": "gng016",
+      "label": "GNG016",
+      "code": "GNG016",
+      "root_ids": [],
+      "cells": [],
+      "source": null,
+      "note": "no FlyWire v783 match in the Shiu 2024 SEZ dictionary or the Schlegel 2024 annotation table (cell_type / hemibrain_type / synonyms); skipped on the site"
+    },
+    {
+      "key": "gng510",
+      "label": "GNG510",
+      "code": "GNG510",
+      "root_ids": [],
+      "cells": [],
+      "source": null,
+      "note": "no FlyWire v783 match in the Shiu 2024 SEZ dictionary or the Schlegel 2024 annotation table (cell_type / hemibrain_type / synonyms); skipped on the site"
+    },
+    {
+      "key": "fdg",
+      "label": "Fdg",
+      "code": "GNG588",
+      "root_ids": [
+        "720575940647030324",
+        "720575940631997032"
+      ],
+      "cells": [
+        {
+          "root_id": "720575940647030324",
+          "side": "right",
+          "annotation_cell_type": "CB0038"
+        },
+        {
+          "root_id": "720575940631997032",
+          "side": "left",
+          "annotation_cell_type": "CB0038"
+        }
+      ],
+      "source": "Shiu et al. 2024 sez_neurons.pickle key 'Fdg' (MIT)",
+      "note": null
+    },
+    {
+      "key": "dng103",
+      "label": "DNg103",
+      "code": "DNg103",
+      "root_ids": [
+        "720575940635179871",
+        "720575940606866377"
+      ],
+      "cells": [
+        {
+          "root_id": "720575940635179871",
+          "side": "left",
+          "annotation_cell_type": "DNg103"
+        },
+        {
+          "root_id": "720575940606866377",
+          "side": "right",
+          "annotation_cell_type": "DNg103"
+        }
+      ],
+      "source": "FlyWire annotations (Schlegel et al. 2024, CC BY 4.0), cell_type/hemibrain_type/synonyms match",
+      "note": null
+    },
+    {
+      "key": "bluebell",
+      "label": "Bluebell",
+      "code": null,
+      "root_ids": [
+        "720575940635166571",
+        "720575940631168057"
+      ],
+      "cells": [
+        {
+          "root_id": "720575940635166571",
+          "side": "right",
+          "annotation_cell_type": "DNg60"
+        },
+        {
+          "root_id": "720575940631168057",
+          "side": "left",
+          "annotation_cell_type": "DNg60"
+        }
+      ],
+      "source": "Shiu et al. 2024 sez_neurons.pickle key 'bluebell' (MIT)",
+      "note": null
+    }
+  ]
+}

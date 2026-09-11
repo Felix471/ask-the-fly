@@ -86,14 +86,37 @@ def annotation_xy(root_ids: list[str], annotations: Path, background: int) -> tu
     # axes, the shorter axis centred.
     lo, hi = xy.min(axis=0), xy.max(axis=0)
     span = float(max(hi - lo))
-    xy = (xy - lo) / max(span, 1e-9)
-    xy += (1.0 - (hi - lo) / max(span, 1e-9)) / 2.0
+    offset = (1.0 - (hi - lo) / max(span, 1e-9)) / 2.0
+    xy = (xy - lo) / max(span, 1e-9) + offset
+    global FRAME
+    FRAME = {"lo": [float(lo[0]), float(lo[1])], "span": span, "offset": [float(offset[0]), float(offset[1])],
+             "voxel_nm": [4.0, 4.0], "units": "FlyWire voxel coordinates (pos_x, pos_y)"}
     return xy, extra
+
+
+FRAME: dict | None = None
+
+
+def named_entries(root_ids: list[str]) -> list[dict]:
+    """Named SEZ neurons (data/named_neurons.json) with their index in this file."""
+    path = ROOT / "data" / "named_neurons.json"
+    if not path.exists():
+        return []
+    position = {rid: i for i, rid in enumerate(root_ids)}
+    out = []
+    for entry in json.loads(path.read_text(encoding="utf-8"))["neurons"]:
+        cells = [{"index": position[c["root_id"]], "root_id": c["root_id"], "side": c["side"]}
+                 for c in entry["cells"] if c["root_id"] in position]
+        if cells:
+            out.append({"key": entry["key"], "label": entry["label"], "code": entry["code"], "cells": cells})
+    return out
 
 
 def write(xy: np.ndarray, flags: np.ndarray, layout: str, n_indexed: int, meta: dict) -> None:
     q = np.clip(np.round(xy * 65535), 0, 65535).astype("<u2")
     payload = {
+        "frame": FRAME,
+        "named": named_entries(meta["root_ids"]),
         "schema_version": "neurons_v1",
         "layout": layout,
         "n": int(len(xy)),

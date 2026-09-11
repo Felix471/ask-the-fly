@@ -107,6 +107,10 @@ def main() -> int:
     args.out_dir.mkdir(parents=True, exist_ok=True)
     shutil.copyfile(args.dishes, args.out_dir / "dishes.json")
     print(f"copied {args.dishes} -> {args.out_dir / 'dishes.json'}")
+    named = ROOT / "data" / "named_neurons.json"
+    if named.exists():
+        shutil.copyfile(named, args.out_dir / "named_neurons.json")
+        print(f"copied {named} -> {args.out_dir / 'named_neurons.json'}")
     target = args.out_dir / "lookup_table.json"
     if args.stub:
         payload = build_stub()

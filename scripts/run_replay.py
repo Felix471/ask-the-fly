@@ -33,6 +33,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 import numpy as np
+import pandas as pd
 
 ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
@@ -46,7 +47,7 @@ SITE_DIR = ROOT / "site" / "data" / "replay"
 INDEX_PATH = ROOT / "data" / "replay_neurons.json"
 REPLAY_SEED_OFFSET = 700_000  # keeps replay seeds disjoint from grid seeds (base + trial + 1000 * index)
 MAGIC = b"AFR1"
-FLAG_BITS = {"sugar": 1, "bitter": 2, "water": 4, "ir94e": 8, "mn9_left": 16, "mn9_right": 32}
+FLAG_BITS = {"sugar": 1, "bitter": 2, "water": 4, "ir94e": 8, "mn9_left": 16, "mn9_right": 32, "named": 64}
 
 
 def git_commit() -> str:
@@ -66,6 +67,24 @@ def replay_seed(protocol: dict, condition_index: int) -> int:
     return _base_seed(protocol) + REPLAY_SEED_OFFSET + condition_index
 
 
+def _run_shard_silenced(worker_id, jobs, protocol, cells, duration_ms, channels, silence_ids):
+    """sim.runner._run_shard with an optional list of silenced FlyWire IDs."""
+    if not silence_ids:
+        return _run_shard(worker_id, jobs, protocol, cells, duration_ms, channels)
+    import time as _time
+
+    from sim.network import build_network, channel_cell_sets
+
+    mappings = channel_cell_sets(protocol)
+    network = build_network(protocol, cells, {name: mappings[name] for name in channels}, silence_ids=silence_ids)
+    output = []
+    for condition_index, condition, trial, seed in jobs:
+        start = _time.perf_counter()
+        spikes = network.run_trial(condition["rates"], seed, duration_ms)
+        output.append((condition_index, trial, spikes, _time.perf_counter() - start, None))
+    return {"worker_id": worker_id, "output": output}
+
+
 def run(args: argparse.Namespace) -> int:
     from joblib import Parallel, delayed
 
@@ -76,9 +95,19 @@ def run(args: argparse.Namespace) -> int:
     if args.limit:
         conditions = conditions[: args.limit]
     RAW_DIR.mkdir(parents=True, exist_ok=True)
+    silence_ids: list[int] = []
+    suffix = ""
+    if args.silence:
+        named = json.loads((ROOT / "data" / "named_neurons.json").read_text(encoding="utf-8"))
+        entry = next((n for n in named["neurons"] if n["key"] == args.silence), None)
+        if entry is None or not entry["root_ids"]:
+            raise SystemExit(f"--silence {args.silence}: no v783 ids in data/named_neurons.json")
+        silence_ids = [int(r) for r in entry["root_ids"]]
+        suffix = f"_silence_{args.silence}"
+        print(f"silencing {entry['label']}: {silence_ids}", flush=True)
     jobs = []
     for index, condition in enumerate(conditions):
-        target = RAW_DIR / f"{condition['cond_id']}.npz"
+        target = RAW_DIR / f"{condition['cond_id']}{suffix}.npz"
         if target.exists() and not args.force:
             continue
         jobs.append((index, condition, 0, replay_seed(protocol, index)))
@@ -98,9 +127,11 @@ def run(args: argparse.Namespace) -> int:
         "seed_rule": f"base_seed + {REPLAY_SEED_OFFSET} + grid_condition_index",
         "duration_ms": 1000.0,
         "path": "fixed per-channel refractory rule (store/restore)",
+        "silence": args.silence,
+        "silence_ids": [str(i) for i in silence_ids],
     }
     results = Parallel(n_jobs=workers, backend="loky")(
-        delayed(_run_shard)(worker_id, shard, protocol, cells, 1000.0, list(EXPECTED_DIMENSIONS))
+        delayed(_run_shard_silenced)(worker_id, shard, protocol, cells, 1000.0, list(EXPECTED_DIMENSIONS), silence_ids)
         for worker_id, shard in enumerate(shards)
     )
     by_index = {condition_index: (condition, seed) for condition_index, condition, _, seed in jobs}
@@ -113,7 +144,7 @@ def run(args: argparse.Namespace) -> int:
             order = np.argsort(times, kind="stable")
             n_spikes_total += len(order)
             np.savez_compressed(
-                RAW_DIR / f"{condition['cond_id']}.npz",
+                RAW_DIR / f"{condition['cond_id']}{suffix}.npz",
                 flywire_id=ids[order], t_ms=times[order] * 1000.0,
                 seed=np.int64(seed), condition_index=np.int64(condition_index),
                 rates=np.array([condition["rates"][d] for d in EXPECTED_DIMENSIONS], dtype=np.float64),
@@ -123,7 +154,7 @@ def run(args: argparse.Namespace) -> int:
     meta["n_cells_run"] = len(jobs)
     meta["n_spikes_total"] = int(n_spikes_total)
     meta["walltime_s"] = round(time.perf_counter() - started, 1)
-    (RAW_DIR / "run_meta.json").write_text(json.dumps(meta, indent=2) + "\n", encoding="utf-8")
+    (RAW_DIR / f"run_meta{suffix}.json").write_text(json.dumps(meta, indent=2) + "\n", encoding="utf-8")
     print(f"replay: {len(jobs)} trials, {n_spikes_total} spikes, {meta['walltime_s']} s", flush=True)
     return 0
 
@@ -145,17 +176,32 @@ def pack(args: argparse.Namespace) -> int:
             flags[int(fid)] = flags.get(int(fid), 0) | FLAG_BITS[channel]
     flags[left] = flags.get(left, 0) | FLAG_BITS["mn9_left"]
     flags[right] = flags.get(right, 0) | FLAG_BITS["mn9_right"]
+    # Named SEZ neurons (data/named_neurons.json) are always indexed so the site can
+    # draw and label them even in cells where they never fire.
+    named_path = ROOT / "data" / "named_neurons.json"
+    named = json.loads(named_path.read_text(encoding="utf-8"))["neurons"] if named_path.exists() else []
+    for entry in named:
+        for rid in entry["root_ids"]:
+            flags[int(rid)] = flags.get(int(rid), 0) | FLAG_BITS["named"]
 
+    # Variants: the baseline replay plus every recorded silencing run (<cell>_silence_<key>.npz).
+    variants = [""] + sorted({p.name[len(conditions[0]["cond_id"]):].removesuffix(".npz")
+                              for p in RAW_DIR.glob(f"{conditions[0]['cond_id']}_silence_*.npz")})
     loaded = {}
     spiking: set[int] = set()
     for condition in conditions:
-        path = RAW_DIR / f"{condition['cond_id']}.npz"
-        if not path.exists():
-            raise FileNotFoundError(f"missing replay {path}; run `run` first")
-        data = np.load(path)
-        loaded[condition["cond_id"]] = data
-        spiking.update(int(v) for v in np.unique(data["flywire_id"]))
+        for variant in variants:
+            path = RAW_DIR / f"{condition['cond_id']}{variant}.npz"
+            if not path.exists():
+                raise FileNotFoundError(f"missing replay {path}; run `run` first")
+            data = np.load(path)
+            loaded[(condition["cond_id"], variant)] = data
+            spiking.update(int(v) for v in np.unique(data["flywire_id"]))
     index_ids = sorted(spiking | set(flags))
+    variant_meta = {}
+    for variant in variants:
+        meta_path = RAW_DIR / f"run_meta{variant}.json"
+        variant_meta[variant] = json.loads(meta_path.read_text(encoding="utf-8")) if meta_path.exists() else meta
     position = {fid: i for i, fid in enumerate(index_ids)}
     INDEX_PATH.write_text(json.dumps({
         "schema_version": "replay_neurons_v1",
@@ -170,22 +216,30 @@ def pack(args: argparse.Namespace) -> int:
     SITE_DIR.mkdir(parents=True, exist_ok=True)
     idx_dtype = np.dtype("<u2") if len(index_ids) <= 65535 else np.dtype("<u4")
     sizes = []
-    for condition in conditions:
-        data = loaded[condition["cond_id"]]
+    n_model_neurons = int(pd.read_csv(ROOT / protocol["completeness_file"], index_col=0).shape[0])
+    for condition, variant in ((c, v) for c in conditions for v in variants):
+        data = loaded[(condition["cond_id"], variant)]
+        vmeta = variant_meta[variant]
         ids, t_ms = data["flywire_id"], data["t_ms"]
         idx = np.fromiter((position[int(v)] for v in ids), dtype=idx_dtype, count=len(ids))
         t_units = np.clip(np.round(t_ms * 10.0), 0, 10000).astype(np.uint16)
         left_t = np.round(t_ms[ids == left], 1).tolist()
         right_t = np.round(t_ms[ids == right], 1).tolist()
         header = {
-            "schema_version": "replay_v1",
+            "schema_version": "replay_v2",
             "cell_id": condition["cond_id"],
+            "variant": variant.lstrip("_") or "baseline",
+            "silenced": vmeta.get("silence"),
+            "silenced_root_ids": vmeta.get("silence_ids", []),
+            "n_model_neurons": n_model_neurons,
+            "mn9_left_first_ms": (round(float(t_ms[ids == left].min()), 1) if np.any(ids == left) else None),
+            "mn9_right_first_ms": (round(float(t_ms[ids == right].min()), 1) if np.any(ids == right) else None),
             "levels": condition["levels"],
             "hz": condition["rates"],
             "seed": int(data["seed"]),
             "seed_rule": meta["seed_rule"],
-            "git_commit": meta["git_commit"],
-            "protocol_sha256": meta["protocol_sha256"],
+            "git_commit": vmeta["git_commit"],
+            "protocol_sha256": vmeta["protocol_sha256"],
             "duration_ms": 1000.0,
             "t_unit_ms": 0.1,
             "idx_dtype": "u16" if idx_dtype.itemsize == 2 else "u32",
@@ -199,14 +253,17 @@ def pack(args: argparse.Namespace) -> int:
         }
         blob = json.dumps(header, separators=(",", ":")).encode("utf-8")
         payload = MAGIC + struct.pack("<I", len(blob)) + blob + idx.tobytes() + t_units.tobytes()
-        (SITE_DIR / f"{condition['cond_id']}.bin").write_bytes(payload)
+        (SITE_DIR / f"{condition['cond_id']}{variant}.bin").write_bytes(payload)
         sizes.append(len(payload))
     manifest = {
         "schema_version": "replay_manifest_v1",
         "git_commit": meta["git_commit"],
         "n_cells": len(conditions),
-        "cells": {c["cond_id"]: {"levels": c["levels"], "n_spikes": int(len(loaded[c["cond_id"]]["t_ms"])),
-                                 "mn9_left_count": int(np.sum(loaded[c["cond_id"]]["flywire_id"] == left))}
+        "variants": [v.lstrip("_") or "baseline" for v in variants],
+        "named_neurons": [{"key": e["key"], "label": e["label"], "root_ids": e["root_ids"]} for e in named if e["root_ids"]],
+        "cells": {c["cond_id"]: {"levels": c["levels"], "n_spikes": int(len(loaded[(c["cond_id"], "")]["t_ms"])),
+                                 "mn9_left_count": int(np.sum(loaded[(c["cond_id"], "")]["flywire_id"] == left)),
+                                 **{f"mn9_left_count{v}": int(np.sum(loaded[(c["cond_id"], v)]["flywire_id"] == left)) for v in variants if v}}
                   for c in conditions},
     }
     (SITE_DIR / "manifest.json").write_text(json.dumps(manifest, separators=(",", ":")) + "\n", encoding="utf-8")
@@ -222,6 +279,7 @@ def main() -> int:
     run_parser.add_argument("--n-proc", type=int, default=14)
     run_parser.add_argument("--limit", type=int)
     run_parser.add_argument("--force", action="store_true")
+    run_parser.add_argument("--silence", help="key from data/named_neurons.json: record every cell with that neuron's synapses zeroed")
     run_parser.set_defaults(function=run)
     pack_parser = sub.add_parser("pack")
     pack_parser.set_defaults(function=pack)
