@@ -553,16 +553,21 @@ export class SpikeClick {
 }
 
 // Fetches and caches replay files by cell id (and optional silencing variant).
-export function makeReplayLoader(baseUrl = "data/replay/") {
+// Replay loader: in-flight requests are shared and successes stay cached; a
+// failed request (HTTP error or parse error) is dropped from the cache so the
+// next call retries it (F01). `fetchImpl` is injectable for tests.
+export function makeReplayLoader(baseUrl = "data/replay/", fetchImpl = null) {
   const cache = new Map();
   return async function load(cellId, variant = "") {
     const key = variant ? `${cellId}_silence_${variant}` : cellId;
     if (cache.has(key)) return cache.get(key);
-    const promise = fetch(`${baseUrl}${key}.bin`).then(async (response) => {
+    const doFetch = fetchImpl || globalThis.fetch;
+    const promise = doFetch(`${baseUrl}${key}.bin`).then(async (response) => {
       if (!response.ok) throw new Error(`replay ${key}: HTTP ${response.status}`);
       return parseReplay(await response.arrayBuffer());
     });
     cache.set(key, promise);
+    promise.catch(() => { if (cache.get(key) === promise) cache.delete(key); });
     return promise;
   };
 }
