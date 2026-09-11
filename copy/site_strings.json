@@ -53,7 +53,7 @@
     {
       "key": "brainCaption",
       "context": "Caption under the brain view during a replay; {cell} = grid cell id, {n} = spike count. Keep the meaning 'replay of recorded simulation'.",
-      "en": "Recorded run: {cell} · 1 s · ~{n} spikes",
+      "en": "Replaying a recorded run: {cell} · 1 s · ~{n} spikes",
       "zh": "正在回放记录：{cell} · 1 秒 · 约 {n} 次放电",
       "max_length": 80
     },
@@ -339,7 +339,7 @@
     {
       "key": "missReport",
       "context": "Button on an unknown dish that opens a prefilled GitHub issue",
-      "en": "Add it",
+      "en": "Report it",
       "zh": "提交这道菜",
       "max_length": 12
     },

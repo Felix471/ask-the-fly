@@ -9,7 +9,7 @@ export const STRINGS = {
     "ariaSceneCanvas": "Fly and plates",
     "ariaShareCard": "Share card",
     "ask": "Ask the fly",
-    "brainCaption": "Recorded run: {cell} · 1 s · ~{n} spikes",
+    "brainCaption": "Replaying a recorded run: {cell} · 1 s · ~{n} spikes",
     "brainIdle": "Brain view: waiting for a dish",
     "cardBottom": "An LLM estimates how the dish tastes. The fly-brain model turns that into an MN9 response, and we pick the strongest one.",
     "cardEmptyValue": "—",
@@ -54,7 +54,7 @@ export const STRINGS = {
       "very_high": "very high"
     },
     "missNote": "Not in the dictionary: {names}",
-    "missReport": "Add it",
+    "missReport": "Report it",
     "missTitle": "The fly hasn't tried this one yet.",
     "mn9Label": "MN9 spikes",
     "mn9MeanStd": "{mean} ± {std}",
