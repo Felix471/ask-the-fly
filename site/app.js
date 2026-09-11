@@ -694,6 +694,25 @@ export function drawShareCard(canvas, decision, lang, options = {}) {
     const sy = y + (chosen.length > 1 ? 30 : 0);
     const opposite = decision.mode === "opposite" && decision.flyPick && !chosen.includes(decision.flyPick);
     const shift = opposite ? -Math.round(bigSize * 0.36) : 0; // room for the fly's pick on the right
+    // Tablecloth only behind the sprites; every line of text stays on solid cream.
+    if (options.tablecloth) {
+      const padX = 36;
+      const padY = 22;
+      const extra = opposite ? Math.round(bigSize * 0.56) + 28 : 0;
+      const bx = x0 + shift - padX;
+      const bw = rowWidth + extra + 2 * padX;
+      const by = sy - padY - (chosen.length > 1 ? bigSize * 0.16 : bigSize * 0.1);
+      const bh = bigSize + 2 * padY + (chosen.length > 1 ? bigSize * 0.16 : bigSize * 0.1) + (opposite ? 30 : 0);
+      ctx.save();
+      ctx.beginPath();
+      if (typeof ctx.roundRect === "function") ctx.roundRect(bx, by, bw, bh, 18); else ctx.rect(bx, by, bw, bh);
+      ctx.fillStyle = options.tablecloth;
+      ctx.fill();
+      ctx.strokeStyle = "#d9c6a8";
+      ctx.lineWidth = 3;
+      ctx.stroke();
+      ctx.restore();
+    }
     if (chosen.length > 1) drawFlyOn(ctx, flyFrames, W / 2 - bigSize / 2, sy - bigSize * 0.16, bigSize, false);
     chosen.forEach((item, i) => {
       const x = x0 + shift + i * (bigSize + gap);
@@ -713,7 +732,7 @@ export function drawShareCard(canvas, decision, lang, options = {}) {
       ctx.fillText(displayName(decision.flyPick, lang), x + small / 2, yy + small + 24);
       ctx.textAlign = "left";
     }
-    y = sy + bigSize + (opposite ? 44 : 16);
+    y = sy + bigSize + (opposite ? 44 : (options.tablecloth ? 30 : 16));
   }
 
   // Bars carry the numbers: one shared scale, the chosen dish in the accent.
@@ -863,6 +882,8 @@ if (isBrowser) {
   };
 
   const $ = (id) => document.getElementById(id);
+  const reducedMotion = typeof matchMedia === "function" && matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const scrollBehavior = reducedMotion ? "auto" : "smooth";
   const tr = (key, values) => fmt(STRINGS[state.lang][key], values || {});
   function notice(key, values) {
     const el = $("notice");
@@ -1286,7 +1307,7 @@ if (isBrowser) {
     // Empty table: the one-line hint shows until a dish arrives; the fly rests
     // on the table's edge throughout.
     $("table-empty").hidden = state.options.length > 0;
-    if (state.idleFly) state.idleFly.start();
+    if (state.idleFly) { if (reducedMotion) { state.idleFly.stop(); state.idleFly.draw(); } else state.idleFly.start(); }
   }
 
   function levelText(level) {
@@ -1449,7 +1470,7 @@ if (isBrowser) {
     state.brain.resize();
     await state.scene.setPlates(plates);
     if (!live()) return;
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    window.scrollTo({ top: 0, behavior: scrollBehavior });
 
     const hooks = {
       onTaste: async (index) => {
@@ -1543,7 +1564,7 @@ if (isBrowser) {
       return;
     }
     showResult();
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    window.scrollTo({ top: 0, behavior: scrollBehavior });
   }
 
   function spriteSlug(item) {
@@ -1570,6 +1591,26 @@ if (isBrowser) {
   // and an id; only the latest request may draw, set the download link or open
   // the dialog. Close, reset and a newer request cancel older ones. Failures are
   // shown with a retry hint instead of being logged away (F08).
+  let tableclothPattern = null;
+  async function tableclothFor(ctx) {
+    if (tableclothPattern !== null) return tableclothPattern || null;
+    const img = await new Promise((resolve) => {
+      const image = new Image();
+      image.onload = () => resolve(image);
+      image.onerror = () => resolve(null);
+      image.src = "assets/bg/tablecloth.png";
+    });
+    if (!img) { tableclothPattern = false; return null; }
+    const tile = document.createElement("canvas");
+    tile.width = img.width * 2;
+    tile.height = img.height * 2;
+    const tctx = tile.getContext("2d");
+    tctx.imageSmoothingEnabled = false;
+    tctx.drawImage(img, 0, 0, tile.width, tile.height);
+    tableclothPattern = ctx.createPattern(tile, "repeat");
+    return tableclothPattern;
+  }
+
   async function showCard() {
     const request = { id: ++state.shareRequest, session: state.session, decision: state.decision, lang: state.lang, siteUrl: state.siteUrl };
     const current = () => request.id === state.shareRequest && request.session === state.session && state.decision === request.decision;
@@ -1589,11 +1630,14 @@ if (isBrowser) {
       snapshot = null; // the card is still valid without the brain snapshot
     }
     if (!current()) return;
+    const tablecloth = await tableclothFor(canvas.getContext("2d")).catch(() => null);
+    if (!current()) return;
     try {
       drawShareCard(canvas, request.decision, request.lang, {
         stub: Boolean(state.lookup.table.stub),
         sprites,
         snapshot,
+        tablecloth,
         siteUrl: request.siteUrl,
         spriteFor: (item) => (sprites && spriteSlug(item) ? sprites.dishCache.get(spriteSlug(item)) || null : null),
       });

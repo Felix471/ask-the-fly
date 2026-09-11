@@ -34,6 +34,18 @@ html, body {
   margin: 0;
   background: var(--bg);
   color: var(--ink);
+}
+
+/* Page: paper texture at 2x (light scheme only; measured contrast on the tile:
+   ink 15.4:1, muted 5.3:1). Chips, buttons, panels and the modal stay solid. */
+body {
+  background-image: url("assets/bg/paper.png");
+  background-repeat: repeat;
+  background-size: 512px 512px;
+  image-rendering: pixelated;
+}
+@media (prefers-color-scheme: dark) {
+  body { background-image: none; }
   font: 16px/1.5 system-ui, -apple-system, "Segoe UI", "PingFang SC", "Noto Sans CJK SC", "Microsoft YaHei", sans-serif;
 }
 
@@ -205,7 +217,23 @@ body { padding: 0 16px 32px; max-width: 640px; margin: 0 auto; }
 .btn-small { padding: 6px 12px; font-size: 0.9rem; }
 /* One surface for the stage: the canvases sit directly on the page, no panel around them. */
 .scene-panel { background: transparent; border: 0; padding: 0; }
-.scene-canvas { display: block; width: 100%; height: 220px; background: var(--soft); border-radius: 14px; border: 1px solid var(--line); }
+/* Stage: tablecloth at 2x behind the plates (plate shadows drawn by the scene;
+   measured contrast on the tile: ink 14.2:1, muted 4.9:1, so no overlay) with a
+   thin darker rim. */
+.scene-canvas {
+  display: block; width: 100%; height: 220px; border-radius: 14px;
+  background: var(--soft) url("assets/bg/tablecloth.png") repeat;
+  background-size: 512px 512px;
+  image-rendering: pixelated;
+  border: 2px solid #d9c6a8;
+  box-shadow: inset 0 0 0 1px rgba(120, 90, 60, 0.18);
+}
+@media (prefers-color-scheme: dark) {
+  .scene-canvas { border-color: #5a4a38; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
 .brain-wrap { position: relative; margin-top: 8px; }
 .brain-canvas { display: block; width: 100%; height: 260px; background: #14110e; border-radius: 14px; }
 .scene-panel .brain-details, .scene-panel .legend, .scene-panel .replay-honesty, .scene-panel .small, .scene-panel .brain-caption { padding: 0 4px; }

@@ -52,3 +52,23 @@ Adding a real `assets/raw/<key>.png` and re-running `prep_assets.py --only-new -
 ## Placeholders
 
 Dish sprites are drawn with their own plate, so the scene adds only a shadow under them; without a sprite it draws a plate and a coloured circle (hue from the key), and without fly frames a simple drawn fly. Sprites are picked up automatically when the files exist.
+
+## Backgrounds
+
+`assets/raw/bg/tablecloth.png` and `assets/raw/bg/paper.png` (512 px, gitignored) become
+`site/assets/bg/*.png` through `scripts/prep_bg.py`: 256 × 256 nearest-neighbour, one
+palette shared by both tiles (32 colours max; the tablecloth uses 13, the paper 3),
+no dithering. The script checks seamless tiling (mean wrap-edge difference / mean
+interior neighbour difference; ≤ 1.5 passes: tablecloth 0.73, paper 0.11) and measures
+WCAG contrast of the text colours against the darkest and lightest tile pixel:
+
+| tile | ink `#1f1a17` | muted `#6b625b` | used for |
+|---|---:|---:|---|
+| tablecloth | 14.2:1 | 4.9:1 | the stage, at 2× (`.scene-canvas`), thin darker rim; plate shadows drawn by the scene; no overlay needed |
+| paper | 15.4:1 | 5.3:1 | the page body, at 2×, light scheme only |
+
+23.6 KB in total. The brain view stays black; chips, buttons, the result surface and the
+modal stay solid. On the share card the tablecloth appears only behind the winner
+sprite (a rounded patch with the same rim); every line of text stays on solid cream.
+Reduced motion: the idle fly shows one frame instead of animating, and scrolling is not
+smoothed; the textures themselves never move.
