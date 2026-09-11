@@ -107,6 +107,10 @@ def main() -> int:
     args.out_dir.mkdir(parents=True, exist_ok=True)
     shutil.copyfile(args.dishes, args.out_dir / "dishes.json")
     print(f"copied {args.dishes} -> {args.out_dir / 'dishes.json'}")
+    sections = ROOT / "data" / "dish_sections.json"
+    if sections.exists():
+        shutil.copyfile(sections, args.out_dir / "sections.json")
+        print(f"copied {sections} -> {args.out_dir / 'sections.json'}")
     named = ROOT / "data" / "named_neurons.json"
     if named.exists():
         shutil.copyfile(named, args.out_dir / "named_neurons.json")

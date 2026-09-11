@@ -212,7 +212,8 @@ test("suggest ranks prefix, then substring, then edit distance, max 6, both lang
   assert.ok(en.every((s, i) => i === 0 || s.rank >= en[i - 1].rank), "ranks are non-decreasing");
   assert.ok(en.some((s) => s.entry.key === "cola") && en.some((s) => s.entry.key === "cookies"));
   const sub = suggest("tofu", dictionary, "en");
-  assert.equal(sub[0].entry.key, "mapo tofu", "substring / word match");
+  assert.equal(sub[0].entry.key, "tofu", "exact name first");
+  assert.ok(sub.some((s) => s.entry.key === "mapo tofu" && s.rank === 1), "substring / word match follows");
   const typo = suggest("watermelom", dictionary, "en");
   assert.equal(typo[0].entry.key, "watermelon", "edit distance 1");
   assert.equal(typo[0].rank, 3);

@@ -32,6 +32,24 @@ A single 3 × 3 grid sheet named `fly.png` is also accepted (the form the first 
 
 Output: `site/assets/fly/<state>_<n>.png`, 48 × 48, facing right; the site mirrors for leftward flight. The `fly` frames are the wing-beat cycle; `proboscis` is played on the winning plate.
 
+## Sprite fallbacks
+
+Nine batch-2 keys were skipped by the image generator as near-duplicates. `site/assets/dishes/fallbacks.json` maps them to the nearest existing sprite and the site draws that instead:
+
+| key | renders with |
+|---|---|
+| soy-milk | milk |
+| americano | black-coffee |
+| cappuccino | latte |
+| hot-chocolate | latte |
+| oolong-tea | green-tea |
+| sparkling-water | water |
+| apple-juice | orange-juice |
+| milk-chocolate | dark-chocolate-85 |
+| tomato | apple — **needs its own sprite** (a tomato drawn as an apple is the one fallback that misleads) |
+
+Adding a real `assets/raw/<key>.png` and re-running `prep_assets.py --only-new --palette-from site/assets/dishes` replaces the fallback automatically (the site prefers a sprite of its own when the file exists).
+
 ## Placeholders
 
 Dish sprites are drawn with their own plate, so the scene adds only a shadow under them; without a sprite it draws a plate and a coloured circle (hue from the key), and without fly frames a simple drawn fly. Sprites are picked up automatically when the files exist.

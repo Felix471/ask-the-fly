@@ -110,14 +110,24 @@ def apply_palette(image: Image.Image, palette: Image.Image) -> Image.Image:
     return rgb
 
 
-def prepare(paths: list[Path], size: int, out_dir: Path, tolerance: int, margin: float) -> list[Path]:
+def palette_from_sprites(sprite_dir: Path, colours: int) -> Image.Image:
+    """Rebuild the shared palette from sprites already shipped (their opaque pixels)."""
+    sprites = [Image.open(p).convert("RGBA") for p in sorted(sprite_dir.glob("*.png"))]
+    if not sprites:
+        raise ValueError(f"no sprites in {sprite_dir} to take a palette from")
+    return shared_palette(sprites, colours)
+
+
+def prepare(paths: list[Path], size: int, out_dir: Path, tolerance: int, margin: float,
+            palette: Image.Image | None = None) -> list[Path]:
     prepared = []
     for path in paths:
         image = Image.open(path)
         image = remove_background(image, tolerance)
         image = crop_and_square(image, margin)
         prepared.append(downsample(image, size))
-    palette = shared_palette(prepared, PALETTE_SIZE)
+    if palette is None:
+        palette = shared_palette(prepared, PALETTE_SIZE)
     out_dir.mkdir(parents=True, exist_ok=True)
     written = []
     for path, image in zip(paths, prepared):
@@ -180,13 +190,18 @@ def main() -> int:
     parser.add_argument("--tolerance", type=int, default=24, help="background flood-fill tolerance per channel")
     parser.add_argument("--margin", type=float, default=0.04, help="transparent margin around the content")
     parser.add_argument("--only", choices=("dishes", "fly"))
+    parser.add_argument("--only-new", action="store_true", help="skip dishes whose sprite already exists")
+    parser.add_argument("--palette-from", type=Path, help="reuse the palette of the sprites in this folder instead of learning one from the inputs")
     args = parser.parse_args()
 
     if args.only in (None, "dishes"):
         dish_paths = sorted(p for p in args.raw.glob("*.png"))
+        if args.only_new:
+            dish_paths = [p for p in dish_paths if not (OUT_DISHES / (p.stem.lower() + ".png")).exists()]
         if dish_paths:
-            written = prepare(dish_paths, args.dish_size, OUT_DISHES, args.tolerance, args.margin)
-            print(f"dishes: wrote {len(written)} sprites to {OUT_DISHES}")
+            palette = palette_from_sprites(args.palette_from, PALETTE_SIZE) if args.palette_from else None
+            written = prepare(dish_paths, args.dish_size, OUT_DISHES, args.tolerance, args.margin, palette)
+            print(f"dishes: wrote {len(written)} sprites to {OUT_DISHES}" + (" (shared palette reused)" if palette else ""))
         else:
             print(f"dishes: no PNGs in {args.raw}")
 

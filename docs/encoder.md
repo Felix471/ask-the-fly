@@ -37,3 +37,13 @@ The model assigns levels; application code owns Hz conversion.
 Review values are `llm_v1`, `needs_review`, `human_checked`, and `proxy`; distant cross-language modes create `needs_review` entries.
 Names are NFKC-normalized, lowercased, trimmed, and internal whitespace is collapsed.
 Lookup is exact on the normalized key or a normalized alias.
+
+## Adding a batch of dishes
+
+1. List the dishes in a batch file (`data/batch2_dishes.json`: key = dictionary key = sprite slug, en/zh display names, section) and derive the food list the encoder consumes (`encoder/foods_batch2.json`, one object per dish with zh, en, key and section; every field travels with each raw record).
+2. Stability run on that list only: `python -m encoder.stability --repeats 6 --langs zh,en --prompt-version encode_v2.2 --foods encoder/foods_batch2.json --raw results/encoder/stability_raw_batch2.jsonl --report docs/encoder_stability_batch2.md`.
+3. Merge: `python -m encoder.merge results/encoder/stability_raw_batch2.jsonl --foods encoder/foods_batch2.json --replace-llm --arbitration-report`. The key comes from the food list, human_checked entries are never touched, and any model-proposed alias that already names another dish is dropped and printed.
+4. `python scripts/augment_aliases.py --batch data/batch2_dishes.json` adds traditional characters, pinyin (spaced and joined) and English spelling variants, skipping names owned elsewhere.
+5. `python scripts/batch_review.py --batch data/batch2_dishes.json --report docs/encoder_stability_batch2.md` appends the needs_review list, every confidence below 0.8, and the sanity checks (expectations per dish; disagreements are listed, the model's output is kept).
+6. `python scripts/export_site_data.py`, sprites via `scripts/prep_assets.py --only-new --palette-from site/assets/dishes`, sections in `data/dish_sections.json`.
+

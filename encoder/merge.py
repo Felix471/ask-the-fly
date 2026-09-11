@@ -211,8 +211,11 @@ def _arbitrate_dimension(
     return chosen, {"zh": zh_level, "en": en_level, "chosen": chosen, "rule": rule}
 
 
+FOODS_OVERRIDE: Path | None = None
+
+
 def _from_stability(records: list[object]) -> list[dict]:
-    foods = json.loads(FOODS_PATH.read_text(encoding="utf-8"))
+    foods = json.loads((FOODS_OVERRIDE or FOODS_PATH).read_text(encoding="utf-8"))
     groups: dict[int, list[dict]] = defaultdict(list)
     for row_number, record in enumerate(records, 1):
         if not isinstance(record, dict):
@@ -247,7 +250,7 @@ def _from_stability(records: list[object]) -> list[dict]:
         for entry in normalized:
             aliases.extend([entry["key"], *entry["aliases"]])
         aliases = list(dict.fromkeys(filter(None, (normalize_name(x) for x in aliases))))
-        key = normalize_name(food["en"])
+        key = normalize_name(food.get("key") or food["en"])
         encoder_version = Counter(
             record.get("encoder_version")
             or entry.get("encoder_version", "unknown@encode_v1")
@@ -394,9 +397,25 @@ def merge(
 ) -> tuple[int, int, list[dict]]:
     """Merge entries; replace_llm explicitly requests the existing default LLM replacement."""
     incoming = _read_source(source)
-    _assert_unique(incoming, "incoming entries")
     existing = _read_dictionary(destination) if destination.exists() else []
     owner = _assert_unique(existing, "destination")
+    # Aliases the model proposed that already name another entry (existing, or earlier
+    # in this batch) are dropped, so one name never points at two dishes.
+    taken: dict[str, str] = {name: result_key for name, result_key in
+                             ((normalize_name(n), e["key"]) for e in existing for n in _names(e))}
+    for candidate in incoming:
+        own = {normalize_name(candidate["key"]), *(normalize_name(v) for v in candidate.get("display", {}).values())}
+        kept = []
+        for alias in candidate.get("aliases", []):
+            other = taken.get(normalize_name(alias))
+            if other and other != candidate["key"] and normalize_name(alias) not in own:
+                print(f"dropped alias {alias!r} from {candidate['key']!r}: already names {other!r}")
+                continue
+            kept.append(alias)
+        candidate["aliases"] = kept
+        for name in _names(candidate):
+            taken.setdefault(normalize_name(name), candidate["key"])
+    _assert_unique(incoming, "incoming entries")
 
     skipped = 0
     changed_entries: set[str] = set()
@@ -515,6 +534,7 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="Merge encoded entries into the dish dictionary")
     parser.add_argument("source", nargs="?", type=Path)
     parser.add_argument("--into", type=Path, default=ROOT / "data" / "dishes.json")
+    parser.add_argument("--foods", type=Path, help="food list the raw JSONL was produced from (default: encoder/foods_stability.json)")
     modes = parser.add_mutually_exclusive_group()
     modes.add_argument("--split-list", action="store_true")
     modes.add_argument("--sample", type=int, metavar="N")
@@ -531,6 +551,8 @@ def main() -> None:
         help="print every cross-language arbitration performed by the merge",
     )
     args = parser.parse_args()
+    global FOODS_OVERRIDE
+    FOODS_OVERRIDE = args.foods
     try:
         if args.split_list:
             _print_split_list()

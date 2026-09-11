@@ -360,6 +360,8 @@ if (isBrowser) {
     raster: null,
     sound: new SpikeClick(),
     manifest: null,
+    spriteFallbacks: {},
+    sections: null,
     currentCell: null,
     currentItem: null,
     variant: "",
@@ -529,14 +531,40 @@ if (isBrowser) {
     if (!state.dictionary) return;
     const box = $("tasted-chips");
     box.innerHTML = "";
-    const entries = [...state.dictionary.entries].sort((a, b) =>
-      (a.display?.[state.lang] || a.key).localeCompare(b.display?.[state.lang] || b.key, state.lang === "zh" ? "zh-Hans-CN" : "en"));
-    for (const entry of entries) {
+    const byKey = new Map(state.dictionary.entries.map((e) => [e.key, e]));
+    const label = (entry) => entry.display?.[state.lang] || entry.key;
+    const sortEntries = (list) => [...list].sort((a, b) => label(a).localeCompare(label(b), state.lang === "zh" ? "zh-Hans-CN" : "en"));
+    const addChip = (parent, entry) => {
       const chip = document.createElement("button");
       chip.type = "button";
-      chip.textContent = entry.display?.[state.lang] || entry.key;
+      chip.textContent = label(entry);
       chip.addEventListener("click", () => { addOption(chip.textContent); closeSuggest(); });
-      box.append(chip);
+      parent.append(chip);
+    };
+    const placed = new Set();
+    if (state.sections) {
+      for (const section of state.sections.sections) {
+        const entries = section.keys.map((k) => byKey.get(k)).filter(Boolean);
+        if (!entries.length) continue;
+        const group = document.createElement("div");
+        group.className = "chip-group";
+        const head = document.createElement("div");
+        head.className = "chip-head";
+        head.textContent = state.lang === "zh" ? section.zh : section.en;
+        group.append(head);
+        const row = document.createElement("div");
+        row.className = "chips";
+        for (const entry of sortEntries(entries)) { addChip(row, entry); placed.add(entry.key); }
+        group.append(row);
+        box.append(group);
+      }
+    }
+    const rest = sortEntries(state.dictionary.entries.filter((e) => !placed.has(e.key)));
+    if (rest.length) {
+      const row = document.createElement("div");
+      row.className = "chips";
+      for (const entry of rest) addChip(row, entry);
+      box.append(row);
     }
     if (!tastedInitialised) {
       $("tasted").open = window.innerWidth >= 560; // collapsed by default on mobile
@@ -745,7 +773,7 @@ if (isBrowser) {
       key: item.entry ? item.entry.key : item.name,
       label: displayName(item, state.lang),
       sub: item.cell ? tr("hzValue", { hz: item.cell.mn9_mean.toFixed(1) }) : STRINGS[state.lang].plateUnknown,
-      slug: item.entry ? slugFor(item.entry.key) : null,
+      slug: item.entry ? (state.spriteFallbacks[slugFor(item.entry.key)] || slugFor(item.entry.key)) : null,
     }));
     const indexOf = (item) => scored.indexOf(item);
     const plan = {
@@ -864,6 +892,12 @@ if (isBrowser) {
     state.dictionary = buildDictionary(dishes);
     state.lookup = buildLookup(table);
     $("stub-banner").hidden = !table.stub;
+    const [fallbacks, sections] = await Promise.all([
+      fetch("assets/dishes/fallbacks.json").then((r) => (r.ok ? r.json() : null)).catch(() => null),
+      fetch("data/sections.json").then((r) => (r.ok ? r.json() : null)).catch(() => null),
+    ]);
+    state.spriteFallbacks = (fallbacks && fallbacks.fallbacks) || {};
+    state.sections = sections;
     applyStrings();
     // Scene data loads after the dictionary so the buttons enable early; the
     // scene is used only once both the neuron layout and the sprites are ready.

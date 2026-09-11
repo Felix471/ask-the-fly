@@ -57,7 +57,7 @@ Pure functions (`normalizeName`, `buildDictionary`, `buildLookup`, `scoreOptions
 - Mobile-first, zh/en toggle (remembered per browser in `localStorage`).
 - Options are added one at a time or pasted as a list (newline, comma, 、 or ; separated).
 - Autocomplete: typing shows up to 6 matches on key, both display names and aliases, ranked prefix → substring → edit distance (tolerance grows with query length: Latin none under 3 chars, 1 up to 5, then 2; CJK 1 from 2 chars). Arrow keys move, Enter or tap selects, Escape closes. With no match the dropdown says "Not tasted yet; closest: …" (edit distance ≤ 3, tappable) or "Press Enter to add it anyway", and Enter adds the raw text, which then takes the miss path.
-- "The fly has tasted these": every dictionary entry as a chip in the current language, tap to add; collapsed by default under 560 px.
+- "The fly has tasted these": every dictionary entry as a chip in the current language, grouped under the section headers of `data/dish_sections.json` (copied to `site/data/sections.json`), tap to add; collapsed by default under 560 px. Dish sprites without their own file use `site/assets/dishes/fallbacks.json`.
 - "Ask the fly" picks the highest MN9; "Do the opposite" picks the lowest and says what the fly would have picked. Equal MN9 is reported as a tie.
 - The result view lists every option with its sugar/bitter/water levels and MN9 mean ± std, in MN9 order.
 - Unknown names take the miss path: "the fly hasn't tasted this yet" and a "Report it" button that opens a prefilled GitHub Issue (`REPO_URL` in `site/app.js`).

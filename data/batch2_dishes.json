@@ -1,0 +1,945 @@
+{
+  "schema": "dish_batch_v1",
+  "batch": "batch2",
+  "sections": {
+    "中餐": "Chinese",
+    "日韩": "Japanese & Korean",
+    "东南亚": "Southeast Asian & Middle Eastern",
+    "西餐": "Western",
+    "饮料": "Drinks",
+    "水果蔬菜": "Fruit & vegetables"
+  },
+  "dishes": [
+    {
+      "key": "hotpot",
+      "en": "hotpot",
+      "zh": "火锅",
+      "section_zh": "中餐",
+      "section_en": "Chinese"
+    },
+    {
+      "key": "beef-noodle-soup",
+      "en": "beef noodle soup",
+      "zh": "牛肉面",
+      "section_zh": "中餐",
+      "section_en": "Chinese"
+    },
+    {
+      "key": "fried-rice",
+      "en": "fried rice",
+      "zh": "炒饭",
+      "section_zh": "中餐",
+      "section_en": "Chinese"
+    },
+    {
+      "key": "chow-mein",
+      "en": "chow mein",
+      "zh": "炒面",
+      "section_zh": "中餐",
+      "section_en": "Chinese"
+    },
+    {
+      "key": "kung-pao-chicken",
+      "en": "kung pao chicken",
+      "zh": "宫保鸡丁",
+      "section_zh": "中餐",
+      "section_en": "Chinese"
+    },
+    {
+      "key": "twice-cooked-pork",
+      "en": "twice-cooked pork",
+      "zh": "回锅肉",
+      "section_zh": "中餐",
+      "section_en": "Chinese"
+    },
+    {
+      "key": "yuxiang-shredded-pork",
+      "en": "yuxiang shredded pork",
+      "zh": "鱼香肉丝",
+      "section_zh": "中餐",
+      "section_en": "Chinese"
+    },
+    {
+      "key": "sweet-and-sour-pork",
+      "en": "sweet and sour pork",
+      "zh": "糖醋里脊",
+      "section_zh": "中餐",
+      "section_en": "Chinese"
+    },
+    {
+      "key": "sichuan-boiled-fish",
+      "en": "sichuan boiled fish",
+      "zh": "水煮鱼",
+      "section_zh": "中餐",
+      "section_en": "Chinese"
+    },
+    {
+      "key": "pickled-cabbage-fish",
+      "en": "pickled cabbage fish soup",
+      "zh": "酸菜鱼",
+      "section_zh": "中餐",
+      "section_en": "Chinese"
+    },
+    {
+      "key": "hot-and-sour-noodles",
+      "en": "hot and sour glass noodles",
+      "zh": "酸辣粉",
+      "section_zh": "中餐",
+      "section_en": "Chinese"
+    },
+    {
+      "key": "xiaolongbao",
+      "en": "xiaolongbao soup dumplings",
+      "zh": "小笼包",
+      "section_zh": "中餐",
+      "section_en": "Chinese"
+    },
+    {
+      "key": "steamed-buns",
+      "en": "steamed buns",
+      "zh": "包子",
+      "section_zh": "中餐",
+      "section_en": "Chinese"
+    },
+    {
+      "key": "jianbing",
+      "en": "jianbing crepe",
+      "zh": "煎饼果子",
+      "section_zh": "中餐",
+      "section_en": "Chinese"
+    },
+    {
+      "key": "youtiao",
+      "en": "fried dough sticks",
+      "zh": "油条",
+      "section_zh": "中餐",
+      "section_en": "Chinese"
+    },
+    {
+      "key": "congee",
+      "en": "congee",
+      "zh": "白粥",
+      "section_zh": "中餐",
+      "section_en": "Chinese"
+    },
+    {
+      "key": "peking-duck",
+      "en": "peking duck",
+      "zh": "烤鸭",
+      "section_zh": "中餐",
+      "section_en": "Chinese"
+    },
+    {
+      "key": "lamb-skewers",
+      "en": "lamb skewers",
+      "zh": "羊肉串",
+      "section_zh": "中餐",
+      "section_en": "Chinese"
+    },
+    {
+      "key": "malatang",
+      "en": "malatang",
+      "zh": "麻辣烫",
+      "section_zh": "中餐",
+      "section_en": "Chinese"
+    },
+    {
+      "key": "luosifen",
+      "en": "luosifen snail noodles",
+      "zh": "螺蛳粉",
+      "section_zh": "中餐",
+      "section_en": "Chinese"
+    },
+    {
+      "key": "liangpi",
+      "en": "cold skin noodles",
+      "zh": "凉皮",
+      "section_zh": "中餐",
+      "section_en": "Chinese"
+    },
+    {
+      "key": "wontons",
+      "en": "wonton soup",
+      "zh": "馄饨",
+      "section_zh": "中餐",
+      "section_en": "Chinese"
+    },
+    {
+      "key": "scallion-pancake",
+      "en": "scallion pancake",
+      "zh": "葱油饼",
+      "section_zh": "中餐",
+      "section_en": "Chinese"
+    },
+    {
+      "key": "steamed-fish",
+      "en": "steamed fish",
+      "zh": "清蒸鱼",
+      "section_zh": "中餐",
+      "section_en": "Chinese"
+    },
+    {
+      "key": "stir-fried-broccoli",
+      "en": "stir-fried broccoli",
+      "zh": "炒西兰花",
+      "section_zh": "中餐",
+      "section_en": "Chinese"
+    },
+    {
+      "key": "tangyuan",
+      "en": "tangyuan sweet rice balls",
+      "zh": "汤圆",
+      "section_zh": "中餐",
+      "section_en": "Chinese"
+    },
+    {
+      "key": "zongzi",
+      "en": "zongzi",
+      "zh": "粽子",
+      "section_zh": "中餐",
+      "section_en": "Chinese"
+    },
+    {
+      "key": "douhua",
+      "en": "douhua tofu pudding",
+      "zh": "豆腐脑",
+      "section_zh": "中餐",
+      "section_en": "Chinese"
+    },
+    {
+      "key": "century-egg",
+      "en": "century egg",
+      "zh": "皮蛋",
+      "section_zh": "中餐",
+      "section_en": "Chinese"
+    },
+    {
+      "key": "stinky-tofu",
+      "en": "stinky tofu",
+      "zh": "臭豆腐",
+      "section_zh": "中餐",
+      "section_en": "Chinese"
+    },
+    {
+      "key": "spicy-crayfish",
+      "en": "spicy crayfish",
+      "zh": "麻辣小龙虾",
+      "section_zh": "中餐",
+      "section_en": "Chinese"
+    },
+    {
+      "key": "latiao",
+      "en": "latiao spicy gluten strips",
+      "zh": "辣条",
+      "section_zh": "中餐",
+      "section_en": "Chinese"
+    },
+    {
+      "key": "instant-noodles",
+      "en": "instant noodles",
+      "zh": "泡面",
+      "section_zh": "中餐",
+      "section_en": "Chinese"
+    },
+    {
+      "key": "egg-tart",
+      "en": "egg tart",
+      "zh": "蛋挞",
+      "section_zh": "中餐",
+      "section_en": "Chinese"
+    },
+    {
+      "key": "cilantro",
+      "en": "cilantro",
+      "zh": "香菜",
+      "section_zh": "中餐",
+      "section_en": "Chinese"
+    },
+    {
+      "key": "soy-milk",
+      "en": "soy milk",
+      "zh": "豆浆",
+      "section_zh": "中餐",
+      "section_en": "Chinese"
+    },
+    {
+      "key": "herbal-tea",
+      "en": "herbal tea (liangcha)",
+      "zh": "凉茶",
+      "section_zh": "中餐",
+      "section_en": "Chinese"
+    },
+    {
+      "key": "sour-plum-drink",
+      "en": "sour plum drink",
+      "zh": "酸梅汤",
+      "section_zh": "中餐",
+      "section_en": "Chinese"
+    },
+    {
+      "key": "baijiu",
+      "en": "baijiu",
+      "zh": "白酒",
+      "section_zh": "中餐",
+      "section_en": "Chinese"
+    },
+    {
+      "key": "sushi",
+      "en": "sushi",
+      "zh": "寿司",
+      "section_zh": "日韩",
+      "section_en": "Japanese & Korean"
+    },
+    {
+      "key": "sashimi",
+      "en": "sashimi",
+      "zh": "刺身",
+      "section_zh": "日韩",
+      "section_en": "Japanese & Korean"
+    },
+    {
+      "key": "ramen",
+      "en": "ramen",
+      "zh": "拉面",
+      "section_zh": "日韩",
+      "section_en": "Japanese & Korean"
+    },
+    {
+      "key": "udon",
+      "en": "udon",
+      "zh": "乌冬面",
+      "section_zh": "日韩",
+      "section_en": "Japanese & Korean"
+    },
+    {
+      "key": "tempura",
+      "en": "tempura",
+      "zh": "天妇罗",
+      "section_zh": "日韩",
+      "section_en": "Japanese & Korean"
+    },
+    {
+      "key": "takoyaki",
+      "en": "takoyaki",
+      "zh": "章鱼烧",
+      "section_zh": "日韩",
+      "section_en": "Japanese & Korean"
+    },
+    {
+      "key": "onigiri",
+      "en": "onigiri",
+      "zh": "饭团",
+      "section_zh": "日韩",
+      "section_en": "Japanese & Korean"
+    },
+    {
+      "key": "teriyaki-chicken",
+      "en": "teriyaki chicken",
+      "zh": "照烧鸡",
+      "section_zh": "日韩",
+      "section_en": "Japanese & Korean"
+    },
+    {
+      "key": "sukiyaki",
+      "en": "sukiyaki",
+      "zh": "寿喜烧",
+      "section_zh": "日韩",
+      "section_en": "Japanese & Korean"
+    },
+    {
+      "key": "natto",
+      "en": "natto",
+      "zh": "纳豆",
+      "section_zh": "日韩",
+      "section_en": "Japanese & Korean"
+    },
+    {
+      "key": "matcha-latte",
+      "en": "matcha latte",
+      "zh": "抹茶拿铁",
+      "section_zh": "日韩",
+      "section_en": "Japanese & Korean"
+    },
+    {
+      "key": "matcha",
+      "en": "matcha",
+      "zh": "抹茶",
+      "section_zh": "日韩",
+      "section_en": "Japanese & Korean"
+    },
+    {
+      "key": "wasabi",
+      "en": "wasabi",
+      "zh": "芥末",
+      "section_zh": "日韩",
+      "section_en": "Japanese & Korean"
+    },
+    {
+      "key": "mochi",
+      "en": "mochi",
+      "zh": "麻薯",
+      "section_zh": "日韩",
+      "section_en": "Japanese & Korean"
+    },
+    {
+      "key": "kimchi",
+      "en": "kimchi",
+      "zh": "泡菜",
+      "section_zh": "日韩",
+      "section_en": "Japanese & Korean"
+    },
+    {
+      "key": "bibimbap",
+      "en": "bibimbap",
+      "zh": "石锅拌饭",
+      "section_zh": "日韩",
+      "section_en": "Japanese & Korean"
+    },
+    {
+      "key": "korean-bbq",
+      "en": "korean bbq",
+      "zh": "韩式烤肉",
+      "section_zh": "日韩",
+      "section_en": "Japanese & Korean"
+    },
+    {
+      "key": "tteokbokki",
+      "en": "tteokbokki",
+      "zh": "辣炒年糕",
+      "section_zh": "日韩",
+      "section_en": "Japanese & Korean"
+    },
+    {
+      "key": "budae-jjigae",
+      "en": "budae jjigae army stew",
+      "zh": "部队锅",
+      "section_zh": "日韩",
+      "section_en": "Japanese & Korean"
+    },
+    {
+      "key": "pad-thai",
+      "en": "pad thai",
+      "zh": "泰式炒河粉",
+      "section_zh": "东南亚",
+      "section_en": "Southeast Asian & Middle Eastern"
+    },
+    {
+      "key": "tom-yum",
+      "en": "tom yum soup",
+      "zh": "冬阴功",
+      "section_zh": "东南亚",
+      "section_en": "Southeast Asian & Middle Eastern"
+    },
+    {
+      "key": "pho",
+      "en": "pho",
+      "zh": "越南河粉",
+      "section_zh": "东南亚",
+      "section_en": "Southeast Asian & Middle Eastern"
+    },
+    {
+      "key": "kebab",
+      "en": "kebab",
+      "zh": "烤肉卷",
+      "section_zh": "东南亚",
+      "section_en": "Southeast Asian & Middle Eastern"
+    },
+    {
+      "key": "hummus",
+      "en": "hummus",
+      "zh": "鹰嘴豆泥",
+      "section_zh": "东南亚",
+      "section_en": "Southeast Asian & Middle Eastern"
+    },
+    {
+      "key": "hamburger",
+      "en": "hamburger",
+      "zh": "汉堡",
+      "section_zh": "西餐",
+      "section_en": "Western"
+    },
+    {
+      "key": "french-fries",
+      "en": "french fries",
+      "zh": "薯条",
+      "section_zh": "西餐",
+      "section_en": "Western"
+    },
+    {
+      "key": "hot-dog",
+      "en": "hot dog",
+      "zh": "热狗",
+      "section_zh": "西餐",
+      "section_en": "Western"
+    },
+    {
+      "key": "sandwich",
+      "en": "sandwich",
+      "zh": "三明治",
+      "section_zh": "西餐",
+      "section_en": "Western"
+    },
+    {
+      "key": "caesar-salad",
+      "en": "caesar salad",
+      "zh": "凯撒沙拉",
+      "section_zh": "西餐",
+      "section_en": "Western"
+    },
+    {
+      "key": "steak",
+      "en": "steak",
+      "zh": "牛排",
+      "section_zh": "西餐",
+      "section_en": "Western"
+    },
+    {
+      "key": "spaghetti-bolognese",
+      "en": "spaghetti bolognese",
+      "zh": "肉酱意面",
+      "section_zh": "西餐",
+      "section_en": "Western"
+    },
+    {
+      "key": "lasagna",
+      "en": "lasagna",
+      "zh": "千层面",
+      "section_zh": "西餐",
+      "section_en": "Western"
+    },
+    {
+      "key": "taco",
+      "en": "taco",
+      "zh": "塔可",
+      "section_zh": "西餐",
+      "section_en": "Western"
+    },
+    {
+      "key": "burrito",
+      "en": "burrito",
+      "zh": "墨西哥卷饼",
+      "section_zh": "西餐",
+      "section_en": "Western"
+    },
+    {
+      "key": "fish-and-chips",
+      "en": "fish and chips",
+      "zh": "炸鱼薯条",
+      "section_zh": "西餐",
+      "section_en": "Western"
+    },
+    {
+      "key": "bacon",
+      "en": "bacon",
+      "zh": "培根",
+      "section_zh": "西餐",
+      "section_en": "Western"
+    },
+    {
+      "key": "fried-egg",
+      "en": "fried egg",
+      "zh": "煎蛋",
+      "section_zh": "西餐",
+      "section_en": "Western"
+    },
+    {
+      "key": "scrambled-eggs",
+      "en": "scrambled eggs",
+      "zh": "炒蛋",
+      "section_zh": "西餐",
+      "section_en": "Western"
+    },
+    {
+      "key": "cereal",
+      "en": "cereal with milk",
+      "zh": "麦片",
+      "section_zh": "西餐",
+      "section_en": "Western"
+    },
+    {
+      "key": "oatmeal",
+      "en": "oatmeal",
+      "zh": "燕麦粥",
+      "section_zh": "西餐",
+      "section_en": "Western"
+    },
+    {
+      "key": "toast",
+      "en": "toast",
+      "zh": "吐司",
+      "section_zh": "西餐",
+      "section_en": "Western"
+    },
+    {
+      "key": "croissant",
+      "en": "croissant",
+      "zh": "牛角包",
+      "section_zh": "西餐",
+      "section_en": "Western"
+    },
+    {
+      "key": "bagel",
+      "en": "bagel",
+      "zh": "贝果",
+      "section_zh": "西餐",
+      "section_en": "Western"
+    },
+    {
+      "key": "donut",
+      "en": "donut",
+      "zh": "甜甜圈",
+      "section_zh": "西餐",
+      "section_en": "Western"
+    },
+    {
+      "key": "waffle",
+      "en": "waffle",
+      "zh": "华夫饼",
+      "section_zh": "西餐",
+      "section_en": "Western"
+    },
+    {
+      "key": "pancakes",
+      "en": "pancakes",
+      "zh": "松饼",
+      "section_zh": "西餐",
+      "section_en": "Western"
+    },
+    {
+      "key": "cheese",
+      "en": "cheese",
+      "zh": "奶酪",
+      "section_zh": "西餐",
+      "section_en": "Western"
+    },
+    {
+      "key": "yogurt",
+      "en": "yogurt",
+      "zh": "酸奶",
+      "section_zh": "西餐",
+      "section_en": "Western"
+    },
+    {
+      "key": "cheesecake",
+      "en": "cheesecake",
+      "zh": "芝士蛋糕",
+      "section_zh": "西餐",
+      "section_en": "Western"
+    },
+    {
+      "key": "tiramisu",
+      "en": "tiramisu",
+      "zh": "提拉米苏",
+      "section_zh": "西餐",
+      "section_en": "Western"
+    },
+    {
+      "key": "brownie",
+      "en": "brownie",
+      "zh": "布朗尼",
+      "section_zh": "西餐",
+      "section_en": "Western"
+    },
+    {
+      "key": "apple-pie",
+      "en": "apple pie",
+      "zh": "苹果派",
+      "section_zh": "西餐",
+      "section_en": "Western"
+    },
+    {
+      "key": "milk-chocolate",
+      "en": "milk chocolate",
+      "zh": "牛奶巧克力",
+      "section_zh": "西餐",
+      "section_en": "Western"
+    },
+    {
+      "key": "peanut-butter",
+      "en": "peanut butter",
+      "zh": "花生酱",
+      "section_zh": "西餐",
+      "section_en": "Western"
+    },
+    {
+      "key": "popcorn",
+      "en": "popcorn",
+      "zh": "爆米花",
+      "section_zh": "西餐",
+      "section_en": "Western"
+    },
+    {
+      "key": "marshmallow",
+      "en": "marshmallow",
+      "zh": "棉花糖",
+      "section_zh": "西餐",
+      "section_en": "Western"
+    },
+    {
+      "key": "pudding",
+      "en": "pudding",
+      "zh": "布丁",
+      "section_zh": "西餐",
+      "section_en": "Western"
+    },
+    {
+      "key": "jelly",
+      "en": "jelly",
+      "zh": "果冻",
+      "section_zh": "西餐",
+      "section_en": "Western"
+    },
+    {
+      "key": "bread",
+      "en": "bread",
+      "zh": "面包",
+      "section_zh": "西餐",
+      "section_en": "Western"
+    },
+    {
+      "key": "mashed-potatoes",
+      "en": "mashed potatoes",
+      "zh": "土豆泥",
+      "section_zh": "西餐",
+      "section_en": "Western"
+    },
+    {
+      "key": "roasted-sweet-potato",
+      "en": "roasted sweet potato",
+      "zh": "烤红薯",
+      "section_zh": "西餐",
+      "section_en": "Western"
+    },
+    {
+      "key": "americano",
+      "en": "americano",
+      "zh": "美式咖啡",
+      "section_zh": "饮料",
+      "section_en": "Drinks"
+    },
+    {
+      "key": "cappuccino",
+      "en": "cappuccino",
+      "zh": "卡布奇诺",
+      "section_zh": "饮料",
+      "section_en": "Drinks"
+    },
+    {
+      "key": "hot-chocolate",
+      "en": "hot chocolate",
+      "zh": "热巧克力",
+      "section_zh": "饮料",
+      "section_en": "Drinks"
+    },
+    {
+      "key": "black-tea",
+      "en": "black tea",
+      "zh": "红茶",
+      "section_zh": "饮料",
+      "section_en": "Drinks"
+    },
+    {
+      "key": "oolong-tea",
+      "en": "oolong tea",
+      "zh": "乌龙茶",
+      "section_zh": "饮料",
+      "section_en": "Drinks"
+    },
+    {
+      "key": "lemon-tea",
+      "en": "lemon tea",
+      "zh": "柠檬茶",
+      "section_zh": "饮料",
+      "section_en": "Drinks"
+    },
+    {
+      "key": "lemonade",
+      "en": "lemonade",
+      "zh": "柠檬水",
+      "section_zh": "饮料",
+      "section_en": "Drinks"
+    },
+    {
+      "key": "sparkling-water",
+      "en": "sparkling water",
+      "zh": "气泡水",
+      "section_zh": "饮料",
+      "section_en": "Drinks"
+    },
+    {
+      "key": "apple-juice",
+      "en": "apple juice",
+      "zh": "苹果汁",
+      "section_zh": "饮料",
+      "section_en": "Drinks"
+    },
+    {
+      "key": "coconut-water",
+      "en": "coconut water",
+      "zh": "椰子水",
+      "section_zh": "饮料",
+      "section_en": "Drinks"
+    },
+    {
+      "key": "red-wine",
+      "en": "red wine",
+      "zh": "红酒",
+      "section_zh": "饮料",
+      "section_en": "Drinks"
+    },
+    {
+      "key": "whiskey",
+      "en": "whiskey",
+      "zh": "威士忌",
+      "section_zh": "饮料",
+      "section_en": "Drinks"
+    },
+    {
+      "key": "margarita",
+      "en": "margarita",
+      "zh": "玛格丽特",
+      "section_zh": "饮料",
+      "section_en": "Drinks"
+    },
+    {
+      "key": "energy-drink",
+      "en": "energy drink",
+      "zh": "能量饮料",
+      "section_zh": "饮料",
+      "section_en": "Drinks"
+    },
+    {
+      "key": "sports-drink",
+      "en": "sports drink",
+      "zh": "运动饮料",
+      "section_zh": "饮料",
+      "section_en": "Drinks"
+    },
+    {
+      "key": "strawberry",
+      "en": "strawberries",
+      "zh": "草莓",
+      "section_zh": "水果蔬菜",
+      "section_en": "Fruit & vegetables"
+    },
+    {
+      "key": "grapes",
+      "en": "grapes",
+      "zh": "葡萄",
+      "section_zh": "水果蔬菜",
+      "section_en": "Fruit & vegetables"
+    },
+    {
+      "key": "mango",
+      "en": "mango",
+      "zh": "芒果",
+      "section_zh": "水果蔬菜",
+      "section_en": "Fruit & vegetables"
+    },
+    {
+      "key": "orange",
+      "en": "orange",
+      "zh": "橙子",
+      "section_zh": "水果蔬菜",
+      "section_en": "Fruit & vegetables"
+    },
+    {
+      "key": "lemon",
+      "en": "lemon",
+      "zh": "柠檬",
+      "section_zh": "水果蔬菜",
+      "section_en": "Fruit & vegetables"
+    },
+    {
+      "key": "blueberries",
+      "en": "blueberries",
+      "zh": "蓝莓",
+      "section_zh": "水果蔬菜",
+      "section_en": "Fruit & vegetables"
+    },
+    {
+      "key": "durian",
+      "en": "durian",
+      "zh": "榴莲",
+      "section_zh": "水果蔬菜",
+      "section_en": "Fruit & vegetables"
+    },
+    {
+      "key": "cherries",
+      "en": "cherries",
+      "zh": "樱桃",
+      "section_zh": "水果蔬菜",
+      "section_en": "Fruit & vegetables"
+    },
+    {
+      "key": "peach",
+      "en": "peach",
+      "zh": "桃子",
+      "section_zh": "水果蔬菜",
+      "section_en": "Fruit & vegetables"
+    },
+    {
+      "key": "pineapple",
+      "en": "pineapple",
+      "zh": "菠萝",
+      "section_zh": "水果蔬菜",
+      "section_en": "Fruit & vegetables"
+    },
+    {
+      "key": "avocado",
+      "en": "avocado",
+      "zh": "牛油果",
+      "section_zh": "水果蔬菜",
+      "section_en": "Fruit & vegetables"
+    },
+    {
+      "key": "tomato",
+      "en": "tomato",
+      "zh": "番茄",
+      "section_zh": "水果蔬菜",
+      "section_en": "Fruit & vegetables"
+    },
+    {
+      "key": "cucumber",
+      "en": "cucumber",
+      "zh": "黄瓜",
+      "section_zh": "水果蔬菜",
+      "section_en": "Fruit & vegetables"
+    },
+    {
+      "key": "carrot",
+      "en": "carrot",
+      "zh": "胡萝卜",
+      "section_zh": "水果蔬菜",
+      "section_en": "Fruit & vegetables"
+    },
+    {
+      "key": "corn-on-the-cob",
+      "en": "corn on the cob",
+      "zh": "玉米",
+      "section_zh": "水果蔬菜",
+      "section_en": "Fruit & vegetables"
+    },
+    {
+      "key": "tofu",
+      "en": "tofu",
+      "zh": "豆腐",
+      "section_zh": "水果蔬菜",
+      "section_en": "Fruit & vegetables"
+    },
+    {
+      "key": "edamame",
+      "en": "edamame",
+      "zh": "毛豆",
+      "section_zh": "水果蔬菜",
+      "section_en": "Fruit & vegetables"
+    },
+    {
+      "key": "spinach",
+      "en": "spinach",
+      "zh": "菠菜",
+      "section_zh": "水果蔬菜",
+      "section_en": "Fruit & vegetables"
+    }
+  ]
+}

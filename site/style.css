@@ -232,3 +232,7 @@ body { padding: 0 16px 32px; max-width: 640px; margin: 0 auto; }
 .silence-controls .unavailable { color: var(--muted); font-size: 0.85rem; align-self: center; }
 .sound { display: inline-flex; align-items: center; gap: 8px; margin-top: 10px; font-size: 0.9rem; }
 .silence-summary { flex-basis: 100%; color: var(--muted); font-size: 0.8rem; font-variant-numeric: tabular-nums; }
+
+.chip-group { margin: 6px 0 2px; }
+.chip-head { font-size: 0.8rem; color: var(--muted); margin: 6px 0 2px; }
+#tasted-chips { display: block; }

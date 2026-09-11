@@ -386,6 +386,7 @@ def main() -> None:
     parser.add_argument("--dimensions", default=",".join(DIMENSIONS))
     parser.add_argument("--raw", type=Path, default=RAW_PATH)
     parser.add_argument("--report", type=Path, default=REPORT_PATH)
+    parser.add_argument("--foods", type=Path, default=FOODS_PATH, help="food list JSON (default: encoder/foods_stability.json)")
     args = parser.parse_args()
     if args.retry_errors and args.report_only:
         parser.error("--retry-errors and --report-only are mutually exclusive")
@@ -410,7 +411,7 @@ def main() -> None:
     ):
         parser.error(f"unknown prompt version: {args.prompt_version}")
 
-    foods = json.loads(FOODS_PATH.read_text(encoding="utf-8"))
+    foods = json.loads(args.foods.read_text(encoding="utf-8"))
     if args.limit is not None and not (args.retry_errors or args.report_only):
         if args.limit < 1:
             parser.error("--limit must be at least 1")
