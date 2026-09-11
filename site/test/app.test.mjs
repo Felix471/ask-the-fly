@@ -192,3 +192,42 @@ test("cancel token fires and clears its callbacks once", () => {
   assert.equal(token.cancelled, true);
   assert.equal(fired, 1);
 });
+
+// ---- autocomplete ----
+import { suggest, closest, editDistance, entryNames } from "../app.js";
+
+test("edit distance with cutoff", () => {
+  assert.equal(editDistance("cola", "cola"), 0);
+  assert.equal(editDistance("colla", "cola"), 1);
+  assert.equal(editDistance("kola", "cola"), 1);
+  assert.equal(editDistance("xxxxx", "cola"), 3, "over the cutoff returns cutoff + 1");
+  assert.equal(editDistance("可乐", "可口可乐", 4), 2);
+});
+
+test("suggest ranks prefix, then substring, then edit distance, max 6, both languages", () => {
+  const dictionary = buildDictionary(dishes);
+  const en = suggest("co", dictionary, "en");
+  assert.ok(en.length > 0 && en.length <= 6);
+  assert.equal(en[0].rank, 0, "prefix matches come first");
+  assert.ok(en.every((s, i) => i === 0 || s.rank >= en[i - 1].rank), "ranks are non-decreasing");
+  assert.ok(en.some((s) => s.entry.key === "cola") && en.some((s) => s.entry.key === "cookies"));
+  const sub = suggest("tofu", dictionary, "en");
+  assert.equal(sub[0].entry.key, "mapo tofu", "substring / word match");
+  const typo = suggest("watermelom", dictionary, "en");
+  assert.equal(typo[0].entry.key, "watermelon", "edit distance 1");
+  assert.equal(typo[0].rank, 3);
+  const zh = suggest("麻婆", dictionary, "zh");
+  assert.equal(zh[0].label, "麻婆豆腐");
+  const alias = suggest("chinese broc", dictionary, "en");
+  assert.equal(alias[0].entry.key, "gai lan", "alias prefix");
+  assert.equal(suggest("", dictionary, "en").length, 0);
+  assert.equal(suggest("zzzzzzzz", dictionary, "en").length, 0);
+});
+
+test("closest offers near misses when nothing matches", () => {
+  const dictionary = buildDictionary(dishes);
+  const near = closest("watermelonsss", dictionary, "en");
+  assert.ok(near.length >= 1 && near[0].entry.key === "watermelon");
+  assert.equal(closest("qqqqqqqqqqqq", dictionary, "en").length, 0);
+  assert.ok(entryNames(dishes[0]).includes(dishes[0].key));
+});

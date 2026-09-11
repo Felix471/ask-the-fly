@@ -36,11 +36,19 @@
     <section class="panel" id="input-panel">
       <p class="lead" data-i18n="lead"></p>
       <form id="option-form" class="option-form" autocomplete="off">
-        <input id="option-input" class="option-input" type="text" data-i18n-placeholder="inputPlaceholder" enterkeyhint="done">
+        <div class="input-wrap">
+          <input id="option-input" class="option-input" type="text" data-i18n-placeholder="inputPlaceholder" enterkeyhint="done"
+                 role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="suggest">
+          <div id="suggest" class="suggest" role="listbox" hidden></div>
+        </div>
         <button class="btn btn-add" type="submit" data-i18n="add"></button>
       </form>
       <ul id="option-list" class="option-list" aria-live="polite"></ul>
       <p class="hint" data-i18n="hint"></p>
+      <details id="tasted" class="tasted">
+        <summary data-i18n="tastedTitle"></summary>
+        <div id="tasted-chips" class="chips"></div>
+      </details>
       <div class="actions">
         <button id="ask-btn" class="btn btn-primary" type="button" data-i18n="ask" disabled></button>
         <button id="opposite-btn" class="btn btn-secondary" type="button" data-i18n="opposite" disabled></button>

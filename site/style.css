@@ -196,3 +196,25 @@ body { padding: 0 16px 32px; max-width: 640px; margin: 0 auto; }
 .details summary { cursor: pointer; color: var(--muted); font-size: 0.9rem; padding: 6px 0; }
 
 .notice { background: var(--soft); border: 1px solid var(--line); color: var(--ink); padding: 8px 12px; margin: 12px 0 0; border-radius: 8px; font-size: 0.9rem; }
+
+/* ---- autocomplete and "tasted" chips ---- */
+.input-wrap { position: relative; flex: 1; min-width: 0; }
+.input-wrap .option-input { width: 100%; }
+.suggest {
+  position: absolute; left: 0; right: 0; top: calc(100% + 4px); z-index: 20;
+  background: var(--panel); border: 1px solid var(--line); border-radius: 10px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12); overflow: hidden;
+}
+.suggest-item { padding: 8px 12px; cursor: pointer; display: flex; justify-content: space-between; gap: 8px; }
+.suggest-item[aria-selected="true"], .suggest-item:hover { background: var(--soft); }
+.suggest-item .alt { color: var(--muted); font-size: 0.85rem; }
+.suggest-none { padding: 8px 12px; color: var(--muted); font-size: 0.9rem; }
+.suggest-none b { color: var(--ink); font-weight: 600; }
+.tasted { margin-top: 4px; }
+.tasted summary { cursor: pointer; color: var(--muted); font-size: 0.9rem; padding: 6px 0; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; padding: 6px 0 2px; }
+.chips button {
+  font: inherit; font-size: 0.85rem; border: 1px solid var(--line); background: var(--panel);
+  color: var(--ink); border-radius: 999px; padding: 4px 10px; cursor: pointer;
+}
+.chips button:hover { background: var(--soft); }

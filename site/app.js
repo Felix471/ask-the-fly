@@ -61,6 +61,9 @@ export const STRINGS = {
     stateReplayFailed: "Replay file could not be loaded; the numbers below still stand.",
     stateOffline: "You're offline. Dishes already loaded still work; new replays can't be fetched.",
     stateDataFailed: "The dictionary or lookup table failed to load. Reload the page.",
+    tastedTitle: "The fly has tasted these:",
+    suggestNone: "Not tasted yet; closest: {names}",
+    suggestNoneNoClosest: "Not tasted yet. Press Enter to add it anyway.",
     stubBanner: "STUB DATA: the lookup table on this page is a placeholder, not simulation output.",
     tableMeta: "Lookup table {version} · {cells} cells · {trials} trials per cell",
     cardTitle: "Ask the Fly",
@@ -126,6 +129,9 @@ export const STRINGS = {
     stateReplayFailed: "回放文件没加载出来；下面的数字仍然有效。",
     stateOffline: "现在离线。已加载的菜还能用，新的回放取不到。",
     stateDataFailed: "词典或查找表没加载出来，请刷新页面。",
+    tastedTitle: "果蝇吃过这些：",
+    suggestNone: "果蝇没吃过，试试相近的：{names}",
+    suggestNoneNoClosest: "果蝇没吃过。按回车也可以直接加上。",
     stubBanner: "占位数据：本页的查找表是占位符，不是仿真结果。",
     tableMeta: "查找表 {version} · {cells} 个格子 · 每格 {trials} 次试验",
     cardTitle: "问问果蝇",
@@ -228,6 +234,78 @@ export function decide(scored, mode) {
     known,
     misses: scored.filter((item) => !item.cell),
   };
+}
+
+// Levenshtein distance with an early cutoff (characters, so CJK works too).
+export function editDistance(a, b, cutoff = 2) {
+  if (Math.abs(a.length - b.length) > cutoff) return cutoff + 1;
+  const prev = new Array(b.length + 1);
+  const cur = new Array(b.length + 1);
+  for (let j = 0; j <= b.length; j += 1) prev[j] = j;
+  for (let i = 1; i <= a.length; i += 1) {
+    cur[0] = i;
+    let rowMin = cur[0];
+    for (let j = 1; j <= b.length; j += 1) {
+      const cost = a[i - 1] === b[j - 1] ? 0 : 1;
+      cur[j] = Math.min(prev[j] + 1, cur[j - 1] + 1, prev[j - 1] + cost);
+      if (cur[j] < rowMin) rowMin = cur[j];
+    }
+    if (rowMin > cutoff) return cutoff + 1;
+    for (let j = 0; j <= b.length; j += 1) prev[j] = cur[j];
+  }
+  return prev[b.length];
+}
+
+// Names a dictionary entry can be found under: key, both display names, aliases.
+export function entryNames(entry) {
+  return [...new Set([entry.key, entry.display?.zh, entry.display?.en, ...(entry.aliases || [])].filter(Boolean).map(normalizeName))];
+}
+
+// Fuzzy suggestions: prefix matches first, then substring, then edit distance <= 2
+// (on the whole name or on any word of it). Returns at most `max` entries, each with
+// the label to show in `lang` and the matched name.
+export function suggest(query, dictionary, lang, max = 6) {
+  const q = normalizeName(query);
+  if (!q) return [];
+  // Typo tolerance grows with the query: for Latin text none under 3 characters,
+  // 1 up to 5, then 2; CJK names are short, so one edit is allowed from 2 characters.
+  const cjk = /[㐀-鿿]/.test(q);
+  const tolerance = Math.min(2, Math.floor(q.length / (cjk ? 2 : 3)));
+  const scored = [];
+  for (const entry of dictionary.entries) {
+    let best = null;
+    for (const name of entryNames(entry)) {
+      let rank = null;
+      if (name.startsWith(q)) rank = 0;
+      else if (name.includes(q)) rank = 1;
+      else if (tolerance > 0) {
+        const d = Math.min(editDistance(q, name, tolerance), ...name.split(" ").map((w) => editDistance(q, w, tolerance)));
+        if (d <= tolerance) rank = 2 + d;
+      }
+      if (rank !== null && (best === null || rank < best.rank || (rank === best.rank && name.length < best.name.length))) {
+        best = { rank, name };
+      }
+    }
+    if (best) scored.push({ entry, rank: best.rank, name: best.name, label: entry.display?.[lang] || entry.key });
+  }
+  scored.sort((a, b) => a.rank - b.rank || a.name.length - b.name.length || a.label.localeCompare(b.label));
+  return scored.slice(0, max);
+}
+
+// Closest entries when nothing matches within the fuzzy rules (edit distance <= 4).
+export function closest(query, dictionary, lang, max = 3) {
+  const q = normalizeName(query);
+  if (!q) return [];
+  const cutoff = Math.min(3, Math.floor(q.length / 2));
+  if (cutoff === 0) return [];
+  const scored = [];
+  for (const entry of dictionary.entries) {
+    let d = Infinity;
+    for (const name of entryNames(entry)) d = Math.min(d, editDistance(q, name, cutoff), ...name.split(" ").map((w) => editDistance(q, w, cutoff)));
+    if (d <= cutoff) scored.push({ entry, d, label: entry.display?.[lang] || entry.key });
+  }
+  scored.sort((a, b) => a.d - b.d || a.label.localeCompare(b.label));
+  return scored.slice(0, max);
 }
 
 export function issueUrl(name, lang) {
@@ -450,7 +528,106 @@ if (isBrowser) {
       });
     }
     renderOptions();
+    renderTasted();
     if (state.decision) renderDecision();
+  }
+
+  // "The fly has tasted these": every dictionary entry as a tappable chip.
+  let tastedInitialised = false;
+  function renderTasted() {
+    if (!state.dictionary) return;
+    const box = $("tasted-chips");
+    box.innerHTML = "";
+    const entries = [...state.dictionary.entries].sort((a, b) =>
+      (a.display?.[state.lang] || a.key).localeCompare(b.display?.[state.lang] || b.key, state.lang === "zh" ? "zh-Hans-CN" : "en"));
+    for (const entry of entries) {
+      const chip = document.createElement("button");
+      chip.type = "button";
+      chip.textContent = entry.display?.[state.lang] || entry.key;
+      chip.addEventListener("click", () => { addOption(chip.textContent); closeSuggest(); });
+      box.append(chip);
+    }
+    if (!tastedInitialised) {
+      $("tasted").open = window.innerWidth >= 560; // collapsed by default on mobile
+      tastedInitialised = true;
+    }
+  }
+
+  // ---- autocomplete ----
+  const suggestState = { items: [], index: -1 };
+
+  function closeSuggest() {
+    suggestState.items = [];
+    suggestState.index = -1;
+    $("suggest").hidden = true;
+    $("suggest").innerHTML = "";
+    $("option-input").setAttribute("aria-expanded", "false");
+  }
+
+  function renderSuggest() {
+    const input = $("option-input");
+    const box = $("suggest");
+    const query = input.value;
+    if (!state.dictionary || !normalizeName(query)) { closeSuggest(); return; }
+    const items = suggest(query, state.dictionary, state.lang, 6);
+    suggestState.items = items;
+    suggestState.index = items.length ? 0 : -1;
+    box.innerHTML = "";
+    if (items.length === 0) {
+      const near = closest(query, state.dictionary, state.lang, 3);
+      const p = document.createElement("div");
+      p.className = "suggest-none";
+      if (near.length) {
+        p.textContent = "";
+        const text = tr("suggestNone", { names: "" });
+        p.append(document.createTextNode(text));
+        near.forEach((item, i) => {
+          const b = document.createElement("b");
+          b.textContent = item.label;
+          b.style.cursor = "pointer";
+          b.addEventListener("mousedown", (event) => { event.preventDefault(); addOption(item.label); input.value = ""; closeSuggest(); });
+          if (i) p.append(document.createTextNode(" · "));
+          p.append(b);
+        });
+      } else {
+        p.textContent = tr("suggestNoneNoClosest");
+      }
+      box.append(p);
+    } else {
+      items.forEach((item, i) => {
+        const row = document.createElement("div");
+        row.className = "suggest-item";
+        row.setAttribute("role", "option");
+        row.setAttribute("aria-selected", i === suggestState.index ? "true" : "false");
+        const main = document.createElement("span");
+        main.textContent = item.label;
+        const alt = document.createElement("span");
+        alt.className = "alt";
+        const other = item.entry.display?.[state.lang === "zh" ? "en" : "zh"];
+        alt.textContent = other && other !== item.label ? other : (item.name !== normalizeName(item.label) ? item.name : "");
+        row.append(main, alt);
+        row.addEventListener("mousedown", (event) => { event.preventDefault(); pickSuggest(i); });
+        box.append(row);
+      });
+    }
+    box.hidden = false;
+    input.setAttribute("aria-expanded", "true");
+  }
+
+  function highlightSuggest(index) {
+    const rows = $("suggest").querySelectorAll(".suggest-item");
+    if (!rows.length) return;
+    suggestState.index = (index + rows.length) % rows.length;
+    rows.forEach((row, i) => row.setAttribute("aria-selected", i === suggestState.index ? "true" : "false"));
+  }
+
+  function pickSuggest(index) {
+    const item = suggestState.items[index];
+    if (!item) return;
+    addOption(item.label);
+    $("option-input").value = "";
+    closeSuggest();
+    $("option-input").focus();
   }
 
   function renderOptions() {
@@ -724,9 +901,23 @@ if (isBrowser) {
   $("option-form").addEventListener("submit", (event) => {
     event.preventDefault();
     const input = $("option-input");
-    addOption(input.value);
+    if (suggestState.index >= 0 && suggestState.items[suggestState.index]) {
+      pickSuggest(suggestState.index); // Enter selects the highlighted match
+      return;
+    }
+    addOption(input.value); // no match: raw text is added and takes the miss path
     input.value = "";
+    closeSuggest();
     input.focus();
+  });
+  $("option-input").addEventListener("input", renderSuggest);
+  $("option-input").addEventListener("focus", renderSuggest);
+  $("option-input").addEventListener("blur", () => setTimeout(closeSuggest, 120));
+  $("option-input").addEventListener("keydown", (event) => {
+    if ($("suggest").hidden) return;
+    if (event.key === "ArrowDown") { event.preventDefault(); highlightSuggest(suggestState.index + 1); }
+    else if (event.key === "ArrowUp") { event.preventDefault(); highlightSuggest(suggestState.index - 1); }
+    else if (event.key === "Escape") { closeSuggest(); }
   });
   $("option-input").addEventListener("paste", (event) => {
     const text = event.clipboardData && event.clipboardData.getData("text");
