@@ -376,3 +376,13 @@ test("fixed line 4 is a label; the snapshot caption carries the numbers", () => 
   assert.equal(fmt(STRINGS.en.cardSnapshot, { n: 62, neurons: "138,639" }), "MN9 fired 62\u00d7 \u00b7 138,639 neurons");
   assert.equal(STRINGS.en.issueBody, undefined);
 });
+
+test("site/config.json carries the canonical URL the page falls back to", () => {
+  const config = JSON.parse(readFileSync(path.join(here, "..", "config.json"), "utf8"));
+  assert.equal(config.site_url, SITE_URL);
+  assert.equal(SITE_URL, "https://askthefly.app/");
+  const dictionary = buildDictionary(dishes);
+  const lookup = buildLookup(table);
+  const decision = decide(scoreOptions(["火锅", "black coffee"], dictionary, lookup), "ask");
+  assert.equal(shareUrl(decision, "en", "https://example.test"), "https://example.test/?d=hotpot,black-coffee&lang=en");
+});

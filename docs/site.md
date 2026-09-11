@@ -40,7 +40,11 @@ then open http://localhost:8000/. `fetch()` needs an HTTP origin; opening `index
 
 Every string the page shows lives in `copy/site_strings.json` (key, context, en, zh, optional max_length). `scripts/import_copy.py` generates `site/strings.js` from it (the page imports that module; never edit it by hand) and writes the `<title>` and the description / Open Graph / Twitter meta tags into `site/index.html` from the `meta.*` entries. Keys are stable; edit only `en` and `zh`. The importer warns about keys that were removed (previous value kept), unknown keys (ignored) and values over `max_length` (still applied); `--check` reports without writing. The README prose is exported per section with `scripts/export_copy.py --readme` into `copy/readme_sections.md` and rebuilt with `scripts/import_copy.py --readme`.
 
-## Deploy (GitHub Pages)
+## Deploy (Cloudflare Workers, GitHub Pages as backup)
+
+The canonical site is https://askthefly.app/, served as static assets by a Cloudflare Worker: `wrangler.jsonc` at the repo root (name `ask-the-fly`, `assets.directory` = `site`, observability on) is the file Cloudflare generated; `npx wrangler deploy` publishes `site/` as is (no build step). `.wrangler/` and `.dev.vars*` are gitignored. The canonical URL lives in `site/config.json` (`site_url`) and nowhere else by hand: the page reads it at load for share links and the QR code (`SITE_URL` in `site/app.js` is only the fallback), `scripts/import_copy.py` writes it into the canonical link, `og:url`, `og:image` and `twitter:image`, and `scripts/export_share_card.py` checks the QR against it. The READMEs' "Try it" line is copy (`copy/readme_sections.md`); the import script warns when it disagrees with the config.
+
+### GitHub Pages (backup)
 
 `.github/workflows/pages.yml` runs the unit tests and deploys `site/` with the official Pages actions (configure-pages, upload-pages-artifact, deploy-pages) on every push to `main` that touches `site/`, and on manual dispatch. It only works once the repository setting **Settings → Pages → Build and deployment → Source** is set to **GitHub Actions**; until then the workflow's deploy job fails with a "Pages not enabled" error and nothing is published.
 

@@ -1,0 +1,15 @@
+/**
+ * For more details on how to configure Wrangler, refer to:
+ * https://developers.cloudflare.com/workers/wrangler/configuration/
+ */
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "ask-the-fly",
+	"compatibility_date": "2026-09-11",
+	"assets": {
+		"directory": "site"
+	},
+	"observability": {
+		"enabled": true
+	}
+}

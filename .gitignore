@@ -8,3 +8,8 @@ results/
 docs/papers/
 assets/raw/
 data/external/
+
+# Wrangler
+.wrangler/
+.dev.vars
+.dev.vars.*

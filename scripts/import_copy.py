@@ -29,6 +29,7 @@ COPY_JSON = ROOT / "copy" / "site_strings.json"
 COPY_README = ROOT / "copy" / "readme_sections.md"
 STRINGS_JS = ROOT / "site" / "strings.js"
 INDEX_HTML = ROOT / "site" / "index.html"
+SITE_CONFIG = ROOT / "site" / "config.json"
 LANGS = ("en", "zh")
 
 # meta.* keys are written into index.html; everything else into strings.js.
@@ -119,6 +120,27 @@ def escape(value: str) -> str:
     return value.replace("&", "&amp;").replace('"', "&quot;").replace("<", "&lt;").replace(">", "&gt;")
 
 
+def site_url() -> str:
+    """Canonical public URL from site/config.json (trailing slash guaranteed)."""
+    url = json.loads(SITE_CONFIG.read_text(encoding="utf-8"))["site_url"]
+    return url if url.endswith("/") else url + "/"
+
+
+def patch_site_url(html: str, url: str) -> str:
+    """Point the canonical link, og:url, og:image and twitter:image at the site URL."""
+    targets = [
+        (r'(<link\s+rel="canonical"\s+href=")[^"]*(")', url),
+        (r'(<meta\s+property="og:url"\s+content=")[^"]*(")', url),
+        (r'(<meta\s+property="og:image"\s+content=")[^"]*(")', url + "og-image.png"),
+        (r'(<meta\s+name="twitter:image"\s+content=")[^"]*(")', url + "og-image.png"),
+    ]
+    for pattern, value in targets:
+        html, n = re.subn(pattern, lambda m, v=value: f"{m.group(1)}{escape(v)}{m.group(2)}", html, count=1)
+        if n == 0:
+            print(f"warning: no tag for {pattern} in index.html")
+    return html
+
+
 def apply_strings(entries: list[dict], check: bool, allow_new: bool = False) -> int:
     shipped = {lang: flatten(current_strings().get(lang, {})) for lang in LANGS}
     known_keys = set(shipped["en"]) | set(shipped["zh"])
@@ -160,12 +182,20 @@ def apply_strings(entries: list[dict], check: bool, allow_new: bool = False) -> 
     nested = {lang: unflatten(new_strings[lang]) for lang in LANGS}
     STRINGS_JS.write_text(render_strings_js(nested), encoding="utf-8")
     html = INDEX_HTML.read_text(encoding="utf-8")
-    INDEX_HTML.write_text(patch_index_html(html, meta), encoding="utf-8")
+    INDEX_HTML.write_text(patch_site_url(patch_index_html(html, meta), site_url()), encoding="utf-8")
     print(f"wrote {STRINGS_JS} ({sum(len(v) for v in new_strings.values())} strings) and meta tags in {INDEX_HTML}; {problems} warnings")
     return problems
 
 
 SECTION_RE = re.compile(r"^<!-- section: (\d+) \| file: (README\.md|README\.zh\.md) \| context: .*? -->$", re.M)
+
+
+def check_readme_url(text: str, name: str) -> None:
+    """The READMEs' "Try it" line must point at the canonical site URL."""
+    urls = set(re.findall(r"https?://[^\s)]+", text))
+    stale = [u for u in urls if u.rstrip("/").endswith("github.io/ask-the-fly") or u.startswith("https://askthefly.app") and u.rstrip("/") + "/" != site_url()]
+    if stale:
+        print(f"warning: {name} links to {', '.join(sorted(stale))} instead of {site_url()}")
 
 
 def apply_readme(path: Path = COPY_README) -> None:

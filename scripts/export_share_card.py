@@ -15,11 +15,12 @@ from __future__ import annotations
 
 import argparse
 import base64
+import json
 import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-SITE_URL = "https://felix471.github.io/ask-the-fly/"
+SITE_URL = json.loads((ROOT / "site" / "config.json").read_text(encoding="utf-8"))["site_url"]
 
 
 def render(args: argparse.Namespace) -> tuple[Path, Path]:

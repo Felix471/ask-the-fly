@@ -220,7 +220,8 @@ export function cardLines(decision, lang) {
 
 // ---------- share links ----------
 
-export const SITE_URL = "https://felix471.github.io/ask-the-fly/";
+// Canonical public URL; the page overrides it from site/config.json at load.
+export const SITE_URL = "https://askthefly.app/";
 
 // Commits recorded by data files before the 2026-09-11 history rewrite (commit
 // trailers stripped), mapped to the same commits' current hashes. The lookup
@@ -248,8 +249,8 @@ export function shareParams(decision, lang) {
   return query;
 }
 
-export function shareUrl(decision, lang) {
-  return SITE_URL + shareParams(decision, lang);
+export function shareUrl(decision, lang, base = SITE_URL) {
+  return (base.endsWith("/") ? base : base + "/") + shareParams(decision, lang);
 }
 
 export function parseShareParams(search) {
@@ -409,7 +410,8 @@ function drawQr(ctx, text, x, y, size) {
 }
 
 // options: stub, sprites ({ fly, dishCache }), spriteFor(item) -> image | null,
-// snapshot ({ canvas, mn9, neurons }) -> a brain frame drawn left of the QR code.
+// snapshot ({ canvas, mn9, neurons }) -> a brain frame drawn left of the QR code,
+// siteUrl -> base of the QR link (default SITE_URL).
 export function drawShareCard(canvas, decision, lang, options = {}) {
   const t = STRINGS[lang];
   const ctx = canvas.getContext("2d");
@@ -598,7 +600,7 @@ export function drawShareCard(canvas, decision, lang, options = {}) {
     ctx.textAlign = "left";
   }
 
-  const url = shareUrl(decision, lang);
+  const url = shareUrl(decision, lang, options.siteUrl || SITE_URL);
   const qr = drawQr(ctx, url, qrX, bottomTop - 20, qrSize);
   ctx.font = font(15);
   ctx.fillStyle = "#6b625b";
@@ -646,6 +648,7 @@ if (isBrowser) {
     manifest: null,
     spriteFallbacks: {},
     sections: null,
+    siteUrl: SITE_URL,
     currentCell: null,
     currentItem: null,
     variant: "",
@@ -1173,6 +1176,7 @@ if (isBrowser) {
       stub: Boolean(state.lookup.table.stub),
       sprites,
       snapshot,
+      siteUrl: state.siteUrl,
       spriteFor: (item) => (sprites && spriteSlug(item) ? sprites.dishCache.get(spriteSlug(item)) || null : null),
     });
     try {
@@ -1202,12 +1206,14 @@ if (isBrowser) {
     state.dictionary = buildDictionary(dishes);
     state.lookup = buildLookup(table);
     $("stub-banner").hidden = !table.stub;
-    const [fallbacks, sections] = await Promise.all([
+    const [fallbacks, sections, config] = await Promise.all([
       fetch("assets/dishes/fallbacks.json").then((r) => (r.ok ? r.json() : null)).catch(() => null),
       fetch("data/sections.json").then((r) => (r.ok ? r.json() : null)).catch(() => null),
+      fetch("config.json").then((r) => (r.ok ? r.json() : null)).catch(() => null),
     ]);
     state.spriteFallbacks = (fallbacks && fallbacks.fallbacks) || {};
     state.sections = sections;
+    if (config && typeof config.site_url === "string" && /^https?:\/\//.test(config.site_url)) state.siteUrl = config.site_url;
     applyStrings();
     // Scene data loads after the dictionary so the buttons enable early; the
     // scene is used only once both the neuron layout and the sprites are ready.

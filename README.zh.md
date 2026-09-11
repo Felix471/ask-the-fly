@@ -4,7 +4,7 @@
 
 English: [README.md](README.md)
 
-在线试用：https://felix471.github.io/ask-the-fly/
+在线试用：https://askthefly.app/
 
 ![丢进三道菜，果蝇选一道](docs/media/demo-zh.gif)
 
