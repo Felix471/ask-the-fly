@@ -13,3 +13,6 @@ data/external/
 .wrangler/
 .dev.vars
 .dev.vars.*
+
+# Launch assets recorded locally (clips, stills); never committed
+assets/launch/
