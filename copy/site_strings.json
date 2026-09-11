@@ -114,11 +114,11 @@
       "max_length": 30
     },
     {
-      "key": "cardBottom",
-      "context": "Card front-bottom explanation paragraph (product owner wording)",
-      "en": "An LLM estimates how the dish tastes. The fly-brain model turns that into an MN9 response, and we pick the strongest one.",
-      "zh": "LLM 会先估算这道菜大概有多甜、多苦、含水量有多高，再交给果蝇脑模型算出 MN9 的反应。哪一道的反应最强，果蝇就选哪一道。",
-      "max_length": 220
+      "key": "cardHonesty",
+      "context": "The card's one honesty sentence: taste levels are LLM estimates, the response is read from precomputed runs of a published fly-connectome model",
+      "en": "Taste levels are LLM estimates; the response is read from precomputed runs of a published fly-connectome model.",
+      "zh": "口味等级由 LLM 估算；反应来自已发表果蝇连接组模型预先跑好的结果。",
+      "max_length": 140
     },
     {
       "key": "cardEmptyValue",

@@ -215,7 +215,7 @@ export function cardLines(decision, lang) {
         water: names[lead.entry.water] ?? lead.entry.water,
       }
     : Object.fromEntries(["dish", "hz", "hz_sugar_only", "sugar", "bitter", "water"].map((k) => [k, t.cardEmptyValue]));
-  return { fixed: t.fixedLines.map((line) => fmt(line, values)), bottom: t.cardBottom };
+  return { fixed: t.fixedLines.map((line) => fmt(line, values)), bottom: t.cardHonesty };
 }
 
 // ---------- share links ----------
@@ -508,6 +508,10 @@ export function drawResultHero(canvas, decision, lang, options = {}) {
 // options: stub, sprites ({ fly, dishCache }), spriteFor(item) -> image | null,
 // snapshot ({ canvas, mn9, neurons }) -> a brain frame drawn left of the QR code,
 // siteUrl -> base of the QR link (default SITE_URL).
+// Card content: title, headline, the chosen name, the chosen sprite with the
+// fly, the MN9 bar comparison, the MN9 line, one honesty sentence, then the
+// brain snapshot and the QR code with its short URL. The taste levels and the
+// other fixed lines live in the page's details, not on the card.
 export function drawShareCard(canvas, decision, lang, options = {}) {
   const t = STRINGS[lang];
   const ctx = canvas.getContext("2d");
@@ -552,69 +556,34 @@ export function drawShareCard(canvas, decision, lang, options = {}) {
       ctx.fillText(line, pad, y);
     }
   }
-  y += 28;
+  y += 24;
 
-  // Bottom block is fixed: the four lines and the honesty line on the left, the
-  // QR code and its URL on the right. Everything above shares the rest.
+  // Bottom block is fixed: brain snapshot left, QR code right. Everything above
+  // shares the rest: sprite, bars, MN9 line, honesty sentence.
   const qrSize = 220;
   const qrX = W - pad - qrSize;
-  const bottomTop = H - 345;
-  const snapW = options.snapshot ? 170 : 0;
-  const snapX = qrX - 22 - snapW;
-  const textWidth = (options.snapshot ? snapX : qrX) - 24 - pad;
+  const bottomEstimate = H - 300; // the bottom block starts here at the latest
 
-  // Middle: the chosen dish large with the fly on it; the others small, grey,
-  // struck. Ties: every tied dish in colour, side by side, fly hovering above.
+  // The chosen dish with the fly on it (ties: every tied dish, fly hovering above).
   const ranked = [...decision.known].sort((a, b) => b.cell.mn9_mean - a.cell.mn9_mean);
-  const others = ranked.filter((item) => !chosen.includes(item));
   const barRows = Math.min(ranked.length, 4);
-  const barsHeight = ranked.length ? 24 + barRows * 44 + (ranked.length > barRows ? 28 : 0) : 0;
-  const missHeight = Math.min(decision.misses.length, 2) * 28;
-  const spriteTop = y;
-  const spriteBottom = bottomTop - barsHeight - missHeight - 24;
-  const spriteRoom = Math.max(0, spriteBottom - spriteTop);
-  let sy = spriteTop;
-  if (chosen.length && spriteRoom >= 150) {
-    const smallSize = others.length ? 88 : 0;
-    const smallBlock = others.length ? smallSize + 46 : 0;
-    const bigSize = Math.max(110, Math.min(chosen.length > 1 ? 170 : 240, spriteRoom - smallBlock - 12));
+  const barsHeight = ranked.length ? 16 + barRows * 44 + (ranked.length > barRows ? 28 : 0) : 0;
+  const textBlock = 40 + 60; // MN9 line + honesty sentence (up to two lines)
+  const spriteRoom = Math.max(0, bottomEstimate - 30 - textBlock - barsHeight - y);
+  if (chosen.length && spriteRoom >= 120) {
+    const bigSize = Math.max(120, Math.min(chosen.length > 1 ? 180 : 250, spriteRoom - (chosen.length > 1 ? 30 : 0)));
     const gap = 24;
     const rowWidth = chosen.length * bigSize + (chosen.length - 1) * gap;
     const x0 = (W - rowWidth) / 2;
+    const sy = y + (chosen.length > 1 ? 30 : 0);
     if (chosen.length > 1) drawFlyOn(ctx, flyFrames, W / 2 - bigSize / 2, sy - bigSize * 0.16, bigSize, false);
     chosen.forEach((item, i) => {
       const x = x0 + i * (bigSize + gap);
       drawDish(ctx, spriteFor(item), x, sy, bigSize, false);
       if (chosen.length === 1 && decision.mode !== "opposite") drawFlyOn(ctx, flyFrames, x, sy, bigSize, true);
     });
-    sy += bigSize + 12;
-    if (others.length) {
-      const maxCols = Math.max(1, Math.floor((W - 2 * pad + 20) / (smallSize + 20)));
-      const shownOthers = others.slice(0, maxCols);
-      const rw = shownOthers.length * smallSize + (shownOthers.length - 1) * 20;
-      let x = (W - rw) / 2;
-      ctx.textAlign = "center";
-      for (const item of shownOthers) {
-        const flyPick = decision.mode === "opposite" && item === decision.flyPick;
-        drawDish(ctx, spriteFor(item), x, sy, smallSize, !flyPick);
-        if (flyPick) drawFlyOn(ctx, flyFrames, x, sy, smallSize, true);
-        ctx.font = font(17, flyPick ? 600 : 400);
-        ctx.fillStyle = flyPick ? "#1f1a17" : "#9a928a";
-        const label = displayName(item, lang);
-        const short = ctx.measureText(label).width > smallSize + 16 ? wrapLines(ctx, label, smallSize + 16)[0] : label;
-        ctx.fillText(short, x + smallSize / 2, sy + smallSize + 22);
-        x += smallSize + 20;
-      }
-      if (others.length > shownOthers.length) {
-        ctx.font = font(17);
-        ctx.fillStyle = "#9a928a";
-        ctx.fillText(fmt(t.cardMore, { n: others.length - shownOthers.length }), W / 2, sy + smallSize + 44);
-      }
-      ctx.textAlign = "left";
-      sy += smallBlock;
-    }
+    y = sy + bigSize + 16;
   }
-  y = Math.max(sy, spriteTop) + 8;
 
   // Bars carry the numbers: one shared scale, the chosen dish in the accent.
   const scale = Math.max(100, ...ranked.map((item) => item.cell.mn9_mean));
@@ -644,38 +613,39 @@ export function drawShareCard(canvas, decision, lang, options = {}) {
     ctx.fillText(fmt(t.cardMore, { n: ranked.length - shown.length }), pad, y);
     y += 28;
   }
-  ctx.font = font(20);
-  for (const item of decision.misses.slice(0, 2)) {
-    ctx.fillStyle = "#6b625b";
-    ctx.fillText(`${item.name} · ${t.missTitle}`, pad, y);
+
+  // The MN9 line and the one honesty sentence.
+  const lines = cardLines(decision, lang);
+  y += 6;
+  ctx.font = font(21);
+  ctx.fillStyle = "#1f1a17";
+  for (const part of wrapLines(ctx, lines.fixed[1], W - 2 * pad)) {
+    ctx.fillText(part, pad, y);
     y += 28;
   }
-
-  // Bottom block: four fixed lines, honesty line, QR code with its URL.
-  const lines = cardLines(decision, lang);
-  let fy = bottomTop;
-  ctx.fillStyle = "#e2dbd0";
-  ctx.fillRect(pad, fy - 30, W - 2 * pad, 2);
-  ctx.font = font(20);
-  ctx.fillStyle = "#1f1a17";
-  for (const line of lines.fixed) {
-    for (const part of wrapLines(ctx, line, textWidth)) {
-      ctx.fillText(part, pad, fy);
-      fy += 28;
-    }
-  }
-  fy += 10;
+  y += 6;
   ctx.font = font(19, 600);
   ctx.fillStyle = "#b5471f";
-  for (const part of wrapLines(ctx, lines.bottom, textWidth)) {
-    ctx.fillText(part, pad, fy);
-    fy += 26;
+  for (const part of wrapLines(ctx, lines.bottom, W - 2 * pad).slice(0, 3)) {
+    ctx.fillText(part, pad, y);
+    y += 26;
   }
 
+  // Bottom block: brain snapshot with its caption, QR code with its URL. It
+  // starts right under the text and the snapshot grows into whatever is left,
+  // so it stays readable.
+  const bottomTop = Math.max(y + 44, Math.min(bottomEstimate, H - 330));
+  ctx.fillStyle = "#e2dbd0";
+  ctx.fillRect(pad, bottomTop - 34, W - 2 * pad, 2);
   if (options.snapshot) {
     const snap = options.snapshot;
-    const snapH = Math.round(snapW * snap.canvas.height / snap.canvas.width);
-    const snapY = bottomTop - 20;
+    const aspect = snap.canvas.height / snap.canvas.width;
+    const maxW = qrX - 28 - pad;
+    const maxH = H - 64 - 46 - bottomTop; // caption line under it, margin below
+    const snapW = Math.max(200, Math.min(maxW, Math.floor(maxH / aspect)));
+    const snapH = Math.round(snapW * aspect);
+    const snapX = pad;
+    const snapY = bottomTop;
     ctx.save();
     ctx.imageSmoothingEnabled = true;
     ctx.drawImage(snap.canvas, snapX, snapY, snapW, snapH);
@@ -683,21 +653,20 @@ export function drawShareCard(canvas, decision, lang, options = {}) {
     ctx.strokeStyle = "#e2dbd0";
     ctx.lineWidth = 1;
     ctx.strokeRect(snapX - 0.5, snapY - 0.5, snapW + 1, snapH + 1);
-    ctx.font = font(13);
+    ctx.font = font(16);
     ctx.fillStyle = "#6b625b";
-    ctx.textAlign = "center";
+    ctx.textAlign = "left";
     const neurons = typeof snap.neurons === "number" ? snap.neurons.toLocaleString(lang === "zh" ? "zh-CN" : "en-US") : "\u2014";
     const caption = fmt(t.cardSnapshot, { n: snap.mn9, neurons });
-    let cy = snapY + snapH + 20;
-    for (const part of wrapLines(ctx, caption, snapW + 40).slice(0, 2)) {
-      ctx.fillText(part, snapX + snapW / 2, cy);
-      cy += 17;
+    let cy = snapY + snapH + 26;
+    for (const part of wrapLines(ctx, caption, snapW).slice(0, 2)) {
+      ctx.fillText(part, snapX, cy);
+      cy += 21;
     }
-    ctx.textAlign = "left";
   }
 
   const url = shareUrl(decision, lang, options.siteUrl || SITE_URL);
-  const qr = drawQr(ctx, url, qrX, bottomTop - 20, qrSize);
+  const qr = drawQr(ctx, url, qrX, bottomTop, qrSize);
   ctx.font = font(15);
   ctx.fillStyle = "#6b625b";
   ctx.textAlign = "center";
@@ -706,7 +675,7 @@ export function drawShareCard(canvas, decision, lang, options = {}) {
   ctx.fillStyle = "#1f1a17";
   const shortUrl = url.replace(/^https?:\/\//, "");
   let uy = qr.y + qr.size + 22;
-  for (const part of wrapChars(shortUrl, 27).slice(0, 5)) {
+  for (const part of wrapChars(shortUrl, 27).slice(0, 4)) {
     ctx.fillText(part, qr.x + qr.size / 2, uy);
     uy += 17;
   }
@@ -787,7 +756,7 @@ if (isBrowser) {
     renderSceneStatus();
     relabelPlates();
     if (state.decision) renderDecision();
-    if (state.decision && !$("card-panel").hidden) showCard().catch(() => {});
+    if (state.decision && $("card-dialog").open) showCard().catch(() => {});
   }
 
   function renderSceneStatus() {
@@ -1212,6 +1181,16 @@ if (isBrowser) {
       body.append(tr);
     }
 
+    const cardLinesBox = $("card-lines");
+    cardLinesBox.innerHTML = "";
+    if (d.winner) {
+      for (const line of cardLines(d, state.lang).fixed) {
+        const li = document.createElement("li");
+        li.textContent = line;
+        cardLinesBox.append(li);
+      }
+    }
+
     const misses = $("misses");
     misses.innerHTML = "";
     for (const item of d.misses) {
@@ -1284,7 +1263,6 @@ if (isBrowser) {
     $("scene-panel").hidden = false;
     $("input-panel").hidden = true;
     $("result-panel").hidden = true;
-    $("card-panel").hidden = true;
     state.sceneStatus = { key: "sceneIdle" };
     renderSceneStatus();
     $("brain-caption").textContent = "";
@@ -1359,7 +1337,6 @@ if (isBrowser) {
     state.decision = decide(scored, mode);
     if (state.decision.known.length === 0) {
       notice("stateAllUnknown");
-      $("card-panel").hidden = true;
       renderDecision();
       return;
     }
@@ -1371,7 +1348,6 @@ if (isBrowser) {
       });
       return;
     }
-    $("card-panel").hidden = true;
     renderDecision();
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
@@ -1415,8 +1391,8 @@ if (isBrowser) {
     } catch (_) {
       $("download-link").removeAttribute("href");
     }
-    $("card-panel").hidden = false;
-    $("card-panel").scrollIntoView({ behavior: "smooth" });
+    const dialog = $("card-dialog");
+    if (!dialog.open) dialog.showModal();
   }
 
   function addSelection(option) {
@@ -1487,7 +1463,7 @@ if (isBrowser) {
     state.scenePlates = null;
     $("scene-panel").hidden = true;
     $("result-panel").hidden = true;
-    $("card-panel").hidden = true;
+    if ($("card-dialog").open) $("card-dialog").close();
     $("input-panel").hidden = false;
   }
 
@@ -1533,7 +1509,8 @@ if (isBrowser) {
   $("ask-btn").addEventListener("click", () => run("ask"));
   $("opposite-btn").addEventListener("click", () => run("opposite"));
   $("share-btn").addEventListener("click", () => { showCard().catch((error) => console.warn("share card failed:", error)); });
-  $("close-card-btn").addEventListener("click", () => { $("card-panel").hidden = true; });
+  $("close-card-btn").addEventListener("click", () => $("card-dialog").close());
+  $("card-dialog").addEventListener("click", (event) => { if (event.target === event.currentTarget) event.currentTarget.close(); });
   $("again-btn").addEventListener("click", () => {
     reset();
     $("option-input").focus();

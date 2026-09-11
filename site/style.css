@@ -170,8 +170,19 @@ body { padding: 0 16px 32px; max-width: 640px; margin: 0 auto; }
 }
 .miss-item .btn { padding: 6px 12px; font-size: 0.9rem; }
 
-.card-panel { text-align: center; }
-.share-card { width: 100%; max-width: 420px; height: auto; aspect-ratio: 3 / 4; border-radius: 12px; border: 1px solid var(--line); }
+/* ---- share card modal: near full-screen on phones, centred sheet above 560 px ---- */
+.card-dialog { border: 0; padding: 0; margin: 0; width: 100vw; max-width: 100vw; height: 100dvh; max-height: 100dvh; background: var(--bg); color: var(--ink); }
+.card-dialog::backdrop { background: rgba(20, 17, 14, 0.55); }
+.card-dialog-body { height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; padding: 16px; overflow: auto; }
+.share-card { display: block; width: auto; max-width: 100%; max-height: calc(100dvh - 110px); aspect-ratio: 3 / 4; border-radius: 12px; border: 1px solid var(--line); }
+.card-dialog .actions { width: 100%; max-width: 420px; margin-top: 0; }
+@media (min-width: 560px) {
+  .card-dialog { width: min(480px, 92vw); max-width: 92vw; height: auto; max-height: 92dvh; margin: auto; border-radius: 16px; border: 1px solid var(--line); }
+  .card-dialog-body { padding: 20px; }
+  .share-card { max-height: calc(92dvh - 120px); }
+}
+.card-lines { list-style: none; margin: 12px 0 0; padding: 10px 0 0; border-top: 1px solid var(--line); font-size: 0.9rem; color: var(--muted); }
+.card-lines li { margin: 2px 0; }
 
 .foot { color: var(--muted); font-size: 0.85rem; }
 .foot p { margin: 6px 0; }

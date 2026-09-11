@@ -140,17 +140,20 @@
         </thead>
         <tbody id="results-body"></tbody>
       </table>
+      <ul id="card-lines" class="card-lines"></ul>
       </details>
     </section>
+  </main>
 
-    <section class="panel card-panel" id="card-panel" hidden>
-      <canvas id="share-card" class="share-card" width="900" height="1200" data-i18n-aria="ariaShareCard"></canvas>
+  <dialog id="card-dialog" class="card-dialog" data-i18n-aria="ariaShareCard">
+    <div class="card-dialog-body">
+      <canvas id="share-card" class="share-card" width="900" height="1200"></canvas>
       <div class="actions">
         <a id="download-link" class="btn btn-primary" download="ask-the-fly.png" data-i18n="download"></a>
         <button id="close-card-btn" class="btn btn-secondary" type="button" data-i18n="close"></button>
       </div>
-    </section>
-  </main>
+    </div>
+  </dialog>
 
   <footer class="foot">
     <p class="honesty" data-i18n="honesty"></p>

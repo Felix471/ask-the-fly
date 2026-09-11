@@ -40,11 +40,11 @@ def render(args: argparse.Namespace) -> tuple[Path, Path]:
         page.click("#skip-btn")
         page.wait_for_selector("#result-panel:not([hidden])", timeout=20000)
         page.click("#share-btn")
-        page.wait_for_selector("#card-panel:not([hidden])", timeout=20000)
+        page.wait_for_selector("#card-dialog[open]", timeout=20000)
         page.wait_for_timeout(500)
         data_url = page.evaluate("document.getElementById('share-card').toDataURL('image/png')")
         out.write_bytes(base64.b64decode(data_url.split(",", 1)[1]))
-        page.locator("#card-panel").screenshot(path=str(phone))
+        page.screenshot(path=str(phone))  # the modal as the phone shows it
         browser.close()
     return out, phone
 
@@ -55,7 +55,13 @@ def decode_qr(png: Path) -> str | None:
     except ImportError:
         return None
     image = cv2.imread(str(png))
-    text, _points, _ = cv2.QRCodeDetector().detectAndDecode(image)
+    detector = cv2.QRCodeDetector()
+    text, _points, _ = detector.detectAndDecode(image)
+    if not text:
+        # The detector sometimes locks onto the dark brain snapshot; the QR sits
+        # in the bottom-right quadrant, so try that crop on its own.
+        h, w = image.shape[:2]
+        text, _points, _ = detector.detectAndDecode(image[h // 2:, w // 2:])
     return text or ""
 
 

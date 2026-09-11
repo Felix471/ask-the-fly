@@ -106,10 +106,10 @@ test("card lines are filled exactly from the spec templates", () => {
   assert.ok(en.fixed[1].includes(w.sugarOnly.mn9_mean.toFixed(1)) && !/\{\w+\}/.test(en.fixed[1]), "both numbers filled");
   assert.ok(!/\{\w+\}/.test(en.fixed[2]) && en.fixed[2].includes(STRINGS.en.levelNames[w.entry.sugar]), "levels filled");
   assert.equal(en.fixed[3], STRINGS.en.fixedLines[3]);
-  assert.equal(en.bottom, STRINGS.en.cardBottom);
+  assert.equal(en.bottom, STRINGS.en.cardHonesty);
   assert.equal(zh.fixed[0], fmt(STRINGS.zh.fixedLines[0], { dish: w.entry.display.zh }));
   assert.equal(zh.fixed[3], STRINGS.zh.fixedLines[3]);
-  assert.equal(zh.bottom, STRINGS.zh.cardBottom);
+  assert.equal(zh.bottom, STRINGS.zh.cardHonesty);
   assert.equal(en.fixed.length, 4);
 });
 
@@ -416,4 +416,14 @@ test("every fly state draws from the sprite frame sets", () => {
   const sets = new Set(["idle", "fly", "land", "proboscis"]);
   for (const state of ["idle", "fly", "land", "taste", "hover", "proboscis"]) assert.ok(sets.has(FRAME_SET[state]), state);
   assert.equal(FRAME_SET.hover, "idle");
+});
+
+test("the card's one honesty sentence names both the LLM estimate and the precomputed connectome runs", () => {
+  assert.match(STRINGS.en.cardHonesty, /LLM/);
+  assert.match(STRINGS.en.cardHonesty, /precomputed/);
+  assert.match(STRINGS.en.cardHonesty, /connectome/);
+  assert.match(STRINGS.zh.cardHonesty, /LLM/);
+  assert.match(STRINGS.zh.cardHonesty, /预先/);
+  assert.match(STRINGS.zh.cardHonesty, /连接组/);
+  assert.equal(STRINGS.en.cardBottom, undefined);
 });

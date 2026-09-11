@@ -11,7 +11,6 @@ export const STRINGS = {
     "ask": "Ask the fly",
     "brainCaption": "Replaying a recorded run: {cell} · 1 s · ~{n} spikes",
     "brainIdle": "Brain view: waiting for a dish",
-    "cardBottom": "An LLM estimates how the dish tastes. The fly-brain model turns that into an MN9 response, and we pick the strongest one.",
     "cardEmptyValue": "—",
     "cardMore": "+{n}",
     "cardOppositePicked": "The fly picks {fly}; I take",
@@ -128,7 +127,8 @@ export const STRINGS = {
     "librarySearch": "Search dishes",
     "libraryAll": "All",
     "libraryEmpty": "No dish matches.",
-    "ariaResultHero": "The fly's pick"
+    "ariaResultHero": "The fly's pick",
+    "cardHonesty": "Taste levels are LLM estimates; the response is read from precomputed runs of a published fly-connectome model."
   },
   "zh": {
     "add": "添加",
@@ -140,7 +140,6 @@ export const STRINGS = {
     "ask": "问问果蝇",
     "brainCaption": "正在回放记录：{cell} · 1 秒 · 约 {n} 次放电",
     "brainIdle": "脑图：还在等第一道菜",
-    "cardBottom": "LLM 会先估算这道菜大概有多甜、多苦、含水量有多高，再交给果蝇脑模型算出 MN9 的反应。哪一道的反应最强，果蝇就选哪一道。",
     "cardEmptyValue": "—",
     "cardMore": "+{n}",
     "cardOppositePicked": "果蝇本来会选 {fly}，那我就反着来：",
@@ -257,6 +256,7 @@ export const STRINGS = {
     "librarySearch": "搜索菜品",
     "libraryAll": "全部",
     "libraryEmpty": "没有匹配的菜。",
-    "ariaResultHero": "果蝇选中的菜"
+    "ariaResultHero": "果蝇选中的菜",
+    "cardHonesty": "口味等级由 LLM 估算；反应来自已发表果蝇连接组模型预先跑好的结果。"
   }
 };
