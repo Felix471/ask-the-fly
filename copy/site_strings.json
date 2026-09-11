@@ -534,6 +534,34 @@
       "max_length": 70
     },
     {
+      "key": "sceneOppositeMany",
+      "context": "Stage caption in 'Let the fly eat first' with three or more dishes: the fly takes its top pick, every remaining dish is the human's",
+      "en": "The fly took {fly_pick}. The rest is yours.",
+      "zh": "果蝇选了{fly_pick}，剩下的都归你。",
+      "max_length": 60
+    },
+    {
+      "key": "verdictOppositeMany",
+      "context": "Result title, same case",
+      "en": "The fly took {fly_pick}. The rest is yours.",
+      "zh": "果蝇选了{fly_pick}，剩下的都归你。",
+      "max_length": 60
+    },
+    {
+      "key": "cardOppositeMany",
+      "context": "Share-card title, same case (replaces the single dish name)",
+      "en": "The fly took {fly_pick}. The rest is yours.",
+      "zh": "果蝇选了{fly_pick}，剩下的都归你。",
+      "max_length": 60
+    },
+    {
+      "key": "oppositeLeast",
+      "context": "Small second line under the title in that case; {lowest} = the lowest-MN9 dish(es), ties joined with ' / '",
+      "en": "Its least favorite: {lowest}",
+      "zh": "它最不想吃的是{lowest}",
+      "max_length": 60
+    },
+    {
       "key": "sceneTasting",
       "context": "Scene status while a plate is tasted; {dish}",
       "en": "Trying {dish}…",
