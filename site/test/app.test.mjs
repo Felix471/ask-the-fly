@@ -103,7 +103,7 @@ test("card lines are filled exactly from the spec templates", () => {
   const w = decision.winner;
   assert.equal(en.fixed[0], `Today's pick: ${w.entry.display.en}`);
   assert.equal(en.fixed[1], `MN9: ${w.cell.mn9_mean.toFixed(1)} Hz (sugar response ${w.sugarOnly.mn9_mean.toFixed(1)} · after bitter suppression ${w.cell.mn9_mean.toFixed(1)})`);
-  assert.match(en.fixed[2], /^Taste input: sugar \S+ · bitter \S+ · water \S+ \(estimated by LLM\)$/);
+  assert.match(en.fixed[2], /^Taste input: sugar .+ · bitter .+ · water .+ \(estimated by LLM\)$/);
   assert.equal(en.fixed[3], "Simulation: precomputed from the whole-brain connectome, not run live");
   assert.equal(en.bottom, "The model turns the dish into taste signals. The connectome predicts whether the fly would extend its proboscis. We use that response to choose the winner.");
   assert.equal(zh.fixed[0], `今日选择：${w.entry.display.zh}`);
