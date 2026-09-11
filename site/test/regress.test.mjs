@@ -308,3 +308,55 @@ test("D08: stats recomputed from the manifest over cells where baseline MN9 fire
     assert.ok(all.n > active.n, "the all-cells scope includes cells whose baseline MN9 was silent");
   }
 });
+
+// ---- opposite mode with 3+ dishes: the fly takes its top pick, every remaining dish is the human's ----
+test("opposite, 2 dishes: the single remaining dish is the human's (unchanged)", () => {
+  const d = decide([item("A", 100), item("B", 10)], "opposite");
+  assert.equal(d.flyPick.name, "A");
+  assert.equal(d.winner.name, "B");
+  assert.deepEqual(keys(d.humanSet), ["B"]);
+  assert.equal(d.many, false);
+  assert.deepEqual(keys(d.lowest), ["B"]);
+});
+
+test("opposite, 3 dishes: no single winner; the human's set is everything but the fly's pick; lowest reported", () => {
+  const d = decide([item("A", 100), item("B", 40), item("C", 10)], "opposite");
+  assert.equal(d.flyPick.name, "A");
+  assert.equal(d.winner, null, "no lowest-MN9 dish is assigned as the human's single dish");
+  assert.deepEqual(keys(d.humanSet), ["B", "C"], "human set in MN9 order");
+  assert.equal(d.many, true);
+  assert.deepEqual(keys(d.lowest), ["C"]);
+  assert.deepEqual(d.tie, []);
+  const plan = scenePlan(d, [...d.known, ...d.misses]);
+  assert.equal(plan.winner, 0, "the fly still lands on its own pick");
+});
+
+test("opposite, 3 dishes with the top tied: both tied dishes are taken, one remains -> two-dish sentence", () => {
+  const d = decide([item("A", 100), item("B", 100), item("C", 10)], "opposite");
+  assert.deepEqual(keys(d.flyTies), ["A", "B"]);
+  assert.deepEqual(keys(d.humanSet), ["C"]);
+  assert.equal(d.many, false);
+  assert.equal(d.winner.name, "C");
+});
+
+test("opposite, 4 dishes with the bottom tied: lowest lists both", () => {
+  const d = decide([item("A", 100), item("B", 40), item("C", 5), item("D", 5)], "opposite");
+  assert.deepEqual(keys(d.humanSet), ["B", "C", "D"]);
+  assert.deepEqual(keys(d.lowest), ["C", "D"]);
+  assert.equal(d.many, true);
+});
+
+test("opposite, all tied: reported as a tie, nothing is the human's", () => {
+  const d = decide([item("A", 5), item("B", 5), item("C", 5)], "opposite");
+  assert.deepEqual(keys(d.tie), ["A", "B", "C"]);
+  assert.deepEqual(d.humanSet, []);
+  assert.equal(d.many, false);
+});
+
+test("opposite strings exist for both cases in both languages", () => {
+  for (const lang of ["en", "zh"]) {
+    for (const key of ["sceneOppositeMany", "verdictOppositeMany", "cardOppositeMany", "oppositeLeast"]) assert.ok(S[lang][key], `${lang}.${key}`);
+    assert.match(S[lang].sceneOppositeMany, /\{fly_pick\}/);
+    assert.match(S[lang].oppositeLeast, /\{lowest\}/);
+  }
+});
