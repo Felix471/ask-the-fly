@@ -10,6 +10,27 @@ export function frame(callback) {
   return requestAnimationFrame(callback);
 }
 
+export const BIN_MS = 10;
+export const BINS_IN_WINDOW = 5; // 50 ms trail
+
+// Groups a replay's spikes into BIN_MS bins of unique neuron indices.
+export function binReplay(replay, binMs = BIN_MS) {
+  const nBins = Math.ceil(replay.header.duration_ms / binMs);
+  const bins = new Array(nBins);
+  const { idx, t } = replay;
+  let i = 0;
+  for (let b = 0; b < nBins; b += 1) {
+    const endUnits = (b + 1) * binMs * 10;
+    const seen = new Set();
+    while (i < t.length && t[i] < endUnits) {
+      seen.add(idx[i]);
+      i += 1;
+    }
+    bins[b] = Uint32Array.from(seen);
+  }
+  return bins;
+}
+
 export const FLAG = { sugar: 1, bitter: 2, water: 4, ir94e: 8, mn9_left: 16, mn9_right: 32 };
 
 export const COLORS = {
@@ -105,6 +126,14 @@ export class BrainView {
   }
 
   buildBackground() {
+    const n = this.neurons.n;
+    this.px = new Float32Array(n);
+    this.py = new Float32Array(n);
+    for (let i = 0; i < n; i += 1) {
+      const [x, y] = this.project(i);
+      this.px[i] = x;
+      this.py[i] = y;
+    }
     const off = document.createElement("canvas");
     off.width = this.canvas.width;
     off.height = this.canvas.height;
@@ -141,36 +170,47 @@ export class BrainView {
   setReplay(replay) {
     this.stop();
     this.replay = replay;
+    this.bins = replay ? binReplay(replay, BIN_MS) : null;
     this.drawStatic();
   }
 
   drawFrame(tMs) {
     const ctx = this.canvas.getContext("2d");
     ctx.drawImage(this.background, 0, 0);
-    if (!this.replay) return;
-    const { idx, t } = this.replay;
-    const windowMs = 45;
-    const tUnits = tMs * 10;
-    const startUnits = Math.max(0, (tMs - windowMs) * 10);
-    // t is sorted ascending: binary search the window start, scan to the end.
-    let lo = 0;
-    let hi = t.length;
-    while (lo < hi) {
-      const mid = (lo + hi) >> 1;
-      if (t[mid] < startUnits) lo = mid + 1;
-      else hi = mid;
-    }
+    if (!this.replay || !this.bins) return;
+    // Draws are batched per BIN_MS bin: each neuron is painted once per bin it
+    // spiked in, so a frame costs at most (bins in window) x (unique neurons),
+    // whatever the raw spike count. Flagged neurons are painted last, on top.
+    const windowMs = BIN_MS * BINS_IN_WINDOW;
+    const lastBin = Math.min(this.bins.length - 1, Math.floor(tMs / BIN_MS));
+    const firstBin = Math.max(0, Math.floor((tMs - windowMs) / BIN_MS));
     const pr = this.pixelRatio;
-    for (let i = lo; i < t.length && t[i] <= tUnits; i += 1) {
-      const age = (tUnits - t[i]) / 10 / windowMs; // 0 fresh .. 1 old
-      const f = idx[i] < this.neurons.flags.length ? this.neurons.flags[idx[i]] : 0;
-      const [x, y] = this.project(idx[i]);
-      const special = f !== 0;
-      const radius = (special ? 3.2 : 1.7) * pr * (1.35 - 0.35 * age);
-      ctx.globalAlpha = special ? 1 - 0.6 * age : 0.9 - 0.8 * age;
-      ctx.fillStyle = spikeColor(f);
+    const flags = this.neurons.flags;
+    const special = [];
+    for (let b = firstBin; b <= lastBin; b += 1) {
+      const age = Math.min(1, Math.max(0, (tMs - b * BIN_MS) / windowMs));
+      const size = 2 * pr * (1.5 - 0.6 * age);
+      ctx.globalAlpha = 0.9 - 0.8 * age;
+      ctx.fillStyle = COLORS.spike;
+      const list = this.bins[b];
+      for (let k = 0; k < list.length; k += 1) {
+        const i = list[k];
+        if (i < flags.length && flags[i]) {
+          special.push(i, age);
+          continue;
+        }
+        const x = this.px[i];
+        const y = this.py[i];
+        ctx.fillRect(x - size / 2, y - size / 2, size, size);
+      }
+    }
+    for (let k = 0; k < special.length; k += 2) {
+      const i = special[k];
+      const age = special[k + 1];
+      ctx.globalAlpha = 1 - 0.6 * age;
+      ctx.fillStyle = spikeColor(flags[i]);
       ctx.beginPath();
-      ctx.arc(x, y, radius, 0, Math.PI * 2);
+      ctx.arc(this.px[i], this.py[i], 3.2 * pr * (1.35 - 0.35 * age), 0, Math.PI * 2);
       ctx.fill();
     }
     ctx.globalAlpha = 1;
