@@ -51,6 +51,14 @@ def render(path: Path) -> None:
         if width:
             d.rectangle((64, y + 40, 64 + width, y + 52), fill=colour)
         y += 78
+    # Real sprites from the shipped asset set (nearest-neighbour upscaled).
+    sprites = ROOT / "site" / "assets"
+    for name, box in (("dishes/watermelon.png", (930, 60, 192)), ("fly/proboscis_2.png", (1010, 20, 120))):
+        sprite_path = sprites / name
+        if sprite_path.exists():
+            x, y, size = box
+            sprite = Image.open(sprite_path).convert("RGBA").resize((size, size), Image.Resampling.NEAREST)
+            im.paste(sprite, (x, y), sprite)
     d.line((64, 548, 1136, 548), fill=LINE, width=2)
     d.text((64, 566), "Shiu 2024 LIF model · FlyWire v783 · MN9 readout · precomputed, not run live · It only does the first bite.",
            font=font(22), fill=MUTED)
