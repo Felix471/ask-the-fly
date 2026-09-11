@@ -231,3 +231,4 @@ body { padding: 0 16px 32px; max-width: 640px; margin: 0 auto; }
 .silence-controls .btn[aria-pressed="true"] { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
 .silence-controls .unavailable { color: var(--muted); font-size: 0.85rem; align-self: center; }
 .sound { display: inline-flex; align-items: center; gap: 8px; margin-top: 10px; font-size: 0.9rem; }
+.silence-summary { flex-basis: 100%; color: var(--muted); font-size: 0.8rem; font-variant-numeric: tabular-nums; }

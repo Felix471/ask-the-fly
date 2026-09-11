@@ -260,6 +260,23 @@ def pack(args: argparse.Namespace) -> int:
         "git_commit": meta["git_commit"],
         "n_cells": len(conditions),
         "variants": [v.lstrip("_") or "baseline" for v in variants],
+        # Per-variant effect on left MN9 over the cells where the baseline MN9 fired:
+        # median signed change, and the share of cells that went down / unchanged / up.
+        "variant_stats": {
+            v.lstrip("_"): (lambda deltas: {
+                "n_cells_mn9_active": len(deltas),
+                "median_delta": float(np.median(deltas)) if deltas else None,
+                "mean_delta": float(np.mean(deltas)) if deltas else None,
+                "frac_down": float(np.mean([d < 0 for d in deltas])) if deltas else None,
+                "frac_zero": float(np.mean([d == 0 for d in deltas])) if deltas else None,
+                "frac_up": float(np.mean([d > 0 for d in deltas])) if deltas else None,
+                "max_abs_delta": int(max(abs(d) for d in deltas)) if deltas else 0,
+            })([
+                int(np.sum(loaded[(c["cond_id"], v)]["flywire_id"] == left)) - int(np.sum(loaded[(c["cond_id"], "")]["flywire_id"] == left))
+                for c in conditions if int(np.sum(loaded[(c["cond_id"], "")]["flywire_id"] == left)) > 0
+            ])
+            for v in variants if v
+        },
         "named_neurons": [{"key": e["key"], "label": e["label"], "root_ids": e["root_ids"]} for e in named if e["root_ids"]],
         "cells": {c["cond_id"]: {"levels": c["levels"], "n_spikes": int(len(loaded[(c["cond_id"], "")]["t_ms"])),
                                  "mn9_left_count": int(np.sum(loaded[(c["cond_id"], "")]["flywire_id"] == left)),

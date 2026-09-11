@@ -418,6 +418,26 @@ if (isBrowser) {
     $("hud-inputs").textContent = fmt(t.hudRates, { sugar: st.hz.sugar, bitter: st.hz.bitter, water: st.hz.water });
   }
 
+  // Silencing buttons: Clavicle plus the two neurons with the clearest, most
+  // consistent MN9 effect (by |median change| and share of cells moving the same
+  // way) are shown; the rest sit behind "More neurons". Order comes from the
+  // manifest's recorded statistics, never from a guess.
+  const silenceUi = { expanded: false };
+
+  function silenceRanking() {
+    const stats = state.manifest.variant_stats || {};
+    const rows = (state.manifest.named_neurons || [])
+      .filter((entry) => state.manifest.variants.includes(`silence_${entry.key}`))
+      .map((entry) => {
+        const st = stats[`silence_${entry.key}`] || {};
+        const consistency = Math.max(st.frac_down || 0, st.frac_up || 0);
+        return { ...entry, stats: st, score: Math.abs(st.median_delta || 0) * consistency };
+      });
+    const clavicle = rows.filter((r) => r.key === "clavicle");
+    const others = rows.filter((r) => r.key !== "clavicle").sort((a, b) => b.score - a.score);
+    return { primary: [...clavicle, ...others.slice(0, 2)], more: others.slice(2) };
+  }
+
   function renderSilenceControls() {
     const box = $("silence-controls");
     if (!box || !state.manifest) return;
@@ -432,11 +452,29 @@ if (isBrowser) {
       b.addEventListener("click", () => playVariant(variant));
       return b;
     };
+    const { primary, more } = silenceRanking();
     box.append(mk(t.silenceBaseline, ""));
-    for (const entry of state.manifest.named_neurons || []) {
-      const variant = state.manifest.variants.includes(`silence_${entry.key}`) ? entry.key : null;
-      if (variant) box.append(mk(fmt(t.silenceButton, { name: entry.label }), variant));
+    for (const entry of primary) box.append(mk(fmt(t.silenceButton, { name: entry.label }), entry.key));
+    if (more.length) {
+      const toggle = mk(silenceUi.expanded ? t.silenceLess : t.silenceMore, null);
+      toggle.setAttribute("aria-pressed", "false");
+      toggle.onclick = () => { silenceUi.expanded = !silenceUi.expanded; renderSilenceControls(); };
+      box.append(toggle);
+      if (silenceUi.expanded) for (const entry of more) box.append(mk(fmt(t.silenceButton, { name: entry.label }), entry.key));
     }
+    const summary = document.createElement("div");
+    summary.className = "silence-summary";
+    for (const entry of [...primary, ...(silenceUi.expanded ? more : [])]) {
+      const st = entry.stats;
+      if (st.median_delta == null) continue;
+      const line = document.createElement("div");
+      line.textContent = fmt(t.silenceEffectSummary, {
+        name: entry.label, median: (st.median_delta > 0 ? "+" : "") + st.median_delta,
+        n: st.n_cells_mn9_active, down: Math.round((st.frac_down || 0) * 100),
+      });
+      summary.append(line);
+    }
+    box.append(summary);
     for (const entry of state.manifest.unmatched || []) {
       const span = document.createElement("span");
       span.className = "unavailable";
@@ -464,7 +502,15 @@ if (isBrowser) {
       const after = replay.header.mn9_left_count;
       const delta = after - before;
       const name = (state.manifest.named_neurons.find((n) => n.key === variant) || {}).label || variant;
-      $("silence-caption").textContent = fmt(t.silenceCaption, { name, after, before, delta: (delta >= 0 ? "+" : "") + delta });
+      const st = (state.manifest.variant_stats || {})[`silence_${variant}`] || {};
+      const medianText = st.median_delta == null ? "–" : (st.median_delta > 0 ? "+" : "") + st.median_delta;
+      if (st.median_delta === 0) {
+        // No consistent effect across cells (per-cell differences are stream noise):
+        // that is the result, say it plainly alongside this cell's numbers.
+        $("silence-caption").textContent = fmt(t.silenceCaptionNoEffect, { name, after, before, delta: (delta >= 0 ? "+" : "") + delta, median: medianText });
+      } else {
+        $("silence-caption").textContent = fmt(t.silenceCaption, { name, after, before, delta: (delta >= 0 ? "+" : "") + delta });
+      }
     } else {
       $("silence-caption").textContent = "";
     }

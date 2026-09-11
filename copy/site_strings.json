@@ -811,6 +811,34 @@
       "en": "Spike raster",
       "zh": "放电栅格",
       "max_length": 30
+    },
+    {
+      "key": "silenceMore",
+      "context": "Button that reveals the remaining silencing buttons (named neurons with a weaker or no MN9 effect)",
+      "en": "More neurons",
+      "zh": "更多神经元",
+      "max_length": 16
+    },
+    {
+      "key": "silenceLess",
+      "context": "Button that hides the extra silencing buttons again",
+      "en": "Fewer",
+      "zh": "收起",
+      "max_length": 10
+    },
+    {
+      "key": "silenceCaptionNoEffect",
+      "context": "Caption when a silenced neuron has no consistent MN9 effect across cells (median change 0); {name}, {after} = MN9 count silenced, {before} = normal, {delta} = this cell's signed difference, {median} = median change across cells",
+      "en": "Recorded run with {name}'s synapses set to zero · MN9 {after} vs {before} normal ({delta}) · across all cells the median change is {median}: silencing {name} does not move the feeding readout in this model",
+      "zh": "把 {name} 的突触全部置零后的记录回放 · MN9 {after}，正常时 {before}（{delta}）· 在所有格子里中位变化为 {median}：在这个模型里关掉 {name} 不会改变进食读数",
+      "max_length": 240
+    },
+    {
+      "key": "silenceEffectSummary",
+      "context": "Small print under each silencing button group: median MN9 change per neuron over cells where MN9 fired; {name} {median} {n} {down} = percent of cells that dropped",
+      "en": "{name}: median MN9 change {median} over {n} cells, {down}% dropped",
+      "zh": "{name}：MN9 中位变化 {median}（{n} 个格子），{down}% 下降",
+      "max_length": 80
     }
   ]
 }

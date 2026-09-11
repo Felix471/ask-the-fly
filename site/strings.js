@@ -115,7 +115,11 @@ export const STRINGS = {
     "soundToggle": "Click on every MN9 spike",
     "legendNamed": "named SEZ neuron",
     "anatomySource": "Outlines: JFRC2NP neuropil surfaces (Ito et al. 2014) in FlyWire space via fafbseg-py · positions: FlyWire annotations (Schlegel et al. 2024)",
-    "ariaRaster": "Spike raster"
+    "ariaRaster": "Spike raster",
+    "silenceMore": "More neurons",
+    "silenceLess": "Fewer",
+    "silenceCaptionNoEffect": "Recorded run with {name}'s synapses set to zero · MN9 {after} vs {before} normal ({delta}) · across all cells the median change is {median}: silencing {name} does not move the feeding readout in this model",
+    "silenceEffectSummary": "{name}: median MN9 change {median} over {n} cells, {down}% dropped"
   },
   "zh": {
     "add": "添加",
@@ -231,6 +235,10 @@ export const STRINGS = {
     "soundToggle": "每次 MN9 放电响一声",
     "legendNamed": "已命名的 SEZ 神经元",
     "anatomySource": "轮廓：JFRC2NP 神经髓表面（Ito 等 2014），经 fafbseg-py 变换到 FlyWire 空间 · 位置：FlyWire 注释表（Schlegel 等 2024）",
-    "ariaRaster": "放电栅格"
+    "ariaRaster": "放电栅格",
+    "silenceMore": "更多神经元",
+    "silenceLess": "收起",
+    "silenceCaptionNoEffect": "把 {name} 的突触全部置零后的记录回放 · MN9 {after}，正常时 {before}（{delta}）· 在所有格子里中位变化为 {median}：在这个模型里关掉 {name} 不会改变进食读数",
+    "silenceEffectSummary": "{name}：MN9 中位变化 {median}（{n} 个格子），{down}% 下降"
   }
 };
