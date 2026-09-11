@@ -60,7 +60,7 @@ Pure functions (`normalizeName`, `buildDictionary`, `buildLookup`, `scoreOptions
 - "The fly has tasted these": every dictionary entry as a chip in the current language, grouped under the section headers of `data/dish_sections.json` (copied to `site/data/sections.json`), tap to add; collapsed by default under 560 px. Dish sprites without their own file use `site/assets/dishes/fallbacks.json`.
 - "Ask the fly" picks the highest MN9; "Do the opposite" picks the lowest and says what the fly would have picked. Equal MN9 is reported as a tie.
 - The result view lists every option with its sugar/bitter/water levels and MN9 mean ± std, in MN9 order.
-- Unknown names take the miss path: "the fly hasn't tasted this yet" and a "Report it" button that opens a prefilled GitHub Issue (`REPO_URL` in `site/app.js`).
+- Unknown names take the miss path: "the fly hasn't tasted this yet" and a "Report it" button that opens the "New dish request" issue form (`.github/ISSUE_TEMPLATE/dish-request.yml`, `REPO_URL` in `site/app.js`) with the typed name and page language prefilled; the form asks for the Chinese name, the English name and a one-line description.
 - The share card is a 3:4 canvas (900 × 1200) with the verdict, the option list, the four fixed lines and the front-bottom line; "Save image" downloads a PNG. The water honesty line stays in the page footer.
 
 ## Placeholders to confirm

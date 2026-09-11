@@ -71,8 +71,8 @@ test("every dictionary entry resolves to a lookup cell", () => {
 
 test("issue URL is prefilled and encoded", () => {
   const url = issueUrl("凉皮 liangpi", "zh");
-  assert.match(url, /\/issues\/new\?title=New%20dish/);
-  assert.match(url, /body=/);
+  assert.match(url, /\/issues\/new\?template=dish-request\.yml&title=New\+dish/);
+  assert.match(url, /&name_typed=%E5%87%89%E7%9A%AE\+liangpi&language=zh$/);
 });
 
 test("both languages define the same string keys and four fixed lines", () => {

@@ -3,6 +3,10 @@ Ask the Fly lets a fruit-fly brain model taste a few dishes and pick one for you
 
 中文说明：[README.zh.md](README.zh.md)
 
+Try it: https://felix471.github.io/ask-the-fly/
+
+![Three dishes go in, the fly picks one](docs/media/demo-en.gif)
+
 ## Layout
 - `scripts/` — extraction and analysis utilities
 - `sim/` — simulation code (added in a later phase)

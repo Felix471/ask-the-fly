@@ -173,11 +173,17 @@ export function closest(query, dictionary, lang, max = 3) {
   return scored.slice(0, max);
 }
 
+// Opens the "New dish request" issue form (.github/ISSUE_TEMPLATE/dish-request.yml);
+// query keys are the form's field ids, so the issue arrives structured.
 export function issueUrl(name, lang) {
   const t = STRINGS[lang] || STRINGS.en;
-  const title = fmt(t.issueTitle, { name });
-  const body = fmt(t.issueBody, { name, lang });
-  return `${REPO_URL}/issues/new?title=${encodeURIComponent(title)}&body=${encodeURIComponent(body)}`;
+  const params = new URLSearchParams({
+    template: "dish-request.yml",
+    title: fmt(t.issueTitle, { name }),
+    name_typed: name,
+    language: lang === "zh" ? "zh" : "en",
+  });
+  return `${REPO_URL}/issues/new?${params.toString()}`;
 }
 
 export function displayName(item, lang) {

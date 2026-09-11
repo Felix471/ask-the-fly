@@ -1,0 +1,43 @@
+name: New dish request
+description: The fly hasn't tasted this yet. Give us the names and one line about the dish.
+title: "New dish: "
+labels: ["dish-request"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks. A dish needs both names and one line on what it is; we encode it in both languages and it appears at the next deploy. See "How to request a dish" in the README.
+  - type: input
+    id: name_typed
+    attributes:
+      label: Name as typed
+      description: What you typed into the site.
+    validations:
+      required: true
+  - type: dropdown
+    id: language
+    attributes:
+      label: Language
+      description: The page language when you typed it.
+      options:
+        - zh
+        - en
+    validations:
+      required: true
+  - type: input
+    id: zh_name
+    attributes:
+      label: Chinese name (中文名)
+      placeholder: 凉皮
+  - type: input
+    id: en_name
+    attributes:
+      label: English name
+      placeholder: liangpi (cold skin noodles)
+  - type: input
+    id: description
+    attributes:
+      label: What it is (one line)
+      placeholder: cold wheat-starch noodles with chili oil, vinegar and garlic
+    validations:
+      required: true

@@ -1,4 +1,4 @@
-﻿.idea/
+.idea/
 vendor/
 __pycache__/
 *.pyc

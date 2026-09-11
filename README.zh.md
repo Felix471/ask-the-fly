@@ -4,6 +4,10 @@
 
 English: [README.md](README.md)
 
+在线试用：https://felix471.github.io/ask-the-fly/
+
+![丢进三道菜，果蝇选一道](docs/media/demo-zh.gif)
+
 ## 目录结构
 - `scripts/` — 数据提取与分析脚本
 - `sim/` — 仿真代码
