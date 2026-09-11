@@ -114,7 +114,8 @@ body { padding: 0 16px 32px; max-width: 640px; margin: 0 auto; }
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  background: var(--soft);
+  background: var(--panel);
+  border: 1px solid var(--line);
   border-radius: 999px;
   padding: 6px 10px 6px 12px;
 }
@@ -130,10 +131,14 @@ body { padding: 0 16px 32px; max-width: 640px; margin: 0 auto; }
 }
 
 .hint { color: var(--muted); font-size: 0.9rem; margin: 4px 0 12px; }
-.table-empty { display: flex; align-items: center; gap: 10px; margin: 4px 0 8px; }
+/* "On the table": the selection surface; the fly rests on its top edge. */
+.table { position: relative; margin: 12px 0 4px; padding: 8px 12px 10px; border: 1px dashed var(--line); border-radius: 12px; background: var(--soft); }
+.table-head { display: flex; align-items: flex-end; justify-content: space-between; min-height: 26px; }
+.table-title { color: var(--muted); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.04em; }
+.idle-fly { width: 40px; height: 40px; image-rendering: pixelated; flex: 0 0 auto; margin: -22px -4px -6px 0; }
+.table .option-list { margin: 8px 0 0; }
+.table .hint { margin: 6px 0 0; }
 .table-empty[hidden] { display: none; }
-.table-empty .hint { margin: 0; }
-.idle-fly { width: 40px; height: 40px; image-rendering: pixelated; flex: 0 0 auto; }
 .mn9-counter[hidden] { display: none; }
 
 .actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
@@ -215,7 +220,7 @@ body { padding: 0 16px 32px; max-width: 640px; margin: 0 auto; }
 .suggest-item .alt { color: var(--muted); font-size: 0.85rem; }
 .suggest-none { padding: 8px 12px; color: var(--muted); font-size: 0.9rem; }
 .suggest-none b { color: var(--ink); font-weight: 600; }
-.tasted { margin-top: 4px; }
+.tasted { margin-top: 14px; }
 .tasted summary { cursor: pointer; color: var(--muted); font-size: 0.9rem; padding: 6px 0; }
 .chips { display: flex; flex-wrap: wrap; gap: 6px; padding: 6px 0 2px; }
 .chips button {

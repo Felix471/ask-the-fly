@@ -909,7 +909,7 @@ if (isBrowser) {
       box.append(row);
     }
     if (!tastedInitialised) {
-      $("tasted").open = window.innerWidth >= 560; // collapsed by default on mobile
+      $("tasted").open = false; // collapsed on every screen; the buttons stay above it
       tastedInitialised = true;
     }
   }
@@ -1014,10 +1014,10 @@ if (isBrowser) {
     $("ask-btn").disabled = !ready;
     $("opposite-btn").disabled = !ready;
     if (state.options.length >= 2) notice(null);
-    // Empty table: the fly rests next to a one-line hint until a dish arrives.
-    const empty = state.options.length === 0;
-    $("table-empty").hidden = !empty;
-    if (state.idleFly) { if (empty) state.idleFly.start(); else state.idleFly.stop(); }
+    // Empty table: the one-line hint shows until a dish arrives; the fly rests
+    // on the table's edge throughout.
+    $("table-empty").hidden = state.options.length > 0;
+    if (state.idleFly) state.idleFly.start();
   }
 
   function levelText(level) {

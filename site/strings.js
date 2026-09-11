@@ -121,7 +121,8 @@ export const STRINGS = {
     "silenceEffectSummary": "{name}: median MN9 change {median} over {n} cells, {down}% dropped",
     "cardScan": "Scan to replay this choice",
     "cardSnapshot": "MN9 fired {n}× · {neurons} neurons",
-    "plateLoading": "loading…"
+    "plateLoading": "loading…",
+    "tableTitle": "On the table"
   },
   "zh": {
     "add": "添加",
@@ -243,6 +244,7 @@ export const STRINGS = {
     "silenceEffectSummary": "{name}：MN9 中位变化 {median}（{n} 个格子），{down}% 下降",
     "cardScan": "扫码重现这次选择",
     "cardSnapshot": "MN9 放电 {n} 次 · {neurons} 个神经元",
-    "plateLoading": "加载中…"
+    "plateLoading": "加载中…",
+    "tableTitle": "桌上"
   }
 };

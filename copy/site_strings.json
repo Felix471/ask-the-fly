@@ -555,6 +555,13 @@
       "max_length": 60
     },
     {
+      "key": "tableTitle",
+      "context": "Small label over the selected-dishes area (reads as dishes placed on a table)",
+      "en": "On the table",
+      "zh": "桌上",
+      "max_length": 16
+    },
+    {
       "key": "tableMeta",
       "context": "Footer small print; {version} {cells} {trials}",
       "en": "Lookup table {version} · {cells} cells · {trials} trials per cell",

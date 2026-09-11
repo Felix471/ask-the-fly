@@ -44,19 +44,22 @@
         </div>
         <button class="btn btn-add" type="submit" data-i18n="add"></button>
       </form>
-      <ul id="option-list" class="option-list" aria-live="polite"></ul>
-      <div id="table-empty" class="table-empty">
-        <canvas id="idle-fly" class="idle-fly" width="56" height="56" aria-hidden="true"></canvas>
-        <p class="hint" data-i18n="hint"></p>
+      <div class="table" id="table">
+        <div class="table-head">
+          <span class="table-title" data-i18n="tableTitle"></span>
+          <canvas id="idle-fly" class="idle-fly" width="56" height="56" aria-hidden="true"></canvas>
+        </div>
+        <ul id="option-list" class="option-list" aria-live="polite"></ul>
+        <p id="table-empty" class="hint" data-i18n="hint"></p>
+      </div>
+      <div class="actions">
+        <button id="ask-btn" class="btn btn-primary" type="button" data-i18n="ask" disabled></button>
+        <button id="opposite-btn" class="btn btn-secondary" type="button" data-i18n="opposite" disabled></button>
       </div>
       <details id="tasted" class="tasted">
         <summary data-i18n="tastedTitle"></summary>
         <div id="tasted-chips" class="chips"></div>
       </details>
-      <div class="actions">
-        <button id="ask-btn" class="btn btn-primary" type="button" data-i18n="ask" disabled></button>
-        <button id="opposite-btn" class="btn btn-secondary" type="button" data-i18n="opposite" disabled></button>
-      </div>
     </section>
 
     <section class="panel scene-panel" id="scene-panel" hidden>
