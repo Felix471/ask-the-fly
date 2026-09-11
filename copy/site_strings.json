@@ -59,7 +59,7 @@
     },
     {
       "key": "brainCaption",
-      "context": "Caption under the brain view during a replay; {cell} = grid cell id, {n} = spike count. Keep the meaning 'replay of recorded simulation'.",
+      "context": "Caption under the brain view; {cell} = the recorded run's levels in the page language (levelsLine), plus the silenced variant in brackets when one is playing; {n} = spike count",
       "en": "Replaying a recorded run: {cell} · 1 s · ~{n} spikes",
       "zh": "正在回放记录：{cell} · 1 秒 · 约 {n} 次放电",
       "max_length": 80
@@ -350,6 +350,13 @@
       "en": "water GRN",
       "zh": "水 GRN",
       "max_length": 14
+    },
+    {
+      "key": "levelsLine",
+      "context": "The three taste levels of a recorded run, shown instead of the internal cell id; {sugar} {bitter} {water} are level words",
+      "en": "sugar {sugar} · bitter {bitter} · water {water}",
+      "zh": "糖 {sugar} · 苦 {bitter} · 水 {water}",
+      "max_length": 60
     },
     {
       "key": "levelNames.high",
@@ -763,6 +770,13 @@
       "en": "Neurons that fired",
       "zh": "有放电的神经元",
       "max_length": 24
+    },
+    {
+      "key": "hudCell",
+      "context": "Details HUD row: the recorded run's internal cell id (raw), e.g. G_slow_bnone_whigh_inone",
+      "en": "Recorded cell",
+      "zh": "记录格 ID",
+      "max_length": 20
     },
     {
       "key": "hudMn9",

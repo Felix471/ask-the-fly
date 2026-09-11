@@ -352,13 +352,11 @@ export class FlyScene {
     this.fly.state = "idle";
   }
 
-  async turnAway(token) {
-    this.fly.dir = -this.fly.dir;
-    this.fly.state = "hover";
-    await sleep(320, token);
-  }
 
-  // plan: { order: [plate indices to taste], winner, loser, tie: [indices], mode }
+  // plan: { order: [plate indices to taste], winner: the fly's own pick, tie: [indices] }
+  // The fly's behaviour never depends on the mode: in "Do the opposite" it still
+  // lands and extends its proboscis on its own pick; the captions say what the
+  // human gets.
   // hooks: { onTaste(index) -> Promise, onDone() }
   async run(plan, hooks, token) {
     const f = this.fly;
@@ -377,15 +375,6 @@ export class FlyScene {
     if (plan.tie && plan.tie.length > 1) {
       await this.hoverBetween(plan.tie, token);
       this.highlight = -1;
-      return;
-    }
-    if (plan.mode === "opposite" && plan.winner != null && plan.loser != null && plan.winner !== plan.loser) {
-      const w = this.plateLanding(plan.winner);
-      await this.moveTo(w.x, w.y - 40, token);
-      await sleep(350, token);
-      await this.turnAway(token);
-      await this.visit(plan.loser, token);
-      await this.proboscis(token);
       return;
     }
     if (plan.winner != null) {

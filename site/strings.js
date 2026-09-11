@@ -128,7 +128,9 @@ export const STRINGS = {
     "libraryAll": "All",
     "libraryEmpty": "No dish matches.",
     "ariaResultHero": "The fly's pick",
-    "cardHonesty": "Taste levels are LLM estimates; the response is read from precomputed runs of a published fly-connectome model."
+    "cardHonesty": "Taste levels are LLM estimates; the response is read from precomputed runs of a published fly-connectome model.",
+    "levelsLine": "sugar {sugar} · bitter {bitter} · water {water}",
+    "hudCell": "Recorded cell"
   },
   "zh": {
     "add": "添加",
@@ -257,6 +259,8 @@ export const STRINGS = {
     "libraryAll": "全部",
     "libraryEmpty": "没有匹配的菜。",
     "ariaResultHero": "果蝇选中的菜",
-    "cardHonesty": "口味等级由 LLM 估算；反应来自已发表果蝇连接组模型预先跑好的结果。"
+    "cardHonesty": "口味等级由 LLM 估算；反应来自已发表果蝇连接组模型预先跑好的结果。",
+    "levelsLine": "糖 {sugar} · 苦 {bitter} · 水 {water}",
+    "hudCell": "记录格 ID"
   }
 };

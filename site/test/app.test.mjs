@@ -288,7 +288,7 @@ test("neuropil outlines share the neuron frame and stay inside it", () => {
 });
 
 // ---- share links, QR code, provenance ----
-import { COMMIT_REWRITE, currentCommit, parseShareParams, resolveShared, shareParams, shareUrl, slugFor, SITE_URL, optionFromText, optionQuery, optionLabel, sameOption } from "../app.js";
+import { COMMIT_REWRITE, currentCommit, parseShareParams, resolveShared, shareParams, shareUrl, slugFor, SITE_URL, optionFromText, optionQuery, optionLabel, sameOption, levelsText } from "../app.js";
 import { FRAME_SET } from "../fly.js";
 import { qrcode } from "../vendor/qrcode-generator/qrcode.mjs";
 
@@ -426,4 +426,26 @@ test("the card's one honesty sentence names both the LLM estimate and the precom
   assert.match(STRINGS.zh.cardHonesty, /预先/);
   assert.match(STRINGS.zh.cardHonesty, /连接组/);
   assert.equal(STRINGS.en.cardBottom, undefined);
+});
+
+test("replay caption shows levels in the page language, not the cell id", () => {
+  const dictionary = buildDictionary(dishes);
+  const lookup = buildLookup(table);
+  const [pho] = scoreOptions(["pho"], dictionary, lookup);
+  const en = levelsText(pho.cell, "en");
+  const zh = levelsText(pho.cell, "zh");
+  assert.match(en, /^sugar \S+ · bitter \S+ · water \S+$/);
+  assert.match(zh, /^糖 \S+ · 苦 \S+ · 水 \S+$/);
+  assert.ok(!/G_s/.test(en) && !/G_s/.test(zh), "no raw cell id in the caption");
+  assert.equal(levelsText({ sugar: "low", bitter: "none", water: "high" }, "en"), "sugar low · bitter none · water high");
+  assert.equal(levelsText({ sugar: "low", bitter: "none", water: "high" }, "zh"), "糖 低 · 苦 无 · 水 高");
+});
+
+test("opposite mode: the fly's own pick drives the fly, the human's dish is the winner", () => {
+  const dictionary = buildDictionary(dishes);
+  const lookup = buildLookup(table);
+  const d = decide(scoreOptions(["watermelon", "pho", "black coffee"], dictionary, lookup), "opposite");
+  assert.equal(d.flyPick.entry.key, "watermelon");
+  assert.notEqual(d.winner, d.flyPick);
+  assert.equal(d.winner.cell.mn9_mean, Math.min(...d.known.map((i) => i.cell.mn9_mean)));
 });

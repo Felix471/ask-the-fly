@@ -272,6 +272,14 @@ export function parseShareParams(search) {
   };
 }
 
+// "sugar low · bitter none · water high" for a lookup cell or dictionary entry,
+// in the page's language; the raw cell id stays in the details HUD.
+export function levelsText(levels, lang) {
+  const t = STRINGS[lang] || STRINGS.en;
+  const name = (level) => t.levelNames[level] ?? level;
+  return fmt(t.levelsLine, { sugar: name(levels.sugar), bitter: name(levels.bitter), water: name(levels.water) });
+}
+
 // ---------- selected options ----------
 // A selection is { key } for a dictionary dish (stable across languages) or
 // { text } for something the user typed that the fly does not know.
@@ -576,13 +584,28 @@ export function drawShareCard(canvas, decision, lang, options = {}) {
     const rowWidth = chosen.length * bigSize + (chosen.length - 1) * gap;
     const x0 = (W - rowWidth) / 2;
     const sy = y + (chosen.length > 1 ? 30 : 0);
+    const opposite = decision.mode === "opposite" && decision.flyPick && !chosen.includes(decision.flyPick);
+    const shift = opposite ? -Math.round(bigSize * 0.36) : 0; // room for the fly's pick on the right
     if (chosen.length > 1) drawFlyOn(ctx, flyFrames, W / 2 - bigSize / 2, sy - bigSize * 0.16, bigSize, false);
     chosen.forEach((item, i) => {
-      const x = x0 + i * (bigSize + gap);
+      const x = x0 + shift + i * (bigSize + gap);
       drawDish(ctx, spriteFor(item), x, sy, bigSize, false);
-      if (chosen.length === 1 && decision.mode !== "opposite") drawFlyOn(ctx, flyFrames, x, sy, bigSize, true);
+      if (chosen.length === 1 && !opposite) drawFlyOn(ctx, flyFrames, x, sy, bigSize, true);
     });
-    y = sy + bigSize + 16;
+    if (opposite) {
+      // The human's dish stays large; the fly sits on its own pick beside it.
+      const small = Math.round(bigSize * 0.56);
+      const x = x0 + shift + rowWidth + 28;
+      const yy = sy + bigSize - small;
+      drawDish(ctx, spriteFor(decision.flyPick), x, yy, small, false);
+      drawFlyOn(ctx, flyFrames, x, yy, small, true);
+      ctx.font = font(20, 600);
+      ctx.fillStyle = "#1f1a17";
+      ctx.textAlign = "center";
+      ctx.fillText(displayName(decision.flyPick, lang), x + small / 2, yy + small + 24);
+      ctx.textAlign = "left";
+    }
+    y = sy + bigSize + (opposite ? 44 : 16);
   }
 
   // Bars carry the numbers: one shared scale, the chosen dish in the accent.
@@ -720,6 +743,7 @@ if (isBrowser) {
     loadReplay: makeReplayLoader("data/replay/"),
     token: null,
     sceneStatus: null, // { key, item?, fly?, dish? } re-rendered on language switch
+    brainCaption: null, // { cell, variant, n } re-rendered on language switch
     scenePlates: null, // scored items behind the plates, for relabelling
     idleFly: null,
   };
@@ -754,9 +778,17 @@ if (isBrowser) {
     if (state.brain) state.brain.setLang(state.lang);
     renderSilenceControls();
     renderSceneStatus();
+    renderBrainCaption();
     relabelPlates();
     if (state.decision) renderDecision();
     if (state.decision && $("card-dialog").open) showCard().catch(() => {});
+  }
+
+  function renderBrainCaption() {
+    const c = state.brainCaption;
+    if (!c) return;
+    const cell = levelsText(c.cell, state.lang) + (c.variant ? ` (${c.variant})` : "");
+    $("brain-caption").textContent = tr("brainCaption", { cell, n: c.n });
   }
 
   function renderSceneStatus() {
@@ -796,6 +828,7 @@ if (isBrowser) {
     $("hud-total").textContent = st.totalNeurons != null ? st.totalNeurons.toLocaleString() : "–";
     $("hud-active").textContent = st.activeNeurons.toLocaleString();
     $("hud-mn9").textContent = `${st.mn9Left} / ${st.mn9Right}`;
+    $("hud-cell").textContent = replay.header.cell_id || state.currentCell || "–";
     $("hud-latency").textContent = st.mn9FirstMs == null ? t.hudNone : fmt(t.hudMs, { ms: st.mn9FirstMs });
     $("hud-inputs").textContent = fmt(t.hudRates, { sugar: st.hz.sugar, bitter: st.hz.bitter, water: st.hz.water });
   }
@@ -896,7 +929,8 @@ if (isBrowser) {
     } else {
       $("silence-caption").textContent = "";
     }
-    $("brain-caption").textContent = fmt(t.brainCaption, { cell: variant ? `${state.currentCell} (${replay.header.variant})` : state.currentCell, n: replay.header.n_spikes });
+    state.brainCaption = { cell: state.currentCellLevels, variant: variant ? replay.header.variant : "", n: replay.header.n_spikes };
+    renderBrainCaption();
     $("mn9-count").textContent = "0";
     state.brain.onMn9 = (count) => { $("mn9-count").textContent = String(count); state.sound.click(); };
     state.brain.onTime = (ms) => { if (state.raster && !$("brain-details").hidden) state.raster.draw(ms); };
@@ -1255,16 +1289,15 @@ if (isBrowser) {
     const indexOf = (item) => scored.indexOf(item);
     const plan = {
       order: decision.known.map(indexOf),
-      winner: decision.winner ? indexOf(decision.mode === "opposite" ? decision.flyPick : decision.winner) : null,
-      loser: decision.mode === "opposite" && decision.winner ? indexOf(decision.winner) : null,
+      winner: decision.winner ? indexOf(decision.flyPick) : null, // the fly lands on its own pick in every mode
       tie: decision.tie.map(indexOf),
-      mode: decision.mode,
     };
     $("scene-panel").hidden = false;
     $("input-panel").hidden = true;
     $("result-panel").hidden = true;
     state.sceneStatus = { key: "sceneIdle" };
     renderSceneStatus();
+    state.brainCaption = null;
     $("brain-caption").textContent = "";
     $("mn9-count").textContent = "0";
     $("mn9-pill").hidden = true;
@@ -1299,7 +1332,9 @@ if (isBrowser) {
         item.tasted = true;
         state.scene.relabel(index, null, plateSub(item));
         if (token.cancelled) return;
-        $("brain-caption").textContent = tr("brainCaption", { cell: cellId, n: replay.header.n_spikes });
+        state.currentCellLevels = item.cell;
+        state.brainCaption = { cell: item.cell, variant: "", n: replay.header.n_spikes };
+        renderBrainCaption();
         $("mn9-count").textContent = "0";
         $("mn9-pill").hidden = false;
         $("hud-idle").hidden = true;
@@ -1460,6 +1495,7 @@ if (isBrowser) {
     if (state.scene) state.scene.stop();
     state.decision = null;
     state.sceneStatus = null;
+    state.brainCaption = null;
     state.scenePlates = null;
     $("scene-panel").hidden = true;
     $("result-panel").hidden = true;
