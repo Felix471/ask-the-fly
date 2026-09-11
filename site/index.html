@@ -75,10 +75,30 @@
         <span class="chip"><i style="background:#4aa3df"></i><span data-i18n="legendWater"></span></span>
         <span class="chip"><i style="background:#3fb3a1"></i><span data-i18n="legendIr94e"></span></span>
         <span class="chip"><i style="background:#ffd84a"></i><span data-i18n="legendMn9"></span></span>
+        <span class="chip"><i style="background:#f0e6c8"></i><span data-i18n="legendNamed"></span></span>
         <span class="chip"><i style="background:#c8c0b4"></i><span data-i18n="legendOther"></span></span>
       </div>
       <p class="replay-honesty" data-i18n="replayHonesty"></p>
+      <p class="small" data-i18n="anatomySource"></p>
       <p id="layout-note" class="small" hidden data-i18n="layoutPlaceholder"></p>
+      <details id="brain-details" class="brain-details">
+        <summary data-i18n="brainDetails"></summary>
+        <h3 class="sub-h" data-i18n="rasterTitle"></h3>
+        <canvas id="raster-canvas" class="raster-canvas" data-i18n-aria="ariaRaster"></canvas>
+        <h3 class="sub-h" data-i18n="hudTitle"></h3>
+        <dl id="hud" class="hud">
+          <dt data-i18n="hudTotalNeurons"></dt><dd id="hud-total">–</dd>
+          <dt data-i18n="hudActive"></dt><dd id="hud-active">–</dd>
+          <dt data-i18n="hudMn9"></dt><dd id="hud-mn9">–</dd>
+          <dt data-i18n="hudLatency"></dt><dd id="hud-latency">–</dd>
+          <dt data-i18n="hudInputs"></dt><dd id="hud-inputs">–</dd>
+        </dl>
+        <h3 class="sub-h" data-i18n="silenceTitle"></h3>
+        <div id="silence-controls" class="silence-controls"></div>
+        <p id="silence-caption" class="brain-caption"></p>
+        <p class="replay-honesty" data-i18n="silenceHonesty"></p>
+        <label class="sound"><input type="checkbox" id="sound-toggle"> <span data-i18n="soundToggle"></span></label>
+      </details>
     </section>
 
     <section class="panel" id="result-panel" hidden>

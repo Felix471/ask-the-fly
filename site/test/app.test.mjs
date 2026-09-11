@@ -231,3 +231,57 @@ test("closest offers near misses when nothing matches", () => {
   assert.equal(closest("qqqqqqqqqqqq", dictionary, "en").length, 0);
   assert.ok(entryNames(dishes[0]).includes(dishes[0].key));
 });
+
+// ---- neuroscience layers: raster rows, HUD stats, silencing variants, neuropils ----
+import { rasterRows, replayStats, FLAG as BFLAG } from "../brain.js";
+
+function loadReplay(name) {
+  const buf = readFileSync(path.join(here, "..", "data", "replay", `${name}.bin`));
+  return parseReplay(buf.buffer.slice(buf.byteOffset, buf.byteOffset + buf.byteLength));
+}
+
+test("raster rows and HUD stats come from the replay file", () => {
+  const neurons = decodeNeurons(JSON.parse(readFileSync(path.join(here, "..", "data", "neurons.json"), "utf8")));
+  const replay = loadReplay("G_svery_high_bnone_wnone_inone");
+  const rows = rasterRows(replay, neurons, { sugar: "sugar", bitter: "bitter", water: "water", mn9_left: "L", mn9_right: "R" });
+  const byKey = Object.fromEntries(rows.map((r) => [r.key, r]));
+  assert.equal(byKey.mn9_left.times.length, replay.header.mn9_left_count, "MN9 L row = recorded count");
+  assert.ok(byKey.sugar.times.length > 0 && byKey.bitter.times.length === 0, "sugar drives, bitter silent at 0 Hz");
+  assert.ok(neurons.named.length >= 5, "named neurons present");
+  for (const entry of neurons.named) assert.ok(byKey[`named:${entry.key}`], `row for ${entry.label}`);
+  for (const row of rows) for (let i = 1; i < row.times.length; i += 1) assert.ok(row.times[i] >= row.times[i - 1]);
+  const st = replayStats(replay);
+  assert.equal(st.totalNeurons, 138639, "neurons in the v783 completeness list the model is built from");
+  assert.equal(st.mn9Left, replay.header.mn9_left_count);
+  assert.equal(st.mn9FirstMs, replay.header.mn9_left_ms[0]);
+  assert.equal(st.hz.sugar, 200);
+  assert.equal(st.variant, "baseline");
+});
+
+test("silenced replay exists for every cell, same seed, Clavicle recorded as silenced", () => {
+  const manifest = JSON.parse(readFileSync(path.join(here, "..", "data", "replay", "manifest.json"), "utf8"));
+  assert.ok(manifest.variants.includes("silence_clavicle"));
+  const base = loadReplay("G_svery_high_bnone_wnone_inone");
+  const sil = loadReplay("G_svery_high_bnone_wnone_inone_silence_clavicle");
+  assert.equal(sil.header.seed, base.header.seed);
+  assert.equal(sil.header.silenced, "clavicle");
+  assert.equal(sil.header.silenced_root_ids.length, 2);
+  assert.equal(sil.header.mn9_left_count, manifest.cells.G_svery_high_bnone_wnone_inone.mn9_left_count_silence_clavicle);
+  const named = JSON.parse(readFileSync(path.join(here, "..", "data", "named_neurons.json"), "utf8"));
+  const quasimodo = named.neurons.find((n) => n.key === "quasimodo");
+  assert.equal(quasimodo.root_ids.length, 0, "Quasimodo has no v783 match and is recorded as such");
+});
+
+test("neuropil outlines share the neuron frame and stay inside it", () => {
+  const np = JSON.parse(readFileSync(path.join(here, "..", "data", "neuropils.json"), "utf8"));
+  assert.equal(np.groups.length, 8);
+  for (const g of np.groups) {
+    assert.ok(g.polygon.length >= 3, g.key);
+    for (const [x, y] of g.polygon) assert.ok(x >= -0.05 && x <= 1.05 && y >= -0.05 && y <= 1.05, `${g.key} inside frame`);
+    assert.ok(g.label_en && g.label_zh);
+  }
+  const left = np.groups.find((g) => g.key === "ol_l").label_at[0];
+  const right = np.groups.find((g) => g.key === "ol_r").label_at[0];
+  assert.ok(left < 0.4 && right > 0.6, "optic lobes sit on opposite sides");
+  assert.ok(BFLAG.named === 64);
+});

@@ -629,6 +629,188 @@
       "en": "Ask the Fly: three dishes ranked by a fly-brain model's MN9 response",
       "zh": "Ask the Fly: three dishes ranked by a fly-brain model's MN9 response",
       "max_length": 120
+    },
+    {
+      "key": "brainDetails",
+      "context": "Toggle under the brain view that reveals the raster, HUD, silencing and sound controls",
+      "en": "Details",
+      "zh": "详情",
+      "max_length": 10
+    },
+    {
+      "key": "rasterTitle",
+      "context": "Heading of the spike raster panel (details)",
+      "en": "Spike raster from this recording",
+      "zh": "这段记录的放电栅格",
+      "max_length": 40
+    },
+    {
+      "key": "rasterSugar",
+      "context": "Raster row label: sugar GRNs (23 cells)",
+      "en": "sugar GRNs",
+      "zh": "甜味 GRN",
+      "max_length": 14
+    },
+    {
+      "key": "rasterBitter",
+      "context": "Raster row label: bitter GRNs",
+      "en": "bitter GRNs",
+      "zh": "苦味 GRN",
+      "max_length": 14
+    },
+    {
+      "key": "rasterWater",
+      "context": "Raster row label: water GRNs",
+      "en": "water GRNs",
+      "zh": "水 GRN",
+      "max_length": 14
+    },
+    {
+      "key": "rasterMn9L",
+      "context": "Raster row label: left MN9 (the readout)",
+      "en": "MN9 L",
+      "zh": "MN9 左",
+      "max_length": 10
+    },
+    {
+      "key": "rasterMn9R",
+      "context": "Raster row label: right MN9",
+      "en": "MN9 R",
+      "zh": "MN9 右",
+      "max_length": 10
+    },
+    {
+      "key": "hudTitle",
+      "context": "Heading of the numbers panel (details); all values come from the replay file",
+      "en": "From this recording",
+      "zh": "这段记录里的数字",
+      "max_length": 30
+    },
+    {
+      "key": "hudTotalNeurons",
+      "context": "HUD label: neurons in the model network",
+      "en": "Neurons in the model",
+      "zh": "模型里的神经元",
+      "max_length": 24
+    },
+    {
+      "key": "hudActive",
+      "context": "HUD label: neurons that fired at least once in this trial",
+      "en": "Neurons that fired",
+      "zh": "有放电的神经元",
+      "max_length": 24
+    },
+    {
+      "key": "hudMn9",
+      "context": "HUD label: MN9 spike counts left / right",
+      "en": "MN9 spikes (L / R)",
+      "zh": "MN9 放电（左 / 右）",
+      "max_length": 24
+    },
+    {
+      "key": "hudLatency",
+      "context": "HUD label: time from stimulus onset (0 ms) to the first left-MN9 spike",
+      "en": "First MN9 spike after onset",
+      "zh": "刺激开始后第一次 MN9 放电",
+      "max_length": 30
+    },
+    {
+      "key": "hudInputs",
+      "context": "HUD label: Poisson input rates driving the GRNs in this cell",
+      "en": "Input rates",
+      "zh": "输入频率",
+      "max_length": 20
+    },
+    {
+      "key": "hudNone",
+      "context": "HUD value when MN9 never fired",
+      "en": "none",
+      "zh": "无",
+      "max_length": 6
+    },
+    {
+      "key": "hudMs",
+      "context": "HUD value: milliseconds; {ms}",
+      "en": "{ms} ms",
+      "zh": "{ms} ms",
+      "max_length": 12
+    },
+    {
+      "key": "hudRates",
+      "context": "HUD value: input rates; {sugar} {bitter} {water} in Hz",
+      "en": "sugar {sugar} · bitter {bitter} · water {water} Hz",
+      "zh": "甜 {sugar} · 苦 {bitter} · 水 {water} Hz",
+      "max_length": 50
+    },
+    {
+      "key": "silenceTitle",
+      "context": "Heading of the silencing controls (details)",
+      "en": "Silencing experiments (recorded runs)",
+      "zh": "沉默实验（记录回放）",
+      "max_length": 40
+    },
+    {
+      "key": "silenceBaseline",
+      "context": "Button: back to the normal recording",
+      "en": "Normal",
+      "zh": "正常",
+      "max_length": 10
+    },
+    {
+      "key": "silenceButton",
+      "context": "Button: replay the recording with that neuron's synapses zeroed; {name}",
+      "en": "Silence {name}",
+      "zh": "关掉 {name}",
+      "max_length": 24
+    },
+    {
+      "key": "silenceCaption",
+      "context": "Caption while a silenced recording plays; {name}, {after} = MN9 count silenced, {before} = baseline count, {delta} = signed difference",
+      "en": "Recorded run with {name}'s synapses set to zero · MN9 {after} vs {before} normal ({delta}) · cf. Tastekin 2026 Fig 6G / S17",
+      "zh": "把 {name} 的突触全部置零后的记录回放 · MN9 {after}，正常时 {before}（{delta}）· 参见 Tastekin 2026 图 6G / S17",
+      "max_length": 140
+    },
+    {
+      "key": "silenceUnavailable",
+      "context": "Note for a named neuron with no FlyWire v783 match; {name}",
+      "en": "{name}: no FlyWire v783 match, not run",
+      "zh": "{name}：没有对应的 v783 神经元，未运行",
+      "max_length": 40
+    },
+    {
+      "key": "silenceHonesty",
+      "context": "One honesty sentence under the silencing controls (product owner wording)",
+      "en": "Silencing results are recorded runs with that neuron's synapses set to zero; the model has no spontaneous activity, so disinhibition effects are underestimated (Tastekin 2026).",
+      "zh": "沉默实验的结果，是把该神经元的突触全部置零后记录下来的运行结果；这个模型没有自发活动，所以去抑制效应会被低估（Tastekin 2026）。",
+      "max_length": 220
+    },
+    {
+      "key": "soundToggle",
+      "context": "Checkbox in details: play a short click on every MN9 spike (off by default)",
+      "en": "Click on every MN9 spike",
+      "zh": "每次 MN9 放电响一声",
+      "max_length": 24
+    },
+    {
+      "key": "legendNamed",
+      "context": "Legend chip: named SEZ neurons drawn larger with labels",
+      "en": "named SEZ neuron",
+      "zh": "已命名的 SEZ 神经元",
+      "max_length": 16
+    },
+    {
+      "key": "anatomySource",
+      "context": "Small print under the brain view: where the outlines and positions come from",
+      "en": "Outlines: JFRC2NP neuropil surfaces (Ito et al. 2014) in FlyWire space via fafbseg-py · positions: FlyWire annotations (Schlegel et al. 2024)",
+      "zh": "轮廓：JFRC2NP 神经髓表面（Ito 等 2014），经 fafbseg-py 变换到 FlyWire 空间 · 位置：FlyWire 注释表（Schlegel 等 2024）",
+      "max_length": 160
+    },
+    {
+      "key": "ariaRaster",
+      "context": "aria-label of the spike raster canvas",
+      "en": "Spike raster",
+      "zh": "放电栅格",
+      "max_length": 30
     }
   ]
 }

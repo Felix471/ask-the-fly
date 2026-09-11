@@ -218,3 +218,16 @@ body { padding: 0 16px 32px; max-width: 640px; margin: 0 auto; }
   color: var(--ink); border-radius: 999px; padding: 4px 10px; cursor: pointer;
 }
 .chips button:hover { background: var(--soft); }
+
+/* ---- brain details: raster, HUD, silencing, sound ---- */
+.brain-details { margin-top: 10px; }
+.brain-details summary { cursor: pointer; color: var(--muted); font-size: 0.9rem; padding: 6px 0; }
+.sub-h { font-size: 0.9rem; margin: 12px 0 6px; color: var(--ink); }
+.raster-canvas { display: block; width: 100%; height: 160px; background: #14110e; border-radius: 10px; }
+.hud { display: grid; grid-template-columns: auto 1fr; gap: 4px 12px; margin: 0; font-size: 0.9rem; }
+.hud dt { color: var(--muted); }
+.hud dd { margin: 0; font-variant-numeric: tabular-nums; }
+.silence-controls { display: flex; flex-wrap: wrap; gap: 8px; }
+.silence-controls .btn[aria-pressed="true"] { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+.silence-controls .unavailable { color: var(--muted); font-size: 0.85rem; align-self: center; }
+.sound { display: inline-flex; align-items: center; gap: 8px; margin-top: 10px; font-size: 0.9rem; }

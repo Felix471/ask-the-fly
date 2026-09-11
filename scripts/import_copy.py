@@ -119,7 +119,7 @@ def escape(value: str) -> str:
     return value.replace("&", "&amp;").replace('"', "&quot;").replace("<", "&lt;").replace(">", "&gt;")
 
 
-def apply_strings(entries: list[dict], check: bool) -> int:
+def apply_strings(entries: list[dict], check: bool, allow_new: bool = False) -> int:
     shipped = {lang: flatten(current_strings().get(lang, {})) for lang in LANGS}
     known_keys = set(shipped["en"]) | set(shipped["zh"])
     problems = 0
@@ -141,9 +141,12 @@ def apply_strings(entries: list[dict], check: bool) -> int:
                     problems += 1
             continue
         if known_keys and key not in known_keys:
-            print(f"warning: unknown key ignored: {key}")
-            problems += 1
-            continue
+            if allow_new and entry.get("context"):
+                print(f"note: new key added: {key}")
+            else:
+                print(f"warning: unknown key ignored: {key} (pass --allow-new to add keys that carry a context)")
+                problems += 1
+                continue
         for lang in LANGS:
             value = entry[lang]
             limit = entry.get("max_length")
@@ -185,8 +188,9 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--readme", action="store_true", help="also rebuild README.md / README.zh.md from copy/readme_sections.md")
     parser.add_argument("--check", action="store_true", help="report warnings without writing")
+    parser.add_argument("--allow-new", action="store_true", help="accept keys not yet in site/strings.js (they must carry a context)")
     args = parser.parse_args()
-    problems = apply_strings(load_copy(), args.check)
+    problems = apply_strings(load_copy(), args.check, args.allow_new)
     if args.readme and not args.check:
         apply_readme()
     return 1 if problems else 0

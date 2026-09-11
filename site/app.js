@@ -2,7 +2,7 @@
 // Ask the Fly — static front end. No LLM calls: dictionary lookup + lookup-table read.
 // Pure functions are exported so they can be unit-tested with node (see test/).
 
-import { BrainView, cellIdFor, decodeNeurons, makeReplayLoader } from "./brain.js";
+import { BrainView, RasterView, SpikeClick, cellIdFor, decodeNeurons, makeReplayLoader, rasterRows, replayStats } from "./brain.js";
 import { FlyScene, loadSprites, makeToken } from "./fly.js";
 
 export const LEVELS = ["none", "low", "medium", "high", "very_high"];
@@ -357,6 +357,12 @@ if (isBrowser) {
     decision: null,
     brain: null,
     scene: null,
+    raster: null,
+    sound: new SpikeClick(),
+    manifest: null,
+    currentCell: null,
+    currentItem: null,
+    variant: "",
     loadReplay: makeReplayLoader("data/replay/"),
     token: null,
   };
@@ -388,7 +394,87 @@ if (isBrowser) {
     }
     renderOptions();
     renderTasted();
+    if (state.brain) state.brain.setLang(state.lang);
+    renderSilenceControls();
     if (state.decision) renderDecision();
+  }
+
+  // ---- details: raster, HUD, silencing ----
+  function rasterLabels() {
+    const t = STRINGS[state.lang];
+    return { sugar: t.rasterSugar, bitter: t.rasterBitter, water: t.rasterWater, mn9_left: t.rasterMn9L, mn9_right: t.rasterMn9R };
+  }
+
+  function showReplayDetails(replay) {
+    if (!state.raster) return;
+    state.raster.setRows(rasterRows(replay, state.brain.neurons, rasterLabels()), replay.header.duration_ms);
+    state.raster.draw(0);
+    const st = replayStats(replay);
+    const t = STRINGS[state.lang];
+    $("hud-total").textContent = st.totalNeurons != null ? st.totalNeurons.toLocaleString() : "–";
+    $("hud-active").textContent = st.activeNeurons.toLocaleString();
+    $("hud-mn9").textContent = `${st.mn9Left} / ${st.mn9Right}`;
+    $("hud-latency").textContent = st.mn9FirstMs == null ? t.hudNone : fmt(t.hudMs, { ms: st.mn9FirstMs });
+    $("hud-inputs").textContent = fmt(t.hudRates, { sugar: st.hz.sugar, bitter: st.hz.bitter, water: st.hz.water });
+  }
+
+  function renderSilenceControls() {
+    const box = $("silence-controls");
+    if (!box || !state.manifest) return;
+    const t = STRINGS[state.lang];
+    box.innerHTML = "";
+    const mk = (label, variant) => {
+      const b = document.createElement("button");
+      b.type = "button";
+      b.className = "btn btn-secondary btn-small";
+      b.textContent = label;
+      b.setAttribute("aria-pressed", state.variant === variant ? "true" : "false");
+      b.addEventListener("click", () => playVariant(variant));
+      return b;
+    };
+    box.append(mk(t.silenceBaseline, ""));
+    for (const entry of state.manifest.named_neurons || []) {
+      const variant = state.manifest.variants.includes(`silence_${entry.key}`) ? entry.key : null;
+      if (variant) box.append(mk(fmt(t.silenceButton, { name: entry.label }), variant));
+    }
+    for (const entry of state.manifest.unmatched || []) {
+      const span = document.createElement("span");
+      span.className = "unavailable";
+      span.textContent = fmt(t.silenceUnavailable, { name: entry.label });
+      box.append(span);
+    }
+  }
+
+  async function playVariant(variant) {
+    if (!state.currentCell || !state.brain) return;
+    state.variant = variant;
+    renderSilenceControls();
+    const t = STRINGS[state.lang];
+    let replay;
+    try {
+      replay = await state.loadReplay(state.currentCell, variant);
+    } catch (error) {
+      console.warn("variant load failed:", error);
+      $("silence-caption").textContent = t.stateReplayFailed;
+      return;
+    }
+    const cellInfo = state.manifest.cells[state.currentCell];
+    if (variant) {
+      const before = cellInfo.mn9_left_count;
+      const after = replay.header.mn9_left_count;
+      const delta = after - before;
+      const name = (state.manifest.named_neurons.find((n) => n.key === variant) || {}).label || variant;
+      $("silence-caption").textContent = fmt(t.silenceCaption, { name, after, before, delta: (delta >= 0 ? "+" : "") + delta });
+    } else {
+      $("silence-caption").textContent = "";
+    }
+    $("brain-caption").textContent = fmt(t.brainCaption, { cell: variant ? `${state.currentCell} (${replay.header.variant})` : state.currentCell, n: replay.header.n_spikes });
+    $("mn9-count").textContent = "0";
+    state.brain.onMn9 = (count) => { $("mn9-count").textContent = String(count); state.sound.click(); };
+    state.brain.onTime = (ms) => { if (state.raster && !$("brain-details").hidden) state.raster.draw(ms); };
+    state.brain.setReplay(replay);
+    showReplayDetails(replay);
+    await state.brain.play(speed());
   }
 
   // "The fly has tasted these": every dictionary entry as a tappable chip.
@@ -654,8 +740,15 @@ if (isBrowser) {
         if (token.cancelled) return;
         $("brain-caption").textContent = tr("brainCaption", { cell: cellId, n: replay.header.n_spikes });
         $("mn9-count").textContent = "0";
-        state.brain.onMn9 = (count) => { $("mn9-count").textContent = String(count); };
+        state.currentCell = cellId;
+        state.currentItem = item;
+        state.variant = "";
+        $("silence-caption").textContent = "";
+        renderSilenceControls();
+        state.brain.onMn9 = (count) => { $("mn9-count").textContent = String(count); state.sound.click(); };
+        state.brain.onTime = (ms) => { if (state.raster) state.raster.draw(ms); };
         state.brain.setReplay(replay);
+        showReplayDetails(replay);
         const stopOnCancel = () => state.brain.stop();
         token.onCancel.push(stopOnCancel);
         await state.brain.play(speed());
@@ -729,12 +822,24 @@ if (isBrowser) {
     // Scene data loads after the dictionary so the buttons enable early; the
     // scene is used only once both the neuron layout and the sprites are ready.
     try {
-      const [neuronsJson, sprites] = await Promise.all([
+      const [neuronsJson, sprites, neuropils, manifest] = await Promise.all([
         fetch("data/neurons.json").then((r) => r.json()),
         loadSprites("assets/"),
+        fetch("data/neuropils.json").then((r) => (r.ok ? r.json() : null)).catch(() => null),
+        fetch("data/replay/manifest.json").then((r) => (r.ok ? r.json() : null)).catch(() => null),
       ]);
       const neurons = decodeNeurons(neuronsJson);
-      state.brain = new BrainView($("brain-canvas"), neurons);
+      state.brain = new BrainView($("brain-canvas"), neurons, { neuropils, lang: state.lang });
+      state.raster = new RasterView($("raster-canvas"));
+      state.manifest = manifest;
+      if (manifest) {
+        // Named neurons without a v783 match are listed so the site can say they were skipped.
+        try {
+          const named = await fetch("data/named_neurons.json").then((r) => (r.ok ? r.json() : null));
+          manifest.unmatched = named ? named.neurons.filter((n) => !n.root_ids.length).map((n) => ({ key: n.key, label: n.label })) : [];
+        } catch (_) { manifest.unmatched = []; }
+      }
+      renderSilenceControls();
       state.scene = new FlyScene($("scene-canvas"), sprites);
       $("layout-note").hidden = neurons.layout !== "placeholder";
     } catch (error) {
@@ -801,6 +906,10 @@ if (isBrowser) {
   });
   $("speed").addEventListener("change", () => {
     if (state.brain) state.brain.speed = speed();
+  });
+  $("sound-toggle").addEventListener("change", (event) => state.sound.enable(event.target.checked));
+  $("brain-details").addEventListener("toggle", () => {
+    if ($("brain-details").open && state.raster && state.raster.rows.length) state.raster.setRows(state.raster.rows, state.raster.duration);
   });
   window.addEventListener("resize", () => {
     if (state.brain && !$("scene-panel").hidden) state.brain.resize();

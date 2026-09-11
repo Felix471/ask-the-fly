@@ -16,7 +16,9 @@ Ask the Fly lets a fruit-fly brain model taste a few dishes and pick one for you
 - Shiu et al. (2024), *Nature*, model code: MIT.
 - Eon fly-brain benchmark repository: GPL-2.0; used as read-only reference/data, with no code copied.
 - Assets: the 41 dish sprites and the fly sprite sheet (`site/assets/`) are original pixel art generated for this project, released under CC BY 4.0; the code stays MIT. Only the processed sprites are tracked; the raw 1024 px sources in `assets/raw/` are not.
-- FlyWire neuron annotations (Schlegel et al. 2024; github.com/flyconnectome/flywire_annotations): CC BY 4.0. Used for the soma positions behind the brain view (`site/data/neurons.json`); the table itself lives in `data/external/` and is not tracked.
+- FlyWire neuron annotations (Schlegel et al. 2024; github.com/flyconnectome/flywire_annotations): CC BY 4.0.
+- Neuropil outlines in the brain view: JFRC2NP neuropil surfaces (Ito et al. 2014 nomenclature) transformed into FlyWire space, taken from the data folder of fafbseg-py (github.com/navis-org/fafbseg-py, GPL-3.0; used as data only, no code copied), projected to 2D by `scripts/export_neuropils.py`. The mesh archive lives in `data/external/` and is not tracked.
+- Named SEZ neurons (`data/named_neurons.json`): IDs from the Shiu et al. 2024 SEZ neuron dictionary shipped with the paper's figure code (MIT) and, for DNg103, from the FlyWire annotations; Quasimodo, Scapula, GNG016 and GNG510 have no FlyWire v783 match in either source and are recorded as such. Used for the soma positions behind the brain view (`site/data/neurons.json`); the table itself lives in `data/external/` and is not tracked.
 
 ## Citations
 Simulation basis (what the scores come from):
