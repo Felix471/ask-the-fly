@@ -24,7 +24,7 @@ export const STRINGS = {
     "colOption": "Option",
     "colSugar": "Sugar",
     "colWater": "Water",
-    "details": "See how every dish scored",
+    "details": "How each dish was scored",
     "download": "Save image",
     "fixedLines": [
       "The fly picked: {dish}",
@@ -69,7 +69,7 @@ export const STRINGS = {
     "sceneTasting": "Trying {dish}…",
     "sceneTie": "The fly can't decide between these",
     "sceneWinner": "The fly goes for {dish}",
-    "share": "Share card",
+    "share": "Share",
     "skip": "Skip",
     "speed": "Speed",
     "stateAllUnknown": "The fly hasn't tried any of these yet. Add them below, or try another dish.",
@@ -127,7 +127,8 @@ export const STRINGS = {
     "viewLess": "Fewer",
     "librarySearch": "Search dishes",
     "libraryAll": "All",
-    "libraryEmpty": "No dish matches."
+    "libraryEmpty": "No dish matches.",
+    "ariaResultHero": "The fly's pick"
   },
   "zh": {
     "add": "添加",
@@ -197,7 +198,7 @@ export const STRINGS = {
     "sceneTasting": "果蝇正在尝 {dish}……",
     "sceneTie": "果蝇也分不出这几道哪个好",
     "sceneWinner": "果蝇最后飞向了 {dish}",
-    "share": "生成分享卡",
+    "share": "分享",
     "skip": "跳过",
     "speed": "速度",
     "stateAllUnknown": "这些菜果蝇都还没吃过。你可以在下面提交，也可以换几道它认识的菜再试试。",
@@ -255,6 +256,7 @@ export const STRINGS = {
     "viewLess": "收起",
     "librarySearch": "搜索菜品",
     "libraryAll": "全部",
-    "libraryEmpty": "没有匹配的菜。"
+    "libraryEmpty": "没有匹配的菜。",
+    "ariaResultHero": "果蝇选中的菜"
   }
 };

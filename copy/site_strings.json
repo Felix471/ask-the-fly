@@ -37,6 +37,13 @@
       "max_length": 30
     },
     {
+      "key": "ariaResultHero",
+      "context": "aria-label of the result's main image canvas (winner with the fly, losers greyed)",
+      "en": "The fly's pick",
+      "zh": "果蝇选中的菜",
+      "max_length": 30
+    },
+    {
       "key": "ariaShareCard",
       "context": "aria-label of the share-card canvas",
       "en": "Share card",
@@ -213,8 +220,8 @@
     },
     {
       "key": "details",
-      "context": "Toggle label of the collapsed level/MN9 table",
-      "en": "See how every dish scored",
+      "context": "Collapsed section under the result: the level / MN9 table (product owner wording)",
+      "en": "How each dish was scored",
       "zh": "看看每道菜是怎么算出来的",
       "max_length": 40
     },
@@ -507,9 +514,9 @@
     },
     {
       "key": "share",
-      "context": "Button under the result: open the share card",
-      "en": "Share card",
-      "zh": "生成分享卡",
+      "context": "Secondary button on the result view; opens the share card",
+      "en": "Share",
+      "zh": "分享",
       "max_length": 16
     },
     {

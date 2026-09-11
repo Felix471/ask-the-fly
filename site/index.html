@@ -120,6 +120,12 @@
 
     <section class="panel" id="result-panel" hidden>
       <div id="verdict" class="verdict"></div>
+      <canvas id="result-hero" class="result-hero" data-i18n-aria="ariaResultHero"></canvas>
+      <div id="misses" class="misses"></div>
+      <div class="actions">
+        <button id="again-btn" class="btn btn-primary" type="button" data-i18n="again"></button>
+        <button id="share-btn" class="btn btn-secondary" type="button" data-i18n="share"></button>
+      </div>
       <details id="details" class="details">
         <summary data-i18n="details"></summary>
       <table class="results" id="results-table">
@@ -135,11 +141,6 @@
         <tbody id="results-body"></tbody>
       </table>
       </details>
-      <div id="misses" class="misses"></div>
-      <div class="actions">
-        <button id="share-btn" class="btn btn-primary" type="button" data-i18n="share"></button>
-        <button id="again-btn" class="btn btn-secondary" type="button" data-i18n="again"></button>
-      </div>
     </section>
 
     <section class="panel card-panel" id="card-panel" hidden>

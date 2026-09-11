@@ -441,6 +441,70 @@ function drawQr(ctx, text, x, y, size) {
   return { x: ox, y: oy, size: total, modules: n };
 }
 
+// The result view's main image: the chosen dish with the fly on it, the other
+// dishes small, greyed and struck beside it (same treatment as the card). Ties
+// draw every tied dish in colour; in "opposite" the fly's own pick keeps the
+// fly. Sizes are CSS px; the canvas is scaled by options.pixelRatio.
+export function drawResultHero(canvas, decision, lang, options = {}) {
+  const pr = options.pixelRatio || 1;
+  const width = options.width || 360;
+  const spriteFor = options.spriteFor || (() => null);
+  const flyFrames = options.sprites ? options.sprites.fly : null;
+  const chosen = decision.winner ? (decision.tie.length ? decision.tie : [decision.winner]) : [];
+  const ranked = [...decision.known].sort((a, b) => b.cell.mn9_mean - a.cell.mn9_mean);
+  const others = ranked.filter((item) => !chosen.includes(item));
+  const big = chosen.length > 1 ? Math.min(120, Math.floor((width - 16 * (chosen.length + 1)) / chosen.length)) : 150;
+  const small = 64;
+  const gap = 16;
+  const top = chosen.length > 1 ? Math.round(big * 0.2) : 0; // room for the hovering fly in a tie
+  const height = top + (chosen.length ? big + 12 : 0) + (others.length ? small + 34 : 0) + 8;
+  canvas.width = Math.round(width * pr);
+  canvas.height = Math.round(height * pr);
+  canvas.style.height = `${height}px`;
+  const ctx = canvas.getContext("2d");
+  ctx.setTransform(pr, 0, 0, pr, 0, 0);
+  ctx.clearRect(0, 0, width, height);
+  const font = (size, weight = 400) =>
+    `${weight} ${size}px system-ui, -apple-system, "Segoe UI", "PingFang SC", "Noto Sans CJK SC", "Microsoft YaHei", sans-serif`;
+  let y = top;
+  if (chosen.length) {
+    const rowWidth = chosen.length * big + (chosen.length - 1) * gap;
+    const x0 = (width - rowWidth) / 2;
+    if (chosen.length > 1) drawFlyOn(ctx, flyFrames, width / 2 - big / 2, y - big * 0.16, big, false);
+    chosen.forEach((item, i) => {
+      const x = x0 + i * (big + gap);
+      drawDish(ctx, spriteFor(item), x, y, big, false);
+      if (chosen.length === 1 && decision.mode !== "opposite") drawFlyOn(ctx, flyFrames, x, y, big, true);
+    });
+    y += big + 12;
+  }
+  if (others.length) {
+    const maxCols = Math.max(1, Math.floor((width + 12) / (small + 12)));
+    const shown = others.slice(0, maxCols);
+    const rowWidth = shown.length * small + (shown.length - 1) * 12;
+    let x = (width - rowWidth) / 2;
+    ctx.textAlign = "center";
+    for (const item of shown) {
+      const flyPick = decision.mode === "opposite" && item === decision.flyPick;
+      drawDish(ctx, spriteFor(item), x, y, small, !flyPick);
+      if (flyPick) drawFlyOn(ctx, flyFrames, x, y, small, true);
+      ctx.font = font(12, flyPick ? 600 : 400);
+      ctx.fillStyle = flyPick ? "#1f1a17" : "#9a928a";
+      const label = displayName(item, lang);
+      const short = ctx.measureText(label).width > small + 10 ? wrapLines(ctx, label, small + 10)[0] : label;
+      ctx.fillText(short, x + small / 2, y + small + 16);
+      x += small + 12;
+    }
+    if (others.length > shown.length) {
+      ctx.font = font(12);
+      ctx.fillStyle = "#9a928a";
+      ctx.fillText(fmt(STRINGS[lang].cardMore, { n: others.length - shown.length }), width / 2, y + small + 32);
+    }
+    ctx.textAlign = "left";
+  }
+  return canvas;
+}
+
 // options: stub, sprites ({ fly, dishCache }), spriteFor(item) -> image | null,
 // snapshot ({ canvas, mn9, neurons }) -> a brain frame drawn left of the QR code,
 // siteUrl -> base of the QR link (default SITE_URL).
@@ -1110,6 +1174,7 @@ if (isBrowser) {
       strong.textContent = displayName(d.winner, state.lang);
     }
     verdict.append(lead, strong);
+    renderHero().catch((error) => console.warn("hero failed:", error));
 
     const body = $("results-body");
     body.innerHTML = "";
@@ -1166,6 +1231,26 @@ if (isBrowser) {
 
     $("result-panel").hidden = false;
     $("input-panel").hidden = true;
+  }
+
+  // The winner sprite with the fly is the result's main image, drawn as soon
+  // as the sprites are in the cache (the scene loaded them; the card reuses them).
+  async function renderHero() {
+    const canvas = $("result-hero");
+    const decision = state.decision;
+    const sprites = state.scene ? state.scene.sprites : null;
+    if (!decision || !decision.winner || !sprites) { canvas.hidden = true; return; }
+    await Promise.all(decision.known.map((item) => loadDishSprite(sprites, spriteSlug(item)).catch(() => null)));
+    if (state.decision !== decision) return;
+    canvas.hidden = false;
+    const width = Math.min(420, canvas.parentElement.clientWidth || 360);
+    canvas.style.width = `${width}px`;
+    drawResultHero(canvas, decision, state.lang, {
+      pixelRatio: Math.min(2, window.devicePixelRatio || 1),
+      width,
+      sprites,
+      spriteFor: (item) => (spriteSlug(item) ? sprites.dishCache.get(spriteSlug(item)) || null : null),
+    });
   }
 
   function speed() {

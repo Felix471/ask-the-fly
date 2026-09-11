@@ -144,8 +144,9 @@ body { padding: 0 16px 32px; max-width: 640px; margin: 0 auto; }
 .actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
 .actions .btn { flex: 1 1 45%; }
 
-.verdict { font-size: 1.15rem; margin-bottom: 12px; }
-.verdict strong { font-size: 1.4rem; display: block; }
+.verdict { font-size: 1.05rem; color: var(--muted); margin-bottom: 4px; }
+.verdict strong { font-size: 1.5rem; color: var(--ink); display: block; }
+.result-hero { display: block; width: 100%; height: auto; margin: 4px 0 8px; }
 
 .results { width: 100%; border-collapse: collapse; font-size: 0.92rem; }
 .results th, .results td { text-align: left; padding: 8px 6px; border-bottom: 1px solid var(--line); vertical-align: top; }
@@ -156,18 +157,18 @@ body { padding: 0 16px 32px; max-width: 640px; margin: 0 auto; }
 .results .mn9 { white-space: nowrap; font-variant-numeric: tabular-nums; }
 .results .sub { display: block; color: var(--muted); font-size: 0.8rem; }
 
-.misses { margin-top: 12px; }
+.misses:empty { display: none; }
 .miss-item {
-  background: var(--soft);
-  border-radius: 10px;
-  padding: 10px 12px;
-  margin-top: 8px;
+  border-top: 1px solid var(--line);
+  padding: 10px 0;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   gap: 8px;
+  font-size: 0.95rem;
 }
+.miss-item .btn { padding: 6px 12px; font-size: 0.9rem; }
 
 .card-panel { text-align: center; }
 .share-card { width: 100%; max-width: 420px; height: auto; aspect-ratio: 3 / 4; border-radius: 12px; border: 1px solid var(--line); }
