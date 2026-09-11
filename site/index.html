@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; font-src 'self'; object-src 'none'; base-uri 'none'; form-action 'self'">
   <title>Ask the Fly · 问问果蝇</title>
   <meta name="description" content="Can't decide what to eat? Let a fruit-fly brain pick. 不知道吃什么？让果蝇脑替你选一个。">
   <link rel="canonical" href="https://askthefly.app/">
@@ -86,13 +87,13 @@
       </div>
       <p id="brain-caption" class="brain-caption"></p>
       <div class="legend">
-        <span class="chip"><i style="background:#e0774a"></i><span data-i18n="legendSugar"></span></span>
-        <span class="chip"><i style="background:#8e6bd6"></i><span data-i18n="legendBitter"></span></span>
-        <span class="chip"><i style="background:#4aa3df"></i><span data-i18n="legendWater"></span></span>
-        <span class="chip"><i style="background:#3fb3a1"></i><span data-i18n="legendIr94e"></span></span>
-        <span class="chip"><i style="background:#ffd84a"></i><span data-i18n="legendMn9"></span></span>
-        <span class="chip"><i style="background:#f0e6c8"></i><span data-i18n="legendNamed"></span></span>
-        <span class="chip"><i style="background:#c8c0b4"></i><span data-i18n="legendOther"></span></span>
+        <span class="chip"><i class="sw-sugar"></i><span data-i18n="legendSugar"></span></span>
+        <span class="chip"><i class="sw-bitter"></i><span data-i18n="legendBitter"></span></span>
+        <span class="chip"><i class="sw-water"></i><span data-i18n="legendWater"></span></span>
+        <span class="chip"><i class="sw-ir94e"></i><span data-i18n="legendIr94e"></span></span>
+        <span class="chip"><i class="sw-mn9"></i><span data-i18n="legendMn9"></span></span>
+        <span class="chip"><i class="sw-named"></i><span data-i18n="legendNamed"></span></span>
+        <span class="chip"><i class="sw-other"></i><span data-i18n="legendOther"></span></span>
       </div>
       <p class="replay-honesty" data-i18n="replayHonesty"></p>
       <p class="small" data-i18n="anatomySource"></p>

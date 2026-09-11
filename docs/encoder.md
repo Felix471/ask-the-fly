@@ -38,6 +38,10 @@ Review values are `llm_v1`, `needs_review`, `human_checked`, and `proxy`; distan
 Names are NFKC-normalized, lowercased, trimmed, and internal whitespace is collapsed.
 Lookup is exact on the normalized key or a normalized alias.
 
+## Environment
+
+The encoder reads two variables from a gitignored `.env` at the repo root (or the environment): `GEMINI_API_KEY`, and `ENCODER_MODEL` = the exact model id, which is also written into every entry's `encoder_version`. Nothing in the site needs them; the site makes no LLM calls.
+
 ## Adding a batch of dishes
 
 1. List the dishes in a batch file (`data/batch2_dishes.json`: key = dictionary key = sprite slug, en/zh display names, section) and derive the food list the encoder consumes (`encoder/foods_batch2.json`, one object per dish with zh, en, key and section; every field travels with each raw record).

@@ -216,6 +216,8 @@ body { padding: 0 16px 32px; max-width: 640px; margin: 0 auto; }
 .legend { display: flex; flex-wrap: wrap; gap: 6px 12px; font-size: 0.8rem; color: var(--muted); }
 .chip { display: inline-flex; align-items: center; gap: 5px; }
 .chip i { display: inline-block; width: 10px; height: 10px; border-radius: 50%; }
+.sw-sugar { background: #e0774a; } .sw-bitter { background: #8e6bd6; } .sw-water { background: #4aa3df; } .sw-ir94e { background: #3fb3a1; }
+.sw-mn9 { background: #ffd84a; } .sw-named { background: #f0e6c8; } .sw-other { background: #c8c0b4; }
 .replay-honesty { margin: 10px 0 0; font-size: 0.85rem; color: var(--ink); }
 .details { margin-top: 8px; }
 .details summary { cursor: pointer; color: var(--muted); font-size: 0.9rem; padding: 6px 0; }
