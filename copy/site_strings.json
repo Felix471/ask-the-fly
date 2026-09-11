@@ -275,6 +275,34 @@
       "max_length": 80
     },
     {
+      "key": "howTitle",
+      "context": "Collapsed 'how it works' block under the intro: the summary line",
+      "en": "How does it choose?",
+      "zh": "它是怎么选的？",
+      "max_length": 30
+    },
+    {
+      "key": "howP1",
+      "context": "'How it works', paragraph 1 (product owner wording, both places)",
+      "en": "Think of it as translating each dish's flavours into the signals a fly's tongue has receptors for.",
+      "zh": "相当于我把每道菜的各种味道，翻译成果蝇舌头上有受体的信号。",
+      "max_length": 140
+    },
+    {
+      "key": "howP2",
+      "context": "'How it works', paragraph 2 (product owner wording, both places)",
+      "en": "Then the brain model runs, and we watch how fast MN9, the neuron that drives proboscis extension, fires. Fast firing means it wants to eat.",
+      "zh": "然后用大脑模拟，看控制伸喙的那个神经元 MN9 放电多快——放电快就是想吃。",
+      "max_length": 160
+    },
+    {
+      "key": "howExtra",
+      "context": "Extra sentence, result panel only, after the two paragraphs (product owner wording)",
+      "en": "Sweet always wins, bitter always loses; cucumber scores 0 because the sweet cells get no signal.",
+      "zh": "甜的永远赢，苦的永远输；黄瓜是 0 分，因为甜味细胞收不到信号。",
+      "max_length": 120
+    },
+    {
       "key": "honesty",
       "context": "Footer honesty line about water (keep the meaning: weak water only helps sugar in this model)",
       "en": "In this model, a little water mostly boosts the sugar signal. Water matters on its own only when the food is mostly water.",

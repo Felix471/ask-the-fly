@@ -131,7 +131,11 @@ export const STRINGS = {
     "levelsLine": "sugar {sugar} · bitter {bitter} · water {water}",
     "hudCell": "Recorded cell",
     "stateShareFailed": "The share card could not be drawn. Tap Share to try again.",
-    "saveHint": "Press and hold the image to save it"
+    "saveHint": "Press and hold the image to save it",
+    "howTitle": "How does it choose?",
+    "howP1": "Think of it as translating each dish's flavours into the signals a fly's tongue has receptors for.",
+    "howP2": "Then the brain model runs, and we watch how fast MN9, the neuron that drives proboscis extension, fires. Fast firing means it wants to eat.",
+    "howExtra": "Sweet always wins, bitter always loses; cucumber scores 0 because the sweet cells get no signal."
   },
   "zh": {
     "add": "添加",
@@ -263,6 +267,10 @@ export const STRINGS = {
     "levelsLine": "糖 {sugar} · 苦 {bitter} · 水 {water}",
     "hudCell": "记录格 ID",
     "stateShareFailed": "分享卡没能生成。再点一次「分享」试试。",
-    "saveHint": "长按图片保存到相册"
+    "saveHint": "长按图片保存到相册",
+    "howTitle": "它是怎么选的？",
+    "howP1": "相当于我把每道菜的各种味道，翻译成果蝇舌头上有受体的信号。",
+    "howP2": "然后用大脑模拟，看控制伸喙的那个神经元 MN9 放电多快——放电快就是想吃。",
+    "howExtra": "甜的永远赢，苦的永远输；黄瓜是 0 分，因为甜味细胞收不到信号。"
   }
 };

@@ -113,7 +113,11 @@ body { padding: 0 16px 32px; max-width: 640px; margin: 0 auto; }
   margin-bottom: 16px;
 }
 
-.lead { margin: 0 0 12px; }
+.lead { margin: 0 0 8px; }
+.how { margin: 0 0 12px; }
+.how summary { cursor: pointer; color: var(--muted); font-size: 0.9rem; padding: 4px 0; }
+.how p, .how-inline p { margin: 6px 0; font-size: 0.95rem; color: var(--ink); }
+.how-inline { margin: 8px 0 10px; padding-bottom: 8px; border-bottom: 1px solid var(--line); }
 
 .option-form { display: flex; gap: 8px; }
 
