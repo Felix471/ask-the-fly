@@ -283,26 +283,46 @@ export function drawShareCard(canvas, decision, lang, options = {}) {
     y += 30;
   }
 
-  // Option list
-  y += 40;
-  ctx.font = font(28);
-  for (const item of decision.known) {
+  // Middle third: horizontal-bar comparison of every option's MN9 (monochrome;
+  // the winner takes the card's accent). Bars share one scale so lengths compare.
+  const bottomStart = H - 440;
+  y += 36;
+  const ranked = [...decision.known].sort((a, b) => b.cell.mn9_mean - a.cell.mn9_mean);
+  const scale = Math.max(100, ...ranked.map((item) => item.cell.mn9_mean));
+  const rowHeight = 58;
+  const barHeight = 14;
+  const trackWidth = W - 2 * pad;
+  const maxRows = Math.max(1, Math.floor((bottomStart - y) / rowHeight));
+  const shown = ranked.slice(0, maxRows);
+  for (const item of shown) {
     const isWinner = decision.winner && (item === decision.winner || decision.tie.includes(item));
+    ctx.font = font(26, isWinner ? 700 : 400);
     ctx.fillStyle = isWinner ? "#b5471f" : "#1f1a17";
-    const label = displayName(item, lang);
-    const value = `${item.cell.mn9_mean.toFixed(1)} Hz`;
-    ctx.fillText(label, pad, y);
-    ctx.textAlign = "right";
-    ctx.fillText(value, W - pad, y);
     ctx.textAlign = "left";
-    y += 40;
-    if (y > H - 420) break;
+    ctx.fillText(displayName(item, lang), pad, y);
+    ctx.textAlign = "right";
+    ctx.fillText(`${item.cell.mn9_mean.toFixed(1)} Hz`, W - pad, y);
+    ctx.textAlign = "left";
+    const barY = y + 12;
+    ctx.fillStyle = "#e2dbd0";
+    ctx.fillRect(pad, barY, trackWidth, barHeight);
+    const width = Math.max(0, Math.round((item.cell.mn9_mean / scale) * trackWidth));
+    ctx.fillStyle = isWinner ? "#b5471f" : "#1f1a17";
+    if (width > 0) ctx.fillRect(pad, barY, width, barHeight);
+    y += rowHeight;
   }
+  if (ranked.length > shown.length) {
+    ctx.font = font(22);
+    ctx.fillStyle = "#6b625b";
+    ctx.fillText(`+${ranked.length - shown.length}`, pad, y);
+    y += 34;
+  }
+  ctx.font = font(22);
   for (const item of decision.misses) {
+    if (y > bottomStart - 10) break;
     ctx.fillStyle = "#6b625b";
     ctx.fillText(`${item.name} · ${t.missTitle}`, pad, y);
-    y += 40;
-    if (y > H - 420) break;
+    y += 32;
   }
 
   // Four fixed lines, then the front-bottom line
