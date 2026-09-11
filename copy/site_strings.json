@@ -576,6 +576,13 @@
       "max_length": 80
     },
     {
+      "key": "stateShareFailed",
+      "context": "Notice when drawing the share card fails; the Share button stays available to retry",
+      "en": "The share card could not be drawn. Tap Share to try again.",
+      "zh": "分享卡没能生成。再点一次「分享」试试。",
+      "max_length": 80
+    },
+    {
       "key": "stateSceneError",
       "context": "Status line if the animation throws; the numbers below still show",
       "en": "The animation broke, but the result is still valid.",

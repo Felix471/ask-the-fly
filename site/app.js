@@ -766,6 +766,7 @@ if (isBrowser) {
     appliedVariant: "", // variant whose replay is on screen
     variantRequest: 0, // id of the latest silencing request; older responses are dropped (F03)
     session: 0, // run session; reset() and run() start a new one, older async work is dropped (F05)
+    shareRequest: 0, // id of the latest share request; close/reset/newer request cancel older ones (F08)
     phase: "input", // input | tasting | result; only setPhase() changes it, never a text re-render (F06)
     loadReplay: makeReplayLoader("data/replay/"),
     token: null,
@@ -808,7 +809,7 @@ if (isBrowser) {
     renderBrainCaption();
     relabelPlates();
     if (state.decision) renderDecision(); // text only; the phase is untouched
-    if (state.decision && $("card-dialog").open) showCard().catch(() => {});
+    if (state.decision && $("card-dialog").open) showCard().catch((error) => console.warn("share card redraw failed:", error));
   }
 
   function renderBrainCaption() {
@@ -1480,27 +1481,55 @@ if (isBrowser) {
     return { canvas: snap.canvas, mn9: stats.mn9Left ?? snap.count, neurons: stats.totalNeurons };
   }
 
+  // One share request = one immutable (decision, lang, siteUrl) captured up front
+  // and an id; only the latest request may draw, set the download link or open
+  // the dialog. Close, reset and a newer request cancel older ones. Failures are
+  // shown with a retry hint instead of being logged away (F08).
   async function showCard() {
+    const request = { id: ++state.shareRequest, session: state.session, decision: state.decision, lang: state.lang, siteUrl: state.siteUrl };
+    const current = () => request.id === state.shareRequest && request.session === state.session && state.decision === request.decision;
+    if (!request.decision) return;
     const canvas = $("share-card");
+    $("download-link").removeAttribute("href"); // no stale PNG while this request runs
     const sprites = state.scene ? state.scene.sprites : null;
-    const [snapshot] = await Promise.all([
-      snapshotFor(state.decision).catch((error) => { console.warn("snapshot failed:", error); return null; }),
-      sprites ? Promise.all(state.decision.known.map((item) => loadDishSprite(sprites, spriteSlug(item)).catch(() => null))) : null,
-    ]);
-    drawShareCard(canvas, state.decision, state.lang, {
-      stub: Boolean(state.lookup.table.stub),
-      sprites,
-      snapshot,
-      siteUrl: state.siteUrl,
-      spriteFor: (item) => (sprites && spriteSlug(item) ? sprites.dishCache.get(spriteSlug(item)) || null : null),
-    });
+    let snapshot = null;
+    try {
+      const [snap] = await Promise.all([
+        snapshotFor(request.decision),
+        sprites ? Promise.all(request.decision.known.map((item) => loadDishSprite(sprites, spriteSlug(item)).catch(() => null))) : null,
+      ]);
+      snapshot = snap;
+    } catch (error) {
+      console.warn("snapshot failed:", error);
+      snapshot = null; // the card is still valid without the brain snapshot
+    }
+    if (!current()) return;
+    try {
+      drawShareCard(canvas, request.decision, request.lang, {
+        stub: Boolean(state.lookup.table.stub),
+        sprites,
+        snapshot,
+        siteUrl: request.siteUrl,
+        spriteFor: (item) => (sprites && spriteSlug(item) ? sprites.dishCache.get(spriteSlug(item)) || null : null),
+      });
+    } catch (error) {
+      console.warn("share card failed:", error);
+      notice("stateShareFailed");
+      return;
+    }
+    if (!current()) return;
     try {
       $("download-link").href = canvas.toDataURL("image/png");
     } catch (_) {
       $("download-link").removeAttribute("href");
     }
     const dialog = $("card-dialog");
-    if (!dialog.open) dialog.showModal();
+    if (!dialog.open && request.id === state.shareRequest) dialog.showModal();
+  }
+
+  function cancelShare() {
+    state.shareRequest += 1;
+    $("download-link").removeAttribute("href");
   }
 
   function addSelection(option) {
@@ -1586,6 +1615,7 @@ if (isBrowser) {
     $("mn9-pill").hidden = true;
     $("mn9-count").textContent = "0";
     renderSilenceControls();
+    cancelShare();
     if ($("card-dialog").open) $("card-dialog").close();
     setPhase("input");
   }
@@ -1631,9 +1661,12 @@ if (isBrowser) {
   $("library-search").addEventListener("input", (event) => { library.query = event.target.value; renderTasted(); });
   $("ask-btn").addEventListener("click", () => run("ask"));
   $("opposite-btn").addEventListener("click", () => run("opposite"));
-  $("share-btn").addEventListener("click", () => { showCard().catch((error) => console.warn("share card failed:", error)); });
+  $("share-btn").addEventListener("click", () => {
+    showCard().catch((error) => { console.warn("share card failed:", error); notice("stateShareFailed"); });
+  });
   $("close-card-btn").addEventListener("click", () => $("card-dialog").close());
   $("card-dialog").addEventListener("click", (event) => { if (event.target === event.currentTarget) event.currentTarget.close(); });
+  $("card-dialog").addEventListener("close", cancelShare); // covers Close, backdrop and Escape
   $("again-btn").addEventListener("click", () => {
     reset();
     $("option-input").focus();
