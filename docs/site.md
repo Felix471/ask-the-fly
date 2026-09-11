@@ -41,5 +41,5 @@ Pure functions (`normalizeName`, `buildDictionary`, `buildLookup`, `scoreOptions
 
 ## Placeholders to confirm
 
-- `REPO_URL` in `site/app.js` is `https://github.com/OWNER/WhatDoesTheFlyEat` until the public repository exists.
+- `REPO_URL` in `site/app.js` points at https://github.com/Felix471/ask-the-fly (confirmed 2026-09-11).
 - The four fixed lines (`STRINGS.*.fixedLines`) are drafted from the README product copy; replace them with the spec's wording if it differs.

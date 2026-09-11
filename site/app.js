@@ -6,7 +6,7 @@ export const LEVELS = ["none", "low", "medium", "high", "very_high"];
 export const DIMENSIONS = ["sugar", "bitter", "water", "ir94e"];
 
 // Set this to the public repository once it exists; the report button opens a prefilled issue there.
-export const REPO_URL = "https://github.com/OWNER/WhatDoesTheFlyEat";
+export const REPO_URL = "https://github.com/Felix471/ask-the-fly";
 
 export const STRINGS = {
   en: {
