@@ -136,3 +136,59 @@ test("all-miss decision fills the card with dashes", () => {
   const en = cardLines(decision, "en");
   assert.equal(en.fixed[0], "Today's pick: —");
 });
+
+// ---- brain view and fly scene (pure parts) ----
+import { cellIdFor, decodeNeurons, parseReplay, spikeColor, COLORS, FLAG } from "../brain.js";
+import { layoutPlates, makeToken } from "../fly.js";
+
+test("every dictionary entry maps to a replay file that parses and matches the manifest", () => {
+  const lookup = buildLookup(table);
+  const manifest = JSON.parse(readFileSync(path.join(here, "..", "data", "replay", "manifest.json"), "utf8"));
+  const neurons = decodeNeurons(JSON.parse(readFileSync(path.join(here, "..", "data", "neurons.json"), "utf8")));
+  assert.equal(manifest.n_cells, 400);
+  for (const entry of dishes) {
+    const cell = lookup.get({ sugar: entry.sugar, bitter: entry.bitter, water: entry.water, ir94e: "none" });
+    const id = cellIdFor(cell);
+    assert.ok(manifest.cells[id], `${entry.key}: ${id} missing from manifest`);
+    const buf = readFileSync(path.join(here, "..", "data", "replay", `${id}.bin`));
+    const replay = parseReplay(buf.buffer.slice(buf.byteOffset, buf.byteOffset + buf.byteLength));
+    assert.equal(replay.header.cell_id, id);
+    assert.equal(replay.idx.length, manifest.cells[id].n_spikes);
+    assert.equal(replay.header.mn9_left_count, manifest.cells[id].mn9_left_count);
+    assert.equal(replay.header.hz.sugar, cell.hz.sugar);
+    assert.equal(replay.header.hz.water, cell.hz.water);
+    for (let i = 1; i < replay.t.length; i += 1) assert.ok(replay.t[i] >= replay.t[i - 1], "times sorted");
+    if (replay.idx.length) assert.ok(Math.max(...replay.idx) < neurons.n, "indices inside neurons.json");
+    assert.ok(typeof replay.header.seed === "number" && replay.header.git_commit.length >= 7, "provenance present");
+  }
+});
+
+test("neurons.json decodes with flags for every GRN class and MN9", () => {
+  const neurons = decodeNeurons(JSON.parse(readFileSync(path.join(here, "..", "data", "neurons.json"), "utf8")));
+  assert.equal(neurons.xy.length, neurons.n * 2);
+  const has = (bit) => Array.from(neurons.flags).some((f) => (f & bit) !== 0);
+  for (const name of ["sugar", "bitter", "water", "ir94e", "mn9_left", "mn9_right"]) assert.ok(has(FLAG[name]), name);
+  assert.equal(spikeColor(FLAG.mn9_left | FLAG.sugar), COLORS.mn9);
+  assert.equal(spikeColor(0), COLORS.spike);
+});
+
+test("plate layout wraps to rows on narrow screens and centres a single row", () => {
+  const wide = layoutPlates(4, 640);
+  assert.equal(wide.positions.length, 4);
+  assert.ok(wide.positions.every((p) => p.y === wide.positions[0].y), "one row on a wide screen");
+  const narrow = layoutPlates(4, 360);
+  assert.ok(new Set(narrow.positions.map((p) => p.y)).size > 1, "wraps on a narrow screen");
+  assert.ok(narrow.height > wide.height);
+  const one = layoutPlates(1, 400);
+  assert.equal(Math.round(one.positions[0].x), 200);
+});
+
+test("cancel token fires and clears its callbacks once", () => {
+  const token = makeToken();
+  let fired = 0;
+  token.onCancel.push(() => { fired += 1; });
+  token.cancel();
+  token.cancel();
+  assert.equal(token.cancelled, true);
+  assert.equal(fired, 1);
+});

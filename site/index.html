@@ -29,8 +29,36 @@
       </div>
     </section>
 
+    <section class="panel scene-panel" id="scene-panel" hidden>
+      <div class="scene-head">
+        <span id="scene-status" class="scene-status"></span>
+        <label class="speed"><span data-i18n="speed"></span>
+          <select id="speed"><option value="0.5">0.5×</option><option value="1" selected>1×</option><option value="2">2×</option></select>
+        </label>
+        <button id="skip-btn" class="btn btn-secondary btn-small" type="button" data-i18n="skip"></button>
+      </div>
+      <canvas id="scene-canvas" class="scene-canvas" aria-label="fly and plates"></canvas>
+      <div class="brain-wrap">
+        <canvas id="brain-canvas" class="brain-canvas" aria-label="brain replay"></canvas>
+        <div class="mn9-counter"><span data-i18n="mn9Label"></span> <strong id="mn9-count">0</strong></div>
+      </div>
+      <p id="brain-caption" class="brain-caption"></p>
+      <div class="legend">
+        <span class="chip"><i style="background:#e0774a"></i><span data-i18n="legendSugar"></span></span>
+        <span class="chip"><i style="background:#8e6bd6"></i><span data-i18n="legendBitter"></span></span>
+        <span class="chip"><i style="background:#4aa3df"></i><span data-i18n="legendWater"></span></span>
+        <span class="chip"><i style="background:#3fb3a1"></i>Ir94e</span>
+        <span class="chip"><i style="background:#ffd84a"></i>MN9</span>
+        <span class="chip"><i style="background:#c8c0b4"></i><span data-i18n="legendOther"></span></span>
+      </div>
+      <p class="replay-honesty" data-i18n="replayHonesty"></p>
+      <p id="layout-note" class="small" hidden data-i18n="layoutPlaceholder"></p>
+    </section>
+
     <section class="panel" id="result-panel" hidden>
       <div id="verdict" class="verdict"></div>
+      <details id="details" class="details">
+        <summary data-i18n="details"></summary>
       <table class="results" id="results-table">
         <thead>
           <tr>
@@ -43,6 +71,7 @@
         </thead>
         <tbody id="results-body"></tbody>
       </table>
+      </details>
       <div id="misses" class="misses"></div>
       <div class="actions">
         <button id="share-btn" class="btn btn-primary" type="button" data-i18n="share"></button>

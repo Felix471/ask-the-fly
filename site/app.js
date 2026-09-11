@@ -2,6 +2,9 @@
 // Ask the Fly — static front end. No LLM calls: dictionary lookup + lookup-table read.
 // Pure functions are exported so they can be unit-tested with node (see test/).
 
+import { BrainView, cellIdFor, decodeNeurons, makeReplayLoader } from "./brain.js";
+import { FlyScene, loadSprites, makeToken } from "./fly.js";
+
 export const LEVELS = ["none", "low", "medium", "high", "very_high"];
 export const DIMENSIONS = ["sugar", "bitter", "water", "ir94e"];
 
@@ -34,7 +37,25 @@ export const STRINGS = {
     missReport: "Report it",
     missNote: "Not in the dictionary: {names}",
     honesty: "In this model weak water is only visible as a helper to sugar; the fly notices water when the food is mostly water.",
+    replayHonesty: "Every flash in the brain view is a replay of recorded simulation output: one extra 1 s trial per grid cell from the same Brian2 model and connectome, fixed seed, recorded once. Nothing is simulated live in this page.",
+    layoutPlaceholder: "Neuron positions are a placeholder layout, not FlyWire soma coordinates yet.",
     provenance: "Scores come from a published female-brain LIF model (Shiu 2024 / FlyWire v783). It only does the first bite.",
+    speed: "Speed",
+    skip: "Skip",
+    details: "Levels and MN9 for every option",
+    mn9Label: "MN9 spikes",
+    legendSugar: "sugar GRN",
+    legendBitter: "bitter GRN",
+    legendWater: "water GRN",
+    legendOther: "other neuron",
+    sceneIdle: "The fly is thinking…",
+    sceneTasting: "Tasting {dish}",
+    sceneWinner: "The fly extends its proboscis on {dish}",
+    sceneOpposite: "The fly wanted {fly}; you take {dish}",
+    sceneTie: "The fly hovers: it can't tell these apart",
+    sceneNone: "Nothing here the fly has tasted",
+    brainCaption: "Replay of recorded simulation: {cell} · 1 s · ~{n} spikes",
+    brainIdle: "Brain view: waiting for the first plate",
     stubBanner: "STUB DATA: the lookup table on this page is a placeholder, not simulation output.",
     tableMeta: "Lookup table {version} · {cells} cells · {trials} trials per cell",
     cardTitle: "Ask the Fly",
@@ -76,7 +97,25 @@ export const STRINGS = {
     missReport: "报上去",
     missNote: "词典里没有：{names}",
     honesty: "在这个模型里，微量的水只在帮糖时才被看见；只有食物基本是水时，果蝇才注意到水。",
+    replayHonesty: "脑图里的每一次闪烁都是仿真记录的回放：同一个 Brian2 模型和连接组，每个网格格子额外跑了一次 1 秒试验，固定随机种子，只记录一次。本页没有任何实时仿真。",
+    layoutPlaceholder: "神经元位置目前是占位布局，还不是 FlyWire 的胞体坐标。",
     provenance: "分数来自已发表的雌性果蝇脑 LIF 模型（Shiu 2024 / FlyWire v783）。它只管第一口。",
+    speed: "速度",
+    skip: "跳过",
+    details: "每个选项的等级和 MN9",
+    mn9Label: "MN9 放电",
+    legendSugar: "甜味 GRN",
+    legendBitter: "苦味 GRN",
+    legendWater: "水 GRN",
+    legendOther: "其他神经元",
+    sceneIdle: "果蝇在想……",
+    sceneTasting: "正在尝 {dish}",
+    sceneWinner: "果蝇对着 {dish} 伸出了口器",
+    sceneOpposite: "果蝇想要 {fly}，你选 {dish}",
+    sceneTie: "果蝇悬在中间：它分不出这几个",
+    sceneNone: "这里没有果蝇尝过的东西",
+    brainCaption: "仿真记录回放：{cell} · 1 秒 · 约 {n} 个 spike",
+    brainIdle: "脑图：等第一盘",
     stubBanner: "占位数据：本页的查找表是占位符，不是仿真结果。",
     tableMeta: "查找表 {version} · {cells} 个格子 · 每格 {trials} 次试验",
     cardTitle: "问问果蝇",
@@ -370,9 +409,14 @@ if (isBrowser) {
     dictionary: null,
     lookup: null,
     decision: null,
+    brain: null,
+    scene: null,
+    loadReplay: makeReplayLoader("data/replay/"),
+    token: null,
   };
 
   const $ = (id) => document.getElementById(id);
+  const tr = (key, values) => fmt(STRINGS[state.lang][key], values || {});
 
   function applyStrings() {
     const t = STRINGS[state.lang];
@@ -498,10 +542,88 @@ if (isBrowser) {
     $("input-panel").hidden = true;
   }
 
+  function slugFor(key) {
+    return String(key).normalize("NFKD").replace(/[^\x00-\x7f]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "") || "dish";
+  }
+
+  function speed() {
+    return Number($("speed").value) || 1;
+  }
+
+  // Plays the fly + brain sequence for a decision, then reveals the result view.
+  async function runScene(decision) {
+    if (state.token) state.token.cancel();
+    const token = makeToken();
+    state.token = token;
+    const scored = [...decision.known, ...decision.misses];
+    const plates = scored.map((item) => ({
+      key: item.entry ? item.entry.key : item.name,
+      label: displayName(item, state.lang),
+      sub: item.cell ? `${item.cell.mn9_mean.toFixed(1)} Hz` : "?",
+      slug: item.entry ? slugFor(item.entry.key) : null,
+    }));
+    const indexOf = (item) => scored.indexOf(item);
+    const plan = {
+      order: decision.known.map(indexOf),
+      winner: decision.winner ? indexOf(decision.mode === "opposite" ? decision.flyPick : decision.winner) : null,
+      loser: decision.mode === "opposite" && decision.winner ? indexOf(decision.winner) : null,
+      tie: decision.tie.map(indexOf),
+      mode: decision.mode,
+    };
+    $("scene-panel").hidden = false;
+    $("input-panel").hidden = true;
+    $("result-panel").hidden = true;
+    $("card-panel").hidden = true;
+    $("scene-status").textContent = tr("sceneIdle");
+    $("brain-caption").textContent = tr("brainIdle");
+    $("mn9-count").textContent = "0";
+    state.brain.resize();
+    await state.scene.setPlates(plates);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+
+    const hooks = {
+      onTaste: async (index) => {
+        const item = scored[index];
+        if (!item.cell || token.cancelled) return;
+        $("scene-status").textContent = tr("sceneTasting", { dish: displayName(item, state.lang) });
+        const cellId = cellIdFor(item.cell);
+        let replay;
+        try {
+          replay = await state.loadReplay(cellId);
+        } catch (error) {
+          $("brain-caption").textContent = `replay unavailable: ${error.message}`;
+          return;
+        }
+        if (token.cancelled) return;
+        $("brain-caption").textContent = tr("brainCaption", { cell: cellId, n: replay.header.n_spikes });
+        $("mn9-count").textContent = "0";
+        state.brain.onMn9 = (count) => { $("mn9-count").textContent = String(count); };
+        state.brain.setReplay(replay);
+        const stopOnCancel = () => state.brain.stop();
+        token.onCancel.push(stopOnCancel);
+        await state.brain.play(speed());
+      },
+    };
+    await state.scene.run(plan, hooks, token);
+    if (state.token !== token) return;
+    if (!decision.winner) $("scene-status").textContent = tr("sceneNone");
+    else if (decision.tie.length) $("scene-status").textContent = tr("sceneTie");
+    else if (decision.mode === "opposite") $("scene-status").textContent = tr("sceneOpposite", { fly: displayName(decision.flyPick, state.lang), dish: displayName(decision.winner, state.lang) });
+    else $("scene-status").textContent = tr("sceneWinner", { dish: displayName(decision.winner, state.lang) });
+    renderDecision();
+  }
+
   function run(mode) {
     if (!state.lookup || !state.dictionary) return;
     const scored = scoreOptions(state.options, state.dictionary, state.lookup);
     state.decision = decide(scored, mode);
+    if (state.brain && state.scene) {
+      runScene(state.decision).catch((error) => {
+        $("scene-status").textContent = `scene error: ${error.message}`;
+        renderDecision();
+      });
+      return;
+    }
     $("card-panel").hidden = true;
     renderDecision();
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -538,6 +660,31 @@ if (isBrowser) {
     state.lookup = buildLookup(table);
     $("stub-banner").hidden = !table.stub;
     applyStrings();
+    // Scene data loads after the dictionary so the buttons enable early; the
+    // scene is used only once both the neuron layout and the sprites are ready.
+    try {
+      const [neuronsJson, sprites] = await Promise.all([
+        fetch("data/neurons.json").then((r) => r.json()),
+        loadSprites("assets/"),
+      ]);
+      const neurons = decodeNeurons(neuronsJson);
+      state.brain = new BrainView($("brain-canvas"), neurons);
+      state.scene = new FlyScene($("scene-canvas"), sprites);
+      $("layout-note").hidden = neurons.layout !== "placeholder";
+    } catch (error) {
+      console.warn("scene disabled:", error);
+    }
+  }
+
+  function reset() {
+    if (state.token) state.token.cancel();
+    if (state.brain) state.brain.stop();
+    if (state.scene) state.scene.stop();
+    state.decision = null;
+    $("scene-panel").hidden = true;
+    $("result-panel").hidden = true;
+    $("card-panel").hidden = true;
+    $("input-panel").hidden = false;
   }
 
   $("lang-toggle").addEventListener("click", () => {
@@ -564,11 +711,19 @@ if (isBrowser) {
   $("share-btn").addEventListener("click", showCard);
   $("close-card-btn").addEventListener("click", () => { $("card-panel").hidden = true; });
   $("again-btn").addEventListener("click", () => {
-    state.decision = null;
-    $("result-panel").hidden = true;
-    $("card-panel").hidden = true;
-    $("input-panel").hidden = false;
+    reset();
     $("option-input").focus();
+  });
+  $("skip-btn").addEventListener("click", () => {
+    if (state.token) state.token.cancel();
+    if (state.brain) state.brain.stop();
+    if (state.decision) renderDecision();
+  });
+  $("speed").addEventListener("change", () => {
+    if (state.brain) state.brain.speed = speed();
+  });
+  window.addEventListener("resize", () => {
+    if (state.brain && !$("scene-panel").hidden) state.brain.resize();
   });
 
   applyStrings();

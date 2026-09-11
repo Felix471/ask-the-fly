@@ -5,6 +5,18 @@ The front end in `site/` is a dependency-free static page: one HTML file, one st
 - `dishes.json` — the dish dictionary (copied from `data/dishes.json`); lookup is exact on the normalized key or a normalized alias, mirroring `encoder/normalize.py`.
 - `lookup_table.json` — the `lookup_v1` table (`levels` → cells with `hz`, `mn9_mean`, `mn9_std`). Cells are indexed by their Hz vector, mirroring `sim/lookup.py`, so water `low` and `medium` (both 60 Hz) resolve to the same cell.
 
+## Replay pack and brain view
+
+The result view is a fly with a brain tasting the options. Every visual of neural activity is a **replay of recorded simulation output**, labelled as such on the page.
+
+- `scripts/run_replay.py run` (WSL, Brian2) records ONE extra 1 s trial per grid cell on the fixed path with the SpikeMonitor on the whole network, seed = protocol base seed + 700000 + grid index, into `results/replay/<cell>.npz` (gitignored). 400 trials take about 2.5 minutes on 14 workers.
+- `scripts/run_replay.py pack` writes `site/data/replay/<cell>.bin` (magic `AFR1`, JSON header with provenance: cell id, levels, Hz, seed, git commit, protocol sha, MN9 left/right spike times; then uint16 neuron indices and uint16 spike times in 0.1 ms) plus `site/data/replay/manifest.json` and `data/replay_neurons.json` (root ids + flags in index order). Median file 68 KB; the site fetches only the cells it shows.
+- `scripts/export_neurons.py` writes `site/data/neurons.json` (base64 Uint16 x/y + Uint8 flags). `--annotations <flywire annotations tsv>` uses FlyWire soma positions (anterior view) and adds a background subsample up to the 300 KB budget; `--placeholder` writes a deterministic pseudo-layout flagged `"layout": "placeholder"`, which the page labels as such.
+- `site/brain.js` draws the dots once and replays a cell's spikes over 1 s at 0.5×/1×/2×: GRN inputs and MN9 have their own colours, the MN9 counter ticks with each left-MN9 spike and ends at the trial's count. Caption: "Replay of recorded simulation: {cell} · 1 s · ~{n} spikes" / "仿真记录回放：{cell} · 1 秒 · 约 {n} 个 spike".
+- `site/fly.js` lays the options out as plates (row, grid on narrow screens) and runs the sequence: idle → fly to plate → land → replay that plate's cell → next plate → winner + proboscis frames. "Do the opposite" approaches the fly's pick, turns away and lands on the loser. Ties hover between the tied plates. Skip jumps to the result. The level/MN9 table stays below, collapsed.
+
+Sprites come from `site/assets/` when present (see `docs/assets.md`); otherwise a coloured circle per dish and a drawn fly stand in.
+
 ## Data
 
 ```
@@ -32,7 +44,7 @@ then open http://localhost:8000/. `fetch()` needs an HTTP origin; opening `index
 node --test site/test/app.test.mjs
 ```
 
-Pure functions (`normalizeName`, `buildDictionary`, `buildLookup`, `scoreOptions`, `decide`, `issueUrl`, share-card strings) are exported from `site/app.js`; DOM wiring only runs in a browser.
+Pure functions (`normalizeName`, `buildDictionary`, `buildLookup`, `scoreOptions`, `decide`, `issueUrl`, share-card strings) are exported from `site/app.js`; the replay parser, neuron decoder, plate layout and cancel token from `site/brain.js` / `site/fly.js`. The tests parse every dictionary entry's replay file against the manifest. DOM wiring only runs in a browser.
 
 ## Behaviour
 
