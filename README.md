@@ -15,11 +15,13 @@ Ask the Fly probes how a connectome-scale fruit-fly brain model responds to tast
 - FlyWire v783 connectome data: CC BY-NC 4.0.
 - Shiu et al. (2024), *Nature*, model code: MIT.
 - Eon fly-brain benchmark repository: GPL-2.0; used as read-only reference/data, with no code copied.
+- FlyWire neuron annotations (Schlegel et al. 2024; github.com/flyconnectome/flywire_annotations): CC BY 4.0. Used for the soma positions behind the brain view (`site/data/neurons.json`); the table itself lives in `data/external/` and is not tracked.
 
 ## Citations
 Simulation basis (what the scores come from):
 - Shiu, P.K., et al. (2024). A Drosophila computational brain model reveals sensorimotor processing. *Nature*. PMC11446845. Model code (MIT): github.com/philshiu/Drosophila_brain_model.
 - FlyWire v783 connectome (Dorkenwald et al. 2024; Schlegel et al. 2024), CC BY-NC 4.0.
+- Schlegel, P., Yin, Y., Bates, A.S., et al. (2024). Whole-brain annotation and multi-connectome cell typing of Drosophila. *Nature* 634, 139–152. Annotation table (nucleus positions, cell types): CC BY 4.0.
 
 Related work, not part of this simulation (see docs/open_questions.md, OQ-2):
 - Berg, S., Beckett, I.R., Costa, M., … Hess, H.F., Rubin, G.M., Jefferis, G.S.X.E. (2026). Sexual dimorphism in the complete Drosophila male central nervous system connectome. *Cell* 189(18), 5504–5526.e15. https://doi.org/10.1016/j.cell.2026.08.015 (MaleCNS; male brain + VNC).

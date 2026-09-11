@@ -81,8 +81,13 @@ def annotation_xy(root_ids: list[str], annotations: Path, background: int) -> tu
         extra = list(sample.index)
     else:
         extra = []
+    # Anterior view: x = mediolateral, y = dorsoventral (FlyWire y grows ventrally, so
+    # dorsal ends up on top of the canvas). Keep the aspect ratio: one scale for both
+    # axes, the shorter axis centred.
     lo, hi = xy.min(axis=0), xy.max(axis=0)
-    xy = (xy - lo) / np.maximum(hi - lo, 1e-9)
+    span = float(max(hi - lo))
+    xy = (xy - lo) / max(span, 1e-9)
+    xy += (1.0 - (hi - lo) / max(span, 1e-9)) / 2.0
     return xy, extra
 
 
@@ -95,6 +100,9 @@ def write(xy: np.ndarray, flags: np.ndarray, layout: str, n_indexed: int, meta: 
         "n_indexed": int(n_indexed),
         "flag_bits": meta["flag_bits"],
         "git_commit": meta["git_commit"],
+        "source": ("FlyWire annotations, Schlegel et al. 2024 (Nature), CC BY 4.0: nucleus positions pos_x/pos_y "
+                   "in the FlyWire v783 space, anterior view, aspect preserved" if layout != "placeholder"
+                   else "deterministic placeholder scatter; not anatomical"),
         "xy_b64": base64.b64encode(q.tobytes()).decode("ascii"),
         "flags_b64": base64.b64encode(flags.astype(np.uint8).tobytes()).decode("ascii"),
     }
