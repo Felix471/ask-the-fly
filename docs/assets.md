@@ -21,6 +21,8 @@ Pipeline per image: background removal (existing alpha is kept; otherwise a floo
 
 Frames go in `assets/raw/fly/` as individual PNGs, or as one horizontal sheet per state named `<state>_sheet.png` (frames of equal width, left to right), which the script splits first.
 
+A single 3 × 3 grid sheet named `fly.png` is also accepted (the form the first asset batch used): row-major `idle_1, idle_2, fly_1, fly_2, fly_3, fly_4, land_1, proboscis_1, proboscis_2`; `proboscis_3` (retract) is copied from `land_1`. Cells are cropped to content after background removal.
+
 | state | frames | files |
 |---|---:|---|
 | idle | 2 | `idle_1.png`, `idle_2.png` |
@@ -32,4 +34,4 @@ Output: `site/assets/fly/<state>_<n>.png`, 48 × 48, facing right; the site mirr
 
 ## Placeholders
 
-Until assets land the site draws a coloured circle per dish (hue from the key) and a simple two-ellipse fly, so the sequence can be tested. Both are swapped for sprites automatically when the files exist.
+Dish sprites are drawn with their own plate, so the scene adds only a shadow under them; without a sprite it draws a plate and a coloured circle (hue from the key), and without fly frames a simple drawn fly. Sprites are picked up automatically when the files exist.

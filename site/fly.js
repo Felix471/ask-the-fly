@@ -130,18 +130,19 @@ export class FlyScene {
     ctx.ellipse(0, r * 0.55, r + 6, r * 0.5, 0, 0, Math.PI * 2);
     ctx.fillStyle = index === this.highlight ? "rgba(181, 71, 31, 0.28)" : "rgba(0, 0, 0, 0.10)";
     ctx.fill();
-    ctx.beginPath();
-    ctx.ellipse(0, r * 0.45, r + 2, r * 0.42, 0, 0, Math.PI * 2);
-    ctx.fillStyle = "#f4efe7";
-    ctx.strokeStyle = "#d8cfc2";
-    ctx.lineWidth = 2;
-    ctx.fill();
-    ctx.stroke();
     const img = plate.slug ? this.sprites.dishCache.get(plate.slug) : null;
     if (img) {
+      // Dish sprites are drawn with their own plate, so only the shadow is added.
       ctx.imageSmoothingEnabled = false;
-      ctx.drawImage(img, -r * 0.8, -r * 0.55, r * 1.6, r * 1.6);
+      ctx.drawImage(img, -r, -r * 0.7, r * 2, r * 2);
     } else {
+      ctx.beginPath();
+      ctx.ellipse(0, r * 0.45, r + 2, r * 0.42, 0, 0, Math.PI * 2);
+      ctx.fillStyle = "#f4efe7";
+      ctx.strokeStyle = "#d8cfc2";
+      ctx.lineWidth = 2;
+      ctx.fill();
+      ctx.stroke();
       ctx.beginPath();
       ctx.arc(0, r * 0.15, r * 0.55, 0, Math.PI * 2);
       ctx.fillStyle = `hsl(${hueFor(plate.key)} 55% 55%)`;
@@ -170,7 +171,8 @@ export class FlyScene {
     if (frames) {
       const frame = frames[Math.floor(f.t * (f.state === "fly" ? 16 : 3)) % frames.length];
       ctx.imageSmoothingEnabled = false;
-      ctx.drawImage(frame, -24, -24, 48, 48);
+      const size = 56;
+      ctx.drawImage(frame, -size / 2, -size * 0.6, size, size);
     } else {
       // Placeholder fly: body, head, wings that beat in flight, six leg strokes.
       const beat = f.state === "fly" || f.state === "hover" ? Math.sin(f.t * 40) : 0.3;

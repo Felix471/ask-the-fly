@@ -127,6 +127,34 @@ def prepare(paths: list[Path], size: int, out_dir: Path, tolerance: int, margin:
     return written
 
 
+# A single 3 x 3 grid sheet named fly.png, row-major: idle x2, fly x4, land, proboscis x2.
+# The third proboscis frame (retract) reuses the land frame.
+FLY_GRID_ORDER = ["idle_1", "idle_2", "fly_1", "fly_2", "fly_3", "fly_4", "land_1", "proboscis_1", "proboscis_2"]
+FLY_GRID_COPIES = {"proboscis_3": "land_1"}
+
+
+def split_grid_sheet(sheet: Path, tolerance: int) -> list[Path]:
+    """Cut fly.png (3 x 3 grid) into named frames next to it; cells are cropped to content."""
+    image = remove_background(Image.open(sheet), tolerance)
+    cols = rows = 3
+    cell_w, cell_h = image.width // cols, image.height // rows
+    outputs = []
+    for index, name in enumerate(FLY_GRID_ORDER):
+        r, c = divmod(index, cols)
+        cell = image.crop((c * cell_w, r * cell_h, (c + 1) * cell_w, (r + 1) * cell_h))
+        box = cell.getchannel("A").getbbox()
+        if box:
+            cell = cell.crop(box)
+        target = sheet.with_name(f"{name}.png")
+        cell.save(target)
+        outputs.append(target)
+    for copy_name, source in FLY_GRID_COPIES.items():
+        target = sheet.with_name(f"{copy_name}.png")
+        Image.open(sheet.with_name(f"{source}.png")).save(target)
+        outputs.append(target)
+    return outputs
+
+
 def split_sheet(sheet: Path, frame: int) -> list[Path]:
     """Cut a horizontal sprite sheet <state>_sheet.png into <state>_<n>.png files next to it."""
     image = Image.open(sheet).convert("RGBA")
@@ -165,9 +193,11 @@ def main() -> int:
     if args.only in (None, "fly"):
         fly_dir = args.raw / "fly"
         if fly_dir.is_dir():
+            if (fly_dir / "fly.png").exists():
+                split_grid_sheet(fly_dir / "fly.png", args.tolerance)
             for sheet in sorted(fly_dir.glob("*_sheet.png")):
                 split_sheet(sheet, args.fly_size)
-            frames = sorted(p for p in fly_dir.glob("*.png") if not p.stem.endswith("_sheet"))
+            frames = sorted(p for p in fly_dir.glob("*.png") if not p.stem.endswith("_sheet") and p.stem != "fly")
             expected = {f"{state}_{n}" for state, count in FLY_FRAMES.items() for n in range(1, count + 1)}
             missing = sorted(expected - {p.stem for p in frames})
             if missing:
