@@ -150,7 +150,10 @@
   <dialog id="card-dialog" class="card-dialog" data-i18n-aria="ariaShareCard">
     <div class="card-dialog-body">
       <canvas id="share-card" class="share-card" width="900" height="1200"></canvas>
+      <img id="share-image" class="share-card share-image" alt="" hidden>
+      <p id="save-hint" class="hint save-hint" hidden data-i18n="saveHint"></p>
       <div class="actions">
+        <button id="save-btn" class="btn btn-primary" type="button" hidden data-i18n="download"></button>
         <a id="download-link" class="btn btn-primary" download="ask-the-fly.png" data-i18n="download"></a>
         <button id="close-card-btn" class="btn btn-secondary" type="button" data-i18n="close"></button>
       </div>

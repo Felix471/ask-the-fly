@@ -656,7 +656,7 @@ export function drawShareCard(canvas, decision, lang, options = {}) {
   let headline;
   if (!decision.winner) headline = t.verdictNone;
   else if (decision.tie.length) headline = t.cardTie;
-  else if (decision.mode === "opposite") headline = fmt(t.cardOppositePicked, { fly: displayName(decision.flyPick, lang) });
+  else if (decision.mode === "opposite") headline = fmt(t.cardOppositePicked, { fly_pick: displayName(decision.flyPick, lang), human_pick: displayName(decision.winner, lang) });
   else headline = t.cardPicked;
   for (const line of wrapLines(ctx, headline, W - 2 * pad)) {
     ctx.fillText(line, pad, y);
@@ -909,7 +909,7 @@ if (isBrowser) {
     const st = state.sceneStatus;
     if (!st) return;
     const values = {};
-    for (const k of ["dish", "fly"]) if (st[k]) values[k] = displayName(st[k], state.lang);
+    for (const k of ["dish", "fly", "pick", "fly_pick", "human_pick"]) if (st[k]) values[k] = displayName(st[k], state.lang);
     $("scene-status").textContent = tr(st.key, values);
   }
 
@@ -1306,8 +1306,8 @@ if (isBrowser) {
       lead.textContent = t.verdictTie;
       strong.textContent = d.tie.map((i) => displayName(i, state.lang)).join(" / ");
     } else if (d.mode === "opposite") {
-      lead.textContent = fmt(t.verdictOpposite, { fly: displayName(d.flyPick, state.lang) });
-      strong.textContent = displayName(d.winner, state.lang);
+      lead.textContent = "";
+      strong.textContent = fmt(t.verdictOpposite, { fly_pick: displayName(d.flyPick, state.lang), human_pick: displayName(d.winner, state.lang) });
     } else {
       lead.textContent = t.verdictAsk;
       strong.textContent = displayName(d.winner, state.lang);
@@ -1507,12 +1507,17 @@ if (isBrowser) {
     renderSilenceControls();
     for (const item of decision.known) item.tasted = true; // skipped plates still show their Hz
     relabelPlates();
-    if (!decision.winner) state.sceneStatus = { key: "sceneNone" };
-    else if (decision.tie.length) state.sceneStatus = { key: "sceneTie" };
-    else if (decision.mode === "opposite") state.sceneStatus = { key: "sceneOpposite", fly: decision.flyPick, dish: decision.winner };
-    else state.sceneStatus = { key: "sceneWinner", dish: decision.winner };
+    state.sceneStatus = finalSceneStatus(decision);
     renderSceneStatus();
     showResult();
+  }
+
+  // The stage caption once the outcome is known (end of the sequence, or skip).
+  function finalSceneStatus(decision) {
+    if (!decision.winner) return { key: "sceneNone" };
+    if (decision.tie.length) return { key: "sceneTie" };
+    if (decision.mode === "opposite") return { key: "sceneOpposite", fly_pick: decision.flyPick, human_pick: decision.winner };
+    return { key: "sceneWinner", pick: decision.winner };
   }
 
   function run(mode) {
@@ -1598,18 +1603,70 @@ if (isBrowser) {
       return;
     }
     if (!current()) return;
-    try {
-      $("download-link").href = canvas.toDataURL("image/png");
-    } catch (_) {
-      $("download-link").removeAttribute("href");
-    }
+    await prepareSave(canvas, request);
+    if (!current()) return;
     const dialog = $("card-dialog");
     if (!dialog.open && request.id === state.shareRequest) dialog.showModal();
   }
 
+  const isIOS = () => /iP(hone|ad|od)/.test(navigator.userAgent) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+
+  // The PNG as a File. Where the browser can share files (iOS Safari, Android
+  // Chrome), "Save image" opens the share sheet, whose "Save Image" writes to
+  // Photos. Otherwise the download link is used, and on iOS Safari (no file
+  // sharing) the PNG is shown as an image with a long-press hint, because a
+  // canvas cannot be long-pressed into Photos.
+  let saveFile = null;
+  async function prepareSave(canvas, request) {
+    const blob = await new Promise((resolve) => canvas.toBlob(resolve, "image/png"));
+    if (!blob || !(request.id === state.shareRequest)) return;
+    saveFile = new File([blob], "ask-the-fly.png", { type: "image/png" });
+    const canShareFiles = typeof navigator.canShare === "function" && navigator.canShare({ files: [saveFile] });
+    const link = $("download-link");
+    const button = $("save-btn");
+    const image = $("share-image");
+    const hint = $("save-hint");
+    if (link.dataset.url) { URL.revokeObjectURL(link.dataset.url); delete link.dataset.url; }
+    if (canShareFiles) {
+      button.hidden = false;
+      link.hidden = true;
+      link.removeAttribute("href");
+    } else {
+      button.hidden = true;
+      link.hidden = false;
+      const url = URL.createObjectURL(blob);
+      link.href = url;
+      link.dataset.url = url;
+    }
+    const showImage = !canShareFiles && isIOS();
+    if (showImage) {
+      image.src = canvas.toDataURL("image/png");
+      image.alt = STRINGS[state.lang].ariaShareCard;
+    } else {
+      image.removeAttribute("src");
+    }
+    image.hidden = !showImage;
+    canvas.hidden = showImage;
+    hint.hidden = !showImage;
+  }
+
+  async function shareSave() {
+    if (!saveFile) return;
+    try {
+      await navigator.share({ files: [saveFile], title: STRINGS[state.lang].cardTitle });
+    } catch (error) {
+      if (error && error.name === "AbortError") return; // the user dismissed the sheet
+      console.warn("share sheet failed:", error);
+      notice("stateShareFailed");
+    }
+  }
+
   function cancelShare() {
     state.shareRequest += 1;
-    $("download-link").removeAttribute("href");
+    const link = $("download-link");
+    if (link.dataset.url) { URL.revokeObjectURL(link.dataset.url); delete link.dataset.url; }
+    link.removeAttribute("href");
+    saveFile = null;
   }
 
   function addSelection(option) {
@@ -1754,6 +1811,7 @@ if (isBrowser) {
   $("share-btn").addEventListener("click", () => {
     showCard().catch((error) => { console.warn("share card failed:", error); notice("stateShareFailed"); });
   });
+  $("save-btn").addEventListener("click", () => { shareSave(); });
   $("close-card-btn").addEventListener("click", () => $("card-dialog").close());
   $("card-dialog").addEventListener("click", (event) => { if (event.target === event.currentTarget) event.currentTarget.close(); });
   $("card-dialog").addEventListener("close", cancelShare); // covers Close, backdrop and Escape
@@ -1766,7 +1824,7 @@ if (isBrowser) {
     if (state.brain) state.brain.stop();
     renderSilenceControls();
     if (state.scenePlates) { for (const item of state.scenePlates) { item.loading = false; item.tasted = Boolean(item.cell); } relabelPlates(); }
-    if (state.decision) showResult();
+    if (state.decision) { state.sceneStatus = finalSceneStatus(state.decision); renderSceneStatus(); showResult(); }
   });
   $("speed").addEventListener("change", () => {
     if (state.brain) state.brain.speed = speed();

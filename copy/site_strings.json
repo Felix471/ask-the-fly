@@ -52,9 +52,9 @@
     },
     {
       "key": "ask",
-      "context": "Primary button: run the sequence and pick the highest MN9",
+      "context": "Primary button",
       "en": "Ask the fly",
-      "zh": "问问果蝇",
+      "zh": "问问果蝇想吃啥",
       "max_length": 16
     },
     {
@@ -136,16 +136,16 @@
     },
     {
       "key": "cardOppositePicked",
-      "context": "Card line above the chosen name (opposite mode); {fly}",
-      "en": "The fly picks {fly}; I take",
-      "zh": "果蝇本来会选 {fly}，那我就反着来：",
-      "max_length": 40
+      "context": "Share card headline in 'Let the fly eat first' mode (same sentence)",
+      "en": "The fly took {fly_pick}. {human_pick} is yours!",
+      "zh": "果蝇选了{fly_pick}，{human_pick}归你了！",
+      "max_length": 70
     },
     {
       "key": "cardPicked",
-      "context": "Card line above the winner's name (ask mode)",
+      "context": "Share card headline in 'Ask the fly' mode; the pick follows as the big name",
       "en": "The fly picks",
-      "zh": "果蝇最后选了",
+      "zh": "果蝇选了",
       "max_length": 30
     },
     {
@@ -231,6 +231,13 @@
       "en": "Save image",
       "zh": "保存图片",
       "max_length": 16
+    },
+    {
+      "key": "saveHint",
+      "context": "Under the share image on iOS Safari when the share sheet is unavailable: how to save the PNG to Photos",
+      "en": "Press and hold the image to save it",
+      "zh": "长按图片保存到相册",
+      "max_length": 40
     },
     {
       "key": "fixedLines.0",
@@ -430,10 +437,10 @@
     },
     {
       "key": "opposite",
-      "context": "Secondary button: pick the lowest MN9, fly turns away from its favourite",
-      "en": "Do the opposite",
-      "zh": "那就反着来",
-      "max_length": 16
+      "context": "Secondary button: the fly eats its pick first, the human gets the lowest-MN9 dish",
+      "en": "Let the fly eat first",
+      "zh": "让果蝇先吃",
+      "max_length": 24
     },
     {
       "key": "pageTitle",
@@ -493,9 +500,9 @@
     },
     {
       "key": "sceneOpposite",
-      "context": "Scene status at the end (opposite mode); {fly} = fly's pick, {dish} = chosen",
-      "en": "The fly chose {fly}. You get {dish}.",
-      "zh": "果蝇本来想选 {fly}，那你就吃 {dish}。",
+      "context": "Stage caption at the end of 'Let the fly eat first': verb-free pattern that works for food and drinks; {fly_pick} = the fly's own pick, {human_pick} = what the human gets",
+      "en": "The fly took {fly_pick}. {human_pick} is yours!",
+      "zh": "果蝇选了{fly_pick}，{human_pick}归你了！",
       "max_length": 70
     },
     {
@@ -514,9 +521,9 @@
     },
     {
       "key": "sceneWinner",
-      "context": "Scene status at the end (ask mode); {dish}",
-      "en": "The fly goes for {dish}",
-      "zh": "果蝇最后飞向了 {dish}",
+      "context": "Stage caption at the end of 'Ask the fly'; {pick} = the fly's pick",
+      "en": "The fly picks {pick}",
+      "zh": "果蝇选了 {pick}",
       "max_length": 60
     },
     {
@@ -640,9 +647,9 @@
     },
     {
       "key": "verdictAsk",
-      "context": "Result line before the winner's name (ask mode)",
+      "context": "Result title lead in 'Ask the fly' mode; the pick follows in bold",
       "en": "The fly picks",
-      "zh": "果蝇最后选了",
+      "zh": "果蝇选了",
       "max_length": 40
     },
     {
@@ -654,10 +661,10 @@
     },
     {
       "key": "verdictOpposite",
-      "context": "Result line before the chosen loser; {fly} = the fly's own pick",
-      "en": "The fly picks {fly}. So you get:",
-      "zh": "果蝇本来会选 {fly}。既然要反着来，那就选：",
-      "max_length": 60
+      "context": "Result title in 'Let the fly eat first' mode (same sentence as the stage caption)",
+      "en": "The fly took {fly_pick}. {human_pick} is yours!",
+      "zh": "果蝇选了{fly_pick}，{human_pick}归你了！",
+      "max_length": 70
     },
     {
       "key": "verdictTie",
