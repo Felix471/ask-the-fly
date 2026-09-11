@@ -172,3 +172,47 @@ test("F09: the counter and the drawn time come from the same simulated clock", (
   assert.equal(r2.tMs, 35);
   assert.equal(r2.newSpikes, 2);
 });
+
+// ---- F13: transient sprite failures are not cached as missing; one missing frame falls back to another pixel frame ----
+import { loadDishSprite, loadSprites, framesFor } from "../fly.js";
+
+function imageLoader(script) {
+  // script: url -> "ok" | "fail" | ["fail", "ok", ...] (per call)
+  const calls = [];
+  return {
+    calls,
+    load: async (url) => {
+      calls.push(url);
+      const plan = script[url] ?? script["*"] ?? "ok";
+      const outcome = Array.isArray(plan) ? plan.shift() ?? "ok" : plan;
+      return outcome === "ok" ? { src: url, width: 1, height: 1 } : null;
+    },
+  };
+}
+
+test("F13: a dish sprite that fails once loads on the next request; successes stay cached; in-flight shared", async () => {
+  const loader = imageLoader({ "assets/dishes/hotpot.png": ["fail", "ok"] });
+  const sprites = { fly: {}, dishCache: new Map(), base: "assets/" };
+  assert.equal(await loadDishSprite(sprites, "hotpot", loader.load), null);
+  assert.equal(sprites.dishCache.has("hotpot"), false, "a failure is not cached as missing");
+  const img = await loadDishSprite(sprites, "hotpot", loader.load);
+  assert.ok(img, "second request succeeds");
+  assert.equal(loader.calls.length, 2);
+  const [a, b] = await Promise.all([loadDishSprite(sprites, "hotpot", loader.load), loadDishSprite(sprites, "hotpot", loader.load)]);
+  assert.equal(a, b);
+  assert.equal(loader.calls.length, 2, "cached after success");
+  const s2 = { fly: {}, dishCache: new Map(), base: "assets/" };
+  await Promise.all([loadDishSprite(s2, "pho", loader.load), loadDishSprite(s2, "pho", loader.load)]);
+  assert.equal(loader.calls.filter((u) => u.endsWith("pho.png")).length, 1, "concurrent requests share one load");
+});
+
+test("F13: one missing fly frame keeps the other frames; a missing set falls back to another pixel set", async () => {
+  const loader = imageLoader({ "assets/fly/fly_3.png": "fail", "assets/fly/proboscis_1.png": "fail", "assets/fly/proboscis_2.png": "fail", "assets/fly/proboscis_3.png": "fail" });
+  const sprites = await loadSprites("assets/", loader.load);
+  assert.equal(sprites.fly.fly.length, 3, "three of four wing frames survive");
+  assert.equal(sprites.fly.proboscis, null, "no proboscis frames at all");
+  assert.equal(framesFor(sprites.fly, "fly").length, 3);
+  assert.equal(framesFor(sprites.fly, "proboscis"), sprites.fly.idle, "falls back to idle pixel frames, never the drawn fly");
+  assert.equal(framesFor(sprites.fly, "hover"), sprites.fly.idle);
+  assert.equal(framesFor({}, "idle"), null, "only when nothing loaded does the drawn fallback apply");
+});

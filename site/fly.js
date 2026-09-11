@@ -61,21 +61,45 @@ async function loadImage(url) {
   });
 }
 
-// Loads (once) and returns the sprite for a dish slug, or null when none exists.
-export async function loadDishSprite(sprites, slug) {
+// Loads and returns the sprite for a dish slug, or null when it did not load.
+// Successes are cached; a failure is not (the next request retries); requests
+// in flight for the same slug share one load (F13). `loader` is injectable.
+export async function loadDishSprite(sprites, slug, loader = loadImage) {
   if (!slug) return null;
-  if (!sprites.dishCache.has(slug)) sprites.dishCache.set(slug, await loadImage(`${sprites.base}dishes/${slug}.png`));
-  return sprites.dishCache.get(slug);
+  if (sprites.dishCache.has(slug)) return sprites.dishCache.get(slug);
+  if (!sprites.pending) sprites.pending = new Map();
+  if (!sprites.pending.has(slug)) {
+    const promise = loader(`${sprites.base}dishes/${slug}.png`).then((img) => {
+      if (img) sprites.dishCache.set(slug, img);
+      return img || null;
+    }).finally(() => { if (sprites.pending.get(slug) === promise) sprites.pending.delete(slug); });
+    sprites.pending.set(slug, promise);
+  }
+  return sprites.pending.get(slug);
 }
 
-export async function loadSprites(base = "assets/") {
+// Fly frame sets: a set keeps the frames that loaded; a set with none is null.
+export async function loadSprites(base = "assets/", loader = loadImage) {
   const fly = {};
   const frames = { idle: 2, fly: 4, land: 1, proboscis: 3 };
   await Promise.all(Object.entries(frames).map(async ([state, n]) => {
-    const list = await Promise.all(Array.from({ length: n }, (_, i) => loadImage(`${base}fly/${state}_${i + 1}.png`)));
-    fly[state] = list.every(Boolean) ? list : null;
+    const list = await Promise.all(Array.from({ length: n }, (_, i) => loader(`${base}fly/${state}_${i + 1}.png`)));
+    const loaded = list.filter(Boolean);
+    fly[state] = loaded.length ? loaded : null;
   }));
-  return { fly, dishCache: new Map(), base };
+  return { fly, dishCache: new Map(), pending: new Map(), base };
+}
+
+// The pixel frames to draw for a fly state: its own set, else another pixel
+// set in this order. Null only when no frame of any set loaded; that is the
+// one case for the drawn fallback (F13).
+const FRAME_FALLBACK = ["idle", "land", "fly", "proboscis"];
+export function framesFor(fly, state) {
+  if (!fly) return null;
+  const own = fly[FRAME_SET[state] || "idle"];
+  if (own && own.length) return own;
+  for (const name of FRAME_FALLBACK) if (fly[name] && fly[name].length) return fly[name];
+  return null;
 }
 
 // The resting fly next to the empty table: idle frames at 3 fps on a small canvas.
@@ -109,7 +133,7 @@ export class IdleFly {
     const ctx = this.canvas.getContext("2d");
     const size = this.canvas.width;
     ctx.clearRect(0, 0, size, this.canvas.height);
-    const frames = this.sprites && this.sprites.fly && this.sprites.fly.idle;
+    const frames = this.sprites ? framesFor(this.sprites.fly, "idle") : null;
     if (frames) {
       ctx.imageSmoothingEnabled = false;
       ctx.drawImage(frames[Math.floor(this.t * 3) % frames.length], 0, 0, size, size);
@@ -224,7 +248,7 @@ export class FlyScene {
 
   drawFly(ctx) {
     const f = this.fly;
-    const frames = this.sprites.fly[FRAME_SET[f.state] || "idle"];
+    const frames = framesFor(this.sprites.fly, f.state);
     ctx.save();
     ctx.translate(f.x, f.y);
     ctx.scale(f.dir, 1);
