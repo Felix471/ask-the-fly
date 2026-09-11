@@ -1048,18 +1048,18 @@
     },
     "sugar": "low",
     "bitter": "none",
-    "water": "high",
+    "water": "medium",
     "reason": {
       "sugar": "oats have a mild natural sweetness but are generally low in sugar unless added",
       "bitter": "no bitter ingredients present",
-      "water": "milk is a dilute liquid with low solute concentration"
+      "water": "milk is a dilute liquid with low solute concentration (product-owner decision 2026-09-11: medium)"
     },
     "confidence": {
       "sugar": 0.85,
       "bitter": 0.925,
       "water": 0.875
     },
-    "review": "needs_review",
+    "review": "human_checked",
     "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
     "arbitration": {
       "sugar": {
@@ -1071,8 +1071,9 @@
       "water": {
         "zh": "low",
         "en": "high",
-        "chosen": "high",
-        "rule": "needs_review"
+        "chosen": "medium",
+        "rule": "human_checked",
+        "note": "resolved by hand 2026-09-11: product-owner decision"
       }
     }
   },
@@ -3192,33 +3193,35 @@
       "zh": "柠檬水",
       "en": "lemonade"
     },
-    "sugar": "medium",
+    "sugar": "high",
     "bitter": "low",
     "water": "medium",
     "reason": {
-      "sugar": "typically sweetened with sugar or syrup",
+      "sugar": "typically sweetened with sugar or syrup (product-owner decision 2026-09-11: high)",
       "bitter": "contains trace bitterness from lemon peel oils",
-      "water": "dilute aqueous solution of sugar and acid"
+      "water": "dilute aqueous solution of sugar and acid (product-owner decision 2026-09-11: medium)"
     },
     "confidence": {
       "sugar": 0.9,
       "bitter": 0.8,
       "water": 0.9
     },
-    "review": "needs_review",
+    "review": "human_checked",
     "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
     "arbitration": {
       "sugar": {
         "zh": "none",
         "en": "medium",
-        "chosen": "medium",
-        "rule": "needs_review"
+        "chosen": "high",
+        "rule": "human_checked",
+        "note": "resolved by hand 2026-09-11: product-owner decision"
       },
       "water": {
         "zh": "very_high",
         "en": "medium",
         "chosen": "medium",
-        "rule": "needs_review"
+        "rule": "human_checked",
+        "note": "resolved by hand 2026-09-11: product-owner decision"
       }
     }
   },
@@ -3831,25 +3834,26 @@
     },
     "sugar": "none",
     "bitter": "none",
-    "water": "low",
+    "water": "medium",
     "reason": {
       "sugar": "plain oatmeal is typically unsweetened",
       "bitter": "oats do not contain significant bitter compounds",
-      "water": "a moist, starchy solid porridge"
+      "water": "a moist, starchy solid porridge (product-owner decision 2026-09-11: medium)"
     },
     "confidence": {
       "sugar": 0.9,
       "bitter": 0.925,
       "water": 0.85
     },
-    "review": "needs_review",
+    "review": "human_checked",
     "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
     "arbitration": {
       "water": {
         "zh": "high",
         "en": "low",
-        "chosen": "low",
-        "rule": "needs_review"
+        "chosen": "medium",
+        "rule": "human_checked",
+        "note": "resolved by hand 2026-09-11: product-owner decision"
       }
     }
   },
@@ -5781,25 +5785,26 @@
     },
     "sugar": "none",
     "bitter": "none",
-    "water": "high",
+    "water": "low",
     "reason": {
       "sugar": "tofu is a savory soy product with no inherent sweetness",
       "bitter": "properly processed tofu has no bitter taste",
-      "water": "tofu has a high water content and soft texture"
+      "water": "tofu has a high water content and soft texture (product-owner decision 2026-09-11: low)"
     },
     "confidence": {
       "sugar": 1.0,
       "bitter": 0.9,
       "water": 0.85
     },
-    "review": "needs_review",
+    "review": "human_checked",
     "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
     "arbitration": {
       "water": {
         "zh": "low",
         "en": "high",
-        "chosen": "high",
-        "rule": "needs_review"
+        "chosen": "low",
+        "rule": "human_checked",
+        "note": "resolved by hand 2026-09-11: product-owner decision"
       }
     }
   },
@@ -6217,19 +6222,28 @@
     },
     "sugar": "none",
     "bitter": "medium",
-    "water": "high",
+    "water": "low",
     "reason": {
       "sugar": "distilled spirit contains no sugar",
       "bitter": "contains tannins and congeners from barrel aging",
-      "water": "mostly water and ethanol solution"
+      "water": "mostly water and ethanol solution (product-owner decision 2026-09-11: low)"
     },
     "confidence": {
       "sugar": 1.0,
       "bitter": 0.9,
       "water": 0.9
     },
-    "review": "llm_v1",
-    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2"
+    "review": "human_checked",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "arbitration": {
+      "water": {
+        "zh": "high",
+        "en": "high",
+        "chosen": "low",
+        "rule": "human_checked",
+        "note": "designed override: a 40% spirit is not \"mostly water\" in the osmolarity sense (2026-09-11)"
+      }
+    }
   },
   {
     "key": "wontons",
