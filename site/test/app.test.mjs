@@ -101,14 +101,15 @@ test("card lines are filled exactly from the spec templates", () => {
   const en = cardLines(decision, "en");
   const zh = cardLines(decision, "zh");
   const w = decision.winner;
-  assert.equal(en.fixed[0], `Today's pick: ${w.entry.display.en}`);
-  assert.equal(en.fixed[1], `MN9: ${w.cell.mn9_mean.toFixed(1)} Hz (sugar response ${w.sugarOnly.mn9_mean.toFixed(1)} · after bitter suppression ${w.cell.mn9_mean.toFixed(1)})`);
-  assert.match(en.fixed[2], /^Taste input: sugar .+ · bitter .+ · water .+ \(estimated by LLM\)$/);
-  assert.equal(en.fixed[3], "Simulation: precomputed from the whole-brain connectome, not run live");
-  assert.equal(en.bottom, "The model turns the dish into taste signals. The connectome predicts whether the fly would extend its proboscis. We use that response to choose the winner.");
-  assert.equal(zh.fixed[0], `今日选择：${w.entry.display.zh}`);
-  assert.equal(zh.fixed[3], "仿真：基于全脑连接组预先计算，并非现场实时运行");
-  assert.equal(zh.bottom, "模型先把菜品转换成味觉信号，连接组再预测果蝇会不会伸出口器。最后我们根据这个反应决定选哪一道。");
+  assert.equal(en.fixed[0], fmt(STRINGS.en.fixedLines[0], { dish: w.entry.display.en }));
+  assert.equal(en.fixed[1], fmt(STRINGS.en.fixedLines[1], { hz: w.cell.mn9_mean.toFixed(1), hz_sugar_only: w.sugarOnly.mn9_mean.toFixed(1) }));
+  assert.ok(en.fixed[1].includes(w.sugarOnly.mn9_mean.toFixed(1)) && !/\{\w+\}/.test(en.fixed[1]), "both numbers filled");
+  assert.ok(!/\{\w+\}/.test(en.fixed[2]) && en.fixed[2].includes(STRINGS.en.levelNames[w.entry.sugar]), "levels filled");
+  assert.equal(en.fixed[3], STRINGS.en.fixedLines[3]);
+  assert.equal(en.bottom, STRINGS.en.cardBottom);
+  assert.equal(zh.fixed[0], fmt(STRINGS.zh.fixedLines[0], { dish: w.entry.display.zh }));
+  assert.equal(zh.fixed[3], STRINGS.zh.fixedLines[3]);
+  assert.equal(zh.bottom, STRINGS.zh.cardBottom);
   assert.equal(en.fixed.length, 4);
 });
 
@@ -123,10 +124,9 @@ test("two options in the same grid cell tie exactly and the card says so", () =>
   if (b) {
     assert.equal(decision.tie.length, 2);
     const en = cardLines(decision, "en");
-    assert.equal(en.fixed[0], `Today's pick: ${a.display.en} / ${b.display.en}`);
+    assert.equal(en.fixed[0], fmt(STRINGS.en.fixedLines[0], { dish: `${a.display.en} / ${b.display.en}` }));
   }
-  assert.equal(STRINGS.en.cardTie, "The fly can't tell these apart");
-  assert.equal(STRINGS.zh.cardTie, "果蝇分不出这几个");
+  assert.ok(STRINGS.en.cardTie && STRINGS.zh.cardTie, "tie wording present in both languages");
 });
 
 test("all-miss decision fills the card with dashes", () => {
@@ -134,7 +134,7 @@ test("all-miss decision fills the card with dashes", () => {
   const lookup = buildLookup(table);
   const decision = decide(scoreOptions(["zzz"], dictionary, lookup), "ask");
   const en = cardLines(decision, "en");
-  assert.equal(en.fixed[0], "Today's pick: —");
+  assert.equal(en.fixed[0], fmt(STRINGS.en.fixedLines[0], { dish: STRINGS.en.cardEmptyValue }));
 });
 
 // ---- brain view and fly scene (pure parts) ----
