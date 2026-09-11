@@ -25,8 +25,12 @@ jobs:
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: "22"
-      - name: Unit tests against the shipped data
-        run: node --test site/test/app.test.mjs
+      - name: Unit tests against the shipped data (pure functions + audit regressions)
+        run: node --test site/test/app.test.mjs site/test/regress.test.mjs
+      - name: Python quick tests (stdlib; encoder gate, release validator)
+        run: python3 -m unittest tests.test_merge_validation tests.test_validate_release -v 2>&1 | tail -5
+      - name: Validate the production data bundle (Q06)
+        run: python3 scripts/validate_release.py
 
   deploy:
     needs: test
