@@ -108,7 +108,7 @@ test("card lines are filled exactly from the spec templates", () => {
   assert.equal(en.bottom, "The model turns the dish into taste signals. The connectome predicts whether the fly would extend its proboscis. We use that response to choose the winner.");
   assert.equal(zh.fixed[0], `今日选择：${w.entry.display.zh}`);
   assert.equal(zh.fixed[3], "仿真：基于全脑连接组预先计算，并非现场实时运行");
-  assert.equal(zh.bottom, "模型先把菜品转换成味觉信号，连接组再预测苍蝇会不会伸出口器。最后我们根据这个反应决定选哪一道。");
+  assert.equal(zh.bottom, "模型先把菜品转换成味觉信号，连接组再预测果蝇会不会伸出口器。最后我们根据这个反应决定选哪一道。");
   assert.equal(en.fixed.length, 4);
 });
 
@@ -126,7 +126,7 @@ test("two options in the same grid cell tie exactly and the card says so", () =>
     assert.equal(en.fixed[0], `Today's pick: ${a.display.en} / ${b.display.en}`);
   }
   assert.equal(STRINGS.en.cardTie, "The fly can't tell these apart");
-  assert.equal(STRINGS.zh.cardTie, "苍蝇分不出这几个");
+  assert.equal(STRINGS.zh.cardTie, "果蝇分不出这几个");
 });
 
 test("all-miss decision fills the card with dashes", () => {

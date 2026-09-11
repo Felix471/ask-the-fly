@@ -52,12 +52,12 @@ export const STRINGS = {
     cardBottom: "The model turns the dish into taste signals. The connectome predicts whether the fly would extend its proboscis. We use that response to choose the winner.",
   },
   zh: {
-    title: "问问苍蝇",
+    title: "问问果蝇",
     lead: "输入你在纠结的几道菜，让一只果蝇脑模型逐个尝一口。",
     inputPlaceholder: "一道菜，例如：麻婆豆腐",
     add: "添加",
-    hint: "至少加两个选项。苍蝇只管第一口。",
-    ask: "问问苍蝇",
+    hint: "至少加两个选项。果蝇只管第一口。",
+    ask: "问问果蝇",
     opposite: "反着来",
     share: "生成分享卡",
     again: "再问一次",
@@ -68,21 +68,21 @@ export const STRINGS = {
     colBitter: "苦",
     colWater: "水",
     colMn9: "MN9 (Hz)",
-    verdictAsk: "苍蝇选",
-    verdictOpposite: "苍蝇会选 {fly}。你反着来：",
-    verdictTie: "苍蝇分不出这几个：",
-    verdictNone: "这些苍蝇都还没尝过。",
-    missTitle: "苍蝇还没尝过这个。",
+    verdictAsk: "果蝇选",
+    verdictOpposite: "果蝇会选 {fly}。你反着来：",
+    verdictTie: "果蝇分不出这几个：",
+    verdictNone: "这些果蝇都还没尝过。",
+    missTitle: "果蝇还没尝过这个。",
     missReport: "报上去",
     missNote: "词典里没有：{names}",
-    honesty: "在这个模型里，微量的水只在帮糖时才被看见；只有食物基本是水时，苍蝇才注意到水。",
+    honesty: "在这个模型里，微量的水只在帮糖时才被看见；只有食物基本是水时，果蝇才注意到水。",
     provenance: "分数来自已发表的雌性果蝇脑 LIF 模型（Shiu 2024 / FlyWire v783）。它只管第一口。",
     stubBanner: "占位数据：本页的查找表是占位符，不是仿真结果。",
     tableMeta: "查找表 {version} · {cells} 个格子 · 每格 {trials} 次试验",
-    cardTitle: "问问苍蝇",
-    cardPicked: "苍蝇选",
-    cardOppositePicked: "苍蝇选 {fly}，我反着来：",
-    cardTie: "苍蝇分不出这几个",
+    cardTitle: "问问果蝇",
+    cardPicked: "果蝇选",
+    cardOppositePicked: "果蝇选 {fly}，我反着来：",
+    cardTie: "果蝇分不出这几个",
     levelNames: { none: "无", low: "低", medium: "中", high: "高", very_high: "很高" },
     fixedLines: [
       "今日选择：{dish}",
@@ -90,7 +90,7 @@ export const STRINGS = {
       "味觉输入：甜 {sugar} · 苦 {bitter} · 水 {water}（由 LLM 估算）",
       "仿真：基于全脑连接组预先计算，并非现场实时运行",
     ],
-    cardBottom: "模型先把菜品转换成味觉信号，连接组再预测苍蝇会不会伸出口器。最后我们根据这个反应决定选哪一道。",
+    cardBottom: "模型先把菜品转换成味觉信号，连接组再预测果蝇会不会伸出口器。最后我们根据这个反应决定选哪一道。",
   },
 };
 
@@ -357,7 +357,7 @@ if (isBrowser) {
   function applyStrings() {
     const t = STRINGS[state.lang];
     document.documentElement.lang = state.lang === "zh" ? "zh-CN" : "en";
-    document.title = state.lang === "zh" ? "问问苍蝇 · Ask the Fly" : "Ask the Fly · 问问苍蝇";
+    document.title = state.lang === "zh" ? "问问果蝇 · Ask the Fly" : "Ask the Fly · 问问果蝇";
     for (const el of document.querySelectorAll("[data-i18n]")) el.textContent = t[el.dataset.i18n] ?? "";
     for (const el of document.querySelectorAll("[data-i18n-placeholder]")) el.placeholder = t[el.dataset.i18nPlaceholder] ?? "";
     $("lang-toggle").textContent = state.lang === "zh" ? "EN" : "中文";
