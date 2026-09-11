@@ -857,11 +857,19 @@ if (isBrowser) {
     return { primary: [...clavicle, ...others.slice(0, 2)], more: others.slice(2) };
   }
 
+  // The auto-taste sequence owns the brain player while its token is live;
+  // manual silencing is disabled until it ends (F04).
+  function sequenceRunning() {
+    return Boolean(state.token && !state.token.cancelled);
+  }
+
   function renderSilenceControls() {
     const box = $("silence-controls");
     if (!box || !state.manifest) return;
     const t = STRINGS[state.lang];
+    const locked = sequenceRunning();
     box.innerHTML = "";
+    box.setAttribute("aria-busy", locked ? "true" : "false");
     // The button factory only builds the element; each button gets exactly one
     // handler, passed in explicitly (F02).
     const button = (label, onClick) => {
@@ -869,6 +877,7 @@ if (isBrowser) {
       b.type = "button";
       b.className = "btn btn-secondary btn-small";
       b.textContent = label;
+      b.disabled = locked;
       b.addEventListener("click", onClick);
       return b;
     };
@@ -1298,6 +1307,7 @@ if (isBrowser) {
     if (state.token) state.token.cancel();
     const token = makeToken();
     state.token = token;
+    renderSilenceControls(); // the sequence now owns the player: manual experiments disabled (F04)
     // Live while this session is current and the sequence has not been skipped.
     const live = () => state.session === session && !token.cancelled;
     const scored = [...decision.known, ...decision.misses];
@@ -1384,6 +1394,8 @@ if (isBrowser) {
     };
     await state.scene.run(plan, hooks, token);
     if (state.session !== session || state.token !== token) return;
+    token.cancel(); // the sequence is over: the player is free for manual experiments
+    renderSilenceControls();
     for (const item of decision.known) item.tasted = true; // skipped plates still show their Hz
     relabelPlates();
     if (!decision.winner) state.sceneStatus = { key: "sceneNone" };
@@ -1603,6 +1615,7 @@ if (isBrowser) {
   $("skip-btn").addEventListener("click", () => {
     if (state.token) state.token.cancel();
     if (state.brain) state.brain.stop();
+    renderSilenceControls();
     if (state.scenePlates) { for (const item of state.scenePlates) { item.loading = false; item.tasted = Boolean(item.cell); } relabelPlates(); }
     if (state.decision) renderDecision();
   });
