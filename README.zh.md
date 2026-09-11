@@ -23,6 +23,7 @@ English: [README.md](README.md)
 - 素材：41 张菜品像素图和果蝇精灵图（`site/assets/`）是为本项目生成的原创像素画，以 CC BY 4.0 发布；代码仍为 MIT。仓库只跟踪处理后的精灵图，`assets/raw/` 里的 1024 px 原图不入库。
 - FlyWire 神经元注释表（Schlegel 等 2024；github.com/flyconnectome/flywire_annotations）：CC BY 4.0。
 - 分享卡二维码：qrcode-generator 2.0.4（Kazuhiko Arase），MIT，原样放在 `site/vendor/qrcode-generator/`，附许可证。
+- 展示字体（自托管 woff2，由 `scripts/prep_fonts.py` 子集化）：Pixelify Sans（Stefie Justprince 与 Pixelify Sans 项目作者），SIL Open Font License 1.1，`site/assets/fonts/LICENSE-PixelifySans.txt`；缝合怪像素字体 Fusion Pixel 12px 比例版（TakWolf；基于方舟像素、俐方体 11 号和 Galmuri），SIL Open Font License 1.1，`site/assets/fonts/LICENSE-FusionPixel.txt`。中文字体只包含站点会显示的字符（`site/assets/fonts/glyphs-zh.txt`），其余字符回退到系统中文无衬线字体。
 - 脑图里的神经髓轮廓：JFRC2NP 神经髓表面（Ito 等 2014 命名法）经变换到 FlyWire 空间，取自 fafbseg-py 的数据目录（github.com/navis-org/fafbseg-py，GPL-3.0；仅作数据使用，未复制代码），由 `scripts/export_neuropils.py` 投影到二维。网格压缩包放在 `data/external/`，不入库。
 - 已命名的 SEZ 神经元（`data/named_neurons.json`）：ID 来自 Shiu 等 2024 随论文图表代码发布的 SEZ 神经元字典（MIT），DNg103 来自 FlyWire 注释表；Quasimodo、Scapula、GNG016 和 GNG510 在两个来源里都没有 FlyWire v783 对应，文件里如实记录。用于脑图的胞体位置（`site/data/neurons.json`）；表格本身放在 `data/external/`，不入库。
 

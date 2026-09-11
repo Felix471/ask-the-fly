@@ -643,11 +643,15 @@ export function drawShareCard(canvas, decision, lang, options = {}) {
 
   const font = (size, weight = 400) =>
     `${weight} ${size}px system-ui, -apple-system, "Segoe UI", "PingFang SC", "Noto Sans CJK SC", "Microsoft YaHei", sans-serif`;
+  // Display tier on the card: the title and the chosen dish name (pixel fonts,
+  // self-hosted; the caller waits for document.fonts before drawing).
+  const display = (size, weight = 400) =>
+    `${weight} ${size}px "Pixelify Sans", "Fusion Pixel", "PingFang SC", "Noto Sans CJK SC", "Microsoft YaHei", system-ui, sans-serif`;
   const mono = (size) => `${size}px ui-monospace, Menlo, Consolas, "Courier New", monospace`;
 
   // Header: title, headline, the chosen name(s).
   ctx.fillStyle = "#1f1a17";
-  ctx.font = font(50, 700);
+  ctx.font = display(50, 700);
   ctx.textAlign = "left";
   ctx.fillText(t.cardTitle, pad, 108);
   let y = 172;
@@ -665,7 +669,7 @@ export function drawShareCard(canvas, decision, lang, options = {}) {
   const chosen = decision.winner ? (decision.tie.length ? decision.tie : [decision.winner]) : [];
   if (chosen.length) {
     ctx.fillStyle = "#1f1a17";
-    ctx.font = font(chosen.length > 1 ? 44 : 56, 700);
+    ctx.font = display(chosen.length > 1 ? 44 : 56, 700);
     const names = chosen.map((i) => displayName(i, lang)).join(" / ");
     for (const line of wrapLines(ctx, names, W - 2 * pad)) {
       y += chosen.length > 1 ? 50 : 62;
@@ -1591,6 +1595,21 @@ if (isBrowser) {
   // and an id; only the latest request may draw, set the download link or open
   // the dialog. Close, reset and a newer request cancel older ones. Failures are
   // shown with a retry hint instead of being logged away (F08).
+  // The card is drawn only once the display fonts are loaded (preloaded in
+  // index.html); a font that never loads falls through after document.fonts
+  // settles, so the card still renders with the system fallback.
+  async function displayFontsReady(lang) {
+    if (!document.fonts) return;
+    try {
+      const wanted = ['700 56px "Pixelify Sans"', '400 56px "Pixelify Sans"'];
+      if (lang === "zh") wanted.push('400 56px "Fusion Pixel"');
+      await Promise.all(wanted.map((spec) => document.fonts.load(spec)));
+      await document.fonts.ready;
+    } catch (error) {
+      console.warn("display fonts:", error);
+    }
+  }
+
   let tableclothPattern = null;
   async function tableclothFor(ctx) {
     if (tableclothPattern !== null) return tableclothPattern || null;
@@ -1631,6 +1650,7 @@ if (isBrowser) {
     }
     if (!current()) return;
     const tablecloth = await tableclothFor(canvas.getContext("2d")).catch(() => null);
+    await displayFontsReady(request.lang);
     if (!current()) return;
     try {
       drawShareCard(canvas, request.decision, request.lang, {

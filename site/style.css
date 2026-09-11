@@ -28,12 +28,39 @@
   }
 }
 
+/* ---- typography: two tiers ----
+   Display (pixel, self-hosted, only at >= 16 px): h1, section headings, buttons,
+   chips, dish names on tiles, result title, share card title and dish name.
+   Body: the system sans stack. Latin display = Pixelify Sans (OFL); CJK display =
+   Fusion Pixel 12px proportional (OFL), subset to the glyphs the site shows, with
+   the system CJK sans as fallback. No external font requests. */
+@font-face {
+  font-family: "Pixelify Sans";
+  src: url("assets/fonts/pixelify-sans.woff2") format("woff2");
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Fusion Pixel";
+  src: url("assets/fonts/fusion-pixel-12px-zh.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+:root {
+  --font-body: system-ui, -apple-system, "Segoe UI", "PingFang SC", "Noto Sans CJK SC", "Microsoft YaHei", sans-serif;
+  --font-display: "Pixelify Sans", "Fusion Pixel", "PingFang SC", "Noto Sans CJK SC", "Microsoft YaHei", system-ui, sans-serif;
+}
+.display { font-family: var(--font-display); font-synthesis-weight: none; }
+
 * { box-sizing: border-box; }
 
 html, body {
   margin: 0;
   background: var(--bg);
   color: var(--ink);
+  font: 16px/1.5 var(--font-body);
 }
 
 /* Page: paper texture at 2x (light scheme only; measured contrast on the tile:
@@ -46,7 +73,6 @@ body {
 }
 @media (prefers-color-scheme: dark) {
   body { background-image: none; }
-  font: 16px/1.5 system-ui, -apple-system, "Segoe UI", "PingFang SC", "Noto Sans CJK SC", "Microsoft YaHei", sans-serif;
 }
 
 body { padding: 0 16px 32px; max-width: 640px; margin: 0 auto; }
@@ -67,7 +93,7 @@ body { padding: 0 16px 32px; max-width: 640px; margin: 0 auto; }
   padding: 20px 0 12px;
 }
 
-.title { font-size: 1.6rem; margin: 0; letter-spacing: 0.01em; }
+.title { font-family: var(--font-display); font-weight: 700; font-size: 1.75rem; margin: 0; letter-spacing: 0.01em; }
 
 .lang-toggle {
   border: 1px solid var(--line);
@@ -104,6 +130,7 @@ body { padding: 0 16px 32px; max-width: 640px; margin: 0 auto; }
 
 .btn {
   font: inherit;
+  font-family: var(--font-display);
   padding: 10px 16px;
   border-radius: 10px;
   border: 1px solid var(--line);
@@ -123,6 +150,7 @@ body { padding: 0 16px 32px; max-width: 640px; margin: 0 auto; }
 .option-list { list-style: none; padding: 0; margin: 12px 0 4px; display: flex; flex-wrap: wrap; gap: 8px; }
 
 .option-list li {
+  font-family: var(--font-display);
   display: inline-flex;
   align-items: center;
   gap: 6px;
@@ -157,7 +185,7 @@ body { padding: 0 16px 32px; max-width: 640px; margin: 0 auto; }
 .actions .btn { flex: 1 1 45%; }
 
 .verdict { font-size: 1.05rem; color: var(--muted); margin-bottom: 4px; }
-.verdict strong { font-size: 1.5rem; color: var(--ink); display: block; }
+.verdict strong { font-family: var(--font-display); font-size: 1.5rem; color: var(--ink); display: block; }
 .result-hero { display: block; width: 100%; height: auto; margin: 4px 0 8px; }
 
 .results { width: 100%; border-collapse: collapse; font-size: 0.92rem; }
@@ -214,7 +242,7 @@ body { padding: 0 16px 32px; max-width: 640px; margin: 0 auto; }
 .scene-status { flex: 1 1 auto; font-weight: 600; min-width: 140px; }
 .speed { display: inline-flex; align-items: center; gap: 6px; font-size: 0.9rem; color: var(--muted); }
 .speed select { font: inherit; padding: 4px 6px; border-radius: 8px; border: 1px solid var(--line); background: var(--panel); color: var(--ink); }
-.btn-small { padding: 6px 12px; font-size: 0.9rem; }
+.btn-small { padding: 6px 12px; font-size: 0.9rem; font-family: var(--font-body); } /* below 16 px: body tier */
 /* One surface for the stage: the canvases sit directly on the page, no panel around them. */
 .scene-panel { background: transparent; border: 0; padding: 0; }
 /* Stage: tablecloth at 2x behind the plates (plate shadows drawn by the scene;
@@ -271,7 +299,7 @@ body { padding: 0 16px 32px; max-width: 640px; margin: 0 auto; }
 /* ---- dish library: picture menu ---- */
 .library { margin-top: 18px; }
 .library-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 8px; }
-.library-title { font-size: 0.95rem; font-weight: 600; margin: 0; color: var(--ink); }
+.library-title { font-family: var(--font-display); font-size: 1rem; font-weight: 600; margin: 0; color: var(--ink); }
 .tile-row { display: flex; gap: 8px; overflow-x: auto; padding: 2px 2px 8px; scroll-snap-type: x proximity; -webkit-overflow-scrolling: touch; }
 .tile-row .tile { flex: 0 0 92px; width: 92px; min-width: 0; scroll-snap-align: start; }
 .tile-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin-top: 10px; }
@@ -283,7 +311,7 @@ body { padding: 0 16px 32px; max-width: 640px; margin: 0 auto; }
 }
 .tile:hover { background: var(--soft); }
 .tile img { width: 64px; height: 64px; image-rendering: pixelated; display: block; }
-.tile .name { display: block; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.tile .name { font-family: var(--font-display); font-size: 1rem; line-height: 1.15; display: block; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .tile[aria-pressed="true"] { border-color: var(--accent); box-shadow: inset 0 0 0 1px var(--accent); }
 .tile .check { position: absolute; top: 6px; right: 6px; width: 20px; height: 20px; border-radius: 50%; background: var(--accent); color: var(--accent-ink); font-size: 0.75rem; line-height: 20px; text-align: center; display: none; }
 .tile[aria-pressed="true"] .check { display: block; }

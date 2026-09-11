@@ -72,3 +72,21 @@ modal stay solid. On the share card the tablecloth appears only behind the winne
 sprite (a rounded patch with the same rim); every line of text stays on solid cream.
 Reduced motion: the idle fly shows one frame instead of animating, and scrolling is not
 smoothed; the textures themselves never move.
+
+## Fonts
+
+Two tiers. Display tier, pixel fonts, only at 16 px and above: the h1, section
+headings, buttons (not the small 14 px ones), chips, dish names on tiles, the result
+title, the share card's title and dish name. Body tier: the system sans stack for
+everything else (intro, captions, honesty lines, table, details, footer, plate labels).
+
+`scripts/prep_fonts.py` builds `site/assets/fonts/`: Pixelify Sans (variable weight,
+Basic Latin + Latin-1 + the punctuation the copy uses) and Fusion Pixel 12px
+proportional zh_hans, subset to `glyphs-zh.txt` (all zh dictionary display names and
+aliases, section names, every zh string in `copy/site_strings.json`, digits, ASCII and
+CJK punctuation); `coverage.json` records what the CJK subset covers and which
+characters fall back to the system CJK sans. Both are woff2 with `font-display: swap`,
+preloaded from `index.html`, served same-origin (CSP `font-src 'self'`); no external
+font requests. The share card draws its title and dish name with the display fonts and
+waits for `document.fonts` before drawing. Licenses: `LICENSE-PixelifySans.txt`,
+`LICENSE-FusionPixel.txt` (OFL 1.1, with the component fonts' licenses).
