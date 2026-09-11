@@ -29,6 +29,13 @@ Related work, not part of this simulation (see docs/open_questions.md, OQ-2):
 
 Product copy for provenance: "Scores come from a published female-brain LIF model (Shiu 2024 / FlyWire v783). The September 2026 papers describe a more complete taste wiring diagram that is not part of this simulation."
 
+## What you see on screen
+
+- **Replay pack.** For each of the 400 lookup-grid cells we ran one extra 1 s trial of the same Brian2 model with the spike monitor on the whole network, seed fixed and recorded, and stored every spike (`site/data/replay/<cell>.bin`, provenance in each file's header: cell, levels, Hz, seed, commit, protocol hash). `scripts/run_replay.py` produces it.
+- **Brain view is a replay, not a simulation.** The dark panel draws 29,326 neurons at their FlyWire soma positions (anterior view; Schlegel et al. 2024 annotations) and flashes the neurons that spiked, at the recorded times, over 1 s. Sugar, bitter, water and Ir94e inputs and MN9 have their own colours; the counter ticks with each recorded left-MN9 spike and ends on that trial's count. The caption names the cell being replayed. Nothing is simulated in the browser.
+- **The fly is an animation over real numbers.** The fly visiting plates, landing, and extending its proboscis is scripted from the decision: plates are ranked by the lookup table's mean MN9 rate (30 trials per cell), the replay shown on each plate is that dish's cell, and the proboscis plays on the highest-ranked plate (or the lowest, for "do the opposite"). Equal cells tie exactly and the fly hovers.
+- **Levels come from an LLM, scores from the connectome.** Each dish's sugar/bitter/water levels were estimated by the encoder and reviewed (`data/dishes.json`); those levels select a precomputed grid cell. The share card says so on its front.
+
 ## Honesty: what this simulation does and does not do
 | Claim | Status | Source |
 |---|---|---|
@@ -39,6 +46,9 @@ Product copy for provenance: "Scores come from a published female-brain LIF mode
 | Covers the whole feeding sequence | **no** — real feeding is a chain of checkpoints: leg bristles → labellar bristles → taste pegs → pharynx. This simulation covers the labellar-bristle checkpoint only. | Tastekin et al. 2026, Discussion, "Sequential checkpoints and action control" |
 | Water is a separate taste quality in the model | **no** — in this model water acts as a second appetitive drive that mainly boosts weak sugar (sugar 40 Hz + water 40 Hz gives 24 Hz MN9 vs 4 Hz alone; at sugar 200 Hz it adds 7%). That is why a wet savory dish outranks a dry one. This is a property of the connectome model, not a rule we wrote. | docs/phase1_characterization.md, sugar × water |
 | Uses the September 2026 complete gustatory wiring (MaleCNS) | **no** — a different animal, not part of this simulation | docs/open_questions.md, v3 note |
+| The brain view shows a live simulation | **no** — it replays one recorded 1 s trial per grid cell (fixed seed) from the same model; positions are FlyWire soma coordinates, activity is the recorded spike times | docs/site.md, `site/data/replay/` headers |
+| The fly animation is measured behaviour | **no** — it is a scripted animation driven by the lookup table's MN9 means and the recorded replays; the model has no body, legs or proboscis, only MN9 firing | docs/site.md |
+| The fly's ranking is a live computation | **no** — a 400-cell lookup table precomputed from 30 trials per cell (`data/lookup_table.json`); the page only reads it | docs/grid_provenance.md |
 
 In this model weak water is only visible as a helper to sugar; the fly notices water when the food is mostly water. The lookup grid therefore gives water "low" and "medium" the same cell (60 Hz): the fixed-path recheck (docs/fixed_path_recheck.md) could not separate them on any curve.
 
