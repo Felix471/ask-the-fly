@@ -83,7 +83,6 @@ export const STRINGS = {
     "suggestNone": "Not tried yet. Closest matches: {names}",
     "suggestNoneNoClosest": "Not tried yet. Press Enter to add it anyway.",
     "tableMeta": "Lookup table {version} · {cells} cells · {trials} trials per cell",
-    "tastedTitle": "Dishes the fly knows:",
     "title": "Ask the Fly",
     "verdictAsk": "The fly picks",
     "verdictNone": "The fly hasn't tried any of these yet.",
@@ -122,7 +121,13 @@ export const STRINGS = {
     "cardScan": "Scan to replay this choice",
     "cardSnapshot": "MN9 fired {n}× · {neurons} neurons",
     "plateLoading": "loading…",
-    "tableTitle": "On the table"
+    "tableTitle": "On the table",
+    "browseTitle": "Browse dishes",
+    "viewAll": "View all",
+    "viewLess": "Fewer",
+    "librarySearch": "Search dishes",
+    "libraryAll": "All",
+    "libraryEmpty": "No dish matches."
   },
   "zh": {
     "add": "添加",
@@ -206,7 +211,6 @@ export const STRINGS = {
     "suggestNone": "果蝇还没吃过这道。你是不是想找：{names}",
     "suggestNoneNoClosest": "果蝇还没吃过这道。按回车也可以先把它加进来。",
     "tableMeta": "查找表 {version} · {cells} 个格子 · 每格 {trials} 次试验",
-    "tastedTitle": "这些菜果蝇已经吃过了：",
     "title": "问问果蝇",
     "verdictAsk": "果蝇最后选了",
     "verdictNone": "这些菜果蝇都还没吃过。",
@@ -245,6 +249,12 @@ export const STRINGS = {
     "cardScan": "扫码重现这次选择",
     "cardSnapshot": "MN9 放电 {n} 次 · {neurons} 个神经元",
     "plateLoading": "加载中…",
-    "tableTitle": "桌上"
+    "tableTitle": "桌上",
+    "browseTitle": "看看有哪些菜",
+    "viewAll": "全部菜品",
+    "viewLess": "收起",
+    "librarySearch": "搜索菜品",
+    "libraryAll": "全部",
+    "libraryEmpty": "没有匹配的菜。"
   }
 };

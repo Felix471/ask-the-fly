@@ -56,10 +56,19 @@
         <button id="ask-btn" class="btn btn-primary" type="button" data-i18n="ask" disabled></button>
         <button id="opposite-btn" class="btn btn-secondary" type="button" data-i18n="opposite" disabled></button>
       </div>
-      <details id="tasted" class="tasted">
-        <summary data-i18n="tastedTitle"></summary>
-        <div id="tasted-chips" class="chips"></div>
-      </details>
+      <section class="library" id="library" aria-labelledby="library-title">
+        <div class="library-head">
+          <h2 id="library-title" class="library-title" data-i18n="browseTitle"></h2>
+          <button id="view-all-btn" class="btn btn-secondary btn-small" type="button" aria-expanded="false" aria-controls="library-panel" data-i18n="viewAll"></button>
+        </div>
+        <div id="popular-row" class="tile-row" role="group"></div>
+        <div id="library-panel" class="library-panel" hidden>
+          <input id="library-search" class="option-input" type="search" data-i18n-placeholder="librarySearch" autocomplete="off">
+          <div id="library-tabs" class="tabs" role="tablist"></div>
+          <div id="library-grid" class="tile-grid" role="group"></div>
+          <p id="library-empty" class="hint" hidden data-i18n="libraryEmpty"></p>
+        </div>
+      </section>
     </section>
 
     <section class="panel scene-panel" id="scene-panel" hidden>

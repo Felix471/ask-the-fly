@@ -217,5 +217,19 @@
     "spinach"
    ]
   }
+ ],
+ "popular": [
+  "hotpot",
+  "mapo tofu",
+  "dumplings",
+  "xiaolongbao",
+  "sushi",
+  "ramen",
+  "bibimbap",
+  "pho",
+  "pizza",
+  "hamburger",
+  "bubble tea",
+  "watermelon"
  ]
 }

@@ -235,6 +235,11 @@ export function currentCommit(hash) {
   return COMMIT_REWRITE[hash] || hash || "";
 }
 
+// One neutral plate for every dish without a sprite (typed, unknown dishes).
+export const PLACEHOLDER_PLATE = "data:image/svg+xml," + encodeURIComponent(
+  '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><ellipse cx="16" cy="19" rx="13" ry="6" fill="#ebe4d8" stroke="#cfc5b6"/><ellipse cx="16" cy="18" rx="8" ry="3.4" fill="#f6f1e8" stroke="#ded5c6"/></svg>'
+);
+
 export function slugFor(key) {
   return String(key).normalize("NFKD").replace(/[^\x00-\x7f]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "") || "dish";
 }
@@ -867,51 +872,94 @@ if (isBrowser) {
     await state.brain.play(speed());
   }
 
-  // "The fly has tasted these": every dictionary entry as a tappable chip.
-  let tastedInitialised = false;
+  // ---- dish library: a picture menu ----
+  // Collapsed: one scrolling row of popular dishes. "View all": search, section
+  // tabs and a tile grid. Tiles toggle the selection; a selected tile shows a check.
+  const library = { open: false, tab: "all", query: "" };
+
+  function isSelected(key) {
+    return state.options.some((o) => o.key === key);
+  }
+
+  function toggleSelection(key) {
+    const index = state.options.findIndex((o) => o.key === key);
+    if (index >= 0) state.options.splice(index, 1);
+    else state.options.push({ key });
+    renderOptions();
+  }
+
+  function makeTile(entry) {
+    const tile = document.createElement("button");
+    tile.type = "button";
+    tile.className = "tile";
+    tile.dataset.key = entry.key;
+    tile.setAttribute("aria-pressed", isSelected(entry.key) ? "true" : "false");
+    tile.append(spriteImg(entry.key, "sprite"));
+    const name = document.createElement("span");
+    name.className = "name";
+    name.textContent = entry.display?.[state.lang] || entry.key;
+    tile.title = name.textContent;
+    const check = document.createElement("span");
+    check.className = "check";
+    check.textContent = "✓";
+    tile.append(name, check);
+    tile.addEventListener("click", () => { toggleSelection(entry.key); closeSuggest(); });
+    return tile;
+  }
+
+  function renderLibrarySelection() {
+    for (const tile of document.querySelectorAll(".tile[data-key]")) {
+      tile.setAttribute("aria-pressed", isSelected(tile.dataset.key) ? "true" : "false");
+    }
+  }
+
+  function librarySections() {
+    return state.sections ? state.sections.sections : [];
+  }
+
   function renderTasted() {
     if (!state.dictionary) return;
-    const box = $("tasted-chips");
-    box.innerHTML = "";
-    const byKey = new Map(state.dictionary.entries.map((e) => [e.key, e]));
-    const label = (entry) => entry.display?.[state.lang] || entry.key;
-    const sortEntries = (list) => [...list].sort((a, b) => label(a).localeCompare(label(b), state.lang === "zh" ? "zh-Hans-CN" : "en"));
-    const addChip = (parent, entry) => {
-      const chip = document.createElement("button");
-      chip.type = "button";
-      chip.textContent = label(entry);
-      chip.addEventListener("click", () => { addSelection({ key: entry.key }); closeSuggest(); });
-      parent.append(chip);
+    const t = STRINGS[state.lang];
+    const popularKeys = (state.sections && state.sections.popular) || [];
+    const row = $("popular-row");
+    row.innerHTML = "";
+    for (const key of popularKeys) {
+      const entry = state.dictionary.find(key);
+      if (entry) row.append(makeTile(entry));
+    }
+    $("view-all-btn").textContent = library.open ? t.viewLess : t.viewAll;
+    $("view-all-btn").setAttribute("aria-expanded", library.open ? "true" : "false");
+    $("library-panel").hidden = !library.open;
+    $("library-search").placeholder = t.librarySearch;
+    if (!library.open) return;
+    const tabs = $("library-tabs");
+    tabs.innerHTML = "";
+    const mkTab = (id, label) => {
+      const b = document.createElement("button");
+      b.type = "button";
+      b.setAttribute("role", "tab");
+      b.setAttribute("aria-selected", library.tab === id ? "true" : "false");
+      b.textContent = label;
+      b.addEventListener("click", () => { library.tab = id; renderTasted(); });
+      tabs.append(b);
     };
-    const placed = new Set();
-    if (state.sections) {
-      for (const section of state.sections.sections) {
-        const entries = section.keys.map((k) => byKey.get(k)).filter(Boolean);
-        if (!entries.length) continue;
-        const group = document.createElement("div");
-        group.className = "chip-group";
-        const head = document.createElement("div");
-        head.className = "chip-head";
-        head.textContent = state.lang === "zh" ? section.zh : section.en;
-        group.append(head);
-        const row = document.createElement("div");
-        row.className = "chips";
-        for (const entry of sortEntries(entries)) { addChip(row, entry); placed.add(entry.key); }
-        group.append(row);
-        box.append(group);
-      }
+    mkTab("all", t.libraryAll);
+    librarySections().forEach((section, i) => mkTab(String(i), state.lang === "zh" ? section.zh : section.en));
+    const grid = $("library-grid");
+    grid.innerHTML = "";
+    const byKey = new Map(state.dictionary.entries.map((e) => [e.key, e]));
+    let entries;
+    if (library.tab === "all") entries = [...state.dictionary.entries];
+    else entries = (librarySections()[Number(library.tab)] || { keys: [] }).keys.map((k) => byKey.get(k)).filter(Boolean);
+    if (normalizeName(library.query)) {
+      const matched = new Set(suggest(library.query, state.dictionary, state.lang, 1000).map((s) => s.entry.key));
+      entries = entries.filter((e) => matched.has(e.key));
+    } else {
+      const label = (entry) => entry.display?.[state.lang] || entry.key;
+      entries.sort((a, b) => label(a).localeCompare(label(b), state.lang === "zh" ? "zh-Hans-CN" : "en"));
     }
-    const rest = sortEntries(state.dictionary.entries.filter((e) => !placed.has(e.key)));
-    if (rest.length) {
-      const row = document.createElement("div");
-      row.className = "chips";
-      for (const entry of rest) addChip(row, entry);
-      box.append(row);
-    }
-    if (!tastedInitialised) {
-      $("tasted").open = false; // collapsed on every screen; the buttons stay above it
-      tastedInitialised = true;
-    }
+    for (const entry of entries) grid.append(makeTile(entry));
+    $("library-empty").hidden = entries.length > 0;
   }
 
   // ---- autocomplete ----
@@ -991,12 +1039,29 @@ if (isBrowser) {
     $("option-input").focus();
   }
 
+  function spriteUrlFor(key) {
+    if (!key) return PLACEHOLDER_PLATE;
+    const slug = slugFor(key);
+    return `assets/dishes/${state.spriteFallbacks[slug] || slug}.png`;
+  }
+
+  function spriteImg(key, className) {
+    const img = document.createElement("img");
+    img.className = className;
+    img.alt = "";
+    img.decoding = "async";
+    img.src = spriteUrlFor(key);
+    img.addEventListener("error", () => { img.src = PLACEHOLDER_PLATE; }, { once: true });
+    return img;
+  }
+
   function renderOptions() {
     const list = $("option-list");
     list.innerHTML = "";
     state.options.forEach((option, index) => {
       const name = optionLabel(option, state.dictionary, state.lang);
       const li = document.createElement("li");
+      li.append(spriteImg(option.key, "thumb"));
       const span = document.createElement("span");
       span.textContent = name;
       const remove = document.createElement("button");
@@ -1010,6 +1075,7 @@ if (isBrowser) {
       li.append(span, remove);
       list.append(li);
     });
+    renderLibrarySelection();
     const ready = Boolean(state.lookup && state.dictionary);
     $("ask-btn").disabled = !ready;
     $("opposite-btn").disabled = !ready;
@@ -1373,6 +1439,12 @@ if (isBrowser) {
       addOption(text);
     }
   });
+  $("view-all-btn").addEventListener("click", () => {
+    library.open = !library.open;
+    renderTasted();
+    if (library.open) $("library-search").focus({ preventScroll: true });
+  });
+  $("library-search").addEventListener("input", (event) => { library.query = event.target.value; renderTasted(); });
   $("ask-btn").addEventListener("click", () => run("ask"));
   $("opposite-btn").addEventListener("click", () => run("opposite"));
   $("share-btn").addEventListener("click", () => { showCard().catch((error) => console.warn("share card failed:", error)); });
