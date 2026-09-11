@@ -71,6 +71,9 @@ def expand_grid_conditions(levels: dict) -> list[dict]:
             "rates": rates,
             "levels": level_names,
             "alias_levels": [],
+            # Position in canonical product order: the seed identity of the
+            # cell, independent of how the run is batched (seed scheme v2, D02).
+            "global_index": len(conditions),
         }
         by_rates[rate_key] = condition
         conditions.append(condition)

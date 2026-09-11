@@ -99,6 +99,7 @@ def main() -> int:
             len(condition["alias_levels"]) for condition in conditions
         ),
         "n_trials": n_trials,
+        "seed_scheme": "v2",  # base_seed + trial + 1000 * global condition index (D02)
     }
     try:
         import pandas as pd

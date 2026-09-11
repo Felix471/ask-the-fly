@@ -8,10 +8,26 @@ import numpy as np
 import pandas as pd
 
 
-def mn9_rate(df_spikes: pd.DataFrame, protocol: dict, n_trials: int) -> dict:
-    """Return per-side and protocol-aggregated MN9 rates across trials."""
+def mn9_rate(df_spikes: pd.DataFrame, protocol: dict, n_trials: int, completed_trials=None) -> dict:
+    """Return per-side and protocol-aggregated MN9 rates across trials.
+
+    A trial with no MN9 spike leaves no row, so the frame alone cannot tell a
+    silent trial from a trial that never ran. When `completed_trials` (the run
+    ledger) is given, it must be exactly range(n_trials); otherwise a missing
+    trial would be counted as zero firing (D01)."""
     if n_trials <= 0:
         raise ValueError("n_trials must be positive")
+    if completed_trials is not None:
+        completed = sorted(int(t) for t in completed_trials)
+        if completed != list(range(n_trials)):
+            raise ValueError(
+                f"completed trials {completed} do not cover n_trials={n_trials}; "
+                "missing trials are not zero firing"
+            )
+        if not df_spikes.empty:
+            extra = sorted(set(int(t) for t in df_spikes["trial"].unique()) - set(completed))
+            if extra:
+                raise ValueError(f"spike rows for trials outside the ledger: {extra}")
     duration_s = float(protocol["trial"]["duration_ms"]) / 1000.0
     readout = protocol["readout"]
 

@@ -7,7 +7,10 @@ from __future__ import annotations
 import itertools
 import gc
 import os
+import hashlib
+import json
 import re
+from datetime import datetime, timezone
 import time
 from pathlib import Path
 from typing import Iterable
@@ -46,6 +49,85 @@ def expand_conditions(protocol: dict, condition_keys: Iterable[str]) -> list[dic
                 {"cond_id": cond_id, "cell_set_override": override.copy(), "rates": rates}
             )
     return expanded
+
+
+class ResumeError(RuntimeError):
+    """An existing result cannot be reused as-is (never silently zero-filled or relabelled)."""
+
+
+# Seed schemes. v1 (legacy): seed = base + trial + 1000 * index within the list
+# handed to run_conditions, so batching changed the seeds. v2: the same formula
+# on the condition's stable `global_index` (D02). Every published table so far
+# was produced under v1; see docs/grid_provenance.md.
+def seed_scheme_for(conditions: list[dict]) -> str:
+    return "v2" if conditions and all("global_index" in c for c in conditions) else "v1"
+
+
+def seed_for(base_seed: int, condition: dict, trial: int, local_index: int) -> int:
+    index = condition["global_index"] if "global_index" in condition else local_index
+    return int(base_seed) + int(trial) + 1000 * int(index)
+
+
+def _json_sha256(value) -> str:
+    return hashlib.sha256(json.dumps(value, sort_keys=True, separators=(",", ":")).encode("utf-8")).hexdigest()
+
+
+def ledger_expectation(condition: dict, n_trials: int, duration_ms: float, protocol: dict, cells: dict, channels) -> dict:
+    """The immutable identity a stored result must match before it is reused (D01)."""
+    return {
+        "cond_id": condition["cond_id"],
+        "n_trials": int(n_trials),
+        "duration_ms": float(duration_ms),
+        "rates": {k: float(v) for k, v in condition.get("rates", {}).items()},
+        "channels": list(channels) if channels else None,
+        "protocol_sha256": _json_sha256(protocol),
+        "cells_sha256": _json_sha256(cells),
+        "readout": protocol.get("readout"),
+        "seed_scheme": seed_scheme_for([condition]),
+    }
+
+
+def ledger_path(output_dir: Path, cond_id: str) -> Path:
+    return output_dir / f"{cond_id}.meta.json"
+
+
+def write_ledger(output_dir: Path, expectation: dict, completed_trials: list[int], seeds: list[int]) -> dict:
+    ledger = {**expectation, "completed_trials": sorted(int(t) for t in completed_trials), "seeds": [int(x) for x in seeds],
+              "written_at": datetime.now(timezone.utc).isoformat()}
+    path = ledger_path(output_dir, expectation["cond_id"])
+    tmp = path.with_suffix(".json.tmp")
+    tmp.write_text(json.dumps(ledger, indent=2), encoding="utf-8")
+    os.replace(tmp, path)
+    return ledger
+
+
+def reuse_condition(condition: dict, parquet_path: Path, expectation: dict) -> tuple[dict, int]:
+    """Validate a stored result against the ledger and the requested run, then read it out.
+    Raises ResumeError on any mismatch; never interprets missing trials as zero spikes."""
+    ledger_file = ledger_path(parquet_path.parent, condition["cond_id"])
+    if not ledger_file.exists():
+        raise ResumeError(f"{parquet_path}: no completion ledger ({ledger_file.name}); rerun this condition with --force")
+    try:
+        ledger = json.loads(ledger_file.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        raise ResumeError(f"{ledger_file}: unreadable ledger: {exc}") from exc
+    mismatches = [key for key in expectation if ledger.get(key) != expectation[key]]
+    if mismatches:
+        details = "; ".join(f"{k}: stored {ledger.get(k)!r} vs requested {expectation[k]!r}" for k in mismatches)
+        raise ResumeError(f"{parquet_path}: stored run does not match the requested run ({details})")
+    completed = sorted(int(t) for t in ledger.get("completed_trials", []))
+    if completed != list(range(expectation["n_trials"])):
+        raise ResumeError(f"{parquet_path}: completed trials {completed} do not cover n_trials={expectation['n_trials']}")
+    try:
+        frame = pd.read_parquet(parquet_path)
+    except Exception as exc:  # noqa: BLE001 - any reader failure means the result is unusable
+        raise ResumeError(f"{parquet_path}: unreadable result: {exc}") from exc
+    protocol_like = {"trial": {"duration_ms": expectation["duration_ms"]}, "readout": expectation["readout"]}
+    try:
+        rates = mn9_rate(frame, protocol_like, expectation["n_trials"], completed_trials=completed)
+    except ValueError as exc:
+        raise ResumeError(f"{parquet_path}: {exc}") from exc
+    return rates, expectation["n_trials"]
 
 
 def _base_seed(protocol: dict) -> int:
@@ -164,9 +246,10 @@ def run_conditions(
     workers = max(1, min(requested, max(1, len(pending) * n_trials)))
     jobs = []
     base_seed = _base_seed(protocol)
+    scheme = seed_scheme_for(conditions)
     for index, condition in pending:
         for trial in range(n_trials):
-            jobs.append((index, condition, trial, base_seed + trial + 1000 * index))
+            jobs.append((index, condition, trial, seed_for(base_seed, condition, trial, index)))
     shards = [jobs[offset::workers] for offset in range(workers)] if jobs else []
 
     started = time.perf_counter()
@@ -199,11 +282,16 @@ def run_conditions(
                     condition_walltime += trial_walltime
                     del output[position]
         items.sort(key=lambda item: item[0])
+        completed = [trial for trial, _ in items]
+        if completed != list(range(n_trials)):
+            raise RuntimeError(f"{condition['cond_id']}: workers returned trials {completed}, expected 0..{n_trials - 1}")
         frame = spikes_dataframe(items)
         frame.to_parquet(output_dir / f"{condition['cond_id']}.parquet", index=False)
         # Use the actual duration for stage-specific readout calculations.
         stage_protocol = {**protocol, "trial": {**protocol["trial"], "duration_ms": duration_ms}}
-        rates = mn9_rate(frame, stage_protocol, n_trials)
+        expectation = ledger_expectation(condition, n_trials, duration_ms, protocol, cells, channels)
+        write_ledger(output_dir, expectation, completed, [seed_for(base_seed, condition, t, index) for t in completed])
+        rates = mn9_rate(frame, stage_protocol, n_trials, completed_trials=completed)
         summaries.append(
             {
                 "cond_id": condition["cond_id"],
@@ -214,14 +302,15 @@ def run_conditions(
                 "mn9_aggregated_mean_hz": rates["aggregated"]["mean"],
                 "mn9_aggregated_std_hz": rates["aggregated"]["std"],
                 "n_trials": n_trials,
+                "seed_scheme": scheme,
                 "walltime_s": condition_walltime,
             }
         )
         del items, frame
     for _, condition, path in skipped:
-        frame = pd.read_parquet(path)
-        stage_protocol = {**protocol, "trial": {**protocol["trial"], "duration_ms": duration_ms}}
-        rates = mn9_rate(frame, stage_protocol, n_trials)
+        # Reuse only what the ledger proves complete and identical (D01).
+        expectation = ledger_expectation(condition, n_trials, duration_ms, protocol, cells, channels)
+        rates, ledger_trials = reuse_condition(condition, path, expectation)
         summaries.append(
             {
                 "cond_id": condition["cond_id"],
@@ -231,11 +320,12 @@ def run_conditions(
                 "mn9_right_std_hz": rates["right"]["std"],
                 "mn9_aggregated_mean_hz": rates["aggregated"]["mean"],
                 "mn9_aggregated_std_hz": rates["aggregated"]["std"],
-                "n_trials": n_trials,
+                "n_trials": ledger_trials,
+                "seed_scheme": expectation["seed_scheme"],
                 "walltime_s": 0.0,
             }
         )
-        print(f"skipping existing {path}")
+        print(f"reusing verified {path}")
     summary = pd.DataFrame(summaries)
     summary.to_csv(output_dir / "summary.csv", index=False)
     print(f"parallel stage walltime: {elapsed_total:.3f} s")

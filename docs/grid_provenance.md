@@ -13,3 +13,31 @@ The 400-cell lookup grid (`results/grid/full`, gitignored) that produced `data/l
 | protocol / cells | `data/stim_protocol.json`, `data/cells.json` (SHA-256 in the table's `protocol_sha256` / `source_cells_sha256`) |
 
 `git_commit` inside `data/lookup_table.json` and inside the site's copy still carries the pre-rewrite hash; it is left as recorded so the table's `cells_sha256` stays valid. Use this file to resolve it.
+
+## Seed scheme and resume ledger (D01, D02)
+
+Trial seeds are `base_seed + trial + 1000 × index`. Until 2026-09-11 the index was the
+position within the list handed to `run_conditions` (**scheme v1**), so a batched run
+seeded each cell by its position inside its batch. Every published table was produced
+under v1:
+
+| product | run | batch size | consequence |
+|---|---|---|---|
+| `data/lookup_table.json` (cells_sha256 `bd7c6f61…`), `results/grid/full` | `scripts/run_grid.py --stage full`, 400 cells | 40 (10 batches) | cell *k* used index *k mod 40*: cells 40 apart shared seeds |
+| Phase 0 / Phase 1 / fixed-path recheck | `run_conditions` on the whole condition list | single batch | index = global position (identical to v2) |
+| replay pack (`site/data/replay`) | `scripts/run_replay.py` | n/a | `base_seed + 700000 + global condition index`: unaffected |
+
+Since 2026-09-11 conditions carry a `global_index` (their position in canonical grid
+order) and the seed uses it (**scheme v2**), so batch size, worker count, filtering and
+resume no longer change a condition's seed. `run_meta.json` and `summary.csv` record
+the scheme. Nothing has been regenerated: a v2 recompute of the grid is a different
+but equivalent random stream, to be run only with an explicit decision and a
+migration note.
+
+Every condition now also writes `<cond_id>.meta.json` next to its parquet: n_trials,
+duration, rates, channels, protocol and cells hashes, seed scheme, seeds, and the list
+of completed trials. A resume (`run_conditions(..., force=False)`) reuses a stored
+result only when that ledger matches the requested run exactly and lists every
+trial; a trial with no MN9 spike leaves no spike row, so without the ledger a missing
+trial would be counted as zero firing. Results without a ledger (all runs before this
+date) cannot be resumed; rerun them with `--force`.
