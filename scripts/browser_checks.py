@@ -190,8 +190,8 @@ def check_F05(browser):
     if snap is None:
         problems.append("no debug accessor (window.__askfly)")
     else:
-        if snap.get("phase") != "input":
-            problems.append(f"phase after reset: {snap.get('phase')!r}")
+        if not page.evaluate("!document.getElementById('input-panel').hidden"):
+            problems.append("input panel not shown after reset")
         if snap.get("currentCell"):
             problems.append(f"currentCell not cleared: {snap.get('currentCell')!r}")
         if snap.get("sceneRunning"):
@@ -221,8 +221,8 @@ def check_F06(browser):
     if page.evaluate("document.getElementById('scene-panel').hidden"):
         problems.append("scene hidden after a language switch during tasting")
     snap = debug(page)
-    if snap and snap.get("phase") != "tasting":
-        problems.append(f"phase after switch: {snap.get('phase')!r}")
+    if not snap or snap.get("phase") != "tasting":
+        problems.append(f"phase after switch: {(snap or {}).get('phase')!r} (expected an explicit 'tasting' phase)")
     chips = page.evaluate("[...document.querySelectorAll('#option-list li span')].map(e => e.textContent)")
     if chips != ["火锅", "黑咖啡", "越南河粉"]:
         problems.append(f"chips not relabelled in zh: {chips}")

@@ -739,7 +739,11 @@ if (isBrowser) {
     siteUrl: SITE_URL,
     currentCell: null,
     currentItem: null,
-    variant: "",
+    currentCellLevels: null,
+    variant: "", // requested variant (button state)
+    appliedVariant: "", // variant whose replay is on screen
+    variantRequest: 0, // id of the latest silencing request; older responses are dropped (F03)
+    session: 0, // run session; reset() and run() start a new one, older async work is dropped (F05)
     loadReplay: makeReplayLoader("data/replay/"),
     token: null,
     sceneStatus: null, // { key, item?, fly?, dish? } re-rendered on language switch
@@ -910,18 +914,27 @@ if (isBrowser) {
 
   async function playVariant(variant) {
     if (!state.currentCell || !state.brain) return;
+    // Identity of this request: only the latest request of the current session
+    // for the cell that is still current may touch the UI (F03).
+    const request = { id: ++state.variantRequest, session: state.session, cell: state.currentCell, levels: state.currentCellLevels };
+    const current = () => request.id === state.variantRequest && request.session === state.session && state.currentCell === request.cell;
     state.variant = variant;
     renderSilenceControls();
     const t = STRINGS[state.lang];
     let replay;
     try {
-      replay = await state.loadReplay(state.currentCell, variant);
+      replay = await state.loadReplay(request.cell, variant);
     } catch (error) {
       console.warn("variant load failed:", error);
+      if (!current()) return;
+      state.variant = state.appliedVariant; // the buttons go back to what is actually shown
+      renderSilenceControls();
       $("silence-caption").textContent = t.stateReplayFailed;
       return;
     }
-    const cellInfo = state.manifest.cells[state.currentCell];
+    if (!current()) return;
+    state.appliedVariant = variant;
+    const cellInfo = state.manifest.cells[request.cell];
     if (variant) {
       const before = cellInfo.mn9_left_count;
       const after = replay.header.mn9_left_count;
@@ -939,7 +952,7 @@ if (isBrowser) {
     } else {
       $("silence-caption").textContent = "";
     }
-    state.brainCaption = { cell: state.currentCellLevels, variant: variant ? replay.header.variant : "", n: replay.header.n_spikes };
+    state.brainCaption = { cell: request.levels, variant: variant ? replay.header.variant : "", n: replay.header.n_spikes };
     renderBrainCaption();
     $("mn9-count").textContent = "0";
     state.brain.onMn9 = (count) => { $("mn9-count").textContent = String(count); state.sound.click(); };
@@ -1281,10 +1294,12 @@ if (isBrowser) {
   }
 
   // Plays the fly + brain sequence for a decision, then reveals the result view.
-  async function runScene(decision) {
+  async function runScene(decision, session) {
     if (state.token) state.token.cancel();
     const token = makeToken();
     state.token = token;
+    // Live while this session is current and the sequence has not been skipped.
+    const live = () => state.session === session && !token.cancelled;
     const scored = [...decision.known, ...decision.misses];
     for (const item of scored) { item.loading = false; item.tasted = false; }
     state.scenePlates = scored;
@@ -1314,12 +1329,13 @@ if (isBrowser) {
     $("hud-idle").hidden = false;
     state.brain.resize();
     await state.scene.setPlates(plates);
+    if (!live()) return;
     window.scrollTo({ top: 0, behavior: "smooth" });
 
     const hooks = {
       onTaste: async (index) => {
         const item = scored[index];
-        if (!item.cell || token.cancelled) return;
+        if (!item.cell || !live()) return;
         state.sceneStatus = { key: "sceneTasting", dish: item };
         renderSceneStatus();
         state.brain.setReplay(null); // blank brain while the replay is fetched
@@ -1332,16 +1348,18 @@ if (isBrowser) {
           replay = await state.loadReplay(cellId);
         } catch (error) {
           console.warn("replay load failed:", error);
+          if (state.session !== session) return; // reset while loading: nothing to show
           item.loading = false;
           state.scene.relabel(index, null, plateSub(item));
           $("brain-caption").textContent = navigator.onLine === false ? tr("stateOffline") : tr("stateReplayFailed");
           notice(navigator.onLine === false ? "stateOffline" : "stateReplayFailed");
           return;
         }
+        if (state.session !== session) return; // reset while loading (F05)
         item.loading = false;
         item.tasted = true;
         state.scene.relabel(index, null, plateSub(item));
-        if (token.cancelled) return;
+        if (token.cancelled) return; // skipped: the result view shows the numbers
         state.currentCellLevels = item.cell;
         state.brainCaption = { cell: item.cell, variant: "", n: replay.header.n_spikes };
         renderBrainCaption();
@@ -1351,6 +1369,8 @@ if (isBrowser) {
         state.currentCell = cellId;
         state.currentItem = item;
         state.variant = "";
+        state.appliedVariant = "";
+        state.variantRequest += 1; // pending silencing requests for the previous dish are stale
         $("silence-caption").textContent = "";
         renderSilenceControls();
         state.brain.onMn9 = (count) => { $("mn9-count").textContent = String(count); state.sound.click(); };
@@ -1363,7 +1383,7 @@ if (isBrowser) {
       },
     };
     await state.scene.run(plan, hooks, token);
-    if (state.token !== token) return;
+    if (state.session !== session || state.token !== token) return;
     for (const item of decision.known) item.tasted = true; // skipped plates still show their Hz
     relabelPlates();
     if (!decision.winner) state.sceneStatus = { key: "sceneNone" };
@@ -1378,6 +1398,8 @@ if (isBrowser) {
     if (!state.lookup || !state.dictionary) { notice("stateDataFailed"); return; }
     if (state.options.length < 2) { notice("stateNoOptions"); return; }
     notice(null);
+    state.session += 1;
+    const session = state.session;
     const scored = scoreOptions(state.options.map(optionQuery), state.dictionary, state.lookup);
     state.decision = decide(scored, mode);
     if (state.decision.known.length === 0) {
@@ -1386,8 +1408,9 @@ if (isBrowser) {
       return;
     }
     if (state.brain && state.scene) {
-      runScene(state.decision).catch((error) => {
+      runScene(state.decision, session).catch((error) => {
         console.warn("scene error:", error);
+        if (state.session !== session) return;
         $("scene-status").textContent = tr("stateSceneError");
         renderDecision();
       });
@@ -1499,14 +1522,30 @@ if (isBrowser) {
     }
   }
 
+  // Reset discards the current run: a new session id makes every pending await
+  // of the old run a no-op, and the run-time fields are cleared (F05). Skip is
+  // different: it keeps the session and shows this run's result.
   function reset() {
+    state.session += 1;
     if (state.token) state.token.cancel();
-    if (state.brain) state.brain.stop();
+    state.token = null;
+    if (state.brain) { state.brain.stop(); state.brain.setReplay(null); }
     if (state.scene) state.scene.stop();
     state.decision = null;
     state.sceneStatus = null;
     state.brainCaption = null;
     state.scenePlates = null;
+    state.currentCell = null;
+    state.currentItem = null;
+    state.currentCellLevels = null;
+    state.variant = "";
+    state.appliedVariant = "";
+    state.variantRequest += 1;
+    $("brain-caption").textContent = "";
+    $("silence-caption").textContent = "";
+    $("mn9-pill").hidden = true;
+    $("mn9-count").textContent = "0";
+    renderSilenceControls();
     $("scene-panel").hidden = true;
     $("result-panel").hidden = true;
     if ($("card-dialog").open) $("card-dialog").close();

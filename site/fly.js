@@ -133,6 +133,7 @@ export class FlyScene {
     this.raf = 0;
     this.lastTime = 0;
     this.highlight = -1;
+    this.generation = 0; // bumped by setPlates() and stop(); a stale setPlates never starts the loop
   }
 
   async setPlates(plates) {
@@ -145,7 +146,9 @@ export class FlyScene {
     this.canvas.style.height = `${height}px`;
     this.fly.x = width / 2;
     this.fly.y = 34;
+    const generation = ++this.generation;
     for (const plate of plates) await loadDishSprite(this.sprites, plate.slug);
+    if (generation !== this.generation) return; // replaced or stopped while loading (F05)
     this.start();
   }
 
@@ -172,6 +175,7 @@ export class FlyScene {
   }
 
   stop() {
+    this.generation += 1; // invalidates a setPlates() still awaiting its sprites
     if (this.raf) { cancelAnimationFrame(this.raf); clearTimeout(this.raf); }
     this.raf = 0;
     this.lastTime = 0;
