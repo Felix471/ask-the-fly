@@ -377,6 +377,11 @@ def main() -> None:
     parser.add_argument("--dry-run", action="store_true")
     parser.add_argument("--retry-errors", action="store_true")
     parser.add_argument("--report-only", action="store_true")
+    parser.add_argument(
+        "--resume", action="store_true",
+        help="reuse error-free observations already in --raw for the same prompt version and "
+             "run only the missing (food, lang, repeat) cells",
+    )
     parser.add_argument("--prompt-version", default=PROMPT_VERSION)
     parser.add_argument("--dimensions", default=",".join(DIMENSIONS))
     parser.add_argument("--raw", type=Path, default=RAW_PATH)
@@ -384,6 +389,8 @@ def main() -> None:
     args = parser.parse_args()
     if args.retry_errors and args.report_only:
         parser.error("--retry-errors and --report-only are mutually exclusive")
+    if args.resume and (args.retry_errors or args.report_only):
+        parser.error("--resume cannot be combined with --retry-errors or --report-only")
     if args.repeats < 1:
         parser.error("--repeats must be at least 1")
     langs = [value.strip() for value in args.langs.split(",") if value.strip()]
@@ -456,12 +463,29 @@ def main() -> None:
         return
 
     model_id = "dry-run" if args.dry_run else (os.getenv("ENCODER_MODEL") or "")
+    existing: dict[tuple[int, str, int], dict] = {}
+    if args.resume and args.raw.exists():
+        for record in _read_records(args.raw):
+            if "error" in record or record.get("prompt_version") != args.prompt_version:
+                continue
+            index = int(record["food_index"])
+            if index >= len(foods) or record.get("food") != foods[index]:
+                raise ValueError(
+                    f"{args.raw}: food_index {index} does not match the configured food list"
+                )
+            existing[(index, str(record["lang"]), int(record["repeat"]))] = record
     records = []
+    reused = 0
     args.raw.parent.mkdir(parents=True, exist_ok=True)
     with args.raw.open("a", encoding="utf-8") as raw_file:
         for index, food in enumerate(foods):
             for lang in langs:
                 for repeat in range(1, args.repeats + 1):
+                    previous = existing.get((index, lang, repeat))
+                    if previous is not None:
+                        records.append(previous)
+                        reused += 1
+                        continue
                     record = _run_observation(
                         food, index, lang, repeat, args.dry_run, args.prompt_version
                     )
@@ -475,6 +499,8 @@ def main() -> None:
         foods, records, args.repeats, langs, model_id, encoder_version,
         args.prompt_version, dimensions, args.report,
     )
+    if args.resume:
+        print(f"Reused {reused} existing observations; ran {len(records) - reused} new ones")
     print(f"Wrote {len(records)} observations to {args.raw}")
     print(f"Wrote report to {args.report}")
 

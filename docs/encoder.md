@@ -12,6 +12,7 @@ Use `--dimensions water` (or a comma list) to restrict report tables; raw JSONL 
 Use `--raw PATH` and `--report PATH` to choose outputs; defaults are `results/encoder/stability_raw.jsonl` and `docs/encoder_stability.md`.
 Limit a new run with `--limit N`; exercise it without Gemini with `--dry-run`.
 Retry failed rows with `--retry-errors`; regenerate only the report with `--report-only`.
+Resume an interrupted run with `--resume`: error-free rows already in `--raw` for the same prompt version are reused and only the missing (food, lang, repeat) cells are called.
 Each raw row records `prompt_version`; `encoder_version` is `model_id@prompt_version`.
 
 Merge raw results with `.venv\Scripts\python -m encoder.merge PATH [--replace-llm] [--arbitration-report]`.
