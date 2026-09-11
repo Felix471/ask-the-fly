@@ -12,11 +12,11 @@ from .client import GeminiEncoder
 from .levels import LEVELS
 from .normalize import normalize_name
 
-PROMPT_VERSION = "encode_v2.1"
+PROMPT_VERSION = "encode_v2.2"
 _PROMPTS_DIR = Path(__file__).parent / "prompts"
 _PROMPT_PATH_FOR = {
     version: _PROMPTS_DIR / f"{version.replace('.', '_')}.md"
-    for version in ("encode_v1", "encode_v2", "encode_v2.1")
+    for version in ("encode_v1", "encode_v2", "encode_v2.1", "encode_v2.2")
 }
 _DIMENSIONS = ("sugar", "bitter", "water")
 _MODEL_FIELDS = {"key", "aliases", "display", *_DIMENSIONS, "reason", "confidence"}

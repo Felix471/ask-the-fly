@@ -126,11 +126,11 @@
     },
     "sugar": "none",
     "bitter": "very_high",
-    "water": "low",
+    "water": "medium",
     "reason": {
       "sugar": "contains no significant sugar content",
       "bitter": "contains high levels of cucurbitacins causing intense bitterness",
-      "water": "a moist vegetable but not a liquid or dilute solution"
+      "water": "fleshy vegetable with high water content that releases juice when bitten"
     },
     "confidence": {
       "sugar": 1.0,
@@ -494,11 +494,11 @@
     },
     "sugar": "low",
     "bitter": "none",
-    "water": "medium",
+    "water": "low",
     "reason": {
       "sugar": "often contains a small amount of sugar in the filling for flavor balance",
       "bitter": "no bitter ingredients typically used in standard fillings",
-      "water": "moist filling and dough provide moderate water content"
+      "water": "moist solid texture with moderate moisture content in the filling"
     },
     "confidence": {
       "sugar": 0.8,
@@ -667,16 +667,16 @@
     },
     "sugar": "low",
     "bitter": "high",
-    "water": "low",
+    "water": "medium",
     "reason": {
       "sugar": "contains natural fruit sugars but is primarily tart",
       "bitter": "contains naringin which provides a strong bitter profile",
-      "water": "moist solid fruit flesh"
+      "water": "high water content with dissolved solutes typical of citrus fruit"
     },
     "confidence": {
       "sugar": 0.9,
       "bitter": 0.95,
-      "water": 0.875
+      "water": 0.9
     },
     "review": "llm_v1",
     "encoder_version": "gemini-3.1-flash-lite@encode_v2.1"
@@ -1244,16 +1244,16 @@
     },
     "sugar": "medium",
     "bitter": "none",
-    "water": "low",
+    "water": "medium",
     "reason": {
       "sugar": "contains natural fructose and glucose",
       "bitter": "no bitter compounds present",
-      "water": "high water content but bound in cellular structure as a solid fruit"
+      "water": "high water content with dissolved sugars"
     },
     "confidence": {
       "sugar": 0.9,
       "bitter": 1.0,
-      "water": 0.8
+      "water": 0.9
     },
     "review": "llm_v1",
     "encoder_version": "gemini-3.1-flash-lite@encode_v2.1"

@@ -1,13 +1,15 @@
-# Dish encoder v2.1
-The default prompt is `encode_v2.1`; select `encode_v1` or `encode_v2` with `--prompt-version VERSION`.
-Encode Chinese: `.venv\Scripts\python -m encoder.encode "红烧肉" --lang zh [--prompt-version encode_v2.1]`.
+# Dish encoder v2.2
+The default prompt is `encode_v2.2`; select `encode_v1`, `encode_v2` or `encode_v2.1` with `--prompt-version VERSION`.
+Encode Chinese: `.venv\Scripts\python -m encoder.encode "红烧肉" --lang zh [--prompt-version encode_v2.2]`.
 Encode English: `.venv\Scripts\python -m encoder.encode "black coffee" --lang en`.
 V2.1 retains v2's osmolarity-based water definition and adds bilingual anchor examples.
+V2.2 moves the water anchors so juicy fruit that releases juice when bitten (watermelon, orange, grapes) is `medium`, while firm or starchy fruit (apple, banana) stays `low`. Labels only: water `low` and `medium` share one grid cell (60 Hz), so MN9 results are unchanged.
+The v2.2 stability run (`docs/encoder_stability_v2_2.md`, water agreement 37/41) was applied to `data/dishes.json` only for water moves between `low` and `medium`; every other level in the dictionary is still the v2.1 encoding, because a full v2.2 re-encode also moved sugar, bitter and cross-cell water levels (see the merge report in the commit that introduced v2.2), which would change results.
 Plain water, clear tea, and clear broth are `very_high`; dilute milk and most soups are `high`; sweet/salty drinks and sauces are `medium`; moist solids and syrups are `low`; dry solids are `none`.
 Sugar and bitter definitions are unchanged from `encode_v1`.
 
 Run stability: `.venv\Scripts\python -m encoder.stability --repeats 6 --langs zh,en`.
-Use `--prompt-version VERSION`; the default is `encode_v2.1`.
+Use `--prompt-version VERSION`; the default is `encode_v2.2`.
 Use `--dimensions water` (or a comma list) to restrict report tables; raw JSONL entries still contain all dimensions.
 Use `--raw PATH` and `--report PATH` to choose outputs; defaults are `results/encoder/stability_raw.jsonl` and `docs/encoder_stability.md`.
 Limit a new run with `--limit N`; exercise it without Gemini with `--dry-run`.
