@@ -389,27 +389,31 @@ PoissonInput and PoissonGroup consume the RNG differently, so PoissonInput compa
 
 ## Refractory quirk (10 matched seeds)
 
-| seed | sugar+bitter MN9-L count | sugar-only MN9-L count | paired difference | all-neuron spike trains exact |
-|---|---|---|---|---|
-| 20260910 | 73 | 71 | 2 | False |
-| 20260911 | 68 | 68 | 0 | False |
-| 20260912 | 72 | 69 | 3 | False |
-| 20260913 | 74 | 72 | 2 | False |
-| 20260914 | 56 | 76 | -20 | False |
-| 20260915 | 69 | 70 | -1 | False |
-| 20260916 | 51 | 71 | -20 | False |
-| 20260917 | 64 | 69 | -5 | False |
-| 20260918 | 62 | 65 | -3 | False |
-| 20260919 | 64 | 63 | 1 | False |
+Three builds per seed, sugar 100 Hz: (a) sugar+bitter stimulus group with the old build-time `rfc=0` for both channels; (b) sugar-only stimulus group (bitter GRNs absent, rfc untouched); (c) the same sugar+bitter stimulus group as (a) with the per-channel rule (rfc=0 only for the driven channel). (a) and (c) consume an identical random stream, so (a)-(c) is the pure effect of the refractory rule; (a)-(b) also changes the stimulus group size and therefore the random draws.
 
-Mean paired count difference: **-4.100 spikes/trial**. Exact all-neuron spike trains: **0/10 seeds**.
+| seed | (a) old rule MN9-L | (b) sugar-only MN9-L | (a)-(b) | (a) vs (b) all-neuron exact | (c) per-channel rule MN9-L | (a)-(c) pure refractory | (a) vs (c) all-neuron exact |
+|---|---|---|---|---|---|---|---|
+| 20260910 | 73 | 71 | 2 | False | 73 | 0 | True |
+| 20260911 | 68 | 68 | 0 | False | 68 | 0 | True |
+| 20260912 | 72 | 69 | 3 | False | 72 | 0 | True |
+| 20260913 | 74 | 72 | 2 | False | 74 | 0 | True |
+| 20260914 | 56 | 76 | -20 | False | 56 | 0 | True |
+| 20260915 | 69 | 70 | -1 | False | 69 | 0 | True |
+| 20260916 | 51 | 71 | -20 | False | 51 | 0 | True |
+| 20260917 | 64 | 69 | -5 | False | 64 | 0 | True |
+| 20260918 | 62 | 65 | -3 | False | 62 | 0 | True |
+| 20260919 | 64 | 63 | 1 | False | 64 | 0 | True |
 
-A difference was observed. A nominally silent GRN can still be driven to spike by network input: with `rfc=0` it can fire at every step, while with `rfc=2.2 ms` it cannot.
+Different-stream comparison (a)-(b): mean paired count difference **-4.100 spikes/trial**; exact all-neuron spike trains **0/10 seeds**.
+
+Same-random-stream comparison (a)-(c): mean pure refractory difference **0.000 spikes/trial**; exact all-neuron spike trains **10/10 seeds**.
+
+The refractory rule has **zero measured effect**: with the random stream held fixed, the old build-time rule and the per-channel rule are spike-for-spike identical on every seed, so the undriven bitter GRNs never fired in this condition. The (a)-(b) difference is entirely the changed random stream (stimulus PoissonGroup of 65 versus 23 neurons), not the refractory rule. The per-channel rule is kept for fidelity to model.py; differences between pre-fix and fixed runs are sampling noise from different streams and must not be attributed to the rule.
 
 ## Semantic differences identified
 
 - Reusable/fresh-PG use one `PoissonGroup` neuron per target plus one-to-one `Synapses(on_pre='v += w_stim')`; legacy uses one `PoissonInput(N=1)` per target.
-- Reusable construction sets `rfc=0` for every neuron belonging to every built channel, even a channel run at 0 Hz. Legacy changes `rfc` only for channels passed into that fresh build; the study passes sugar only.
+- Before the fix, reusable construction set `rfc=0` for every neuron belonging to every built channel, even a channel run at 0 Hz. Legacy changes `rfc` only for channels passed into that fresh build; the study passes sugar only. The reusable path now applies rfc=0 per trial only to channels with a nonzero rate (measured effect: zero, see the refractory section).
 - Reusable restores, sets rates, then calls `brian2.seed` immediately before running. Fresh paths construct and set rates first, then seed immediately before running.
 - Reusable network membership includes the PoissonGroup and stimulus Synapses; legacy membership instead includes all PoissonInput objects. Fresh-PG matches reusable membership.
 - Reusable retains one SpikeMonitor and relies on `restore('init')` to clear it; both legacy paths allocate a new monitor for every trial.
@@ -426,6 +430,6 @@ Relative to legacy PoissonInput, the reusable path is **inconclusive: difference
 | 1 | restore-determinism | same-seed exact=True; all restored state at rest=True | exact spike trains and v, g, refractory state, stimulus rates at rest | PASS |
 | 2 | paired reusable vs fresh PoissonGroup | mean paired MN9-L difference=0.000 Hz; exact=10/10 | mean paired difference within ±2 Hz | PASS |
 | 3 | stimulus semantics vs legacy PoissonInput | MN9-L CI=[-2.010, 0.899] Hz, p=0.451963; total CI=[-80.569, 126.369] spikes/trial ([-0.834%, 1.308%] of legacy mean), p=0.662808 | MN9-L 95% CI within ±3 Hz and including 0; total CI covers 0 (no p-value rule) | PASS |
-| 4 | refractory quirk experiment | n=10; mean paired MN9-L count difference=-4.100; exact=0/10; any difference=True | 10 matched seeds reported (diagnostic; no numerical equivalence bound) | PASS |
+| 4 | refractory quirk experiment | n=10; mean paired MN9-L count difference=-4.100 (different stream); exact=0/10; same-stream pure refractory difference=0.000, exact=10/10 | 10 matched seeds reported (diagnostic; no numerical equivalence bound) | PASS |
 
-**Recommendation:** Use the reusable path as the single downstream path. Criterion 4 shows a difference, so the reusable path should adopt the legacy rule: set `rfc=0` only for channels with a nonzero rate in the condition. Re-run Phase 0 condition A on the fixed path (about 4 minutes) and note the delta; re-run Phase 1 only if the 100 Hz delta exceeds 3 Hz.
+**Recommendation:** Use the reusable path as the single downstream path. Criterion 4: the same-random-stream variant shows the refractory rule has zero measured effect; the per-channel rule (rfc=0 only for driven channels, as in model.py) is kept for fidelity, not because it changes results. Phase 0 condition A was re-run on the fixed path; its delta at 100 Hz (+0.1 Hz) is random-stream sampling noise, so Phase 1 was not re-run.

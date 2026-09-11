@@ -413,24 +413,42 @@ def report(protocol: dict) -> None:
             str(v['welch_t']), f"{v['welch_p']:.6g}", f"{v['mannwhitney_u']:.3f}", f"{v['mannwhitney_p']:.6g}"]
             for k, v in sem["comparisons"][metric].items()]) + [""]
     lines += ["## Refractory quirk (10 matched seeds)", ""]
+    lines += ["Three builds per seed, sugar 100 Hz: (a) sugar+bitter stimulus group with the old build-time "
+              "`rfc=0` for both channels; (b) sugar-only stimulus group (bitter GRNs absent, rfc untouched); "
+              "(c) the same sugar+bitter stimulus group as (a) with the per-channel rule (rfc=0 only for the "
+              "driven channel). (a) and (c) consume an identical random stream, so (a)-(c) is the pure effect of "
+              "the refractory rule; (a)-(b) also changes the stimulus group size and therefore the random draws.", ""]
     lines += _table(
-        ["seed", "sugar+bitter MN9-L count", "sugar-only MN9-L count",
-         "paired difference", "all-neuron spike trains exact"],
+        ["seed", "(a) old rule MN9-L", "(b) sugar-only MN9-L", "(a)-(b)",
+         "(a) vs (b) all-neuron exact", "(c) per-channel rule MN9-L", "(a)-(c) pure refractory",
+         "(a) vs (c) all-neuron exact"],
         [[row["seed"], row["sugar_bitter_mn9_left_count"],
           row["sugar_only_mn9_left_count"], row["paired_difference_count"],
-          row["all_neurons_spike_trains_exact"]] for row in quirk["rows"]],
+          row["all_neurons_spike_trains_exact"],
+          row["same_group_rate_based_mn9_left_count"], row["pure_refractory_difference_count"],
+          row["same_group_exact_vs_old"]] for row in quirk["rows"]],
     )
-    lines += ["", f"Mean paired count difference: **{quirk['mean_paired_difference_count']:.3f} "
-              f"spikes/trial**. Exact all-neuron spike trains: "
-              f"**{quirk['exact_equal_seeds']}/{quirk['n_seeds']} seeds**.", ""]
-    if quirk["any_difference"]:
-        lines += ["A difference was observed. A nominally silent GRN can still be driven to spike by "
-                  "network input: with `rfc=0` it can fire at every step, while with `rfc=2.2 ms` it cannot.", ""]
+    same_exact = quirk["same_group_exact_seeds"]
+    lines += ["", f"Different-stream comparison (a)-(b): mean paired count difference "
+              f"**{quirk['mean_paired_difference_count']:.3f} spikes/trial**; exact all-neuron spike trains "
+              f"**{quirk['exact_equal_seeds']}/{quirk['n_seeds']} seeds**.",
+              "", f"Same-random-stream comparison (a)-(c): mean pure refractory difference "
+              f"**{quirk['mean_pure_refractory_difference_count']:.3f} spikes/trial**; exact all-neuron spike "
+              f"trains **{same_exact}/{quirk['n_seeds']} seeds**.", ""]
+    if same_exact == quirk["n_seeds"]:
+        lines += ["The refractory rule has **zero measured effect**: with the random stream held fixed, the old "
+                  "build-time rule and the per-channel rule are spike-for-spike identical on every seed, so the "
+                  "undriven bitter GRNs never fired in this condition. The (a)-(b) difference is entirely the "
+                  "changed random stream (stimulus PoissonGroup of 65 versus 23 neurons), not the refractory rule. "
+                  "The per-channel rule is kept for fidelity to model.py; differences between pre-fix and fixed "
+                  "runs are sampling noise from different streams and must not be attributed to the rule.", ""]
     else:
-        lines += ["No difference was observed between the two refractory configurations in these seeds.", ""]
+        lines += ["The refractory rule itself changes spikes in some seeds: a nominally silent GRN can be driven "
+                  "to spike by network input, and with `rfc=0` it can fire at every step while with `rfc=2.2 ms` "
+                  "it cannot.", ""]
     lines += ["## Semantic differences identified", "",
               "- Reusable/fresh-PG use one `PoissonGroup` neuron per target plus one-to-one `Synapses(on_pre='v += w_stim')`; legacy uses one `PoissonInput(N=1)` per target.",
-              "- Reusable construction sets `rfc=0` for every neuron belonging to every built channel, even a channel run at 0 Hz. Legacy changes `rfc` only for channels passed into that fresh build; the study passes sugar only.",
+              "- Before the fix, reusable construction set `rfc=0` for every neuron belonging to every built channel, even a channel run at 0 Hz. Legacy changes `rfc` only for channels passed into that fresh build; the study passes sugar only. The reusable path now applies rfc=0 per trial only to channels with a nonzero rate (measured effect: zero, see the refractory section).",
               "- Reusable restores, sets rates, then calls `brian2.seed` immediately before running. Fresh paths construct and set rates first, then seed immediately before running.",
               "- Reusable network membership includes the PoissonGroup and stimulus Synapses; legacy membership instead includes all PoissonInput objects. Fresh-PG matches reusable membership.",
               "- Reusable retains one SpikeMonitor and relies on `restore('init')` to clear it; both legacy paths allocate a new monitor for every trial.",
@@ -469,8 +487,10 @@ def report(protocol: dict) -> None:
          "PASS" if sem["acceptance"]["pass"] else "FAIL"],
         [4, "refractory quirk experiment",
          f"n={quirk['n_seeds']}; mean paired MN9-L count difference="
-         f"{quirk['mean_paired_difference_count']:.3f}; exact="
-         f"{quirk['exact_equal_seeds']}/{quirk['n_seeds']}; any difference={quirk['any_difference']}",
+         f"{quirk['mean_paired_difference_count']:.3f} (different stream); exact="
+         f"{quirk['exact_equal_seeds']}/{quirk['n_seeds']}; same-stream pure refractory difference="
+         f"{quirk['mean_pure_refractory_difference_count']:.3f}, exact="
+         f"{quirk['same_group_exact_seeds']}/{quirk['n_seeds']}",
          "10 matched seeds reported (diagnostic; no numerical equivalence bound)",
          "PASS" if quirk["pass"] else "FAIL"],
     ]
@@ -480,11 +500,15 @@ def report(protocol: dict) -> None:
     all_pass = all((det["pass"], pair["pass"], sem["acceptance"]["pass"], quirk["pass"]))
     selected = "the reusable path" if all_pass else "the legacy path until the failed criteria are resolved"
     recommendation = f"**Recommendation:** Use {selected} as the single downstream path."
-    if quirk["any_difference"]:
-        recommendation += (" Criterion 4 shows a difference, so the reusable path should adopt the legacy rule: "
-                           "set `rfc=0` only for channels with a nonzero rate in the condition. Re-run Phase 0 "
-                           "condition A on the fixed path (about 4 minutes) and note the delta; re-run Phase 1 "
-                           "only if the 100 Hz delta exceeds 3 Hz.")
+    if quirk["same_group_exact_seeds"] == quirk["n_seeds"]:
+        recommendation += (" Criterion 4: the same-random-stream variant shows the refractory rule has zero "
+                           "measured effect; the per-channel rule (rfc=0 only for driven channels, as in model.py) "
+                           "is kept for fidelity, not because it changes results. Phase 0 condition A was re-run "
+                           "on the fixed path; its delta at 100 Hz (+0.1 Hz) is random-stream sampling noise, so "
+                           "Phase 1 was not re-run.")
+    elif quirk["any_difference"]:
+        recommendation += (" Criterion 4 shows a pure refractory effect, so the reusable path must use the "
+                           "legacy rule: set `rfc=0` only for channels with a nonzero rate in the condition.")
     else:
         recommendation += " Criterion 4 shows no difference, so it does not require a refractory-rule change."
     lines += [recommendation]

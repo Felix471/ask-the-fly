@@ -314,6 +314,14 @@ def pair_pass(curve: dict, a: float, b: float) -> tuple[bool, dict, dict, float]
     return abs(delta) >= curve["threshold"], pa, pb, delta
 
 
+def _pair_pass_if_measured(curve: dict, a: float, b: float) -> bool:
+    """A candidate pair counts only on curves where both points were measured directly."""
+    try:
+        return pair_pass(curve, a, b)[0]
+    except ValueError:
+        return False
+
+
 def adjustment_for_pair(
     levels: list[float], pair_index: int, curves: list[dict]
 ) -> dict | None:
@@ -333,7 +341,7 @@ def adjustment_for_pair(
             changed = levels.copy()
             changed[level_index] = new
             a, b = changed[pair_index:pair_index + 2]
-            if any(pair_pass(curve, a, b)[0] for curve in curves):
+            if any(_pair_pass_if_measured(curve, a, b) for curve in curves):
                 candidates.append((abs(new - old), new, level_index, old))
     if not candidates:
         return None
