@@ -1625,8 +1625,14 @@ if (isBrowser) {
     try { localStorage.setItem("askfly.lang", state.lang); } catch (_) { /* ignore */ }
     applyStrings();
   });
+  // IME: while a composition is open, Enter confirms the candidate and must not
+  // submit the form (F15). Chrome reports keyCode 229 / isComposing on that key.
+  const ime = { composing: false };
+  $("option-input").addEventListener("compositionstart", () => { ime.composing = true; });
+  $("option-input").addEventListener("compositionend", () => { ime.composing = false; });
   $("option-form").addEventListener("submit", (event) => {
     event.preventDefault();
+    if (ime.composing) return;
     const input = $("option-input");
     if (suggestState.index >= 0 && suggestState.items[suggestState.index]) {
       pickSuggest(suggestState.index); // Enter selects the highlighted match
@@ -1641,6 +1647,10 @@ if (isBrowser) {
   $("option-input").addEventListener("focus", renderSuggest);
   $("option-input").addEventListener("blur", () => setTimeout(closeSuggest, 120));
   $("option-input").addEventListener("keydown", (event) => {
+    if (event.isComposing || event.keyCode === 229 || ime.composing) {
+      if (event.key === "Enter") event.preventDefault();
+      return;
+    }
     if ($("suggest").hidden) return;
     if (event.key === "ArrowDown") { event.preventDefault(); highlightSuggest(suggestState.index + 1); }
     else if (event.key === "ArrowUp") { event.preventDefault(); highlightSuggest(suggestState.index - 1); }
