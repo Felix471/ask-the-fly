@@ -15,6 +15,7 @@ Ask the Fly probes how a connectome-scale fruit-fly brain model responds to tast
 - FlyWire v783 connectome data: CC BY-NC 4.0.
 - Shiu et al. (2024), *Nature*, model code: MIT.
 - Eon fly-brain benchmark repository: GPL-2.0; used as read-only reference/data, with no code copied.
+- Assets: the 41 dish sprites and the fly sprite sheet (`site/assets/`) are original pixel art generated for this project, released under CC BY 4.0; the code stays MIT. Only the processed sprites are tracked; the raw 1024 px sources in `assets/raw/` are not.
 - FlyWire neuron annotations (Schlegel et al. 2024; github.com/flyconnectome/flywire_annotations): CC BY 4.0. Used for the soma positions behind the brain view (`site/data/neurons.json`); the table itself lives in `data/external/` and is not tracked.
 
 ## Citations

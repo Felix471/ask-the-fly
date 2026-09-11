@@ -16,6 +16,7 @@ English: [README.md](README.md)
 - FlyWire v783 连接组数据：CC BY-NC 4.0。
 - Shiu 等（2024），*Nature*，模型代码：MIT。
 - Eon fly-brain 基准仓库：GPL-2.0；仅作只读参考/数据使用，未复制任何代码。
+- 素材：41 张菜品像素图和果蝇精灵图（`site/assets/`）是为本项目生成的原创像素画，以 CC BY 4.0 发布；代码仍为 MIT。仓库只跟踪处理后的精灵图，`assets/raw/` 里的 1024 px 原图不入库。
 - FlyWire 神经元注释表（Schlegel 等 2024；github.com/flyconnectome/flywire_annotations）：CC BY 4.0。用于脑图的胞体位置（`site/data/neurons.json`）；表格本身放在 `data/external/`，不入库。
 
 ## 引用
