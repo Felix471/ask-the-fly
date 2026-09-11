@@ -39,7 +39,12 @@ def grid_cell_id(levels: dict) -> str:
 
 
 def expand_grid_conditions(levels: dict) -> list[dict]:
-    """Expand the confirmed 5 x 5 x 5 x 4 grid in declared dimension order."""
+    """Expand the confirmed grid in declared dimension order, one cell per unique Hz vector.
+
+    Level names that map to identical Hz on every dimension share one cell (for
+    example water low and medium, both 60 Hz). The first combination in product
+    order is the canonical cell; the others are listed under ``alias_levels``.
+    """
     dimensions = tuple(levels["dimensions"])
     if dimensions != EXPECTED_DIMENSIONS:
         raise ValueError(
@@ -47,30 +52,55 @@ def expand_grid_conditions(levels: dict) -> list[dict]:
         )
     mappings = levels["levels"]
     choices = [tuple(mappings[dimension]) for dimension in dimensions]
-    conditions = []
+    conditions: list[dict] = []
+    by_rates: dict[tuple, dict] = {}
     for names in itertools.product(*choices):
         level_names = dict(zip(dimensions, names))
         rates = {
             dimension: mappings[dimension][level_names[dimension]]
             for dimension in dimensions
         }
-        conditions.append(
-            {
-                "cond_id": grid_cell_id(level_names),
-                "cell_set_override": {},
-                "rates": rates,
-                "levels": level_names,
-            }
-        )
+        rate_key = tuple(float(rates[dimension]) for dimension in dimensions)
+        canonical = by_rates.get(rate_key)
+        if canonical is not None:
+            canonical["alias_levels"].append(level_names)
+            continue
+        condition = {
+            "cond_id": grid_cell_id(level_names),
+            "cell_set_override": {},
+            "rates": rates,
+            "levels": level_names,
+            "alias_levels": [],
+        }
+        by_rates[rate_key] = condition
+        conditions.append(condition)
 
+    expected = 1
+    for dimension in dimensions:
+        expected *= len(set(mappings[dimension].values()))
     ids = {condition["cond_id"] for condition in conditions}
-    rate_vectors = {
-        tuple(condition["rates"][dimension] for dimension in dimensions)
-        for condition in conditions
-    }
-    assert len(conditions) == 500, f"Expected 500 grid cells, got {len(conditions)}"
-    assert len(ids) == 500, f"Expected 500 unique condition IDs, got {len(ids)}"
-    assert len(rate_vectors) == 500, (
-        f"Expected 500 unique rate vectors, got {len(rate_vectors)}"
-    )
+    if len(conditions) != expected or len(ids) != expected:
+        raise ValueError(
+            f"Expected {expected} unique grid cells, got {len(conditions)} "
+            f"({len(ids)} unique IDs)"
+        )
     return conditions
+
+
+def resolve_levels(levels: dict, selected: dict) -> dict:
+    """Map any level-name combination to the canonical level names of its cell."""
+    mappings = levels["levels"]
+    for dimension in EXPECTED_DIMENSIONS:
+        if selected.get(dimension) not in mappings[dimension]:
+            raise ValueError(
+                f"Unknown {dimension} level {selected.get(dimension)!r}; "
+                f"expected one of {list(mappings[dimension])}"
+            )
+    wanted = tuple(
+        float(mappings[dimension][selected[dimension]]) for dimension in EXPECTED_DIMENSIONS
+    )
+    for condition in expand_grid_conditions(levels):
+        rates = tuple(float(condition["rates"][d]) for d in EXPECTED_DIMENSIONS)
+        if rates == wanted:
+            return dict(condition["levels"])
+    raise ValueError(f"No grid cell for {selected}")

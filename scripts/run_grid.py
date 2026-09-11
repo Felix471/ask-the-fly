@@ -71,7 +71,7 @@ def main() -> int:
         wanted = (
             ("none", "none", "none", "none"),
             ("high", "none", "none", "none"),
-            ("high", "medium", "medium", "none"),
+            ("high", "medium", "low", "none"),
         )
         by_levels = {
             tuple(condition["levels"][dimension] for dimension in EXPECTED_DIMENSIONS): condition
@@ -95,6 +95,9 @@ def main() -> int:
         "start_time": datetime.now(timezone.utc).isoformat(),
         "end_time": None,
         "n_cells": len(conditions),
+        "n_level_combinations": len(conditions) + sum(
+            len(condition["alias_levels"]) for condition in conditions
+        ),
         "n_trials": n_trials,
     }
     try:

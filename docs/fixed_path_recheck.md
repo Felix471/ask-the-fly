@@ -133,20 +133,17 @@ all chosen levels pairwise distinguishable: yes
 | none 0→low 60 | P_sugar200Hz_water (fixed) | 93.5 ± 4.8 | 98.1 ± 4.9 | +4.7 | 6.9 | no |
 | none 0→low 60 | P_sugar60Hz_water (fixed) | 31.1 ± 6.8 | 60.0 ± 4.2 | +28.8 | 8.9 | yes |
 | none 0→low 60 | P_sugar100Hz_water (fixed) | 65.3 ± 4.8 | 79.9 ± 6.2 | +14.6 | 7.5 | yes |
-| low 60→medium 120 | S_water alone (fixed) | 0.0 ± 0.0 | 0.2 ± 0.5 | +0.2 | 4.7 | no |
-| low 60→medium 120 | P_sugar200Hz_water (fixed) | 98.1 ± 4.9 | 103.0 ± 4.0 | +4.9 | 6.9 | no |
-| low 60→medium 120 | P_sugar60Hz_water (fixed) | 60.0 ± 4.2 | 67.1 ± 5.5 | +7.1 | 8.9 | no |
-| low 60→medium 120 | P_sugar100Hz_water (fixed) | 79.9 ± 6.2 | 84.3 ± 4.8 | +4.3 | 7.5 | no |
-| medium 120→high 180 | S_water alone (fixed) | 0.2 ± 0.5 | 20.4 ± 4.3 | +20.2 | 4.7 | yes |
-| medium 120→high 180 | P_sugar200Hz_water (fixed) | 103.0 ± 4.0 | 99.8 ± 5.1 | -3.3 | 6.9 | no |
-| medium 120→high 180 | P_sugar60Hz_water (fixed) | 67.1 ± 5.5 | 71.9 ± 7.1 | +4.9 | 8.9 | no |
-| medium 120→high 180 | P_sugar100Hz_water (fixed) | 84.3 ± 4.8 | 84.2 ± 5.2 | -0.1 | 7.5 | no |
+| low 60→medium 60 | shared grid cell (identical Hz; levels deliberately not separated) | — | — | — | — | n/a |
+| medium 60→high 180 | S_water alone (fixed) | 0.0 ± 0.0 | 20.4 ± 4.3 | +20.4 | 4.7 | yes |
+| medium 60→high 180 | P_sugar200Hz_water (fixed) | 98.1 ± 4.9 | 99.8 ± 5.1 | +1.6 | 6.9 | no |
+| medium 60→high 180 | P_sugar60Hz_water (fixed) | 60.0 ± 4.2 | 71.9 ± 7.1 | +12.0 | 8.9 | yes |
+| medium 60→high 180 | P_sugar100Hz_water (fixed) | 79.9 ± 6.2 | 84.2 ± 5.2 | +4.3 | 7.5 | no |
 | high 180→very_high 240 | S_water alone (fixed) | 20.4 ± 4.3 | 44.8 ± 4.7 | +24.4 | 4.7 | yes |
 | high 180→very_high 240 | P_sugar200Hz_water (fixed) | 99.8 ± 5.1 | 100.1 ± 4.2 | +0.4 | 6.9 | no |
 | high 180→very_high 240 | P_sugar60Hz_water (fixed) | 71.9 ± 7.1 | 71.1 ± 5.7 | -0.8 | 8.9 | no |
 | high 180→very_high 240 | P_sugar100Hz_water (fixed) | 84.2 ± 5.2 | 83.7 ± 3.6 | -0.5 | 7.5 | no |
 
-all chosen levels pairwise distinguishable: no
+all chosen levels pairwise distinguishable: yes
 
 ### ir94e
 
@@ -160,8 +157,6 @@ all chosen levels pairwise distinguishable: yes
 
 ## Suggested minimal adjustments
 
-| dimension | collapsed pair | suggested one-level move |
-|---|---|---|
-| water | low→medium | move low from 60 Hz to 20 Hz |
+No adjustments suggested; every adjacent chosen pair passes.
 
-Grid may start: NO — see adjustments
+Grid may start: YES

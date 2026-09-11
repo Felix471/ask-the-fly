@@ -1,19 +1,48 @@
 {
-  "grid_levels_version": "1.0",
-  "decided_on": "2026-09-10",
-  "status": "confirmed by product owner; stim_protocol.json mechanics unchanged (dt, w_syn, cell sets, duration, trials, readout)",
-  "dimensions": ["sugar", "bitter", "water", "ir94e"],
+  "grid_levels_version": "1.1",
+  "decided_on": "2026-09-11",
+  "status": "confirmed by product owner 2026-09-10; water medium remapped to the low cell 2026-09-11 after the fixed-path recheck; stim_protocol.json mechanics unchanged (dt, w_syn, cell sets, duration, trials, readout)",
+  "dimensions": [
+    "sugar",
+    "bitter",
+    "water",
+    "ir94e"
+  ],
   "levels": {
-    "sugar":  {"none": 0, "low": 60, "medium": 80, "high": 120, "very_high": 200},
-    "bitter": {"none": 0, "low": 30, "medium": 60, "high": 100, "very_high": 160},
-    "water":  {"none": 0, "low": 60, "medium": 120, "high": 180, "very_high": 240},
-    "ir94e":  {"none": 0, "low": 60, "medium": 120, "high": 200}
+    "sugar": {
+      "none": 0,
+      "low": 60,
+      "medium": 80,
+      "high": 120,
+      "very_high": 200
+    },
+    "bitter": {
+      "none": 0,
+      "low": 30,
+      "medium": 60,
+      "high": 100,
+      "very_high": 160
+    },
+    "water": {
+      "none": 0,
+      "low": 60,
+      "medium": 60,
+      "high": 180,
+      "very_high": 240
+    },
+    "ir94e": {
+      "none": 0,
+      "low": 60,
+      "medium": 120,
+      "high": 200
+    }
   },
   "notes": {
     "ir94e": "Four levels; the characterization showed high and very_high not distinguishable, so they are merged into 'high' = 200 Hz. Ir94e is not exposed in the v1 encoder; the v1 lookup uses the ir94e = none slice. Included so v2 does not need a second grid run.",
-    "water": "Water levels are chosen to span both regimes on purpose: 60 and 120 Hz are visible only as modifiers of sugar (sugar x water surface), 180 and 240 Hz drive MN9 alone. Water distinguishability is judged on the full sugar x water surface, not on the alone curve.",
+    "water": "Five encoder levels are kept, but low and medium share one grid cell (both 60 Hz) because the model cannot separate weak water drives: the fixed-path recheck (docs/fixed_path_recheck.md) found water 60 -> 120 Hz indistinguishable on every curve (alone, and as a modifier at sugar 60/100/200). 60 Hz is visible only as a helper to sugar (sugar x water surface); 180 and 240 Hz drive MN9 alone. The grid runner deduplicates identical Hz vectors, so the grid is 5 x 5 x 4 x 4 = 400 unique cells; lookups resolve level names by Hz.",
     "sugar": "25 Hz gives 0 Hz MN9 in this model, so the former 25/50 levels were replaced; threshold is near 40 Hz, saturation near 90 Hz MN9.",
     "n_trials_per_cell": 30,
-    "readout": "left MN9 (720575940660219265) per stim_protocol.json; right recorded"
+    "readout": "left MN9 (720575940660219265) per stim_protocol.json; right recorded",
+    "n_unique_cells": 400
   }
 }

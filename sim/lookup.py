@@ -25,10 +25,9 @@ class LookupTable:
         self.data = data
         self.levels = data["levels"]
         self.cells = data["cells"]
-        self._index = {
-            tuple(cell[dimension] for dimension in DIMENSIONS): cell
-            for cell in self.cells
-        }
+        # Cells are keyed by their Hz vector so level names that share a rate
+        # (for example water low and medium, both 60 Hz) resolve to one cell.
+        self._index = {self._hz_key(cell["hz"]): cell for cell in self.cells}
         if len(self._index) != len(self.cells):
             raise ValueError("Lookup table contains duplicate cells")
 
@@ -51,6 +50,10 @@ class LookupTable:
             )
         return table
 
+    @staticmethod
+    def _hz_key(hz: dict) -> tuple[float, ...]:
+        return tuple(float(hz[dimension]) for dimension in DIMENSIONS)
+
     def _validate_levels(self, **selected: str) -> None:
         for dimension in DIMENSIONS:
             name = selected[dimension]
@@ -68,7 +71,9 @@ class LookupTable:
             "sugar": sugar, "bitter": bitter, "water": water, "ir94e": ir94e
         }
         self._validate_levels(**selected)
-        key = tuple(selected[dimension] for dimension in DIMENSIONS)
+        key = self._hz_key(
+            {dimension: self.levels[dimension][selected[dimension]] for dimension in DIMENSIONS}
+        )
         try:
             return self._index[key]
         except KeyError as exc:

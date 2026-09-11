@@ -529,21 +529,22 @@
     "reason": {
       "sugar": "contains no significant sugar content",
       "bitter": "naturally contains high levels of bitter sesquiterpene lactones",
-      "water": "a moist vegetable but not a liquid or high-water-content solution"
+      "water": "moist leafy green: tissue water, not free water (product-owner decision 2026-09-11)"
     },
     "confidence": {
       "sugar": 1.0,
       "bitter": 1.0,
       "water": 0.9
     },
-    "review": "needs_review",
+    "review": "human_checked",
     "encoder_version": "gemini-3.1-flash-lite@encode_v2.1",
     "arbitration": {
       "water": {
         "zh": "high",
         "en": "low",
         "chosen": "low",
-        "rule": "needs_review"
+        "rule": "human_checked",
+        "note": "resolved by hand 2026-09-11: moist leafy greens are water low"
       }
     }
   },
@@ -628,25 +629,26 @@
     },
     "sugar": "none",
     "bitter": "low",
-    "water": "high",
+    "water": "low",
     "reason": {
       "sugar": "vegetable with no added sugar",
       "bitter": "contains mild natural glucosinolates",
-      "water": "high water content typical of leafy green vegetables"
+      "water": "moist leafy green: tissue water, not free water (product-owner decision 2026-09-11)"
     },
     "confidence": {
       "sugar": 1.0,
       "bitter": 0.9,
       "water": 0.9
     },
-    "review": "needs_review",
+    "review": "human_checked",
     "encoder_version": "gemini-3.1-flash-lite@encode_v2.1",
     "arbitration": {
       "water": {
         "zh": "low",
         "en": "high",
-        "chosen": "high",
-        "rule": "needs_review"
+        "chosen": "low",
+        "rule": "human_checked",
+        "note": "resolved by hand 2026-09-11: moist leafy greens are water low"
       }
     }
   },

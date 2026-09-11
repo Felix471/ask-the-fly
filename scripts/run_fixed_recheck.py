@@ -374,6 +374,12 @@ def distinguishability_sections(
         lines += [f"### {dimension}", "", "| pair | curve | value_a | value_b | Δ | threshold | distinguishable? |", "|---|---|---:|---:|---:|---:|---|"]
         dimension_pass = True
         for index, (a, b) in enumerate(zip(frequencies, frequencies[1:])):
+            if a == b:
+                lines.append(
+                    f"| {names[index]} {a:g}→{names[index + 1]} {b:g} | shared grid cell "
+                    f"(identical Hz; levels deliberately not separated) | — | — | — | — | n/a |"
+                )
+                continue
             passes = []
             for curve in curves:
                 passed, pa, pb, delta = pair_pass(curve, a, b)

@@ -21,16 +21,15 @@ def export(lookup_path: Path) -> dict:
     sugar_levels = list(table.levels["sugar"])
     bitter_levels = list(table.levels["bitter"])
     water_levels = list(table.levels["water"])
-    cells = table.slice(ir94e="none")
-    by_key = {
-        (cell["water"], cell["sugar"], cell["bitter"]): cell for cell in cells
-    }
-
+    # Resolve by level names through the table so level names that share a
+    # grid cell (water low/medium, both 60 Hz) both get a surface entry.
     def surface(field: str) -> dict:
         return {
             water: {
                 sugar: {
-                    bitter: by_key[(water, sugar, bitter)][field]
+                    bitter: table.get(
+                        sugar=sugar, bitter=bitter, water=water, ir94e="none"
+                    )[field]
                     for bitter in bitter_levels
                 }
                 for sugar in sugar_levels

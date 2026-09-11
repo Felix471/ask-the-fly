@@ -35,4 +35,6 @@ Product copy for provenance: "Scores come from a published female-brain LIF mode
 | Water is a separate taste quality in the model | **no** — in this model water acts as a second appetitive drive that mainly boosts weak sugar (sugar 40 Hz + water 40 Hz gives 24 Hz MN9 vs 4 Hz alone; at sugar 200 Hz it adds 7%). That is why a wet savory dish outranks a dry one. This is a property of the connectome model, not a rule we wrote. | docs/phase1_characterization.md, sugar × water |
 | Uses the September 2026 complete gustatory wiring (MaleCNS) | **no** — a different animal, not part of this simulation | docs/open_questions.md, v3 note |
 
+In this model weak water is only visible as a helper to sugar; the fly notices water when the food is mostly water. The lookup grid therefore gives water "low" and "medium" the same cell (60 Hz): the fixed-path recheck (docs/fixed_path_recheck.md) could not separate them on any curve.
+
 Product line: "It only does the first bite."
