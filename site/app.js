@@ -858,24 +858,34 @@ if (isBrowser) {
     if (!box || !state.manifest) return;
     const t = STRINGS[state.lang];
     box.innerHTML = "";
-    const mk = (label, variant) => {
+    // The button factory only builds the element; each button gets exactly one
+    // handler, passed in explicitly (F02).
+    const button = (label, onClick) => {
       const b = document.createElement("button");
       b.type = "button";
       b.className = "btn btn-secondary btn-small";
       b.textContent = label;
+      b.addEventListener("click", onClick);
+      return b;
+    };
+    const variantButton = (label, variant) => {
+      const b = button(label, () => playVariant(variant));
       b.setAttribute("aria-pressed", state.variant === variant ? "true" : "false");
-      b.addEventListener("click", () => playVariant(variant));
       return b;
     };
     const { primary, more } = silenceRanking();
-    box.append(mk(t.silenceBaseline, ""));
-    for (const entry of primary) box.append(mk(fmt(t.silenceButton, { name: entry.label }), entry.key));
+    box.append(variantButton(t.silenceBaseline, ""));
+    for (const entry of primary) box.append(variantButton(fmt(t.silenceButton, { name: entry.label }), entry.key));
     if (more.length) {
-      const toggle = mk(silenceUi.expanded ? t.silenceLess : t.silenceMore, null);
-      toggle.setAttribute("aria-pressed", "false");
-      toggle.onclick = () => { silenceUi.expanded = !silenceUi.expanded; renderSilenceControls(); };
+      // Expander: changes only the list, never the experiment condition.
+      const toggle = button(silenceUi.expanded ? t.silenceLess : t.silenceMore, () => {
+        silenceUi.expanded = !silenceUi.expanded;
+        renderSilenceControls();
+      });
+      toggle.setAttribute("aria-expanded", silenceUi.expanded ? "true" : "false");
+      toggle.setAttribute("aria-controls", "silence-controls");
       box.append(toggle);
-      if (silenceUi.expanded) for (const entry of more) box.append(mk(fmt(t.silenceButton, { name: entry.label }), entry.key));
+      if (silenceUi.expanded) for (const entry of more) box.append(variantButton(fmt(t.silenceButton, { name: entry.label }), entry.key));
     }
     const summary = document.createElement("div");
     summary.className = "silence-summary";
@@ -1567,6 +1577,21 @@ if (isBrowser) {
   window.addEventListener("resize", () => {
     if (state.brain && !$("scene-panel").hidden) state.brain.resize();
   });
+
+  // Read-only view of the run state for browser regression checks (scripts/browser_checks.py).
+  window.__askfly = {
+    snapshot: () => ({
+      phase: state.phase ?? null,
+      session: state.session ?? null,
+      currentCell: state.currentCell,
+      variant: state.variant,
+      options: state.options.map((o) => o.key || o.text),
+      sceneRunning: Boolean(state.scene && state.scene.raf),
+      brainPlaying: Boolean(state.brain && state.brain.raf),
+      idleRunning: Boolean(state.idleFly && state.idleFly.raf),
+      dialogOpen: $("card-dialog").open,
+    }),
+  };
 
   applyStrings();
   loadData().then(() => {
