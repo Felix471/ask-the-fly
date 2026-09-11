@@ -297,10 +297,10 @@ test("share link round-trips known dishes as slugs and unknown names as typed", 
   const lookup = buildLookup(table);
   const decision = decide(scoreOptions(["火锅", "black coffee", "not a dish"], dictionary, lookup), "ask");
   const url = shareUrl(decision, "zh");
-  assert.equal(url, `${SITE_URL}?d=hotpot,black-coffee,not%20a%20dish&lang=zh`);
+  assert.equal(url, `${SITE_URL}?v=2&d=k.hotpot,k.black-coffee,t.not%20a%20dish&lang=zh`);
   const parsed = parseShareParams(new URL(url).search);
-  assert.deepEqual(parsed, { names: ["hotpot", "black-coffee", "not a dish"], lang: "zh", mode: "ask" });
-  const options = resolveShared(parsed.names, dictionary);
+  assert.deepEqual(parsed, { version: 2, items: [{ kind: "key", value: "hotpot" }, { kind: "key", value: "black-coffee" }, { kind: "text", value: "not a dish" }], lang: "zh", mode: "ask" });
+  const options = resolveShared(parsed.items, dictionary);
   assert.deepEqual(options, [{ key: "hotpot" }, { key: "black coffee" }, { text: "not a dish" }]);
   const again = decide(scoreOptions(options.map(optionQuery), dictionary, lookup), "ask");
   assert.deepEqual(again.known.map((i) => i.entry.key), decision.known.map((i) => i.entry.key));
@@ -310,13 +310,14 @@ test("share link round-trips known dishes as slugs and unknown names as typed", 
   assert.equal(parseShareParams("?lang=zh"), null);
   assert.equal(parseShareParams("?d=&lang=zh"), null);
   assert.equal(parseShareParams("?d=a,b&lang=fr").lang, null);
+  assert.equal(parseShareParams("?d=a,b&lang=fr").version, 1);
   assert.equal(slugFor("Black Coffee"), "black-coffee");
 });
 
 test("every dictionary key survives the slug round trip", () => {
   const dictionary = buildDictionary(dishes);
   for (const entry of dishes) {
-    const [option] = resolveShared([slugFor(entry.key)], dictionary);
+    const [option] = resolveShared([{ kind: "key", value: slugFor(entry.key) }], dictionary);
     assert.deepEqual(option, { key: entry.key }, `${entry.key} -> ${slugFor(entry.key)}`);
   }
 });
@@ -386,7 +387,7 @@ test("site/config.json carries the canonical URL the page falls back to", () => 
   const dictionary = buildDictionary(dishes);
   const lookup = buildLookup(table);
   const decision = decide(scoreOptions(["火锅", "black coffee"], dictionary, lookup), "ask");
-  assert.equal(shareUrl(decision, "en", "https://example.test"), "https://example.test/?d=hotpot,black-coffee&lang=en");
+  assert.equal(shareUrl(decision, "en", "https://example.test"), "https://example.test/?v=2&d=k.hotpot,k.black-coffee&lang=en");
 });
 
 // ---- selections are keys; the language switch only changes labels ----

@@ -216,3 +216,58 @@ test("F13: one missing fly frame keeps the other frames; a missing set falls bac
   assert.equal(framesFor(sprites.fly, "hover"), sprites.fly.idle);
   assert.equal(framesFor({}, "idle"), null, "only when nothing loaded does the drawn fallback apply");
 });
+
+// ---- F17: versioned, typed share params; unknown text with separators round-trips; old links still parse ----
+import { shareParams, parseShareParams, resolveShared, SHARE_LIMITS } from "../app.js";
+
+function fakeDictionary(keys) {
+  const entries = keys.map((key) => ({ key, display: { en: key, zh: key }, aliases: [] }));
+  return buildDictionary(entries);
+}
+const known = (key) => ({ name: key, entry: { key, display: { en: key, zh: key } }, cell: { mn9_mean: 1, mn9_std: 0 } });
+const unknown = (text) => ({ name: text, entry: null, cell: null });
+
+test("F17: v2 keeps type and order; unknown text with comma, percent, ampersand, emoji and CJK round-trips", () => {
+  const texts = ["not, a dish", "50% off", "fish & chips", "🍜 noodles", "凉皮, 加辣", "  padded  "];
+  const decision = { mode: "ask", known: [known("hotpot")], misses: texts.map(unknown) };
+  const query = shareParams(decision, "zh");
+  assert.match(query, /^\?v=2&d=k\.hotpot,t\./);
+  const parsed = parseShareParams(query);
+  assert.equal(parsed.version, 2);
+  assert.deepEqual(parsed.items[0], { kind: "key", value: "hotpot" });
+  assert.deepEqual(parsed.items.slice(1).map((i) => i.value), texts.map((t) => t.trim()));
+  assert.ok(parsed.items.slice(1).every((i) => i.kind === "text"));
+  const dictionary = fakeDictionary(["hotpot"]);
+  const options = resolveShared(parsed.items, dictionary);
+  assert.deepEqual(options[0], { key: "hotpot" });
+  assert.deepEqual(options.slice(1).map((o) => o.text), texts.map((t) => t.trim()));
+});
+
+test("F17: unknown text that equals a known slug is never upgraded to a key in v2", () => {
+  const dictionary = fakeDictionary(["hotpot"]);
+  const query = shareParams({ mode: "ask", known: [], misses: [unknown("hotpot")] }, "en");
+  const options = resolveShared(parseShareParams(query).items, dictionary);
+  assert.deepEqual(options, [{ text: "hotpot" }]);
+});
+
+test("F17: old v1 links (untyped, comma-joined) still parse and resolve", () => {
+  const dictionary = fakeDictionary(["hotpot", "black coffee"]);
+  const parsed = parseShareParams("?d=hotpot,black-coffee,not%20a%20dish&lang=zh&m=opposite");
+  assert.equal(parsed.version, 1);
+  assert.deepEqual(parsed.items.map((i) => i.value), ["hotpot", "black-coffee", "not a dish"]);
+  assert.deepEqual(resolveShared(parsed.items, dictionary), [{ key: "hotpot" }, { key: "black coffee" }, { text: "not a dish" }]);
+  assert.equal(parsed.lang, "zh");
+  assert.equal(parsed.mode, "opposite");
+});
+
+test("F17: limits and malformed links are controlled", () => {
+  const many = { mode: "ask", known: Array.from({ length: 40 }, (_, i) => known(`d${i}`)), misses: [] };
+  const parsed = parseShareParams(shareParams(many, "en"));
+  assert.equal(parsed.items.length, SHARE_LIMITS.maxItems);
+  const long = { mode: "ask", known: [], misses: [unknown("x".repeat(500))] };
+  assert.equal(parseShareParams(shareParams(long, "en")).items[0].value.length, SHARE_LIMITS.maxTextLength);
+  assert.equal(parseShareParams("?v=2&d=t.%E0%A4%A&lang=en"), null, "bad percent-encoding is rejected, not thrown");
+  assert.equal(parseShareParams("?v=2&d=&lang=en"), null);
+  assert.equal(parseShareParams("?v=9&d=k.hotpot"), null, "unknown version");
+  assert.equal(parseShareParams(""), null);
+});

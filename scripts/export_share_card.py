@@ -26,7 +26,7 @@ SITE_URL = json.loads((ROOT / "site" / "config.json").read_text(encoding="utf-8"
 def render(args: argparse.Namespace) -> tuple[Path, Path]:
     from playwright.sync_api import sync_playwright
 
-    query = f"?d={args.dishes}&lang={args.lang}" + ("&m=opposite" if args.opposite else "")
+    query = "?v=2&d=" + ",".join("k." + d for d in args.dishes.split(",")) + f"&lang={args.lang}" + ("&m=opposite" if args.opposite else "")
     out = Path(args.out)
     phone = out.with_name(out.stem + "-phone" + out.suffix)
     out.parent.mkdir(parents=True, exist_ok=True)
@@ -77,7 +77,7 @@ def main() -> int:
 
     out, phone = render(args)
     print(f"card: {out}\nphone view: {phone}")
-    expected = f"{SITE_URL}?d={args.dishes}&lang={args.lang}" + ("&m=opposite" if args.opposite else "")
+    expected = f"{SITE_URL}?v=2&d=" + ",".join("k." + d for d in args.dishes.split(",")) + f"&lang={args.lang}" + ("&m=opposite" if args.opposite else "")
     decoded = decode_qr(out)
     if decoded is None:
         print("QR not checked (pip install opencv-python-headless to decode)")

@@ -266,12 +266,24 @@ export function slugFor(key) {
   return String(key).normalize("NFKD").replace(/[^\x00-\x7f]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "") || "dish";
 }
 
-// ?d=slug,slug,…&lang=zh[&m=opposite] replays a comparison on load. Known dishes
-// travel as their sprite slug (short, scannable); unknown names as typed, encoded.
+// Share links, format v2: `?v=2&d=<item>,<item>,…&lang=zh|en[&m=opposite]`.
+// Each item is typed: `k.<slug>` for a dictionary dish, `t.<encodeURIComponent(text)>`
+// for typed unknown text. Items are joined with "," after encoding, so commas,
+// "&", "%" and non-ASCII inside a text survive; the `d` value is read from
+// the raw query string, not through URLSearchParams (which would decode
+// before splitting). Old v1 links (`?d=slug,slug` without `v`) still parse.
+// A link re-runs the choice against the current data; it is not a snapshot.
+export const SHARE_LIMITS = { maxItems: 20, maxTextLength: 80 };
+
+function shareItemsFor(decision) {
+  return [...decision.known, ...decision.misses].slice(0, SHARE_LIMITS.maxItems).map((item) => (
+    item.entry ? { kind: "key", value: slugFor(item.entry.key) } : { kind: "text", value: String(item.name).trim().slice(0, SHARE_LIMITS.maxTextLength) }
+  ));
+}
+
 export function shareParams(decision, lang) {
-  const parts = [...decision.known, ...decision.misses].map((item) =>
-    (item.entry ? slugFor(item.entry.key) : encodeURIComponent(item.name)));
-  let query = `?d=${parts.join(",")}&lang=${lang === "zh" ? "zh" : "en"}`;
+  const parts = shareItemsFor(decision).map((item) => (item.kind === "key" ? `k.${item.value}` : `t.${encodeURIComponent(item.value)}`));
+  let query = `?v=2&d=${parts.join(",")}&lang=${lang === "zh" ? "zh" : "en"}`;
   if (decision.mode === "opposite") query += "&m=opposite";
   return query;
 }
@@ -280,18 +292,66 @@ export function shareUrl(decision, lang, base = SITE_URL) {
   return (base.endsWith("/") ? base : base + "/") + shareParams(decision, lang);
 }
 
+function safeDecode(text) {
+  try { return decodeURIComponent(text); } catch (_) { return null; }
+}
+
+// Returns { version, items: [{kind: "key"|"text", value}], lang, mode } or null
+// for a link that carries no usable list (missing, empty, unknown version,
+// undecodable). Items beyond the limits are dropped or truncated.
 export function parseShareParams(search) {
-  const params = new URLSearchParams(search || "");
-  const d = params.get("d");
-  if (!d) return null;
-  const names = d.split(",").map((s) => s.trim()).filter(Boolean);
-  if (!names.length) return null;
-  const lang = params.get("lang");
+  const raw = String(search || "").replace(/^\?/, "");
+  if (!raw) return null;
+  const fields = {};
+  for (const pair of raw.split("&")) {
+    const eq = pair.indexOf("=");
+    const name = eq < 0 ? pair : pair.slice(0, eq);
+    if (!(name in fields)) fields[name] = eq < 0 ? "" : pair.slice(eq + 1);
+  }
+  if (!fields.d) return null;
+  const version = fields.v === undefined ? 1 : Number(fields.v);
+  if (version !== 1 && version !== 2) return null;
+  const items = [];
+  for (const part of fields.d.split(",")) {
+    if (!part) continue;
+    if (version === 2) {
+      const kind = part.startsWith("k.") ? "key" : part.startsWith("t.") ? "text" : null;
+      if (!kind) return null;
+      const value = safeDecode(part.slice(2));
+      if (value === null) return null;
+      const trimmed = value.trim().slice(0, SHARE_LIMITS.maxTextLength);
+      if (trimmed) items.push({ kind, value: trimmed });
+    } else {
+      const value = safeDecode(part.replace(/\+/g, " "));
+      if (value === null) return null;
+      const trimmed = value.trim().slice(0, SHARE_LIMITS.maxTextLength);
+      if (trimmed) items.push({ kind: "any", value: trimmed });
+    }
+    if (items.length >= SHARE_LIMITS.maxItems) break;
+  }
+  if (!items.length) return null;
+  const lang = safeDecode(fields.lang || "");
   return {
-    names,
+    version,
+    items,
     lang: lang === "zh" || lang === "en" ? lang : null,
-    mode: params.get("m") === "opposite" ? "opposite" : "ask",
+    mode: fields.m === "opposite" ? "opposite" : "ask",
   };
+}
+
+// Turns shared items back into selections. v2: a `key` item resolves through
+// the slug index (an unknown slug stays as typed text), a `text` item is always
+// text, never upgraded to a dish. v1 (`any`): slug, then name, then hyphens as
+// spaces, else text.
+export function resolveShared(items, dictionary) {
+  return items.map((item) => {
+    if (item.kind === "text") return { text: item.value };
+    const name = item.value;
+    const entry = item.kind === "key"
+      ? (dictionary.findSlug(name) || dictionary.find(name))
+      : (dictionary.find(name) || dictionary.findSlug(name) || dictionary.find(name.replace(/-/g, " ")));
+    return entry ? { key: entry.key } : { text: name };
+  });
 }
 
 // "sugar low · bitter none · water high" for a lookup cell or dictionary entry,
@@ -327,15 +387,6 @@ export function optionLabel(option, dictionary, lang) {
 export function sameOption(a, b) {
   if (a.key || b.key) return a.key === b.key;
   return normalizeName(a.text) === normalizeName(b.text);
-}
-
-// Turns shared names back into selections: a slug or name that resolves to a
-// dictionary entry becomes { key }; anything else stays as typed.
-export function resolveShared(names, dictionary) {
-  return names.map((name) => {
-    const entry = dictionary.find(name) || dictionary.findSlug(name) || dictionary.find(name.replace(/-/g, " "));
-    return entry ? { key: entry.key } : { text: name };
-  });
 }
 
 // ---------- share card (3:4, canvas) ----------
@@ -1723,7 +1774,7 @@ if (isBrowser) {
       state.lang = shared.lang; // for this view only; the saved preference is untouched
       applyStrings();
     }
-    for (const option of resolveShared(shared.names, state.dictionary)) addSelection(option);
+    for (const option of resolveShared(shared.items, state.dictionary)) addSelection(option);
     if (state.options.length >= 2) run(shared.mode);
   }).catch((error) => {
     console.warn("data load failed:", error);
