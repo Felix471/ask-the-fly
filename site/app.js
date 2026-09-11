@@ -744,6 +744,7 @@ if (isBrowser) {
     appliedVariant: "", // variant whose replay is on screen
     variantRequest: 0, // id of the latest silencing request; older responses are dropped (F03)
     session: 0, // run session; reset() and run() start a new one, older async work is dropped (F05)
+    phase: "input", // input | tasting | result; only setPhase() changes it, never a text re-render (F06)
     loadReplay: makeReplayLoader("data/replay/"),
     token: null,
     sceneStatus: null, // { key, item?, fly?, dish? } re-rendered on language switch
@@ -784,7 +785,7 @@ if (isBrowser) {
     renderSceneStatus();
     renderBrainCaption();
     relabelPlates();
-    if (state.decision) renderDecision();
+    if (state.decision) renderDecision(); // text only; the phase is untouched
     if (state.decision && $("card-dialog").open) showCard().catch(() => {});
   }
 
@@ -1274,8 +1275,20 @@ if (isBrowser) {
       misses.append(box);
     }
 
-    $("result-panel").hidden = false;
-    $("input-panel").hidden = true;
+  }
+
+  // The only place that shows or hides the three views. Text re-renders
+  // (language switch) never call it (F06).
+  function setPhase(phase) {
+    state.phase = phase;
+    $("input-panel").hidden = phase !== "input";
+    $("scene-panel").hidden = phase === "input";
+    $("result-panel").hidden = phase !== "result";
+  }
+
+  function showResult() {
+    renderDecision();
+    setPhase("result");
   }
 
   // The winner sprite with the fly is the result's main image, drawn as soon
@@ -1327,9 +1340,7 @@ if (isBrowser) {
       winner: decision.winner ? indexOf(decision.flyPick) : null, // the fly lands on its own pick in every mode
       tie: decision.tie.map(indexOf),
     };
-    $("scene-panel").hidden = false;
-    $("input-panel").hidden = true;
-    $("result-panel").hidden = true;
+    setPhase("tasting");
     state.sceneStatus = { key: "sceneIdle" };
     renderSceneStatus();
     state.brainCaption = null;
@@ -1403,7 +1414,7 @@ if (isBrowser) {
     else if (decision.mode === "opposite") state.sceneStatus = { key: "sceneOpposite", fly: decision.flyPick, dish: decision.winner };
     else state.sceneStatus = { key: "sceneWinner", dish: decision.winner };
     renderSceneStatus();
-    renderDecision();
+    showResult();
   }
 
   function run(mode) {
@@ -1416,7 +1427,7 @@ if (isBrowser) {
     state.decision = decide(scored, mode);
     if (state.decision.known.length === 0) {
       notice("stateAllUnknown");
-      renderDecision();
+      showResult();
       return;
     }
     if (state.brain && state.scene) {
@@ -1424,11 +1435,11 @@ if (isBrowser) {
         console.warn("scene error:", error);
         if (state.session !== session) return;
         $("scene-status").textContent = tr("stateSceneError");
-        renderDecision();
+        showResult();
       });
       return;
     }
-    renderDecision();
+    showResult();
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
@@ -1558,10 +1569,8 @@ if (isBrowser) {
     $("mn9-pill").hidden = true;
     $("mn9-count").textContent = "0";
     renderSilenceControls();
-    $("scene-panel").hidden = true;
-    $("result-panel").hidden = true;
     if ($("card-dialog").open) $("card-dialog").close();
-    $("input-panel").hidden = false;
+    setPhase("input");
   }
 
   $("lang-toggle").addEventListener("click", () => {
@@ -1617,7 +1626,7 @@ if (isBrowser) {
     if (state.brain) state.brain.stop();
     renderSilenceControls();
     if (state.scenePlates) { for (const item of state.scenePlates) { item.loading = false; item.tasted = Boolean(item.cell); } relabelPlates(); }
-    if (state.decision) renderDecision();
+    if (state.decision) showResult();
   });
   $("speed").addEventListener("change", () => {
     if (state.brain) state.brain.speed = speed();
