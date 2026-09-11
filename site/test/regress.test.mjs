@@ -64,3 +64,69 @@ test("F01: a parse failure (bad magic) is retried on the next call", async () =>
   assert.equal(replay.header.cell_id, cell);
   assert.equal(calls.length, 2);
 });
+
+// ---- F07: fly ties (max set) and selection ties (human rule) are separate ----
+import * as appModule from "../app.js";
+const { decide, scoreOptions, buildDictionary, buildLookup } = appModule;
+
+const cellOf = (hz) => ({ mn9_mean: hz, mn9_std: 0, hz: {} });
+const item = (name, hz) => ({ name, entry: { key: name, display: { en: name, zh: name } }, cell: cellOf(hz), sugarOnly: cellOf(hz) });
+const keys = (list) => list.map((i) => i.name);
+
+test("F07: max unique / min tied, opposite: the fly has no tie; the human's dish is tied", () => {
+  const d = decide([item("A", 100), item("B", 0), item("C", 0)], "opposite");
+  assert.equal(d.flyPick.name, "A");
+  assert.deepEqual(keys(d.flyTies), []);
+  assert.deepEqual(keys(d.selectionTies), ["B", "C"]);
+  assert.deepEqual(keys(d.tie), ["B", "C"], "tie stays the selection tie for the result and the card");
+});
+
+test("F07: max tied / min unique, both modes", () => {
+  const scored = [item("A", 100), item("B", 100), item("C", 0)];
+  const ask = decide(scored, "ask");
+  assert.deepEqual(keys(ask.flyTies), ["A", "B"]);
+  assert.deepEqual(keys(ask.selectionTies), ["A", "B"]);
+  const opp = decide(scored, "opposite");
+  assert.deepEqual(keys(opp.flyTies), ["A", "B"], "the fly's tie is expressed even when the human picks the minimum");
+  assert.deepEqual(keys(opp.selectionTies), []);
+  assert.equal(opp.winner.name, "C");
+});
+
+test("F07: ties at both ends, and all tied", () => {
+  const both = decide([item("A", 50), item("B", 50), item("C", 1), item("D", 1)], "opposite");
+  assert.deepEqual(keys(both.flyTies), ["A", "B"]);
+  assert.deepEqual(keys(both.selectionTies), ["C", "D"]);
+  const all = decide([item("A", 5), item("B", 5), item("C", 5)], "ask");
+  assert.deepEqual(keys(all.flyTies), ["A", "B", "C"]);
+  assert.deepEqual(keys(all.selectionTies), ["A", "B", "C"]);
+  const allOpp = decide([item("A", 5), item("B", 5), item("C", 5)], "opposite");
+  assert.deepEqual(keys(allOpp.flyTies), ["A", "B", "C"]);
+  assert.deepEqual(keys(allOpp.selectionTies), ["A", "B", "C"]);
+});
+
+test("F07: no random tie-break: flyPick is the first maximum in input order, stable across calls", () => {
+  const scored = [item("B", 100), item("A", 100), item("C", 0)];
+  for (let i = 0; i < 5; i += 1) assert.equal(decide(scored, "ask").flyPick.name, "B");
+  assert.equal(decide([item("A", 100), item("B", 100)], "ask").flyPick.name, "A");
+});
+
+test("F07: the animation plan hovers between the fly's ties, never the human's", () => {
+  // scenePlan mirrors runScene's plan construction (exported for this test)
+  const { scenePlan } = appModule;
+  const d = decide([item("A", 100), item("B", 0), item("C", 0)], "opposite");
+  const plan = scenePlan(d, [...d.known, ...d.misses]);
+  assert.deepEqual(plan.tie, [], "unique fly maximum: no hover");
+  assert.equal(plan.winner, 0, "the fly lands on A");
+  const d2 = decide([item("A", 100), item("B", 100), item("C", 0)], "opposite");
+  const plan2 = scenePlan(d2, [...d2.known, ...d2.misses]);
+  assert.deepEqual(plan2.tie, [0, 1], "fly tie between A and B");
+});
+
+test("F07: a real dictionary tie behaves the same through scoreOptions", () => {
+  const dishes = JSON.parse(readFileSync(path.join(here, "..", "data", "dishes.json"), "utf8"));
+  const table = JSON.parse(readFileSync(path.join(here, "..", "data", "lookup_table.json"), "utf8"));
+  const d = decide(scoreOptions(["candy", "honey", "lemon"], buildDictionary(dishes), buildLookup(table)), "opposite");
+  assert.deepEqual(d.flyTies.map((i) => i.entry.key), ["candy", "honey"]);
+  assert.deepEqual(d.selectionTies, []);
+  assert.equal(d.winner.entry.key, "lemon");
+});

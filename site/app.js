@@ -88,22 +88,44 @@ export function scoreOptions(names, dictionary, lookup) {
 
 // mode: "ask" picks the highest MN9; "opposite" picks the lowest, and also
 // reports what the fly itself would have picked. Ties are reported as ties.
+// flyTies: every option sharing the maximum MN9 (what the fly cannot tell
+// apart; the animation hovers between them). selectionTies: the options tied
+// under the human rule (ask: the maximum set; opposite: the minimum set); the
+// result view and the card report them. `tie` is an alias of selectionTies.
+// Sorting is stable and ties are never broken at random: flyPick is the first
+// maximum in input order (F07).
 export function decide(scored, mode) {
   const known = scored.filter((item) => item.cell);
-  if (known.length === 0) return { mode, winner: null, flyPick: null, tie: [], known, misses: scored.filter((i) => !i.cell) };
+  const misses = scored.filter((item) => !item.cell);
+  if (known.length === 0) return { mode, winner: null, flyPick: null, tie: [], flyTies: [], selectionTies: [], known, misses };
   const by = (sign) => [...known].sort((a, b) => sign * (b.cell.mn9_mean - a.cell.mn9_mean));
   const highest = by(1);
   const lowest = by(-1);
   const flyPick = highest[0];
   const chosen = mode === "opposite" ? lowest[0] : flyPick;
-  const tie = known.filter((item) => Math.abs(item.cell.mn9_mean - chosen.cell.mn9_mean) < 1e-9);
+  const sameAs = (ref) => known.filter((item) => Math.abs(item.cell.mn9_mean - ref.cell.mn9_mean) < 1e-9);
+  const flyTies = sameAs(flyPick);
+  const selectionTies = sameAs(chosen);
   return {
     mode,
     winner: chosen,
     flyPick,
-    tie: tie.length > 1 ? tie : [],
+    flyTies: flyTies.length > 1 ? flyTies : [],
+    selectionTies: selectionTies.length > 1 ? selectionTies : [],
+    tie: selectionTies.length > 1 ? selectionTies : [],
     known,
-    misses: scored.filter((item) => !item.cell),
+    misses,
+  };
+}
+
+// The fly's animation plan for a decision: taste every known dish in order,
+// then land on the fly's own pick, or hover between the fly's ties.
+export function scenePlan(decision, scored) {
+  const indexOf = (item) => scored.indexOf(item);
+  return {
+    order: decision.known.map(indexOf),
+    winner: decision.winner ? indexOf(decision.flyPick) : null,
+    tie: decision.flyTies.map(indexOf),
   };
 }
 
@@ -1334,12 +1356,7 @@ if (isBrowser) {
     }));
     // Replays are fetched up front so the fly rarely waits at a plate.
     for (const item of decision.known) state.loadReplay(cellIdFor(item.cell)).catch(() => {});
-    const indexOf = (item) => scored.indexOf(item);
-    const plan = {
-      order: decision.known.map(indexOf),
-      winner: decision.winner ? indexOf(decision.flyPick) : null, // the fly lands on its own pick in every mode
-      tie: decision.tie.map(indexOf),
-    };
+    const plan = scenePlan(decision, scored);
     setPhase("tasting");
     state.sceneStatus = { key: "sceneIdle" };
     renderSceneStatus();
