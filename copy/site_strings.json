@@ -850,10 +850,10 @@
     },
     {
       "key": "silenceCaption",
-      "context": "Caption while a silenced recording plays; {name}, {after} = MN9 count silenced, {before} = baseline count, {delta} = signed difference",
-      "en": "Recorded run with {name}'s synapses set to zero · MN9 {after} vs {before} normal ({delta}) · cf. Tastekin 2026 Fig 6G / S17",
-      "zh": "把 {name} 的突触全部置零后的记录回放 · MN9 {after}，正常时 {before}（{delta}）· 参见 Tastekin 2026 图 6G / S17",
-      "max_length": 140
+      "context": "Caption under a silencing replay: this cell's MN9 counts, then the measured distribution over the cells where the baseline MN9 fired; {median} signed, {up}/{down}/{same} are percentages, {n} the number of cells in that scope",
+      "en": "Recorded run with {name}'s synapses set to zero · MN9 {after} vs {before} normal ({delta}) · over {n} cells where baseline MN9 fired: median change {median}, {up}% up, {down}% down, {same}% unchanged · cf. Tastekin 2026 Fig 6G / S17",
+      "zh": "把 {name} 的突触全部置零后的记录回放 · MN9 {after}，正常时 {before}（{delta}）· 在基线 MN9 有放电的 {n} 个格子里：中位变化 {median}，{up}% 上升，{down}% 下降，{same}% 不变 · 参见 Tastekin 2026 图 6G / S17",
+      "max_length": 260
     },
     {
       "key": "silenceUnavailable",
@@ -912,18 +912,11 @@
       "max_length": 10
     },
     {
-      "key": "silenceCaptionNoEffect",
-      "context": "Caption when a silenced neuron has no consistent MN9 effect across cells (median change 0); {name}, {after} = MN9 count silenced, {before} = normal, {delta} = this cell's signed difference, {median} = median change across cells",
-      "en": "Recorded run with {name}'s synapses set to zero · MN9 {after} vs {before} normal ({delta}) · across all cells the median change is {median}: silencing {name} does not move the feeding readout in this model",
-      "zh": "把 {name} 的突触全部置零后的记录回放 · MN9 {after}，正常时 {before}（{delta}）· 在所有格子里中位变化为 {median}：在这个模型里关掉 {name} 不会改变进食读数",
-      "max_length": 240
-    },
-    {
       "key": "silenceEffectSummary",
-      "context": "Small print under each silencing button group: median MN9 change per neuron over cells where MN9 fired; {name} {median} {n} {down} = percent of cells that dropped",
-      "en": "{name}: median MN9 change {median} over {n} cells, {down}% dropped",
-      "zh": "{name}：MN9 中位变化 {median}（{n} 个格子），{down}% 下降",
-      "max_length": 80
+      "context": "One line per silenced neuron under the buttons: the measured median and up/down/unchanged shares over the cells where the baseline MN9 fired, then the median over all recorded cells",
+      "en": "{name}: median MN9 change {median} over {n} cells where baseline MN9 fired · {up}% up · {down}% down · {same}% unchanged · all {nAll} cells: median {medianAll}",
+      "zh": "{name}：基线 MN9 有放电的 {n} 个格子里 MN9 中位变化 {median} · {up}% 上升 · {down}% 下降 · {same}% 不变 · 全部 {nAll} 个格子：中位 {medianAll}",
+      "max_length": 180
     }
   ]
 }

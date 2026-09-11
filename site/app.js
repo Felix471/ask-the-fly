@@ -362,6 +362,41 @@ export function levelsText(levels, lang) {
   return fmt(t.levelsLine, { sugar: name(levels.sugar), bitter: name(levels.bitter), water: name(levels.water) });
 }
 
+// ---------- silencing statistics (D08) ----------
+// Percentages that sum to 100 after rounding (largest remainder), median as
+// text with the sign kept. Input: a manifest variant_stats entry.
+export function silenceStats(st) {
+  const fracs = [st.frac_up || 0, st.frac_down || 0, st.frac_zero || 0];
+  const raw = fracs.map((f) => f * 100);
+  const floors = raw.map(Math.floor);
+  let rest = 100 - floors.reduce((a, b) => a + b, 0);
+  const order = raw.map((v, i) => [v - floors[i], i]).sort((a, b) => b[0] - a[0]);
+  for (const [, i] of order) { if (rest <= 0) break; floors[i] += 1; rest -= 1; }
+  const median = st.median_delta == null ? "–" : (st.median_delta > 0 ? "+" : "") + String(st.median_delta);
+  return { n: st.n_cells_mn9_active ?? 0, median, up: floors[0], down: floors[1], same: floors[2] };
+}
+
+// Recomputes a variant's MN9 delta distribution from the manifest cells:
+// scope "active" = cells where the baseline MN9 fired (the stored stats'
+// scope), "all" = every recorded cell.
+export function silenceStatsFrom(manifest, variant, scope = "active") {
+  const deltas = [];
+  for (const cell of Object.values(manifest.cells)) {
+    const before = cell.mn9_left_count;
+    const after = cell[`mn9_left_count_${variant}`];
+    if (typeof after !== "number") continue;
+    if (scope === "active" && !(before > 0)) continue;
+    deltas.push(after - before);
+  }
+  const sorted = [...deltas].sort((a, b) => a - b);
+  const n = sorted.length;
+  const medianValue = n ? (n % 2 ? sorted[(n - 1) / 2] : (sorted[n / 2 - 1] + sorted[n / 2]) / 2) : null;
+  const fracUp = n ? deltas.filter((d) => d > 0).length / n : 0;
+  const fracDown = n ? deltas.filter((d) => d < 0).length / n : 0;
+  const fracZero = n ? deltas.filter((d) => d === 0).length / n : 0;
+  return { n, medianValue, fracUp, fracDown, fracZero, ...silenceStats({ n_cells_mn9_active: n, median_delta: medianValue, frac_up: fracUp, frac_down: fracDown, frac_zero: fracZero }) };
+}
+
 // ---------- selected options ----------
 // A selection is { key } for a dictionary dish (stable across languages) or
 // { text } for something the user typed that the fly does not know.
@@ -980,11 +1015,10 @@ if (isBrowser) {
     for (const entry of [...primary, ...(silenceUi.expanded ? more : [])]) {
       const st = entry.stats;
       if (st.median_delta == null) continue;
+      const active = silenceStats(st);
+      const all = silenceStatsFrom(state.manifest, `silence_${entry.key}`, "all");
       const line = document.createElement("div");
-      line.textContent = fmt(t.silenceEffectSummary, {
-        name: entry.label, median: (st.median_delta > 0 ? "+" : "") + st.median_delta,
-        n: st.n_cells_mn9_active, down: Math.round((st.frac_down || 0) * 100),
-      });
+      line.textContent = fmt(t.silenceEffectSummary, { name: entry.label, ...active, nAll: all.n, medianAll: all.median });
       summary.append(line);
     }
     box.append(summary);
@@ -1025,14 +1059,9 @@ if (isBrowser) {
       const delta = after - before;
       const name = (state.manifest.named_neurons.find((n) => n.key === variant) || {}).label || variant;
       const st = (state.manifest.variant_stats || {})[`silence_${variant}`] || {};
-      const medianText = st.median_delta == null ? "–" : (st.median_delta > 0 ? "+" : "") + st.median_delta;
-      if (st.median_delta === 0) {
-        // No consistent effect across cells (per-cell differences are stream noise):
-        // that is the result, say it plainly alongside this cell's numbers.
-        $("silence-caption").textContent = fmt(t.silenceCaptionNoEffect, { name, after, before, delta: (delta >= 0 ? "+" : "") + delta, median: medianText });
-      } else {
-        $("silence-caption").textContent = fmt(t.silenceCaption, { name, after, before, delta: (delta >= 0 ? "+" : "") + delta });
-      }
+      // Only what was measured: this cell's counts, then the median and the
+      // up/down/unchanged shares over the cells where the baseline MN9 fired.
+      $("silence-caption").textContent = fmt(t.silenceCaption, { name, after, before, delta: (delta >= 0 ? "+" : "") + delta, ...silenceStats(st) });
     } else {
       $("silence-caption").textContent = "";
     }

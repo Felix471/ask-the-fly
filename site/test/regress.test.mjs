@@ -271,3 +271,40 @@ test("F17: limits and malformed links are controlled", () => {
   assert.equal(parseShareParams("?v=9&d=k.hotpot"), null, "unknown version");
   assert.equal(parseShareParams(""), null);
 });
+
+// ---- D08: silencing captions report the measured distribution and its scope; never "no effect" from a zero median ----
+import { silenceStats, silenceStatsFrom, STRINGS as S, fmt as fmtStr } from "../app.js";
+
+test("D08: a zero median with large opposite changes is reported as a distribution, not as no effect", () => {
+  // deltas [-20, 0, 0, 0, 20]: median 0, 20% up, 20% down, 60% unchanged
+  const st = silenceStats({ n_cells_mn9_active: 5, median_delta: 0, frac_up: 0.2, frac_down: 0.2, frac_zero: 0.6 });
+  assert.deepEqual(st, { n: 5, median: "0", up: 20, down: 20, same: 60 });
+  for (const lang of ["en", "zh"]) {
+    const t = S[lang];
+    const text = fmtStr(t.silenceCaption, { name: "X", after: 1, before: 1, delta: "+0", ...st });
+    assert.ok(!/no effect|does not move|不会改变|没有作用/.test(text), text);
+    assert.ok(/20% .*20% .*60%|20%.*20%.*60%/.test(text.replace(/\s+/g, " ")), text);
+    assert.ok(/baseline MN9 fired|基线 MN9 有放电/.test(text), "scope named");
+    assert.equal(t.silenceCaptionNoEffect, undefined, "the 'no effect' string is gone");
+  }
+});
+
+test("D08: percentages sum to 100 after rounding", () => {
+  const st = silenceStats({ n_cells_mn9_active: 3, median_delta: -1.5, frac_up: 1 / 3, frac_down: 1 / 3, frac_zero: 1 / 3 });
+  assert.equal(st.up + st.down + st.same, 100);
+  assert.equal(st.median, "-1.5");
+});
+
+test("D08: stats recomputed from the manifest over cells where baseline MN9 fired match the stored stats; the all-cells scope is separate", () => {
+  const manifest = JSON.parse(readFileSync(path.join(replayDir, "manifest.json"), "utf8"));
+  for (const variant of manifest.variants.filter((v) => v !== "baseline")) {
+    const active = silenceStatsFrom(manifest, variant, "active");
+    const stored = manifest.variant_stats[variant];
+    assert.equal(active.n, stored.n_cells_mn9_active, variant);
+    assert.equal(active.medianValue, stored.median_delta, variant);
+    assert.ok(Math.abs(active.fracUp - stored.frac_up) < 1e-9 && Math.abs(active.fracDown - stored.frac_down) < 1e-9, variant);
+    const all = silenceStatsFrom(manifest, variant, "all");
+    assert.equal(all.n, manifest.n_cells);
+    assert.ok(all.n > active.n, "the all-cells scope includes cells whose baseline MN9 was silent");
+  }
+});
