@@ -344,27 +344,26 @@ export class BrainView {
     ctx.globalAlpha = 1;
   }
 
-  // Plays the loaded replay in real time × speed. Resolves when the trial ends.
+  // Plays the loaded replay: simulated time accumulates per frame from the
+  // wall-clock delta × the speed in force at that frame, so changing the speed
+  // never rewinds or jumps (F09). Resolves when the trial ends.
   play(speed = 1) {
     this.stop();
     this.speed = speed;
     if (!this.replay) return Promise.resolve();
-    const left = this.replay.header.mn9_left_ms;
-    const duration = this.replay.header.duration_ms;
+    const playback = createPlayback(this.replay);
+    const total = playback.left.length;
     return new Promise((resolve) => {
-      const start = performance.now();
-      let counted = 0;
       const tick = (now) => {
-        const tMs = Math.min(duration, (now - start) * this.speed);
+        const { tMs, newSpikes, finished } = advancePlayback(playback, now, this.speed);
         this.drawFrame(tMs);
         if (this.onTime) this.onTime(tMs);
-        while (counted < left.length && left[counted] <= tMs) {
-          counted += 1;
-          if (this.onMn9) this.onMn9(counted, left.length);
+        for (let k = 0; k < newSpikes; k += 1) {
+          if (this.onMn9) this.onMn9(playback.counted - newSpikes + k + 1, total);
         }
-        if (tMs >= duration) {
+        if (finished) {
           this.raf = 0;
-          if (this.onMn9) this.onMn9(left.length, left.length);
+          this.resolvePlay = null;
           resolve();
           return;
         }
@@ -556,6 +555,31 @@ export class SpikeClick {
 // Replay loader: in-flight requests are shared and successes stay cached; a
 // failed request (HTTP error or parse error) is dropped from the cache so the
 // next call retries it (F01). `fetchImpl` is injectable for tests.
+// Playback clock, pure so it can be tested with a fake clock: `t` is the
+// simulated time in ms, `counted` the MN9 (left) spikes at or before t.
+export function createPlayback(replay) {
+  return { t: 0, last: null, counted: 0, done: false, duration: replay.header.duration_ms, left: replay.header.mn9_left_ms || [] };
+}
+
+// Advances by (nowMs - previous nowMs) × speed, clamps at the duration, and
+// returns the new time, how many MN9 spikes were crossed, and whether the
+// trial ended on this step (reported once).
+export function advancePlayback(playback, nowMs, speed) {
+  if (playback.done) return { tMs: playback.t, newSpikes: 0, finished: false };
+  if (playback.last == null) playback.last = nowMs;
+  const dt = Math.max(0, nowMs - playback.last);
+  playback.last = nowMs;
+  playback.t = Math.min(playback.duration, playback.t + dt * Math.max(0, speed));
+  let newSpikes = 0;
+  while (playback.counted < playback.left.length && playback.left[playback.counted] <= playback.t) {
+    playback.counted += 1;
+    newSpikes += 1;
+  }
+  const finished = playback.t >= playback.duration;
+  if (finished) playback.done = true;
+  return { tMs: playback.t, newSpikes, finished };
+}
+
 export function makeReplayLoader(baseUrl = "data/replay/", fetchImpl = null) {
   const cache = new Map();
   return async function load(cellId, variant = "") {

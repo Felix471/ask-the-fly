@@ -130,3 +130,45 @@ test("F07: a real dictionary tie behaves the same through scoreOptions", () => {
   assert.deepEqual(d.selectionTies, []);
   assert.equal(d.winner.entry.key, "lemon");
 });
+
+// ---- F09: playback accumulates simulated time per frame; speed changes never rewind ----
+import { createPlayback, advancePlayback } from "../brain.js";
+
+test("F09: 1 -> 0.5 -> 2 -> 1 speed changes keep simulated time monotone", () => {
+  const replay = { header: { duration_ms: 1000, mn9_left_ms: [100, 250, 250, 600, 999] } };
+  const pb = createPlayback(replay);
+  const times = [];
+  let counted = 0;
+  let finishes = 0;
+  const step = (now, speed) => {
+    const r = advancePlayback(pb, now, speed);
+    times.push(r.tMs);
+    counted += r.newSpikes;
+    if (r.finished) finishes += 1;
+    return r;
+  };
+  step(0, 1);
+  step(500, 1);          // 500 ms simulated
+  const r = step(510, 0.5); // the old formula gave (510 - 0) * 0.5 = 255: a rewind
+  assert.equal(r.tMs, 505);
+  step(600, 2);          // + 90 * 2
+  assert.equal(pb.t, 685);
+  for (let now = 700; now <= 1200; now += 100) step(now, 1);
+  assert.ok(times.every((t, i) => i === 0 || t >= times[i - 1]), `monotone: ${times}`);
+  assert.equal(pb.t, 1000, "clamped at the duration");
+  assert.equal(counted, 5, "each MN9 spike counted exactly once");
+  assert.equal(finishes, 1, "finish reported once");
+  assert.equal(advancePlayback(pb, 5000, 1).newSpikes, 0, "nothing after the end");
+});
+
+test("F09: the counter and the drawn time come from the same simulated clock", () => {
+  const replay = { header: { duration_ms: 100, mn9_left_ms: [10, 20, 30] } };
+  const pb = createPlayback(replay);
+  advancePlayback(pb, 0, 1);
+  const r1 = advancePlayback(pb, 15, 1);
+  assert.equal(r1.tMs, 15);
+  assert.equal(r1.newSpikes, 1);
+  const r2 = advancePlayback(pb, 20, 4); // 15 + 5 * 4 = 35
+  assert.equal(r2.tMs, 35);
+  assert.equal(r2.newSpikes, 2);
+});
