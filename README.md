@@ -6,6 +6,7 @@ Ask the Fly probes how a connectome-scale fruit-fly brain model responds to tast
 - `sim/` — simulation code (added in a later phase)
 - `data/` — frozen inputs, protocols, and generated results
 - `docs/` — project documentation
+- `site/` — static front end (no build step, no LLM calls); see docs/site.md
 - `vendor/` — gitignored, read-only upstream reference data and code
 
 ## Attribution and data provenance

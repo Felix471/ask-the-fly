@@ -1,0 +1,7665 @@
+{
+ "schema_version": "lookup_v1",
+ "stub": true,
+ "generated_at": "2026-09-11T00:19:19.212551+00:00",
+ "git_commit": "stub",
+ "protocol_sha256": "stub",
+ "source_cells_sha256": "stub",
+ "grid_levels_sha256": "stub",
+ "data_version": "flywire_v783",
+ "model": "STUB: closed-form guess shaped like docs/phase1_characterization.md; replace with build_lookup.py output",
+ "readout": {
+  "neuron": "MN9",
+  "aggregation": "left_only",
+  "left": 720575940660219265,
+  "right": 720575940618238523,
+  "unit": "Hz (spikes per 1000 ms trial)"
+ },
+ "n_trials_per_cell": 0,
+ "dimensions": [
+  "sugar",
+  "bitter",
+  "water",
+  "ir94e"
+ ],
+ "levels": {
+  "sugar": {
+   "none": 0,
+   "low": 60,
+   "medium": 80,
+   "high": 120,
+   "very_high": 200
+  },
+  "bitter": {
+   "none": 0,
+   "low": 30,
+   "medium": 60,
+   "high": 100,
+   "very_high": 160
+  },
+  "water": {
+   "none": 0,
+   "low": 60,
+   "medium": 60,
+   "high": 180,
+   "very_high": 240
+  },
+  "ir94e": {
+   "none": 0,
+   "low": 60,
+   "medium": 120,
+   "high": 200
+  }
+ },
+ "level_notes": {
+  "ir94e": "Four levels; the characterization showed high and very_high not distinguishable, so they are merged into 'high' = 200 Hz. Ir94e is not exposed in the v1 encoder; the v1 lookup uses the ir94e = none slice. Included so v2 does not need a second grid run.",
+  "water": "Five encoder levels are kept, but low and medium share one grid cell (both 60 Hz) because the model cannot separate weak water drives: the fixed-path recheck (docs/fixed_path_recheck.md) found water 60 -> 120 Hz indistinguishable on every curve (alone, and as a modifier at sugar 60/100/200). 60 Hz is visible only as a helper to sugar (sugar x water surface); 180 and 240 Hz drive MN9 alone. The grid runner deduplicates identical Hz vectors, so the grid is 5 x 5 x 4 x 4 = 400 unique cells; lookups resolve level names by Hz.",
+  "sugar": "25 Hz gives 0 Hz MN9 in this model, so the former 25/50 levels were replaced; threshold is near 40 Hz, saturation near 90 Hz MN9.",
+  "n_trials_per_cell": 30,
+  "readout": "left MN9 (720575940660219265) per stim_protocol.json; right recorded",
+  "n_unique_cells": 400
+ },
+ "cells": [
+  {
+   "sugar": "none",
+   "bitter": "none",
+   "water": "none",
+   "ir94e": "none",
+   "hz": {
+    "sugar": 0,
+    "bitter": 0,
+    "water": 0,
+    "ir94e": 0
+   },
+   "mn9_mean": 0.0,
+   "mn9_std": 1.0,
+   "mn9_left_mean": 0.0,
+   "mn9_left_std": 1.0,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "none",
+   "bitter": "none",
+   "water": "none",
+   "ir94e": "low",
+   "hz": {
+    "sugar": 0,
+    "bitter": 0,
+    "water": 0,
+    "ir94e": 60
+   },
+   "mn9_mean": 0.0,
+   "mn9_std": 1.0,
+   "mn9_left_mean": 0.0,
+   "mn9_left_std": 1.0,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "none",
+   "bitter": "none",
+   "water": "none",
+   "ir94e": "medium",
+   "hz": {
+    "sugar": 0,
+    "bitter": 0,
+    "water": 0,
+    "ir94e": 120
+   },
+   "mn9_mean": 0.0,
+   "mn9_std": 1.0,
+   "mn9_left_mean": 0.0,
+   "mn9_left_std": 1.0,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "none",
+   "bitter": "none",
+   "water": "none",
+   "ir94e": "high",
+   "hz": {
+    "sugar": 0,
+    "bitter": 0,
+    "water": 0,
+    "ir94e": 200
+   },
+   "mn9_mean": 0.0,
+   "mn9_std": 1.0,
+   "mn9_left_mean": 0.0,
+   "mn9_left_std": 1.0,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "none",
+   "bitter": "none",
+   "water": "low",
+   "ir94e": "none",
+   "hz": {
+    "sugar": 0,
+    "bitter": 0,
+    "water": 60,
+    "ir94e": 0
+   },
+   "mn9_mean": 0.0,
+   "mn9_std": 1.0,
+   "mn9_left_mean": 0.0,
+   "mn9_left_std": 1.0,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "none",
+   "bitter": "none",
+   "water": "low",
+   "ir94e": "low",
+   "hz": {
+    "sugar": 0,
+    "bitter": 0,
+    "water": 60,
+    "ir94e": 60
+   },
+   "mn9_mean": 0.0,
+   "mn9_std": 1.0,
+   "mn9_left_mean": 0.0,
+   "mn9_left_std": 1.0,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "none",
+   "bitter": "none",
+   "water": "low",
+   "ir94e": "medium",
+   "hz": {
+    "sugar": 0,
+    "bitter": 0,
+    "water": 60,
+    "ir94e": 120
+   },
+   "mn9_mean": 0.0,
+   "mn9_std": 1.0,
+   "mn9_left_mean": 0.0,
+   "mn9_left_std": 1.0,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "none",
+   "bitter": "none",
+   "water": "low",
+   "ir94e": "high",
+   "hz": {
+    "sugar": 0,
+    "bitter": 0,
+    "water": 60,
+    "ir94e": 200
+   },
+   "mn9_mean": 0.0,
+   "mn9_std": 1.0,
+   "mn9_left_mean": 0.0,
+   "mn9_left_std": 1.0,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "none",
+   "bitter": "none",
+   "water": "high",
+   "ir94e": "none",
+   "hz": {
+    "sugar": 0,
+    "bitter": 0,
+    "water": 180,
+    "ir94e": 0
+   },
+   "mn9_mean": 24.0,
+   "mn9_std": 2.44,
+   "mn9_left_mean": 24.0,
+   "mn9_left_std": 2.44,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "none",
+   "bitter": "none",
+   "water": "high",
+   "ir94e": "low",
+   "hz": {
+    "sugar": 0,
+    "bitter": 0,
+    "water": 180,
+    "ir94e": 60
+   },
+   "mn9_mean": 21.12,
+   "mn9_std": 2.267,
+   "mn9_left_mean": 21.12,
+   "mn9_left_std": 2.267,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "none",
+   "bitter": "none",
+   "water": "high",
+   "ir94e": "medium",
+   "hz": {
+    "sugar": 0,
+    "bitter": 0,
+    "water": 180,
+    "ir94e": 120
+   },
+   "mn9_mean": 18.24,
+   "mn9_std": 2.094,
+   "mn9_left_mean": 18.24,
+   "mn9_left_std": 2.094,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "none",
+   "bitter": "none",
+   "water": "high",
+   "ir94e": "high",
+   "hz": {
+    "sugar": 0,
+    "bitter": 0,
+    "water": 180,
+    "ir94e": 200
+   },
+   "mn9_mean": 14.4,
+   "mn9_std": 1.864,
+   "mn9_left_mean": 14.4,
+   "mn9_left_std": 1.864,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "none",
+   "bitter": "none",
+   "water": "very_high",
+   "ir94e": "none",
+   "hz": {
+    "sugar": 0,
+    "bitter": 0,
+    "water": 240,
+    "ir94e": 0
+   },
+   "mn9_mean": 48.0,
+   "mn9_std": 3.88,
+   "mn9_left_mean": 48.0,
+   "mn9_left_std": 3.88,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "none",
+   "bitter": "none",
+   "water": "very_high",
+   "ir94e": "low",
+   "hz": {
+    "sugar": 0,
+    "bitter": 0,
+    "water": 240,
+    "ir94e": 60
+   },
+   "mn9_mean": 42.24,
+   "mn9_std": 3.534,
+   "mn9_left_mean": 42.24,
+   "mn9_left_std": 3.534,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "none",
+   "bitter": "none",
+   "water": "very_high",
+   "ir94e": "medium",
+   "hz": {
+    "sugar": 0,
+    "bitter": 0,
+    "water": 240,
+    "ir94e": 120
+   },
+   "mn9_mean": 36.48,
+   "mn9_std": 3.189,
+   "mn9_left_mean": 36.48,
+   "mn9_left_std": 3.189,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "none",
+   "bitter": "none",
+   "water": "very_high",
+   "ir94e": "high",
+   "hz": {
+    "sugar": 0,
+    "bitter": 0,
+    "water": 240,
+    "ir94e": 200
+   },
+   "mn9_mean": 28.8,
+   "mn9_std": 2.728,
+   "mn9_left_mean": 28.8,
+   "mn9_left_std": 2.728,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "none",
+   "bitter": "low",
+   "water": "none",
+   "ir94e": "none",
+   "hz": {
+    "sugar": 0,
+    "bitter": 30,
+    "water": 0,
+    "ir94e": 0
+   },
+   "mn9_mean": 0.0,
+   "mn9_std": 1.0,
+   "mn9_left_mean": 0.0,
+   "mn9_left_std": 1.0,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "none",
+   "bitter": "low",
+   "water": "none",
+   "ir94e": "low",
+   "hz": {
+    "sugar": 0,
+    "bitter": 30,
+    "water": 0,
+    "ir94e": 60
+   },
+   "mn9_mean": 0.0,
+   "mn9_std": 1.0,
+   "mn9_left_mean": 0.0,
+   "mn9_left_std": 1.0,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "none",
+   "bitter": "low",
+   "water": "none",
+   "ir94e": "medium",
+   "hz": {
+    "sugar": 0,
+    "bitter": 30,
+    "water": 0,
+    "ir94e": 120
+   },
+   "mn9_mean": 0.0,
+   "mn9_std": 1.0,
+   "mn9_left_mean": 0.0,
+   "mn9_left_std": 1.0,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "none",
+   "bitter": "low",
+   "water": "none",
+   "ir94e": "high",
+   "hz": {
+    "sugar": 0,
+    "bitter": 30,
+    "water": 0,
+    "ir94e": 200
+   },
+   "mn9_mean": 0.0,
+   "mn9_std": 1.0,
+   "mn9_left_mean": 0.0,
+   "mn9_left_std": 1.0,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "none",
+   "bitter": "low",
+   "water": "low",
+   "ir94e": "none",
+   "hz": {
+    "sugar": 0,
+    "bitter": 30,
+    "water": 60,
+    "ir94e": 0
+   },
+   "mn9_mean": 0.0,
+   "mn9_std": 1.0,
+   "mn9_left_mean": 0.0,
+   "mn9_left_std": 1.0,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "none",
+   "bitter": "low",
+   "water": "low",
+   "ir94e": "low",
+   "hz": {
+    "sugar": 0,
+    "bitter": 30,
+    "water": 60,
+    "ir94e": 60
+   },
+   "mn9_mean": 0.0,
+   "mn9_std": 1.0,
+   "mn9_left_mean": 0.0,
+   "mn9_left_std": 1.0,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "none",
+   "bitter": "low",
+   "water": "low",
+   "ir94e": "medium",
+   "hz": {
+    "sugar": 0,
+    "bitter": 30,
+    "water": 60,
+    "ir94e": 120
+   },
+   "mn9_mean": 0.0,
+   "mn9_std": 1.0,
+   "mn9_left_mean": 0.0,
+   "mn9_left_std": 1.0,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "none",
+   "bitter": "low",
+   "water": "low",
+   "ir94e": "high",
+   "hz": {
+    "sugar": 0,
+    "bitter": 30,
+    "water": 60,
+    "ir94e": 200
+   },
+   "mn9_mean": 0.0,
+   "mn9_std": 1.0,
+   "mn9_left_mean": 0.0,
+   "mn9_left_std": 1.0,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "none",
+   "bitter": "low",
+   "water": "high",
+   "ir94e": "none",
+   "hz": {
+    "sugar": 0,
+    "bitter": 30,
+    "water": 180,
+    "ir94e": 0
+   },
+   "mn9_mean": 19.765,
+   "mn9_std": 2.186,
+   "mn9_left_mean": 19.765,
+   "mn9_left_std": 2.186,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "none",
+   "bitter": "low",
+   "water": "high",
+   "ir94e": "low",
+   "hz": {
+    "sugar": 0,
+    "bitter": 30,
+    "water": 180,
+    "ir94e": 60
+   },
+   "mn9_mean": 17.393,
+   "mn9_std": 2.044,
+   "mn9_left_mean": 17.393,
+   "mn9_left_std": 2.044,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "none",
+   "bitter": "low",
+   "water": "high",
+   "ir94e": "medium",
+   "hz": {
+    "sugar": 0,
+    "bitter": 30,
+    "water": 180,
+    "ir94e": 120
+   },
+   "mn9_mean": 15.021,
+   "mn9_std": 1.901,
+   "mn9_left_mean": 15.021,
+   "mn9_left_std": 1.901,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "none",
+   "bitter": "low",
+   "water": "high",
+   "ir94e": "high",
+   "hz": {
+    "sugar": 0,
+    "bitter": 30,
+    "water": 180,
+    "ir94e": 200
+   },
+   "mn9_mean": 11.859,
+   "mn9_std": 1.712,
+   "mn9_left_mean": 11.859,
+   "mn9_left_std": 1.712,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "none",
+   "bitter": "low",
+   "water": "very_high",
+   "ir94e": "none",
+   "hz": {
+    "sugar": 0,
+    "bitter": 30,
+    "water": 240,
+    "ir94e": 0
+   },
+   "mn9_mean": 39.529,
+   "mn9_std": 3.372,
+   "mn9_left_mean": 39.529,
+   "mn9_left_std": 3.372,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "none",
+   "bitter": "low",
+   "water": "very_high",
+   "ir94e": "low",
+   "hz": {
+    "sugar": 0,
+    "bitter": 30,
+    "water": 240,
+    "ir94e": 60
+   },
+   "mn9_mean": 34.786,
+   "mn9_std": 3.087,
+   "mn9_left_mean": 34.786,
+   "mn9_left_std": 3.087,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "none",
+   "bitter": "low",
+   "water": "very_high",
+   "ir94e": "medium",
+   "hz": {
+    "sugar": 0,
+    "bitter": 30,
+    "water": 240,
+    "ir94e": 120
+   },
+   "mn9_mean": 30.042,
+   "mn9_std": 2.803,
+   "mn9_left_mean": 30.042,
+   "mn9_left_std": 2.803,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "none",
+   "bitter": "low",
+   "water": "very_high",
+   "ir94e": "high",
+   "hz": {
+    "sugar": 0,
+    "bitter": 30,
+    "water": 240,
+    "ir94e": 200
+   },
+   "mn9_mean": 23.718,
+   "mn9_std": 2.423,
+   "mn9_left_mean": 23.718,
+   "mn9_left_std": 2.423,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "none",
+   "bitter": "medium",
+   "water": "none",
+   "ir94e": "none",
+   "hz": {
+    "sugar": 0,
+    "bitter": 60,
+    "water": 0,
+    "ir94e": 0
+   },
+   "mn9_mean": 0.0,
+   "mn9_std": 1.0,
+   "mn9_left_mean": 0.0,
+   "mn9_left_std": 1.0,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "none",
+   "bitter": "medium",
+   "water": "none",
+   "ir94e": "low",
+   "hz": {
+    "sugar": 0,
+    "bitter": 60,
+    "water": 0,
+    "ir94e": 60
+   },
+   "mn9_mean": 0.0,
+   "mn9_std": 1.0,
+   "mn9_left_mean": 0.0,
+   "mn9_left_std": 1.0,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "none",
+   "bitter": "medium",
+   "water": "none",
+   "ir94e": "medium",
+   "hz": {
+    "sugar": 0,
+    "bitter": 60,
+    "water": 0,
+    "ir94e": 120
+   },
+   "mn9_mean": 0.0,
+   "mn9_std": 1.0,
+   "mn9_left_mean": 0.0,
+   "mn9_left_std": 1.0,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "none",
+   "bitter": "medium",
+   "water": "none",
+   "ir94e": "high",
+   "hz": {
+    "sugar": 0,
+    "bitter": 60,
+    "water": 0,
+    "ir94e": 200
+   },
+   "mn9_mean": 0.0,
+   "mn9_std": 1.0,
+   "mn9_left_mean": 0.0,
+   "mn9_left_std": 1.0,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "none",
+   "bitter": "medium",
+   "water": "low",
+   "ir94e": "none",
+   "hz": {
+    "sugar": 0,
+    "bitter": 60,
+    "water": 60,
+    "ir94e": 0
+   },
+   "mn9_mean": 0.0,
+   "mn9_std": 1.0,
+   "mn9_left_mean": 0.0,
+   "mn9_left_std": 1.0,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "none",
+   "bitter": "medium",
+   "water": "low",
+   "ir94e": "low",
+   "hz": {
+    "sugar": 0,
+    "bitter": 60,
+    "water": 60,
+    "ir94e": 60
+   },
+   "mn9_mean": 0.0,
+   "mn9_std": 1.0,
+   "mn9_left_mean": 0.0,
+   "mn9_left_std": 1.0,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "none",
+   "bitter": "medium",
+   "water": "low",
+   "ir94e": "medium",
+   "hz": {
+    "sugar": 0,
+    "bitter": 60,
+    "water": 60,
+    "ir94e": 120
+   },
+   "mn9_mean": 0.0,
+   "mn9_std": 1.0,
+   "mn9_left_mean": 0.0,
+   "mn9_left_std": 1.0,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "none",
+   "bitter": "medium",
+   "water": "low",
+   "ir94e": "high",
+   "hz": {
+    "sugar": 0,
+    "bitter": 60,
+    "water": 60,
+    "ir94e": 200
+   },
+   "mn9_mean": 0.0,
+   "mn9_std": 1.0,
+   "mn9_left_mean": 0.0,
+   "mn9_left_std": 1.0,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "none",
+   "bitter": "medium",
+   "water": "high",
+   "ir94e": "none",
+   "hz": {
+    "sugar": 0,
+    "bitter": 60,
+    "water": 180,
+    "ir94e": 0
+   },
+   "mn9_mean": 15.529,
+   "mn9_std": 1.932,
+   "mn9_left_mean": 15.529,
+   "mn9_left_std": 1.932,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "none",
+   "bitter": "medium",
+   "water": "high",
+   "ir94e": "low",
+   "hz": {
+    "sugar": 0,
+    "bitter": 60,
+    "water": 180,
+    "ir94e": 60
+   },
+   "mn9_mean": 13.666,
+   "mn9_std": 1.82,
+   "mn9_left_mean": 13.666,
+   "mn9_left_std": 1.82,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "none",
+   "bitter": "medium",
+   "water": "high",
+   "ir94e": "medium",
+   "hz": {
+    "sugar": 0,
+    "bitter": 60,
+    "water": 180,
+    "ir94e": 120
+   },
+   "mn9_mean": 11.802,
+   "mn9_std": 1.708,
+   "mn9_left_mean": 11.802,
+   "mn9_left_std": 1.708,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "none",
+   "bitter": "medium",
+   "water": "high",
+   "ir94e": "high",
+   "hz": {
+    "sugar": 0,
+    "bitter": 60,
+    "water": 180,
+    "ir94e": 200
+   },
+   "mn9_mean": 9.318,
+   "mn9_std": 1.559,
+   "mn9_left_mean": 9.318,
+   "mn9_left_std": 1.559,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "none",
+   "bitter": "medium",
+   "water": "very_high",
+   "ir94e": "none",
+   "hz": {
+    "sugar": 0,
+    "bitter": 60,
+    "water": 240,
+    "ir94e": 0
+   },
+   "mn9_mean": 31.059,
+   "mn9_std": 2.864,
+   "mn9_left_mean": 31.059,
+   "mn9_left_std": 2.864,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "none",
+   "bitter": "medium",
+   "water": "very_high",
+   "ir94e": "low",
+   "hz": {
+    "sugar": 0,
+    "bitter": 60,
+    "water": 240,
+    "ir94e": 60
+   },
+   "mn9_mean": 27.332,
+   "mn9_std": 2.64,
+   "mn9_left_mean": 27.332,
+   "mn9_left_std": 2.64,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "none",
+   "bitter": "medium",
+   "water": "very_high",
+   "ir94e": "medium",
+   "hz": {
+    "sugar": 0,
+    "bitter": 60,
+    "water": 240,
+    "ir94e": 120
+   },
+   "mn9_mean": 23.605,
+   "mn9_std": 2.416,
+   "mn9_left_mean": 23.605,
+   "mn9_left_std": 2.416,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "none",
+   "bitter": "medium",
+   "water": "very_high",
+   "ir94e": "high",
+   "hz": {
+    "sugar": 0,
+    "bitter": 60,
+    "water": 240,
+    "ir94e": 200
+   },
+   "mn9_mean": 18.635,
+   "mn9_std": 2.118,
+   "mn9_left_mean": 18.635,
+   "mn9_left_std": 2.118,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "none",
+   "bitter": "high",
+   "water": "none",
+   "ir94e": "none",
+   "hz": {
+    "sugar": 0,
+    "bitter": 100,
+    "water": 0,
+    "ir94e": 0
+   },
+   "mn9_mean": 0.0,
+   "mn9_std": 1.0,
+   "mn9_left_mean": 0.0,
+   "mn9_left_std": 1.0,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "none",
+   "bitter": "high",
+   "water": "none",
+   "ir94e": "low",
+   "hz": {
+    "sugar": 0,
+    "bitter": 100,
+    "water": 0,
+    "ir94e": 60
+   },
+   "mn9_mean": 0.0,
+   "mn9_std": 1.0,
+   "mn9_left_mean": 0.0,
+   "mn9_left_std": 1.0,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "none",
+   "bitter": "high",
+   "water": "none",
+   "ir94e": "medium",
+   "hz": {
+    "sugar": 0,
+    "bitter": 100,
+    "water": 0,
+    "ir94e": 120
+   },
+   "mn9_mean": 0.0,
+   "mn9_std": 1.0,
+   "mn9_left_mean": 0.0,
+   "mn9_left_std": 1.0,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "none",
+   "bitter": "high",
+   "water": "none",
+   "ir94e": "high",
+   "hz": {
+    "sugar": 0,
+    "bitter": 100,
+    "water": 0,
+    "ir94e": 200
+   },
+   "mn9_mean": 0.0,
+   "mn9_std": 1.0,
+   "mn9_left_mean": 0.0,
+   "mn9_left_std": 1.0,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "none",
+   "bitter": "high",
+   "water": "low",
+   "ir94e": "none",
+   "hz": {
+    "sugar": 0,
+    "bitter": 100,
+    "water": 60,
+    "ir94e": 0
+   },
+   "mn9_mean": 0.0,
+   "mn9_std": 1.0,
+   "mn9_left_mean": 0.0,
+   "mn9_left_std": 1.0,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "none",
+   "bitter": "high",
+   "water": "low",
+   "ir94e": "low",
+   "hz": {
+    "sugar": 0,
+    "bitter": 100,
+    "water": 60,
+    "ir94e": 60
+   },
+   "mn9_mean": 0.0,
+   "mn9_std": 1.0,
+   "mn9_left_mean": 0.0,
+   "mn9_left_std": 1.0,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "none",
+   "bitter": "high",
+   "water": "low",
+   "ir94e": "medium",
+   "hz": {
+    "sugar": 0,
+    "bitter": 100,
+    "water": 60,
+    "ir94e": 120
+   },
+   "mn9_mean": 0.0,
+   "mn9_std": 1.0,
+   "mn9_left_mean": 0.0,
+   "mn9_left_std": 1.0,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "none",
+   "bitter": "high",
+   "water": "low",
+   "ir94e": "high",
+   "hz": {
+    "sugar": 0,
+    "bitter": 100,
+    "water": 60,
+    "ir94e": 200
+   },
+   "mn9_mean": 0.0,
+   "mn9_std": 1.0,
+   "mn9_left_mean": 0.0,
+   "mn9_left_std": 1.0,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "none",
+   "bitter": "high",
+   "water": "high",
+   "ir94e": "none",
+   "hz": {
+    "sugar": 0,
+    "bitter": 100,
+    "water": 180,
+    "ir94e": 0
+   },
+   "mn9_mean": 9.882,
+   "mn9_std": 1.593,
+   "mn9_left_mean": 9.882,
+   "mn9_left_std": 1.593,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "none",
+   "bitter": "high",
+   "water": "high",
+   "ir94e": "low",
+   "hz": {
+    "sugar": 0,
+    "bitter": 100,
+    "water": 180,
+    "ir94e": 60
+   },
+   "mn9_mean": 8.696,
+   "mn9_std": 1.522,
+   "mn9_left_mean": 8.696,
+   "mn9_left_std": 1.522,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "none",
+   "bitter": "high",
+   "water": "high",
+   "ir94e": "medium",
+   "hz": {
+    "sugar": 0,
+    "bitter": 100,
+    "water": 180,
+    "ir94e": 120
+   },
+   "mn9_mean": 7.511,
+   "mn9_std": 1.451,
+   "mn9_left_mean": 7.511,
+   "mn9_left_std": 1.451,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "none",
+   "bitter": "high",
+   "water": "high",
+   "ir94e": "high",
+   "hz": {
+    "sugar": 0,
+    "bitter": 100,
+    "water": 180,
+    "ir94e": 200
+   },
+   "mn9_mean": 5.929,
+   "mn9_std": 1.356,
+   "mn9_left_mean": 5.929,
+   "mn9_left_std": 1.356,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "none",
+   "bitter": "high",
+   "water": "very_high",
+   "ir94e": "none",
+   "hz": {
+    "sugar": 0,
+    "bitter": 100,
+    "water": 240,
+    "ir94e": 0
+   },
+   "mn9_mean": 19.765,
+   "mn9_std": 2.186,
+   "mn9_left_mean": 19.765,
+   "mn9_left_std": 2.186,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "none",
+   "bitter": "high",
+   "water": "very_high",
+   "ir94e": "low",
+   "hz": {
+    "sugar": 0,
+    "bitter": 100,
+    "water": 240,
+    "ir94e": 60
+   },
+   "mn9_mean": 17.393,
+   "mn9_std": 2.044,
+   "mn9_left_mean": 17.393,
+   "mn9_left_std": 2.044,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "none",
+   "bitter": "high",
+   "water": "very_high",
+   "ir94e": "medium",
+   "hz": {
+    "sugar": 0,
+    "bitter": 100,
+    "water": 240,
+    "ir94e": 120
+   },
+   "mn9_mean": 15.021,
+   "mn9_std": 1.901,
+   "mn9_left_mean": 15.021,
+   "mn9_left_std": 1.901,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "none",
+   "bitter": "high",
+   "water": "very_high",
+   "ir94e": "high",
+   "hz": {
+    "sugar": 0,
+    "bitter": 100,
+    "water": 240,
+    "ir94e": 200
+   },
+   "mn9_mean": 11.859,
+   "mn9_std": 1.712,
+   "mn9_left_mean": 11.859,
+   "mn9_left_std": 1.712,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "none",
+   "bitter": "very_high",
+   "water": "none",
+   "ir94e": "none",
+   "hz": {
+    "sugar": 0,
+    "bitter": 160,
+    "water": 0,
+    "ir94e": 0
+   },
+   "mn9_mean": 0.0,
+   "mn9_std": 1.0,
+   "mn9_left_mean": 0.0,
+   "mn9_left_std": 1.0,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "none",
+   "bitter": "very_high",
+   "water": "none",
+   "ir94e": "low",
+   "hz": {
+    "sugar": 0,
+    "bitter": 160,
+    "water": 0,
+    "ir94e": 60
+   },
+   "mn9_mean": 0.0,
+   "mn9_std": 1.0,
+   "mn9_left_mean": 0.0,
+   "mn9_left_std": 1.0,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "none",
+   "bitter": "very_high",
+   "water": "none",
+   "ir94e": "medium",
+   "hz": {
+    "sugar": 0,
+    "bitter": 160,
+    "water": 0,
+    "ir94e": 120
+   },
+   "mn9_mean": 0.0,
+   "mn9_std": 1.0,
+   "mn9_left_mean": 0.0,
+   "mn9_left_std": 1.0,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "none",
+   "bitter": "very_high",
+   "water": "none",
+   "ir94e": "high",
+   "hz": {
+    "sugar": 0,
+    "bitter": 160,
+    "water": 0,
+    "ir94e": 200
+   },
+   "mn9_mean": 0.0,
+   "mn9_std": 1.0,
+   "mn9_left_mean": 0.0,
+   "mn9_left_std": 1.0,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "none",
+   "bitter": "very_high",
+   "water": "low",
+   "ir94e": "none",
+   "hz": {
+    "sugar": 0,
+    "bitter": 160,
+    "water": 60,
+    "ir94e": 0
+   },
+   "mn9_mean": 0.0,
+   "mn9_std": 1.0,
+   "mn9_left_mean": 0.0,
+   "mn9_left_std": 1.0,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "none",
+   "bitter": "very_high",
+   "water": "low",
+   "ir94e": "low",
+   "hz": {
+    "sugar": 0,
+    "bitter": 160,
+    "water": 60,
+    "ir94e": 60
+   },
+   "mn9_mean": 0.0,
+   "mn9_std": 1.0,
+   "mn9_left_mean": 0.0,
+   "mn9_left_std": 1.0,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "none",
+   "bitter": "very_high",
+   "water": "low",
+   "ir94e": "medium",
+   "hz": {
+    "sugar": 0,
+    "bitter": 160,
+    "water": 60,
+    "ir94e": 120
+   },
+   "mn9_mean": 0.0,
+   "mn9_std": 1.0,
+   "mn9_left_mean": 0.0,
+   "mn9_left_std": 1.0,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "none",
+   "bitter": "very_high",
+   "water": "low",
+   "ir94e": "high",
+   "hz": {
+    "sugar": 0,
+    "bitter": 160,
+    "water": 60,
+    "ir94e": 200
+   },
+   "mn9_mean": 0.0,
+   "mn9_std": 1.0,
+   "mn9_left_mean": 0.0,
+   "mn9_left_std": 1.0,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "none",
+   "bitter": "very_high",
+   "water": "high",
+   "ir94e": "none",
+   "hz": {
+    "sugar": 0,
+    "bitter": 160,
+    "water": 180,
+    "ir94e": 0
+   },
+   "mn9_mean": 1.412,
+   "mn9_std": 1.085,
+   "mn9_left_mean": 1.412,
+   "mn9_left_std": 1.085,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "none",
+   "bitter": "very_high",
+   "water": "high",
+   "ir94e": "low",
+   "hz": {
+    "sugar": 0,
+    "bitter": 160,
+    "water": 180,
+    "ir94e": 60
+   },
+   "mn9_mean": 1.242,
+   "mn9_std": 1.075,
+   "mn9_left_mean": 1.242,
+   "mn9_left_std": 1.075,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "none",
+   "bitter": "very_high",
+   "water": "high",
+   "ir94e": "medium",
+   "hz": {
+    "sugar": 0,
+    "bitter": 160,
+    "water": 180,
+    "ir94e": 120
+   },
+   "mn9_mean": 1.073,
+   "mn9_std": 1.064,
+   "mn9_left_mean": 1.073,
+   "mn9_left_std": 1.064,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "none",
+   "bitter": "very_high",
+   "water": "high",
+   "ir94e": "high",
+   "hz": {
+    "sugar": 0,
+    "bitter": 160,
+    "water": 180,
+    "ir94e": 200
+   },
+   "mn9_mean": 0.847,
+   "mn9_std": 1.051,
+   "mn9_left_mean": 0.847,
+   "mn9_left_std": 1.051,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "none",
+   "bitter": "very_high",
+   "water": "very_high",
+   "ir94e": "none",
+   "hz": {
+    "sugar": 0,
+    "bitter": 160,
+    "water": 240,
+    "ir94e": 0
+   },
+   "mn9_mean": 2.824,
+   "mn9_std": 1.169,
+   "mn9_left_mean": 2.824,
+   "mn9_left_std": 1.169,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "none",
+   "bitter": "very_high",
+   "water": "very_high",
+   "ir94e": "low",
+   "hz": {
+    "sugar": 0,
+    "bitter": 160,
+    "water": 240,
+    "ir94e": 60
+   },
+   "mn9_mean": 2.485,
+   "mn9_std": 1.149,
+   "mn9_left_mean": 2.485,
+   "mn9_left_std": 1.149,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "none",
+   "bitter": "very_high",
+   "water": "very_high",
+   "ir94e": "medium",
+   "hz": {
+    "sugar": 0,
+    "bitter": 160,
+    "water": 240,
+    "ir94e": 120
+   },
+   "mn9_mean": 2.146,
+   "mn9_std": 1.129,
+   "mn9_left_mean": 2.146,
+   "mn9_left_std": 1.129,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "none",
+   "bitter": "very_high",
+   "water": "very_high",
+   "ir94e": "high",
+   "hz": {
+    "sugar": 0,
+    "bitter": 160,
+    "water": 240,
+    "ir94e": 200
+   },
+   "mn9_mean": 1.694,
+   "mn9_std": 1.102,
+   "mn9_left_mean": 1.694,
+   "mn9_left_std": 1.102,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "low",
+   "bitter": "none",
+   "water": "none",
+   "ir94e": "none",
+   "hz": {
+    "sugar": 60,
+    "bitter": 0,
+    "water": 0,
+    "ir94e": 0
+   },
+   "mn9_mean": 40.493,
+   "mn9_std": 3.43,
+   "mn9_left_mean": 40.493,
+   "mn9_left_std": 3.43,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "low",
+   "bitter": "none",
+   "water": "none",
+   "ir94e": "low",
+   "hz": {
+    "sugar": 60,
+    "bitter": 0,
+    "water": 0,
+    "ir94e": 60
+   },
+   "mn9_mean": 35.634,
+   "mn9_std": 3.138,
+   "mn9_left_mean": 35.634,
+   "mn9_left_std": 3.138,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "low",
+   "bitter": "none",
+   "water": "none",
+   "ir94e": "medium",
+   "hz": {
+    "sugar": 60,
+    "bitter": 0,
+    "water": 0,
+    "ir94e": 120
+   },
+   "mn9_mean": 30.775,
+   "mn9_std": 2.846,
+   "mn9_left_mean": 30.775,
+   "mn9_left_std": 2.846,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "low",
+   "bitter": "none",
+   "water": "none",
+   "ir94e": "high",
+   "hz": {
+    "sugar": 60,
+    "bitter": 0,
+    "water": 0,
+    "ir94e": 200
+   },
+   "mn9_mean": 24.296,
+   "mn9_std": 2.458,
+   "mn9_left_mean": 24.296,
+   "mn9_left_std": 2.458,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "low",
+   "bitter": "none",
+   "water": "low",
+   "ir94e": "none",
+   "hz": {
+    "sugar": 60,
+    "bitter": 0,
+    "water": 60,
+    "ir94e": 0
+   },
+   "mn9_mean": 57.706,
+   "mn9_std": 4.462,
+   "mn9_left_mean": 57.706,
+   "mn9_left_std": 4.462,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "low",
+   "bitter": "none",
+   "water": "low",
+   "ir94e": "low",
+   "hz": {
+    "sugar": 60,
+    "bitter": 0,
+    "water": 60,
+    "ir94e": 60
+   },
+   "mn9_mean": 50.781,
+   "mn9_std": 4.047,
+   "mn9_left_mean": 50.781,
+   "mn9_left_std": 4.047,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "low",
+   "bitter": "none",
+   "water": "low",
+   "ir94e": "medium",
+   "hz": {
+    "sugar": 60,
+    "bitter": 0,
+    "water": 60,
+    "ir94e": 120
+   },
+   "mn9_mean": 43.857,
+   "mn9_std": 3.631,
+   "mn9_left_mean": 43.857,
+   "mn9_left_std": 3.631,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "low",
+   "bitter": "none",
+   "water": "low",
+   "ir94e": "high",
+   "hz": {
+    "sugar": 60,
+    "bitter": 0,
+    "water": 60,
+    "ir94e": 200
+   },
+   "mn9_mean": 34.624,
+   "mn9_std": 3.077,
+   "mn9_left_mean": 34.624,
+   "mn9_left_std": 3.077,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "low",
+   "bitter": "none",
+   "water": "high",
+   "ir94e": "none",
+   "hz": {
+    "sugar": 60,
+    "bitter": 0,
+    "water": 180,
+    "ir94e": 0
+   },
+   "mn9_mean": 57.706,
+   "mn9_std": 4.462,
+   "mn9_left_mean": 57.706,
+   "mn9_left_std": 4.462,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "low",
+   "bitter": "none",
+   "water": "high",
+   "ir94e": "low",
+   "hz": {
+    "sugar": 60,
+    "bitter": 0,
+    "water": 180,
+    "ir94e": 60
+   },
+   "mn9_mean": 50.781,
+   "mn9_std": 4.047,
+   "mn9_left_mean": 50.781,
+   "mn9_left_std": 4.047,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "low",
+   "bitter": "none",
+   "water": "high",
+   "ir94e": "medium",
+   "hz": {
+    "sugar": 60,
+    "bitter": 0,
+    "water": 180,
+    "ir94e": 120
+   },
+   "mn9_mean": 43.857,
+   "mn9_std": 3.631,
+   "mn9_left_mean": 43.857,
+   "mn9_left_std": 3.631,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "low",
+   "bitter": "none",
+   "water": "high",
+   "ir94e": "high",
+   "hz": {
+    "sugar": 60,
+    "bitter": 0,
+    "water": 180,
+    "ir94e": 200
+   },
+   "mn9_mean": 34.624,
+   "mn9_std": 3.077,
+   "mn9_left_mean": 34.624,
+   "mn9_left_std": 3.077,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "low",
+   "bitter": "none",
+   "water": "very_high",
+   "ir94e": "none",
+   "hz": {
+    "sugar": 60,
+    "bitter": 0,
+    "water": 240,
+    "ir94e": 0
+   },
+   "mn9_mean": 57.706,
+   "mn9_std": 4.462,
+   "mn9_left_mean": 57.706,
+   "mn9_left_std": 4.462,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "low",
+   "bitter": "none",
+   "water": "very_high",
+   "ir94e": "low",
+   "hz": {
+    "sugar": 60,
+    "bitter": 0,
+    "water": 240,
+    "ir94e": 60
+   },
+   "mn9_mean": 50.781,
+   "mn9_std": 4.047,
+   "mn9_left_mean": 50.781,
+   "mn9_left_std": 4.047,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "low",
+   "bitter": "none",
+   "water": "very_high",
+   "ir94e": "medium",
+   "hz": {
+    "sugar": 60,
+    "bitter": 0,
+    "water": 240,
+    "ir94e": 120
+   },
+   "mn9_mean": 43.857,
+   "mn9_std": 3.631,
+   "mn9_left_mean": 43.857,
+   "mn9_left_std": 3.631,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "low",
+   "bitter": "none",
+   "water": "very_high",
+   "ir94e": "high",
+   "hz": {
+    "sugar": 60,
+    "bitter": 0,
+    "water": 240,
+    "ir94e": 200
+   },
+   "mn9_mean": 34.624,
+   "mn9_std": 3.077,
+   "mn9_left_mean": 34.624,
+   "mn9_left_std": 3.077,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "low",
+   "bitter": "low",
+   "water": "none",
+   "ir94e": "none",
+   "hz": {
+    "sugar": 60,
+    "bitter": 30,
+    "water": 0,
+    "ir94e": 0
+   },
+   "mn9_mean": 33.348,
+   "mn9_std": 3.001,
+   "mn9_left_mean": 33.348,
+   "mn9_left_std": 3.001,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "low",
+   "bitter": "low",
+   "water": "none",
+   "ir94e": "low",
+   "hz": {
+    "sugar": 60,
+    "bitter": 30,
+    "water": 0,
+    "ir94e": 60
+   },
+   "mn9_mean": 29.346,
+   "mn9_std": 2.761,
+   "mn9_left_mean": 29.346,
+   "mn9_left_std": 2.761,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "low",
+   "bitter": "low",
+   "water": "none",
+   "ir94e": "medium",
+   "hz": {
+    "sugar": 60,
+    "bitter": 30,
+    "water": 0,
+    "ir94e": 120
+   },
+   "mn9_mean": 25.344,
+   "mn9_std": 2.521,
+   "mn9_left_mean": 25.344,
+   "mn9_left_std": 2.521,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "low",
+   "bitter": "low",
+   "water": "none",
+   "ir94e": "high",
+   "hz": {
+    "sugar": 60,
+    "bitter": 30,
+    "water": 0,
+    "ir94e": 200
+   },
+   "mn9_mean": 20.009,
+   "mn9_std": 2.201,
+   "mn9_left_mean": 20.009,
+   "mn9_left_std": 2.201,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "low",
+   "bitter": "low",
+   "water": "low",
+   "ir94e": "none",
+   "hz": {
+    "sugar": 60,
+    "bitter": 30,
+    "water": 60,
+    "ir94e": 0
+   },
+   "mn9_mean": 47.523,
+   "mn9_std": 3.851,
+   "mn9_left_mean": 47.523,
+   "mn9_left_std": 3.851,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "low",
+   "bitter": "low",
+   "water": "low",
+   "ir94e": "low",
+   "hz": {
+    "sugar": 60,
+    "bitter": 30,
+    "water": 60,
+    "ir94e": 60
+   },
+   "mn9_mean": 41.82,
+   "mn9_std": 3.509,
+   "mn9_left_mean": 41.82,
+   "mn9_left_std": 3.509,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "low",
+   "bitter": "low",
+   "water": "low",
+   "ir94e": "medium",
+   "hz": {
+    "sugar": 60,
+    "bitter": 30,
+    "water": 60,
+    "ir94e": 120
+   },
+   "mn9_mean": 36.117,
+   "mn9_std": 3.167,
+   "mn9_left_mean": 36.117,
+   "mn9_left_std": 3.167,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "low",
+   "bitter": "low",
+   "water": "low",
+   "ir94e": "high",
+   "hz": {
+    "sugar": 60,
+    "bitter": 30,
+    "water": 60,
+    "ir94e": 200
+   },
+   "mn9_mean": 28.514,
+   "mn9_std": 2.711,
+   "mn9_left_mean": 28.514,
+   "mn9_left_std": 2.711,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "low",
+   "bitter": "low",
+   "water": "high",
+   "ir94e": "none",
+   "hz": {
+    "sugar": 60,
+    "bitter": 30,
+    "water": 180,
+    "ir94e": 0
+   },
+   "mn9_mean": 47.523,
+   "mn9_std": 3.851,
+   "mn9_left_mean": 47.523,
+   "mn9_left_std": 3.851,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "low",
+   "bitter": "low",
+   "water": "high",
+   "ir94e": "low",
+   "hz": {
+    "sugar": 60,
+    "bitter": 30,
+    "water": 180,
+    "ir94e": 60
+   },
+   "mn9_mean": 41.82,
+   "mn9_std": 3.509,
+   "mn9_left_mean": 41.82,
+   "mn9_left_std": 3.509,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "low",
+   "bitter": "low",
+   "water": "high",
+   "ir94e": "medium",
+   "hz": {
+    "sugar": 60,
+    "bitter": 30,
+    "water": 180,
+    "ir94e": 120
+   },
+   "mn9_mean": 36.117,
+   "mn9_std": 3.167,
+   "mn9_left_mean": 36.117,
+   "mn9_left_std": 3.167,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "low",
+   "bitter": "low",
+   "water": "high",
+   "ir94e": "high",
+   "hz": {
+    "sugar": 60,
+    "bitter": 30,
+    "water": 180,
+    "ir94e": 200
+   },
+   "mn9_mean": 28.514,
+   "mn9_std": 2.711,
+   "mn9_left_mean": 28.514,
+   "mn9_left_std": 2.711,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "low",
+   "bitter": "low",
+   "water": "very_high",
+   "ir94e": "none",
+   "hz": {
+    "sugar": 60,
+    "bitter": 30,
+    "water": 240,
+    "ir94e": 0
+   },
+   "mn9_mean": 47.523,
+   "mn9_std": 3.851,
+   "mn9_left_mean": 47.523,
+   "mn9_left_std": 3.851,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "low",
+   "bitter": "low",
+   "water": "very_high",
+   "ir94e": "low",
+   "hz": {
+    "sugar": 60,
+    "bitter": 30,
+    "water": 240,
+    "ir94e": 60
+   },
+   "mn9_mean": 41.82,
+   "mn9_std": 3.509,
+   "mn9_left_mean": 41.82,
+   "mn9_left_std": 3.509,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "low",
+   "bitter": "low",
+   "water": "very_high",
+   "ir94e": "medium",
+   "hz": {
+    "sugar": 60,
+    "bitter": 30,
+    "water": 240,
+    "ir94e": 120
+   },
+   "mn9_mean": 36.117,
+   "mn9_std": 3.167,
+   "mn9_left_mean": 36.117,
+   "mn9_left_std": 3.167,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "low",
+   "bitter": "low",
+   "water": "very_high",
+   "ir94e": "high",
+   "hz": {
+    "sugar": 60,
+    "bitter": 30,
+    "water": 240,
+    "ir94e": 200
+   },
+   "mn9_mean": 28.514,
+   "mn9_std": 2.711,
+   "mn9_left_mean": 28.514,
+   "mn9_left_std": 2.711,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "low",
+   "bitter": "medium",
+   "water": "none",
+   "ir94e": "none",
+   "hz": {
+    "sugar": 60,
+    "bitter": 60,
+    "water": 0,
+    "ir94e": 0
+   },
+   "mn9_mean": 26.202,
+   "mn9_std": 2.572,
+   "mn9_left_mean": 26.202,
+   "mn9_left_std": 2.572,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "low",
+   "bitter": "medium",
+   "water": "none",
+   "ir94e": "low",
+   "hz": {
+    "sugar": 60,
+    "bitter": 60,
+    "water": 0,
+    "ir94e": 60
+   },
+   "mn9_mean": 23.057,
+   "mn9_std": 2.383,
+   "mn9_left_mean": 23.057,
+   "mn9_left_std": 2.383,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "low",
+   "bitter": "medium",
+   "water": "none",
+   "ir94e": "medium",
+   "hz": {
+    "sugar": 60,
+    "bitter": 60,
+    "water": 0,
+    "ir94e": 120
+   },
+   "mn9_mean": 19.913,
+   "mn9_std": 2.195,
+   "mn9_left_mean": 19.913,
+   "mn9_left_std": 2.195,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "low",
+   "bitter": "medium",
+   "water": "none",
+   "ir94e": "high",
+   "hz": {
+    "sugar": 60,
+    "bitter": 60,
+    "water": 0,
+    "ir94e": 200
+   },
+   "mn9_mean": 15.721,
+   "mn9_std": 1.943,
+   "mn9_left_mean": 15.721,
+   "mn9_left_std": 1.943,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "low",
+   "bitter": "medium",
+   "water": "low",
+   "ir94e": "none",
+   "hz": {
+    "sugar": 60,
+    "bitter": 60,
+    "water": 60,
+    "ir94e": 0
+   },
+   "mn9_mean": 37.339,
+   "mn9_std": 3.24,
+   "mn9_left_mean": 37.339,
+   "mn9_left_std": 3.24,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "low",
+   "bitter": "medium",
+   "water": "low",
+   "ir94e": "low",
+   "hz": {
+    "sugar": 60,
+    "bitter": 60,
+    "water": 60,
+    "ir94e": 60
+   },
+   "mn9_mean": 32.858,
+   "mn9_std": 2.971,
+   "mn9_left_mean": 32.858,
+   "mn9_left_std": 2.971,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "low",
+   "bitter": "medium",
+   "water": "low",
+   "ir94e": "medium",
+   "hz": {
+    "sugar": 60,
+    "bitter": 60,
+    "water": 60,
+    "ir94e": 120
+   },
+   "mn9_mean": 28.378,
+   "mn9_std": 2.703,
+   "mn9_left_mean": 28.378,
+   "mn9_left_std": 2.703,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "low",
+   "bitter": "medium",
+   "water": "low",
+   "ir94e": "high",
+   "hz": {
+    "sugar": 60,
+    "bitter": 60,
+    "water": 60,
+    "ir94e": 200
+   },
+   "mn9_mean": 22.404,
+   "mn9_std": 2.344,
+   "mn9_left_mean": 22.404,
+   "mn9_left_std": 2.344,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "low",
+   "bitter": "medium",
+   "water": "high",
+   "ir94e": "none",
+   "hz": {
+    "sugar": 60,
+    "bitter": 60,
+    "water": 180,
+    "ir94e": 0
+   },
+   "mn9_mean": 37.339,
+   "mn9_std": 3.24,
+   "mn9_left_mean": 37.339,
+   "mn9_left_std": 3.24,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "low",
+   "bitter": "medium",
+   "water": "high",
+   "ir94e": "low",
+   "hz": {
+    "sugar": 60,
+    "bitter": 60,
+    "water": 180,
+    "ir94e": 60
+   },
+   "mn9_mean": 32.858,
+   "mn9_std": 2.971,
+   "mn9_left_mean": 32.858,
+   "mn9_left_std": 2.971,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "low",
+   "bitter": "medium",
+   "water": "high",
+   "ir94e": "medium",
+   "hz": {
+    "sugar": 60,
+    "bitter": 60,
+    "water": 180,
+    "ir94e": 120
+   },
+   "mn9_mean": 28.378,
+   "mn9_std": 2.703,
+   "mn9_left_mean": 28.378,
+   "mn9_left_std": 2.703,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "low",
+   "bitter": "medium",
+   "water": "high",
+   "ir94e": "high",
+   "hz": {
+    "sugar": 60,
+    "bitter": 60,
+    "water": 180,
+    "ir94e": 200
+   },
+   "mn9_mean": 22.404,
+   "mn9_std": 2.344,
+   "mn9_left_mean": 22.404,
+   "mn9_left_std": 2.344,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "low",
+   "bitter": "medium",
+   "water": "very_high",
+   "ir94e": "none",
+   "hz": {
+    "sugar": 60,
+    "bitter": 60,
+    "water": 240,
+    "ir94e": 0
+   },
+   "mn9_mean": 37.339,
+   "mn9_std": 3.24,
+   "mn9_left_mean": 37.339,
+   "mn9_left_std": 3.24,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "low",
+   "bitter": "medium",
+   "water": "very_high",
+   "ir94e": "low",
+   "hz": {
+    "sugar": 60,
+    "bitter": 60,
+    "water": 240,
+    "ir94e": 60
+   },
+   "mn9_mean": 32.858,
+   "mn9_std": 2.971,
+   "mn9_left_mean": 32.858,
+   "mn9_left_std": 2.971,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "low",
+   "bitter": "medium",
+   "water": "very_high",
+   "ir94e": "medium",
+   "hz": {
+    "sugar": 60,
+    "bitter": 60,
+    "water": 240,
+    "ir94e": 120
+   },
+   "mn9_mean": 28.378,
+   "mn9_std": 2.703,
+   "mn9_left_mean": 28.378,
+   "mn9_left_std": 2.703,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "low",
+   "bitter": "medium",
+   "water": "very_high",
+   "ir94e": "high",
+   "hz": {
+    "sugar": 60,
+    "bitter": 60,
+    "water": 240,
+    "ir94e": 200
+   },
+   "mn9_mean": 22.404,
+   "mn9_std": 2.344,
+   "mn9_left_mean": 22.404,
+   "mn9_left_std": 2.344,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "low",
+   "bitter": "high",
+   "water": "none",
+   "ir94e": "none",
+   "hz": {
+    "sugar": 60,
+    "bitter": 100,
+    "water": 0,
+    "ir94e": 0
+   },
+   "mn9_mean": 16.674,
+   "mn9_std": 2.0,
+   "mn9_left_mean": 16.674,
+   "mn9_left_std": 2.0,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "low",
+   "bitter": "high",
+   "water": "none",
+   "ir94e": "low",
+   "hz": {
+    "sugar": 60,
+    "bitter": 100,
+    "water": 0,
+    "ir94e": 60
+   },
+   "mn9_mean": 14.673,
+   "mn9_std": 1.88,
+   "mn9_left_mean": 14.673,
+   "mn9_left_std": 1.88,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "low",
+   "bitter": "high",
+   "water": "none",
+   "ir94e": "medium",
+   "hz": {
+    "sugar": 60,
+    "bitter": 100,
+    "water": 0,
+    "ir94e": 120
+   },
+   "mn9_mean": 12.672,
+   "mn9_std": 1.76,
+   "mn9_left_mean": 12.672,
+   "mn9_left_std": 1.76,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "low",
+   "bitter": "high",
+   "water": "none",
+   "ir94e": "high",
+   "hz": {
+    "sugar": 60,
+    "bitter": 100,
+    "water": 0,
+    "ir94e": 200
+   },
+   "mn9_mean": 10.004,
+   "mn9_std": 1.6,
+   "mn9_left_mean": 10.004,
+   "mn9_left_std": 1.6,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "low",
+   "bitter": "high",
+   "water": "low",
+   "ir94e": "none",
+   "hz": {
+    "sugar": 60,
+    "bitter": 100,
+    "water": 60,
+    "ir94e": 0
+   },
+   "mn9_mean": 23.761,
+   "mn9_std": 2.426,
+   "mn9_left_mean": 23.761,
+   "mn9_left_std": 2.426,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "low",
+   "bitter": "high",
+   "water": "low",
+   "ir94e": "low",
+   "hz": {
+    "sugar": 60,
+    "bitter": 100,
+    "water": 60,
+    "ir94e": 60
+   },
+   "mn9_mean": 20.91,
+   "mn9_std": 2.255,
+   "mn9_left_mean": 20.91,
+   "mn9_left_std": 2.255,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "low",
+   "bitter": "high",
+   "water": "low",
+   "ir94e": "medium",
+   "hz": {
+    "sugar": 60,
+    "bitter": 100,
+    "water": 60,
+    "ir94e": 120
+   },
+   "mn9_mean": 18.059,
+   "mn9_std": 2.084,
+   "mn9_left_mean": 18.059,
+   "mn9_left_std": 2.084,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "low",
+   "bitter": "high",
+   "water": "low",
+   "ir94e": "high",
+   "hz": {
+    "sugar": 60,
+    "bitter": 100,
+    "water": 60,
+    "ir94e": 200
+   },
+   "mn9_mean": 14.257,
+   "mn9_std": 1.855,
+   "mn9_left_mean": 14.257,
+   "mn9_left_std": 1.855,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "low",
+   "bitter": "high",
+   "water": "high",
+   "ir94e": "none",
+   "hz": {
+    "sugar": 60,
+    "bitter": 100,
+    "water": 180,
+    "ir94e": 0
+   },
+   "mn9_mean": 23.761,
+   "mn9_std": 2.426,
+   "mn9_left_mean": 23.761,
+   "mn9_left_std": 2.426,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "low",
+   "bitter": "high",
+   "water": "high",
+   "ir94e": "low",
+   "hz": {
+    "sugar": 60,
+    "bitter": 100,
+    "water": 180,
+    "ir94e": 60
+   },
+   "mn9_mean": 20.91,
+   "mn9_std": 2.255,
+   "mn9_left_mean": 20.91,
+   "mn9_left_std": 2.255,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "low",
+   "bitter": "high",
+   "water": "high",
+   "ir94e": "medium",
+   "hz": {
+    "sugar": 60,
+    "bitter": 100,
+    "water": 180,
+    "ir94e": 120
+   },
+   "mn9_mean": 18.059,
+   "mn9_std": 2.084,
+   "mn9_left_mean": 18.059,
+   "mn9_left_std": 2.084,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "low",
+   "bitter": "high",
+   "water": "high",
+   "ir94e": "high",
+   "hz": {
+    "sugar": 60,
+    "bitter": 100,
+    "water": 180,
+    "ir94e": 200
+   },
+   "mn9_mean": 14.257,
+   "mn9_std": 1.855,
+   "mn9_left_mean": 14.257,
+   "mn9_left_std": 1.855,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "low",
+   "bitter": "high",
+   "water": "very_high",
+   "ir94e": "none",
+   "hz": {
+    "sugar": 60,
+    "bitter": 100,
+    "water": 240,
+    "ir94e": 0
+   },
+   "mn9_mean": 23.761,
+   "mn9_std": 2.426,
+   "mn9_left_mean": 23.761,
+   "mn9_left_std": 2.426,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "low",
+   "bitter": "high",
+   "water": "very_high",
+   "ir94e": "low",
+   "hz": {
+    "sugar": 60,
+    "bitter": 100,
+    "water": 240,
+    "ir94e": 60
+   },
+   "mn9_mean": 20.91,
+   "mn9_std": 2.255,
+   "mn9_left_mean": 20.91,
+   "mn9_left_std": 2.255,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "low",
+   "bitter": "high",
+   "water": "very_high",
+   "ir94e": "medium",
+   "hz": {
+    "sugar": 60,
+    "bitter": 100,
+    "water": 240,
+    "ir94e": 120
+   },
+   "mn9_mean": 18.059,
+   "mn9_std": 2.084,
+   "mn9_left_mean": 18.059,
+   "mn9_left_std": 2.084,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "low",
+   "bitter": "high",
+   "water": "very_high",
+   "ir94e": "high",
+   "hz": {
+    "sugar": 60,
+    "bitter": 100,
+    "water": 240,
+    "ir94e": 200
+   },
+   "mn9_mean": 14.257,
+   "mn9_std": 1.855,
+   "mn9_left_mean": 14.257,
+   "mn9_left_std": 1.855,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "low",
+   "bitter": "very_high",
+   "water": "none",
+   "ir94e": "none",
+   "hz": {
+    "sugar": 60,
+    "bitter": 160,
+    "water": 0,
+    "ir94e": 0
+   },
+   "mn9_mean": 2.382,
+   "mn9_std": 1.143,
+   "mn9_left_mean": 2.382,
+   "mn9_left_std": 1.143,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "low",
+   "bitter": "very_high",
+   "water": "none",
+   "ir94e": "low",
+   "hz": {
+    "sugar": 60,
+    "bitter": 160,
+    "water": 0,
+    "ir94e": 60
+   },
+   "mn9_mean": 2.096,
+   "mn9_std": 1.126,
+   "mn9_left_mean": 2.096,
+   "mn9_left_std": 1.126,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "low",
+   "bitter": "very_high",
+   "water": "none",
+   "ir94e": "medium",
+   "hz": {
+    "sugar": 60,
+    "bitter": 160,
+    "water": 0,
+    "ir94e": 120
+   },
+   "mn9_mean": 1.81,
+   "mn9_std": 1.109,
+   "mn9_left_mean": 1.81,
+   "mn9_left_std": 1.109,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "low",
+   "bitter": "very_high",
+   "water": "none",
+   "ir94e": "high",
+   "hz": {
+    "sugar": 60,
+    "bitter": 160,
+    "water": 0,
+    "ir94e": 200
+   },
+   "mn9_mean": 1.429,
+   "mn9_std": 1.086,
+   "mn9_left_mean": 1.429,
+   "mn9_left_std": 1.086,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "low",
+   "bitter": "very_high",
+   "water": "low",
+   "ir94e": "none",
+   "hz": {
+    "sugar": 60,
+    "bitter": 160,
+    "water": 60,
+    "ir94e": 0
+   },
+   "mn9_mean": 3.394,
+   "mn9_std": 1.204,
+   "mn9_left_mean": 3.394,
+   "mn9_left_std": 1.204,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "low",
+   "bitter": "very_high",
+   "water": "low",
+   "ir94e": "low",
+   "hz": {
+    "sugar": 60,
+    "bitter": 160,
+    "water": 60,
+    "ir94e": 60
+   },
+   "mn9_mean": 2.987,
+   "mn9_std": 1.179,
+   "mn9_left_mean": 2.987,
+   "mn9_left_std": 1.179,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "low",
+   "bitter": "very_high",
+   "water": "low",
+   "ir94e": "medium",
+   "hz": {
+    "sugar": 60,
+    "bitter": 160,
+    "water": 60,
+    "ir94e": 120
+   },
+   "mn9_mean": 2.58,
+   "mn9_std": 1.155,
+   "mn9_left_mean": 2.58,
+   "mn9_left_std": 1.155,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "low",
+   "bitter": "very_high",
+   "water": "low",
+   "ir94e": "high",
+   "hz": {
+    "sugar": 60,
+    "bitter": 160,
+    "water": 60,
+    "ir94e": 200
+   },
+   "mn9_mean": 2.037,
+   "mn9_std": 1.122,
+   "mn9_left_mean": 2.037,
+   "mn9_left_std": 1.122,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "low",
+   "bitter": "very_high",
+   "water": "high",
+   "ir94e": "none",
+   "hz": {
+    "sugar": 60,
+    "bitter": 160,
+    "water": 180,
+    "ir94e": 0
+   },
+   "mn9_mean": 3.394,
+   "mn9_std": 1.204,
+   "mn9_left_mean": 3.394,
+   "mn9_left_std": 1.204,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "low",
+   "bitter": "very_high",
+   "water": "high",
+   "ir94e": "low",
+   "hz": {
+    "sugar": 60,
+    "bitter": 160,
+    "water": 180,
+    "ir94e": 60
+   },
+   "mn9_mean": 2.987,
+   "mn9_std": 1.179,
+   "mn9_left_mean": 2.987,
+   "mn9_left_std": 1.179,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "low",
+   "bitter": "very_high",
+   "water": "high",
+   "ir94e": "medium",
+   "hz": {
+    "sugar": 60,
+    "bitter": 160,
+    "water": 180,
+    "ir94e": 120
+   },
+   "mn9_mean": 2.58,
+   "mn9_std": 1.155,
+   "mn9_left_mean": 2.58,
+   "mn9_left_std": 1.155,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "low",
+   "bitter": "very_high",
+   "water": "high",
+   "ir94e": "high",
+   "hz": {
+    "sugar": 60,
+    "bitter": 160,
+    "water": 180,
+    "ir94e": 200
+   },
+   "mn9_mean": 2.037,
+   "mn9_std": 1.122,
+   "mn9_left_mean": 2.037,
+   "mn9_left_std": 1.122,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "low",
+   "bitter": "very_high",
+   "water": "very_high",
+   "ir94e": "none",
+   "hz": {
+    "sugar": 60,
+    "bitter": 160,
+    "water": 240,
+    "ir94e": 0
+   },
+   "mn9_mean": 3.394,
+   "mn9_std": 1.204,
+   "mn9_left_mean": 3.394,
+   "mn9_left_std": 1.204,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "low",
+   "bitter": "very_high",
+   "water": "very_high",
+   "ir94e": "low",
+   "hz": {
+    "sugar": 60,
+    "bitter": 160,
+    "water": 240,
+    "ir94e": 60
+   },
+   "mn9_mean": 2.987,
+   "mn9_std": 1.179,
+   "mn9_left_mean": 2.987,
+   "mn9_left_std": 1.179,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "low",
+   "bitter": "very_high",
+   "water": "very_high",
+   "ir94e": "medium",
+   "hz": {
+    "sugar": 60,
+    "bitter": 160,
+    "water": 240,
+    "ir94e": 120
+   },
+   "mn9_mean": 2.58,
+   "mn9_std": 1.155,
+   "mn9_left_mean": 2.58,
+   "mn9_left_std": 1.155,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "low",
+   "bitter": "very_high",
+   "water": "very_high",
+   "ir94e": "high",
+   "hz": {
+    "sugar": 60,
+    "bitter": 160,
+    "water": 240,
+    "ir94e": 200
+   },
+   "mn9_mean": 2.037,
+   "mn9_std": 1.122,
+   "mn9_left_mean": 2.037,
+   "mn9_left_std": 1.122,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "medium",
+   "bitter": "none",
+   "water": "none",
+   "ir94e": "none",
+   "hz": {
+    "sugar": 80,
+    "bitter": 0,
+    "water": 0,
+    "ir94e": 0
+   },
+   "mn9_mean": 60.051,
+   "mn9_std": 4.603,
+   "mn9_left_mean": 60.051,
+   "mn9_left_std": 4.603,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "medium",
+   "bitter": "none",
+   "water": "none",
+   "ir94e": "low",
+   "hz": {
+    "sugar": 80,
+    "bitter": 0,
+    "water": 0,
+    "ir94e": 60
+   },
+   "mn9_mean": 52.845,
+   "mn9_std": 4.171,
+   "mn9_left_mean": 52.845,
+   "mn9_left_std": 4.171,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "medium",
+   "bitter": "none",
+   "water": "none",
+   "ir94e": "medium",
+   "hz": {
+    "sugar": 80,
+    "bitter": 0,
+    "water": 0,
+    "ir94e": 120
+   },
+   "mn9_mean": 45.639,
+   "mn9_std": 3.738,
+   "mn9_left_mean": 45.639,
+   "mn9_left_std": 3.738,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "medium",
+   "bitter": "none",
+   "water": "none",
+   "ir94e": "high",
+   "hz": {
+    "sugar": 80,
+    "bitter": 0,
+    "water": 0,
+    "ir94e": 200
+   },
+   "mn9_mean": 36.031,
+   "mn9_std": 3.162,
+   "mn9_left_mean": 36.031,
+   "mn9_left_std": 3.162,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "medium",
+   "bitter": "none",
+   "water": "low",
+   "ir94e": "none",
+   "hz": {
+    "sugar": 80,
+    "bitter": 0,
+    "water": 60,
+    "ir94e": 0
+   },
+   "mn9_mean": 71.088,
+   "mn9_std": 5.265,
+   "mn9_left_mean": 71.088,
+   "mn9_left_std": 5.265,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "medium",
+   "bitter": "none",
+   "water": "low",
+   "ir94e": "low",
+   "hz": {
+    "sugar": 80,
+    "bitter": 0,
+    "water": 60,
+    "ir94e": 60
+   },
+   "mn9_mean": 62.557,
+   "mn9_std": 4.753,
+   "mn9_left_mean": 62.557,
+   "mn9_left_std": 4.753,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "medium",
+   "bitter": "none",
+   "water": "low",
+   "ir94e": "medium",
+   "hz": {
+    "sugar": 80,
+    "bitter": 0,
+    "water": 60,
+    "ir94e": 120
+   },
+   "mn9_mean": 54.027,
+   "mn9_std": 4.242,
+   "mn9_left_mean": 54.027,
+   "mn9_left_std": 4.242,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "medium",
+   "bitter": "none",
+   "water": "low",
+   "ir94e": "high",
+   "hz": {
+    "sugar": 80,
+    "bitter": 0,
+    "water": 60,
+    "ir94e": 200
+   },
+   "mn9_mean": 42.653,
+   "mn9_std": 3.559,
+   "mn9_left_mean": 42.653,
+   "mn9_left_std": 3.559,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "medium",
+   "bitter": "none",
+   "water": "high",
+   "ir94e": "none",
+   "hz": {
+    "sugar": 80,
+    "bitter": 0,
+    "water": 180,
+    "ir94e": 0
+   },
+   "mn9_mean": 71.088,
+   "mn9_std": 5.265,
+   "mn9_left_mean": 71.088,
+   "mn9_left_std": 5.265,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "medium",
+   "bitter": "none",
+   "water": "high",
+   "ir94e": "low",
+   "hz": {
+    "sugar": 80,
+    "bitter": 0,
+    "water": 180,
+    "ir94e": 60
+   },
+   "mn9_mean": 62.557,
+   "mn9_std": 4.753,
+   "mn9_left_mean": 62.557,
+   "mn9_left_std": 4.753,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "medium",
+   "bitter": "none",
+   "water": "high",
+   "ir94e": "medium",
+   "hz": {
+    "sugar": 80,
+    "bitter": 0,
+    "water": 180,
+    "ir94e": 120
+   },
+   "mn9_mean": 54.027,
+   "mn9_std": 4.242,
+   "mn9_left_mean": 54.027,
+   "mn9_left_std": 4.242,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "medium",
+   "bitter": "none",
+   "water": "high",
+   "ir94e": "high",
+   "hz": {
+    "sugar": 80,
+    "bitter": 0,
+    "water": 180,
+    "ir94e": 200
+   },
+   "mn9_mean": 42.653,
+   "mn9_std": 3.559,
+   "mn9_left_mean": 42.653,
+   "mn9_left_std": 3.559,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "medium",
+   "bitter": "none",
+   "water": "very_high",
+   "ir94e": "none",
+   "hz": {
+    "sugar": 80,
+    "bitter": 0,
+    "water": 240,
+    "ir94e": 0
+   },
+   "mn9_mean": 71.088,
+   "mn9_std": 5.265,
+   "mn9_left_mean": 71.088,
+   "mn9_left_std": 5.265,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "medium",
+   "bitter": "none",
+   "water": "very_high",
+   "ir94e": "low",
+   "hz": {
+    "sugar": 80,
+    "bitter": 0,
+    "water": 240,
+    "ir94e": 60
+   },
+   "mn9_mean": 62.557,
+   "mn9_std": 4.753,
+   "mn9_left_mean": 62.557,
+   "mn9_left_std": 4.753,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "medium",
+   "bitter": "none",
+   "water": "very_high",
+   "ir94e": "medium",
+   "hz": {
+    "sugar": 80,
+    "bitter": 0,
+    "water": 240,
+    "ir94e": 120
+   },
+   "mn9_mean": 54.027,
+   "mn9_std": 4.242,
+   "mn9_left_mean": 54.027,
+   "mn9_left_std": 4.242,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "medium",
+   "bitter": "none",
+   "water": "very_high",
+   "ir94e": "high",
+   "hz": {
+    "sugar": 80,
+    "bitter": 0,
+    "water": 240,
+    "ir94e": 200
+   },
+   "mn9_mean": 42.653,
+   "mn9_std": 3.559,
+   "mn9_left_mean": 42.653,
+   "mn9_left_std": 3.559,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "medium",
+   "bitter": "low",
+   "water": "none",
+   "ir94e": "none",
+   "hz": {
+    "sugar": 80,
+    "bitter": 30,
+    "water": 0,
+    "ir94e": 0
+   },
+   "mn9_mean": 49.454,
+   "mn9_std": 3.967,
+   "mn9_left_mean": 49.454,
+   "mn9_left_std": 3.967,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "medium",
+   "bitter": "low",
+   "water": "none",
+   "ir94e": "low",
+   "hz": {
+    "sugar": 80,
+    "bitter": 30,
+    "water": 0,
+    "ir94e": 60
+   },
+   "mn9_mean": 43.52,
+   "mn9_std": 3.611,
+   "mn9_left_mean": 43.52,
+   "mn9_left_std": 3.611,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "medium",
+   "bitter": "low",
+   "water": "none",
+   "ir94e": "medium",
+   "hz": {
+    "sugar": 80,
+    "bitter": 30,
+    "water": 0,
+    "ir94e": 120
+   },
+   "mn9_mean": 37.585,
+   "mn9_std": 3.255,
+   "mn9_left_mean": 37.585,
+   "mn9_left_std": 3.255,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "medium",
+   "bitter": "low",
+   "water": "none",
+   "ir94e": "high",
+   "hz": {
+    "sugar": 80,
+    "bitter": 30,
+    "water": 0,
+    "ir94e": 200
+   },
+   "mn9_mean": 29.672,
+   "mn9_std": 2.78,
+   "mn9_left_mean": 29.672,
+   "mn9_left_std": 2.78,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "medium",
+   "bitter": "low",
+   "water": "low",
+   "ir94e": "none",
+   "hz": {
+    "sugar": 80,
+    "bitter": 30,
+    "water": 60,
+    "ir94e": 0
+   },
+   "mn9_mean": 58.543,
+   "mn9_std": 4.513,
+   "mn9_left_mean": 58.543,
+   "mn9_left_std": 4.513,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "medium",
+   "bitter": "low",
+   "water": "low",
+   "ir94e": "low",
+   "hz": {
+    "sugar": 80,
+    "bitter": 30,
+    "water": 60,
+    "ir94e": 60
+   },
+   "mn9_mean": 51.518,
+   "mn9_std": 4.091,
+   "mn9_left_mean": 51.518,
+   "mn9_left_std": 4.091,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "medium",
+   "bitter": "low",
+   "water": "low",
+   "ir94e": "medium",
+   "hz": {
+    "sugar": 80,
+    "bitter": 30,
+    "water": 60,
+    "ir94e": 120
+   },
+   "mn9_mean": 44.493,
+   "mn9_std": 3.67,
+   "mn9_left_mean": 44.493,
+   "mn9_left_std": 3.67,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "medium",
+   "bitter": "low",
+   "water": "low",
+   "ir94e": "high",
+   "hz": {
+    "sugar": 80,
+    "bitter": 30,
+    "water": 60,
+    "ir94e": 200
+   },
+   "mn9_mean": 35.126,
+   "mn9_std": 3.108,
+   "mn9_left_mean": 35.126,
+   "mn9_left_std": 3.108,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "medium",
+   "bitter": "low",
+   "water": "high",
+   "ir94e": "none",
+   "hz": {
+    "sugar": 80,
+    "bitter": 30,
+    "water": 180,
+    "ir94e": 0
+   },
+   "mn9_mean": 58.543,
+   "mn9_std": 4.513,
+   "mn9_left_mean": 58.543,
+   "mn9_left_std": 4.513,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "medium",
+   "bitter": "low",
+   "water": "high",
+   "ir94e": "low",
+   "hz": {
+    "sugar": 80,
+    "bitter": 30,
+    "water": 180,
+    "ir94e": 60
+   },
+   "mn9_mean": 51.518,
+   "mn9_std": 4.091,
+   "mn9_left_mean": 51.518,
+   "mn9_left_std": 4.091,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "medium",
+   "bitter": "low",
+   "water": "high",
+   "ir94e": "medium",
+   "hz": {
+    "sugar": 80,
+    "bitter": 30,
+    "water": 180,
+    "ir94e": 120
+   },
+   "mn9_mean": 44.493,
+   "mn9_std": 3.67,
+   "mn9_left_mean": 44.493,
+   "mn9_left_std": 3.67,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "medium",
+   "bitter": "low",
+   "water": "high",
+   "ir94e": "high",
+   "hz": {
+    "sugar": 80,
+    "bitter": 30,
+    "water": 180,
+    "ir94e": 200
+   },
+   "mn9_mean": 35.126,
+   "mn9_std": 3.108,
+   "mn9_left_mean": 35.126,
+   "mn9_left_std": 3.108,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "medium",
+   "bitter": "low",
+   "water": "very_high",
+   "ir94e": "none",
+   "hz": {
+    "sugar": 80,
+    "bitter": 30,
+    "water": 240,
+    "ir94e": 0
+   },
+   "mn9_mean": 58.543,
+   "mn9_std": 4.513,
+   "mn9_left_mean": 58.543,
+   "mn9_left_std": 4.513,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "medium",
+   "bitter": "low",
+   "water": "very_high",
+   "ir94e": "low",
+   "hz": {
+    "sugar": 80,
+    "bitter": 30,
+    "water": 240,
+    "ir94e": 60
+   },
+   "mn9_mean": 51.518,
+   "mn9_std": 4.091,
+   "mn9_left_mean": 51.518,
+   "mn9_left_std": 4.091,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "medium",
+   "bitter": "low",
+   "water": "very_high",
+   "ir94e": "medium",
+   "hz": {
+    "sugar": 80,
+    "bitter": 30,
+    "water": 240,
+    "ir94e": 120
+   },
+   "mn9_mean": 44.493,
+   "mn9_std": 3.67,
+   "mn9_left_mean": 44.493,
+   "mn9_left_std": 3.67,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "medium",
+   "bitter": "low",
+   "water": "very_high",
+   "ir94e": "high",
+   "hz": {
+    "sugar": 80,
+    "bitter": 30,
+    "water": 240,
+    "ir94e": 200
+   },
+   "mn9_mean": 35.126,
+   "mn9_std": 3.108,
+   "mn9_left_mean": 35.126,
+   "mn9_left_std": 3.108,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "medium",
+   "bitter": "medium",
+   "water": "none",
+   "ir94e": "none",
+   "hz": {
+    "sugar": 80,
+    "bitter": 60,
+    "water": 0,
+    "ir94e": 0
+   },
+   "mn9_mean": 38.857,
+   "mn9_std": 3.331,
+   "mn9_left_mean": 38.857,
+   "mn9_left_std": 3.331,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "medium",
+   "bitter": "medium",
+   "water": "none",
+   "ir94e": "low",
+   "hz": {
+    "sugar": 80,
+    "bitter": 60,
+    "water": 0,
+    "ir94e": 60
+   },
+   "mn9_mean": 34.194,
+   "mn9_std": 3.052,
+   "mn9_left_mean": 34.194,
+   "mn9_left_std": 3.052,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "medium",
+   "bitter": "medium",
+   "water": "none",
+   "ir94e": "medium",
+   "hz": {
+    "sugar": 80,
+    "bitter": 60,
+    "water": 0,
+    "ir94e": 120
+   },
+   "mn9_mean": 29.531,
+   "mn9_std": 2.772,
+   "mn9_left_mean": 29.531,
+   "mn9_left_std": 2.772,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "medium",
+   "bitter": "medium",
+   "water": "none",
+   "ir94e": "high",
+   "hz": {
+    "sugar": 80,
+    "bitter": 60,
+    "water": 0,
+    "ir94e": 200
+   },
+   "mn9_mean": 23.314,
+   "mn9_std": 2.399,
+   "mn9_left_mean": 23.314,
+   "mn9_left_std": 2.399,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "medium",
+   "bitter": "medium",
+   "water": "low",
+   "ir94e": "none",
+   "hz": {
+    "sugar": 80,
+    "bitter": 60,
+    "water": 60,
+    "ir94e": 0
+   },
+   "mn9_mean": 45.998,
+   "mn9_std": 3.76,
+   "mn9_left_mean": 45.998,
+   "mn9_left_std": 3.76,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "medium",
+   "bitter": "medium",
+   "water": "low",
+   "ir94e": "low",
+   "hz": {
+    "sugar": 80,
+    "bitter": 60,
+    "water": 60,
+    "ir94e": 60
+   },
+   "mn9_mean": 40.478,
+   "mn9_std": 3.429,
+   "mn9_left_mean": 40.478,
+   "mn9_left_std": 3.429,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "medium",
+   "bitter": "medium",
+   "water": "low",
+   "ir94e": "medium",
+   "hz": {
+    "sugar": 80,
+    "bitter": 60,
+    "water": 60,
+    "ir94e": 120
+   },
+   "mn9_mean": 34.958,
+   "mn9_std": 3.097,
+   "mn9_left_mean": 34.958,
+   "mn9_left_std": 3.097,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "medium",
+   "bitter": "medium",
+   "water": "low",
+   "ir94e": "high",
+   "hz": {
+    "sugar": 80,
+    "bitter": 60,
+    "water": 60,
+    "ir94e": 200
+   },
+   "mn9_mean": 27.599,
+   "mn9_std": 2.656,
+   "mn9_left_mean": 27.599,
+   "mn9_left_std": 2.656,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "medium",
+   "bitter": "medium",
+   "water": "high",
+   "ir94e": "none",
+   "hz": {
+    "sugar": 80,
+    "bitter": 60,
+    "water": 180,
+    "ir94e": 0
+   },
+   "mn9_mean": 45.998,
+   "mn9_std": 3.76,
+   "mn9_left_mean": 45.998,
+   "mn9_left_std": 3.76,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "medium",
+   "bitter": "medium",
+   "water": "high",
+   "ir94e": "low",
+   "hz": {
+    "sugar": 80,
+    "bitter": 60,
+    "water": 180,
+    "ir94e": 60
+   },
+   "mn9_mean": 40.478,
+   "mn9_std": 3.429,
+   "mn9_left_mean": 40.478,
+   "mn9_left_std": 3.429,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "medium",
+   "bitter": "medium",
+   "water": "high",
+   "ir94e": "medium",
+   "hz": {
+    "sugar": 80,
+    "bitter": 60,
+    "water": 180,
+    "ir94e": 120
+   },
+   "mn9_mean": 34.958,
+   "mn9_std": 3.097,
+   "mn9_left_mean": 34.958,
+   "mn9_left_std": 3.097,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "medium",
+   "bitter": "medium",
+   "water": "high",
+   "ir94e": "high",
+   "hz": {
+    "sugar": 80,
+    "bitter": 60,
+    "water": 180,
+    "ir94e": 200
+   },
+   "mn9_mean": 27.599,
+   "mn9_std": 2.656,
+   "mn9_left_mean": 27.599,
+   "mn9_left_std": 2.656,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "medium",
+   "bitter": "medium",
+   "water": "very_high",
+   "ir94e": "none",
+   "hz": {
+    "sugar": 80,
+    "bitter": 60,
+    "water": 240,
+    "ir94e": 0
+   },
+   "mn9_mean": 45.998,
+   "mn9_std": 3.76,
+   "mn9_left_mean": 45.998,
+   "mn9_left_std": 3.76,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "medium",
+   "bitter": "medium",
+   "water": "very_high",
+   "ir94e": "low",
+   "hz": {
+    "sugar": 80,
+    "bitter": 60,
+    "water": 240,
+    "ir94e": 60
+   },
+   "mn9_mean": 40.478,
+   "mn9_std": 3.429,
+   "mn9_left_mean": 40.478,
+   "mn9_left_std": 3.429,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "medium",
+   "bitter": "medium",
+   "water": "very_high",
+   "ir94e": "medium",
+   "hz": {
+    "sugar": 80,
+    "bitter": 60,
+    "water": 240,
+    "ir94e": 120
+   },
+   "mn9_mean": 34.958,
+   "mn9_std": 3.097,
+   "mn9_left_mean": 34.958,
+   "mn9_left_std": 3.097,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "medium",
+   "bitter": "medium",
+   "water": "very_high",
+   "ir94e": "high",
+   "hz": {
+    "sugar": 80,
+    "bitter": 60,
+    "water": 240,
+    "ir94e": 200
+   },
+   "mn9_mean": 27.599,
+   "mn9_std": 2.656,
+   "mn9_left_mean": 27.599,
+   "mn9_left_std": 2.656,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "medium",
+   "bitter": "high",
+   "water": "none",
+   "ir94e": "none",
+   "hz": {
+    "sugar": 80,
+    "bitter": 100,
+    "water": 0,
+    "ir94e": 0
+   },
+   "mn9_mean": 24.727,
+   "mn9_std": 2.484,
+   "mn9_left_mean": 24.727,
+   "mn9_left_std": 2.484,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "medium",
+   "bitter": "high",
+   "water": "none",
+   "ir94e": "low",
+   "hz": {
+    "sugar": 80,
+    "bitter": 100,
+    "water": 0,
+    "ir94e": 60
+   },
+   "mn9_mean": 21.76,
+   "mn9_std": 2.306,
+   "mn9_left_mean": 21.76,
+   "mn9_left_std": 2.306,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "medium",
+   "bitter": "high",
+   "water": "none",
+   "ir94e": "medium",
+   "hz": {
+    "sugar": 80,
+    "bitter": 100,
+    "water": 0,
+    "ir94e": 120
+   },
+   "mn9_mean": 18.793,
+   "mn9_std": 2.128,
+   "mn9_left_mean": 18.793,
+   "mn9_left_std": 2.128,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "medium",
+   "bitter": "high",
+   "water": "none",
+   "ir94e": "high",
+   "hz": {
+    "sugar": 80,
+    "bitter": 100,
+    "water": 0,
+    "ir94e": 200
+   },
+   "mn9_mean": 14.836,
+   "mn9_std": 1.89,
+   "mn9_left_mean": 14.836,
+   "mn9_left_std": 1.89,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "medium",
+   "bitter": "high",
+   "water": "low",
+   "ir94e": "none",
+   "hz": {
+    "sugar": 80,
+    "bitter": 100,
+    "water": 60,
+    "ir94e": 0
+   },
+   "mn9_mean": 29.271,
+   "mn9_std": 2.756,
+   "mn9_left_mean": 29.271,
+   "mn9_left_std": 2.756,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "medium",
+   "bitter": "high",
+   "water": "low",
+   "ir94e": "low",
+   "hz": {
+    "sugar": 80,
+    "bitter": 100,
+    "water": 60,
+    "ir94e": 60
+   },
+   "mn9_mean": 25.759,
+   "mn9_std": 2.546,
+   "mn9_left_mean": 25.759,
+   "mn9_left_std": 2.546,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "medium",
+   "bitter": "high",
+   "water": "low",
+   "ir94e": "medium",
+   "hz": {
+    "sugar": 80,
+    "bitter": 100,
+    "water": 60,
+    "ir94e": 120
+   },
+   "mn9_mean": 22.246,
+   "mn9_std": 2.335,
+   "mn9_left_mean": 22.246,
+   "mn9_left_std": 2.335,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "medium",
+   "bitter": "high",
+   "water": "low",
+   "ir94e": "high",
+   "hz": {
+    "sugar": 80,
+    "bitter": 100,
+    "water": 60,
+    "ir94e": 200
+   },
+   "mn9_mean": 17.563,
+   "mn9_std": 2.054,
+   "mn9_left_mean": 17.563,
+   "mn9_left_std": 2.054,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "medium",
+   "bitter": "high",
+   "water": "high",
+   "ir94e": "none",
+   "hz": {
+    "sugar": 80,
+    "bitter": 100,
+    "water": 180,
+    "ir94e": 0
+   },
+   "mn9_mean": 29.271,
+   "mn9_std": 2.756,
+   "mn9_left_mean": 29.271,
+   "mn9_left_std": 2.756,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "medium",
+   "bitter": "high",
+   "water": "high",
+   "ir94e": "low",
+   "hz": {
+    "sugar": 80,
+    "bitter": 100,
+    "water": 180,
+    "ir94e": 60
+   },
+   "mn9_mean": 25.759,
+   "mn9_std": 2.546,
+   "mn9_left_mean": 25.759,
+   "mn9_left_std": 2.546,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "medium",
+   "bitter": "high",
+   "water": "high",
+   "ir94e": "medium",
+   "hz": {
+    "sugar": 80,
+    "bitter": 100,
+    "water": 180,
+    "ir94e": 120
+   },
+   "mn9_mean": 22.246,
+   "mn9_std": 2.335,
+   "mn9_left_mean": 22.246,
+   "mn9_left_std": 2.335,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "medium",
+   "bitter": "high",
+   "water": "high",
+   "ir94e": "high",
+   "hz": {
+    "sugar": 80,
+    "bitter": 100,
+    "water": 180,
+    "ir94e": 200
+   },
+   "mn9_mean": 17.563,
+   "mn9_std": 2.054,
+   "mn9_left_mean": 17.563,
+   "mn9_left_std": 2.054,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "medium",
+   "bitter": "high",
+   "water": "very_high",
+   "ir94e": "none",
+   "hz": {
+    "sugar": 80,
+    "bitter": 100,
+    "water": 240,
+    "ir94e": 0
+   },
+   "mn9_mean": 29.271,
+   "mn9_std": 2.756,
+   "mn9_left_mean": 29.271,
+   "mn9_left_std": 2.756,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "medium",
+   "bitter": "high",
+   "water": "very_high",
+   "ir94e": "low",
+   "hz": {
+    "sugar": 80,
+    "bitter": 100,
+    "water": 240,
+    "ir94e": 60
+   },
+   "mn9_mean": 25.759,
+   "mn9_std": 2.546,
+   "mn9_left_mean": 25.759,
+   "mn9_left_std": 2.546,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "medium",
+   "bitter": "high",
+   "water": "very_high",
+   "ir94e": "medium",
+   "hz": {
+    "sugar": 80,
+    "bitter": 100,
+    "water": 240,
+    "ir94e": 120
+   },
+   "mn9_mean": 22.246,
+   "mn9_std": 2.335,
+   "mn9_left_mean": 22.246,
+   "mn9_left_std": 2.335,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "medium",
+   "bitter": "high",
+   "water": "very_high",
+   "ir94e": "high",
+   "hz": {
+    "sugar": 80,
+    "bitter": 100,
+    "water": 240,
+    "ir94e": 200
+   },
+   "mn9_mean": 17.563,
+   "mn9_std": 2.054,
+   "mn9_left_mean": 17.563,
+   "mn9_left_std": 2.054,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "medium",
+   "bitter": "very_high",
+   "water": "none",
+   "ir94e": "none",
+   "hz": {
+    "sugar": 80,
+    "bitter": 160,
+    "water": 0,
+    "ir94e": 0
+   },
+   "mn9_mean": 3.532,
+   "mn9_std": 1.212,
+   "mn9_left_mean": 3.532,
+   "mn9_left_std": 1.212,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "medium",
+   "bitter": "very_high",
+   "water": "none",
+   "ir94e": "low",
+   "hz": {
+    "sugar": 80,
+    "bitter": 160,
+    "water": 0,
+    "ir94e": 60
+   },
+   "mn9_mean": 3.109,
+   "mn9_std": 1.187,
+   "mn9_left_mean": 3.109,
+   "mn9_left_std": 1.187,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "medium",
+   "bitter": "very_high",
+   "water": "none",
+   "ir94e": "medium",
+   "hz": {
+    "sugar": 80,
+    "bitter": 160,
+    "water": 0,
+    "ir94e": 120
+   },
+   "mn9_mean": 2.685,
+   "mn9_std": 1.161,
+   "mn9_left_mean": 2.685,
+   "mn9_left_std": 1.161,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "medium",
+   "bitter": "very_high",
+   "water": "none",
+   "ir94e": "high",
+   "hz": {
+    "sugar": 80,
+    "bitter": 160,
+    "water": 0,
+    "ir94e": 200
+   },
+   "mn9_mean": 2.119,
+   "mn9_std": 1.127,
+   "mn9_left_mean": 2.119,
+   "mn9_left_std": 1.127,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "medium",
+   "bitter": "very_high",
+   "water": "low",
+   "ir94e": "none",
+   "hz": {
+    "sugar": 80,
+    "bitter": 160,
+    "water": 60,
+    "ir94e": 0
+   },
+   "mn9_mean": 4.182,
+   "mn9_std": 1.251,
+   "mn9_left_mean": 4.182,
+   "mn9_left_std": 1.251,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "medium",
+   "bitter": "very_high",
+   "water": "low",
+   "ir94e": "low",
+   "hz": {
+    "sugar": 80,
+    "bitter": 160,
+    "water": 60,
+    "ir94e": 60
+   },
+   "mn9_mean": 3.68,
+   "mn9_std": 1.221,
+   "mn9_left_mean": 3.68,
+   "mn9_left_std": 1.221,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "medium",
+   "bitter": "very_high",
+   "water": "low",
+   "ir94e": "medium",
+   "hz": {
+    "sugar": 80,
+    "bitter": 160,
+    "water": 60,
+    "ir94e": 120
+   },
+   "mn9_mean": 3.178,
+   "mn9_std": 1.191,
+   "mn9_left_mean": 3.178,
+   "mn9_left_std": 1.191,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "medium",
+   "bitter": "very_high",
+   "water": "low",
+   "ir94e": "high",
+   "hz": {
+    "sugar": 80,
+    "bitter": 160,
+    "water": 60,
+    "ir94e": 200
+   },
+   "mn9_mean": 2.509,
+   "mn9_std": 1.151,
+   "mn9_left_mean": 2.509,
+   "mn9_left_std": 1.151,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "medium",
+   "bitter": "very_high",
+   "water": "high",
+   "ir94e": "none",
+   "hz": {
+    "sugar": 80,
+    "bitter": 160,
+    "water": 180,
+    "ir94e": 0
+   },
+   "mn9_mean": 4.182,
+   "mn9_std": 1.251,
+   "mn9_left_mean": 4.182,
+   "mn9_left_std": 1.251,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "medium",
+   "bitter": "very_high",
+   "water": "high",
+   "ir94e": "low",
+   "hz": {
+    "sugar": 80,
+    "bitter": 160,
+    "water": 180,
+    "ir94e": 60
+   },
+   "mn9_mean": 3.68,
+   "mn9_std": 1.221,
+   "mn9_left_mean": 3.68,
+   "mn9_left_std": 1.221,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "medium",
+   "bitter": "very_high",
+   "water": "high",
+   "ir94e": "medium",
+   "hz": {
+    "sugar": 80,
+    "bitter": 160,
+    "water": 180,
+    "ir94e": 120
+   },
+   "mn9_mean": 3.178,
+   "mn9_std": 1.191,
+   "mn9_left_mean": 3.178,
+   "mn9_left_std": 1.191,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "medium",
+   "bitter": "very_high",
+   "water": "high",
+   "ir94e": "high",
+   "hz": {
+    "sugar": 80,
+    "bitter": 160,
+    "water": 180,
+    "ir94e": 200
+   },
+   "mn9_mean": 2.509,
+   "mn9_std": 1.151,
+   "mn9_left_mean": 2.509,
+   "mn9_left_std": 1.151,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "medium",
+   "bitter": "very_high",
+   "water": "very_high",
+   "ir94e": "none",
+   "hz": {
+    "sugar": 80,
+    "bitter": 160,
+    "water": 240,
+    "ir94e": 0
+   },
+   "mn9_mean": 4.182,
+   "mn9_std": 1.251,
+   "mn9_left_mean": 4.182,
+   "mn9_left_std": 1.251,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "medium",
+   "bitter": "very_high",
+   "water": "very_high",
+   "ir94e": "low",
+   "hz": {
+    "sugar": 80,
+    "bitter": 160,
+    "water": 240,
+    "ir94e": 60
+   },
+   "mn9_mean": 3.68,
+   "mn9_std": 1.221,
+   "mn9_left_mean": 3.68,
+   "mn9_left_std": 1.221,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "medium",
+   "bitter": "very_high",
+   "water": "very_high",
+   "ir94e": "medium",
+   "hz": {
+    "sugar": 80,
+    "bitter": 160,
+    "water": 240,
+    "ir94e": 120
+   },
+   "mn9_mean": 3.178,
+   "mn9_std": 1.191,
+   "mn9_left_mean": 3.178,
+   "mn9_left_std": 1.191,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "medium",
+   "bitter": "very_high",
+   "water": "very_high",
+   "ir94e": "high",
+   "hz": {
+    "sugar": 80,
+    "bitter": 160,
+    "water": 240,
+    "ir94e": 200
+   },
+   "mn9_mean": 2.509,
+   "mn9_std": 1.151,
+   "mn9_left_mean": 2.509,
+   "mn9_left_std": 1.151,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "high",
+   "bitter": "none",
+   "water": "none",
+   "ir94e": "none",
+   "hz": {
+    "sugar": 120,
+    "bitter": 0,
+    "water": 0,
+    "ir94e": 0
+   },
+   "mn9_mean": 80.632,
+   "mn9_std": 5.838,
+   "mn9_left_mean": 80.632,
+   "mn9_left_std": 5.838,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "high",
+   "bitter": "none",
+   "water": "none",
+   "ir94e": "low",
+   "hz": {
+    "sugar": 120,
+    "bitter": 0,
+    "water": 0,
+    "ir94e": 60
+   },
+   "mn9_mean": 70.956,
+   "mn9_std": 5.257,
+   "mn9_left_mean": 70.956,
+   "mn9_left_std": 5.257,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "high",
+   "bitter": "none",
+   "water": "none",
+   "ir94e": "medium",
+   "hz": {
+    "sugar": 120,
+    "bitter": 0,
+    "water": 0,
+    "ir94e": 120
+   },
+   "mn9_mean": 61.28,
+   "mn9_std": 4.677,
+   "mn9_left_mean": 61.28,
+   "mn9_left_std": 4.677,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "high",
+   "bitter": "none",
+   "water": "none",
+   "ir94e": "high",
+   "hz": {
+    "sugar": 120,
+    "bitter": 0,
+    "water": 0,
+    "ir94e": 200
+   },
+   "mn9_mean": 48.379,
+   "mn9_std": 3.903,
+   "mn9_left_mean": 48.379,
+   "mn9_left_std": 3.903,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "high",
+   "bitter": "none",
+   "water": "low",
+   "ir94e": "none",
+   "hz": {
+    "sugar": 120,
+    "bitter": 0,
+    "water": 60,
+    "ir94e": 0
+   },
+   "mn9_mean": 85.169,
+   "mn9_std": 6.11,
+   "mn9_left_mean": 85.169,
+   "mn9_left_std": 6.11,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "high",
+   "bitter": "none",
+   "water": "low",
+   "ir94e": "low",
+   "hz": {
+    "sugar": 120,
+    "bitter": 0,
+    "water": 60,
+    "ir94e": 60
+   },
+   "mn9_mean": 74.949,
+   "mn9_std": 5.497,
+   "mn9_left_mean": 74.949,
+   "mn9_left_std": 5.497,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "high",
+   "bitter": "none",
+   "water": "low",
+   "ir94e": "medium",
+   "hz": {
+    "sugar": 120,
+    "bitter": 0,
+    "water": 60,
+    "ir94e": 120
+   },
+   "mn9_mean": 64.729,
+   "mn9_std": 4.884,
+   "mn9_left_mean": 64.729,
+   "mn9_left_std": 4.884,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "high",
+   "bitter": "none",
+   "water": "low",
+   "ir94e": "high",
+   "hz": {
+    "sugar": 120,
+    "bitter": 0,
+    "water": 60,
+    "ir94e": 200
+   },
+   "mn9_mean": 51.102,
+   "mn9_std": 4.066,
+   "mn9_left_mean": 51.102,
+   "mn9_left_std": 4.066,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "high",
+   "bitter": "none",
+   "water": "high",
+   "ir94e": "none",
+   "hz": {
+    "sugar": 120,
+    "bitter": 0,
+    "water": 180,
+    "ir94e": 0
+   },
+   "mn9_mean": 85.169,
+   "mn9_std": 6.11,
+   "mn9_left_mean": 85.169,
+   "mn9_left_std": 6.11,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "high",
+   "bitter": "none",
+   "water": "high",
+   "ir94e": "low",
+   "hz": {
+    "sugar": 120,
+    "bitter": 0,
+    "water": 180,
+    "ir94e": 60
+   },
+   "mn9_mean": 74.949,
+   "mn9_std": 5.497,
+   "mn9_left_mean": 74.949,
+   "mn9_left_std": 5.497,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "high",
+   "bitter": "none",
+   "water": "high",
+   "ir94e": "medium",
+   "hz": {
+    "sugar": 120,
+    "bitter": 0,
+    "water": 180,
+    "ir94e": 120
+   },
+   "mn9_mean": 64.729,
+   "mn9_std": 4.884,
+   "mn9_left_mean": 64.729,
+   "mn9_left_std": 4.884,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "high",
+   "bitter": "none",
+   "water": "high",
+   "ir94e": "high",
+   "hz": {
+    "sugar": 120,
+    "bitter": 0,
+    "water": 180,
+    "ir94e": 200
+   },
+   "mn9_mean": 51.102,
+   "mn9_std": 4.066,
+   "mn9_left_mean": 51.102,
+   "mn9_left_std": 4.066,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "high",
+   "bitter": "none",
+   "water": "very_high",
+   "ir94e": "none",
+   "hz": {
+    "sugar": 120,
+    "bitter": 0,
+    "water": 240,
+    "ir94e": 0
+   },
+   "mn9_mean": 85.169,
+   "mn9_std": 6.11,
+   "mn9_left_mean": 85.169,
+   "mn9_left_std": 6.11,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "high",
+   "bitter": "none",
+   "water": "very_high",
+   "ir94e": "low",
+   "hz": {
+    "sugar": 120,
+    "bitter": 0,
+    "water": 240,
+    "ir94e": 60
+   },
+   "mn9_mean": 74.949,
+   "mn9_std": 5.497,
+   "mn9_left_mean": 74.949,
+   "mn9_left_std": 5.497,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "high",
+   "bitter": "none",
+   "water": "very_high",
+   "ir94e": "medium",
+   "hz": {
+    "sugar": 120,
+    "bitter": 0,
+    "water": 240,
+    "ir94e": 120
+   },
+   "mn9_mean": 64.729,
+   "mn9_std": 4.884,
+   "mn9_left_mean": 64.729,
+   "mn9_left_std": 4.884,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "high",
+   "bitter": "none",
+   "water": "very_high",
+   "ir94e": "high",
+   "hz": {
+    "sugar": 120,
+    "bitter": 0,
+    "water": 240,
+    "ir94e": 200
+   },
+   "mn9_mean": 51.102,
+   "mn9_std": 4.066,
+   "mn9_left_mean": 51.102,
+   "mn9_left_std": 4.066,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "high",
+   "bitter": "low",
+   "water": "none",
+   "ir94e": "none",
+   "hz": {
+    "sugar": 120,
+    "bitter": 30,
+    "water": 0,
+    "ir94e": 0
+   },
+   "mn9_mean": 66.403,
+   "mn9_std": 4.984,
+   "mn9_left_mean": 66.403,
+   "mn9_left_std": 4.984,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "high",
+   "bitter": "low",
+   "water": "none",
+   "ir94e": "low",
+   "hz": {
+    "sugar": 120,
+    "bitter": 30,
+    "water": 0,
+    "ir94e": 60
+   },
+   "mn9_mean": 58.435,
+   "mn9_std": 4.506,
+   "mn9_left_mean": 58.435,
+   "mn9_left_std": 4.506,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "high",
+   "bitter": "low",
+   "water": "none",
+   "ir94e": "medium",
+   "hz": {
+    "sugar": 120,
+    "bitter": 30,
+    "water": 0,
+    "ir94e": 120
+   },
+   "mn9_mean": 50.466,
+   "mn9_std": 4.028,
+   "mn9_left_mean": 50.466,
+   "mn9_left_std": 4.028,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "high",
+   "bitter": "low",
+   "water": "none",
+   "ir94e": "high",
+   "hz": {
+    "sugar": 120,
+    "bitter": 30,
+    "water": 0,
+    "ir94e": 200
+   },
+   "mn9_mean": 39.842,
+   "mn9_std": 3.391,
+   "mn9_left_mean": 39.842,
+   "mn9_left_std": 3.391,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "high",
+   "bitter": "low",
+   "water": "low",
+   "ir94e": "none",
+   "hz": {
+    "sugar": 120,
+    "bitter": 30,
+    "water": 60,
+    "ir94e": 0
+   },
+   "mn9_mean": 70.14,
+   "mn9_std": 5.208,
+   "mn9_left_mean": 70.14,
+   "mn9_left_std": 5.208,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "high",
+   "bitter": "low",
+   "water": "low",
+   "ir94e": "low",
+   "hz": {
+    "sugar": 120,
+    "bitter": 30,
+    "water": 60,
+    "ir94e": 60
+   },
+   "mn9_mean": 61.723,
+   "mn9_std": 4.703,
+   "mn9_left_mean": 61.723,
+   "mn9_left_std": 4.703,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "high",
+   "bitter": "low",
+   "water": "low",
+   "ir94e": "medium",
+   "hz": {
+    "sugar": 120,
+    "bitter": 30,
+    "water": 60,
+    "ir94e": 120
+   },
+   "mn9_mean": 53.306,
+   "mn9_std": 4.198,
+   "mn9_left_mean": 53.306,
+   "mn9_left_std": 4.198,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "high",
+   "bitter": "low",
+   "water": "low",
+   "ir94e": "high",
+   "hz": {
+    "sugar": 120,
+    "bitter": 30,
+    "water": 60,
+    "ir94e": 200
+   },
+   "mn9_mean": 42.084,
+   "mn9_std": 3.525,
+   "mn9_left_mean": 42.084,
+   "mn9_left_std": 3.525,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "high",
+   "bitter": "low",
+   "water": "high",
+   "ir94e": "none",
+   "hz": {
+    "sugar": 120,
+    "bitter": 30,
+    "water": 180,
+    "ir94e": 0
+   },
+   "mn9_mean": 70.14,
+   "mn9_std": 5.208,
+   "mn9_left_mean": 70.14,
+   "mn9_left_std": 5.208,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "high",
+   "bitter": "low",
+   "water": "high",
+   "ir94e": "low",
+   "hz": {
+    "sugar": 120,
+    "bitter": 30,
+    "water": 180,
+    "ir94e": 60
+   },
+   "mn9_mean": 61.723,
+   "mn9_std": 4.703,
+   "mn9_left_mean": 61.723,
+   "mn9_left_std": 4.703,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "high",
+   "bitter": "low",
+   "water": "high",
+   "ir94e": "medium",
+   "hz": {
+    "sugar": 120,
+    "bitter": 30,
+    "water": 180,
+    "ir94e": 120
+   },
+   "mn9_mean": 53.306,
+   "mn9_std": 4.198,
+   "mn9_left_mean": 53.306,
+   "mn9_left_std": 4.198,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "high",
+   "bitter": "low",
+   "water": "high",
+   "ir94e": "high",
+   "hz": {
+    "sugar": 120,
+    "bitter": 30,
+    "water": 180,
+    "ir94e": 200
+   },
+   "mn9_mean": 42.084,
+   "mn9_std": 3.525,
+   "mn9_left_mean": 42.084,
+   "mn9_left_std": 3.525,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "high",
+   "bitter": "low",
+   "water": "very_high",
+   "ir94e": "none",
+   "hz": {
+    "sugar": 120,
+    "bitter": 30,
+    "water": 240,
+    "ir94e": 0
+   },
+   "mn9_mean": 70.14,
+   "mn9_std": 5.208,
+   "mn9_left_mean": 70.14,
+   "mn9_left_std": 5.208,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "high",
+   "bitter": "low",
+   "water": "very_high",
+   "ir94e": "low",
+   "hz": {
+    "sugar": 120,
+    "bitter": 30,
+    "water": 240,
+    "ir94e": 60
+   },
+   "mn9_mean": 61.723,
+   "mn9_std": 4.703,
+   "mn9_left_mean": 61.723,
+   "mn9_left_std": 4.703,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "high",
+   "bitter": "low",
+   "water": "very_high",
+   "ir94e": "medium",
+   "hz": {
+    "sugar": 120,
+    "bitter": 30,
+    "water": 240,
+    "ir94e": 120
+   },
+   "mn9_mean": 53.306,
+   "mn9_std": 4.198,
+   "mn9_left_mean": 53.306,
+   "mn9_left_std": 4.198,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "high",
+   "bitter": "low",
+   "water": "very_high",
+   "ir94e": "high",
+   "hz": {
+    "sugar": 120,
+    "bitter": 30,
+    "water": 240,
+    "ir94e": 200
+   },
+   "mn9_mean": 42.084,
+   "mn9_std": 3.525,
+   "mn9_left_mean": 42.084,
+   "mn9_left_std": 3.525,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "high",
+   "bitter": "medium",
+   "water": "none",
+   "ir94e": "none",
+   "hz": {
+    "sugar": 120,
+    "bitter": 60,
+    "water": 0,
+    "ir94e": 0
+   },
+   "mn9_mean": 52.174,
+   "mn9_std": 4.13,
+   "mn9_left_mean": 52.174,
+   "mn9_left_std": 4.13,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "high",
+   "bitter": "medium",
+   "water": "none",
+   "ir94e": "low",
+   "hz": {
+    "sugar": 120,
+    "bitter": 60,
+    "water": 0,
+    "ir94e": 60
+   },
+   "mn9_mean": 45.913,
+   "mn9_std": 3.755,
+   "mn9_left_mean": 45.913,
+   "mn9_left_std": 3.755,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "high",
+   "bitter": "medium",
+   "water": "none",
+   "ir94e": "medium",
+   "hz": {
+    "sugar": 120,
+    "bitter": 60,
+    "water": 0,
+    "ir94e": 120
+   },
+   "mn9_mean": 39.652,
+   "mn9_std": 3.379,
+   "mn9_left_mean": 39.652,
+   "mn9_left_std": 3.379,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "high",
+   "bitter": "medium",
+   "water": "none",
+   "ir94e": "high",
+   "hz": {
+    "sugar": 120,
+    "bitter": 60,
+    "water": 0,
+    "ir94e": 200
+   },
+   "mn9_mean": 31.304,
+   "mn9_std": 2.878,
+   "mn9_left_mean": 31.304,
+   "mn9_left_std": 2.878,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "high",
+   "bitter": "medium",
+   "water": "low",
+   "ir94e": "none",
+   "hz": {
+    "sugar": 120,
+    "bitter": 60,
+    "water": 60,
+    "ir94e": 0
+   },
+   "mn9_mean": 55.11,
+   "mn9_std": 4.307,
+   "mn9_left_mean": 55.11,
+   "mn9_left_std": 4.307,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "high",
+   "bitter": "medium",
+   "water": "low",
+   "ir94e": "low",
+   "hz": {
+    "sugar": 120,
+    "bitter": 60,
+    "water": 60,
+    "ir94e": 60
+   },
+   "mn9_mean": 48.496,
+   "mn9_std": 3.91,
+   "mn9_left_mean": 48.496,
+   "mn9_left_std": 3.91,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "high",
+   "bitter": "medium",
+   "water": "low",
+   "ir94e": "medium",
+   "hz": {
+    "sugar": 120,
+    "bitter": 60,
+    "water": 60,
+    "ir94e": 120
+   },
+   "mn9_mean": 41.883,
+   "mn9_std": 3.513,
+   "mn9_left_mean": 41.883,
+   "mn9_left_std": 3.513,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "high",
+   "bitter": "medium",
+   "water": "low",
+   "ir94e": "high",
+   "hz": {
+    "sugar": 120,
+    "bitter": 60,
+    "water": 60,
+    "ir94e": 200
+   },
+   "mn9_mean": 33.066,
+   "mn9_std": 2.984,
+   "mn9_left_mean": 33.066,
+   "mn9_left_std": 2.984,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "high",
+   "bitter": "medium",
+   "water": "high",
+   "ir94e": "none",
+   "hz": {
+    "sugar": 120,
+    "bitter": 60,
+    "water": 180,
+    "ir94e": 0
+   },
+   "mn9_mean": 55.11,
+   "mn9_std": 4.307,
+   "mn9_left_mean": 55.11,
+   "mn9_left_std": 4.307,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "high",
+   "bitter": "medium",
+   "water": "high",
+   "ir94e": "low",
+   "hz": {
+    "sugar": 120,
+    "bitter": 60,
+    "water": 180,
+    "ir94e": 60
+   },
+   "mn9_mean": 48.496,
+   "mn9_std": 3.91,
+   "mn9_left_mean": 48.496,
+   "mn9_left_std": 3.91,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "high",
+   "bitter": "medium",
+   "water": "high",
+   "ir94e": "medium",
+   "hz": {
+    "sugar": 120,
+    "bitter": 60,
+    "water": 180,
+    "ir94e": 120
+   },
+   "mn9_mean": 41.883,
+   "mn9_std": 3.513,
+   "mn9_left_mean": 41.883,
+   "mn9_left_std": 3.513,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "high",
+   "bitter": "medium",
+   "water": "high",
+   "ir94e": "high",
+   "hz": {
+    "sugar": 120,
+    "bitter": 60,
+    "water": 180,
+    "ir94e": 200
+   },
+   "mn9_mean": 33.066,
+   "mn9_std": 2.984,
+   "mn9_left_mean": 33.066,
+   "mn9_left_std": 2.984,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "high",
+   "bitter": "medium",
+   "water": "very_high",
+   "ir94e": "none",
+   "hz": {
+    "sugar": 120,
+    "bitter": 60,
+    "water": 240,
+    "ir94e": 0
+   },
+   "mn9_mean": 55.11,
+   "mn9_std": 4.307,
+   "mn9_left_mean": 55.11,
+   "mn9_left_std": 4.307,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "high",
+   "bitter": "medium",
+   "water": "very_high",
+   "ir94e": "low",
+   "hz": {
+    "sugar": 120,
+    "bitter": 60,
+    "water": 240,
+    "ir94e": 60
+   },
+   "mn9_mean": 48.496,
+   "mn9_std": 3.91,
+   "mn9_left_mean": 48.496,
+   "mn9_left_std": 3.91,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "high",
+   "bitter": "medium",
+   "water": "very_high",
+   "ir94e": "medium",
+   "hz": {
+    "sugar": 120,
+    "bitter": 60,
+    "water": 240,
+    "ir94e": 120
+   },
+   "mn9_mean": 41.883,
+   "mn9_std": 3.513,
+   "mn9_left_mean": 41.883,
+   "mn9_left_std": 3.513,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "high",
+   "bitter": "medium",
+   "water": "very_high",
+   "ir94e": "high",
+   "hz": {
+    "sugar": 120,
+    "bitter": 60,
+    "water": 240,
+    "ir94e": 200
+   },
+   "mn9_mean": 33.066,
+   "mn9_std": 2.984,
+   "mn9_left_mean": 33.066,
+   "mn9_left_std": 2.984,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "high",
+   "bitter": "high",
+   "water": "none",
+   "ir94e": "none",
+   "hz": {
+    "sugar": 120,
+    "bitter": 100,
+    "water": 0,
+    "ir94e": 0
+   },
+   "mn9_mean": 33.202,
+   "mn9_std": 2.992,
+   "mn9_left_mean": 33.202,
+   "mn9_left_std": 2.992,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "high",
+   "bitter": "high",
+   "water": "none",
+   "ir94e": "low",
+   "hz": {
+    "sugar": 120,
+    "bitter": 100,
+    "water": 0,
+    "ir94e": 60
+   },
+   "mn9_mean": 29.217,
+   "mn9_std": 2.753,
+   "mn9_left_mean": 29.217,
+   "mn9_left_std": 2.753,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "high",
+   "bitter": "high",
+   "water": "none",
+   "ir94e": "medium",
+   "hz": {
+    "sugar": 120,
+    "bitter": 100,
+    "water": 0,
+    "ir94e": 120
+   },
+   "mn9_mean": 25.233,
+   "mn9_std": 2.514,
+   "mn9_left_mean": 25.233,
+   "mn9_left_std": 2.514,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "high",
+   "bitter": "high",
+   "water": "none",
+   "ir94e": "high",
+   "hz": {
+    "sugar": 120,
+    "bitter": 100,
+    "water": 0,
+    "ir94e": 200
+   },
+   "mn9_mean": 19.921,
+   "mn9_std": 2.195,
+   "mn9_left_mean": 19.921,
+   "mn9_left_std": 2.195,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "high",
+   "bitter": "high",
+   "water": "low",
+   "ir94e": "none",
+   "hz": {
+    "sugar": 120,
+    "bitter": 100,
+    "water": 60,
+    "ir94e": 0
+   },
+   "mn9_mean": 35.07,
+   "mn9_std": 3.104,
+   "mn9_left_mean": 35.07,
+   "mn9_left_std": 3.104,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "high",
+   "bitter": "high",
+   "water": "low",
+   "ir94e": "low",
+   "hz": {
+    "sugar": 120,
+    "bitter": 100,
+    "water": 60,
+    "ir94e": 60
+   },
+   "mn9_mean": 30.861,
+   "mn9_std": 2.852,
+   "mn9_left_mean": 30.861,
+   "mn9_left_std": 2.852,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "high",
+   "bitter": "high",
+   "water": "low",
+   "ir94e": "medium",
+   "hz": {
+    "sugar": 120,
+    "bitter": 100,
+    "water": 60,
+    "ir94e": 120
+   },
+   "mn9_mean": 26.653,
+   "mn9_std": 2.599,
+   "mn9_left_mean": 26.653,
+   "mn9_left_std": 2.599,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "high",
+   "bitter": "high",
+   "water": "low",
+   "ir94e": "high",
+   "hz": {
+    "sugar": 120,
+    "bitter": 100,
+    "water": 60,
+    "ir94e": 200
+   },
+   "mn9_mean": 21.042,
+   "mn9_std": 2.263,
+   "mn9_left_mean": 21.042,
+   "mn9_left_std": 2.263,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "high",
+   "bitter": "high",
+   "water": "high",
+   "ir94e": "none",
+   "hz": {
+    "sugar": 120,
+    "bitter": 100,
+    "water": 180,
+    "ir94e": 0
+   },
+   "mn9_mean": 35.07,
+   "mn9_std": 3.104,
+   "mn9_left_mean": 35.07,
+   "mn9_left_std": 3.104,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "high",
+   "bitter": "high",
+   "water": "high",
+   "ir94e": "low",
+   "hz": {
+    "sugar": 120,
+    "bitter": 100,
+    "water": 180,
+    "ir94e": 60
+   },
+   "mn9_mean": 30.861,
+   "mn9_std": 2.852,
+   "mn9_left_mean": 30.861,
+   "mn9_left_std": 2.852,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "high",
+   "bitter": "high",
+   "water": "high",
+   "ir94e": "medium",
+   "hz": {
+    "sugar": 120,
+    "bitter": 100,
+    "water": 180,
+    "ir94e": 120
+   },
+   "mn9_mean": 26.653,
+   "mn9_std": 2.599,
+   "mn9_left_mean": 26.653,
+   "mn9_left_std": 2.599,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "high",
+   "bitter": "high",
+   "water": "high",
+   "ir94e": "high",
+   "hz": {
+    "sugar": 120,
+    "bitter": 100,
+    "water": 180,
+    "ir94e": 200
+   },
+   "mn9_mean": 21.042,
+   "mn9_std": 2.263,
+   "mn9_left_mean": 21.042,
+   "mn9_left_std": 2.263,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "high",
+   "bitter": "high",
+   "water": "very_high",
+   "ir94e": "none",
+   "hz": {
+    "sugar": 120,
+    "bitter": 100,
+    "water": 240,
+    "ir94e": 0
+   },
+   "mn9_mean": 35.07,
+   "mn9_std": 3.104,
+   "mn9_left_mean": 35.07,
+   "mn9_left_std": 3.104,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "high",
+   "bitter": "high",
+   "water": "very_high",
+   "ir94e": "low",
+   "hz": {
+    "sugar": 120,
+    "bitter": 100,
+    "water": 240,
+    "ir94e": 60
+   },
+   "mn9_mean": 30.861,
+   "mn9_std": 2.852,
+   "mn9_left_mean": 30.861,
+   "mn9_left_std": 2.852,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "high",
+   "bitter": "high",
+   "water": "very_high",
+   "ir94e": "medium",
+   "hz": {
+    "sugar": 120,
+    "bitter": 100,
+    "water": 240,
+    "ir94e": 120
+   },
+   "mn9_mean": 26.653,
+   "mn9_std": 2.599,
+   "mn9_left_mean": 26.653,
+   "mn9_left_std": 2.599,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "high",
+   "bitter": "high",
+   "water": "very_high",
+   "ir94e": "high",
+   "hz": {
+    "sugar": 120,
+    "bitter": 100,
+    "water": 240,
+    "ir94e": 200
+   },
+   "mn9_mean": 21.042,
+   "mn9_std": 2.263,
+   "mn9_left_mean": 21.042,
+   "mn9_left_std": 2.263,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "high",
+   "bitter": "very_high",
+   "water": "none",
+   "ir94e": "none",
+   "hz": {
+    "sugar": 120,
+    "bitter": 160,
+    "water": 0,
+    "ir94e": 0
+   },
+   "mn9_mean": 4.743,
+   "mn9_std": 1.285,
+   "mn9_left_mean": 4.743,
+   "mn9_left_std": 1.285,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "high",
+   "bitter": "very_high",
+   "water": "none",
+   "ir94e": "low",
+   "hz": {
+    "sugar": 120,
+    "bitter": 160,
+    "water": 0,
+    "ir94e": 60
+   },
+   "mn9_mean": 4.174,
+   "mn9_std": 1.25,
+   "mn9_left_mean": 4.174,
+   "mn9_left_std": 1.25,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "high",
+   "bitter": "very_high",
+   "water": "none",
+   "ir94e": "medium",
+   "hz": {
+    "sugar": 120,
+    "bitter": 160,
+    "water": 0,
+    "ir94e": 120
+   },
+   "mn9_mean": 3.605,
+   "mn9_std": 1.216,
+   "mn9_left_mean": 3.605,
+   "mn9_left_std": 1.216,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "high",
+   "bitter": "very_high",
+   "water": "none",
+   "ir94e": "high",
+   "hz": {
+    "sugar": 120,
+    "bitter": 160,
+    "water": 0,
+    "ir94e": 200
+   },
+   "mn9_mean": 2.846,
+   "mn9_std": 1.171,
+   "mn9_left_mean": 2.846,
+   "mn9_left_std": 1.171,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "high",
+   "bitter": "very_high",
+   "water": "low",
+   "ir94e": "none",
+   "hz": {
+    "sugar": 120,
+    "bitter": 160,
+    "water": 60,
+    "ir94e": 0
+   },
+   "mn9_mean": 5.01,
+   "mn9_std": 1.301,
+   "mn9_left_mean": 5.01,
+   "mn9_left_std": 1.301,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "high",
+   "bitter": "very_high",
+   "water": "low",
+   "ir94e": "low",
+   "hz": {
+    "sugar": 120,
+    "bitter": 160,
+    "water": 60,
+    "ir94e": 60
+   },
+   "mn9_mean": 4.409,
+   "mn9_std": 1.265,
+   "mn9_left_mean": 4.409,
+   "mn9_left_std": 1.265,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "high",
+   "bitter": "very_high",
+   "water": "low",
+   "ir94e": "medium",
+   "hz": {
+    "sugar": 120,
+    "bitter": 160,
+    "water": 60,
+    "ir94e": 120
+   },
+   "mn9_mean": 3.808,
+   "mn9_std": 1.228,
+   "mn9_left_mean": 3.808,
+   "mn9_left_std": 1.228,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "high",
+   "bitter": "very_high",
+   "water": "low",
+   "ir94e": "high",
+   "hz": {
+    "sugar": 120,
+    "bitter": 160,
+    "water": 60,
+    "ir94e": 200
+   },
+   "mn9_mean": 3.006,
+   "mn9_std": 1.18,
+   "mn9_left_mean": 3.006,
+   "mn9_left_std": 1.18,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "high",
+   "bitter": "very_high",
+   "water": "high",
+   "ir94e": "none",
+   "hz": {
+    "sugar": 120,
+    "bitter": 160,
+    "water": 180,
+    "ir94e": 0
+   },
+   "mn9_mean": 5.01,
+   "mn9_std": 1.301,
+   "mn9_left_mean": 5.01,
+   "mn9_left_std": 1.301,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "high",
+   "bitter": "very_high",
+   "water": "high",
+   "ir94e": "low",
+   "hz": {
+    "sugar": 120,
+    "bitter": 160,
+    "water": 180,
+    "ir94e": 60
+   },
+   "mn9_mean": 4.409,
+   "mn9_std": 1.265,
+   "mn9_left_mean": 4.409,
+   "mn9_left_std": 1.265,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "high",
+   "bitter": "very_high",
+   "water": "high",
+   "ir94e": "medium",
+   "hz": {
+    "sugar": 120,
+    "bitter": 160,
+    "water": 180,
+    "ir94e": 120
+   },
+   "mn9_mean": 3.808,
+   "mn9_std": 1.228,
+   "mn9_left_mean": 3.808,
+   "mn9_left_std": 1.228,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "high",
+   "bitter": "very_high",
+   "water": "high",
+   "ir94e": "high",
+   "hz": {
+    "sugar": 120,
+    "bitter": 160,
+    "water": 180,
+    "ir94e": 200
+   },
+   "mn9_mean": 3.006,
+   "mn9_std": 1.18,
+   "mn9_left_mean": 3.006,
+   "mn9_left_std": 1.18,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "high",
+   "bitter": "very_high",
+   "water": "very_high",
+   "ir94e": "none",
+   "hz": {
+    "sugar": 120,
+    "bitter": 160,
+    "water": 240,
+    "ir94e": 0
+   },
+   "mn9_mean": 5.01,
+   "mn9_std": 1.301,
+   "mn9_left_mean": 5.01,
+   "mn9_left_std": 1.301,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "high",
+   "bitter": "very_high",
+   "water": "very_high",
+   "ir94e": "low",
+   "hz": {
+    "sugar": 120,
+    "bitter": 160,
+    "water": 240,
+    "ir94e": 60
+   },
+   "mn9_mean": 4.409,
+   "mn9_std": 1.265,
+   "mn9_left_mean": 4.409,
+   "mn9_left_std": 1.265,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "high",
+   "bitter": "very_high",
+   "water": "very_high",
+   "ir94e": "medium",
+   "hz": {
+    "sugar": 120,
+    "bitter": 160,
+    "water": 240,
+    "ir94e": 120
+   },
+   "mn9_mean": 3.808,
+   "mn9_std": 1.228,
+   "mn9_left_mean": 3.808,
+   "mn9_left_std": 1.228,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "high",
+   "bitter": "very_high",
+   "water": "very_high",
+   "ir94e": "high",
+   "hz": {
+    "sugar": 120,
+    "bitter": 160,
+    "water": 240,
+    "ir94e": 200
+   },
+   "mn9_mean": 3.006,
+   "mn9_std": 1.18,
+   "mn9_left_mean": 3.006,
+   "mn9_left_std": 1.18,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "very_high",
+   "bitter": "none",
+   "water": "none",
+   "ir94e": "none",
+   "hz": {
+    "sugar": 200,
+    "bitter": 0,
+    "water": 0,
+    "ir94e": 0
+   },
+   "mn9_mean": 92.572,
+   "mn9_std": 6.554,
+   "mn9_left_mean": 92.572,
+   "mn9_left_std": 6.554,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "very_high",
+   "bitter": "none",
+   "water": "none",
+   "ir94e": "low",
+   "hz": {
+    "sugar": 200,
+    "bitter": 0,
+    "water": 0,
+    "ir94e": 60
+   },
+   "mn9_mean": 81.463,
+   "mn9_std": 5.888,
+   "mn9_left_mean": 81.463,
+   "mn9_left_std": 5.888,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "very_high",
+   "bitter": "none",
+   "water": "none",
+   "ir94e": "medium",
+   "hz": {
+    "sugar": 200,
+    "bitter": 0,
+    "water": 0,
+    "ir94e": 120
+   },
+   "mn9_mean": 70.354,
+   "mn9_std": 5.221,
+   "mn9_left_mean": 70.354,
+   "mn9_left_std": 5.221,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "very_high",
+   "bitter": "none",
+   "water": "none",
+   "ir94e": "high",
+   "hz": {
+    "sugar": 200,
+    "bitter": 0,
+    "water": 0,
+    "ir94e": 200
+   },
+   "mn9_mean": 55.543,
+   "mn9_std": 4.333,
+   "mn9_left_mean": 55.543,
+   "mn9_left_std": 4.333,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "very_high",
+   "bitter": "none",
+   "water": "low",
+   "ir94e": "none",
+   "hz": {
+    "sugar": 200,
+    "bitter": 0,
+    "water": 60,
+    "ir94e": 0
+   },
+   "mn9_mean": 93.339,
+   "mn9_std": 6.6,
+   "mn9_left_mean": 93.339,
+   "mn9_left_std": 6.6,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "very_high",
+   "bitter": "none",
+   "water": "low",
+   "ir94e": "low",
+   "hz": {
+    "sugar": 200,
+    "bitter": 0,
+    "water": 60,
+    "ir94e": 60
+   },
+   "mn9_mean": 82.138,
+   "mn9_std": 5.928,
+   "mn9_left_mean": 82.138,
+   "mn9_left_std": 5.928,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "very_high",
+   "bitter": "none",
+   "water": "low",
+   "ir94e": "medium",
+   "hz": {
+    "sugar": 200,
+    "bitter": 0,
+    "water": 60,
+    "ir94e": 120
+   },
+   "mn9_mean": 70.937,
+   "mn9_std": 5.256,
+   "mn9_left_mean": 70.937,
+   "mn9_left_std": 5.256,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "very_high",
+   "bitter": "none",
+   "water": "low",
+   "ir94e": "high",
+   "hz": {
+    "sugar": 200,
+    "bitter": 0,
+    "water": 60,
+    "ir94e": 200
+   },
+   "mn9_mean": 56.003,
+   "mn9_std": 4.36,
+   "mn9_left_mean": 56.003,
+   "mn9_left_std": 4.36,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "very_high",
+   "bitter": "none",
+   "water": "high",
+   "ir94e": "none",
+   "hz": {
+    "sugar": 200,
+    "bitter": 0,
+    "water": 180,
+    "ir94e": 0
+   },
+   "mn9_mean": 93.339,
+   "mn9_std": 6.6,
+   "mn9_left_mean": 93.339,
+   "mn9_left_std": 6.6,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "very_high",
+   "bitter": "none",
+   "water": "high",
+   "ir94e": "low",
+   "hz": {
+    "sugar": 200,
+    "bitter": 0,
+    "water": 180,
+    "ir94e": 60
+   },
+   "mn9_mean": 82.138,
+   "mn9_std": 5.928,
+   "mn9_left_mean": 82.138,
+   "mn9_left_std": 5.928,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "very_high",
+   "bitter": "none",
+   "water": "high",
+   "ir94e": "medium",
+   "hz": {
+    "sugar": 200,
+    "bitter": 0,
+    "water": 180,
+    "ir94e": 120
+   },
+   "mn9_mean": 70.937,
+   "mn9_std": 5.256,
+   "mn9_left_mean": 70.937,
+   "mn9_left_std": 5.256,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "very_high",
+   "bitter": "none",
+   "water": "high",
+   "ir94e": "high",
+   "hz": {
+    "sugar": 200,
+    "bitter": 0,
+    "water": 180,
+    "ir94e": 200
+   },
+   "mn9_mean": 56.003,
+   "mn9_std": 4.36,
+   "mn9_left_mean": 56.003,
+   "mn9_left_std": 4.36,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "very_high",
+   "bitter": "none",
+   "water": "very_high",
+   "ir94e": "none",
+   "hz": {
+    "sugar": 200,
+    "bitter": 0,
+    "water": 240,
+    "ir94e": 0
+   },
+   "mn9_mean": 93.339,
+   "mn9_std": 6.6,
+   "mn9_left_mean": 93.339,
+   "mn9_left_std": 6.6,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "very_high",
+   "bitter": "none",
+   "water": "very_high",
+   "ir94e": "low",
+   "hz": {
+    "sugar": 200,
+    "bitter": 0,
+    "water": 240,
+    "ir94e": 60
+   },
+   "mn9_mean": 82.138,
+   "mn9_std": 5.928,
+   "mn9_left_mean": 82.138,
+   "mn9_left_std": 5.928,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "very_high",
+   "bitter": "none",
+   "water": "very_high",
+   "ir94e": "medium",
+   "hz": {
+    "sugar": 200,
+    "bitter": 0,
+    "water": 240,
+    "ir94e": 120
+   },
+   "mn9_mean": 70.937,
+   "mn9_std": 5.256,
+   "mn9_left_mean": 70.937,
+   "mn9_left_std": 5.256,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "very_high",
+   "bitter": "none",
+   "water": "very_high",
+   "ir94e": "high",
+   "hz": {
+    "sugar": 200,
+    "bitter": 0,
+    "water": 240,
+    "ir94e": 200
+   },
+   "mn9_mean": 56.003,
+   "mn9_std": 4.36,
+   "mn9_left_mean": 56.003,
+   "mn9_left_std": 4.36,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "very_high",
+   "bitter": "low",
+   "water": "none",
+   "ir94e": "none",
+   "hz": {
+    "sugar": 200,
+    "bitter": 30,
+    "water": 0,
+    "ir94e": 0
+   },
+   "mn9_mean": 76.235,
+   "mn9_std": 5.574,
+   "mn9_left_mean": 76.235,
+   "mn9_left_std": 5.574,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "very_high",
+   "bitter": "low",
+   "water": "none",
+   "ir94e": "low",
+   "hz": {
+    "sugar": 200,
+    "bitter": 30,
+    "water": 0,
+    "ir94e": 60
+   },
+   "mn9_mean": 67.087,
+   "mn9_std": 5.025,
+   "mn9_left_mean": 67.087,
+   "mn9_left_std": 5.025,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "very_high",
+   "bitter": "low",
+   "water": "none",
+   "ir94e": "medium",
+   "hz": {
+    "sugar": 200,
+    "bitter": 30,
+    "water": 0,
+    "ir94e": 120
+   },
+   "mn9_mean": 57.939,
+   "mn9_std": 4.476,
+   "mn9_left_mean": 57.939,
+   "mn9_left_std": 4.476,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "very_high",
+   "bitter": "low",
+   "water": "none",
+   "ir94e": "high",
+   "hz": {
+    "sugar": 200,
+    "bitter": 30,
+    "water": 0,
+    "ir94e": 200
+   },
+   "mn9_mean": 45.741,
+   "mn9_std": 3.744,
+   "mn9_left_mean": 45.741,
+   "mn9_left_std": 3.744,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "very_high",
+   "bitter": "low",
+   "water": "low",
+   "ir94e": "none",
+   "hz": {
+    "sugar": 200,
+    "bitter": 30,
+    "water": 60,
+    "ir94e": 0
+   },
+   "mn9_mean": 76.867,
+   "mn9_std": 5.612,
+   "mn9_left_mean": 76.867,
+   "mn9_left_std": 5.612,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "very_high",
+   "bitter": "low",
+   "water": "low",
+   "ir94e": "low",
+   "hz": {
+    "sugar": 200,
+    "bitter": 30,
+    "water": 60,
+    "ir94e": 60
+   },
+   "mn9_mean": 67.643,
+   "mn9_std": 5.059,
+   "mn9_left_mean": 67.643,
+   "mn9_left_std": 5.059,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "very_high",
+   "bitter": "low",
+   "water": "low",
+   "ir94e": "medium",
+   "hz": {
+    "sugar": 200,
+    "bitter": 30,
+    "water": 60,
+    "ir94e": 120
+   },
+   "mn9_mean": 58.419,
+   "mn9_std": 4.505,
+   "mn9_left_mean": 58.419,
+   "mn9_left_std": 4.505,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "very_high",
+   "bitter": "low",
+   "water": "low",
+   "ir94e": "high",
+   "hz": {
+    "sugar": 200,
+    "bitter": 30,
+    "water": 60,
+    "ir94e": 200
+   },
+   "mn9_mean": 46.12,
+   "mn9_std": 3.767,
+   "mn9_left_mean": 46.12,
+   "mn9_left_std": 3.767,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "very_high",
+   "bitter": "low",
+   "water": "high",
+   "ir94e": "none",
+   "hz": {
+    "sugar": 200,
+    "bitter": 30,
+    "water": 180,
+    "ir94e": 0
+   },
+   "mn9_mean": 76.867,
+   "mn9_std": 5.612,
+   "mn9_left_mean": 76.867,
+   "mn9_left_std": 5.612,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "very_high",
+   "bitter": "low",
+   "water": "high",
+   "ir94e": "low",
+   "hz": {
+    "sugar": 200,
+    "bitter": 30,
+    "water": 180,
+    "ir94e": 60
+   },
+   "mn9_mean": 67.643,
+   "mn9_std": 5.059,
+   "mn9_left_mean": 67.643,
+   "mn9_left_std": 5.059,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "very_high",
+   "bitter": "low",
+   "water": "high",
+   "ir94e": "medium",
+   "hz": {
+    "sugar": 200,
+    "bitter": 30,
+    "water": 180,
+    "ir94e": 120
+   },
+   "mn9_mean": 58.419,
+   "mn9_std": 4.505,
+   "mn9_left_mean": 58.419,
+   "mn9_left_std": 4.505,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "very_high",
+   "bitter": "low",
+   "water": "high",
+   "ir94e": "high",
+   "hz": {
+    "sugar": 200,
+    "bitter": 30,
+    "water": 180,
+    "ir94e": 200
+   },
+   "mn9_mean": 46.12,
+   "mn9_std": 3.767,
+   "mn9_left_mean": 46.12,
+   "mn9_left_std": 3.767,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "very_high",
+   "bitter": "low",
+   "water": "very_high",
+   "ir94e": "none",
+   "hz": {
+    "sugar": 200,
+    "bitter": 30,
+    "water": 240,
+    "ir94e": 0
+   },
+   "mn9_mean": 76.867,
+   "mn9_std": 5.612,
+   "mn9_left_mean": 76.867,
+   "mn9_left_std": 5.612,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "very_high",
+   "bitter": "low",
+   "water": "very_high",
+   "ir94e": "low",
+   "hz": {
+    "sugar": 200,
+    "bitter": 30,
+    "water": 240,
+    "ir94e": 60
+   },
+   "mn9_mean": 67.643,
+   "mn9_std": 5.059,
+   "mn9_left_mean": 67.643,
+   "mn9_left_std": 5.059,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "very_high",
+   "bitter": "low",
+   "water": "very_high",
+   "ir94e": "medium",
+   "hz": {
+    "sugar": 200,
+    "bitter": 30,
+    "water": 240,
+    "ir94e": 120
+   },
+   "mn9_mean": 58.419,
+   "mn9_std": 4.505,
+   "mn9_left_mean": 58.419,
+   "mn9_left_std": 4.505,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "very_high",
+   "bitter": "low",
+   "water": "very_high",
+   "ir94e": "high",
+   "hz": {
+    "sugar": 200,
+    "bitter": 30,
+    "water": 240,
+    "ir94e": 200
+   },
+   "mn9_mean": 46.12,
+   "mn9_std": 3.767,
+   "mn9_left_mean": 46.12,
+   "mn9_left_std": 3.767,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "very_high",
+   "bitter": "medium",
+   "water": "none",
+   "ir94e": "none",
+   "hz": {
+    "sugar": 200,
+    "bitter": 60,
+    "water": 0,
+    "ir94e": 0
+   },
+   "mn9_mean": 59.899,
+   "mn9_std": 4.594,
+   "mn9_left_mean": 59.899,
+   "mn9_left_std": 4.594,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "very_high",
+   "bitter": "medium",
+   "water": "none",
+   "ir94e": "low",
+   "hz": {
+    "sugar": 200,
+    "bitter": 60,
+    "water": 0,
+    "ir94e": 60
+   },
+   "mn9_mean": 52.711,
+   "mn9_std": 4.163,
+   "mn9_left_mean": 52.711,
+   "mn9_left_std": 4.163,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "very_high",
+   "bitter": "medium",
+   "water": "none",
+   "ir94e": "medium",
+   "hz": {
+    "sugar": 200,
+    "bitter": 60,
+    "water": 0,
+    "ir94e": 120
+   },
+   "mn9_mean": 45.523,
+   "mn9_std": 3.731,
+   "mn9_left_mean": 45.523,
+   "mn9_left_std": 3.731,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "very_high",
+   "bitter": "medium",
+   "water": "none",
+   "ir94e": "high",
+   "hz": {
+    "sugar": 200,
+    "bitter": 60,
+    "water": 0,
+    "ir94e": 200
+   },
+   "mn9_mean": 35.94,
+   "mn9_std": 3.156,
+   "mn9_left_mean": 35.94,
+   "mn9_left_std": 3.156,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "very_high",
+   "bitter": "medium",
+   "water": "low",
+   "ir94e": "none",
+   "hz": {
+    "sugar": 200,
+    "bitter": 60,
+    "water": 60,
+    "ir94e": 0
+   },
+   "mn9_mean": 60.396,
+   "mn9_std": 4.624,
+   "mn9_left_mean": 60.396,
+   "mn9_left_std": 4.624,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "very_high",
+   "bitter": "medium",
+   "water": "low",
+   "ir94e": "low",
+   "hz": {
+    "sugar": 200,
+    "bitter": 60,
+    "water": 60,
+    "ir94e": 60
+   },
+   "mn9_mean": 53.148,
+   "mn9_std": 4.189,
+   "mn9_left_mean": 53.148,
+   "mn9_left_std": 4.189,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "very_high",
+   "bitter": "medium",
+   "water": "low",
+   "ir94e": "medium",
+   "hz": {
+    "sugar": 200,
+    "bitter": 60,
+    "water": 60,
+    "ir94e": 120
+   },
+   "mn9_mean": 45.901,
+   "mn9_std": 3.754,
+   "mn9_left_mean": 45.901,
+   "mn9_left_std": 3.754,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "very_high",
+   "bitter": "medium",
+   "water": "low",
+   "ir94e": "high",
+   "hz": {
+    "sugar": 200,
+    "bitter": 60,
+    "water": 60,
+    "ir94e": 200
+   },
+   "mn9_mean": 36.237,
+   "mn9_std": 3.174,
+   "mn9_left_mean": 36.237,
+   "mn9_left_std": 3.174,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "very_high",
+   "bitter": "medium",
+   "water": "high",
+   "ir94e": "none",
+   "hz": {
+    "sugar": 200,
+    "bitter": 60,
+    "water": 180,
+    "ir94e": 0
+   },
+   "mn9_mean": 60.396,
+   "mn9_std": 4.624,
+   "mn9_left_mean": 60.396,
+   "mn9_left_std": 4.624,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "very_high",
+   "bitter": "medium",
+   "water": "high",
+   "ir94e": "low",
+   "hz": {
+    "sugar": 200,
+    "bitter": 60,
+    "water": 180,
+    "ir94e": 60
+   },
+   "mn9_mean": 53.148,
+   "mn9_std": 4.189,
+   "mn9_left_mean": 53.148,
+   "mn9_left_std": 4.189,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "very_high",
+   "bitter": "medium",
+   "water": "high",
+   "ir94e": "medium",
+   "hz": {
+    "sugar": 200,
+    "bitter": 60,
+    "water": 180,
+    "ir94e": 120
+   },
+   "mn9_mean": 45.901,
+   "mn9_std": 3.754,
+   "mn9_left_mean": 45.901,
+   "mn9_left_std": 3.754,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "very_high",
+   "bitter": "medium",
+   "water": "high",
+   "ir94e": "high",
+   "hz": {
+    "sugar": 200,
+    "bitter": 60,
+    "water": 180,
+    "ir94e": 200
+   },
+   "mn9_mean": 36.237,
+   "mn9_std": 3.174,
+   "mn9_left_mean": 36.237,
+   "mn9_left_std": 3.174,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "very_high",
+   "bitter": "medium",
+   "water": "very_high",
+   "ir94e": "none",
+   "hz": {
+    "sugar": 200,
+    "bitter": 60,
+    "water": 240,
+    "ir94e": 0
+   },
+   "mn9_mean": 60.396,
+   "mn9_std": 4.624,
+   "mn9_left_mean": 60.396,
+   "mn9_left_std": 4.624,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "very_high",
+   "bitter": "medium",
+   "water": "very_high",
+   "ir94e": "low",
+   "hz": {
+    "sugar": 200,
+    "bitter": 60,
+    "water": 240,
+    "ir94e": 60
+   },
+   "mn9_mean": 53.148,
+   "mn9_std": 4.189,
+   "mn9_left_mean": 53.148,
+   "mn9_left_std": 4.189,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "very_high",
+   "bitter": "medium",
+   "water": "very_high",
+   "ir94e": "medium",
+   "hz": {
+    "sugar": 200,
+    "bitter": 60,
+    "water": 240,
+    "ir94e": 120
+   },
+   "mn9_mean": 45.901,
+   "mn9_std": 3.754,
+   "mn9_left_mean": 45.901,
+   "mn9_left_std": 3.754,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "very_high",
+   "bitter": "medium",
+   "water": "very_high",
+   "ir94e": "high",
+   "hz": {
+    "sugar": 200,
+    "bitter": 60,
+    "water": 240,
+    "ir94e": 200
+   },
+   "mn9_mean": 36.237,
+   "mn9_std": 3.174,
+   "mn9_left_mean": 36.237,
+   "mn9_left_std": 3.174,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "very_high",
+   "bitter": "high",
+   "water": "none",
+   "ir94e": "none",
+   "hz": {
+    "sugar": 200,
+    "bitter": 100,
+    "water": 0,
+    "ir94e": 0
+   },
+   "mn9_mean": 38.118,
+   "mn9_std": 3.287,
+   "mn9_left_mean": 38.118,
+   "mn9_left_std": 3.287,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "very_high",
+   "bitter": "high",
+   "water": "none",
+   "ir94e": "low",
+   "hz": {
+    "sugar": 200,
+    "bitter": 100,
+    "water": 0,
+    "ir94e": 60
+   },
+   "mn9_mean": 33.544,
+   "mn9_std": 3.013,
+   "mn9_left_mean": 33.544,
+   "mn9_left_std": 3.013,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "very_high",
+   "bitter": "high",
+   "water": "none",
+   "ir94e": "medium",
+   "hz": {
+    "sugar": 200,
+    "bitter": 100,
+    "water": 0,
+    "ir94e": 120
+   },
+   "mn9_mean": 28.969,
+   "mn9_std": 2.738,
+   "mn9_left_mean": 28.969,
+   "mn9_left_std": 2.738,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "very_high",
+   "bitter": "high",
+   "water": "none",
+   "ir94e": "high",
+   "hz": {
+    "sugar": 200,
+    "bitter": 100,
+    "water": 0,
+    "ir94e": 200
+   },
+   "mn9_mean": 22.871,
+   "mn9_std": 2.372,
+   "mn9_left_mean": 22.871,
+   "mn9_left_std": 2.372,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "very_high",
+   "bitter": "high",
+   "water": "low",
+   "ir94e": "none",
+   "hz": {
+    "sugar": 200,
+    "bitter": 100,
+    "water": 60,
+    "ir94e": 0
+   },
+   "mn9_mean": 38.434,
+   "mn9_std": 3.306,
+   "mn9_left_mean": 38.434,
+   "mn9_left_std": 3.306,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "very_high",
+   "bitter": "high",
+   "water": "low",
+   "ir94e": "low",
+   "hz": {
+    "sugar": 200,
+    "bitter": 100,
+    "water": 60,
+    "ir94e": 60
+   },
+   "mn9_mean": 33.821,
+   "mn9_std": 3.029,
+   "mn9_left_mean": 33.821,
+   "mn9_left_std": 3.029,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "very_high",
+   "bitter": "high",
+   "water": "low",
+   "ir94e": "medium",
+   "hz": {
+    "sugar": 200,
+    "bitter": 100,
+    "water": 60,
+    "ir94e": 120
+   },
+   "mn9_mean": 29.209,
+   "mn9_std": 2.753,
+   "mn9_left_mean": 29.209,
+   "mn9_left_std": 2.753,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "very_high",
+   "bitter": "high",
+   "water": "low",
+   "ir94e": "high",
+   "hz": {
+    "sugar": 200,
+    "bitter": 100,
+    "water": 60,
+    "ir94e": 200
+   },
+   "mn9_mean": 23.06,
+   "mn9_std": 2.384,
+   "mn9_left_mean": 23.06,
+   "mn9_left_std": 2.384,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "very_high",
+   "bitter": "high",
+   "water": "high",
+   "ir94e": "none",
+   "hz": {
+    "sugar": 200,
+    "bitter": 100,
+    "water": 180,
+    "ir94e": 0
+   },
+   "mn9_mean": 38.434,
+   "mn9_std": 3.306,
+   "mn9_left_mean": 38.434,
+   "mn9_left_std": 3.306,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "very_high",
+   "bitter": "high",
+   "water": "high",
+   "ir94e": "low",
+   "hz": {
+    "sugar": 200,
+    "bitter": 100,
+    "water": 180,
+    "ir94e": 60
+   },
+   "mn9_mean": 33.821,
+   "mn9_std": 3.029,
+   "mn9_left_mean": 33.821,
+   "mn9_left_std": 3.029,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "very_high",
+   "bitter": "high",
+   "water": "high",
+   "ir94e": "medium",
+   "hz": {
+    "sugar": 200,
+    "bitter": 100,
+    "water": 180,
+    "ir94e": 120
+   },
+   "mn9_mean": 29.209,
+   "mn9_std": 2.753,
+   "mn9_left_mean": 29.209,
+   "mn9_left_std": 2.753,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "very_high",
+   "bitter": "high",
+   "water": "high",
+   "ir94e": "high",
+   "hz": {
+    "sugar": 200,
+    "bitter": 100,
+    "water": 180,
+    "ir94e": 200
+   },
+   "mn9_mean": 23.06,
+   "mn9_std": 2.384,
+   "mn9_left_mean": 23.06,
+   "mn9_left_std": 2.384,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "very_high",
+   "bitter": "high",
+   "water": "very_high",
+   "ir94e": "none",
+   "hz": {
+    "sugar": 200,
+    "bitter": 100,
+    "water": 240,
+    "ir94e": 0
+   },
+   "mn9_mean": 38.434,
+   "mn9_std": 3.306,
+   "mn9_left_mean": 38.434,
+   "mn9_left_std": 3.306,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "very_high",
+   "bitter": "high",
+   "water": "very_high",
+   "ir94e": "low",
+   "hz": {
+    "sugar": 200,
+    "bitter": 100,
+    "water": 240,
+    "ir94e": 60
+   },
+   "mn9_mean": 33.821,
+   "mn9_std": 3.029,
+   "mn9_left_mean": 33.821,
+   "mn9_left_std": 3.029,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "very_high",
+   "bitter": "high",
+   "water": "very_high",
+   "ir94e": "medium",
+   "hz": {
+    "sugar": 200,
+    "bitter": 100,
+    "water": 240,
+    "ir94e": 120
+   },
+   "mn9_mean": 29.209,
+   "mn9_std": 2.753,
+   "mn9_left_mean": 29.209,
+   "mn9_left_std": 2.753,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "very_high",
+   "bitter": "high",
+   "water": "very_high",
+   "ir94e": "high",
+   "hz": {
+    "sugar": 200,
+    "bitter": 100,
+    "water": 240,
+    "ir94e": 200
+   },
+   "mn9_mean": 23.06,
+   "mn9_std": 2.384,
+   "mn9_left_mean": 23.06,
+   "mn9_left_std": 2.384,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "very_high",
+   "bitter": "very_high",
+   "water": "none",
+   "ir94e": "none",
+   "hz": {
+    "sugar": 200,
+    "bitter": 160,
+    "water": 0,
+    "ir94e": 0
+   },
+   "mn9_mean": 5.445,
+   "mn9_std": 1.327,
+   "mn9_left_mean": 5.445,
+   "mn9_left_std": 1.327,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "very_high",
+   "bitter": "very_high",
+   "water": "none",
+   "ir94e": "low",
+   "hz": {
+    "sugar": 200,
+    "bitter": 160,
+    "water": 0,
+    "ir94e": 60
+   },
+   "mn9_mean": 4.792,
+   "mn9_std": 1.288,
+   "mn9_left_mean": 4.792,
+   "mn9_left_std": 1.288,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "very_high",
+   "bitter": "very_high",
+   "water": "none",
+   "ir94e": "medium",
+   "hz": {
+    "sugar": 200,
+    "bitter": 160,
+    "water": 0,
+    "ir94e": 120
+   },
+   "mn9_mean": 4.138,
+   "mn9_std": 1.248,
+   "mn9_left_mean": 4.138,
+   "mn9_left_std": 1.248,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "very_high",
+   "bitter": "very_high",
+   "water": "none",
+   "ir94e": "high",
+   "hz": {
+    "sugar": 200,
+    "bitter": 160,
+    "water": 0,
+    "ir94e": 200
+   },
+   "mn9_mean": 3.267,
+   "mn9_std": 1.196,
+   "mn9_left_mean": 3.267,
+   "mn9_left_std": 1.196,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "very_high",
+   "bitter": "very_high",
+   "water": "low",
+   "ir94e": "none",
+   "hz": {
+    "sugar": 200,
+    "bitter": 160,
+    "water": 60,
+    "ir94e": 0
+   },
+   "mn9_mean": 5.491,
+   "mn9_std": 1.329,
+   "mn9_left_mean": 5.491,
+   "mn9_left_std": 1.329,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "very_high",
+   "bitter": "very_high",
+   "water": "low",
+   "ir94e": "low",
+   "hz": {
+    "sugar": 200,
+    "bitter": 160,
+    "water": 60,
+    "ir94e": 60
+   },
+   "mn9_mean": 4.832,
+   "mn9_std": 1.29,
+   "mn9_left_mean": 4.832,
+   "mn9_left_std": 1.29,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "very_high",
+   "bitter": "very_high",
+   "water": "low",
+   "ir94e": "medium",
+   "hz": {
+    "sugar": 200,
+    "bitter": 160,
+    "water": 60,
+    "ir94e": 120
+   },
+   "mn9_mean": 4.173,
+   "mn9_std": 1.25,
+   "mn9_left_mean": 4.173,
+   "mn9_left_std": 1.25,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "very_high",
+   "bitter": "very_high",
+   "water": "low",
+   "ir94e": "high",
+   "hz": {
+    "sugar": 200,
+    "bitter": 160,
+    "water": 60,
+    "ir94e": 200
+   },
+   "mn9_mean": 3.294,
+   "mn9_std": 1.198,
+   "mn9_left_mean": 3.294,
+   "mn9_left_std": 1.198,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "very_high",
+   "bitter": "very_high",
+   "water": "high",
+   "ir94e": "none",
+   "hz": {
+    "sugar": 200,
+    "bitter": 160,
+    "water": 180,
+    "ir94e": 0
+   },
+   "mn9_mean": 5.491,
+   "mn9_std": 1.329,
+   "mn9_left_mean": 5.491,
+   "mn9_left_std": 1.329,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "very_high",
+   "bitter": "very_high",
+   "water": "high",
+   "ir94e": "low",
+   "hz": {
+    "sugar": 200,
+    "bitter": 160,
+    "water": 180,
+    "ir94e": 60
+   },
+   "mn9_mean": 4.832,
+   "mn9_std": 1.29,
+   "mn9_left_mean": 4.832,
+   "mn9_left_std": 1.29,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "very_high",
+   "bitter": "very_high",
+   "water": "high",
+   "ir94e": "medium",
+   "hz": {
+    "sugar": 200,
+    "bitter": 160,
+    "water": 180,
+    "ir94e": 120
+   },
+   "mn9_mean": 4.173,
+   "mn9_std": 1.25,
+   "mn9_left_mean": 4.173,
+   "mn9_left_std": 1.25,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "very_high",
+   "bitter": "very_high",
+   "water": "high",
+   "ir94e": "high",
+   "hz": {
+    "sugar": 200,
+    "bitter": 160,
+    "water": 180,
+    "ir94e": 200
+   },
+   "mn9_mean": 3.294,
+   "mn9_std": 1.198,
+   "mn9_left_mean": 3.294,
+   "mn9_left_std": 1.198,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "very_high",
+   "bitter": "very_high",
+   "water": "very_high",
+   "ir94e": "none",
+   "hz": {
+    "sugar": 200,
+    "bitter": 160,
+    "water": 240,
+    "ir94e": 0
+   },
+   "mn9_mean": 5.491,
+   "mn9_std": 1.329,
+   "mn9_left_mean": 5.491,
+   "mn9_left_std": 1.329,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "very_high",
+   "bitter": "very_high",
+   "water": "very_high",
+   "ir94e": "low",
+   "hz": {
+    "sugar": 200,
+    "bitter": 160,
+    "water": 240,
+    "ir94e": 60
+   },
+   "mn9_mean": 4.832,
+   "mn9_std": 1.29,
+   "mn9_left_mean": 4.832,
+   "mn9_left_std": 1.29,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "very_high",
+   "bitter": "very_high",
+   "water": "very_high",
+   "ir94e": "medium",
+   "hz": {
+    "sugar": 200,
+    "bitter": 160,
+    "water": 240,
+    "ir94e": 120
+   },
+   "mn9_mean": 4.173,
+   "mn9_std": 1.25,
+   "mn9_left_mean": 4.173,
+   "mn9_left_std": 1.25,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  },
+  {
+   "sugar": "very_high",
+   "bitter": "very_high",
+   "water": "very_high",
+   "ir94e": "high",
+   "hz": {
+    "sugar": 200,
+    "bitter": 160,
+    "water": 240,
+    "ir94e": 200
+   },
+   "mn9_mean": 3.294,
+   "mn9_std": 1.198,
+   "mn9_left_mean": 3.294,
+   "mn9_left_std": 1.198,
+   "mn9_right_mean": 0.0,
+   "mn9_right_std": 0.0,
+   "n_trials": 0
+  }
+ ],
+ "cells_sha256": "4f982cb1f04afe9c243138b7a55c4565ee82aa632df47c3c5850990ef2528446"
+}

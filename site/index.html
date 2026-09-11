@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ask the Fly · 问问苍蝇</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="stub-banner" class="stub-banner" hidden data-i18n="stubBanner"></div>
+
+  <header class="top">
+    <h1 class="title" data-i18n="title"></h1>
+    <button id="lang-toggle" class="lang-toggle" type="button" aria-label="Switch language"></button>
+  </header>
+
+  <main class="app">
+    <section class="panel" id="input-panel">
+      <p class="lead" data-i18n="lead"></p>
+      <form id="option-form" class="option-form" autocomplete="off">
+        <input id="option-input" class="option-input" type="text" data-i18n-placeholder="inputPlaceholder" enterkeyhint="done">
+        <button class="btn btn-add" type="submit" data-i18n="add"></button>
+      </form>
+      <ul id="option-list" class="option-list" aria-live="polite"></ul>
+      <p class="hint" data-i18n="hint"></p>
+      <div class="actions">
+        <button id="ask-btn" class="btn btn-primary" type="button" data-i18n="ask" disabled></button>
+        <button id="opposite-btn" class="btn btn-secondary" type="button" data-i18n="opposite" disabled></button>
+      </div>
+    </section>
+
+    <section class="panel" id="result-panel" hidden>
+      <div id="verdict" class="verdict"></div>
+      <table class="results" id="results-table">
+        <thead>
+          <tr>
+            <th data-i18n="colOption"></th>
+            <th data-i18n="colSugar"></th>
+            <th data-i18n="colBitter"></th>
+            <th data-i18n="colWater"></th>
+            <th data-i18n="colMn9"></th>
+          </tr>
+        </thead>
+        <tbody id="results-body"></tbody>
+      </table>
+      <div id="misses" class="misses"></div>
+      <div class="actions">
+        <button id="share-btn" class="btn btn-primary" type="button" data-i18n="share"></button>
+        <button id="again-btn" class="btn btn-secondary" type="button" data-i18n="again"></button>
+      </div>
+    </section>
+
+    <section class="panel card-panel" id="card-panel" hidden>
+      <canvas id="share-card" class="share-card" width="900" height="1200" aria-label="share card"></canvas>
+      <div class="actions">
+        <a id="download-link" class="btn btn-primary" download="ask-the-fly.png" data-i18n="download"></a>
+        <button id="close-card-btn" class="btn btn-secondary" type="button" data-i18n="close"></button>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <p class="honesty" data-i18n="honesty"></p>
+    <p class="provenance" data-i18n="provenance"></p>
+    <p class="small" id="table-meta"></p>
+  </footer>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>

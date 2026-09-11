@@ -1,0 +1,173 @@
+:root {
+  --bg: #fbf8f2;
+  --ink: #1f1a17;
+  --muted: #6b625b;
+  --line: #e2dbd0;
+  --panel: #ffffff;
+  --accent: #b5471f;
+  --accent-ink: #ffffff;
+  --soft: #f3ece2;
+  --win: #e7f2df;
+  --lose: #f6e6e0;
+  --warn: #fff3c4;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #17140f;
+    --ink: #f1ebe2;
+    --muted: #a99f93;
+    --line: #3a332b;
+    --panel: #221d17;
+    --accent: #e0774a;
+    --accent-ink: #17140f;
+    --soft: #2c251d;
+    --win: #223320;
+    --lose: #3a2620;
+    --warn: #3d3410;
+  }
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font: 16px/1.5 system-ui, -apple-system, "Segoe UI", "PingFang SC", "Noto Sans CJK SC", "Microsoft YaHei", sans-serif;
+}
+
+body { padding: 0 16px 32px; max-width: 640px; margin: 0 auto; }
+
+.stub-banner {
+  background: var(--warn);
+  color: #4a3a00;
+  padding: 8px 12px;
+  margin: 12px 0 0;
+  border-radius: 8px;
+  font-size: 0.9rem;
+}
+
+.top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 0 12px;
+}
+
+.title { font-size: 1.6rem; margin: 0; letter-spacing: 0.01em; }
+
+.lang-toggle {
+  border: 1px solid var(--line);
+  background: var(--panel);
+  color: var(--ink);
+  border-radius: 999px;
+  padding: 6px 12px;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+.lead { margin: 0 0 12px; }
+
+.option-form { display: flex; gap: 8px; }
+
+.option-input {
+  flex: 1;
+  min-width: 0;
+  font: inherit;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--bg);
+  color: var(--ink);
+}
+
+.btn {
+  font: inherit;
+  padding: 10px 16px;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  background: var(--soft);
+  color: var(--ink);
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+}
+
+.btn:disabled { opacity: 0.45; cursor: not-allowed; }
+.btn-primary { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+.btn-secondary { background: var(--panel); }
+.btn-add { white-space: nowrap; }
+
+.option-list { list-style: none; padding: 0; margin: 12px 0 4px; display: flex; flex-wrap: wrap; gap: 8px; }
+
+.option-list li {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--soft);
+  border-radius: 999px;
+  padding: 6px 10px 6px 12px;
+}
+
+.option-list button {
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  font-size: 1.1rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0 2px;
+}
+
+.hint { color: var(--muted); font-size: 0.9rem; margin: 4px 0 12px; }
+
+.actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+.actions .btn { flex: 1 1 45%; }
+
+.verdict { font-size: 1.15rem; margin-bottom: 12px; }
+.verdict strong { font-size: 1.4rem; display: block; }
+
+.results { width: 100%; border-collapse: collapse; font-size: 0.92rem; }
+.results th, .results td { text-align: left; padding: 8px 6px; border-bottom: 1px solid var(--line); vertical-align: top; }
+.results th { color: var(--muted); font-weight: 600; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.04em; }
+.results tr.win td { background: var(--win); }
+.results tr.lose td { background: var(--lose); }
+.results tr.miss td { color: var(--muted); }
+.results .mn9 { white-space: nowrap; font-variant-numeric: tabular-nums; }
+.results .sub { display: block; color: var(--muted); font-size: 0.8rem; }
+
+.misses { margin-top: 12px; }
+.miss-item {
+  background: var(--soft);
+  border-radius: 10px;
+  padding: 10px 12px;
+  margin-top: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.card-panel { text-align: center; }
+.share-card { width: 100%; max-width: 420px; height: auto; aspect-ratio: 3 / 4; border-radius: 12px; border: 1px solid var(--line); }
+
+.foot { color: var(--muted); font-size: 0.85rem; }
+.foot p { margin: 6px 0; }
+.honesty { color: var(--ink); }
+.small { font-size: 0.75rem; }
+
+@media (min-width: 560px) {
+  .title { font-size: 2rem; }
+  .actions .btn { flex: 1 1 auto; }
+}
