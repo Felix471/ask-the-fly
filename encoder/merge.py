@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import sys
 import random
 from collections import Counter, defaultdict
 from pathlib import Path
@@ -15,7 +16,7 @@ ROOT = Path(__file__).resolve().parents[1]
 FOODS_PATH = Path(__file__).with_name("foods_stability.json")
 AMBIGUOUS_PATH = ROOT / "data" / "ambiguous_names.json"
 DIMENSIONS = ("sugar", "bitter", "water")
-REVIEWS = {"llm_v1", "needs_review", "human_checked", "proxy"}
+REVIEWS = {"llm_v1", "needs_review", "human_checked", "proxy", "draft"}  # draft: never merged, never published
 
 
 class MergeError(ValueError):
@@ -212,10 +213,72 @@ def _arbitrate_dimension(
 
 
 FOODS_OVERRIDE: Path | None = None
+STABILITY_LANGS: tuple[str, ...] = ("zh", "en")
+STABILITY_REPEATS = 6
 
 
-def _from_stability(records: list[object]) -> list[dict]:
+def validate_stability(records: list[object], foods: list[dict], langs=None, repeats=None) -> list[str]:
+    """Problems that make a stability batch unfit for merging (D07): every food needs
+    `repeats` distinct repeat ids per language, error rows do not count, and the
+    batch must carry one encoder/prompt/schema version. Empty list = complete."""
+    langs = tuple(langs or STABILITY_LANGS)
+    repeats = int(repeats or STABILITY_REPEATS)
+    problems: list[str] = []
+    seen: dict[tuple[int, str], list[int]] = defaultdict(list)
+    versions: Counter = Counter()
+    prompts: Counter = Counter()
+    schemas: Counter = Counter()
+    errors = 0
+    for row, record in enumerate(records, 1):
+        if not isinstance(record, dict):
+            problems.append(f"row {row}: not an object")
+            continue
+        if "error" in record or "entry" not in record:
+            errors += 1
+            continue
+        try:
+            key = (int(record["food_index"]), str(record["lang"]))
+            repeat = int(record["repeat"])
+        except (KeyError, TypeError, ValueError):
+            problems.append(f"row {row}: invalid food_index / lang / repeat")
+            continue
+        seen[key].append(repeat)
+        versions[record.get("encoder_version")] += 1
+        prompts[record.get("prompt_version")] += 1
+        schemas[record.get("schema_version")] += 1
+    if errors:
+        problems.append(f"{errors} error rows (not counted as samples)")
+    expected = set(range(1, repeats + 1))
+    for index in range(len(foods)):
+        for lang in langs:
+            reps = seen.get((index, lang), [])
+            dup = sorted(r for r, c in Counter(reps).items() if c > 1)
+            if dup:
+                problems.append(f"food {index} {lang}: duplicate repeat ids {dup}")
+            missing = sorted(expected - set(reps))
+            if missing:
+                problems.append(f"food {index} {lang}: missing repeats {missing} ({len(set(reps) & expected)}/{repeats})")
+            extra = sorted(set(reps) - expected)
+            if extra:
+                problems.append(f"food {index} {lang}: repeat ids outside 1..{repeats}: {extra}")
+    for name, counter in (("encoder_version", versions), ("prompt_version", prompts), ("schema_version", schemas)):
+        if None in counter:
+            problems.append(f"records without {name}")
+        if len(counter) > 1:
+            problems.append(f"mixed {name}: {dict(counter)}")
+    return problems
+
+
+def _from_stability(records: list[object], draft: bool = False) -> list[dict]:
     foods = json.loads((FOODS_OVERRIDE or FOODS_PATH).read_text(encoding="utf-8"))
+    problems = validate_stability(records, foods)
+    if problems and not draft:
+        shown = "\n  ".join(problems[:25])
+        more = f"\n  ... {len(problems) - 25} more" if len(problems) > 25 else ""
+        raise MergeError(
+            "stability batch incomplete or mixed; it cannot be merged (use --draft PATH to write a draft):\n  "
+            + shown + more
+        )
     groups: dict[int, list[dict]] = defaultdict(list)
     for row_number, record in enumerate(records, 1):
         if not isinstance(record, dict):
@@ -355,7 +418,7 @@ def _paired_entry(pair: dict, index: int) -> dict:
     return _normalized_entry(result, label)
 
 
-def _read_source(path: Path) -> list[dict]:
+def _read_source(path: Path, draft: bool = False) -> list[dict]:
     text = path.read_text(encoding="utf-8")
     try:
         value = json.loads(text)
@@ -368,7 +431,7 @@ def _read_source(path: Path) -> list[dict]:
                 records.append(json.loads(line))
             except json.JSONDecodeError as exc:
                 raise MergeError(f"invalid JSON on line {line_number}: {exc}") from exc
-        return _from_stability(records)
+        return _from_stability(records, draft=draft)
     if not isinstance(value, list):
         raise MergeError("input JSON must be an array of entries")
     paired = [isinstance(entry, dict) and ("zh_entry" in entry or "en_entry" in entry) for entry in value]
@@ -389,6 +452,18 @@ def _read_dictionary(path: Path) -> list[dict]:
     return [_normalized_entry(entry, f"existing entry {i}") for i, entry in enumerate(value)]
 
 
+def write_draft(source: Path, draft_path: Path) -> int:
+    """Write the entries an incomplete or mixed stability batch would produce, marked
+    review = "draft", to `draft_path`. A draft never enters the dictionary: merge()
+    rejects entries with that review value (D07)."""
+    entries = _read_source(source, draft=True)
+    for entry in entries:
+        entry["review"] = "draft"
+    draft_path.parent.mkdir(parents=True, exist_ok=True)
+    draft_path.write_text(json.dumps(entries, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    return len(entries)
+
+
 def merge(
     source: Path,
     destination: Path,
@@ -397,6 +472,9 @@ def merge(
 ) -> tuple[int, int, list[dict]]:
     """Merge entries; replace_llm explicitly requests the existing default LLM replacement."""
     incoming = _read_source(source)
+    drafts = [entry["key"] for entry in incoming if entry.get("review") == "draft"]
+    if drafts:
+        raise MergeError(f"draft entries cannot be merged (re-encode a complete batch): {drafts[:10]}")
     existing = _read_dictionary(destination) if destination.exists() else []
     owner = _assert_unique(existing, "destination")
     # Aliases the model proposed that already name another entry (existing, or earlier
@@ -531,10 +609,14 @@ def _mark_checked(path: Path, keys: list[str]) -> None:
 
 
 def main() -> None:
+    global FOODS_OVERRIDE, STABILITY_REPEATS, STABILITY_LANGS
     parser = argparse.ArgumentParser(description="Merge encoded entries into the dish dictionary")
     parser.add_argument("source", nargs="?", type=Path)
     parser.add_argument("--into", type=Path, default=ROOT / "data" / "dishes.json")
     parser.add_argument("--foods", type=Path, help="food list the raw JSONL was produced from (default: encoder/foods_stability.json)")
+    parser.add_argument("--repeats", type=int, default=STABILITY_REPEATS, help="repeats per food and language a stability batch must have")
+    parser.add_argument("--langs", default=",".join(STABILITY_LANGS), help="languages a stability batch must cover")
+    parser.add_argument("--draft", type=Path, metavar="PATH", help="write an incomplete/mixed batch as a draft file instead of merging")
     modes = parser.add_mutually_exclusive_group()
     modes.add_argument("--split-list", action="store_true")
     modes.add_argument("--sample", type=int, metavar="N")
@@ -551,8 +633,19 @@ def main() -> None:
         help="print every cross-language arbitration performed by the merge",
     )
     args = parser.parse_args()
-    global FOODS_OVERRIDE
     FOODS_OVERRIDE = args.foods
+    STABILITY_REPEATS = args.repeats
+    STABILITY_LANGS = tuple(part.strip() for part in args.langs.split(",") if part.strip())
+    if args.draft:
+        if args.source is None:
+            parser.error("--draft needs a source")
+        try:
+            count = write_draft(args.source, args.draft)
+        except MergeError as exc:
+            print(f"error: {exc}")
+            sys.exit(1)
+        print(f"Wrote {count} draft entries to {args.draft} (review = draft; not merged)")
+        return
     try:
         if args.split_list:
             _print_split_list()
