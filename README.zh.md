@@ -63,18 +63,39 @@ English: [README.md](README.md)
 
 产品口号："它只管第一口。"
 
-## 复现 Phase 0 曲线
+## 运行、测试、重算
 
-Phase 0 使用论文里的 LIF 模型（Brian2），在 FlyWire v783 上复现 Shiu 2024 的糖/苦 → MN9 结果。除了编译器工具链以外，运行所需要的内容都已经放在仓库里。
+运行已构建的网站、跑快速测试、获取仿真输入、重算仿真，是四件不同的事。前两件不需要仓库之外的任何东西。
 
-**环境。** 正式运行时使用 Brian2 2.9.0 的 Cython 代码生成目标，因此需要一个 C++ 编译器。我们是在 WSL2 Ubuntu 里的 conda 环境 `flybrain` 中运行的（环境规格见 `env/flybrain.yml`，精确导出见 `env/flybrain-lock.yml`）；具体配置和踩坑记录都写在 `docs/environment.md` 里。如果直接在没有 `cl.exe` 的原生 Windows 环境中运行，就会在代码生成阶段失败。
+**运行网站。** `python -m http.server 8765 --directory site`，然后打开 http://127.0.0.1:8765/。网站是静态的：它读取的所有文件都在 `site/data/` 和 `site/assets/` 里；不需要 API key，不需要 vendor 数据，也没有构建步骤。
 
-**输入（冻结、已跟踪）。** 包括 `data/2025_Connectivity_783.parquet`（v783 连接矩阵）、`data/cells.json`（GRN 与 MN9 的 root ID）以及 `data/stim_protocol.json`（频率、试验次数、读数 = 左侧 MN9）。生成报告时，也会把当时使用的协议文件和细胞文件的 SHA-256 一并记录下来。
+**跑快速测试。** Node 22：`node --test site/test/app.test.mjs site/test/regress.test.mjs`（纯函数、随站数据、审计回归）。Python 3.11+，只用标准库：`python -m unittest discover -s tests`（编码器合并门禁、仿真账本与种子、发布校验器）。`python scripts/validate_release.py` 检查生产数据包（无 stub、无未审核条目、源数据与站点副本一致、回放 variant 齐全、MN9 数值有限）。浏览器检查需要 Playwright：对本地服务器运行 `python scripts/browser_checks.py`。
 
-**运行。**
+**获取并验证输入。** `vendor/fly-brain/` 不在仓库里跟踪；它是 Eon fly-brain 仓库在某一个 commit 上的副本：
 
 ```
-# 在 Linux / WSL2 的仓库目录下
+git clone https://github.com/eonsystemspbc/fly-brain vendor/fly-brain
+git -C vendor/fly-brain checkout a3db62f9436074e485c0278290c2164ed6150808
+sha256sum vendor/fly-brain/data/2025_Connectivity_783.parquet vendor/fly-brain/data/2025_Completeness_783.csv data/cells.json data/stim_protocol.json data/grid_levels.json
+```
+
+预期 SHA-256：
+
+| 文件 | sha256 |
+|---|---|
+| vendor/fly-brain/data/2025_Connectivity_783.parquet（100.8 MB，v783 连接矩阵） | `efeb23fb99098e9c390f6869969b2a121a2ee92c833cfc45ecb2c1d8e1af0347` |
+| vendor/fly-brain/data/2025_Completeness_783.csv（3.5 MB） | `52b0ac6094cd32c546f8d4c341e094376f48f4e791f8db9b166de5dff8199ea4` |
+| data/cells.json（已跟踪；GRN 与 MN9 的 root ID） | `f78f5071af3bf0984e2e71326f715777c567794e03c0e6369846a147015b395a` |
+| data/stim_protocol.json（已跟踪；频率、试验次数、读数 = 左侧 MN9，指向 vendor 文件） | `9f9495033281bfcd6f3b373551817987deb2cc083ae94ab61fece9065102d82a` |
+| data/grid_levels.json（已跟踪；400 格网格） | `33a1dab4a03a440298d12c7ba2365e88457268b4ee3a220f15981b2702350780` |
+
+每次运行都会把这些哈希写进自己的 `run_meta.json`；`docs/grid_provenance.md` 记录了已发布的表对应的 commit。缺少 vendor 文件时，脚本会给出明确提示后停止。
+
+**重算仿真。** 正式运行使用 Brian2 2.9.0 的 Cython 目标，需要 C++ 编译器；我们在 WSL2 Ubuntu 里的 conda 环境 `flybrain` 中运行（`env/flybrain.yml`，精确导出 `env/flybrain-lock.yml`；踩坑记录见 `docs/environment.md`）。没有 `cl.exe` 的原生 Windows 会在代码生成阶段失败。
+
+```
+# 在 Linux / WSL2 的仓库目录下，上面的输入就位之后
+conda env create -f env/flybrain.yml
 conda run -n flybrain --no-capture-output python scripts/run_phase0.py --stage smoke --target numpy   # 流程检查，不需要编译器
 conda run -n flybrain --no-capture-output python scripts/run_phase0.py --stage full --n-proc 14       # 540 次试验，14 个进程约 4 分钟（每个约 3 GB 内存）
 conda run -n flybrain --no-capture-output python scripts/phase0_report.py                              # 重新生成 docs/phase0_report.md
@@ -93,7 +114,7 @@ conda run -n flybrain --no-capture-output python scripts/phase0_report.py       
 
 这些门槛主要看的是变化方向（A 上升、B 下降，C 和 D 保持为零），而不是要求绝对数值和论文完全一致。之所以会有数值差异，是因为论文是在 v630 上标定 `w_syn` 的，而这里直接沿用了同一参数去运行 v783。两次使用不同随机流的完整运行，在糖 100 Hz 这一点分别得到 67.2 和 67.3 Hz（`docs/phase0_report.md`、`docs/fixed_path_recheck.md`）。
 
-**Phase 0 之后。** `scripts/run_phase1.py` 会生成 `docs/phase1_characterization.md` 里的单通道和成对曲线；`scripts/run_grid.py --stage full` 会跑完整的 400 格查找网格（14 个进程大约需要 80 分钟），然后由 `scripts/build_lookup.py` 把结果整理成 `data/lookup_table.json`。网站实际读取的就是这一份查找表。
+**Phase 0 之后。** `scripts/run_phase1.py` 会生成 `docs/phase1_characterization.md` 里的单通道和成对曲线；`scripts/run_grid.py --stage full` 会跑完整的 400 格查找网格（14 个进程大约需要 80 分钟），然后由 `scripts/build_lookup.py` 把结果整理成 `data/lookup_table.json`，这是网站读取的唯一一份分数文件；`scripts/run_replay.py run` 与 `pack` 记录并打包 `site/data/replay/` 里的脑回放。试验种子遵循 `docs/grid_provenance.md` 里的版本化方案（已发布的表是在 v1 方案下生成的；用 v2 重算会得到不同但等价的随机流）。
 
 ## 如何申请加一道菜
 
