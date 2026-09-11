@@ -6,7 +6,7 @@ import { fileURLToPath } from "node:url";
 import path from "node:path";
 
 import {
-  buildDictionary, buildLookup, decide, issueUrl, normalizeName, scoreOptions, STRINGS, fmt,
+  buildDictionary, buildLookup, cardLines, decide, issueUrl, normalizeName, scoreOptions, STRINGS, fmt,
 } from "../app.js";
 
 const here = path.dirname(fileURLToPath(import.meta.url));
@@ -80,4 +80,59 @@ test("both languages define the same string keys and four fixed lines", () => {
   assert.equal(STRINGS.en.fixedLines.length, 4);
   assert.equal(STRINGS.zh.fixedLines.length, 4);
   assert.equal(fmt("{a}-{b}", { a: 1, b: 2 }), "1-2");
+});
+
+test("sugar response is the same dish with bitter = none; equal when bitter is already none", () => {
+  const dictionary = buildDictionary(dishes);
+  const lookup = buildLookup(table);
+  const [coffee, water] = scoreOptions(["black coffee", "water"], dictionary, lookup);
+  assert.equal(coffee.entry.bitter !== "none", true);
+  assert.equal(coffee.sugarOnly.hz.bitter, 0);
+  assert.equal(coffee.sugarOnly.hz.sugar, coffee.cell.hz.sugar);
+  assert.equal(coffee.sugarOnly.hz.water, coffee.cell.hz.water);
+  assert.equal(water.entry.bitter, "none");
+  assert.equal(water.sugarOnly, water.cell);
+});
+
+test("card lines are filled exactly from the spec templates", () => {
+  const dictionary = buildDictionary(dishes);
+  const lookup = buildLookup(table);
+  const decision = decide(scoreOptions(["black coffee", "water"], dictionary, lookup), "ask");
+  const en = cardLines(decision, "en");
+  const zh = cardLines(decision, "zh");
+  const w = decision.winner;
+  assert.equal(en.fixed[0], `Today's pick: ${w.entry.display.en}`);
+  assert.equal(en.fixed[1], `MN9: ${w.cell.mn9_mean.toFixed(1)} Hz (sugar response ${w.sugarOnly.mn9_mean.toFixed(1)} · after bitter suppression ${w.cell.mn9_mean.toFixed(1)})`);
+  assert.match(en.fixed[2], /^Taste input: sugar \S+ · bitter \S+ · water \S+ \(estimated by LLM\)$/);
+  assert.equal(en.fixed[3], "Simulation: precomputed from the whole-brain connectome, not run live");
+  assert.equal(en.bottom, "The model turns the dish into taste signals. The connectome predicts whether the fly would extend its proboscis. We use that response to choose the winner.");
+  assert.equal(zh.fixed[0], `今日选择：${w.entry.display.zh}`);
+  assert.equal(zh.fixed[3], "仿真：基于全脑连接组预先计算，并非现场实时运行");
+  assert.equal(zh.bottom, "模型先把菜品转换成味觉信号，连接组再预测苍蝇会不会伸出口器。最后我们根据这个反应决定选哪一道。");
+  assert.equal(en.fixed.length, 4);
+});
+
+test("two options in the same grid cell tie exactly and the card says so", () => {
+  const dictionary = buildDictionary(dishes);
+  const lookup = buildLookup(table);
+  const a = dishes[0];
+  const b = dishes.find((e) => e !== a && lookup.get({ sugar: e.sugar, bitter: e.bitter, water: e.water, ir94e: "none" }) === lookup.get({ sugar: a.sugar, bitter: a.bitter, water: a.water, ir94e: "none" }))
+    || dishes.find((e) => e !== a && e.sugar === a.sugar && e.bitter === a.bitter && e.water === a.water);
+  const pair = b ? [a.key, b.key] : ["water", "water"];
+  const decision = decide(scoreOptions(pair, dictionary, lookup), "ask");
+  if (b) {
+    assert.equal(decision.tie.length, 2);
+    const en = cardLines(decision, "en");
+    assert.equal(en.fixed[0], `Today's pick: ${a.display.en} / ${b.display.en}`);
+  }
+  assert.equal(STRINGS.en.cardTie, "The fly can't tell these apart");
+  assert.equal(STRINGS.zh.cardTie, "苍蝇分不出这几个");
+});
+
+test("all-miss decision fills the card with dashes", () => {
+  const dictionary = buildDictionary(dishes);
+  const lookup = buildLookup(table);
+  const decision = decide(scoreOptions(["zzz"], dictionary, lookup), "ask");
+  const en = cardLines(decision, "en");
+  assert.equal(en.fixed[0], "Today's pick: —");
 });

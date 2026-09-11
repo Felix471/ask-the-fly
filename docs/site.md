@@ -37,9 +37,9 @@ Pure functions (`normalizeName`, `buildDictionary`, `buildLookup`, `scoreOptions
 - "Ask the fly" picks the highest MN9; "Do the opposite" picks the lowest and says what the fly would have picked. Equal MN9 is reported as a tie.
 - The result view lists every option with its sugar/bitter/water levels and MN9 mean ± std, in MN9 order.
 - Unknown names take the miss path: "the fly hasn't tasted this yet" and a "Report it" button that opens a prefilled GitHub Issue (`REPO_URL` in `site/app.js`).
-- The share card is a 3:4 canvas (900 × 1200) with the verdict, the option list, the four fixed lines and the honesty line on the front; "Save image" downloads a PNG.
+- The share card is a 3:4 canvas (900 × 1200) with the verdict, the option list, the four fixed lines and the front-bottom line; "Save image" downloads a PNG. The water honesty line stays in the page footer.
 
 ## Placeholders to confirm
 
 - `REPO_URL` in `site/app.js` points at https://github.com/Felix471/ask-the-fly (confirmed 2026-09-11).
-- The four fixed lines (`STRINGS.*.fixedLines`) are drafted from the README product copy; replace them with the spec's wording if it differs.
+- The four fixed lines (`STRINGS.*.fixedLines`) and the front-bottom line (`cardBottom`) are the product owner's exact wording (2026-09-11). `{hz_sugar_only}` is the same dish looked up with bitter = none; it equals `{hz}` when the dish has no bitter and is shown anyway. Options that land in the same grid cell tie exactly (no jitter in v1) and the card says "the fly can't tell these apart".

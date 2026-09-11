@@ -40,15 +40,16 @@ export const STRINGS = {
     cardTitle: "Ask the Fly",
     cardPicked: "The fly picks",
     cardOppositePicked: "The fly picks {fly}; I take",
-    cardTie: "The fly cannot tell them apart",
-    cardMn9: "{hz} Hz on the proboscis-extension neuron",
+    cardTie: "The fly can't tell these apart",
     levelNames: { none: "none", low: "low", medium: "medium", high: "high", very_high: "very high" },
+    // The four fixed lines (product owner, 2026-09-11). Placeholders are filled by cardLines().
     fixedLines: [
-      "It only does the first bite.",
-      "A fly-brain model tasted this: Shiu 2024 LIF on FlyWire v783.",
-      "Readout: MN9, the proboscis-extension motor neuron, in Hz.",
-      "A fly's opinion, not nutrition advice.",
+      "Today's pick: {dish}",
+      "MN9: {hz} Hz (sugar response {hz_sugar_only} · after bitter suppression {hz})",
+      "Taste input: sugar {sugar} · bitter {bitter} · water {water} (estimated by LLM)",
+      "Simulation: precomputed from the whole-brain connectome, not run live",
     ],
+    cardBottom: "The model turns the dish into taste signals. The connectome predicts whether the fly would extend its proboscis. We use that response to choose the winner.",
   },
   zh: {
     title: "问问苍蝇",
@@ -81,15 +82,15 @@ export const STRINGS = {
     cardTitle: "问问苍蝇",
     cardPicked: "苍蝇选",
     cardOppositePicked: "苍蝇选 {fly}，我反着来：",
-    cardTie: "苍蝇分不出它们",
-    cardMn9: "伸喙神经元 {hz} Hz",
+    cardTie: "苍蝇分不出这几个",
     levelNames: { none: "无", low: "低", medium: "中", high: "高", very_high: "很高" },
     fixedLines: [
-      "它只管第一口。",
-      "一只果蝇脑模型尝过了：Shiu 2024 LIF，FlyWire v783。",
-      "读数：MN9，伸喙运动神经元，单位 Hz。",
-      "苍蝇的意见，不是营养建议。",
+      "今日选择：{dish}",
+      "MN9：{hz} Hz（甜味反应 {hz_sugar_only} · 加入苦味抑制后 {hz}）",
+      "味觉输入：甜 {sugar} · 苦 {bitter} · 水 {water}（由 LLM 估算）",
+      "仿真：基于全脑连接组预先计算，并非现场实时运行",
     ],
+    cardBottom: "模型先把菜品转换成味觉信号，连接组再预测苍蝇会不会伸出口器。最后我们根据这个反应决定选哪一道。",
   },
 };
 
@@ -152,7 +153,10 @@ export function scoreOptions(names, dictionary, lookup) {
     const entry = dictionary.find(name);
     if (!entry) return { name, entry: null, cell: null };
     const cell = lookup.get({ sugar: entry.sugar, bitter: entry.bitter, water: entry.water, ir94e: "none" });
-    return { name, entry, cell };
+    // "Sugar response" = the same dish looked up with bitter = none. Equal to
+    // `cell` when the dish has no bitter; shown anyway.
+    const sugarOnly = lookup.get({ sugar: entry.sugar, bitter: "none", water: entry.water, ir94e: "none" });
+    return { name, entry, cell, sugarOnly };
   });
 }
 
@@ -194,6 +198,27 @@ export function issueUrl(name, lang) {
 export function displayName(item, lang) {
   if (item.entry && item.entry.display && item.entry.display[lang]) return item.entry.display[lang];
   return item.name;
+}
+
+// The four fixed lines and the front-bottom line, filled for a decision.
+// Ties are exact (same grid cell): the pick shows every tied name and the
+// shared cell's numbers. With no known option every placeholder is "—".
+export function cardLines(decision, lang) {
+  const t = STRINGS[lang];
+  const names = t.levelNames;
+  const picked = decision.tie.length ? decision.tie : decision.winner ? [decision.winner] : [];
+  const lead = picked[0];
+  const values = lead
+    ? {
+        dish: picked.map((item) => displayName(item, lang)).join(" / "),
+        hz: lead.cell.mn9_mean.toFixed(1),
+        hz_sugar_only: lead.sugarOnly.mn9_mean.toFixed(1),
+        sugar: names[lead.entry.sugar] ?? lead.entry.sugar,
+        bitter: names[lead.entry.bitter] ?? lead.entry.bitter,
+        water: names[lead.entry.water] ?? lead.entry.water,
+      }
+    : { dish: "—", hz: "—", hz_sugar_only: "—", sugar: "—", bitter: "—", water: "—" };
+  return { fixed: t.fixedLines.map((line) => fmt(line, values)), bottom: t.cardBottom };
 }
 
 // ---------- share card (3:4, canvas) ----------
@@ -255,10 +280,6 @@ export function drawShareCard(canvas, decision, lang, options = {}) {
       y += 70;
       ctx.fillText(line, pad, y);
     }
-    y += 50;
-    ctx.font = font(30);
-    ctx.fillStyle = "#6b625b";
-    ctx.fillText(fmt(t.cardMn9, { hz: decision.winner.cell.mn9_mean.toFixed(1) }), pad, y);
     y += 30;
   }
 
@@ -284,13 +305,14 @@ export function drawShareCard(canvas, decision, lang, options = {}) {
     if (y > H - 420) break;
   }
 
-  // Four fixed lines + honesty line on the front
-  let fy = H - 330;
+  // Four fixed lines, then the front-bottom line
+  const lines = cardLines(decision, lang);
+  let fy = H - 400;
   ctx.fillStyle = "#e2dbd0";
   ctx.fillRect(pad, fy - 40, W - 2 * pad, 2);
   ctx.font = font(24);
   ctx.fillStyle = "#1f1a17";
-  for (const line of t.fixedLines) {
+  for (const line of lines.fixed) {
     for (const part of wrapLines(ctx, line, W - 2 * pad)) {
       ctx.fillText(part, pad, fy);
       fy += 34;
@@ -299,7 +321,7 @@ export function drawShareCard(canvas, decision, lang, options = {}) {
   fy += 12;
   ctx.font = font(22, 600);
   ctx.fillStyle = "#b5471f";
-  for (const part of wrapLines(ctx, t.honesty, W - 2 * pad)) {
+  for (const part of wrapLines(ctx, lines.bottom, W - 2 * pad)) {
     ctx.fillText(part, pad, fy);
     fy += 30;
   }
