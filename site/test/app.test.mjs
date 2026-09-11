@@ -288,7 +288,8 @@ test("neuropil outlines share the neuron frame and stay inside it", () => {
 });
 
 // ---- share links, QR code, provenance ----
-import { COMMIT_REWRITE, currentCommit, parseShareParams, resolveShared, shareParams, shareUrl, slugFor, SITE_URL } from "../app.js";
+import { COMMIT_REWRITE, currentCommit, parseShareParams, resolveShared, shareParams, shareUrl, slugFor, SITE_URL, optionFromText, optionQuery, optionLabel, sameOption } from "../app.js";
+import { FRAME_SET } from "../fly.js";
 import { qrcode } from "../vendor/qrcode-generator/qrcode.mjs";
 
 test("share link round-trips known dishes as slugs and unknown names as typed", () => {
@@ -299,8 +300,9 @@ test("share link round-trips known dishes as slugs and unknown names as typed", 
   assert.equal(url, `${SITE_URL}?d=hotpot,black-coffee,not%20a%20dish&lang=zh`);
   const parsed = parseShareParams(new URL(url).search);
   assert.deepEqual(parsed, { names: ["hotpot", "black-coffee", "not a dish"], lang: "zh", mode: "ask" });
-  const options = resolveShared(parsed.names, dictionary, "zh");
-  const again = decide(scoreOptions(options, dictionary, lookup), "ask");
+  const options = resolveShared(parsed.names, dictionary);
+  assert.deepEqual(options, [{ key: "hotpot" }, { key: "black coffee" }, { text: "not a dish" }]);
+  const again = decide(scoreOptions(options.map(optionQuery), dictionary, lookup), "ask");
   assert.deepEqual(again.known.map((i) => i.entry.key), decision.known.map((i) => i.entry.key));
   assert.deepEqual(again.misses.map((i) => i.name), ["not a dish"]);
   assert.equal(again.winner.entry.key, decision.winner.entry.key);
@@ -314,8 +316,8 @@ test("share link round-trips known dishes as slugs and unknown names as typed", 
 test("every dictionary key survives the slug round trip", () => {
   const dictionary = buildDictionary(dishes);
   for (const entry of dishes) {
-    const [name] = resolveShared([slugFor(entry.key)], dictionary, "en");
-    assert.equal(dictionary.find(name), entry, `${entry.key} -> ${slugFor(entry.key)} -> ${name}`);
+    const [option] = resolveShared([slugFor(entry.key)], dictionary);
+    assert.deepEqual(option, { key: entry.key }, `${entry.key} -> ${slugFor(entry.key)}`);
   }
 });
 
@@ -385,4 +387,33 @@ test("site/config.json carries the canonical URL the page falls back to", () => 
   const lookup = buildLookup(table);
   const decision = decide(scoreOptions(["火锅", "black coffee"], dictionary, lookup), "ask");
   assert.equal(shareUrl(decision, "en", "https://example.test"), "https://example.test/?d=hotpot,black-coffee&lang=en");
+});
+
+// ---- selections are keys; the language switch only changes labels ----
+test("selections are stable keys; typed unknown text stays as typed", () => {
+  const dictionary = buildDictionary(dishes);
+  assert.deepEqual(optionFromText("  火锅 ", dictionary), { key: "hotpot" });
+  assert.deepEqual(optionFromText("Black Coffee", dictionary), { key: "black coffee" });
+  assert.deepEqual(optionFromText("moon cheese", dictionary), { text: "moon cheese" });
+  assert.equal(optionFromText("   ", dictionary), null);
+  const hot = { key: "hotpot" };
+  assert.equal(optionLabel(hot, dictionary, "zh"), "火锅");
+  assert.equal(optionLabel(hot, dictionary, "en"), "hotpot");
+  assert.equal(optionLabel({ text: "moon cheese" }, dictionary, "zh"), "moon cheese");
+  assert.ok(sameOption(hot, optionFromText("火锅", dictionary)));
+  assert.ok(sameOption({ text: "Liang Pi" }, { text: "liang  pi" }));
+  assert.ok(!sameOption(hot, { text: "hotpot" }));
+  const lookup = buildLookup(table);
+  const options = [hot, { key: "black coffee" }, { text: "moon cheese" }];
+  const zh = decide(scoreOptions(options.map(optionQuery), dictionary, lookup), "ask");
+  const en = decide(scoreOptions(options.map(optionQuery), dictionary, lookup), "ask");
+  assert.equal(zh.winner.entry.key, en.winner.entry.key);
+  assert.equal(zh.winner.cell.mn9_mean, en.winner.cell.mn9_mean);
+  assert.deepEqual(zh.misses.map((m) => m.name), ["moon cheese"]);
+});
+
+test("every fly state draws from the sprite frame sets", () => {
+  const sets = new Set(["idle", "fly", "land", "proboscis"]);
+  for (const state of ["idle", "fly", "land", "taste", "hover", "proboscis"]) assert.ok(sets.has(FRAME_SET[state]), state);
+  assert.equal(FRAME_SET.hover, "idle");
 });

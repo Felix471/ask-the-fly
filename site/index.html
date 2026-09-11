@@ -45,7 +45,10 @@
         <button class="btn btn-add" type="submit" data-i18n="add"></button>
       </form>
       <ul id="option-list" class="option-list" aria-live="polite"></ul>
-      <p class="hint" data-i18n="hint"></p>
+      <div id="table-empty" class="table-empty">
+        <canvas id="idle-fly" class="idle-fly" width="56" height="56" aria-hidden="true"></canvas>
+        <p class="hint" data-i18n="hint"></p>
+      </div>
       <details id="tasted" class="tasted">
         <summary data-i18n="tastedTitle"></summary>
         <div id="tasted-chips" class="chips"></div>
@@ -67,7 +70,7 @@
       <canvas id="scene-canvas" class="scene-canvas" data-i18n-aria="ariaSceneCanvas"></canvas>
       <div class="brain-wrap">
         <canvas id="brain-canvas" class="brain-canvas" data-i18n-aria="ariaBrainCanvas"></canvas>
-        <div class="mn9-counter"><span data-i18n="mn9Label"></span> <strong id="mn9-count">0</strong></div>
+        <div id="mn9-pill" class="mn9-counter" hidden><span data-i18n="mn9Label"></span> <strong id="mn9-count">0</strong></div>
       </div>
       <p id="brain-caption" class="brain-caption"></p>
       <div class="legend">
@@ -87,6 +90,7 @@
         <h3 class="sub-h" data-i18n="rasterTitle"></h3>
         <canvas id="raster-canvas" class="raster-canvas" data-i18n-aria="ariaRaster"></canvas>
         <h3 class="sub-h" data-i18n="hudTitle"></h3>
+        <p id="hud-idle" class="brain-caption" data-i18n="brainIdle"></p>
         <dl id="hud" class="hud">
           <dt data-i18n="hudTotalNeurons"></dt><dd id="hud-total">–</dd>
           <dt data-i18n="hudActive"></dt><dd id="hud-active">–</dd>

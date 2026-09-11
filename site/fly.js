@@ -14,12 +14,10 @@ export function frame(callback) {
 const PLATE = 96;
 const ROW_HEIGHT = 150;
 const FLY_SPEED_PX_S = 520;
+// Every fly state draws from the same four sprite sets; "hover" (tie, turning
+// away) and "taste" have no frames of their own.
+export const FRAME_SET = { idle: "idle", fly: "fly", land: "land", taste: "land", hover: "idle", proboscis: "proboscis" };
 
-function hueFor(key) {
-  let h = 0;
-  for (const ch of String(key)) h = (h * 31 + ch.charCodeAt(0)) >>> 0;
-  return h % 360;
-}
 
 function sleep(ms, token) {
   return new Promise((resolve) => {
@@ -80,6 +78,50 @@ export async function loadSprites(base = "assets/") {
   return { fly, dishCache: new Map(), base };
 }
 
+// The resting fly next to the empty table: idle frames at 3 fps on a small canvas.
+export class IdleFly {
+  constructor(canvas, sprites) {
+    this.canvas = canvas;
+    this.sprites = sprites;
+    this.raf = 0;
+    this.t = 0;
+    this.last = 0;
+  }
+
+  start() {
+    if (this.raf) return;
+    const loop = (now) => {
+      this.t += this.last ? (now - this.last) / 1000 : 0;
+      this.last = now;
+      this.draw();
+      this.raf = frame(loop);
+    };
+    this.raf = frame(loop);
+  }
+
+  stop() {
+    if (this.raf) { cancelAnimationFrame(this.raf); clearTimeout(this.raf); }
+    this.raf = 0;
+    this.last = 0;
+  }
+
+  draw() {
+    const ctx = this.canvas.getContext("2d");
+    const size = this.canvas.width;
+    ctx.clearRect(0, 0, size, this.canvas.height);
+    const frames = this.sprites && this.sprites.fly && this.sprites.fly.idle;
+    if (frames) {
+      ctx.imageSmoothingEnabled = false;
+      ctx.drawImage(frames[Math.floor(this.t * 3) % frames.length], 0, 0, size, size);
+    } else {
+      ctx.fillStyle = "#2a2420";
+      ctx.beginPath();
+      ctx.ellipse(size / 2, size / 2, size * 0.22, size * 0.12, 0, 0, Math.PI * 2);
+      ctx.fill();
+    }
+  }
+}
+
 export class FlyScene {
   constructor(canvas, sprites) {
     this.canvas = canvas;
@@ -105,6 +147,16 @@ export class FlyScene {
     this.fly.y = 34;
     for (const plate of plates) await loadDishSprite(this.sprites, plate.slug);
     this.start();
+  }
+
+  // Text on the plates can change without restarting anything (language
+  // switch, "loading…" while a replay is fetched).
+  relabel(index, label, sub) {
+    const plate = this.plates[index];
+    if (!plate) return;
+    if (label != null) plate.label = label;
+    if (sub != null) plate.sub = sub;
+    if (!this.raf) this.draw();
   }
 
   start() {
@@ -146,11 +198,12 @@ export class FlyScene {
       ctx.lineWidth = 2;
       ctx.fill();
       ctx.stroke();
+      // One neutral plate for every dish without a sprite (typed, unknown dishes).
       ctx.beginPath();
-      ctx.arc(0, r * 0.15, r * 0.55, 0, Math.PI * 2);
-      ctx.fillStyle = `hsl(${hueFor(plate.key)} 55% 55%)`;
+      ctx.ellipse(0, r * 0.4, r * 0.62, r * 0.26, 0, 0, Math.PI * 2);
+      ctx.fillStyle = "#ebe4d8";
+      ctx.strokeStyle = "#cfc5b6";
       ctx.fill();
-      ctx.strokeStyle = "rgba(0,0,0,0.25)";
       ctx.stroke();
     }
     ctx.fillStyle = "#1f1a17";
@@ -167,7 +220,7 @@ export class FlyScene {
 
   drawFly(ctx) {
     const f = this.fly;
-    const frames = this.sprites.fly[f.state === "taste" ? "land" : f.state];
+    const frames = this.sprites.fly[FRAME_SET[f.state] || "idle"];
     ctx.save();
     ctx.translate(f.x, f.y);
     ctx.scale(f.dir, 1);

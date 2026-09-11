@@ -120,7 +120,8 @@ export const STRINGS = {
     "silenceCaptionNoEffect": "Recorded run with {name}'s synapses set to zero · MN9 {after} vs {before} normal ({delta}) · across all cells the median change is {median}: silencing {name} does not move the feeding readout in this model",
     "silenceEffectSummary": "{name}: median MN9 change {median} over {n} cells, {down}% dropped",
     "cardScan": "Scan to replay this choice",
-    "cardSnapshot": "MN9 fired {n}× · {neurons} neurons"
+    "cardSnapshot": "MN9 fired {n}× · {neurons} neurons",
+    "plateLoading": "loading…"
   },
   "zh": {
     "add": "添加",
@@ -241,6 +242,7 @@ export const STRINGS = {
     "silenceCaptionNoEffect": "把 {name} 的突触全部置零后的记录回放 · MN9 {after}，正常时 {before}（{delta}）· 在所有格子里中位变化为 {median}：在这个模型里关掉 {name} 不会改变进食读数",
     "silenceEffectSummary": "{name}：MN9 中位变化 {median}（{n} 个格子），{down}% 下降",
     "cardScan": "扫码重现这次选择",
-    "cardSnapshot": "MN9 放电 {n} 次 · {neurons} 个神经元"
+    "cardSnapshot": "MN9 放电 {n} 次 · {neurons} 个神经元",
+    "plateLoading": "加载中…"
   }
 };

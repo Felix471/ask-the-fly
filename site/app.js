@@ -3,7 +3,7 @@
 // Pure functions are exported so they can be unit-tested with node (see test/).
 
 import { BrainView, RasterView, SpikeClick, cellIdFor, decodeNeurons, makeReplayLoader, rasterRows, renderSnapshot, replayStats } from "./brain.js";
-import { FlyScene, loadDishSprite, loadSprites, makeToken } from "./fly.js";
+import { FlyScene, IdleFly, loadDishSprite, loadSprites, makeToken } from "./fly.js";
 import { qrcode } from "./vendor/qrcode-generator/qrcode.mjs";
 
 export const LEVELS = ["none", "low", "medium", "high", "very_high"];
@@ -267,12 +267,39 @@ export function parseShareParams(search) {
   };
 }
 
-// Turns shared names back into option strings: a slug or name that resolves to a
-// dictionary entry becomes that entry's display name; anything else stays as typed.
-export function resolveShared(names, dictionary, lang) {
+// ---------- selected options ----------
+// A selection is { key } for a dictionary dish (stable across languages) or
+// { text } for something the user typed that the fly does not know.
+
+export function optionFromText(raw, dictionary) {
+  const text = String(raw).trim();
+  if (!text) return null;
+  const entry = dictionary ? dictionary.find(text) : null;
+  return entry ? { key: entry.key } : { text };
+}
+
+// The string handed to scoreOptions (a key resolves through the dictionary).
+export function optionQuery(option) {
+  return option.key ?? option.text;
+}
+
+export function optionLabel(option, dictionary, lang) {
+  if (!option.key) return option.text;
+  const entry = dictionary ? dictionary.find(option.key) : null;
+  return entry ? (entry.display?.[lang] || entry.key) : option.key;
+}
+
+export function sameOption(a, b) {
+  if (a.key || b.key) return a.key === b.key;
+  return normalizeName(a.text) === normalizeName(b.text);
+}
+
+// Turns shared names back into selections: a slug or name that resolves to a
+// dictionary entry becomes { key }; anything else stays as typed.
+export function resolveShared(names, dictionary) {
   return names.map((name) => {
     const entry = dictionary.find(name) || dictionary.findSlug(name) || dictionary.find(name.replace(/-/g, " "));
-    return entry ? (entry.display?.[lang] || entry.key) : name;
+    return entry ? { key: entry.key } : { text: name };
   });
 }
 
@@ -637,7 +664,7 @@ if (isBrowser) {
       } catch (_) { /* ignore */ }
       return /^zh/i.test(navigator.language || "") ? "zh" : "en";
     })(),
-    options: [],
+    options: [], // [{ key } | { text }], see optionFromText
     dictionary: null,
     lookup: null,
     decision: null,
@@ -654,6 +681,9 @@ if (isBrowser) {
     variant: "",
     loadReplay: makeReplayLoader("data/replay/"),
     token: null,
+    sceneStatus: null, // { key, item?, fly?, dish? } re-rendered on language switch
+    scenePlates: null, // scored items behind the plates, for relabelling
+    idleFly: null,
   };
 
   const $ = (id) => document.getElementById(id);
@@ -685,7 +715,32 @@ if (isBrowser) {
     renderTasted();
     if (state.brain) state.brain.setLang(state.lang);
     renderSilenceControls();
+    renderSceneStatus();
+    relabelPlates();
     if (state.decision) renderDecision();
+    if (state.decision && !$("card-panel").hidden) showCard().catch(() => {});
+  }
+
+  function renderSceneStatus() {
+    const st = state.sceneStatus;
+    if (!st) return;
+    const values = {};
+    for (const k of ["dish", "fly"]) if (st[k]) values[k] = displayName(st[k], state.lang);
+    $("scene-status").textContent = tr(st.key, values);
+  }
+
+  // Plate captions follow the language; a plate says "loading…" only while its
+  // replay is being fetched, and shows its Hz once the fly has tasted it.
+  function plateSub(item) {
+    if (!item.cell) return STRINGS[state.lang].plateUnknown;
+    if (item.loading) return STRINGS[state.lang].plateLoading;
+    if (item.tasted) return tr("hzValue", { hz: item.cell.mn9_mean.toFixed(1) });
+    return "";
+  }
+
+  function relabelPlates() {
+    if (!state.scene || !state.scenePlates) return;
+    state.scenePlates.forEach((item, i) => state.scene.relabel(i, displayName(item, state.lang), plateSub(item)));
   }
 
   // ---- details: raster, HUD, silencing ----
@@ -825,7 +880,7 @@ if (isBrowser) {
       const chip = document.createElement("button");
       chip.type = "button";
       chip.textContent = label(entry);
-      chip.addEventListener("click", () => { addOption(chip.textContent); closeSuggest(); });
+      chip.addEventListener("click", () => { addSelection({ key: entry.key }); closeSuggest(); });
       parent.append(chip);
     };
     const placed = new Set();
@@ -891,7 +946,7 @@ if (isBrowser) {
           const b = document.createElement("b");
           b.textContent = item.label;
           b.style.cursor = "pointer";
-          b.addEventListener("mousedown", (event) => { event.preventDefault(); addOption(item.label); input.value = ""; closeSuggest(); });
+          b.addEventListener("mousedown", (event) => { event.preventDefault(); addSelection({ key: item.entry.key }); input.value = ""; closeSuggest(); });
           if (i) p.append(document.createTextNode(" · "));
           p.append(b);
         });
@@ -930,7 +985,7 @@ if (isBrowser) {
   function pickSuggest(index) {
     const item = suggestState.items[index];
     if (!item) return;
-    addOption(item.label);
+    addSelection({ key: item.entry.key });
     $("option-input").value = "";
     closeSuggest();
     $("option-input").focus();
@@ -939,7 +994,8 @@ if (isBrowser) {
   function renderOptions() {
     const list = $("option-list");
     list.innerHTML = "";
-    state.options.forEach((name, index) => {
+    state.options.forEach((option, index) => {
+      const name = optionLabel(option, state.dictionary, state.lang);
       const li = document.createElement("li");
       const span = document.createElement("span");
       span.textContent = name;
@@ -958,6 +1014,10 @@ if (isBrowser) {
     $("ask-btn").disabled = !ready;
     $("opposite-btn").disabled = !ready;
     if (state.options.length >= 2) notice(null);
+    // Empty table: the fly rests next to a one-line hint until a dish arrives.
+    const empty = state.options.length === 0;
+    $("table-empty").hidden = !empty;
+    if (state.idleFly) { if (empty) state.idleFly.start(); else state.idleFly.stop(); }
   }
 
   function levelText(level) {
@@ -1052,12 +1112,16 @@ if (isBrowser) {
     const token = makeToken();
     state.token = token;
     const scored = [...decision.known, ...decision.misses];
+    for (const item of scored) { item.loading = false; item.tasted = false; }
+    state.scenePlates = scored;
     const plates = scored.map((item) => ({
       key: item.entry ? item.entry.key : item.name,
       label: displayName(item, state.lang),
-      sub: item.cell ? tr("hzValue", { hz: item.cell.mn9_mean.toFixed(1) }) : STRINGS[state.lang].plateUnknown,
+      sub: plateSub(item),
       slug: spriteSlug(item),
     }));
+    // Replays are fetched up front so the fly rarely waits at a plate.
+    for (const item of decision.known) state.loadReplay(cellIdFor(item.cell)).catch(() => {});
     const indexOf = (item) => scored.indexOf(item);
     const plan = {
       order: decision.known.map(indexOf),
@@ -1070,9 +1134,12 @@ if (isBrowser) {
     $("input-panel").hidden = true;
     $("result-panel").hidden = true;
     $("card-panel").hidden = true;
-    $("scene-status").textContent = tr("sceneIdle");
-    $("brain-caption").textContent = tr("brainIdle");
+    state.sceneStatus = { key: "sceneIdle" };
+    renderSceneStatus();
+    $("brain-caption").textContent = "";
     $("mn9-count").textContent = "0";
+    $("mn9-pill").hidden = true;
+    $("hud-idle").hidden = false;
     state.brain.resize();
     await state.scene.setPlates(plates);
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -1081,22 +1148,32 @@ if (isBrowser) {
       onTaste: async (index) => {
         const item = scored[index];
         if (!item.cell || token.cancelled) return;
-        $("scene-status").textContent = tr("sceneTasting", { dish: displayName(item, state.lang) });
+        state.sceneStatus = { key: "sceneTasting", dish: item };
+        renderSceneStatus();
         state.brain.setReplay(null); // blank brain while the replay is fetched
         $("mn9-count").textContent = "0";
         const cellId = cellIdFor(item.cell);
+        item.loading = true;
+        state.scene.relabel(index, null, plateSub(item));
         let replay;
         try {
           replay = await state.loadReplay(cellId);
         } catch (error) {
           console.warn("replay load failed:", error);
+          item.loading = false;
+          state.scene.relabel(index, null, plateSub(item));
           $("brain-caption").textContent = navigator.onLine === false ? tr("stateOffline") : tr("stateReplayFailed");
           notice(navigator.onLine === false ? "stateOffline" : "stateReplayFailed");
           return;
         }
+        item.loading = false;
+        item.tasted = true;
+        state.scene.relabel(index, null, plateSub(item));
         if (token.cancelled) return;
         $("brain-caption").textContent = tr("brainCaption", { cell: cellId, n: replay.header.n_spikes });
         $("mn9-count").textContent = "0";
+        $("mn9-pill").hidden = false;
+        $("hud-idle").hidden = true;
         state.currentCell = cellId;
         state.currentItem = item;
         state.variant = "";
@@ -1113,10 +1190,13 @@ if (isBrowser) {
     };
     await state.scene.run(plan, hooks, token);
     if (state.token !== token) return;
-    if (!decision.winner) $("scene-status").textContent = tr("sceneNone");
-    else if (decision.tie.length) $("scene-status").textContent = tr("sceneTie");
-    else if (decision.mode === "opposite") $("scene-status").textContent = tr("sceneOpposite", { fly: displayName(decision.flyPick, state.lang), dish: displayName(decision.winner, state.lang) });
-    else $("scene-status").textContent = tr("sceneWinner", { dish: displayName(decision.winner, state.lang) });
+    for (const item of decision.known) item.tasted = true; // skipped plates still show their Hz
+    relabelPlates();
+    if (!decision.winner) state.sceneStatus = { key: "sceneNone" };
+    else if (decision.tie.length) state.sceneStatus = { key: "sceneTie" };
+    else if (decision.mode === "opposite") state.sceneStatus = { key: "sceneOpposite", fly: decision.flyPick, dish: decision.winner };
+    else state.sceneStatus = { key: "sceneWinner", dish: decision.winner };
+    renderSceneStatus();
     renderDecision();
   }
 
@@ -1124,7 +1204,7 @@ if (isBrowser) {
     if (!state.lookup || !state.dictionary) { notice("stateDataFailed"); return; }
     if (state.options.length < 2) { notice("stateNoOptions"); return; }
     notice(null);
-    const scored = scoreOptions(state.options, state.dictionary, state.lookup);
+    const scored = scoreOptions(state.options.map(optionQuery), state.dictionary, state.lookup);
     state.decision = decide(scored, mode);
     if (state.decision.known.length === 0) {
       notice("stateAllUnknown");
@@ -1188,13 +1268,15 @@ if (isBrowser) {
     $("card-panel").scrollIntoView({ behavior: "smooth" });
   }
 
+  function addSelection(option) {
+    if (!option) return;
+    if (!state.options.some((existing) => sameOption(existing, option))) state.options.push(option);
+    renderOptions();
+  }
+
+  // Typed or pasted text: split on list separators; known names become keys.
   function addOption(raw) {
-    for (const part of String(raw).split(/[\n,，、;；]+/)) {
-      const name = part.trim();
-      if (!name) continue;
-      if (state.options.some((existing) => normalizeName(existing) === normalizeName(name))) continue;
-      state.options.push(name);
-    }
+    for (const part of String(raw).split(/[\n,，、;；]+/)) addSelection(optionFromText(part, state.dictionary));
     renderOptions();
   }
 
@@ -1237,6 +1319,8 @@ if (isBrowser) {
       }
       renderSilenceControls();
       state.scene = new FlyScene($("scene-canvas"), sprites);
+      state.idleFly = new IdleFly($("idle-fly"), sprites);
+      renderOptions();
       $("layout-note").hidden = neurons.layout !== "placeholder";
     } catch (error) {
       console.warn("scene disabled:", error);
@@ -1248,6 +1332,8 @@ if (isBrowser) {
     if (state.brain) state.brain.stop();
     if (state.scene) state.scene.stop();
     state.decision = null;
+    state.sceneStatus = null;
+    state.scenePlates = null;
     $("scene-panel").hidden = true;
     $("result-panel").hidden = true;
     $("card-panel").hidden = true;
@@ -1298,6 +1384,7 @@ if (isBrowser) {
   $("skip-btn").addEventListener("click", () => {
     if (state.token) state.token.cancel();
     if (state.brain) state.brain.stop();
+    if (state.scenePlates) { for (const item of state.scenePlates) { item.loading = false; item.tasted = Boolean(item.cell); } relabelPlates(); }
     if (state.decision) renderDecision();
   });
   $("speed").addEventListener("change", () => {
@@ -1320,7 +1407,7 @@ if (isBrowser) {
       state.lang = shared.lang; // for this view only; the saved preference is untouched
       applyStrings();
     }
-    for (const name of resolveShared(shared.names, state.dictionary, state.lang)) addOption(name);
+    for (const option of resolveShared(shared.names, state.dictionary)) addSelection(option);
     if (state.options.length >= 2) run(shared.mode);
   }).catch((error) => {
     console.warn("data load failed:", error);
