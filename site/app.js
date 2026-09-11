@@ -603,6 +603,8 @@ if (isBrowser) {
         const item = scored[index];
         if (!item.cell || token.cancelled) return;
         $("scene-status").textContent = tr("sceneTasting", { dish: displayName(item, state.lang) });
+        state.brain.setReplay(null); // blank brain while the replay is fetched
+        $("mn9-count").textContent = "0";
         const cellId = cellIdFor(item.cell);
         let replay;
         try {
