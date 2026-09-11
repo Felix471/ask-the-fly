@@ -34,6 +34,10 @@ The stub table has the real schema and 400 cells but its MN9 values are a closed
 
 then open http://localhost:8000/. `fetch()` needs an HTTP origin; opening `index.html` from disk will not load the data files.
 
+## Copy (all user-facing text)
+
+Every string the page shows lives in `copy/site_strings.json` (key, context, en, zh, optional max_length). `scripts/import_copy.py` generates `site/strings.js` from it (the page imports that module; never edit it by hand) and writes the `<title>` and the description / Open Graph / Twitter meta tags into `site/index.html` from the `meta.*` entries. Keys are stable; edit only `en` and `zh`. The importer warns about keys that were removed (previous value kept), unknown keys (ignored) and values over `max_length` (still applied); `--check` reports without writing. The README prose is exported per section with `scripts/export_copy.py --readme` into `copy/readme_sections.md` and rebuilt with `scripts/import_copy.py --readme`.
+
 ## Deploy (GitHub Pages)
 
 `.github/workflows/pages.yml` runs the unit tests and deploys `site/` with the official Pages actions (configure-pages, upload-pages-artifact, deploy-pages) on every push to `main` that touches `site/`, and on manual dispatch. It only works once the repository setting **Settings → Pages → Build and deployment → Source** is set to **GitHub Actions**; until then the workflow's deploy job fails with a "Pages not enabled" error and nothing is published.

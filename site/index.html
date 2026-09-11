@@ -8,7 +8,7 @@
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Ask the Fly">
   <meta property="og:title" content="Ask the Fly · 问问果蝇">
-  <meta property="og:description" content="A fly-brain model (Shiu 2024 / FlyWire v783) tastes your menu and picks for you. It only does the first bite. · 让一只果蝇脑模型替你尝一口，然后选菜。它只管第一口。">
+  <meta property="og:description" content="A fly-brain model (Shiu 2024 / FlyWire v783) tastes your menu and picks for you. It only does the first bite. 让一只果蝇脑模型替你尝一口，然后选菜。它只管第一口。">
   <meta property="og:url" content="https://felix471.github.io/ask-the-fly/">
   <meta property="og:image" content="https://felix471.github.io/ask-the-fly/og-image.png">
   <meta property="og:image:width" content="1200">
@@ -29,7 +29,7 @@
 
   <header class="top">
     <h1 class="title" data-i18n="title"></h1>
-    <button id="lang-toggle" class="lang-toggle" type="button" aria-label="Switch language"></button>
+    <button id="lang-toggle" class="lang-toggle" type="button" data-i18n-aria="ariaLangToggle"></button>
   </header>
 
   <main class="app">
@@ -63,9 +63,9 @@
         </label>
         <button id="skip-btn" class="btn btn-secondary btn-small" type="button" data-i18n="skip"></button>
       </div>
-      <canvas id="scene-canvas" class="scene-canvas" aria-label="fly and plates"></canvas>
+      <canvas id="scene-canvas" class="scene-canvas" data-i18n-aria="ariaSceneCanvas"></canvas>
       <div class="brain-wrap">
-        <canvas id="brain-canvas" class="brain-canvas" aria-label="brain replay"></canvas>
+        <canvas id="brain-canvas" class="brain-canvas" data-i18n-aria="ariaBrainCanvas"></canvas>
         <div class="mn9-counter"><span data-i18n="mn9Label"></span> <strong id="mn9-count">0</strong></div>
       </div>
       <p id="brain-caption" class="brain-caption"></p>
@@ -73,8 +73,8 @@
         <span class="chip"><i style="background:#e0774a"></i><span data-i18n="legendSugar"></span></span>
         <span class="chip"><i style="background:#8e6bd6"></i><span data-i18n="legendBitter"></span></span>
         <span class="chip"><i style="background:#4aa3df"></i><span data-i18n="legendWater"></span></span>
-        <span class="chip"><i style="background:#3fb3a1"></i>Ir94e</span>
-        <span class="chip"><i style="background:#ffd84a"></i>MN9</span>
+        <span class="chip"><i style="background:#3fb3a1"></i><span data-i18n="legendIr94e"></span></span>
+        <span class="chip"><i style="background:#ffd84a"></i><span data-i18n="legendMn9"></span></span>
         <span class="chip"><i style="background:#c8c0b4"></i><span data-i18n="legendOther"></span></span>
       </div>
       <p class="replay-honesty" data-i18n="replayHonesty"></p>
@@ -106,7 +106,7 @@
     </section>
 
     <section class="panel card-panel" id="card-panel" hidden>
-      <canvas id="share-card" class="share-card" width="900" height="1200" aria-label="share card"></canvas>
+      <canvas id="share-card" class="share-card" width="900" height="1200" data-i18n-aria="ariaShareCard"></canvas>
       <div class="actions">
         <a id="download-link" class="btn btn-primary" download="ask-the-fly.png" data-i18n="download"></a>
         <button id="close-card-btn" class="btn btn-secondary" type="button" data-i18n="close"></button>

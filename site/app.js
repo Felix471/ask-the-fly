@@ -11,143 +11,8 @@ export const DIMENSIONS = ["sugar", "bitter", "water", "ir94e"];
 // Set this to the public repository once it exists; the report button opens a prefilled issue there.
 export const REPO_URL = "https://github.com/Felix471/ask-the-fly";
 
-export const STRINGS = {
-  en: {
-    title: "Ask the Fly",
-    lead: "Type the dishes you are choosing between. A fly-brain model tastes each one.",
-    inputPlaceholder: "a dish, e.g. mapo tofu",
-    add: "Add",
-    hint: "Add at least two options. The fly only does the first bite.",
-    ask: "Ask the fly",
-    opposite: "Do the opposite",
-    share: "Share card",
-    again: "Ask again",
-    download: "Save image",
-    close: "Close",
-    colOption: "Option",
-    colSugar: "Sugar",
-    colBitter: "Bitter",
-    colWater: "Water",
-    colMn9: "MN9 (Hz)",
-    verdictAsk: "The fly picks",
-    verdictOpposite: "The fly would pick {fly}. You do the opposite:",
-    verdictTie: "The fly cannot tell these apart:",
-    verdictNone: "The fly has not tasted any of these yet.",
-    missTitle: "The fly hasn't tasted this yet.",
-    missReport: "Report it",
-    missNote: "Not in the dictionary: {names}",
-    honesty: "In this model weak water is only visible as a helper to sugar; the fly notices water when the food is mostly water.",
-    replayHonesty: "Every flash in the brain view is a replay of recorded simulation output: one extra 1 s trial per grid cell from the same Brian2 model and connectome, fixed seed, recorded once. Nothing is simulated live in this page.",
-    layoutPlaceholder: "Neuron positions are a placeholder layout, not FlyWire soma coordinates yet.",
-    provenance: "Scores come from a published female-brain LIF model (Shiu 2024 / FlyWire v783). It only does the first bite.",
-    speed: "Speed",
-    skip: "Skip",
-    details: "Levels and MN9 for every option",
-    mn9Label: "MN9 spikes",
-    legendSugar: "sugar GRN",
-    legendBitter: "bitter GRN",
-    legendWater: "water GRN",
-    legendOther: "other neuron",
-    sceneIdle: "The fly is thinking…",
-    sceneTasting: "Tasting {dish}",
-    sceneWinner: "The fly extends its proboscis on {dish}",
-    sceneOpposite: "The fly wanted {fly}; you take {dish}",
-    sceneTie: "The fly hovers: it can't tell these apart",
-    sceneNone: "Nothing here the fly has tasted",
-    brainCaption: "Replay of recorded simulation: {cell} · 1 s · ~{n} spikes",
-    brainIdle: "Brain view: waiting for the first plate",
-    stateNoOptions: "Add at least two dishes first. Type a name and press Add.",
-    stateAllUnknown: "The fly hasn't tasted any of these. Report them below and try known dishes.",
-    stateReplayFailed: "Replay file could not be loaded; the numbers below still stand.",
-    stateOffline: "You're offline. Dishes already loaded still work; new replays can't be fetched.",
-    stateDataFailed: "The dictionary or lookup table failed to load. Reload the page.",
-    tastedTitle: "The fly has tasted these:",
-    suggestNone: "Not tasted yet; closest: {names}",
-    suggestNoneNoClosest: "Not tasted yet. Press Enter to add it anyway.",
-    stubBanner: "STUB DATA: the lookup table on this page is a placeholder, not simulation output.",
-    tableMeta: "Lookup table {version} · {cells} cells · {trials} trials per cell",
-    cardTitle: "Ask the Fly",
-    cardPicked: "The fly picks",
-    cardOppositePicked: "The fly picks {fly}; I take",
-    cardTie: "The fly can't tell these apart",
-    levelNames: { none: "none", low: "low", medium: "medium", high: "high", very_high: "very high" },
-    // The four fixed lines (product owner, 2026-09-11). Placeholders are filled by cardLines().
-    fixedLines: [
-      "Today's pick: {dish}",
-      "MN9: {hz} Hz (sugar response {hz_sugar_only} · after bitter suppression {hz})",
-      "Taste input: sugar {sugar} · bitter {bitter} · water {water} (estimated by LLM)",
-      "Simulation: precomputed from the whole-brain connectome, not run live",
-    ],
-    cardBottom: "The model turns the dish into taste signals. The connectome predicts whether the fly would extend its proboscis. We use that response to choose the winner.",
-  },
-  zh: {
-    title: "问问果蝇",
-    lead: "输入你在纠结的几道菜，让一只果蝇脑模型逐个尝一口。",
-    inputPlaceholder: "一道菜，例如：麻婆豆腐",
-    add: "添加",
-    hint: "至少加两个选项。果蝇只管第一口。",
-    ask: "问问果蝇",
-    opposite: "反着来",
-    share: "生成分享卡",
-    again: "再问一次",
-    download: "保存图片",
-    close: "关闭",
-    colOption: "选项",
-    colSugar: "糖",
-    colBitter: "苦",
-    colWater: "水",
-    colMn9: "MN9 (Hz)",
-    verdictAsk: "果蝇选",
-    verdictOpposite: "果蝇会选 {fly}。你反着来：",
-    verdictTie: "果蝇分不出这几个：",
-    verdictNone: "这些果蝇都还没尝过。",
-    missTitle: "果蝇还没尝过这个。",
-    missReport: "报上去",
-    missNote: "词典里没有：{names}",
-    honesty: "在这个模型里，微量的水只在帮糖时才被看见；只有食物基本是水时，果蝇才注意到水。",
-    replayHonesty: "脑图里的每一次闪烁都是仿真记录的回放：同一个 Brian2 模型和连接组，每个网格格子额外跑了一次 1 秒试验，固定随机种子，只记录一次。本页没有任何实时仿真。",
-    layoutPlaceholder: "神经元位置目前是占位布局，还不是 FlyWire 的胞体坐标。",
-    provenance: "分数来自已发表的雌性果蝇脑 LIF 模型（Shiu 2024 / FlyWire v783）。它只管第一口。",
-    speed: "速度",
-    skip: "跳过",
-    details: "每个选项的等级和 MN9",
-    mn9Label: "MN9 放电",
-    legendSugar: "甜味 GRN",
-    legendBitter: "苦味 GRN",
-    legendWater: "水 GRN",
-    legendOther: "其他神经元",
-    sceneIdle: "果蝇在想……",
-    sceneTasting: "正在尝 {dish}",
-    sceneWinner: "果蝇对着 {dish} 伸出了口器",
-    sceneOpposite: "果蝇想要 {fly}，你选 {dish}",
-    sceneTie: "果蝇悬在中间：它分不出这几个",
-    sceneNone: "这里没有果蝇尝过的东西",
-    brainCaption: "仿真记录回放：{cell} · 1 秒 · 约 {n} 个 spike",
-    brainIdle: "脑图：等第一盘",
-    stateNoOptions: "先加至少两道菜：输入名字，按添加。",
-    stateAllUnknown: "这些果蝇都没尝过。可以在下面报上去，或换几道它认识的菜。",
-    stateReplayFailed: "回放文件没加载出来；下面的数字仍然有效。",
-    stateOffline: "现在离线。已加载的菜还能用，新的回放取不到。",
-    stateDataFailed: "词典或查找表没加载出来，请刷新页面。",
-    tastedTitle: "果蝇吃过这些：",
-    suggestNone: "果蝇没吃过，试试相近的：{names}",
-    suggestNoneNoClosest: "果蝇没吃过。按回车也可以直接加上。",
-    stubBanner: "占位数据：本页的查找表是占位符，不是仿真结果。",
-    tableMeta: "查找表 {version} · {cells} 个格子 · 每格 {trials} 次试验",
-    cardTitle: "问问果蝇",
-    cardPicked: "果蝇选",
-    cardOppositePicked: "果蝇选 {fly}，我反着来：",
-    cardTie: "果蝇分不出这几个",
-    levelNames: { none: "无", low: "低", medium: "中", high: "高", very_high: "很高" },
-    fixedLines: [
-      "今日选择：{dish}",
-      "MN9：{hz} Hz（甜味反应 {hz_sugar_only} · 加入苦味抑制后 {hz}）",
-      "味觉输入：甜 {sugar} · 苦 {bitter} · 水 {water}（由 LLM 估算）",
-      "仿真：基于全脑连接组预先计算，并非现场实时运行",
-    ],
-    cardBottom: "模型先把菜品转换成味觉信号，连接组再预测果蝇会不会伸出口器。最后我们根据这个反应决定选哪一道。",
-  },
-};
+import { STRINGS } from "./strings.js";
+export { STRINGS };
 
 export function fmt(template, values) {
   return template.replace(/\{(\w+)\}/g, (_, key) => (key in values ? String(values[key]) : `{${key}}`));
@@ -309,16 +174,9 @@ export function closest(query, dictionary, lang, max = 3) {
 }
 
 export function issueUrl(name, lang) {
-  const title = `New dish: ${name}`;
-  const body = [
-    "The fly hasn't tasted this yet.",
-    "",
-    `- name as typed: ${name}`,
-    `- language: ${lang}`,
-    "- zh name: ",
-    "- en name: ",
-    "- what it is (one line): ",
-  ].join("\n");
+  const t = STRINGS[lang] || STRINGS.en;
+  const title = fmt(t.issueTitle, { name });
+  const body = fmt(t.issueBody, { name, lang });
   return `${REPO_URL}/issues/new?title=${encodeURIComponent(title)}&body=${encodeURIComponent(body)}`;
 }
 
@@ -344,7 +202,7 @@ export function cardLines(decision, lang) {
         bitter: names[lead.entry.bitter] ?? lead.entry.bitter,
         water: names[lead.entry.water] ?? lead.entry.water,
       }
-    : { dish: "—", hz: "—", hz_sugar_only: "—", sugar: "—", bitter: "—", water: "—" };
+    : Object.fromEntries(["dish", "hz", "hz_sugar_only", "sugar", "bitter", "water"].map((k) => [k, t.cardEmptyValue]));
   return { fixed: t.fixedLines.map((line) => fmt(line, values)), bottom: t.cardBottom };
 }
 
@@ -428,7 +286,7 @@ export function drawShareCard(canvas, decision, lang, options = {}) {
     ctx.textAlign = "left";
     ctx.fillText(displayName(item, lang), pad, y);
     ctx.textAlign = "right";
-    ctx.fillText(`${item.cell.mn9_mean.toFixed(1)} Hz`, W - pad, y);
+    ctx.fillText(fmt(t.hzValue, { hz: item.cell.mn9_mean.toFixed(1) }), W - pad, y);
     ctx.textAlign = "left";
     const barY = y + 12;
     ctx.fillStyle = "#e2dbd0";
@@ -441,7 +299,7 @@ export function drawShareCard(canvas, decision, lang, options = {}) {
   if (ranked.length > shown.length) {
     ctx.font = font(22);
     ctx.fillStyle = "#6b625b";
-    ctx.fillText(`+${ranked.length - shown.length}`, pad, y);
+    ctx.fillText(fmt(t.cardMore, { n: ranked.length - shown.length }), pad, y);
     y += 34;
   }
   ctx.font = font(22);
@@ -475,7 +333,7 @@ export function drawShareCard(canvas, decision, lang, options = {}) {
   if (options.stub) {
     ctx.font = font(20, 700);
     ctx.fillStyle = "#4a3a00";
-    ctx.fillText("STUB DATA", pad, H - 30);
+    ctx.fillText(t.stubStamp, pad, H - 30);
   }
   return canvas;
 }
@@ -515,9 +373,10 @@ if (isBrowser) {
   function applyStrings() {
     const t = STRINGS[state.lang];
     document.documentElement.lang = state.lang === "zh" ? "zh-CN" : "en";
-    document.title = state.lang === "zh" ? "问问果蝇 · Ask the Fly" : "Ask the Fly · 问问果蝇";
+    document.title = t.pageTitle;
     for (const el of document.querySelectorAll("[data-i18n]")) el.textContent = t[el.dataset.i18n] ?? "";
     for (const el of document.querySelectorAll("[data-i18n-placeholder]")) el.placeholder = t[el.dataset.i18nPlaceholder] ?? "";
+    for (const el of document.querySelectorAll("[data-i18n-aria]")) el.setAttribute("aria-label", t[el.dataset.i18nAria] ?? "");
     $("lang-toggle").textContent = state.lang === "zh" ? "EN" : "中文";
     if (state.lookup) {
       const table = state.lookup.table;
@@ -640,7 +499,7 @@ if (isBrowser) {
       const remove = document.createElement("button");
       remove.type = "button";
       remove.textContent = "×";
-      remove.setAttribute("aria-label", `remove ${name}`);
+      remove.setAttribute("aria-label", tr("removeOption", { name }));
       remove.addEventListener("click", () => {
         state.options.splice(index, 1);
         renderOptions();
@@ -704,7 +563,7 @@ if (isBrowser) {
         }
         const mn9 = document.createElement("td");
         mn9.className = "mn9";
-        mn9.textContent = `${item.cell.mn9_mean.toFixed(1)} ± ${item.cell.mn9_std.toFixed(1)}`;
+        mn9.textContent = fmt(t.mn9MeanStd, { mean: item.cell.mn9_mean.toFixed(1), std: item.cell.mn9_std.toFixed(1) }); // `tr` is the table row here
         tr.append(mn9);
       } else {
         const td = document.createElement("td");
@@ -753,7 +612,7 @@ if (isBrowser) {
     const plates = scored.map((item) => ({
       key: item.entry ? item.entry.key : item.name,
       label: displayName(item, state.lang),
-      sub: item.cell ? `${item.cell.mn9_mean.toFixed(1)} Hz` : "?",
+      sub: item.cell ? tr("hzValue", { hz: item.cell.mn9_mean.toFixed(1) }) : STRINGS[state.lang].plateUnknown,
       slug: item.entry ? slugFor(item.entry.key) : null,
     }));
     const indexOf = (item) => scored.indexOf(item);
@@ -825,7 +684,8 @@ if (isBrowser) {
     }
     if (state.brain && state.scene) {
       runScene(state.decision).catch((error) => {
-        $("scene-status").textContent = `scene error: ${error.message}`;
+        console.warn("scene error:", error);
+        $("scene-status").textContent = tr("stateSceneError");
         renderDecision();
       });
       return;

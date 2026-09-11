@@ -1,0 +1,634 @@
+{
+  "schema": "site_strings_v1",
+  "strings": [
+    {
+      "key": "add",
+      "context": "Button next to the input",
+      "en": "Add",
+      "zh": "添加",
+      "max_length": 10
+    },
+    {
+      "key": "again",
+      "context": "Button under the result: back to the input",
+      "en": "Ask again",
+      "zh": "再问一次",
+      "max_length": 16
+    },
+    {
+      "key": "ariaBrainCanvas",
+      "context": "aria-label of the brain replay canvas",
+      "en": "Brain replay",
+      "zh": "脑图回放",
+      "max_length": 30
+    },
+    {
+      "key": "ariaLangToggle",
+      "context": "aria-label of the language pill (screen readers only)",
+      "en": "Switch language",
+      "zh": "切换语言",
+      "max_length": 30
+    },
+    {
+      "key": "ariaSceneCanvas",
+      "context": "aria-label of the fly-and-plates canvas",
+      "en": "Fly and plates",
+      "zh": "果蝇和盘子",
+      "max_length": 30
+    },
+    {
+      "key": "ariaShareCard",
+      "context": "aria-label of the share-card canvas",
+      "en": "Share card",
+      "zh": "分享卡",
+      "max_length": 30
+    },
+    {
+      "key": "ask",
+      "context": "Primary button: run the sequence and pick the highest MN9",
+      "en": "Ask the fly",
+      "zh": "问问果蝇",
+      "max_length": 16
+    },
+    {
+      "key": "brainCaption",
+      "context": "Caption under the brain view during a replay; {cell} = grid cell id, {n} = spike count. Keep the meaning 'replay of recorded simulation'.",
+      "en": "Replay of recorded simulation: {cell} · 1 s · ~{n} spikes",
+      "zh": "仿真记录回放：{cell} · 1 秒 · 约 {n} 个 spike",
+      "max_length": 80
+    },
+    {
+      "key": "brainIdle",
+      "context": "Caption under the brain view before the first replay",
+      "en": "Brain view: waiting for the first plate",
+      "zh": "脑图：等第一盘",
+      "max_length": 50
+    },
+    {
+      "key": "cardBottom",
+      "context": "Card front-bottom explanation paragraph (product owner wording)",
+      "en": "The model turns the dish into taste signals. The connectome predicts whether the fly would extend its proboscis. We use that response to choose the winner.",
+      "zh": "模型先把菜品转换成味觉信号，连接组再预测果蝇会不会伸出口器。最后我们根据这个反应决定选哪一道。",
+      "max_length": 220
+    },
+    {
+      "key": "cardEmptyValue",
+      "context": "Placeholder filling the fixed lines when no option is known",
+      "en": "—",
+      "zh": "—",
+      "max_length": 4
+    },
+    {
+      "key": "cardMore",
+      "context": "Card: how many ranked options did not fit; {n} = count",
+      "en": "+{n}",
+      "zh": "+{n}",
+      "max_length": 8
+    },
+    {
+      "key": "cardOppositePicked",
+      "context": "Card line above the chosen name (opposite mode); {fly}",
+      "en": "The fly picks {fly}; I take",
+      "zh": "果蝇选 {fly}，我反着来：",
+      "max_length": 40
+    },
+    {
+      "key": "cardPicked",
+      "context": "Card line above the winner's name (ask mode)",
+      "en": "The fly picks",
+      "zh": "果蝇选",
+      "max_length": 30
+    },
+    {
+      "key": "cardTie",
+      "context": "Card line for an exact tie",
+      "en": "The fly can't tell these apart",
+      "zh": "果蝇分不出这几个",
+      "max_length": 40
+    },
+    {
+      "key": "cardTitle",
+      "context": "Share card heading",
+      "en": "Ask the Fly",
+      "zh": "问问果蝇",
+      "max_length": 20
+    },
+    {
+      "key": "close",
+      "context": "Button under the card: hide it",
+      "en": "Close",
+      "zh": "关闭",
+      "max_length": 12
+    },
+    {
+      "key": "colBitter",
+      "context": "Detail table header",
+      "en": "Bitter",
+      "zh": "苦",
+      "max_length": 12
+    },
+    {
+      "key": "colMn9",
+      "context": "Detail table header (MN9 firing rate in Hz)",
+      "en": "MN9 (Hz)",
+      "zh": "MN9 (Hz)",
+      "max_length": 12
+    },
+    {
+      "key": "colOption",
+      "context": "Detail table header",
+      "en": "Option",
+      "zh": "选项",
+      "max_length": 12
+    },
+    {
+      "key": "colSugar",
+      "context": "Detail table header",
+      "en": "Sugar",
+      "zh": "糖",
+      "max_length": 12
+    },
+    {
+      "key": "colWater",
+      "context": "Detail table header",
+      "en": "Water",
+      "zh": "水",
+      "max_length": 12
+    },
+    {
+      "key": "details",
+      "context": "Toggle label of the collapsed level/MN9 table",
+      "en": "Levels and MN9 for every option",
+      "zh": "每个选项的等级和 MN9",
+      "max_length": 40
+    },
+    {
+      "key": "download",
+      "context": "Button under the card: download the PNG",
+      "en": "Save image",
+      "zh": "保存图片",
+      "max_length": 16
+    },
+    {
+      "key": "fixedLines.0",
+      "context": "Card fixed line 1 (product owner wording); {dish}",
+      "en": "Today's pick: {dish}",
+      "zh": "今日选择：{dish}",
+      "max_length": 70
+    },
+    {
+      "key": "fixedLines.1",
+      "context": "Card fixed line 2; {hz} {hz_sugar_only}",
+      "en": "MN9: {hz} Hz (sugar response {hz_sugar_only} · after bitter suppression {hz})",
+      "zh": "MN9：{hz} Hz（甜味反应 {hz_sugar_only} · 加入苦味抑制后 {hz}）",
+      "max_length": 90
+    },
+    {
+      "key": "fixedLines.2",
+      "context": "Card fixed line 3; {sugar} {bitter} {water} = level words",
+      "en": "Taste input: sugar {sugar} · bitter {bitter} · water {water} (estimated by LLM)",
+      "zh": "味觉输入：甜 {sugar} · 苦 {bitter} · 水 {water}（由 LLM 估算）",
+      "max_length": 90
+    },
+    {
+      "key": "fixedLines.3",
+      "context": "Card fixed line 4",
+      "en": "Simulation: precomputed from the whole-brain connectome, not run live",
+      "zh": "仿真：基于全脑连接组预先计算，并非现场实时运行",
+      "max_length": 90
+    },
+    {
+      "key": "hint",
+      "context": "Small grey line under the option chips",
+      "en": "Add at least two options. The fly only does the first bite.",
+      "zh": "至少加两个选项。果蝇只管第一口。",
+      "max_length": 80
+    },
+    {
+      "key": "honesty",
+      "context": "Footer honesty line about water (keep the meaning: weak water only helps sugar in this model)",
+      "en": "In this model weak water is only visible as a helper to sugar; the fly notices water when the food is mostly water.",
+      "zh": "在这个模型里，微量的水只在帮糖时才被看见；只有食物基本是水时，果蝇才注意到水。",
+      "max_length": 200
+    },
+    {
+      "key": "hzValue",
+      "context": "A firing rate shown next to an option (plate sub-label, card bars); {hz} = number with one decimal",
+      "en": "{hz} Hz",
+      "zh": "{hz} Hz",
+      "max_length": 12
+    },
+    {
+      "key": "inputPlaceholder",
+      "context": "Placeholder inside the dish input",
+      "en": "a dish, e.g. mapo tofu",
+      "zh": "一道菜，例如：麻婆豆腐",
+      "max_length": 40
+    },
+    {
+      "key": "issueBody",
+      "context": "Prefilled GitHub issue body; {name} = dish as typed, {lang} = page language. Newlines allowed.",
+      "en": "The fly hasn't tasted this yet.\n\n- name as typed: {name}\n- language: {lang}\n- zh name: \n- en name: \n- what it is (one line): ",
+      "zh": "The fly hasn't tasted this yet.\n\n- name as typed: {name}\n- language: {lang}\n- zh name: \n- en name: \n- what it is (one line): "
+    },
+    {
+      "key": "issueTitle",
+      "context": "Prefilled GitHub issue title from the Report button; {name} = dish as typed (issue is English-only, maintainer-facing)",
+      "en": "New dish: {name}",
+      "zh": "New dish: {name}",
+      "max_length": 60
+    },
+    {
+      "key": "layoutPlaceholder",
+      "context": "Only shown if neurons.json is the placeholder layout (not the case now)",
+      "en": "Neuron positions are a placeholder layout, not FlyWire soma coordinates yet.",
+      "zh": "神经元位置目前是占位布局，还不是 FlyWire 的胞体坐标。",
+      "max_length": 120
+    },
+    {
+      "key": "lead",
+      "context": "Intro sentence above the input box",
+      "en": "Type the dishes you are choosing between. A fly-brain model tastes each one.",
+      "zh": "输入你在纠结的几道菜，让一只果蝇脑模型逐个尝一口。",
+      "max_length": 120
+    },
+    {
+      "key": "legendBitter",
+      "context": "Legend chip (purple)",
+      "en": "bitter GRN",
+      "zh": "苦味 GRN",
+      "max_length": 14
+    },
+    {
+      "key": "legendIr94e",
+      "context": "Legend chip under the brain view for the Ir94e GRN class (teal)",
+      "en": "Ir94e GRN",
+      "zh": "Ir94e GRN",
+      "max_length": 14
+    },
+    {
+      "key": "legendMn9",
+      "context": "Legend chip under the brain view for MN9, the readout neuron (yellow)",
+      "en": "MN9",
+      "zh": "MN9",
+      "max_length": 14
+    },
+    {
+      "key": "legendOther",
+      "context": "Legend chip (grey)",
+      "en": "other neuron",
+      "zh": "其他神经元",
+      "max_length": 14
+    },
+    {
+      "key": "legendSugar",
+      "context": "Legend chip under the brain view (orange)",
+      "en": "sugar GRN",
+      "zh": "甜味 GRN",
+      "max_length": 14
+    },
+    {
+      "key": "legendWater",
+      "context": "Legend chip (blue)",
+      "en": "water GRN",
+      "zh": "水 GRN",
+      "max_length": 14
+    },
+    {
+      "key": "levelNames.high",
+      "context": "Level word",
+      "en": "high",
+      "zh": "高",
+      "max_length": 6
+    },
+    {
+      "key": "levelNames.low",
+      "context": "Level word",
+      "en": "low",
+      "zh": "低",
+      "max_length": 6
+    },
+    {
+      "key": "levelNames.medium",
+      "context": "Level word",
+      "en": "medium",
+      "zh": "中",
+      "max_length": 6
+    },
+    {
+      "key": "levelNames.none",
+      "context": "Level word (table, card taste-input line)",
+      "en": "none",
+      "zh": "无",
+      "max_length": 6
+    },
+    {
+      "key": "levelNames.very_high",
+      "context": "Level word",
+      "en": "very high",
+      "zh": "很高",
+      "max_length": 10
+    },
+    {
+      "key": "missNote",
+      "context": "(currently unused) summary of unknown names; {names}",
+      "en": "Not in the dictionary: {names}",
+      "zh": "词典里没有：{names}",
+      "max_length": 80
+    },
+    {
+      "key": "missReport",
+      "context": "Button on an unknown dish that opens a prefilled GitHub issue",
+      "en": "Report it",
+      "zh": "报上去",
+      "max_length": 12
+    },
+    {
+      "key": "missTitle",
+      "context": "Shown next to an unknown dish in the table, the miss box and the card",
+      "en": "The fly hasn't tasted this yet.",
+      "zh": "果蝇还没尝过这个。",
+      "max_length": 40
+    },
+    {
+      "key": "mn9Label",
+      "context": "Label of the counter pill on the brain view",
+      "en": "MN9 spikes",
+      "zh": "MN9 放电",
+      "max_length": 14
+    },
+    {
+      "key": "mn9MeanStd",
+      "context": "Detail table cell: mean ± std of MN9 over 30 trials",
+      "en": "{mean} ± {std}",
+      "zh": "{mean} ± {std}",
+      "max_length": 16
+    },
+    {
+      "key": "opposite",
+      "context": "Secondary button: pick the lowest MN9, fly turns away from its favourite",
+      "en": "Do the opposite",
+      "zh": "反着来",
+      "max_length": 16
+    },
+    {
+      "key": "pageTitle",
+      "context": "Browser tab title (document.title), switches with the language toggle",
+      "en": "Ask the Fly · 问问果蝇",
+      "zh": "问问果蝇 · Ask the Fly",
+      "max_length": 40
+    },
+    {
+      "key": "plateUnknown",
+      "context": "Plate sub-label for an unknown dish (no MN9 value)",
+      "en": "?",
+      "zh": "?",
+      "max_length": 4
+    },
+    {
+      "key": "provenance",
+      "context": "Footer provenance line (model + tagline)",
+      "en": "Scores come from a published female-brain LIF model (Shiu 2024 / FlyWire v783). It only does the first bite.",
+      "zh": "分数来自已发表的雌性果蝇脑 LIF 模型（Shiu 2024 / FlyWire v783）。它只管第一口。",
+      "max_length": 160
+    },
+    {
+      "key": "removeOption",
+      "context": "aria-label of the × on an option chip; {name} = the option",
+      "en": "Remove {name}",
+      "zh": "移除 {name}",
+      "max_length": 30
+    },
+    {
+      "key": "replayHonesty",
+      "context": "Honesty line under the brain view: everything shown is a replay of recorded output, nothing live",
+      "en": "Every flash in the brain view is a replay of recorded simulation output: one extra 1 s trial per grid cell from the same Brian2 model and connectome, fixed seed, recorded once. Nothing is simulated live in this page.",
+      "zh": "脑图里的每一次闪烁都是仿真记录的回放：同一个 Brian2 模型和连接组，每个网格格子额外跑了一次 1 秒试验，固定随机种子，只记录一次。本页没有任何实时仿真。",
+      "max_length": 260
+    },
+    {
+      "key": "sceneIdle",
+      "context": "Scene status while the fly is idle before the first plate",
+      "en": "The fly is thinking…",
+      "zh": "果蝇在想……",
+      "max_length": 40
+    },
+    {
+      "key": "sceneNone",
+      "context": "Scene status when nothing is known",
+      "en": "Nothing here the fly has tasted",
+      "zh": "这里没有果蝇尝过的东西",
+      "max_length": 50
+    },
+    {
+      "key": "sceneOpposite",
+      "context": "Scene status at the end (opposite mode); {fly} = fly's pick, {dish} = chosen",
+      "en": "The fly wanted {fly}; you take {dish}",
+      "zh": "果蝇想要 {fly}，你选 {dish}",
+      "max_length": 70
+    },
+    {
+      "key": "sceneTasting",
+      "context": "Scene status while a plate is tasted; {dish}",
+      "en": "Tasting {dish}",
+      "zh": "正在尝 {dish}",
+      "max_length": 40
+    },
+    {
+      "key": "sceneTie",
+      "context": "Scene status at the end when options tie exactly",
+      "en": "The fly hovers: it can't tell these apart",
+      "zh": "果蝇悬在中间：它分不出这几个",
+      "max_length": 50
+    },
+    {
+      "key": "sceneWinner",
+      "context": "Scene status at the end (ask mode); {dish}",
+      "en": "The fly extends its proboscis on {dish}",
+      "zh": "果蝇对着 {dish} 伸出了口器",
+      "max_length": 60
+    },
+    {
+      "key": "share",
+      "context": "Button under the result: open the share card",
+      "en": "Share card",
+      "zh": "生成分享卡",
+      "max_length": 16
+    },
+    {
+      "key": "skip",
+      "context": "Button: jump past the animation to the result",
+      "en": "Skip",
+      "zh": "跳过",
+      "max_length": 10
+    },
+    {
+      "key": "speed",
+      "context": "Label before the 0.5x/1x/2x selector",
+      "en": "Speed",
+      "zh": "速度",
+      "max_length": 10
+    },
+    {
+      "key": "stateAllUnknown",
+      "context": "Notice when no option is in the dictionary",
+      "en": "The fly hasn't tasted any of these. Report them below and try known dishes.",
+      "zh": "这些果蝇都没尝过。可以在下面报上去，或换几道它认识的菜。",
+      "max_length": 100
+    },
+    {
+      "key": "stateDataFailed",
+      "context": "Notice when dishes.json or the lookup table fails to load",
+      "en": "The dictionary or lookup table failed to load. Reload the page.",
+      "zh": "词典或查找表没加载出来，请刷新页面。",
+      "max_length": 80
+    },
+    {
+      "key": "stateNoOptions",
+      "context": "Notice when Ask is pressed with fewer than two options",
+      "en": "Add at least two dishes first. Type a name and press Add.",
+      "zh": "先加至少两道菜：输入名字，按添加。",
+      "max_length": 80
+    },
+    {
+      "key": "stateOffline",
+      "context": "Notice when the browser goes offline",
+      "en": "You're offline. Dishes already loaded still work; new replays can't be fetched.",
+      "zh": "现在离线。已加载的菜还能用，新的回放取不到。",
+      "max_length": 100
+    },
+    {
+      "key": "stateReplayFailed",
+      "context": "Notice and caption when a replay file fails to load",
+      "en": "Replay file could not be loaded; the numbers below still stand.",
+      "zh": "回放文件没加载出来；下面的数字仍然有效。",
+      "max_length": 80
+    },
+    {
+      "key": "stateSceneError",
+      "context": "Status line if the animation throws; the numbers below still show",
+      "en": "The animation hit an error; the result below still stands.",
+      "zh": "动画出了点问题；下面的结果仍然有效。",
+      "max_length": 80
+    },
+    {
+      "key": "stubBanner",
+      "context": "Yellow banner if the lookup table is the stub (should never ship)",
+      "en": "STUB DATA: the lookup table on this page is a placeholder, not simulation output.",
+      "zh": "占位数据：本页的查找表是占位符，不是仿真结果。",
+      "max_length": 120
+    },
+    {
+      "key": "stubStamp",
+      "context": "Card stamp when the lookup table is the placeholder stub (should never ship)",
+      "en": "STUB DATA",
+      "zh": "占位数据",
+      "max_length": 12
+    },
+    {
+      "key": "suggestNone",
+      "context": "Autocomplete dropdown when nothing matches but near names exist; {names} is filled with tappable names",
+      "en": "Not tasted yet; closest: {names}",
+      "zh": "果蝇没吃过，试试相近的：{names}",
+      "max_length": 60
+    },
+    {
+      "key": "suggestNoneNoClosest",
+      "context": "Autocomplete dropdown when nothing matches at all",
+      "en": "Not tasted yet. Press Enter to add it anyway.",
+      "zh": "果蝇没吃过。按回车也可以直接加上。",
+      "max_length": 60
+    },
+    {
+      "key": "tableMeta",
+      "context": "Footer small print; {version} {cells} {trials}",
+      "en": "Lookup table {version} · {cells} cells · {trials} trials per cell",
+      "zh": "查找表 {version} · {cells} 个格子 · 每格 {trials} 次试验",
+      "max_length": 80
+    },
+    {
+      "key": "tastedTitle",
+      "context": "Toggle label of the chip list of all 41 dishes",
+      "en": "The fly has tasted these:",
+      "zh": "果蝇吃过这些：",
+      "max_length": 30
+    },
+    {
+      "key": "title",
+      "context": "Page heading top-left",
+      "en": "Ask the Fly",
+      "zh": "问问果蝇",
+      "max_length": 20
+    },
+    {
+      "key": "verdictAsk",
+      "context": "Result line before the winner's name (ask mode)",
+      "en": "The fly picks",
+      "zh": "果蝇选",
+      "max_length": 40
+    },
+    {
+      "key": "verdictNone",
+      "context": "Result line when no option is in the dictionary",
+      "en": "The fly has not tasted any of these yet.",
+      "zh": "这些果蝇都还没尝过。",
+      "max_length": 60
+    },
+    {
+      "key": "verdictOpposite",
+      "context": "Result line before the chosen loser; {fly} = the fly's own pick",
+      "en": "The fly would pick {fly}. You do the opposite:",
+      "zh": "果蝇会选 {fly}。你反着来：",
+      "max_length": 60
+    },
+    {
+      "key": "verdictTie",
+      "context": "Result line before the tied names",
+      "en": "The fly cannot tell these apart:",
+      "zh": "果蝇分不出这几个：",
+      "max_length": 40
+    },
+    {
+      "key": "meta.title",
+      "context": "<title> in the HTML (tab title before JS runs, search result title). Same text both languages.",
+      "en": "Ask the Fly · 问问果蝇",
+      "zh": "Ask the Fly · 问问果蝇",
+      "max_length": 60
+    },
+    {
+      "key": "meta.description",
+      "context": "<meta name=description>: search snippet. en and zh are joined with a space in the tag.",
+      "en": "A fly-brain model tastes your menu and picks for you.",
+      "zh": "让一只果蝇脑模型替你尝一口，然后选菜。",
+      "max_length": 90
+    },
+    {
+      "key": "meta.ogTitle",
+      "context": "og:title and twitter:title: link-preview title in WeChat, X, iMessage. Same text both languages.",
+      "en": "Ask the Fly · 问问果蝇",
+      "zh": "Ask the Fly · 问问果蝇",
+      "max_length": 60
+    },
+    {
+      "key": "meta.ogDescription",
+      "context": "og:description: link-preview text (WeChat, iMessage). en and zh joined with a space.",
+      "en": "A fly-brain model (Shiu 2024 / FlyWire v783) tastes your menu and picks for you. It only does the first bite.",
+      "zh": "让一只果蝇脑模型替你尝一口，然后选菜。它只管第一口。",
+      "max_length": 120
+    },
+    {
+      "key": "meta.twitterDescription",
+      "context": "twitter:description: link-preview text on X. en and zh joined with a space.",
+      "en": "A fly-brain model tastes your menu and picks for you.",
+      "zh": "让一只果蝇脑模型替你尝一口，然后选菜。",
+      "max_length": 120
+    },
+    {
+      "key": "meta.ogImageAlt",
+      "context": "og:image:alt: alt text of the preview image (English only; zh ignored).",
+      "en": "Ask the Fly: three dishes ranked by a fly-brain model's MN9 response",
+      "zh": "Ask the Fly: three dishes ranked by a fly-brain model's MN9 response",
+      "max_length": 120
+    }
+  ]
+}
