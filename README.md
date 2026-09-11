@@ -1,5 +1,5 @@
 # Ask the Fly
-Ask the Fly probes how a connectome-scale fruit-fly brain model responds to taste.
+Ask the Fly lets a fruit-fly brain model taste a few dishes and pick one for you.
 
 中文说明：[README.zh.md](README.zh.md)
 
@@ -32,12 +32,12 @@ Product copy for provenance: "Scores come from a published female-brain LIF mode
 
 ## What you see on screen
 
-- **Replay pack.** For each of the 400 lookup-grid cells we ran one extra 1 s trial of the same Brian2 model with the spike monitor on the whole network, seed fixed and recorded, and stored every spike (`site/data/replay/<cell>.bin`, provenance in each file's header: cell, levels, Hz, seed, commit, protocol hash). `scripts/run_replay.py` produces it.
-- **Brain view is a replay, not a simulation.** The dark panel draws 29,326 neurons at their FlyWire soma positions (anterior view; Schlegel et al. 2024 annotations) and flashes the neurons that spiked, at the recorded times, over 1 s. Sugar, bitter, water and Ir94e inputs and MN9 have their own colours; the counter ticks with each recorded left-MN9 spike and ends on that trial's count. The caption names the cell being replayed. Nothing is simulated in the browser.
-- **The fly is an animation over real numbers.** The fly visiting plates, landing, and extending its proboscis is scripted from the decision: plates are ranked by the lookup table's mean MN9 rate (30 trials per cell), the replay shown on each plate is that dish's cell, and the proboscis plays on the highest-ranked plate (or the lowest, for "do the opposite"). Equal cells tie exactly and the fly hovers.
-- **Levels come from an LLM, scores from the connectome.** Each dish's sugar/bitter/water levels were estimated by the encoder and reviewed (`data/dishes.json`); those levels select a precomputed grid cell. The share card says so on its front.
+- **A recorded brain replay.** The dark panel shows 29,326 neurons at their FlyWire soma positions and replays one recorded second of activity for the current taste condition. The flashes are recorded spike times from the Brian2 model, not a live browser simulation.
+- **A fly animation driven by the model's result.** The fly visits each plate, then goes to the option with the strongest mean MN9 response. "Do the opposite" picks the weakest instead. Exact ties stay tied.
+- **Taste estimates from an LLM, brain responses from the connectome model.** Each dish is assigned sugar, bitter, and water levels by the encoder (`data/dishes.json`). Those levels point to one cell in a precomputed 400-cell lookup table.
+- **Everything is reproducible.** The replay files store the condition, firing levels, seed, commit, and protocol hash. `scripts/run_replay.py` generates them.
 
-## Honesty: what this simulation does and does not do
+## What the model does — and what it doesn't
 | Claim | Status | Source |
 |---|---|---|
 | Scores come from a published female-brain LIF model on FlyWire v783 | yes | Shiu et al. 2024; docs/phase0_report.md |
@@ -89,10 +89,10 @@ The gates are directional (A rises, B falls, C and D stay at zero); absolute val
 
 ## How to request a dish
 
-The site only knows dishes in `data/dishes.json`. If it answers "the fly hasn't tasted this yet":
+The site only knows dishes in `data/dishes.json`. If it answers "the fly hasn't tried this one yet":
 
 1. Press **Report it** on that line. It opens a prefilled issue at https://github.com/Felix471/ask-the-fly/issues/new with the name you typed. Add the Chinese name, the English name, and one line on what the dish is. (You can also open the issue by hand with the same four fields.)
-2. We encode the dish with the LLM encoder (`encoder/encode.py`, prompt `encode_v2.1`) in both languages, six repeats each, and merge with the cross-language arbitration rules in `docs/encoder.md`. Disagreements two levels apart are marked `needs_review` and resolved by hand.
+2. We encode the dish with the LLM encoder (`encoder/encode.py`, prompt `encode_v2.2`) in both languages, six repeats each, and merge with the cross-language arbitration rules in `docs/encoder.md`. Disagreements two levels apart are marked `needs_review` and resolved by hand.
 3. No simulation is needed: the three levels (sugar, bitter, water) map onto the precomputed 400-cell grid. The dish appears in the dictionary and on the site at the next deploy.
 
 Names that mean more than one dish (for example "biscuit") are split into separate entries via `data/ambiguous_names.json`; say so in the issue if your dish is one of those.

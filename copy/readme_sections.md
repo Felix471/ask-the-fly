@@ -3,7 +3,7 @@
 
 <!-- section: 1 | file: README.md | context: English README (GitHub landing page) — section '(preamble: title, tagline, language link)' -->
 # Ask the Fly
-Ask the Fly probes how a connectome-scale fruit-fly brain model responds to taste.
+Ask the Fly lets a fruit-fly brain model taste a few dishes and pick one for you.
 
 中文说明：[README.zh.md](README.zh.md)
 
@@ -40,13 +40,13 @@ Product copy for provenance: "Scores come from a published female-brain LIF mode
 <!-- section: 5 | file: README.md | context: English README (GitHub landing page) — section 'What you see on screen' -->
 ## What you see on screen
 
-- **Replay pack.** For each of the 400 lookup-grid cells we ran one extra 1 s trial of the same Brian2 model with the spike monitor on the whole network, seed fixed and recorded, and stored every spike (`site/data/replay/<cell>.bin`, provenance in each file's header: cell, levels, Hz, seed, commit, protocol hash). `scripts/run_replay.py` produces it.
-- **Brain view is a replay, not a simulation.** The dark panel draws 29,326 neurons at their FlyWire soma positions (anterior view; Schlegel et al. 2024 annotations) and flashes the neurons that spiked, at the recorded times, over 1 s. Sugar, bitter, water and Ir94e inputs and MN9 have their own colours; the counter ticks with each recorded left-MN9 spike and ends on that trial's count. The caption names the cell being replayed. Nothing is simulated in the browser.
-- **The fly is an animation over real numbers.** The fly visiting plates, landing, and extending its proboscis is scripted from the decision: plates are ranked by the lookup table's mean MN9 rate (30 trials per cell), the replay shown on each plate is that dish's cell, and the proboscis plays on the highest-ranked plate (or the lowest, for "do the opposite"). Equal cells tie exactly and the fly hovers.
-- **Levels come from an LLM, scores from the connectome.** Each dish's sugar/bitter/water levels were estimated by the encoder and reviewed (`data/dishes.json`); those levels select a precomputed grid cell. The share card says so on its front.
+- **A recorded brain replay.** The dark panel shows 29,326 neurons at their FlyWire soma positions and replays one recorded second of activity for the current taste condition. The flashes are recorded spike times from the Brian2 model, not a live browser simulation.
+- **A fly animation driven by the model's result.** The fly visits each plate, then goes to the option with the strongest mean MN9 response. "Do the opposite" picks the weakest instead. Exact ties stay tied.
+- **Taste estimates from an LLM, brain responses from the connectome model.** Each dish is assigned sugar, bitter, and water levels by the encoder (`data/dishes.json`). Those levels point to one cell in a precomputed 400-cell lookup table.
+- **Everything is reproducible.** The replay files store the condition, firing levels, seed, commit, and protocol hash. `scripts/run_replay.py` generates them.
 
 <!-- section: 6 | file: README.md | context: English README (GitHub landing page) — section 'Honesty: what this simulation does and does not do' -->
-## Honesty: what this simulation does and does not do
+## What the model does — and what it doesn't
 | Claim | Status | Source |
 |---|---|---|
 | Scores come from a published female-brain LIF model on FlyWire v783 | yes | Shiu et al. 2024; docs/phase0_report.md |
@@ -100,10 +100,10 @@ The gates are directional (A rises, B falls, C and D stay at zero); absolute val
 <!-- section: 8 | file: README.md | context: English README (GitHub landing page) — section 'How to request a dish' -->
 ## How to request a dish
 
-The site only knows dishes in `data/dishes.json`. If it answers "the fly hasn't tasted this yet":
+The site only knows dishes in `data/dishes.json`. If it answers "the fly hasn't tried this one yet":
 
 1. Press **Report it** on that line. It opens a prefilled issue at https://github.com/Felix471/ask-the-fly/issues/new with the name you typed. Add the Chinese name, the English name, and one line on what the dish is. (You can also open the issue by hand with the same four fields.)
-2. We encode the dish with the LLM encoder (`encoder/encode.py`, prompt `encode_v2.1`) in both languages, six repeats each, and merge with the cross-language arbitration rules in `docs/encoder.md`. Disagreements two levels apart are marked `needs_review` and resolved by hand.
+2. We encode the dish with the LLM encoder (`encoder/encode.py`, prompt `encode_v2.2`) in both languages, six repeats each, and merge with the cross-language arbitration rules in `docs/encoder.md`. Disagreements two levels apart are marked `needs_review` and resolved by hand.
 3. No simulation is needed: the three levels (sugar, bitter, water) map onto the precomputed 400-cell grid. The dish appears in the dictionary and on the site at the next deploy.
 
 Names that mean more than one dish (for example "biscuit") are split into separate entries via `data/ambiguous_names.json`; say so in the issue if your dish is one of those.
@@ -111,7 +111,7 @@ Names that mean more than one dish (for example "biscuit") are split into separa
 <!-- section: 1 | file: README.zh.md | context: Chinese README (mirror of the English one) — section '(preamble: title, tagline, language link)' -->
 # 问问果蝇（Ask the Fly）
 
-Ask the Fly 用一个连接组尺度的果蝇全脑模型，测试它对味道的反应，然后拿这个反应来替你选菜。
+不知道吃什么时，就丢几道菜进来，让一个果蝇脑模型替你选一道。
 
 English: [README.md](README.md)
 
@@ -148,13 +148,13 @@ English: [README.md](README.md)
 <!-- section: 5 | file: README.zh.md | context: Chinese README (mirror of the English one) — section '屏幕上看到的是什么' -->
 ## 屏幕上看到的是什么
 
-- **回放包。** 对查找网格的 400 个格子，我们各自用同一个 Brian2 模型额外跑了一次 1 秒试验，全网络挂上放电监视器，随机种子固定并记录，把每一个 spike 存下来（`site/data/replay/<cell>.bin`，每个文件头里都有来源：格子、等级、Hz、种子、commit、协议哈希）。由 `scripts/run_replay.py` 生成。
-- **脑图是回放，不是仿真。** 深色面板按 FlyWire 的胞体坐标（前视图；Schlegel 等 2024 注释表）画出 29,326 个神经元，并在记录到的时刻让放电的神经元闪一下，持续 1 秒。甜、苦、水、Ir94e 的输入和 MN9 各有颜色；计数器随每一个记录到的左侧 MN9 spike 递增，最后停在那次试验的数目上。说明文字写明正在回放哪个格子。浏览器里没有任何仿真。
-- **果蝇是叠在真实数字上的动画。** 果蝇挨盘子飞、落下、伸口器，都是按决策脚本化的：盘子按查找表的 MN9 平均放电率（每格 30 次试验）排序，每个盘子上播放的是那道菜对应格子的回放，口器在排名最高的盘子上伸出（"反着来"时是最低的）。同一格子的菜严格并列，果蝇悬在中间。
-- **等级来自 LLM，分数来自连接组。** 每道菜的甜/苦/水等级由编码器估算并经过审核（`data/dishes.json`）；等级选中一个预先算好的格子。分享卡的正面写着这一点。
+- **一段真实仿真结果的回放。** 深色脑图会按照 FlyWire 的胞体坐标画出 29,326 个神经元，然后播放当前味觉条件下预先记录好的一秒放电。画面里的每一次闪烁，都对应 Brian2 模型实际记录到的 spike；这里展示的是回放，并不是在浏览器里现场跑仿真。
+- **果蝇动画由模型结果来驱动。** 它会挨个去尝每个盘子，最后飞向 MN9 平均反应最强的那一道；如果点“反着来”，就会改选反应最弱的一道。结果完全相同的菜会并列。
+- **LLM 负责把菜转成味觉输入，连接组模型负责算出脑反应。** 编码器会先估算每道菜的甜、苦、水三个等级（`data/dishes.json`），然后再用这三个等级去查预先算好的 400 格结果表。
+- **这些结果都可以复现。** 每个回放文件里都会保存对应的条件、刺激等级、随机种子、commit 和协议哈希，并由 `scripts/run_replay.py` 统一生成。
 
 <!-- section: 6 | file: README.zh.md | context: Chinese README (mirror of the English one) — section '诚实声明：这个仿真做了什么、没做什么' -->
-## 诚实声明：这个仿真做了什么、没做什么
+## 这个模型能说明什么，又不能说明什么
 | 说法 | 状态 | 依据 |
 |---|---|---|
 | 分数来自已发表的雌性果蝇脑 LIF 模型，运行在 FlyWire v783 上 | 是 | Shiu et al. 2024；docs/phase0_report.md |
@@ -175,11 +175,11 @@ English: [README.md](README.md)
 <!-- section: 7 | file: README.zh.md | context: Chinese README (mirror of the English one) — section '复现 Phase 0 曲线' -->
 ## 复现 Phase 0 曲线
 
-Phase 0 用论文的 LIF 模型（Brian2）在 FlyWire v783 上复现 Shiu 2024 的糖/苦 → MN9 结果。除编译器工具链外，所需的一切都在仓库里。
+Phase 0 使用论文里的 LIF 模型（Brian2），在 FlyWire v783 上复现 Shiu 2024 的糖/苦 → MN9 结果。除了编译器工具链以外，运行所需要的内容都已经放在仓库里。
 
-**环境。** 正式运行使用 Brian2 2.9.0 的 Cython 代码生成目标，需要 C++ 编译器。我们在 WSL2 Ubuntu 里的 conda 环境 `flybrain` 中运行（规格见 `env/flybrain.yml`，精确导出见 `env/flybrain-lock.yml`）；细节与坑见 `docs/environment.md`。没有 `cl.exe` 的原生 Windows 会在代码生成阶段失败。
+**环境。** 正式运行时使用 Brian2 2.9.0 的 Cython 代码生成目标，因此需要一个 C++ 编译器。我们是在 WSL2 Ubuntu 里的 conda 环境 `flybrain` 中运行的（环境规格见 `env/flybrain.yml`，精确导出见 `env/flybrain-lock.yml`）；具体配置和踩坑记录都写在 `docs/environment.md` 里。如果直接在没有 `cl.exe` 的原生 Windows 环境中运行，就会在代码生成阶段失败。
 
-**输入（冻结、已跟踪）。** `data/2025_Connectivity_783.parquet`（v783 连接矩阵）、`data/cells.json`（GRN 与 MN9 的 root ID）、`data/stim_protocol.json`（频率、试验次数、读数 = 左侧 MN9）。报告会记录生成它时协议文件与细胞文件的 SHA-256。
+**输入（冻结、已跟踪）。** 包括 `data/2025_Connectivity_783.parquet`（v783 连接矩阵）、`data/cells.json`（GRN 与 MN9 的 root ID）以及 `data/stim_protocol.json`（频率、试验次数、读数 = 左侧 MN9）。生成报告时，也会把当时使用的协议文件和细胞文件的 SHA-256 一并记录下来。
 
 **运行。**
 
@@ -201,17 +201,17 @@ conda run -n flybrain --no-capture-output python scripts/phase0_report.py       
 | C | 只有苦，任何频率 | 0 |
 | D | 无刺激 | 0 |
 
-门槛只看方向（A 上升、B 下降、C 和 D 保持为零）；绝对值与论文不同，因为论文在 v630 上标定了 `w_syn`，而我们原样运行 v783。两次不同随机流的完整运行在糖 100 Hz 处分别得到 67.2 和 67.3 Hz（`docs/phase0_report.md`、`docs/fixed_path_recheck.md`）。
+这些门槛主要看的是变化方向（A 上升、B 下降，C 和 D 保持为零），而不是要求绝对数值和论文完全一致。之所以会有数值差异，是因为论文是在 v630 上标定 `w_syn` 的，而这里直接沿用了同一参数去运行 v783。两次使用不同随机流的完整运行，在糖 100 Hz 这一点分别得到 67.2 和 67.3 Hz（`docs/phase0_report.md`、`docs/fixed_path_recheck.md`）。
 
-**Phase 0 之后。** `scripts/run_phase1.py` 生成 `docs/phase1_characterization.md` 里的单通道与成对曲线；`scripts/run_grid.py --stage full` 运行 400 格的查找网格（14 个进程约 80 分钟），`scripts/build_lookup.py` 把它转成 `data/lookup_table.json`，这是网站唯一读取的文件。
+**Phase 0 之后。** `scripts/run_phase1.py` 会生成 `docs/phase1_characterization.md` 里的单通道和成对曲线；`scripts/run_grid.py --stage full` 会跑完整的 400 格查找网格（14 个进程大约需要 80 分钟），然后由 `scripts/build_lookup.py` 把结果整理成 `data/lookup_table.json`。网站实际读取的就是这一份查找表。
 
 <!-- section: 8 | file: README.zh.md | context: Chinese README (mirror of the English one) — section '如何申请加一道菜' -->
 ## 如何申请加一道菜
 
-网站只认识 `data/dishes.json` 里的菜。如果它回答"果蝇还没尝过这个"：
+网站目前只认识 `data/dishes.json` 里已经收录的菜。如果页面提示“果蝇还没吃过这道菜”：
 
-1. 点那一行的 **报上去**。它会在 https://github.com/Felix471/ask-the-fly/issues/new 打开一个预填了你输入名称的 issue。补上中文名、英文名，以及一句话说明这是什么菜。（也可以手动开 issue，填同样四项。）
-2. 我们用 LLM 编码器（`encoder/encode.py`，提示词 `encode_v2.1`）在两种语言下各编码六次，再按 `docs/encoder.md` 里的跨语言仲裁规则合并。相差两级以上的分歧会标为 `needs_review`，由人工裁定。
-3. 不需要重新仿真：三个等级（糖、苦、水）直接落到预先算好的 400 格网格上。下一次部署后，这道菜就会出现在词典和网站里。
+1. 点那一行的 **提交这道菜**。页面会打开一个已经预填了你所输入名称的 GitHub issue。再补上中文名、英文名，以及一句话说明这是什么菜就可以了。（你也可以手动新建 issue，填写同样的四项内容。）
+2. 我们会用 LLM 编码器（`encoder/encode.py`，提示词 `encode_v2.2`）分别在两种语言下各编码六次，然后再按照 `docs/encoder.md` 里的跨语言仲裁规则合并结果。如果两边的判断相差两级以上，就会标记为 `needs_review`，再由人工进行裁定。
+3. 不需要重新跑仿真。甜、苦、水这三个等级会直接映射到预先算好的 400 格网格里。等到下一次部署之后，这道菜就会出现在词典和网站上。
 
-一个名字对应多道菜的（比如 "biscuit"），会按 `data/ambiguous_names.json` 拆成多个条目；如果你的菜属于这种情况，请在 issue 里说明。
+如果一个名字可能对应不止一道菜（比如 “biscuit”），就会按照 `data/ambiguous_names.json` 拆成多个条目。如果你提交的菜属于这种情况，请在 issue 里顺便说明。
