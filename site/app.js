@@ -734,21 +734,25 @@ export function drawShareCard(canvas, decision, lang, options = {}) {
   const textBlock = 40 + 60; // MN9 line + honesty sentence (up to two lines)
   const spriteRoom = Math.max(0, bottomEstimate - 30 - textBlock - barsHeight - y);
   if (chosen.length && spriteRoom >= 120) {
-    const fitWidth = Math.floor((W - 2 * pad - 24 * (chosen.length - 1)) / Math.max(1, chosen.length));
-    const bigSize = Math.max(100, Math.min(chosen.length > 1 ? Math.min(180, fitWidth) : 250, spriteRoom - (chosen.length > 1 ? 30 : 0)));
-    const gap = 24;
-    const rowWidth = chosen.length * bigSize + (chosen.length - 1) * gap;
-    const x0 = (W - rowWidth) / 2;
-    const sy = y + (chosen.length > 1 ? 30 : 0);
     const opposite = decision.mode === "opposite" && decision.flyPick && !chosen.includes(decision.flyPick);
-    const shift = opposite ? -Math.round(bigSize * 0.36) : 0; // room for the fly's pick on the right
+    const gap = 24;
+    // Everything on one row: the human's dishes, plus the fly's pick at 0.56x when
+    // it stands beside them; the row (and the tablecloth patch around it) fits
+    // inside the margins.
+    const slots = chosen.length + (opposite ? 0.56 : 0);
+    const fitWidth = Math.floor((W - 2 * pad - 72 - (opposite ? 28 : 0) - gap * (chosen.length - 1)) / Math.max(1, slots));
+    const bigSize = Math.max(100, Math.min(chosen.length > 1 ? Math.min(180, fitWidth) : Math.min(250, fitWidth), spriteRoom - (chosen.length > 1 ? 30 : 0)));
+    const flyExtra = opposite ? Math.round(bigSize * 0.56) + 28 : 0;
+    const rowWidth = chosen.length * bigSize + (chosen.length - 1) * gap;
+    const x0 = (W - rowWidth - flyExtra) / 2;
+    const sy = y + (chosen.length > 1 ? 30 : 0) + (many ? 18 : 0);
+    const shift = 0;
     // Tablecloth only behind the sprites; every line of text stays on solid cream.
     if (options.tablecloth) {
       const padX = 36;
       const padY = 22;
-      const extra = opposite ? Math.round(bigSize * 0.56) + 28 : 0;
-      const bx = x0 + shift - padX;
-      const bw = rowWidth + extra + 2 * padX;
+      const bx = x0 - padX;
+      const bw = rowWidth + flyExtra + 2 * padX;
       const by = sy - padY - (chosen.length > 1 ? bigSize * 0.16 : bigSize * 0.1);
       const bh = bigSize + 2 * padY + (chosen.length > 1 ? bigSize * 0.16 : bigSize * 0.1) + (opposite ? 30 : 0);
       ctx.save();
@@ -781,7 +785,7 @@ export function drawShareCard(canvas, decision, lang, options = {}) {
       ctx.fillText(displayName(decision.flyPick, lang), x + small / 2, yy + small + 24);
       ctx.textAlign = "left";
     }
-    y = sy + bigSize + (opposite ? 44 : (options.tablecloth ? 30 : 16));
+    y = sy + bigSize + (opposite ? (options.tablecloth ? 78 : 44) : (options.tablecloth ? 30 : 16));
   }
 
   // Bars carry the numbers: one shared scale, the chosen dish in the accent.
@@ -1370,7 +1374,7 @@ if (isBrowser) {
     verdict.innerHTML = "";
     const lead = document.createElement("span");
     const strong = document.createElement("strong");
-    if (!d.winner) {
+    if (!d.flyPick) {
       lead.textContent = t.verdictNone;
     } else if (d.tie.length) {
       lead.textContent = t.verdictTie;
@@ -1430,7 +1434,7 @@ if (isBrowser) {
 
     const cardLinesBox = $("card-lines");
     cardLinesBox.innerHTML = "";
-    if (d.winner) {
+    if (d.flyPick) {
       for (const line of cardLines(d, state.lang).fixed) {
         const li = document.createElement("li");
         li.textContent = line;
