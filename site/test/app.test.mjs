@@ -338,3 +338,41 @@ test("footer shows the post-rewrite hash for the grid commit the table records",
   assert.equal(currentCommit("deadbeef"), "deadbeef");
   assert.equal(currentCommit(undefined), "");
 });
+
+// ---- brain snapshot: the frame with the most MN9 activity ----
+import { peakMn9Window, BIN_MS, BINS_IN_WINDOW } from "../brain.js";
+
+test("peak MN9 window is inside the trial and counts every MN9 spike it covers", () => {
+  const dictionary = buildDictionary(dishes);
+  const lookup = buildLookup(table);
+  const neurons = decodeNeurons(JSON.parse(readFileSync(path.join(here, "..", "data", "neurons.json"), "utf8")));
+  const load = (name) => {
+    const cell = lookup.get({ ...dictionary.find(name), ir94e: "none" });
+    const buf = readFileSync(path.join(here, "..", "data", "replay", `${cellIdFor(cell)}.bin`));
+    return parseReplay(buf.buffer.slice(buf.byteOffset, buf.byteOffset + buf.byteLength));
+  };
+  const active = load("hotpot");
+  const peak = peakMn9Window(active, neurons);
+  assert.ok(peak.count > 0, "hotpot's run has MN9 spikes");
+  assert.ok(peak.tMs > 0 && peak.tMs <= active.header.duration_ms);
+  const windowMs = BIN_MS * BINS_IN_WINDOW;
+  let inWindow = 0;
+  for (let i = 0; i < active.idx.length; i += 1) {
+    const f = neurons.flags[active.idx[i]];
+    const ms = active.t[i] / 10;
+    if (f & (FLAG.mn9_left | FLAG.mn9_right) && ms <= peak.tMs && ms >= peak.tMs - 1 - windowMs) inWindow += 1;
+  }
+  assert.equal(inWindow, peak.count);
+  assert.ok(peak.count <= (active.header.mn9_left_count || 0) + (active.header.mn9_right_count || 0));
+  const silent = load("black coffee");
+  const quiet = peakMn9Window(silent, neurons);
+  assert.equal(quiet.count, 0);
+  assert.ok(quiet.tMs > 0 && quiet.tMs <= silent.header.duration_ms);
+});
+
+test("fixed line 4 is a label; the snapshot caption carries the numbers", () => {
+  assert.equal(STRINGS.en.fixedLines[3], "Brain response:");
+  assert.equal(STRINGS.zh.fixedLines[3], "\u8111\u53cd\u5e94\uff1a");
+  assert.equal(fmt(STRINGS.en.cardSnapshot, { n: 62, neurons: "138,639" }), "MN9 fired 62\u00d7 \u00b7 138,639 neurons");
+  assert.equal(STRINGS.en.issueBody, undefined);
+});

@@ -30,13 +30,12 @@ export const STRINGS = {
       "The fly picked: {dish}",
       "MN9: {hz} Hz · sugar alone {hz_sugar_only} · after bitter {hz}",
       "Taste estimate: sugar {sugar} · bitter {bitter} · water {water} (LLM)",
-      "Brain response: looked up from precomputed whole-brain simulations"
+      "Brain response:"
     ],
     "hint": "Add at least two dishes. The fly only judges the first bite.",
     "honesty": "In this model, a little water mostly boosts the sugar signal. Water matters on its own only when the food is mostly water.",
     "hzValue": "{hz} Hz",
     "inputPlaceholder": "a dish, e.g. mapo tofu",
-    "issueBody": "The fly hasn't tasted this yet.\n\n- name as typed: {name}\n- language: {lang}\n- zh name: \n- en name: \n- what it is (one line): ",
     "issueTitle": "New dish: {name}",
     "layoutPlaceholder": "Neuron positions are a placeholder layout, not FlyWire soma coordinates yet.",
     "lead": "Can't decide what to eat? Add a few dishes and let a fruit-fly brain pick.",
@@ -120,7 +119,8 @@ export const STRINGS = {
     "silenceLess": "Fewer",
     "silenceCaptionNoEffect": "Recorded run with {name}'s synapses set to zero · MN9 {after} vs {before} normal ({delta}) · across all cells the median change is {median}: silencing {name} does not move the feeding readout in this model",
     "silenceEffectSummary": "{name}: median MN9 change {median} over {n} cells, {down}% dropped",
-    "cardScan": "Scan to replay this choice"
+    "cardScan": "Scan to replay this choice",
+    "cardSnapshot": "MN9 fired {n}× · {neurons} neurons"
   },
   "zh": {
     "add": "添加",
@@ -151,13 +151,12 @@ export const STRINGS = {
       "果蝇今天选了：{dish}",
       "MN9：{hz} Hz（只有甜味时是 {hz_sugar_only}，加入苦味后是 {hz}）",
       "味觉估算：甜 {sugar} · 苦 {bitter} · 水 {water}（由 LLM 估算）",
-      "脑反应：来自预先跑好的全脑仿真结果，不是在网页里现场计算"
+      "脑反应："
     ],
     "hint": "至少先加两道菜。果蝇只负责判断第一口。",
     "honesty": "在这个模型里，少量的水主要会增强甜味带来的反应；只有当食物本身大部分都是水时，水的影响才会比较明显。",
     "hzValue": "{hz} Hz",
     "inputPlaceholder": "输入一道菜，例如：麻婆豆腐",
-    "issueBody": "The fly hasn't tasted this yet.\n\n- name as typed: {name}\n- language: {lang}\n- zh name: \n- en name: \n- what it is (one line): ",
     "issueTitle": "New dish: {name}",
     "layoutPlaceholder": "神经元位置目前是占位布局，还不是 FlyWire 的胞体坐标。",
     "lead": "不知道该吃什么？加几道菜进来，让果蝇脑替你选一个。",
@@ -241,6 +240,7 @@ export const STRINGS = {
     "silenceLess": "收起",
     "silenceCaptionNoEffect": "把 {name} 的突触全部置零后的记录回放 · MN9 {after}，正常时 {before}（{delta}）· 在所有格子里中位变化为 {median}：在这个模型里关掉 {name} 不会改变进食读数",
     "silenceEffectSummary": "{name}：MN9 中位变化 {median}（{n} 个格子），{down}% 下降",
-    "cardScan": "扫码重现这次选择"
+    "cardScan": "扫码重现这次选择",
+    "cardSnapshot": "MN9 放电 {n} 次 · {neurons} 个神经元"
   }
 };

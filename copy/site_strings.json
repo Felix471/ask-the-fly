@@ -100,6 +100,13 @@
       "max_length": 30
     },
     {
+      "key": "cardSnapshot",
+      "context": "One-line caption under the card's brain snapshot; {n} = MN9 spikes in the winner's recorded run, {neurons} = neurons in the model (formatted)",
+      "en": "MN9 fired {n}× · {neurons} neurons",
+      "zh": "MN9 放电 {n} 次 · {neurons} 个神经元",
+      "max_length": 50
+    },
+    {
       "key": "cardScan",
       "context": "Tiny caption above the share card's QR code; scanning opens the same comparison",
       "en": "Scan to replay this choice",
@@ -199,9 +206,9 @@
     },
     {
       "key": "fixedLines.3",
-      "context": "Card fixed line 4",
-      "en": "Brain response: looked up from precomputed whole-brain simulations",
-      "zh": "脑反应：来自预先跑好的全脑仿真结果，不是在网页里现场计算",
+      "context": "Card fixed line 4; label only, the brain snapshot next to it carries the response",
+      "en": "Brain response:",
+      "zh": "脑反应：",
       "max_length": 90
     },
     {
@@ -231,12 +238,6 @@
       "en": "a dish, e.g. mapo tofu",
       "zh": "输入一道菜，例如：麻婆豆腐",
       "max_length": 40
-    },
-    {
-      "key": "issueBody",
-      "context": "Prefilled GitHub issue body; {name} = dish as typed, {lang} = page language. Newlines allowed.",
-      "en": "The fly hasn't tasted this yet.\n\n- name as typed: {name}\n- language: {lang}\n- zh name: \n- en name: \n- what it is (one line): ",
-      "zh": "The fly hasn't tasted this yet.\n\n- name as typed: {name}\n- language: {lang}\n- zh name: \n- en name: \n- what it is (one line): "
     },
     {
       "key": "issueTitle",

@@ -2,7 +2,7 @@
 // Ask the Fly — static front end. No LLM calls: dictionary lookup + lookup-table read.
 // Pure functions are exported so they can be unit-tested with node (see test/).
 
-import { BrainView, RasterView, SpikeClick, cellIdFor, decodeNeurons, makeReplayLoader, rasterRows, replayStats } from "./brain.js";
+import { BrainView, RasterView, SpikeClick, cellIdFor, decodeNeurons, makeReplayLoader, rasterRows, renderSnapshot, replayStats } from "./brain.js";
 import { FlyScene, loadDishSprite, loadSprites, makeToken } from "./fly.js";
 import { qrcode } from "./vendor/qrcode-generator/qrcode.mjs";
 
@@ -277,21 +277,23 @@ export function resolveShared(names, dictionary, lang) {
 
 // ---------- share card (3:4, canvas) ----------
 
+// Breaks CJK text per character (closing punctuation stays with its character) but
+// keeps Latin/number runs (LLM, 70.6, Hz) whole.
 function wrapLines(ctx, text, maxWidth) {
-  const words = /[㐀-鿿]/.test(text) ? Array.from(text) : text.split(" ");
-  const joiner = /[㐀-鿿]/.test(text) ? "" : " ";
+  const cjk = /[㐀-鿿]/.test(text);
+  const tokens = cjk ? (text.match(/[㐀-鿿][、。，）：；！？]*|[^\s㐀-鿿]+|\s+/g) || []) : text.split(" ").map((w, i) => (i ? " " + w : w));
   const lines = [];
   let current = "";
-  for (const word of words) {
-    const candidate = current ? current + joiner + word : word;
-    if (ctx.measureText(candidate).width > maxWidth && current) {
-      lines.push(current);
-      current = word;
+  for (const token of tokens) {
+    const candidate = current + token;
+    if (ctx.measureText(candidate).width > maxWidth && current.trim()) {
+      lines.push(current.trimEnd());
+      current = token.trimStart();
     } else {
       current = candidate;
     }
   }
-  if (current) lines.push(current);
+  if (current.trim()) lines.push(current.trimEnd());
   return lines;
 }
 
@@ -406,7 +408,8 @@ function drawQr(ctx, text, x, y, size) {
   return { x: ox, y: oy, size: total, modules: n };
 }
 
-// options: stub, sprites ({ fly, dishCache }), spriteFor(item) -> image | null.
+// options: stub, sprites ({ fly, dishCache }), spriteFor(item) -> image | null,
+// snapshot ({ canvas, mn9, neurons }) -> a brain frame drawn left of the QR code.
 export function drawShareCard(canvas, decision, lang, options = {}) {
   const t = STRINGS[lang];
   const ctx = canvas.getContext("2d");
@@ -457,8 +460,10 @@ export function drawShareCard(canvas, decision, lang, options = {}) {
   // QR code and its URL on the right. Everything above shares the rest.
   const qrSize = 220;
   const qrX = W - pad - qrSize;
-  const bottomTop = H - 330;
-  const textWidth = qrX - 28 - pad;
+  const bottomTop = H - 345;
+  const snapW = options.snapshot ? 170 : 0;
+  const snapX = qrX - 22 - snapW;
+  const textWidth = (options.snapshot ? snapX : qrX) - 24 - pad;
 
   // Middle: the chosen dish large with the fly on it; the others small, grey,
   // struck. Ties: every tied dish in colour, side by side, fly hovering above.
@@ -567,6 +572,30 @@ export function drawShareCard(canvas, decision, lang, options = {}) {
   for (const part of wrapLines(ctx, lines.bottom, textWidth)) {
     ctx.fillText(part, pad, fy);
     fy += 26;
+  }
+
+  if (options.snapshot) {
+    const snap = options.snapshot;
+    const snapH = Math.round(snapW * snap.canvas.height / snap.canvas.width);
+    const snapY = bottomTop - 20;
+    ctx.save();
+    ctx.imageSmoothingEnabled = true;
+    ctx.drawImage(snap.canvas, snapX, snapY, snapW, snapH);
+    ctx.restore();
+    ctx.strokeStyle = "#e2dbd0";
+    ctx.lineWidth = 1;
+    ctx.strokeRect(snapX - 0.5, snapY - 0.5, snapW + 1, snapH + 1);
+    ctx.font = font(13);
+    ctx.fillStyle = "#6b625b";
+    ctx.textAlign = "center";
+    const neurons = typeof snap.neurons === "number" ? snap.neurons.toLocaleString(lang === "zh" ? "zh-CN" : "en-US") : "\u2014";
+    const caption = fmt(t.cardSnapshot, { n: snap.mn9, neurons });
+    let cy = snapY + snapH + 20;
+    for (const part of wrapLines(ctx, caption, snapW + 40).slice(0, 2)) {
+      ctx.fillText(part, snapX + snapW / 2, cy);
+      cy += 17;
+    }
+    ctx.textAlign = "left";
   }
 
   const url = shareUrl(decision, lang);
@@ -1117,15 +1146,33 @@ if (isBrowser) {
     return item.entry ? (state.spriteFallbacks[slugFor(item.entry.key)] || slugFor(item.entry.key)) : null;
   }
 
+  // The brain snapshot shows the response being reported: the winner's recorded
+  // run; in "opposite" the fly's own pick; in a tie the tied dish with the most
+  // MN9 spikes. Null when the brain view or the replay is unavailable.
+  async function snapshotFor(decision) {
+    if (!state.brain || !decision.winner) return null;
+    const candidates = decision.mode === "opposite" ? [decision.flyPick] : (decision.tie.length ? decision.tie : [decision.winner]);
+    const loaded = await Promise.all(candidates.map(async (item) => {
+      try { return { item, replay: await state.loadReplay(cellIdFor(item.cell)) }; } catch (_) { return null; }
+    }));
+    const best = loaded.filter(Boolean).sort((a, b) => (b.replay.header.mn9_left_count || 0) - (a.replay.header.mn9_left_count || 0))[0];
+    if (!best) return null;
+    const snap = renderSnapshot(state.brain.neurons, state.brain.neuropils, best.replay, 340, 2);
+    const stats = replayStats(best.replay);
+    return { canvas: snap.canvas, mn9: stats.mn9Left ?? snap.count, neurons: stats.totalNeurons };
+  }
+
   async function showCard() {
     const canvas = $("share-card");
     const sprites = state.scene ? state.scene.sprites : null;
-    if (sprites) {
-      await Promise.all(state.decision.known.map((item) => loadDishSprite(sprites, spriteSlug(item)).catch(() => null)));
-    }
+    const [snapshot] = await Promise.all([
+      snapshotFor(state.decision).catch((error) => { console.warn("snapshot failed:", error); return null; }),
+      sprites ? Promise.all(state.decision.known.map((item) => loadDishSprite(sprites, spriteSlug(item)).catch(() => null))) : null,
+    ]);
     drawShareCard(canvas, state.decision, state.lang, {
       stub: Boolean(state.lookup.table.stub),
       sprites,
+      snapshot,
       spriteFor: (item) => (sprites && spriteSlug(item) ? sprites.dishCache.get(spriteSlug(item)) || null : null),
     });
     try {

@@ -170,7 +170,7 @@ export class BrainView {
     this.onTime = null;
     this.raf = 0;
     this.background = null;
-    this.pixelRatio = typeof devicePixelRatio === "number" ? Math.min(2, devicePixelRatio) : 1;
+    this.pixelRatio = options.pixelRatio || (typeof devicePixelRatio === "number" ? Math.min(2, devicePixelRatio) : 1);
     this.resize();
   }
 
@@ -387,6 +387,63 @@ export class BrainView {
 }
 
 // Oscilloscope-style raster: rows of ticks, time axis 0..duration, revealed up to tMs.
+// The window (BIN_MS x BINS_IN_WINDOW, i.e. what one drawn frame shows) with the
+// most MN9 spikes in a replay: its end time in ms and the MN9 spike count inside.
+// Without any MN9 spike, the busiest single bin is used instead (count 0).
+export function peakMn9Window(replay, neurons, windowMs = BIN_MS * BINS_IN_WINDOW) {
+  const { idx, t } = replay;
+  const flags = neurons.flags;
+  const times = [];
+  for (let i = 0; i < idx.length; i += 1) {
+    const n = idx[i];
+    if (n < flags.length && (flags[n] & (FLAG.mn9_left | FLAG.mn9_right))) times.push(t[i] / 10);
+  }
+  if (!times.length) {
+    const bins = binReplay(replay);
+    let best = 0;
+    for (let b = 1; b < bins.length; b += 1) if (bins[b].length > bins[best].length) best = b;
+    return { tMs: Math.min(replay.header.duration_ms, (best + 1) * BIN_MS), count: 0 };
+  }
+  times.sort((a, b) => a - b);
+  let best = 0;
+  let bestEnd = times[0];
+  let j = 0;
+  for (let i = 0; i < times.length; i += 1) {
+    while (times[i] - times[j] > windowMs) j += 1;
+    if (i - j + 1 > best) {
+      best = i - j + 1;
+      bestEnd = times[i];
+    }
+  }
+  return { tMs: Math.min(replay.header.duration_ms, bestEnd + 1), count: best };
+}
+
+// One frame of a replay on an offscreen canvas with the brain view's renderer
+// (outlines, dots, spikes; no labels), at the frame with the most MN9 activity,
+// MN9 cells ringed. For the share card. Browser only (needs a canvas).
+export function renderSnapshot(neurons, neuropils, replay, width, pixelRatio = 2) {
+  const canvas = document.createElement("canvas");
+  canvas.width = width;
+  const view = new BrainView(canvas, neurons, { neuropils, showLabels: false, pixelRatio });
+  view.setReplay(replay);
+  const peak = peakMn9Window(replay, neurons);
+  view.drawFrame(peak.tMs);
+  const ctx = canvas.getContext("2d");
+  const pr = view.pixelRatio;
+  ctx.strokeStyle = COLORS.mn9;
+  ctx.lineWidth = 1.2 * pr;
+  ctx.globalAlpha = 0.9;
+  for (let i = 0; i < neurons.nIndexed; i += 1) {
+    if (neurons.flags[i] & (FLAG.mn9_left | FLAG.mn9_right)) {
+      ctx.beginPath();
+      ctx.arc(view.px[i], view.py[i], 6 * pr, 0, Math.PI * 2);
+      ctx.stroke();
+    }
+  }
+  ctx.globalAlpha = 1;
+  return { canvas, tMs: peak.tMs, count: peak.count };
+}
+
 export class RasterView {
   constructor(canvas) {
     this.canvas = canvas;
