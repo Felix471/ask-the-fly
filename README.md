@@ -1,6 +1,8 @@
 # Ask the Fly
 Ask the Fly probes how a connectome-scale fruit-fly brain model responds to taste.
 
+中文说明：[README.zh.md](README.zh.md)
+
 ## Layout
 - `scripts/` — extraction and analysis utilities
 - `sim/` — simulation code (added in a later phase)
@@ -39,3 +41,45 @@ Product copy for provenance: "Scores come from a published female-brain LIF mode
 In this model weak water is only visible as a helper to sugar; the fly notices water when the food is mostly water. The lookup grid therefore gives water "low" and "medium" the same cell (60 Hz): the fixed-path recheck (docs/fixed_path_recheck.md) could not separate them on any curve.
 
 Product line: "It only does the first bite."
+
+## Reproduce the Phase 0 curves
+
+Phase 0 reproduces the Shiu 2024 sugar/bitter → MN9 result on FlyWire v783 with the paper's LIF model in Brian2. Everything needed is in the repo except the compiler toolchain.
+
+**Environment.** Gated runs use Brian2 2.9.0 with the Cython code-generation target, which needs a C++ compiler. We run them in WSL2 Ubuntu inside a conda env named `flybrain` (spec in `env/flybrain.yml`, exact export in `env/flybrain-lock.yml`); details and pitfalls are in `docs/environment.md`. Native Windows without `cl.exe` will fail at code generation.
+
+**Inputs (frozen, tracked).** `data/2025_Connectivity_783.parquet` (v783 connectivity), `data/cells.json` (GRN and MN9 root IDs), `data/stim_protocol.json` (frequencies, trial count, readout = left MN9). The report records the SHA-256 of the protocol and cell files it was produced from.
+
+**Run.**
+
+```
+# from Linux / WSL2, inside the repo
+conda run -n flybrain --no-capture-output python scripts/run_phase0.py --stage smoke --target numpy   # pipeline check, no compiler needed
+conda run -n flybrain --no-capture-output python scripts/run_phase0.py --stage full --n-proc 14       # 540 trials, ~4 min on 14 workers (~3 GB RAM each)
+conda run -n flybrain --no-capture-output python scripts/phase0_report.py                              # regenerates docs/phase0_report.md
+```
+
+From a Windows shell the same commands run as `wsl -e bash -lc 'cd /mnt/d/<repo> && ~/miniforge3/bin/conda run -n flybrain --no-capture-output python scripts/run_phase0.py --stage full'`.
+
+**What you should see** (left MN9, mean over 30 one-second trials; run-to-run noise is a few Hz because the Poisson stimulus stream differs):
+
+| Gate | Condition | Expected (Hz) |
+|---|---|---:|
+| A | sugar 25 / 50 / 100 / 200 Hz | ≈ 0 / 17 / 67 / 92 |
+| B | sugar 200 Hz + bitter 0 / 25 / 50 / 100 / 200 Hz | ≈ 93 / 79 / 70 / 28 / 1 |
+| C | bitter alone, any rate | 0 |
+| D | no stimulus | 0 |
+
+The gates are directional (A rises, B falls, C and D stay at zero); absolute values differ from the paper because it calibrated `w_syn` on v630 and we run v783 unchanged. Two full runs on different random streams gave 67.2 and 67.3 Hz at sugar 100 Hz (`docs/phase0_report.md`, `docs/fixed_path_recheck.md`).
+
+**Beyond Phase 0.** `scripts/run_phase1.py` produces the single-channel and pairwise curves in `docs/phase1_characterization.md`; `scripts/run_grid.py --stage full` runs the 400-cell lookup grid (about 80 minutes on 14 workers) and `scripts/build_lookup.py` turns it into `data/lookup_table.json`, the only file the site reads.
+
+## How to request a dish
+
+The site only knows dishes in `data/dishes.json`. If it answers "the fly hasn't tasted this yet":
+
+1. Press **Report it** on that line. It opens a prefilled issue at https://github.com/Felix471/ask-the-fly/issues/new with the name you typed. Add the Chinese name, the English name, and one line on what the dish is. (You can also open the issue by hand with the same four fields.)
+2. We encode the dish with the LLM encoder (`encoder/encode.py`, prompt `encode_v2.1`) in both languages, six repeats each, and merge with the cross-language arbitration rules in `docs/encoder.md`. Disagreements two levels apart are marked `needs_review` and resolved by hand.
+3. No simulation is needed: the three levels (sugar, bitter, water) map onto the precomputed 400-cell grid. The dish appears in the dictionary and on the site at the next deploy.
+
+Names that mean more than one dish (for example "biscuit") are split into separate entries via `data/ambiguous_names.json`; say so in the issue if your dish is one of those.
