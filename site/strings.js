@@ -135,7 +135,11 @@ export const STRINGS = {
     "howTitle": "How does it choose?",
     "howP1": "Think of it as translating each dish's flavours into the signals a fly's tongue has receptors for.",
     "howP2": "Then the brain model runs, and we watch how fast MN9, the neuron that drives proboscis extension, fires. Fast firing means it wants to eat.",
-    "howExtra": "Sweet always wins, bitter always loses; cucumber scores 0 because the sweet cells get no signal."
+    "howExtra": "Sweet always wins, bitter always loses; cucumber scores 0 because the sweet cells get no signal.",
+    "sceneOppositeMany": "The fly took {fly_pick}. The rest is yours.",
+    "verdictOppositeMany": "The fly took {fly_pick}. The rest is yours.",
+    "cardOppositeMany": "The fly took {fly_pick}. The rest is yours.",
+    "oppositeLeast": "Its least favorite: {lowest}"
   },
   "zh": {
     "add": "添加",
@@ -271,6 +275,10 @@ export const STRINGS = {
     "howTitle": "它是怎么选的？",
     "howP1": "相当于我把每道菜的各种味道，翻译成果蝇舌头上有受体的信号。",
     "howP2": "然后用大脑模拟，看控制伸喙的那个神经元 MN9 放电多快——放电快就是想吃。",
-    "howExtra": "甜的永远赢，苦的永远输；黄瓜是 0 分，因为甜味细胞收不到信号。"
+    "howExtra": "甜的永远赢，苦的永远输；黄瓜是 0 分，因为甜味细胞收不到信号。",
+    "sceneOppositeMany": "果蝇选了{fly_pick}，剩下的都归你。",
+    "verdictOppositeMany": "果蝇选了{fly_pick}，剩下的都归你。",
+    "cardOppositeMany": "果蝇选了{fly_pick}，剩下的都归你。",
+    "oppositeLeast": "它最不想吃的是{lowest}"
   }
 };

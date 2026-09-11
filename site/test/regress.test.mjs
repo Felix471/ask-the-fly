@@ -73,12 +73,13 @@ const cellOf = (hz) => ({ mn9_mean: hz, mn9_std: 0, hz: {} });
 const item = (name, hz) => ({ name, entry: { key: name, display: { en: name, zh: name } }, cell: cellOf(hz), sugarOnly: cellOf(hz) });
 const keys = (list) => list.map((i) => i.name);
 
-test("F07: max unique / min tied, opposite: the fly has no tie; the human's dish is tied", () => {
+test("F07: max unique / min tied, opposite: the fly has no tie; both remaining dishes are the human's set", () => {
   const d = decide([item("A", 100), item("B", 0), item("C", 0)], "opposite");
   assert.equal(d.flyPick.name, "A");
   assert.deepEqual(keys(d.flyTies), []);
-  assert.deepEqual(keys(d.selectionTies), ["B", "C"]);
-  assert.deepEqual(keys(d.tie), ["B", "C"], "tie stays the selection tie for the result and the card");
+  assert.deepEqual(keys(d.humanSet), ["B", "C"]);
+  assert.deepEqual(keys(d.lowest), ["B", "C"], "the lowest set lists both");
+  assert.deepEqual(keys(d.tie), [], "no single human winner, so no selection tie");
 });
 
 test("F07: max tied / min unique, both modes", () => {
@@ -95,7 +96,9 @@ test("F07: max tied / min unique, both modes", () => {
 test("F07: ties at both ends, and all tied", () => {
   const both = decide([item("A", 50), item("B", 50), item("C", 1), item("D", 1)], "opposite");
   assert.deepEqual(keys(both.flyTies), ["A", "B"]);
-  assert.deepEqual(keys(both.selectionTies), ["C", "D"]);
+  assert.deepEqual(keys(both.humanSet), ["C", "D"]);
+  assert.deepEqual(keys(both.lowest), ["C", "D"]);
+  assert.deepEqual(keys(both.selectionTies), []);
   const all = decide([item("A", 5), item("B", 5), item("C", 5)], "ask");
   assert.deepEqual(keys(all.flyTies), ["A", "B", "C"]);
   assert.deepEqual(keys(all.selectionTies), ["A", "B", "C"]);
@@ -327,7 +330,7 @@ test("opposite, 3 dishes: no single winner; the human's set is everything but th
   assert.equal(d.many, true);
   assert.deepEqual(keys(d.lowest), ["C"]);
   assert.deepEqual(d.tie, []);
-  const plan = scenePlan(d, [...d.known, ...d.misses]);
+  const plan = appModule.scenePlan(d, [...d.known, ...d.misses]);
   assert.equal(plan.winner, 0, "the fly still lands on its own pick");
 });
 

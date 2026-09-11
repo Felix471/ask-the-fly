@@ -50,7 +50,11 @@ test("ask picks the highest MN9, opposite picks the lowest and reports the fly's
   const maxHz = Math.max(...ask.known.map((i) => i.cell.mn9_mean));
   const minHz = Math.min(...ask.known.map((i) => i.cell.mn9_mean));
   assert.equal(ask.winner.cell.mn9_mean, maxHz);
-  assert.equal(opposite.winner.cell.mn9_mean, minHz);
+  // opposite with three dishes: the fly takes its pick, the other two are the human's set
+  assert.equal(opposite.winner, null);
+  assert.equal(opposite.many, true);
+  assert.deepEqual(opposite.humanSet.map((i) => i.entry.key), ask.known.filter((i) => i !== ask.winner).sort((a, b) => b.cell.mn9_mean - a.cell.mn9_mean).map((i) => i.entry.key));
+  assert.equal(opposite.lowest[0].cell.mn9_mean, minHz);
   assert.equal(opposite.flyPick, ask.winner);
 });
 
@@ -442,11 +446,14 @@ test("replay caption shows levels in the page language, not the cell id", () => 
   assert.equal(levelsText({ sugar: "low", bitter: "none", water: "high" }, "zh"), "糖 低 · 苦 无 · 水 高");
 });
 
-test("opposite mode: the fly's own pick drives the fly, the human's dish is the winner", () => {
+test("opposite mode: the fly's own pick drives the fly; with three dishes the other two are the human's", () => {
   const dictionary = buildDictionary(dishes);
   const lookup = buildLookup(table);
   const d = decide(scoreOptions(["watermelon", "pho", "black coffee"], dictionary, lookup), "opposite");
   assert.equal(d.flyPick.entry.key, "watermelon");
-  assert.notEqual(d.winner, d.flyPick);
-  assert.equal(d.winner.cell.mn9_mean, Math.min(...d.known.map((i) => i.cell.mn9_mean)));
+  assert.equal(d.winner, null);
+  assert.deepEqual(d.humanSet.map((i) => i.entry.key), ["pho", "black coffee"]);
+  assert.equal(d.lowest[0].entry.key, "black coffee");
+  const two = decide(scoreOptions(["watermelon", "black coffee"], dictionary, lookup), "opposite");
+  assert.equal(two.winner.entry.key, "black coffee", "two dishes: the remaining dish is the human's");
 });

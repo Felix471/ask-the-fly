@@ -190,6 +190,7 @@ body { padding: 0 16px 32px; max-width: 640px; margin: 0 auto; }
 
 .verdict { font-size: 1.05rem; color: var(--muted); margin-bottom: 4px; }
 .verdict strong { font-family: var(--font-display); font-size: 1.5rem; color: var(--ink); display: block; }
+.verdict-sub { display: block; font-size: 0.9rem; color: var(--muted); margin-top: 2px; }
 .result-hero { display: block; width: 100%; height: auto; margin: 4px 0 8px; }
 
 .results { width: 100%; border-collapse: collapse; font-size: 0.92rem; }

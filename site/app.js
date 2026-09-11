@@ -105,6 +105,30 @@ export function decide(scored, mode) {
   const chosen = mode === "opposite" ? lowest[0] : flyPick;
   const sameAs = (ref) => known.filter((item) => Math.abs(item.cell.mn9_mean - ref.cell.mn9_mean) < 1e-9);
   const flyTies = sameAs(flyPick);
+  const lowestSet = sameAs(lowest[0]);
+  if (mode === "opposite") {
+    // The fly takes its top pick (every dish tied at the maximum); everything
+    // else is the human's. One remaining dish: the classic two-dish outcome.
+    // Two or more remaining: no single winner among them (`many`). None
+    // remaining: everything was tied, reported as a tie.
+    const humanSet = highest.filter((item) => !flyTies.includes(item));
+    const many = humanSet.length >= 2;
+    const single = humanSet.length === 1 ? humanSet[0] : null;
+    const allTied = humanSet.length === 0;
+    return {
+      mode,
+      winner: single,
+      flyPick,
+      flyTies: flyTies.length > 1 ? flyTies : [],
+      selectionTies: allTied ? flyTies : [],
+      tie: allTied ? flyTies : [],
+      humanSet,
+      many,
+      lowest: lowestSet,
+      known,
+      misses,
+    };
+  }
   const selectionTies = sameAs(chosen);
   return {
     mode,
@@ -113,6 +137,9 @@ export function decide(scored, mode) {
     flyTies: flyTies.length > 1 ? flyTies : [],
     selectionTies: selectionTies.length > 1 ? selectionTies : [],
     tie: selectionTies.length > 1 ? selectionTies : [],
+    humanSet: [],
+    many: false,
+    lowest: lowestSet,
     known,
     misses,
   };
@@ -124,7 +151,7 @@ export function scenePlan(decision, scored) {
   const indexOf = (item) => scored.indexOf(item);
   return {
     order: decision.known.map(indexOf),
-    winner: decision.winner ? indexOf(decision.flyPick) : null,
+    winner: decision.flyPick ? indexOf(decision.flyPick) : null, // the fly lands on its own pick in every mode
     tie: decision.flyTies.map(indexOf),
   };
 }
@@ -225,7 +252,7 @@ export function displayName(item, lang) {
 export function cardLines(decision, lang) {
   const t = STRINGS[lang];
   const names = t.levelNames;
-  const picked = decision.tie.length ? decision.tie : decision.winner ? [decision.winner] : [];
+  const picked = decision.tie.length ? decision.tie : decision.many ? [decision.flyPick] : decision.winner ? [decision.winner] : [];
   const lead = picked[0];
   const values = lead
     ? {
@@ -566,13 +593,14 @@ export function drawResultHero(canvas, decision, lang, options = {}) {
   const width = options.width || 360;
   const spriteFor = options.spriteFor || (() => null);
   const flyFrames = options.sprites ? options.sprites.fly : null;
-  const chosen = decision.winner ? (decision.tie.length ? decision.tie : [decision.winner]) : [];
+  const many = Boolean(decision.many);
+  const chosen = many ? decision.humanSet : decision.winner ? (decision.tie.length ? decision.tie : [decision.winner]) : [];
   const ranked = [...decision.known].sort((a, b) => b.cell.mn9_mean - a.cell.mn9_mean);
   const others = ranked.filter((item) => !chosen.includes(item));
   const big = chosen.length > 1 ? Math.min(120, Math.floor((width - 16 * (chosen.length + 1)) / chosen.length)) : 150;
   const small = 64;
   const gap = 16;
-  const top = chosen.length > 1 ? Math.round(big * 0.2) : 0; // room for the hovering fly in a tie
+  const top = chosen.length > 1 && !many ? Math.round(big * 0.2) : 0; // room for the hovering fly in a tie
   const height = top + (chosen.length ? big + 12 : 0) + (others.length ? small + 34 : 0) + 8;
   canvas.width = Math.round(width * pr);
   canvas.height = Math.round(height * pr);
@@ -586,7 +614,7 @@ export function drawResultHero(canvas, decision, lang, options = {}) {
   if (chosen.length) {
     const rowWidth = chosen.length * big + (chosen.length - 1) * gap;
     const x0 = (width - rowWidth) / 2;
-    if (chosen.length > 1) drawFlyOn(ctx, flyFrames, width / 2 - big / 2, y - big * 0.16, big, false);
+    if (chosen.length > 1 && !many) drawFlyOn(ctx, flyFrames, width / 2 - big / 2, y - big * 0.16, big, false);
     chosen.forEach((item, i) => {
       const x = x0 + i * (big + gap);
       drawDish(ctx, spriteFor(item), x, y, big, false);
@@ -601,8 +629,9 @@ export function drawResultHero(canvas, decision, lang, options = {}) {
     let x = (width - rowWidth) / 2;
     ctx.textAlign = "center";
     for (const item of shown) {
-      const flyPick = decision.mode === "opposite" && item === decision.flyPick;
-      drawDish(ctx, spriteFor(item), x, y, small, !flyPick);
+      const flyPick = decision.mode === "opposite" && (item === decision.flyPick || decision.flyTies.includes(item));
+      // Two dishes: the fly's pick keeps its colour. Three or more: it is taken (greyed, struck) with the fly on it.
+      drawDish(ctx, spriteFor(item), x, y, small, !flyPick || many);
       if (flyPick) drawFlyOn(ctx, flyFrames, x, y, small, true);
       ctx.font = font(12, flyPick ? 600 : 400);
       ctx.fillStyle = flyPick ? "#1f1a17" : "#9a928a";
@@ -658,16 +687,30 @@ export function drawShareCard(canvas, decision, lang, options = {}) {
   ctx.font = font(27);
   ctx.fillStyle = "#6b625b";
   let headline;
-  if (!decision.winner) headline = t.verdictNone;
+  const many = Boolean(decision.many);
+  if (!decision.flyPick) headline = t.verdictNone;
   else if (decision.tie.length) headline = t.cardTie;
+  else if (many) headline = "";
   else if (decision.mode === "opposite") headline = fmt(t.cardOppositePicked, { fly_pick: displayName(decision.flyPick, lang), human_pick: displayName(decision.winner, lang) });
   else headline = t.cardPicked;
   for (const line of wrapLines(ctx, headline, W - 2 * pad)) {
     ctx.fillText(line, pad, y);
     y += 36;
   }
-  const chosen = decision.winner ? (decision.tie.length ? decision.tie : [decision.winner]) : [];
-  if (chosen.length) {
+  const chosen = many ? decision.humanSet : decision.winner ? (decision.tie.length ? decision.tie : [decision.winner]) : [];
+  if (many) {
+    // The sentence is the title; a small second line names the fly's least favourite.
+    ctx.fillStyle = "#1f1a17";
+    ctx.font = display(40, 700);
+    for (const line of wrapLines(ctx, fmt(t.cardOppositeMany, { fly_pick: displayName(decision.flyPick, lang) }), W - 2 * pad)) {
+      y += 48;
+      ctx.fillText(line, pad, y);
+    }
+    ctx.font = font(24);
+    ctx.fillStyle = "#6b625b";
+    y += 34;
+    ctx.fillText(fmt(t.oppositeLeast, { lowest: decision.lowest.map((i) => displayName(i, lang)).join(" / ") }), pad, y);
+  } else if (chosen.length) {
     ctx.fillStyle = "#1f1a17";
     ctx.font = display(chosen.length > 1 ? 44 : 56, 700);
     const names = chosen.map((i) => displayName(i, lang)).join(" / ");
@@ -691,7 +734,8 @@ export function drawShareCard(canvas, decision, lang, options = {}) {
   const textBlock = 40 + 60; // MN9 line + honesty sentence (up to two lines)
   const spriteRoom = Math.max(0, bottomEstimate - 30 - textBlock - barsHeight - y);
   if (chosen.length && spriteRoom >= 120) {
-    const bigSize = Math.max(120, Math.min(chosen.length > 1 ? 180 : 250, spriteRoom - (chosen.length > 1 ? 30 : 0)));
+    const fitWidth = Math.floor((W - 2 * pad - 24 * (chosen.length - 1)) / Math.max(1, chosen.length));
+    const bigSize = Math.max(100, Math.min(chosen.length > 1 ? Math.min(180, fitWidth) : 250, spriteRoom - (chosen.length > 1 ? 30 : 0)));
     const gap = 24;
     const rowWidth = chosen.length * bigSize + (chosen.length - 1) * gap;
     const x0 = (W - rowWidth) / 2;
@@ -717,18 +761,19 @@ export function drawShareCard(canvas, decision, lang, options = {}) {
       ctx.stroke();
       ctx.restore();
     }
-    if (chosen.length > 1) drawFlyOn(ctx, flyFrames, W / 2 - bigSize / 2, sy - bigSize * 0.16, bigSize, false);
+    if (chosen.length > 1 && !many) drawFlyOn(ctx, flyFrames, W / 2 - bigSize / 2, sy - bigSize * 0.16, bigSize, false);
     chosen.forEach((item, i) => {
       const x = x0 + shift + i * (bigSize + gap);
       drawDish(ctx, spriteFor(item), x, sy, bigSize, false);
       if (chosen.length === 1 && !opposite) drawFlyOn(ctx, flyFrames, x, sy, bigSize, true);
     });
     if (opposite) {
-      // The human's dish stays large; the fly sits on its own pick beside it.
+      // The human's dishes stay large; the fly sits on its own pick beside them
+      // (taken: greyed and struck when the human keeps several dishes).
       const small = Math.round(bigSize * 0.56);
       const x = x0 + shift + rowWidth + 28;
       const yy = sy + bigSize - small;
-      drawDish(ctx, spriteFor(decision.flyPick), x, yy, small, false);
+      drawDish(ctx, spriteFor(decision.flyPick), x, yy, small, many);
       drawFlyOn(ctx, flyFrames, x, yy, small, true);
       ctx.font = font(20, 600);
       ctx.fillStyle = "#1f1a17";
@@ -1330,6 +1375,13 @@ if (isBrowser) {
     } else if (d.tie.length) {
       lead.textContent = t.verdictTie;
       strong.textContent = d.tie.map((i) => displayName(i, state.lang)).join(" / ");
+    } else if (d.mode === "opposite" && d.many) {
+      lead.textContent = "";
+      strong.textContent = fmt(t.verdictOppositeMany, { fly_pick: displayName(d.flyPick, state.lang) });
+      const sub = document.createElement("span");
+      sub.className = "verdict-sub";
+      sub.textContent = fmt(t.oppositeLeast, { lowest: d.lowest.map((i) => displayName(i, state.lang)).join(" / ") });
+      verdict.append(lead, strong, sub);
     } else if (d.mode === "opposite") {
       lead.textContent = "";
       strong.textContent = fmt(t.verdictOpposite, { fly_pick: displayName(d.flyPick, state.lang), human_pick: displayName(d.winner, state.lang) });
@@ -1337,7 +1389,7 @@ if (isBrowser) {
       lead.textContent = t.verdictAsk;
       strong.textContent = displayName(d.winner, state.lang);
     }
-    verdict.append(lead, strong);
+    if (!verdict.contains(strong)) verdict.append(lead, strong);
     renderHero().catch((error) => console.warn("hero failed:", error));
 
     const body = $("results-body");
@@ -1345,8 +1397,8 @@ if (isBrowser) {
     const ordered = [...d.known].sort((a, b) => b.cell.mn9_mean - a.cell.mn9_mean).concat(d.misses);
     for (const item of ordered) {
       const tr = document.createElement("tr");
-      if (item.cell && d.winner && (item === d.winner || d.tie.includes(item))) tr.className = "win";
-      else if (item.cell && d.mode === "opposite" && item === d.flyPick) tr.className = "lose";
+      if (item.cell && ((d.winner && (item === d.winner || d.tie.includes(item))) || (d.many && d.humanSet.includes(item)))) tr.className = "win";
+      else if (item.cell && d.mode === "opposite" && (item === d.flyPick || d.flyTies.includes(item))) tr.className = "lose";
       else if (!item.cell) tr.className = "miss";
       const name = document.createElement("td");
       name.textContent = displayName(item, state.lang);
@@ -1425,7 +1477,7 @@ if (isBrowser) {
     const canvas = $("result-hero");
     const decision = state.decision;
     const sprites = state.scene ? state.scene.sprites : null;
-    if (!decision || !decision.winner || !sprites) { canvas.hidden = true; return; }
+    if (!decision || !decision.flyPick || !sprites) { canvas.hidden = true; return; }
     await Promise.all(decision.known.map((item) => loadDishSprite(sprites, spriteSlug(item)).catch(() => null)));
     if (state.decision !== decision) return;
     canvas.hidden = false;
@@ -1539,8 +1591,9 @@ if (isBrowser) {
 
   // The stage caption once the outcome is known (end of the sequence, or skip).
   function finalSceneStatus(decision) {
-    if (!decision.winner) return { key: "sceneNone" };
+    if (!decision.flyPick) return { key: "sceneNone" };
     if (decision.tie.length) return { key: "sceneTie" };
+    if (decision.mode === "opposite" && decision.many) return { key: "sceneOppositeMany", fly_pick: decision.flyPick };
     if (decision.mode === "opposite") return { key: "sceneOpposite", fly_pick: decision.flyPick, human_pick: decision.winner };
     return { key: "sceneWinner", pick: decision.winner };
   }
@@ -1579,7 +1632,7 @@ if (isBrowser) {
   // run; in "opposite" the fly's own pick; in a tie the tied dish with the most
   // MN9 spikes. Null when the brain view or the replay is unavailable.
   async function snapshotFor(decision) {
-    if (!state.brain || !decision.winner) return null;
+    if (!state.brain || !decision.flyPick) return null;
     const candidates = decision.mode === "opposite" ? [decision.flyPick] : (decision.tie.length ? decision.tie : [decision.winner]);
     const loaded = await Promise.all(candidates.map(async (item) => {
       try { return { item, replay: await state.loadReplay(cellIdFor(item.cell)) }; } catch (_) { return null; }
