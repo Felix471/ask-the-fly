@@ -22,6 +22,10 @@ The stub table has the real schema and 400 cells but its MN9 values are a closed
 
 then open http://localhost:8000/. `fetch()` needs an HTTP origin; opening `index.html` from disk will not load the data files.
 
+## Deploy (GitHub Pages)
+
+`.github/workflows/pages.yml` runs the unit tests and deploys `site/` with the official Pages actions (configure-pages, upload-pages-artifact, deploy-pages) on every push to `main` that touches `site/`, and on manual dispatch. It only works once the repository setting **Settings → Pages → Build and deployment → Source** is set to **GitHub Actions**; until then the workflow's deploy job fails with a "Pages not enabled" error and nothing is published.
+
 ## Tests
 
 ```
