@@ -802,10 +802,12 @@
       "ipa beer",
       "india pale ale",
       "ipa",
-      "精酿啤酒"
+      "精酿啤酒",
+      "ipa啤酒",
+      "ipa 啤酒"
     ],
     "display": {
-      "zh": "印度淡色艾尔",
+      "zh": "IPA啤酒",
       "en": "IPA beer"
     },
     "sugar": "none",
