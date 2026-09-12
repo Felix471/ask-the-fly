@@ -42,13 +42,22 @@ Every string the page shows lives in `copy/site_strings.json` (key, context, en,
 
 ## Deploy (Cloudflare Workers, GitHub Pages as backup)
 
-The canonical site is https://askthefly.app/, served as static assets by a Cloudflare Worker: `wrangler.jsonc` at the repo root (name `ask-the-fly`, `assets.directory` = `site`, observability on) is the file Cloudflare generated; `npx wrangler deploy` publishes `site/` as is (no build step). `.wrangler/` and `.dev.vars*` are gitignored. The canonical URL lives in `site/config.json` (`site_url`) and nowhere else by hand: the page reads it at load for share links and the QR code (`SITE_URL` in `site/app.js` is only the fallback), `scripts/import_copy.py` writes it into the canonical link, `og:url`, `og:image` and `twitter:image`, and `scripts/export_share_card.py` checks the QR against it. The READMEs' "Try it" line is copy (`copy/readme_sections.md`); the import script warns when it disagrees with the config.
+The canonical site is https://askthefly.app/, served as static assets by a Cloudflare Worker: `wrangler.jsonc` at the repo root (name `ask-the-fly`, `assets.directory` = `site`, observability on) is the file Cloudflare generated; Cloudflare Workers Builds is connected to the GitHub repository (production branch `main`, deploy command `npx wrangler deploy`): merging into `main` deploys production automatically, and every push to another branch produces a non-production preview build (a preview can also be uploaded by hand with `npx wrangler versions upload`). Running `npx wrangler deploy` yourself is only the manual fallback when the automatic build fails; it publishes `site/` as is (no build step). Before a merge, CI (`.github/workflows/ci.yml`) runs the test job, unit tests plus `scripts/validate_release.py`, on pull requests into `dev` as well as `main`, so release validation happens before the automatic deploy, not after it. `.wrangler/` and `.dev.vars*` are gitignored. The canonical URL lives in `site/config.json` (`site_url`) and nowhere else by hand: the page reads it at load for share links and the QR code (`SITE_URL` in `site/app.js` is only the fallback), `scripts/import_copy.py` writes it into the canonical link, `og:url`, `og:image` and `twitter:image`, and `scripts/export_share_card.py` checks the QR against it. The READMEs' "Try it" line is copy (`copy/readme_sections.md`); the import script warns when it disagrees with the config.
 
 Security headers: `site/_headers` sets a Content-Security-Policy (same-origin scripts, styles, images and fetches; `data:` images for the favicon and the placeholder plate; no objects, no framing), `nosniff`, `Referrer-Policy` and a `Permissions-Policy` on the Cloudflare deploy; `index.html` carries the same CSP in a `<meta>` tag so GitHub Pages, which cannot set headers, enforces it too. The page has no inline scripts or style attributes, no third-party requests, no cookies, and stores only the language preference in `localStorage`.
 
 ### GitHub Pages (backup)
 
 `.github/workflows/pages.yml` runs the unit tests and deploys `site/` with the official Pages actions (configure-pages, upload-pages-artifact, deploy-pages) on every push to `main` that touches `site/`, and on manual dispatch. It only works once the repository setting **Settings → Pages → Build and deployment → Source** is set to **GitHub Actions**; until then the workflow's deploy job fails with a "Pages not enabled" error and nothing is published.
+
+## Releases
+
+Annotated tags on `main`; every update ships under a version (feature branch off `dev`, PR into `dev`, PR `dev` → `main`, tag after the automatic deploy is verified on askthefly.app).
+
+| tag | commit | note |
+|---|---|---|
+| v1.0.0 | 019fe5d | launch |
+| v1.1.0 | 41f8b72 | Ir94e (amino-acid aversion) axis enabled in the encoder and the site; no simulation changes. |
 
 ## Tests
 

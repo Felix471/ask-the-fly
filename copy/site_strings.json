@@ -236,7 +236,7 @@
       "key": "lowInterest",
       "context": "Extra line under the pick when the fly's chosen dish scores below 5 Hz MN9 (threshold designed by us): none of the options interested the fly much",
       "en": "The fly didn't care much for any of these. This one was just the least uninteresting.",
-      "zh": "这几样果蝇都不太感兴趣，这个只是最不无聊的一个。",
+      "zh": "这几样果蝇都不太想吃，勉强挑了这个。",
       "max_length": 120
     },
     {
