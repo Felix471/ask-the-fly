@@ -20,7 +20,7 @@ def cell(sugar, water, mean=10.0, n=30):
 
 
 def dish(key, sugar="low", water="low", review="llm_v1"):
-    return {"key": key, "display": {"zh": key, "en": key}, "sugar": sugar, "bitter": "none", "water": water, "review": review}
+    return {"key": key, "display": {"zh": key, "en": key}, "sugar": sugar, "bitter": "none", "water": water, "ir94e": "none", "review": review}
 
 
 class Bundle:
@@ -122,6 +122,21 @@ class ValidateRelease(unittest.TestCase):
         table = {**self.b.table, "cells": cells, "cells_sha256": vr.cells_sha256(cells)}
         self.b.write(table=table, dishes=[dish("a"), dish("z", "low", "none")])
         self.assertTrue(any("dish 'z'" in p for p in self.b.problems()))
+
+    def test_invalid_and_missing_ir94e_fail_and_shipped_dictionary_passes(self):
+        invalid = dish("invalid")
+        invalid["ir94e"] = "very_high"
+        missing = dish("missing")
+        del missing["ir94e"]
+        self.b.write(dishes=[invalid, missing])
+        problems = self.b.problems()
+        self.assertIn("dictionary: 'invalid' ir94e level 'very_high' invalid", problems)
+        self.assertIn("dictionary: 'missing' ir94e level None invalid", problems)
+        self.assertIn("replay: dish 'missing' lacks ir94e", problems)
+
+        shipped_root = Path(__file__).resolve().parents[1]
+        shipped_problems, _ = vr.check_dictionary(shipped_root)
+        self.assertFalse(any("ir94e level" in p for p in shipped_problems), shipped_problems)
 
     def test_placeholder_layout_fails(self):
         (self.b.root / "site" / "data" / "neurons.json").write_text(json.dumps({"layout": "placeholder"}), encoding="utf-8")

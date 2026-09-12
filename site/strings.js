@@ -27,8 +27,8 @@ export const STRINGS = {
     "download": "Save image",
     "fixedLines": [
       "The fly picked: {dish}",
-      "MN9: {hz} Hz · sugar alone {hz_sugar_only} · after bitter {hz}",
-      "Taste estimate: sugar {sugar} · bitter {bitter} · water {water} (LLM)",
+      "MN9: {hz} Hz · sugar alone {hz_sugar_only} · with bitter and amino acids {hz}",
+      "Taste estimate: sugar {sugar} · bitter {bitter} · water {water} · amino acids {ir94e} (LLM)",
       "Brain response:"
     ],
     "hint": "Add at least two dishes. The fly only judges the first bite.",
@@ -102,7 +102,7 @@ export const STRINGS = {
     "hudInputs": "Input rates",
     "hudNone": "none",
     "hudMs": "{ms} ms",
-    "hudRates": "sugar {sugar} · bitter {bitter} · water {water} Hz",
+    "hudRates": "sugar {sugar} · bitter {bitter} · water {water} · amino acids {ir94e} Hz",
     "silenceTitle": "Silencing experiments (recorded runs)",
     "silenceBaseline": "Normal",
     "silenceButton": "Silence {name}",
@@ -128,7 +128,7 @@ export const STRINGS = {
     "libraryEmpty": "No dish matches.",
     "ariaResultHero": "The fly's pick",
     "cardHonesty": "Taste levels are LLM estimates; the response is read from precomputed runs of a published fly-connectome model.",
-    "levelsLine": "sugar {sugar} · bitter {bitter} · water {water}",
+    "levelsLine": "sugar {sugar} · bitter {bitter} · water {water} · amino acids {ir94e}",
     "hudCell": "Recorded cell",
     "stateShareFailed": "The share card could not be drawn. Tap Share to try again.",
     "saveHint": "Press and hold the image to save it",
@@ -139,7 +139,10 @@ export const STRINGS = {
     "sceneOppositeMany": "The fly took {fly_pick}. The rest is yours.",
     "verdictOppositeMany": "The fly took {fly_pick}. The rest is yours.",
     "cardOppositeMany": "The fly took {fly_pick}. The rest is yours.",
-    "oppositeLeast": "Its least favorite: {lowest}"
+    "oppositeLeast": "Its least favorite: {lowest}",
+    "colIr94e": "Amino acids",
+    "ir94eExplain": "Amino acids = the Ir94e channel: in this model free amino acids and glutamate put the fly off, so soy-, stock- and meat-heavy dishes score low. Which level a dish gets is our estimate; the suppression is the model's.",
+    "lowInterest": "The fly didn't care much for any of these. This one was just the least uninteresting."
   },
   "zh": {
     "add": "添加",
@@ -167,8 +170,8 @@ export const STRINGS = {
     "download": "保存图片",
     "fixedLines": [
       "果蝇今天选了：{dish}",
-      "MN9：{hz} Hz（只有甜味时是 {hz_sugar_only}，加入苦味后是 {hz}）",
-      "味觉估算：甜 {sugar} · 苦 {bitter} · 水 {water}（由 LLM 估算）",
+      "MN9：{hz} Hz · 只看甜 {hz_sugar_only} · 加上苦和氨基酸 {hz}",
+      "味觉估算：甜 {sugar} · 苦 {bitter} · 水 {water} · 氨基酸 {ir94e}（由 LLM 估算）",
       "脑反应："
     ],
     "hint": "至少先加两道菜。果蝇只负责判断第一口。",
@@ -242,7 +245,7 @@ export const STRINGS = {
     "hudInputs": "输入频率",
     "hudNone": "无",
     "hudMs": "{ms} ms",
-    "hudRates": "甜 {sugar} · 苦 {bitter} · 水 {water} Hz",
+    "hudRates": "甜 {sugar} · 苦 {bitter} · 水 {water} · 氨基酸 {ir94e} Hz",
     "silenceTitle": "沉默实验（记录回放）",
     "silenceBaseline": "正常",
     "silenceButton": "关掉 {name}",
@@ -268,7 +271,7 @@ export const STRINGS = {
     "libraryEmpty": "没有匹配的菜。",
     "ariaResultHero": "果蝇选中的菜",
     "cardHonesty": "口味等级由 LLM 估算；反应来自已发表果蝇连接组模型预先跑好的结果。",
-    "levelsLine": "糖 {sugar} · 苦 {bitter} · 水 {water}",
+    "levelsLine": "糖 {sugar} · 苦 {bitter} · 水 {water} · 氨基酸 {ir94e}",
     "hudCell": "记录格 ID",
     "stateShareFailed": "分享卡没能生成。再点一次「分享」试试。",
     "saveHint": "长按图片保存到相册",
@@ -279,6 +282,9 @@ export const STRINGS = {
     "sceneOppositeMany": "果蝇选了{fly_pick}，剩下的都归你。",
     "verdictOppositeMany": "果蝇选了{fly_pick}，剩下的都归你。",
     "cardOppositeMany": "果蝇选了{fly_pick}，剩下的都归你。",
-    "oppositeLeast": "它最不想吃的是{lowest}"
+    "oppositeLeast": "它最不想吃的是{lowest}",
+    "colIr94e": "氨基酸",
+    "ir94eExplain": "氨基酸一列是 Ir94e 通道：在这个模型里，游离氨基酸和谷氨酸（俗称的“鲜”）会让果蝇扫兴，所以酱油、高汤、肉多的菜得分很低。菜对应哪个等级是我们估的，抑制本身是模型的。",
+    "lowInterest": "这几样果蝇都不太感兴趣，这个只是最不无聊的一个。"
   }
 };

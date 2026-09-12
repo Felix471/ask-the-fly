@@ -19,18 +19,24 @@
     "sugar": "none",
     "bitter": "high",
     "water": "high",
+    "ir94e": "none",
     "reason": {
       "sugar": "contains no added sugar",
       "bitter": "brewed coffee is naturally high in bitter compounds",
-      "water": "diluted with a large volume of water"
+      "water": "diluted with a large volume of water",
+      "ir94e": "coffee does not contain significant free glutamate"
     },
     "confidence": {
       "sugar": 1.0,
       "bitter": 0.975,
-      "water": 0.95
+      "water": 0.95,
+      "ir94e": 0.95
     },
     "review": "llm_v1",
     "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    },
     "arbitration": {
       "bitter": {
         "zh": "high",
@@ -61,18 +67,24 @@
     "sugar": "medium",
     "bitter": "none",
     "water": "low",
+    "ir94e": "none",
     "reason": {
       "sugar": "contains natural fructose providing noticeable sweetness",
       "bitter": "no significant bitter compounds present in the flesh",
-      "water": "firm fruit flesh with moderate moisture content"
+      "water": "firm fruit flesh with moderate moisture content",
+      "ir94e": "lacks significant free amino acids or glutamate"
     },
     "confidence": {
       "sugar": 0.9,
       "bitter": 0.975,
-      "water": 0.875
+      "water": 0.875,
+      "ir94e": 1.0
     },
     "review": "llm_v1",
-    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2"
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    }
   },
   {
     "key": "apple-juice",
@@ -93,18 +105,24 @@
     "sugar": "medium",
     "bitter": "none",
     "water": "medium",
+    "ir94e": "none",
     "reason": {
       "sugar": "contains natural fruit sugars",
       "bitter": "no bitter components",
-      "water": "liquid fruit juice with dissolved sugars"
+      "water": "liquid fruit juice with dissolved sugars",
+      "ir94e": "no fermented or protein-rich ingredients"
     },
     "confidence": {
       "sugar": 0.95,
       "bitter": 0.975,
-      "water": 0.9
+      "water": 0.9,
+      "ir94e": 1.0
     },
     "review": "llm_v1",
-    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2"
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    }
   },
   {
     "key": "apple-pie",
@@ -128,18 +146,24 @@
     "sugar": "high",
     "bitter": "none",
     "water": "low",
+    "ir94e": "none",
     "reason": {
       "sugar": "contains significant added sugar in the filling and crust",
       "bitter": "no bitter ingredients used in standard preparation",
-      "water": "moist solid texture with low free water content"
+      "water": "moist solid texture with low free water content",
+      "ir94e": "no significant source of free amino acids"
     },
     "confidence": {
       "sugar": 0.95,
       "bitter": 0.975,
-      "water": 0.9
+      "water": 0.9,
+      "ir94e": 0.95
     },
     "review": "llm_v1",
-    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2"
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    }
   },
   {
     "key": "avocado",
@@ -165,18 +189,24 @@
     "sugar": "none",
     "bitter": "none",
     "water": "low",
+    "ir94e": "low",
     "reason": {
       "sugar": "contains negligible amounts of sugar",
       "bitter": "lacks significant bitter compounds",
-      "water": "fleshy texture with low free water content"
+      "water": "fleshy texture with low free water content",
+      "ir94e": "contains small amounts of free amino acids"
     },
     "confidence": {
       "sugar": 1.0,
       "bitter": 0.9,
-      "water": 0.9
+      "water": 0.9,
+      "ir94e": 0.8
     },
     "review": "llm_v1",
-    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2"
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    }
   },
   {
     "key": "bacon",
@@ -211,18 +241,24 @@
     "sugar": "low",
     "bitter": "none",
     "water": "low",
+    "ir94e": "medium",
     "reason": {
       "sugar": "often cured with a small amount of sugar",
       "bitter": "no significant bitter components",
-      "water": "cured meat with low moisture content"
+      "water": "cured meat with low moisture content",
+      "ir94e": "curing and smoking process releases significant free amino acids"
     },
     "confidence": {
       "sugar": 0.9,
       "bitter": 0.975,
-      "water": 0.9
+      "water": 0.9,
+      "ir94e": 0.9
     },
     "review": "llm_v1",
-    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2"
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    }
   },
   {
     "key": "bagel",
@@ -242,18 +278,24 @@
     "sugar": "low",
     "bitter": "none",
     "water": "low",
+    "ir94e": "none",
     "reason": {
       "sugar": "contains a small amount of sugar in the dough",
       "bitter": "no bitter ingredients used in standard preparation",
-      "water": "a dense, chewy, and moist bread product"
+      "water": "a dense, chewy, and moist bread product",
+      "ir94e": "no significant source of free amino acids"
     },
     "confidence": {
       "sugar": 0.9,
       "bitter": 1.0,
-      "water": 0.9
+      "water": 0.9,
+      "ir94e": 0.95
     },
     "review": "llm_v1",
-    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2"
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    }
   },
   {
     "key": "baijiu",
@@ -276,18 +318,24 @@
     "sugar": "none",
     "bitter": "low",
     "water": "medium",
+    "ir94e": "none",
     "reason": {
       "sugar": "distilled spirit with no added sugar",
       "bitter": "contains trace bitter compounds from fermentation and distillation",
-      "water": "high alcohol content acts as a solvent but is not pure water"
+      "water": "high alcohol content acts as a solvent but is not pure water",
+      "ir94e": "Does not contain significant free amino acids or glutamate."
     },
     "confidence": {
       "sugar": 1.0,
       "bitter": 0.8,
-      "water": 0.9
+      "water": 0.9,
+      "ir94e": 0.9
     },
     "review": "llm_v1",
     "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    },
     "arbitration": {
       "water": {
         "zh": "high",
@@ -311,18 +359,24 @@
     "sugar": "medium",
     "bitter": "none",
     "water": "low",
+    "ir94e": "none",
     "reason": {
       "sugar": "contains natural fruit sugars",
       "bitter": "no bitter compounds present",
-      "water": "firm, starchy fruit flesh"
+      "water": "firm, starchy fruit flesh",
+      "ir94e": "no significant free amino acids"
     },
     "confidence": {
       "sugar": 0.9,
       "bitter": 1.0,
-      "water": 0.9
+      "water": 0.9,
+      "ir94e": 1.0
     },
     "review": "llm_v1",
-    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2"
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    }
   },
   {
     "key": "beef jerky",
@@ -338,18 +392,24 @@
     "sugar": "low",
     "bitter": "none",
     "water": "none",
+    "ir94e": "medium",
     "reason": {
       "sugar": "often contains a small amount of sugar in the marinade",
       "bitter": "no significant bitter components",
-      "water": "a dehydrated, dry solid food"
+      "water": "a dehydrated, dry solid food",
+      "ir94e": "cured and seasoned meat with high levels of free amino acids"
     },
     "confidence": {
       "sugar": 0.85,
       "bitter": 0.925,
-      "water": 0.975
+      "water": 0.975,
+      "ir94e": 0.9
     },
     "review": "llm_v1",
-    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2"
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    }
   },
   {
     "key": "beef-noodle-soup",
@@ -373,18 +433,24 @@
     "sugar": "low",
     "bitter": "none",
     "water": "high",
+    "ir94e": "medium",
     "reason": {
       "sugar": "often contains a small amount of sugar in the braising liquid for balance",
       "bitter": "no significant bitter ingredients in standard preparation",
-      "water": "a broth-based dish with high water content and moderate solute concentration"
+      "water": "a broth-based dish with high water content and moderate solute concentration",
+      "ir94e": "rich in glutamate from long-simmered beef broth and soy sauce"
     },
     "confidence": {
       "sugar": 0.85,
       "bitter": 0.925,
-      "water": 0.925
+      "water": 0.925,
+      "ir94e": 0.9
     },
     "review": "llm_v1",
-    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2"
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    }
   },
   {
     "key": "beer",
@@ -402,18 +468,24 @@
     "sugar": "none",
     "bitter": "medium",
     "water": "high",
+    "ir94e": "low",
     "reason": {
       "sugar": "fermented beverage with negligible residual sugar",
       "bitter": "contains hops which provide a distinct bitter profile",
-      "water": "primarily water-based liquid with low solute concentration"
+      "water": "primarily water-based liquid with low solute concentration",
+      "ir94e": "contains small amounts of amino acids from malted grains"
     },
     "confidence": {
       "sugar": 0.9,
       "bitter": 0.95,
-      "water": 0.9
+      "water": 0.9,
+      "ir94e": 0.8
     },
     "review": "llm_v1",
-    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2"
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    }
   },
   {
     "key": "bibimbap",
@@ -439,18 +511,24 @@
     "sugar": "low",
     "bitter": "low",
     "water": "low",
+    "ir94e": "medium",
     "reason": {
       "sugar": "contains small amounts of sugar in the gochujang sauce",
       "bitter": "faint bitterness from sesame oil and certain vegetable components",
-      "water": "moist solid dish with cooked rice and vegetables"
+      "water": "moist solid dish with cooked rice and vegetables",
+      "ir94e": "gochujang and sesame oil provide significant umami"
     },
     "confidence": {
       "sugar": 0.9,
       "bitter": 0.8,
-      "water": 0.9
+      "water": 0.9,
+      "ir94e": 0.9
     },
     "review": "llm_v1",
-    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2"
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    }
   },
   {
     "key": "bitter melon",
@@ -468,18 +546,24 @@
     "sugar": "none",
     "bitter": "very_high",
     "water": "medium",
+    "ir94e": "none",
     "reason": {
       "sugar": "contains no significant sugar content",
       "bitter": "contains high levels of cucurbitacins which are intensely bitter",
-      "water": "fleshy vegetable with high water content that releases juice when bitten"
+      "water": "fleshy vegetable with high water content that releases juice when bitten",
+      "ir94e": "no fermented or glutamate-rich ingredients"
     },
     "confidence": {
       "sugar": 1.0,
       "bitter": 1.0,
-      "water": 0.9
+      "water": 0.9,
+      "ir94e": 1.0
     },
     "review": "llm_v1",
-    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2"
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    }
   },
   {
     "key": "black coffee",
@@ -496,18 +580,24 @@
     "sugar": "none",
     "bitter": "very_high",
     "water": "high",
+    "ir94e": "none",
     "reason": {
       "sugar": "contains no added sugar or sweeteners",
       "bitter": "dominated by roasted coffee bean compounds",
-      "water": "mostly water with low solute concentration"
+      "water": "mostly water with low solute concentration",
+      "ir94e": "lacks significant free amino acids or glutamate"
     },
     "confidence": {
       "sugar": 1.0,
       "bitter": 1.0,
-      "water": 0.9
+      "water": 0.9,
+      "ir94e": 0.9
     },
     "review": "llm_v1",
     "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    },
     "arbitration": {
       "water": {
         "zh": "high",
@@ -536,18 +626,24 @@
     "sugar": "none",
     "bitter": "medium",
     "water": "very_high",
+    "ir94e": "none",
     "reason": {
       "sugar": "pure tea contains no added sugar",
       "bitter": "contains tannins and caffeine which provide a distinct bitterness",
-      "water": "primarily water with low solute concentration"
+      "water": "primarily water with low solute concentration",
+      "ir94e": "no significant source of free amino acids or glutamate"
     },
     "confidence": {
       "sugar": 1.0,
       "bitter": 0.9,
-      "water": 1.0
+      "water": 1.0,
+      "ir94e": 0.95
     },
     "review": "llm_v1",
-    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2"
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    }
   },
   {
     "key": "blueberries",
@@ -568,18 +664,24 @@
     "sugar": "medium",
     "bitter": "none",
     "water": "medium",
+    "ir94e": "none",
     "reason": {
       "sugar": "naturally sweet fruit",
       "bitter": "no significant bitter compounds",
-      "water": "juicy fruit that releases liquid when bitten"
+      "water": "juicy fruit that releases liquid when bitten",
+      "ir94e": "no fermented or glutamate-rich ingredients"
     },
     "confidence": {
       "sugar": 0.9,
       "bitter": 0.875,
-      "water": 0.9
+      "water": 0.9,
+      "ir94e": 1.0
     },
     "review": "llm_v1",
     "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    },
     "arbitration": {
       "bitter": {
         "zh": "none",
@@ -607,18 +709,24 @@
     "sugar": "medium",
     "bitter": "none",
     "water": "low",
+    "ir94e": "medium",
     "reason": {
       "sugar": "caramelized sugar is a key component of the red braising sauce",
       "bitter": "no bitter ingredients are typically used in the braising process",
-      "water": "the dish is a moist solid with a thick, reduced sauce"
+      "water": "the dish is a moist solid with a thick, reduced sauce",
+      "ir94e": "heavy use of soy sauce and long-simmered meat juices"
     },
     "confidence": {
       "sugar": 0.9,
       "bitter": 0.975,
-      "water": 0.875
+      "water": 0.875,
+      "ir94e": 0.9
     },
     "review": "llm_v1",
-    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2"
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    }
   },
   {
     "key": "bread",
@@ -643,18 +751,24 @@
     "sugar": "low",
     "bitter": "none",
     "water": "low",
+    "ir94e": "none",
     "reason": {
       "sugar": "contains small amounts of sugar for yeast fermentation and flavor",
       "bitter": "no bitter ingredients in standard bread",
-      "water": "moist solid with low free water content"
+      "water": "moist solid with low free water content",
+      "ir94e": "no significant source of free glutamate"
     },
     "confidence": {
       "sugar": 0.9,
       "bitter": 1.0,
-      "water": 0.9
+      "water": 0.9,
+      "ir94e": 0.9
     },
     "review": "llm_v1",
-    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2"
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    }
   },
   {
     "key": "brownie",
@@ -678,18 +792,24 @@
     "sugar": "high",
     "bitter": "low",
     "water": "low",
+    "ir94e": "none",
     "reason": {
       "sugar": "contains significant amounts of sugar as a dessert",
       "bitter": "contains cocoa powder which has a mild bitter note",
-      "water": "dense, moist baked solid with low free water content"
+      "water": "dense, moist baked solid with low free water content",
+      "ir94e": "no significant source of free glutamate"
     },
     "confidence": {
       "sugar": 0.95,
       "bitter": 0.875,
-      "water": 0.9
+      "water": 0.9,
+      "ir94e": 0.95
     },
     "review": "llm_v1",
-    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2"
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    }
   },
   {
     "key": "bubble tea",
@@ -710,18 +830,24 @@
     "sugar": "high",
     "bitter": "low",
     "water": "medium",
+    "ir94e": "none",
     "reason": {
       "sugar": "contains significant amounts of added sugar or syrup",
       "bitter": "contains tea extracts which have a faint bitter profile",
-      "water": "a sweetened liquid beverage with moderate solute concentration"
+      "water": "a sweetened liquid beverage with moderate solute concentration",
+      "ir94e": "no significant source of free glutamate"
     },
     "confidence": {
       "sugar": 0.975,
       "bitter": 0.875,
-      "water": 0.9
+      "water": 0.9,
+      "ir94e": 0.975
     },
     "review": "llm_v1",
     "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    },
     "arbitration": {
       "sugar": {
         "zh": "high",
@@ -762,18 +888,24 @@
     "sugar": "low",
     "bitter": "low",
     "water": "high",
+    "ir94e": "medium",
     "reason": {
       "sugar": "contains small amounts of sugar in the gochujang-based sauce",
       "bitter": "faint bitterness from gochugaru and processed meats",
-      "water": "a broth-based stew with high water content"
+      "water": "a broth-based stew with high water content",
+      "ir94e": "rich in glutamate from kimchi, gochujang, processed meats, and stock"
     },
     "confidence": {
       "sugar": 0.9,
       "bitter": 0.8,
-      "water": 0.95
+      "water": 0.95,
+      "ir94e": 0.9
     },
     "review": "llm_v1",
-    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2"
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    }
   },
   {
     "key": "burrito",
@@ -794,18 +926,24 @@
     "sugar": "low",
     "bitter": "low",
     "water": "low",
+    "ir94e": "medium",
     "reason": {
       "sugar": "contains small amounts of sugar in sauces or tortilla dough",
       "bitter": "faint bitterness from spices like cumin or charred tortilla",
-      "water": "moist solid with some juicy fillings but not a liquid"
+      "water": "moist solid with some juicy fillings but not a liquid",
+      "ir94e": "contains savory components like seasoned meat, cheese, and beans"
     },
     "confidence": {
       "sugar": 0.9,
       "bitter": 0.8,
-      "water": 0.9
+      "water": 0.9,
+      "ir94e": 0.9
     },
     "review": "llm_v1",
-    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2"
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    }
   },
   {
     "key": "caesar-salad",
@@ -826,18 +964,24 @@
     "sugar": "low",
     "bitter": "low",
     "water": "medium",
+    "ir94e": "medium",
     "reason": {
       "sugar": "dressing contains small amounts of sugar",
       "bitter": "romaine lettuce can have mild bitterness",
-      "water": "fresh lettuce provides significant water content"
+      "water": "fresh lettuce provides significant water content",
+      "ir94e": "parmesan cheese and anchovies are rich in glutamate"
     },
     "confidence": {
       "sugar": 0.9,
       "bitter": 0.8,
-      "water": 0.9
+      "water": 0.9,
+      "ir94e": 0.9
     },
     "review": "llm_v1",
-    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2"
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    }
   },
   {
     "key": "cake",
@@ -854,18 +998,24 @@
     "sugar": "high",
     "bitter": "none",
     "water": "low",
+    "ir94e": "none",
     "reason": {
       "sugar": "cakes are typically sweet desserts with significant sugar content",
       "bitter": "standard cakes do not contain bitter ingredients",
-      "water": "cakes are moist solids with a dense structure"
+      "water": "cakes are moist solids with a dense structure",
+      "ir94e": "no fermented or glutamate-rich ingredients are typically used"
     },
     "confidence": {
       "sugar": 0.95,
       "bitter": 0.925,
-      "water": 0.875
+      "water": 0.875,
+      "ir94e": 0.95
     },
     "review": "llm_v1",
-    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2"
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    }
   },
   {
     "key": "candy",
@@ -883,18 +1033,24 @@
     "sugar": "very_high",
     "bitter": "none",
     "water": "low",
+    "ir94e": "none",
     "reason": {
       "sugar": "composed almost entirely of sugar",
       "bitter": "no bitter ingredients",
-      "water": "solid state with low moisture content"
+      "water": "solid state with low moisture content",
+      "ir94e": "no significant source of free amino acids"
     },
     "confidence": {
       "sugar": 1.0,
       "bitter": 0.95,
-      "water": 0.9
+      "water": 0.9,
+      "ir94e": 1.0
     },
     "review": "llm_v1",
-    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2"
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    }
   },
   {
     "key": "cappuccino",
@@ -918,18 +1074,24 @@
     "sugar": "none",
     "bitter": "medium",
     "water": "high",
+    "ir94e": "none",
     "reason": {
       "sugar": "typically served unsweetened unless sugar is added by the consumer",
       "bitter": "contains espresso which is inherently bitter",
-      "water": "consists primarily of milk and espresso, which are dilute liquids"
+      "water": "consists primarily of milk and espresso, which are dilute liquids",
+      "ir94e": "no significant source of free glutamate"
     },
     "confidence": {
       "sugar": 0.9,
       "bitter": 0.95,
-      "water": 0.9
+      "water": 0.9,
+      "ir94e": 0.95
     },
     "review": "llm_v1",
-    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2"
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    }
   },
   {
     "key": "carrot",
@@ -953,18 +1115,24 @@
     "sugar": "low",
     "bitter": "none",
     "water": "low",
+    "ir94e": "none",
     "reason": {
       "sugar": "contains natural sugars but is not sweet like fruit",
       "bitter": "no significant bitter compounds",
-      "water": "moist solid vegetable"
+      "water": "moist solid vegetable",
+      "ir94e": "no significant free glutamate or amino acids"
     },
     "confidence": {
       "sugar": 0.9,
       "bitter": 0.925,
-      "water": 0.9
+      "water": 0.9,
+      "ir94e": 0.9
     },
     "review": "llm_v1",
     "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    },
     "arbitration": {
       "water": {
         "zh": "low",
@@ -1006,18 +1174,32 @@
     "sugar": "none",
     "bitter": "low",
     "water": "low",
+    "ir94e": "medium",
     "reason": {
       "sugar": "no sugar added in preparation",
       "bitter": "slight alkaline bitterness from the curing process",
-      "water": "moist solid texture with low free water content"
+      "water": "moist solid texture with low free water content",
+      "ir94e": "high levels of free amino acids and peptides due to the alkaline fermentation process"
     },
     "confidence": {
       "sugar": 1.0,
       "bitter": 0.85,
-      "water": 0.9
+      "water": 0.9,
+      "ir94e": 0.95
     },
     "review": "llm_v1",
-    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2"
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    },
+    "arbitration": {
+      "ir94e": {
+        "zh": "medium",
+        "en": "high",
+        "chosen": "medium",
+        "rule": "lower_level"
+      }
+    }
   },
   {
     "key": "cereal",
@@ -1049,18 +1231,24 @@
     "sugar": "low",
     "bitter": "none",
     "water": "medium",
+    "ir94e": "none",
     "reason": {
       "sugar": "oats have a mild natural sweetness but are generally low in sugar unless added",
       "bitter": "no bitter ingredients present",
-      "water": "milk is a dilute liquid with low solute concentration (product-owner decision 2026-09-11: medium)"
+      "water": "milk is a dilute liquid with low solute concentration (product-owner decision 2026-09-11: medium)",
+      "ir94e": "no fermented or high-glutamate ingredients"
     },
     "confidence": {
       "sugar": 0.85,
       "bitter": 0.925,
-      "water": 0.875
+      "water": 0.875,
+      "ir94e": 0.95
     },
     "review": "human_checked",
     "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    },
     "arbitration": {
       "sugar": {
         "zh": "low",
@@ -1099,18 +1287,24 @@
     "sugar": "none",
     "bitter": "low",
     "water": "low",
+    "ir94e": "medium",
     "reason": {
       "sugar": "cheese contains negligible amounts of lactose and no added sugar",
       "bitter": "some aged cheeses have a faint bitter note from proteolysis",
-      "water": "cheese is a moist solid with low free water content"
+      "water": "cheese is a moist solid with low free water content",
+      "ir94e": "cheese is a fermented product rich in free glutamates"
     },
     "confidence": {
       "sugar": 0.975,
       "bitter": 0.8,
-      "water": 0.9
+      "water": 0.9,
+      "ir94e": 0.925
     },
     "review": "llm_v1",
-    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2"
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    }
   },
   {
     "key": "cheesecake",
@@ -1135,18 +1329,24 @@
     "sugar": "high",
     "bitter": "none",
     "water": "low",
+    "ir94e": "low",
     "reason": {
       "sugar": "contains significant sugar as a dessert",
       "bitter": "no bitter ingredients",
-      "water": "moist solid texture"
+      "water": "moist solid texture",
+      "ir94e": "contains cream cheese which provides a small amount of amino acids"
     },
     "confidence": {
       "sugar": 0.95,
       "bitter": 0.975,
-      "water": 0.9
+      "water": 0.9,
+      "ir94e": 0.75
     },
     "review": "llm_v1",
-    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2"
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    }
   },
   {
     "key": "cherries",
@@ -1167,18 +1367,24 @@
     "sugar": "medium",
     "bitter": "none",
     "water": "medium",
+    "ir94e": "none",
     "reason": {
       "sugar": "naturally sweet fruit",
       "bitter": "no significant bitter compounds in the flesh",
-      "water": "juicy fruit that releases liquid when bitten"
+      "water": "juicy fruit that releases liquid when bitten",
+      "ir94e": "no fermented or glutamate-rich ingredients"
     },
     "confidence": {
       "sugar": 0.9,
       "bitter": 0.925,
-      "water": 0.9
+      "water": 0.9,
+      "ir94e": 1.0
     },
     "review": "llm_v1",
-    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2"
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    }
   },
   {
     "key": "chow-mein",
@@ -1206,18 +1412,24 @@
     "sugar": "low",
     "bitter": "none",
     "water": "low",
+    "ir94e": "medium",
     "reason": {
       "sugar": "contains small amounts of sugar in the soy sauce based seasoning",
       "bitter": "no significant bitter ingredients used in standard preparation",
-      "water": "moist solid dish with low free water content"
+      "water": "moist solid dish with low free water content",
+      "ir94e": "heavily seasoned with soy sauce and often oyster sauce"
     },
     "confidence": {
       "sugar": 0.85,
       "bitter": 0.925,
-      "water": 0.9
+      "water": 0.9,
+      "ir94e": 0.95
     },
     "review": "llm_v1",
-    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2"
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    }
   },
   {
     "key": "cilantro",
@@ -1244,18 +1456,24 @@
     "sugar": "none",
     "bitter": "low",
     "water": "low",
+    "ir94e": "none",
     "reason": {
       "sugar": "contains no significant sugar content",
       "bitter": "contains faint bitter compounds characteristic of fresh herbs",
-      "water": "moist plant tissue with low solute concentration"
+      "water": "moist plant tissue with low solute concentration",
+      "ir94e": "no fermented or glutamate-rich ingredients"
     },
     "confidence": {
       "sugar": 1.0,
       "bitter": 0.9,
-      "water": 0.9
+      "water": 0.9,
+      "ir94e": 1.0
     },
     "review": "llm_v1",
     "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    },
     "arbitration": {
       "water": {
         "zh": "medium",
@@ -1281,18 +1499,32 @@
     "sugar": "none",
     "bitter": "none",
     "water": "very_high",
+    "ir94e": "low",
     "reason": {
       "sugar": "contains no sweet ingredients",
       "bitter": "contains no bitter ingredients",
-      "water": "mostly water with very low solute concentration"
+      "water": "mostly water with very low solute concentration",
+      "ir94e": "contains trace amounts of amino acids from the base stock"
     },
     "confidence": {
       "sugar": 1.0,
       "bitter": 1.0,
-      "water": 0.975
+      "water": 0.975,
+      "ir94e": 0.9
     },
     "review": "llm_v1",
-    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2"
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    },
+    "arbitration": {
+      "ir94e": {
+        "zh": "low",
+        "en": "medium",
+        "chosen": "low",
+        "rule": "lower_level"
+      }
+    }
   },
   {
     "key": "coconut-water",
@@ -1320,18 +1552,24 @@
     "sugar": "low",
     "bitter": "none",
     "water": "very_high",
+    "ir94e": "none",
     "reason": {
       "sugar": "contains natural sugars but is not sweet like a dessert",
       "bitter": "no bitter compounds present",
-      "water": "essentially a clear, low-solute natural electrolyte liquid"
+      "water": "essentially a clear, low-solute natural electrolyte liquid",
+      "ir94e": "no fermented or glutamate-rich ingredients"
     },
     "confidence": {
       "sugar": 0.9,
       "bitter": 1.0,
-      "water": 1.0
+      "water": 1.0,
+      "ir94e": 1.0
     },
     "review": "llm_v1",
-    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2"
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    }
   },
   {
     "key": "cola",
@@ -1349,18 +1587,24 @@
     "sugar": "high",
     "bitter": "low",
     "water": "medium",
+    "ir94e": "none",
     "reason": {
       "sugar": "contains high levels of high-fructose corn syrup or sugar",
       "bitter": "contains trace amounts of caffeine and caramel coloring",
-      "water": "a sweetened carbonated beverage with significant solute content"
+      "water": "a sweetened carbonated beverage with significant solute content",
+      "ir94e": "no significant source of free amino acids or glutamate"
     },
     "confidence": {
       "sugar": 1.0,
       "bitter": 0.9,
-      "water": 0.95
+      "water": 0.95,
+      "ir94e": 1.0
     },
     "review": "llm_v1",
     "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    },
     "arbitration": {
       "sugar": {
         "zh": "high",
@@ -1397,18 +1641,24 @@
     "sugar": "none",
     "bitter": "none",
     "water": "high",
+    "ir94e": "none",
     "reason": {
       "sugar": "plain rice porridge contains no added sugar",
       "bitter": "rice does not contain bitter compounds",
-      "water": "a dilute suspension of rice grains in water"
+      "water": "a dilute suspension of rice grains in water",
+      "ir94e": "plain congee is made from rice and water without fermented or aged additives"
     },
     "confidence": {
       "sugar": 1.0,
       "bitter": 1.0,
-      "water": 0.9
+      "water": 0.9,
+      "ir94e": 0.95
     },
     "review": "llm_v1",
-    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2"
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    }
   },
   {
     "key": "cookies",
@@ -1426,18 +1676,24 @@
     "sugar": "high",
     "bitter": "none",
     "water": "low",
+    "ir94e": "none",
     "reason": {
       "sugar": "cookies are typically sweet baked goods with significant sugar content",
       "bitter": "standard cookies do not contain bitter ingredients",
-      "water": "cookies are moist solids with low free water content"
+      "water": "cookies are moist solids with low free water content",
+      "ir94e": "no fermented or glutamate-rich ingredients"
     },
     "confidence": {
       "sugar": 0.925,
       "bitter": 0.95,
-      "water": 0.9
+      "water": 0.9,
+      "ir94e": 0.95
     },
     "review": "llm_v1",
-    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2"
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    }
   },
   {
     "key": "corn-on-the-cob",
@@ -1474,18 +1730,24 @@
     "sugar": "low",
     "bitter": "none",
     "water": "low",
+    "ir94e": "none",
     "reason": {
       "sugar": "contains natural corn sugars but is not sweet",
       "bitter": "no bitter compounds present",
-      "water": "moist solid with starch content"
+      "water": "moist solid with starch content",
+      "ir94e": "no fermented or high-glutamate ingredients"
     },
     "confidence": {
       "sugar": 0.9,
       "bitter": 1.0,
-      "water": 0.9
+      "water": 0.9,
+      "ir94e": 1.0
     },
     "review": "llm_v1",
-    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2"
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    }
   },
   {
     "key": "crackers",
@@ -1505,18 +1767,24 @@
     "sugar": "none",
     "bitter": "none",
     "water": "none",
+    "ir94e": "none",
     "reason": {
       "sugar": "savory snack with no added sugar",
       "bitter": "no significant bitter components",
-      "water": "dry, baked solid with very low moisture content"
+      "water": "dry, baked solid with very low moisture content",
+      "ir94e": "no significant source of free glutamate"
     },
     "confidence": {
       "sugar": 0.925,
       "bitter": 0.95,
-      "water": 0.925
+      "water": 0.925,
+      "ir94e": 0.85
     },
     "review": "llm_v1",
     "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    },
     "arbitration": {
       "sugar": {
         "zh": "none",
@@ -1550,18 +1818,24 @@
     "sugar": "low",
     "bitter": "none",
     "water": "low",
+    "ir94e": "none",
     "reason": {
       "sugar": "contains a small amount of sugar in the dough",
       "bitter": "no bitter ingredients used in standard preparation",
-      "water": "moist solid with low free water content"
+      "water": "moist solid with low free water content",
+      "ir94e": "no significant source of free glutamate"
     },
     "confidence": {
       "sugar": 0.9,
       "bitter": 1.0,
-      "water": 0.9
+      "water": 0.9,
+      "ir94e": 0.95
     },
     "review": "llm_v1",
-    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2"
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    }
   },
   {
     "key": "cucumber",
@@ -1587,18 +1861,24 @@
     "sugar": "none",
     "bitter": "low",
     "water": "medium",
+    "ir94e": "none",
     "reason": {
       "sugar": "contains negligible amounts of natural sugars",
       "bitter": "contains trace cucurbitacins which can be slightly bitter",
-      "water": "high water content that releases juice when bitten"
+      "water": "high water content that releases juice when bitten",
+      "ir94e": "no significant free amino acids or glutamate"
     },
     "confidence": {
       "sugar": 0.95,
       "bitter": 0.8,
-      "water": 0.9
+      "water": 0.9,
+      "ir94e": 0.925
     },
     "review": "llm_v1",
-    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2"
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    }
   },
   {
     "key": "curry",
@@ -1616,18 +1896,24 @@
     "sugar": "low",
     "bitter": "low",
     "water": "medium",
+    "ir94e": "medium",
     "reason": {
       "sugar": "often contains a small amount of sugar or fruit for balance",
       "bitter": "spices like turmeric and cumin can have faint bitter notes",
-      "water": "product-owner override 2026-09-11 (encoder v2.2 said high)"
+      "water": "product-owner override 2026-09-11 (encoder v2.2 said high)",
+      "ir94e": "contains savory ingredients like onions, meat, and spice pastes rich in amino acids"
     },
     "confidence": {
       "sugar": 0.85,
       "bitter": 0.75,
-      "water": 0.9
+      "water": 0.9,
+      "ir94e": 0.8
     },
     "review": "human_checked",
-    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2"
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    }
   },
   {
     "key": "dark chocolate 85%",
@@ -1646,18 +1932,24 @@
     "sugar": "low",
     "bitter": "high",
     "water": "none",
+    "ir94e": "none",
     "reason": {
       "sugar": "contains only a small amount of sugar relative to cocoa solids",
       "bitter": "high cocoa content results in strong bitterness",
-      "water": "solid fat-based confection with negligible free water"
+      "water": "solid fat-based confection with negligible free water",
+      "ir94e": "no significant source of free glutamate or amino acids"
     },
     "confidence": {
       "sugar": 0.925,
       "bitter": 0.95,
-      "water": 0.95
+      "water": 0.95,
+      "ir94e": 0.95
     },
     "review": "llm_v1",
-    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2"
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    }
   },
   {
     "key": "donut",
@@ -1678,18 +1970,24 @@
     "sugar": "high",
     "bitter": "none",
     "water": "low",
+    "ir94e": "none",
     "reason": {
       "sugar": "contains significant sugar in dough and glaze",
       "bitter": "no bitter ingredients used in standard preparation",
-      "water": "moist solid with low free water content"
+      "water": "moist solid with low free water content",
+      "ir94e": "no significant source of free amino acids"
     },
     "confidence": {
       "sugar": 0.95,
       "bitter": 0.9,
-      "water": 0.875
+      "water": 0.875,
+      "ir94e": 0.9
     },
     "review": "llm_v1",
-    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2"
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    }
   },
   {
     "key": "douhua",
@@ -1720,24 +2018,36 @@
     "sugar": "low",
     "bitter": "none",
     "water": "high",
+    "ir94e": "medium",
     "reason": {
       "sugar": "usually savory with soy sauce or lightly sweetened in some regions",
       "bitter": "soybeans are processed to remove bitter compounds",
-      "water": "soft, high-moisture gel structure with added syrup"
+      "water": "soft, high-moisture gel structure with added syrup",
+      "ir94e": "savory versions use soy sauce or meat-based stocks as a main component"
     },
     "confidence": {
       "sugar": 0.85,
       "bitter": 0.925,
-      "water": 0.9
+      "water": 0.9,
+      "ir94e": 0.8
     },
     "review": "llm_v1",
     "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    },
     "arbitration": {
       "sugar": {
         "zh": "low",
         "en": "medium",
         "chosen": "low",
         "rule": "lower_level"
+      },
+      "ir94e": {
+        "zh": "medium",
+        "en": "low",
+        "chosen": "medium",
+        "rule": "confidence"
       }
     }
   },
@@ -1756,18 +2066,24 @@
     "sugar": "none",
     "bitter": "none",
     "water": "low",
+    "ir94e": "medium",
     "reason": {
       "sugar": "savory dish without added sugar",
       "bitter": "no bitter ingredients typically used in standard savory dumplings",
-      "water": "moist solid texture with moderate moisture content in the filling"
+      "water": "moist solid texture with moderate moisture content in the filling",
+      "ir94e": "filling usually contains soy sauce, meat, and aromatics rich in glutamates"
     },
     "confidence": {
       "sugar": 0.9,
       "bitter": 0.95,
-      "water": 0.9
+      "water": 0.9,
+      "ir94e": 0.9
     },
     "review": "llm_v1",
     "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    },
     "arbitration": {
       "sugar": {
         "zh": "none",
@@ -1798,24 +2114,36 @@
     "sugar": "medium",
     "bitter": "none",
     "water": "low",
+    "ir94e": "none",
     "reason": {
       "sugar": "naturally high in fructose and sucrose",
       "bitter": "no significant bitter compounds",
-      "water": "fleshy, creamy texture with low free water content"
+      "water": "fleshy, creamy texture with low free water content",
+      "ir94e": "no significant free amino acids or glutamate sources"
     },
     "confidence": {
       "sugar": 0.9,
       "bitter": 0.9,
-      "water": 0.8
+      "water": 0.8,
+      "ir94e": 0.75
     },
     "review": "llm_v1",
     "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    },
     "arbitration": {
       "sugar": {
         "zh": "high",
         "en": "medium",
         "chosen": "medium",
         "rule": "lower_level"
+      },
+      "ir94e": {
+        "zh": "none",
+        "en": "low",
+        "chosen": "none",
+        "rule": "confidence"
       }
     }
   },
@@ -1842,18 +2170,24 @@
     "sugar": "none",
     "bitter": "none",
     "water": "low",
+    "ir94e": "low",
     "reason": {
       "sugar": "it is a savory legume without added sweeteners",
       "bitter": "it lacks significant bitter compounds",
-      "water": "it is a moist solid vegetable"
+      "water": "it is a moist solid vegetable",
+      "ir94e": "contains natural amino acids typical of legumes"
     },
     "confidence": {
       "sugar": 0.975,
       "bitter": 0.9,
-      "water": 0.875
+      "water": 0.875,
+      "ir94e": 0.825
     },
     "review": "llm_v1",
-    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2"
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    }
   },
   {
     "key": "egg-tart",
@@ -1882,18 +2216,24 @@
     "sugar": "high",
     "bitter": "none",
     "water": "low",
+    "ir94e": "none",
     "reason": {
       "sugar": "custard filling is typically quite sweet",
       "bitter": "no bitter ingredients used in standard preparation",
-      "water": "moist solid texture with low free water content"
+      "water": "moist solid texture with low free water content",
+      "ir94e": "no fermented or glutamate-rich ingredients"
     },
     "confidence": {
       "sugar": 0.925,
       "bitter": 1.0,
-      "water": 0.9
+      "water": 0.9,
+      "ir94e": 0.975
     },
     "review": "llm_v1",
-    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2"
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    }
   },
   {
     "key": "endive",
@@ -1913,18 +2253,24 @@
     "sugar": "none",
     "bitter": "high",
     "water": "low",
+    "ir94e": "none",
     "reason": {
       "sugar": "contains no significant sugar content",
       "bitter": "naturally contains high levels of bitter sesquiterpene lactones",
-      "water": "moist leafy green: tissue water, not free water (product-owner decision 2026-09-11)"
+      "water": "moist leafy green: tissue water, not free water (product-owner decision 2026-09-11)",
+      "ir94e": "lacks fermented or glutamate-rich ingredients"
     },
     "confidence": {
       "sugar": 1.0,
       "bitter": 1.0,
-      "water": 0.9
+      "water": 0.9,
+      "ir94e": 1.0
     },
     "review": "human_checked",
     "encoder_version": "gemini-3.1-flash-lite@encode_v2.1",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    },
     "arbitration": {
       "water": {
         "zh": "high",
@@ -1954,18 +2300,24 @@
     "sugar": "high",
     "bitter": "low",
     "water": "medium",
+    "ir94e": "none",
     "reason": {
       "sugar": "typically contains high levels of added sugar or sweeteners",
       "bitter": "contains caffeine and other additives that may have a faint bitter profile",
-      "water": "a liquid beverage with significant solute concentration"
+      "water": "a liquid beverage with significant solute concentration",
+      "ir94e": "no significant source of free amino acids or glutamate"
     },
     "confidence": {
       "sugar": 0.95,
       "bitter": 0.85,
-      "water": 0.925
+      "water": 0.925,
+      "ir94e": 0.925
     },
     "review": "llm_v1",
-    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2"
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    }
   },
   {
     "key": "espresso",
@@ -1983,18 +2335,24 @@
     "sugar": "none",
     "bitter": "very_high",
     "water": "medium",
+    "ir94e": "none",
     "reason": {
       "sugar": "pure coffee extraction without added sweeteners",
       "bitter": "highly concentrated coffee compounds result in intense bitterness",
-      "water": "product-owner override 2026-09-11 (encoder v2.2 said high)"
+      "water": "product-owner override 2026-09-11 (encoder v2.2 said high)",
+      "ir94e": "no significant free glutamate or amino acids"
     },
     "confidence": {
       "sugar": 1.0,
       "bitter": 1.0,
-      "water": 0.9
+      "water": 0.9,
+      "ir94e": 0.95
     },
     "review": "human_checked",
-    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2"
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    }
   },
   {
     "key": "fish-and-chips",
@@ -2016,18 +2374,24 @@
     "sugar": "none",
     "bitter": "none",
     "water": "low",
+    "ir94e": "low",
     "reason": {
       "sugar": "savory fried dish with no added sugar",
       "bitter": "no bitter ingredients used in standard preparation",
-      "water": "moist fried fish and starchy potatoes"
+      "water": "moist fried fish and starchy potatoes",
+      "ir94e": "fish provides natural amino acids and seasoning"
     },
     "confidence": {
       "sugar": 1.0,
       "bitter": 1.0,
-      "water": 0.9
+      "water": 0.9,
+      "ir94e": 0.8
     },
     "review": "llm_v1",
-    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2"
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    }
   },
   {
     "key": "french-fries",
@@ -2050,18 +2414,24 @@
     "sugar": "none",
     "bitter": "none",
     "water": "low",
+    "ir94e": "none",
     "reason": {
       "sugar": "savory potato dish without added sugar",
       "bitter": "no bitter ingredients used in preparation",
-      "water": "moist solid texture from fried potato starch"
+      "water": "moist solid texture from fried potato starch",
+      "ir94e": "no fermented or high-glutamate ingredients"
     },
     "confidence": {
       "sugar": 1.0,
       "bitter": 1.0,
-      "water": 0.9
+      "water": 0.9,
+      "ir94e": 0.9
     },
     "review": "llm_v1",
-    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2"
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    }
   },
   {
     "key": "fried chicken",
@@ -2078,18 +2448,24 @@
     "sugar": "low",
     "bitter": "none",
     "water": "low",
+    "ir94e": "low",
     "reason": {
       "sugar": "often contains a small amount of sugar in the breading or marinade",
       "bitter": "no significant bitter components in standard preparation",
-      "water": "moist meat inside a dry, crispy exterior"
+      "water": "moist meat inside a dry, crispy exterior",
+      "ir94e": "contains small amounts of amino acids from meat and seasoning"
     },
     "confidence": {
       "sugar": 0.8,
       "bitter": 0.9,
-      "water": 0.8
+      "water": 0.8,
+      "ir94e": 0.8
     },
     "review": "llm_v1",
-    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2"
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    }
   },
   {
     "key": "fried-egg",
@@ -2112,18 +2488,24 @@
     "sugar": "none",
     "bitter": "none",
     "water": "low",
+    "ir94e": "low",
     "reason": {
       "sugar": "no sugar added in standard preparation",
       "bitter": "no bitter ingredients used",
-      "water": "moist solid with low free water content"
+      "water": "moist solid with low free water content",
+      "ir94e": "contains natural amino acids from egg protein"
     },
     "confidence": {
       "sugar": 1.0,
       "bitter": 1.0,
-      "water": 0.9
+      "water": 0.9,
+      "ir94e": 0.9
     },
     "review": "llm_v1",
-    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2"
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    }
   },
   {
     "key": "fried-rice",
@@ -2146,18 +2528,32 @@
     "sugar": "none",
     "bitter": "none",
     "water": "low",
+    "ir94e": "low",
     "reason": {
       "sugar": "savory dish without added sugar",
       "bitter": "no bitter ingredients used",
-      "water": "moist solid texture from cooked rice"
+      "water": "moist solid texture from cooked rice",
+      "ir94e": "contains small amounts of soy sauce or egg providing minor amino acids"
     },
     "confidence": {
       "sugar": 0.95,
       "bitter": 0.95,
-      "water": 0.9
+      "water": 0.9,
+      "ir94e": 0.875
     },
     "review": "llm_v1",
-    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2"
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    },
+    "arbitration": {
+      "ir94e": {
+        "zh": "medium",
+        "en": "low",
+        "chosen": "low",
+        "rule": "lower_level"
+      }
+    }
   },
   {
     "key": "gai lan",
@@ -2177,18 +2573,24 @@
     "sugar": "none",
     "bitter": "low",
     "water": "low",
+    "ir94e": "none",
     "reason": {
       "sugar": "vegetable with no added sugar",
       "bitter": "contains mild natural glucosinolates",
-      "water": "moist leafy green: tissue water, not free water (product-owner decision 2026-09-11)"
+      "water": "moist leafy green: tissue water, not free water (product-owner decision 2026-09-11)",
+      "ir94e": "no fermented or aged ingredients in raw state"
     },
     "confidence": {
       "sugar": 1.0,
       "bitter": 0.9,
-      "water": 0.9
+      "water": 0.9,
+      "ir94e": 0.85
     },
     "review": "human_checked",
     "encoder_version": "gemini-3.1-flash-lite@encode_v2.1",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    },
     "arbitration": {
       "water": {
         "zh": "low",
@@ -2196,6 +2598,12 @@
         "chosen": "low",
         "rule": "human_checked",
         "note": "resolved by hand 2026-09-11: moist leafy greens are water low"
+      },
+      "ir94e": {
+        "zh": "none",
+        "en": "low",
+        "chosen": "none",
+        "rule": "lower_level"
       }
     }
   },
@@ -2215,18 +2623,24 @@
     "sugar": "low",
     "bitter": "high",
     "water": "medium",
+    "ir94e": "none",
     "reason": {
       "sugar": "contains natural fruit sugars but is primarily tart and bitter",
       "bitter": "product-owner override 2026-09-11 (encoder v2.2 said medium)",
-      "water": "high water content with dissolved solutes typical of citrus fruit"
+      "water": "high water content with dissolved solutes typical of citrus fruit",
+      "ir94e": "no significant source of free glutamate or amino acids"
     },
     "confidence": {
       "sugar": 0.9,
       "bitter": 0.95,
-      "water": 0.9
+      "water": 0.9,
+      "ir94e": 1.0
     },
     "review": "human_checked",
     "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    },
     "arbitration": {
       "bitter": {
         "zh": "high",
@@ -2255,18 +2669,24 @@
     "sugar": "medium",
     "bitter": "none",
     "water": "medium",
+    "ir94e": "none",
     "reason": {
       "sugar": "naturally contains significant fructose and glucose",
       "bitter": "no bitter compounds present in standard table grapes",
-      "water": "high water content that releases juice upon biting"
+      "water": "high water content that releases juice upon biting",
+      "ir94e": "no fermented or glutamate-rich ingredients"
     },
     "confidence": {
       "sugar": 0.95,
       "bitter": 0.95,
-      "water": 0.9
+      "water": 0.9,
+      "ir94e": 1.0
     },
     "review": "llm_v1",
-    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2"
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    }
   },
   {
     "key": "green tea",
@@ -2284,18 +2704,24 @@
     "sugar": "none",
     "bitter": "medium",
     "water": "very_high",
+    "ir94e": "none",
     "reason": {
       "sugar": "pure tea contains no added sugar",
       "bitter": "contains tannins and catechins that provide a distinct bitterness",
-      "water": "primarily water with very low solute concentration"
+      "water": "primarily water with very low solute concentration",
+      "ir94e": "no significant free glutamate or amino acids"
     },
     "confidence": {
       "sugar": 1.0,
       "bitter": 0.9,
-      "water": 1.0
+      "water": 1.0,
+      "ir94e": 0.9
     },
     "review": "llm_v1",
-    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2"
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    }
   },
   {
     "key": "hamburger",
@@ -2324,18 +2750,24 @@
     "sugar": "low",
     "bitter": "none",
     "water": "low",
+    "ir94e": "medium",
     "reason": {
       "sugar": "bun and ketchup contain small amounts of sugar",
       "bitter": "no significant bitter ingredients",
-      "water": "moist solid with some vegetable content"
+      "water": "moist solid with some vegetable content",
+      "ir94e": "contains meat, cheese, and condiments like ketchup or mustard"
     },
     "confidence": {
       "sugar": 0.9,
       "bitter": 0.875,
-      "water": 0.875
+      "water": 0.875,
+      "ir94e": 0.9
     },
     "review": "llm_v1",
     "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    },
     "arbitration": {
       "bitter": {
         "zh": "low",
@@ -2370,18 +2802,24 @@
     "sugar": "low",
     "bitter": "high",
     "water": "high",
+    "ir94e": "none",
     "reason": {
       "sugar": "often contains a small amount of sugar to mask bitterness",
       "bitter": "contains medicinal herbs known for strong bitter profiles",
-      "water": "a dilute aqueous infusion of herbal extracts"
+      "water": "a dilute aqueous infusion of herbal extracts",
+      "ir94e": "no fermented or glutamate-rich ingredients"
     },
     "confidence": {
       "sugar": 0.85,
       "bitter": 0.925,
-      "water": 0.925
+      "water": 0.925,
+      "ir94e": 1.0
     },
     "review": "llm_v1",
     "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    },
     "arbitration": {
       "water": {
         "zh": "very_high",
@@ -2407,18 +2845,24 @@
     "sugar": "very_high",
     "bitter": "none",
     "water": "low",
+    "ir94e": "none",
     "reason": {
       "sugar": "composed almost entirely of fructose and glucose",
       "bitter": "contains no significant bitter compounds",
-      "water": "a viscous, concentrated sugar solution with low free water content"
+      "water": "a viscous, concentrated sugar solution with low free water content",
+      "ir94e": "contains negligible amounts of free amino acids"
     },
     "confidence": {
       "sugar": 1.0,
       "bitter": 0.95,
-      "water": 0.9
+      "water": 0.9,
+      "ir94e": 0.85
     },
     "review": "llm_v1",
-    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2"
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    }
   },
   {
     "key": "hot-and-sour-noodles",
@@ -2442,18 +2886,24 @@
     "sugar": "low",
     "bitter": "low",
     "water": "medium",
+    "ir94e": "medium",
     "reason": {
       "sugar": "contains a small amount of sugar in the seasoning sauce for balance",
       "bitter": "faint bitterness from spices like Sichuan peppercorns and vinegar",
-      "water": "served in a flavorful, moderately salty and acidic broth"
+      "water": "served in a flavorful, moderately salty and acidic broth",
+      "ir94e": "contains soy sauce, vinegar, and often meat-based stock as main flavor components"
     },
     "confidence": {
       "sugar": 0.9,
       "bitter": 0.8,
-      "water": 0.9
+      "water": 0.9,
+      "ir94e": 0.9
     },
     "review": "llm_v1",
-    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2"
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    }
   },
   {
     "key": "hot-chocolate",
@@ -2479,18 +2929,24 @@
     "sugar": "high",
     "bitter": "medium",
     "water": "high",
+    "ir94e": "none",
     "reason": {
       "sugar": "contains significant added sugar or sweetened chocolate",
       "bitter": "cocoa solids provide a distinct bitter profile",
-      "water": "primarily a milk or water-based liquid solution"
+      "water": "primarily a milk or water-based liquid solution",
+      "ir94e": "no significant source of free glutamate"
     },
     "confidence": {
       "sugar": 0.9,
       "bitter": 0.85,
-      "water": 0.9
+      "water": 0.9,
+      "ir94e": 0.925
     },
     "review": "llm_v1",
-    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2"
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    }
   },
   {
     "key": "hot-dog",
@@ -2515,18 +2971,32 @@
     "sugar": "low",
     "bitter": "none",
     "water": "low",
+    "ir94e": "low",
     "reason": {
       "sugar": "contains small amounts of sugar in the bun and processed meat",
       "bitter": "no significant bitter components",
-      "water": "moist solid food with moderate moisture content"
+      "water": "moist solid food with moderate moisture content",
+      "ir94e": "Contains processed meat and condiments like mustard or ketchup which provide trace amino acids."
     },
     "confidence": {
       "sugar": 0.9,
       "bitter": 0.95,
-      "water": 0.875
+      "water": 0.875,
+      "ir94e": 0.8
     },
     "review": "llm_v1",
-    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2"
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    },
+    "arbitration": {
+      "ir94e": {
+        "zh": "low",
+        "en": "medium",
+        "chosen": "low",
+        "rule": "lower_level"
+      }
+    }
   },
   {
     "key": "hotpot",
@@ -2554,18 +3024,24 @@
     "sugar": "low",
     "bitter": "low",
     "water": "high",
+    "ir94e": "medium",
     "reason": {
       "sugar": "savory dish with occasional trace sugar in dipping sauces or broth bases",
       "bitter": "faint bitterness from certain vegetables or herbal broth ingredients",
-      "water": "consists primarily of broth and cooked ingredients with high moisture content"
+      "water": "consists primarily of broth and cooked ingredients with high moisture content",
+      "ir94e": "broth is typically rich in amino acids from meat and bones"
     },
     "confidence": {
       "sugar": 0.9,
       "bitter": 0.8,
-      "water": 0.9
+      "water": 0.9,
+      "ir94e": 0.9
     },
     "review": "llm_v1",
-    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2"
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    }
   },
   {
     "key": "hummus",
@@ -2587,18 +3063,24 @@
     "sugar": "none",
     "bitter": "none",
     "water": "low",
+    "ir94e": "low",
     "reason": {
       "sugar": "savory dip made from chickpeas and tahini with no added sugar",
       "bitter": "ingredients are generally savory and nutty without significant bitter compounds",
-      "water": "a thick, moist paste with moderate moisture content"
+      "water": "a thick, moist paste with moderate moisture content",
+      "ir94e": "contains chickpeas and tahini which provide some amino acids"
     },
     "confidence": {
       "sugar": 0.95,
       "bitter": 0.85,
-      "water": 0.875
+      "water": 0.875,
+      "ir94e": 0.8
     },
     "review": "llm_v1",
     "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    },
     "arbitration": {
       "bitter": {
         "zh": "none",
@@ -2624,18 +3106,24 @@
     "sugar": "high",
     "bitter": "none",
     "water": "low",
+    "ir94e": "none",
     "reason": {
       "sugar": "contains significant amounts of added sugar",
       "bitter": "no bitter ingredients typically present",
-      "water": "semi-solid dairy emulsion with low free water availability"
+      "water": "semi-solid dairy emulsion with low free water availability",
+      "ir94e": "no significant source of free glutamate or amino acids"
     },
     "confidence": {
       "sugar": 0.975,
       "bitter": 0.95,
-      "water": 0.875
+      "water": 0.875,
+      "ir94e": 0.975
     },
     "review": "llm_v1",
-    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2"
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    }
   },
   {
     "key": "instant-noodles",
@@ -2663,18 +3151,24 @@
     "sugar": "low",
     "bitter": "none",
     "water": "high",
+    "ir94e": "medium",
     "reason": {
       "sugar": "contains small amounts of sugar in seasoning packets",
       "bitter": "no significant bitter ingredients",
-      "water": "consumed as a soup with high water content"
+      "water": "consumed as a soup with high water content",
+      "ir94e": "seasoning packets contain significant amounts of MSG and hydrolyzed vegetable protein"
     },
     "confidence": {
       "sugar": 0.9,
       "bitter": 0.95,
-      "water": 0.95
+      "water": 0.95,
+      "ir94e": 0.95
     },
     "review": "llm_v1",
-    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2"
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    }
   },
   {
     "key": "ipa beer",
@@ -2694,18 +3188,32 @@
     "sugar": "none",
     "bitter": "high",
     "water": "high",
+    "ir94e": "none",
     "reason": {
       "sugar": "fermented dry with no residual sugar",
       "bitter": "heavily hopped for strong bitterness",
-      "water": "mostly water with low solute concentration"
+      "water": "mostly water with low solute concentration",
+      "ir94e": "no significant source of free amino acids or glutamate"
     },
     "confidence": {
       "sugar": 0.925,
       "bitter": 0.975,
-      "water": 0.9
+      "water": 0.9,
+      "ir94e": 0.85
     },
     "review": "llm_v1",
-    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2"
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    },
+    "arbitration": {
+      "ir94e": {
+        "zh": "none",
+        "en": "low",
+        "chosen": "none",
+        "rule": "lower_level"
+      }
+    }
   },
   {
     "key": "jelly",
@@ -2730,18 +3238,24 @@
     "sugar": "high",
     "bitter": "none",
     "water": "medium",
+    "ir94e": "none",
     "reason": {
       "sugar": "typically a sweetened dessert",
       "bitter": "no bitter ingredients",
-      "water": "gelatinous structure with high water content and dissolved sugar"
+      "water": "gelatinous structure with high water content and dissolved sugar",
+      "ir94e": "no fermented or glutamate-rich ingredients"
     },
     "confidence": {
       "sugar": 0.925,
       "bitter": 1.0,
-      "water": 0.85
+      "water": 0.85,
+      "ir94e": 1.0
     },
     "review": "llm_v1",
-    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2"
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    }
   },
   {
     "key": "jianbing",
@@ -2769,18 +3283,24 @@
     "sugar": "low",
     "bitter": "none",
     "water": "low",
+    "ir94e": "medium",
     "reason": {
       "sugar": "contains sweet bean paste or hoisin sauce",
       "bitter": "no bitter ingredients",
-      "water": "moist solid texture from batter and fillings"
+      "water": "moist solid texture from batter and fillings",
+      "ir94e": "contains fermented bean paste and soy sauce as key seasonings"
     },
     "confidence": {
       "sugar": 0.9,
       "bitter": 1.0,
-      "water": 0.9
+      "water": 0.9,
+      "ir94e": 0.9
     },
     "review": "llm_v1",
-    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2"
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    }
   },
   {
     "key": "kebab",
@@ -2816,18 +3336,32 @@
     "sugar": "low",
     "bitter": "none",
     "water": "low",
+    "ir94e": "low",
     "reason": {
       "sugar": "often contains small amounts of sugar in marinades or glazes",
       "bitter": "no significant bitter components in standard preparation",
-      "water": "moist solid meat with some rendered fat and juices"
+      "water": "moist solid meat with some rendered fat and juices",
+      "ir94e": "contains some amino acids from meat and seasoning"
     },
     "confidence": {
       "sugar": 0.8,
       "bitter": 0.9,
-      "water": 0.8
+      "water": 0.8,
+      "ir94e": 0.85
     },
     "review": "llm_v1",
-    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2"
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    },
+    "arbitration": {
+      "ir94e": {
+        "zh": "medium",
+        "en": "low",
+        "chosen": "low",
+        "rule": "lower_level"
+      }
+    }
   },
   {
     "key": "kimchi",
@@ -2852,18 +3386,24 @@
     "sugar": "low",
     "bitter": "low",
     "water": "medium",
+    "ir94e": "medium",
     "reason": {
       "sugar": "contains small amounts of sugar or fruit for fermentation",
       "bitter": "faint bitterness from cabbage and fermentation process",
-      "water": "high moisture content from vegetables and brine"
+      "water": "high moisture content from vegetables and brine",
+      "ir94e": "rich in free amino acids from fermentation and fish sauce"
     },
     "confidence": {
       "sugar": 0.9,
       "bitter": 0.8,
-      "water": 0.9
+      "water": 0.9,
+      "ir94e": 0.95
     },
     "review": "llm_v1",
-    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2"
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    }
   },
   {
     "key": "korean-bbq",
@@ -2896,18 +3436,24 @@
     "sugar": "low",
     "bitter": "none",
     "water": "low",
+    "ir94e": "medium",
     "reason": {
       "sugar": "marinades like bulgogi contain sugar but the dish is primarily savory",
       "bitter": "no significant bitter components in standard preparation",
-      "water": "moist solid meat with some juices but not a liquid-based dish"
+      "water": "moist solid meat with some juices but not a liquid-based dish",
+      "ir94e": "heavy use of soy sauce, fermented pastes like gochujang, and meat proteins"
     },
     "confidence": {
       "sugar": 0.9,
       "bitter": 0.875,
-      "water": 0.875
+      "water": 0.875,
+      "ir94e": 0.9
     },
     "review": "llm_v1",
     "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    },
     "arbitration": {
       "bitter": {
         "zh": "none",
@@ -2940,18 +3486,24 @@
     "sugar": "low",
     "bitter": "none",
     "water": "low",
+    "ir94e": "medium",
     "reason": {
       "sugar": "contains a small amount of sugar in the stir-fry sauce",
       "bitter": "no significant bitter ingredients",
-      "water": "moist solid dish with sauce but not a liquid"
+      "water": "moist solid dish with sauce but not a liquid",
+      "ir94e": "contains soy sauce, vinegar, and often chicken stock as base seasonings"
     },
     "confidence": {
       "sugar": 0.9,
       "bitter": 0.975,
-      "water": 0.825
+      "water": 0.825,
+      "ir94e": 0.9
     },
     "review": "llm_v1",
-    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2"
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    }
   },
   {
     "key": "lamb-skewers",
@@ -2977,18 +3529,24 @@
     "sugar": "low",
     "bitter": "none",
     "water": "low",
+    "ir94e": "low",
     "reason": {
       "sugar": "often seasoned with a small amount of sugar in the spice rub",
       "bitter": "no significant bitter ingredients used in standard preparation",
-      "water": "moist solid meat with low free water content"
+      "water": "moist solid meat with low free water content",
+      "ir94e": "contains small amounts of seasoning like cumin and salt, sometimes soy sauce"
     },
     "confidence": {
       "sugar": 0.8,
       "bitter": 0.9,
-      "water": 0.9
+      "water": 0.9,
+      "ir94e": 0.775
     },
     "review": "llm_v1",
-    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2"
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    }
   },
   {
     "key": "lasagna",
@@ -3010,18 +3568,24 @@
     "sugar": "low",
     "bitter": "none",
     "water": "low",
+    "ir94e": "medium",
     "reason": {
       "sugar": "contains small amounts of sugar in tomato sauce",
       "bitter": "no significant bitter ingredients",
-      "water": "moist solid pasta dish with sauce"
+      "water": "moist solid pasta dish with sauce",
+      "ir94e": "contains cheese, tomato, and meat sauce rich in glutamates"
     },
     "confidence": {
       "sugar": 0.9,
       "bitter": 0.95,
-      "water": 0.9
+      "water": 0.9,
+      "ir94e": 0.925
     },
     "review": "llm_v1",
-    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2"
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    }
   },
   {
     "key": "latiao",
@@ -3050,18 +3614,24 @@
     "sugar": "medium",
     "bitter": "none",
     "water": "low",
+    "ir94e": "medium",
     "reason": {
       "sugar": "contains significant added sugar in the seasoning oil",
       "bitter": "no bitter ingredients typically used",
-      "water": "moist solid texture with low free water content"
+      "water": "moist solid texture with low free water content",
+      "ir94e": "heavily seasoned with soy sauce, MSG, and savory spices"
     },
     "confidence": {
       "sugar": 0.9,
       "bitter": 0.95,
-      "water": 0.9
+      "water": 0.9,
+      "ir94e": 0.9
     },
     "review": "llm_v1",
-    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2"
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    }
   },
   {
     "key": "latte",
@@ -3078,18 +3648,24 @@
     "sugar": "none",
     "bitter": "medium",
     "water": "high",
+    "ir94e": "none",
     "reason": {
       "sugar": "standard latte contains no added sugar",
       "bitter": "espresso base provides a clear bitter profile",
-      "water": "mostly steamed milk which is a dilute liquid"
+      "water": "mostly steamed milk which is a dilute liquid",
+      "ir94e": "no significant source of free glutamate"
     },
     "confidence": {
       "sugar": 0.9,
       "bitter": 0.925,
-      "water": 0.85
+      "water": 0.85,
+      "ir94e": 0.95
     },
     "review": "llm_v1",
-    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2"
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    }
   },
   {
     "key": "lemon",
@@ -3112,18 +3688,24 @@
     "sugar": "none",
     "bitter": "medium",
     "water": "medium",
+    "ir94e": "none",
     "reason": {
       "sugar": "contains virtually no sugar",
       "bitter": "contains bitter compounds in the peel and pith",
-      "water": "juicy fruit that releases liquid when bitten"
+      "water": "juicy fruit that releases liquid when bitten",
+      "ir94e": "no significant free amino acids"
     },
     "confidence": {
       "sugar": 0.975,
       "bitter": 0.875,
-      "water": 0.9
+      "water": 0.9,
+      "ir94e": 0.9
     },
     "review": "llm_v1",
-    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2"
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    }
   },
   {
     "key": "lemon-tea",
@@ -3147,18 +3729,24 @@
     "sugar": "medium",
     "bitter": "low",
     "water": "medium",
+    "ir94e": "none",
     "reason": {
       "sugar": "typically sweetened with sugar or syrup",
       "bitter": "faint bitterness from lemon peel and tea tannins",
-      "water": "dilute aqueous solution with dissolved solutes"
+      "water": "dilute aqueous solution with dissolved solutes",
+      "ir94e": "no significant source of free glutamate"
     },
     "confidence": {
       "sugar": 0.9,
       "bitter": 0.85,
-      "water": 0.925
+      "water": 0.925,
+      "ir94e": 1.0
     },
     "review": "llm_v1",
     "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    },
     "arbitration": {
       "bitter": {
         "zh": "medium",
@@ -3196,18 +3784,24 @@
     "sugar": "high",
     "bitter": "low",
     "water": "medium",
+    "ir94e": "none",
     "reason": {
       "sugar": "typically sweetened with sugar or syrup (product-owner decision 2026-09-11: high)",
       "bitter": "contains trace bitterness from lemon peel oils",
-      "water": "dilute aqueous solution of sugar and acid (product-owner decision 2026-09-11: medium)"
+      "water": "dilute aqueous solution of sugar and acid (product-owner decision 2026-09-11: medium)",
+      "ir94e": "contains no significant sources of free glutamate or amino acids"
     },
     "confidence": {
       "sugar": 0.9,
       "bitter": 0.8,
-      "water": 0.9
+      "water": 0.9,
+      "ir94e": 1.0
     },
     "review": "human_checked",
     "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    },
     "arbitration": {
       "sugar": {
         "zh": "none",
@@ -3249,18 +3843,24 @@
     "sugar": "low",
     "bitter": "none",
     "water": "medium",
+    "ir94e": "medium",
     "reason": {
       "sugar": "contains a small amount of sugar in the sauce for balance",
       "bitter": "no bitter ingredients used in standard preparation",
-      "water": "the sauce and the moisture content of the noodles provide a medium level of free water"
+      "water": "the sauce and the moisture content of the noodles provide a medium level of free water",
+      "ir94e": "heavily seasoned with soy sauce, vinegar, and garlic sauce which are rich in amino acids"
     },
     "confidence": {
       "sugar": 0.9,
       "bitter": 1.0,
-      "water": 0.8
+      "water": 0.8,
+      "ir94e": 0.9
     },
     "review": "llm_v1",
-    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2"
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    }
   },
   {
     "key": "luosifen",
@@ -3287,18 +3887,24 @@
     "sugar": "low",
     "bitter": "low",
     "water": "high",
+    "ir94e": "medium",
     "reason": {
       "sugar": "contains trace amounts of sugar in the seasoning and pickled ingredients",
       "bitter": "faint bitterness from bamboo shoots and spices",
-      "water": "served as a noodle soup with a high liquid content"
+      "water": "served as a noodle soup with a high liquid content",
+      "ir94e": "rich in umami from the snail-based broth and fermented bamboo shoots"
     },
     "confidence": {
       "sugar": 0.9,
       "bitter": 0.8,
-      "water": 0.95
+      "water": 0.95,
+      "ir94e": 0.95
     },
     "review": "llm_v1",
-    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2"
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    }
   },
   {
     "key": "malatang",
@@ -3322,18 +3928,24 @@
     "sugar": "low",
     "bitter": "low",
     "water": "high",
+    "ir94e": "medium",
     "reason": {
       "sugar": "often contains a small amount of sugar in the broth base for flavor balance",
       "bitter": "trace bitterness from spices like Sichuan peppercorns and chili",
-      "water": "the dish is primarily a soup-based meal with high water content"
+      "water": "the dish is primarily a soup-based meal with high water content",
+      "ir94e": "broth is typically made from long-simmered bones and seasoned with fermented bean paste or soy sauce"
     },
     "confidence": {
       "sugar": 0.8,
       "bitter": 0.8,
-      "water": 0.9
+      "water": 0.9,
+      "ir94e": 0.9
     },
     "review": "llm_v1",
-    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2"
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    }
   },
   {
     "key": "mango",
@@ -3355,18 +3967,24 @@
     "sugar": "medium",
     "bitter": "none",
     "water": "medium",
+    "ir94e": "none",
     "reason": {
       "sugar": "naturally sweet fruit",
       "bitter": "no bitter compounds present in edible flesh",
-      "water": "juicy fruit that releases significant liquid when bitten"
+      "water": "juicy fruit that releases significant liquid when bitten",
+      "ir94e": "no significant free amino acids or glutamate"
     },
     "confidence": {
       "sugar": 0.95,
       "bitter": 0.975,
-      "water": 0.9
+      "water": 0.9,
+      "ir94e": 0.975
     },
     "review": "llm_v1",
     "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    },
     "arbitration": {
       "sugar": {
         "zh": "medium",
@@ -3390,18 +4008,24 @@
     "sugar": "low",
     "bitter": "low",
     "water": "medium",
+    "ir94e": "medium",
     "reason": {
       "sugar": "contains a small amount of sugar for flavor balance",
       "bitter": "faint bitterness from Sichuan peppercorns and chili oil",
-      "water": "contains a significant amount of sauce and moisture from tofu"
+      "water": "contains a significant amount of sauce and moisture from tofu",
+      "ir94e": "contains doubanjiang, soy sauce, and meat, providing significant umami"
     },
     "confidence": {
       "sugar": 0.9,
       "bitter": 0.8,
-      "water": 0.9
+      "water": 0.9,
+      "ir94e": 0.95
     },
     "review": "llm_v1",
-    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2"
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    }
   },
   {
     "key": "margarita",
@@ -3423,18 +4047,24 @@
     "sugar": "low",
     "bitter": "low",
     "water": "medium",
+    "ir94e": "none",
     "reason": {
       "sugar": "contains a small amount of triple sec or simple syrup",
       "bitter": "contains lime juice and tequila which have slight bitter notes",
-      "water": "a liquid cocktail with significant water content"
+      "water": "a liquid cocktail with significant water content",
+      "ir94e": "no significant source of free amino acids"
     },
     "confidence": {
       "sugar": 0.9,
       "bitter": 0.8,
-      "water": 0.9
+      "water": 0.9,
+      "ir94e": 1.0
     },
     "review": "llm_v1",
     "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    },
     "arbitration": {
       "sugar": {
         "zh": "low",
@@ -3467,18 +4097,24 @@
     "sugar": "very_high",
     "bitter": "none",
     "water": "none",
+    "ir94e": "none",
     "reason": {
       "sugar": "composed almost entirely of sugar and corn syrup",
       "bitter": "contains no bitter ingredients",
-      "water": "a dry, airy solid that dissolves instantly"
+      "water": "a dry, airy solid that dissolves instantly",
+      "ir94e": "contains no significant sources of free amino acids"
     },
     "confidence": {
       "sugar": 1.0,
       "bitter": 1.0,
-      "water": 0.9
+      "water": 0.9,
+      "ir94e": 1.0
     },
     "review": "llm_v1",
     "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    },
     "arbitration": {
       "water": {
         "zh": "none",
@@ -3507,18 +4143,24 @@
     "sugar": "none",
     "bitter": "none",
     "water": "low",
+    "ir94e": "none",
     "reason": {
       "sugar": "savory dish without added sugar",
       "bitter": "potatoes are not inherently bitter",
-      "water": "moist solid with starch content"
+      "water": "moist solid with starch content",
+      "ir94e": "no fermented or high-glutamate ingredients"
     },
     "confidence": {
       "sugar": 1.0,
       "bitter": 1.0,
-      "water": 0.9
+      "water": 0.9,
+      "ir94e": 0.9
     },
     "review": "llm_v1",
-    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2"
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    }
   },
   {
     "key": "matcha",
@@ -3548,18 +4190,24 @@
     "sugar": "none",
     "bitter": "high",
     "water": "none",
+    "ir94e": "none",
     "reason": {
       "sugar": "pure ground tea leaves contain no added sugar",
       "bitter": "high concentration of tannins and catechins",
-      "water": "powdered form is a dry solid"
+      "water": "powdered form is a dry solid",
+      "ir94e": "no significant source of free glutamate"
     },
     "confidence": {
       "sugar": 1.0,
       "bitter": 0.95,
-      "water": 0.95
+      "water": 0.95,
+      "ir94e": 0.9
     },
     "review": "llm_v1",
-    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2"
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    }
   },
   {
     "key": "matcha-latte",
@@ -3583,18 +4231,24 @@
     "sugar": "medium",
     "bitter": "medium",
     "water": "high",
+    "ir94e": "none",
     "reason": {
       "sugar": "typically sweetened with syrup or sugar",
       "bitter": "contains matcha powder which is naturally bitter",
-      "water": "primarily milk-based liquid"
+      "water": "primarily milk-based liquid",
+      "ir94e": "no significant source of free glutamate"
     },
     "confidence": {
       "sugar": 0.9,
       "bitter": 0.95,
-      "water": 0.9
+      "water": 0.9,
+      "ir94e": 0.95
     },
     "review": "llm_v1",
-    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2"
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    }
   },
   {
     "key": "milk",
@@ -3612,18 +4266,24 @@
     "sugar": "low",
     "bitter": "none",
     "water": "high",
+    "ir94e": "low",
     "reason": {
       "sugar": "contains natural lactose which provides a mild sweetness",
       "bitter": "no bitter compounds present",
-      "water": "mostly water with low solute concentration"
+      "water": "mostly water with low solute concentration",
+      "ir94e": "contains small amounts of free amino acids"
     },
     "confidence": {
       "sugar": 0.9,
       "bitter": 1.0,
-      "water": 0.95
+      "water": 0.95,
+      "ir94e": 0.8
     },
     "review": "llm_v1",
-    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2"
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    }
   },
   {
     "key": "milk-chocolate",
@@ -3645,18 +4305,24 @@
     "sugar": "high",
     "bitter": "low",
     "water": "low",
+    "ir94e": "none",
     "reason": {
       "sugar": "contains significant added sugar",
       "bitter": "contains cocoa solids but tempered by milk and sugar",
-      "water": "solid fat-based confection with low moisture content"
+      "water": "solid fat-based confection with low moisture content",
+      "ir94e": "no significant source of free amino acids"
     },
     "confidence": {
       "sugar": 0.95,
       "bitter": 0.9,
-      "water": 0.925
+      "water": 0.925,
+      "ir94e": 0.95
     },
     "review": "llm_v1",
-    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2"
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    }
   },
   {
     "key": "miso soup",
@@ -3673,18 +4339,24 @@
     "sugar": "low",
     "bitter": "low",
     "water": "medium",
+    "ir94e": "medium",
     "reason": {
       "sugar": "contains small amounts of sugar often added to balance the miso",
       "bitter": "miso paste has a mild fermented bitterness",
-      "water": "a savory liquid broth with dissolved solutes"
+      "water": "a savory liquid broth with dissolved solutes",
+      "ir94e": "fermented miso paste is a primary source of glutamate"
     },
     "confidence": {
       "sugar": 0.9,
       "bitter": 0.8,
-      "water": 0.925
+      "water": 0.925,
+      "ir94e": 1.0
     },
     "review": "llm_v1",
-    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2"
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    }
   },
   {
     "key": "mixed nuts",
@@ -3703,18 +4375,24 @@
     "sugar": "none",
     "bitter": "low",
     "water": "none",
+    "ir94e": "none",
     "reason": {
       "sugar": "nuts are naturally savory and contain no added sugar",
       "bitter": "some nuts like walnuts or almonds have a faint natural bitterness",
-      "water": "nuts are dry, low-moisture solids"
+      "water": "nuts are dry, low-moisture solids",
+      "ir94e": "no significant source of free glutamate"
     },
     "confidence": {
       "sugar": 0.975,
       "bitter": 0.8,
-      "water": 0.95
+      "water": 0.95,
+      "ir94e": 0.9
     },
     "review": "llm_v1",
-    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2"
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    }
   },
   {
     "key": "mochi",
@@ -3741,18 +4419,24 @@
     "sugar": "low",
     "bitter": "none",
     "water": "low",
+    "ir94e": "none",
     "reason": {
       "sugar": "typically contains a small amount of sugar in the dough",
       "bitter": "no bitter ingredients used in standard preparation",
-      "water": "moist, dense, and chewy starch-based solid"
+      "water": "moist, dense, and chewy starch-based solid",
+      "ir94e": "no fermented or glutamate-rich ingredients"
     },
     "confidence": {
       "sugar": 0.9,
       "bitter": 1.0,
-      "water": 0.9
+      "water": 0.9,
+      "ir94e": 1.0
     },
     "review": "llm_v1",
-    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2"
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    }
   },
   {
     "key": "mooncake",
@@ -3769,18 +4453,24 @@
     "sugar": "high",
     "bitter": "none",
     "water": "low",
+    "ir94e": "low",
     "reason": {
       "sugar": "contains high amounts of sugar in fillings like lotus paste or red bean paste",
       "bitter": "no bitter ingredients typically used",
-      "water": "dense, baked pastry with low moisture content"
+      "water": "dense, baked pastry with low moisture content",
+      "ir94e": "May contain salted egg yolk or soy-based ingredients providing trace amino acids"
     },
     "confidence": {
       "sugar": 0.95,
       "bitter": 0.9,
-      "water": 0.9
+      "water": 0.9,
+      "ir94e": 0.8
     },
     "review": "llm_v1",
-    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2"
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    }
   },
   {
     "key": "natto",
@@ -3802,18 +4492,24 @@
     "sugar": "none",
     "bitter": "low",
     "water": "low",
+    "ir94e": "high",
     "reason": {
       "sugar": "fermented soybeans contain no added sugar",
       "bitter": "fermented beans have a mild natural bitterness",
-      "water": "moist solid texture with low free water content"
+      "water": "moist solid texture with low free water content",
+      "ir94e": "natto is a highly fermented product rich in free amino acids and glutamate"
     },
     "confidence": {
       "sugar": 1.0,
       "bitter": 0.9,
-      "water": 0.9
+      "water": 0.9,
+      "ir94e": 1.0
     },
     "review": "llm_v1",
-    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2"
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    }
   },
   {
     "key": "oatmeal",
@@ -3835,18 +4531,24 @@
     "sugar": "none",
     "bitter": "none",
     "water": "medium",
+    "ir94e": "none",
     "reason": {
       "sugar": "plain oatmeal is typically unsweetened",
       "bitter": "oats do not contain significant bitter compounds",
-      "water": "a moist, starchy solid porridge (product-owner decision 2026-09-11: medium)"
+      "water": "a moist, starchy solid porridge (product-owner decision 2026-09-11: medium)",
+      "ir94e": "oats do not contain significant free glutamate or fermented ingredients"
     },
     "confidence": {
       "sugar": 0.9,
       "bitter": 0.925,
-      "water": 0.85
+      "water": 0.85,
+      "ir94e": 0.95
     },
     "review": "human_checked",
     "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    },
     "arbitration": {
       "water": {
         "zh": "high",
@@ -3880,18 +4582,24 @@
     "sugar": "none",
     "bitter": "none",
     "water": "low",
+    "ir94e": "low",
     "reason": {
       "sugar": "plain steamed rice with savory fillings",
       "bitter": "no bitter ingredients",
-      "water": "moist solid rice"
+      "water": "moist solid rice",
+      "ir94e": "contains a small amount of salt or seaweed seasoning"
     },
     "confidence": {
       "sugar": 0.975,
       "bitter": 0.975,
-      "water": 0.9
+      "water": 0.9,
+      "ir94e": 0.8
     },
     "review": "llm_v1",
-    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2"
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    }
   },
   {
     "key": "oolong-tea",
@@ -3920,18 +4628,24 @@
     "sugar": "none",
     "bitter": "low",
     "water": "high",
+    "ir94e": "none",
     "reason": {
       "sugar": "pure tea contains no added sugar",
       "bitter": "contains mild tannins and caffeine",
-      "water": "a clear, dilute aqueous infusion"
+      "water": "a clear, dilute aqueous infusion",
+      "ir94e": "no significant free amino acids or glutamate"
     },
     "confidence": {
       "sugar": 1.0,
       "bitter": 0.9,
-      "water": 0.975
+      "water": 0.975,
+      "ir94e": 0.9
     },
     "review": "llm_v1",
     "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    },
     "arbitration": {
       "bitter": {
         "zh": "low",
@@ -3972,18 +4686,24 @@
     "sugar": "medium",
     "bitter": "low",
     "water": "medium",
+    "ir94e": "none",
     "reason": {
       "sugar": "contains natural fructose and sucrose",
       "bitter": "contains trace amounts of bitter compounds in the pith and peel",
-      "water": "high water content with dissolved sugars and acids"
+      "water": "high water content with dissolved sugars and acids",
+      "ir94e": "no significant free glutamate or amino acids"
     },
     "confidence": {
       "sugar": 0.95,
       "bitter": 0.9,
-      "water": 0.95
+      "water": 0.95,
+      "ir94e": 0.95
     },
     "review": "llm_v1",
-    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2"
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    }
   },
   {
     "key": "orange juice",
@@ -3999,18 +4719,24 @@
     "sugar": "medium",
     "bitter": "low",
     "water": "medium",
+    "ir94e": "none",
     "reason": {
       "sugar": "contains natural fruit sugars",
       "bitter": "contains trace amounts of bitter compounds from the peel or pith",
-      "water": "a liquid solution with dissolved sugars and acids"
+      "water": "a liquid solution with dissolved sugars and acids",
+      "ir94e": "no significant source of free glutamate"
     },
     "confidence": {
       "sugar": 0.9,
       "bitter": 0.8,
-      "water": 0.9
+      "water": 0.9,
+      "ir94e": 0.925
     },
     "review": "llm_v1",
-    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2"
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    }
   },
   {
     "key": "pad-thai",
@@ -4041,18 +4767,24 @@
     "sugar": "medium",
     "bitter": "none",
     "water": "low",
+    "ir94e": "medium",
     "reason": {
       "sugar": "contains palm sugar in the sauce",
       "bitter": "no significant bitter ingredients",
-      "water": "moist solid noodle dish"
+      "water": "moist solid noodle dish",
+      "ir94e": "contains fish sauce and dried shrimp as primary flavor bases"
     },
     "confidence": {
       "sugar": 0.9,
       "bitter": 0.875,
-      "water": 0.875
+      "water": 0.875,
+      "ir94e": 0.9
     },
     "review": "llm_v1",
     "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    },
     "arbitration": {
       "bitter": {
         "zh": "low",
@@ -4089,18 +4821,24 @@
     "sugar": "low",
     "bitter": "none",
     "water": "low",
+    "ir94e": "none",
     "reason": {
       "sugar": "batter contains a small amount of sugar",
       "bitter": "no bitter ingredients used in standard preparation",
-      "water": "moist solid texture with low free water content"
+      "water": "moist solid texture with low free water content",
+      "ir94e": "no significant source of free glutamate"
     },
     "confidence": {
       "sugar": 0.9,
       "bitter": 1.0,
-      "water": 0.9
+      "water": 0.9,
+      "ir94e": 1.0
     },
     "review": "llm_v1",
-    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2"
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    }
   },
   {
     "key": "peach",
@@ -4122,18 +4860,24 @@
     "sugar": "medium",
     "bitter": "none",
     "water": "medium",
+    "ir94e": "none",
     "reason": {
       "sugar": "naturally sweet fruit",
       "bitter": "no bitter compounds in the flesh",
-      "water": "juicy fruit that releases liquid when bitten"
+      "water": "juicy fruit that releases liquid when bitten",
+      "ir94e": "no significant free amino acids or glutamate"
     },
     "confidence": {
       "sugar": 0.925,
       "bitter": 0.975,
-      "water": 0.9
+      "water": 0.9,
+      "ir94e": 0.975
     },
     "review": "llm_v1",
-    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2"
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    }
   },
   {
     "key": "peanut-butter",
@@ -4154,18 +4898,24 @@
     "sugar": "low",
     "bitter": "low",
     "water": "low",
+    "ir94e": "low",
     "reason": {
       "sugar": "contains small amounts of added sugar in commercial versions",
       "bitter": "roasted peanuts have a faint natural bitterness",
-      "water": "a dense, oily paste with very low free water content"
+      "water": "a dense, oily paste with very low free water content",
+      "ir94e": "contains natural amino acids from peanuts"
     },
     "confidence": {
       "sugar": 0.9,
       "bitter": 0.8,
-      "water": 0.95
+      "water": 0.95,
+      "ir94e": 0.75
     },
     "review": "llm_v1",
-    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2"
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    }
   },
   {
     "key": "peking-duck",
@@ -4196,18 +4946,24 @@
     "sugar": "low",
     "bitter": "none",
     "water": "low",
+    "ir94e": "medium",
     "reason": {
       "sugar": "the hoisin or sweet bean sauce contains sugar",
       "bitter": "no significant bitter ingredients",
-      "water": "moist meat and skin with some sauce"
+      "water": "moist meat and skin with some sauce",
+      "ir94e": "The dish relies heavily on fermented sweet bean sauce and the savory depth of roasted meat."
     },
     "confidence": {
       "sugar": 0.9,
       "bitter": 1.0,
-      "water": 0.85
+      "water": 0.85,
+      "ir94e": 0.9
     },
     "review": "llm_v1",
-    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2"
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    }
   },
   {
     "key": "pho",
@@ -4233,18 +4989,24 @@
     "sugar": "low",
     "bitter": "none",
     "water": "high",
+    "ir94e": "medium",
     "reason": {
       "sugar": "contains a small amount of sugar in the broth seasoning",
       "bitter": "no significant bitter ingredients",
-      "water": "a clear, dilute broth-based soup"
+      "water": "a clear, dilute broth-based soup",
+      "ir94e": "long-simmered beef or chicken bones provide high levels of free amino acids"
     },
     "confidence": {
       "sugar": 0.9,
       "bitter": 0.95,
-      "water": 0.95
+      "water": 0.95,
+      "ir94e": 0.9
     },
     "review": "llm_v1",
-    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2"
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    }
   },
   {
     "key": "pickled-cabbage-fish",
@@ -4277,18 +5039,24 @@
     "sugar": "low",
     "bitter": "low",
     "water": "high",
+    "ir94e": "medium",
     "reason": {
       "sugar": "small amount of sugar often added to balance the acidity of the pickled cabbage",
       "bitter": "faint bitterness from the fermented mustard greens",
-      "water": "a soup-based dish with a high proportion of broth"
+      "water": "a soup-based dish with a high proportion of broth",
+      "ir94e": "contains fermented pickled cabbage and fish stock which are rich in free amino acids"
     },
     "confidence": {
       "sugar": 0.9,
       "bitter": 0.8,
-      "water": 0.95
+      "water": 0.95,
+      "ir94e": 0.9
     },
     "review": "llm_v1",
-    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2"
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    }
   },
   {
     "key": "pineapple",
@@ -4313,18 +5081,24 @@
     "sugar": "medium",
     "bitter": "none",
     "water": "medium",
+    "ir94e": "none",
     "reason": {
       "sugar": "contains natural fructose and sucrose",
       "bitter": "no significant bitter compounds",
-      "water": "fleshy fruit with high juice content"
+      "water": "fleshy fruit with high juice content",
+      "ir94e": "no fermented or glutamate-rich ingredients"
     },
     "confidence": {
       "sugar": 0.9,
       "bitter": 0.95,
-      "water": 0.925
+      "water": 0.925,
+      "ir94e": 1.0
     },
     "review": "llm_v1",
-    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2"
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    }
   },
   {
     "key": "pizza",
@@ -4341,18 +5115,24 @@
     "sugar": "low",
     "bitter": "none",
     "water": "low",
+    "ir94e": "medium",
     "reason": {
       "sugar": "tomato sauce and dough contain small amounts of sugar",
       "bitter": "no significant bitter ingredients in standard pizza",
-      "water": "moist solid with moderate moisture content"
+      "water": "moist solid with moderate moisture content",
+      "ir94e": "contains cheese and tomato sauce which are rich in glutamates"
     },
     "confidence": {
       "sugar": 0.9,
       "bitter": 0.95,
-      "water": 0.85
+      "water": 0.85,
+      "ir94e": 0.9
     },
     "review": "llm_v1",
-    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2"
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    }
   },
   {
     "key": "popcorn",
@@ -4371,18 +5151,24 @@
     "sugar": "none",
     "bitter": "none",
     "water": "none",
+    "ir94e": "none",
     "reason": {
       "sugar": "standard popcorn is savory and salty",
       "bitter": "no bitter ingredients in standard preparation",
-      "water": "a dry, puffed starch solid"
+      "water": "a dry, puffed starch solid",
+      "ir94e": "it contains no fermented or high-glutamate ingredients"
     },
     "confidence": {
       "sugar": 0.85,
       "bitter": 0.95,
-      "water": 0.95
+      "water": 0.95,
+      "ir94e": 0.95
     },
     "review": "llm_v1",
     "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    },
     "arbitration": {
       "sugar": {
         "zh": "low",
@@ -4408,18 +5194,24 @@
     "sugar": "none",
     "bitter": "none",
     "water": "none",
+    "ir94e": "low",
     "reason": {
       "sugar": "savory snack with no added sugar",
       "bitter": "no bitter ingredients used in standard preparation",
-      "water": "dehydrated fried potato product with very low moisture content"
+      "water": "dehydrated fried potato product with very low moisture content",
+      "ir94e": "often seasoned with savory powders containing yeast extract or MSG"
     },
     "confidence": {
       "sugar": 1.0,
       "bitter": 1.0,
-      "water": 0.975
+      "water": 0.975,
+      "ir94e": 0.825
     },
     "review": "llm_v1",
-    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2"
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    }
   },
   {
     "key": "pudding",
@@ -4444,18 +5236,24 @@
     "sugar": "high",
     "bitter": "none",
     "water": "low",
+    "ir94e": "none",
     "reason": {
       "sugar": "contains significant amounts of sugar as a dessert",
       "bitter": "no bitter ingredients used in standard preparation",
-      "water": "moist solid texture with low free water content"
+      "water": "moist solid texture with low free water content",
+      "ir94e": "no fermented or high-glutamate ingredients"
     },
     "confidence": {
       "sugar": 0.95,
       "bitter": 0.925,
-      "water": 0.875
+      "water": 0.875,
+      "ir94e": 0.975
     },
     "review": "llm_v1",
-    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2"
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    }
   },
   {
     "key": "ramen",
@@ -4484,18 +5282,24 @@
     "sugar": "low",
     "bitter": "low",
     "water": "high",
+    "ir94e": "medium",
     "reason": {
       "sugar": "broth often contains mirin or sugar for balance",
       "bitter": "trace bitterness from alkaline noodles or charred toppings",
-      "water": "a soup-based dish with high water content"
+      "water": "a soup-based dish with high water content",
+      "ir94e": "broth is rich in free glutamates from long-simmered bones and kombu"
     },
     "confidence": {
       "sugar": 0.85,
       "bitter": 0.75,
-      "water": 0.925
+      "water": 0.925,
+      "ir94e": 0.95
     },
     "review": "llm_v1",
-    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2"
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    }
   },
   {
     "key": "red-wine",
@@ -4519,18 +5323,24 @@
     "sugar": "none",
     "bitter": "medium",
     "water": "medium",
+    "ir94e": "low",
     "reason": {
       "sugar": "dry red wine contains negligible residual sugar",
       "bitter": "tannins provide a distinct bitter and astringent profile",
-      "water": "mostly water with dissolved solutes and alcohol"
+      "water": "mostly water with dissolved solutes and alcohol",
+      "ir94e": "contains trace amino acids from fermentation"
     },
     "confidence": {
       "sugar": 0.9,
       "bitter": 0.925,
-      "water": 0.9
+      "water": 0.9,
+      "ir94e": 0.8
     },
     "review": "llm_v1",
     "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    },
     "arbitration": {
       "sugar": {
         "zh": "low",
@@ -4575,18 +5385,24 @@
     "sugar": "medium",
     "bitter": "none",
     "water": "low",
+    "ir94e": "none",
     "reason": {
       "sugar": "naturally high in starch and sugars that caramelize during roasting",
       "bitter": "no bitter components present",
-      "water": "moist solid texture with low free water content"
+      "water": "moist solid texture with low free water content",
+      "ir94e": "no fermented or high-glutamate ingredients"
     },
     "confidence": {
       "sugar": 0.9,
       "bitter": 1.0,
-      "water": 0.9
+      "water": 0.9,
+      "ir94e": 1.0
     },
     "review": "llm_v1",
-    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2"
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    }
   },
   {
     "key": "sandwich",
@@ -4605,18 +5421,24 @@
     "sugar": "low",
     "bitter": "none",
     "water": "low",
+    "ir94e": "low",
     "reason": {
       "sugar": "bread and condiments may contain small amounts of sugar",
       "bitter": "no significant bitter ingredients in standard preparations",
-      "water": "moist solid food with moderate moisture content"
+      "water": "moist solid food with moderate moisture content",
+      "ir94e": "contains small amounts of amino acids from cheese, meat, or condiments"
     },
     "confidence": {
       "sugar": 0.9,
       "bitter": 0.95,
-      "water": 0.875
+      "water": 0.875,
+      "ir94e": 0.8
     },
     "review": "llm_v1",
-    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2"
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    }
   },
   {
     "key": "sashimi",
@@ -4641,18 +5463,24 @@
     "sugar": "none",
     "bitter": "none",
     "water": "low",
+    "ir94e": "low",
     "reason": {
       "sugar": "raw fish contains no added or natural sugars",
       "bitter": "fresh raw fish is not bitter",
-      "water": "flesh is a moist solid with low free water content"
+      "water": "flesh is a moist solid with low free water content",
+      "ir94e": "contains natural free amino acids and is often served with a small amount of soy sauce"
     },
     "confidence": {
       "sugar": 1.0,
       "bitter": 1.0,
-      "water": 0.9
+      "water": 0.9,
+      "ir94e": 0.9
     },
     "review": "llm_v1",
-    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2"
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    }
   },
   {
     "key": "scallion-pancake",
@@ -4678,18 +5506,24 @@
     "sugar": "none",
     "bitter": "none",
     "water": "low",
+    "ir94e": "low",
     "reason": {
       "sugar": "savory flatbread with no added sugar",
       "bitter": "no bitter ingredients used in preparation",
-      "water": "moist solid dough with low free water content"
+      "water": "moist solid dough with low free water content",
+      "ir94e": "contains small amounts of salt and potentially soy sauce or sesame oil for seasoning"
     },
     "confidence": {
       "sugar": 1.0,
       "bitter": 1.0,
-      "water": 0.9
+      "water": 0.9,
+      "ir94e": 0.8
     },
     "review": "llm_v1",
-    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2"
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    }
   },
   {
     "key": "scrambled-eggs",
@@ -4711,18 +5545,24 @@
     "sugar": "none",
     "bitter": "none",
     "water": "low",
+    "ir94e": "low",
     "reason": {
       "sugar": "savory dish with no added sugar",
       "bitter": "no bitter ingredients used in preparation",
-      "water": "moist solid texture with moderate water content"
+      "water": "moist solid texture with moderate water content",
+      "ir94e": "eggs contain natural amino acids and are often seasoned with a small amount of salt or butter"
     },
     "confidence": {
       "sugar": 1.0,
       "bitter": 1.0,
-      "water": 0.9
+      "water": 0.9,
+      "ir94e": 0.8
     },
     "review": "llm_v1",
-    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2"
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    }
   },
   {
     "key": "sichuan-boiled-fish",
@@ -4751,18 +5591,24 @@
     "sugar": "low",
     "bitter": "low",
     "water": "medium",
+    "ir94e": "medium",
     "reason": {
       "sugar": "small amount of sugar often used in seasoning",
       "bitter": "faint bitterness from Sichuan peppercorns and spices",
-      "water": "the dish consists of fish fillets in a spicy, oily broth"
+      "water": "the dish consists of fish fillets in a spicy, oily broth",
+      "ir94e": "contains doubanjiang, soy sauce, and fish stock which are rich in free glutamates"
     },
     "confidence": {
       "sugar": 0.9,
       "bitter": 0.8,
-      "water": 0.9
+      "water": 0.9,
+      "ir94e": 0.9
     },
     "review": "llm_v1",
     "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    },
     "arbitration": {
       "water": {
         "zh": "medium",
@@ -4799,18 +5645,24 @@
     "sugar": "medium",
     "bitter": "low",
     "water": "medium",
+    "ir94e": "none",
     "reason": {
       "sugar": "typically sweetened with rock sugar to balance acidity",
       "bitter": "faint bitterness from smoked plums and herbs",
-      "water": "a dilute liquid beverage"
+      "water": "a dilute liquid beverage",
+      "ir94e": "no fermented or glutamate-rich ingredients"
     },
     "confidence": {
       "sugar": 0.9,
       "bitter": 0.8,
-      "water": 0.95
+      "water": 0.95,
+      "ir94e": 0.925
     },
     "review": "llm_v1",
-    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2"
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    }
   },
   {
     "key": "soy-milk",
@@ -4833,18 +5685,24 @@
     "sugar": "none",
     "bitter": "low",
     "water": "high",
+    "ir94e": "low",
     "reason": {
       "sugar": "typically unsweetened in traditional preparation",
       "bitter": "contains natural soy bean compounds that have a faint bitterness",
-      "water": "a dilute liquid suspension of soy solids"
+      "water": "a dilute liquid suspension of soy solids",
+      "ir94e": "contains natural free amino acids from soybeans"
     },
     "confidence": {
       "sugar": 0.9,
       "bitter": 0.8,
-      "water": 0.9
+      "water": 0.9,
+      "ir94e": 0.8
     },
     "review": "llm_v1",
-    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2"
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    }
   },
   {
     "key": "spaghetti-bolognese",
@@ -4876,18 +5734,24 @@
     "sugar": "low",
     "bitter": "none",
     "water": "low",
+    "ir94e": "medium",
     "reason": {
       "sugar": "tomatoes and carrots provide a trace of natural sweetness",
       "bitter": "no significant bitter ingredients in standard preparation",
-      "water": "cooked pasta and meat sauce are moist solids"
+      "water": "cooked pasta and meat sauce are moist solids",
+      "ir94e": "contains tomato, meat, and often parmesan or stock, providing significant glutamate"
     },
     "confidence": {
       "sugar": 0.9,
       "bitter": 0.875,
-      "water": 0.875
+      "water": 0.875,
+      "ir94e": 0.9
     },
     "review": "llm_v1",
     "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    },
     "arbitration": {
       "bitter": {
         "zh": "low",
@@ -4930,18 +5794,24 @@
     "sugar": "none",
     "bitter": "none",
     "water": "very_high",
+    "ir94e": "none",
     "reason": {
       "sugar": "contains no sweeteners",
       "bitter": "no bitter compounds present",
-      "water": "essentially plain water with carbonation"
+      "water": "essentially plain water with carbonation",
+      "ir94e": "no amino acid sources"
     },
     "confidence": {
       "sugar": 1.0,
       "bitter": 1.0,
-      "water": 1.0
+      "water": 1.0,
+      "ir94e": 1.0
     },
     "review": "llm_v1",
-    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2"
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    }
   },
   {
     "key": "spicy-crayfish",
@@ -4977,18 +5847,24 @@
     "sugar": "low",
     "bitter": "low",
     "water": "medium",
+    "ir94e": "medium",
     "reason": {
       "sugar": "contains a small amount of sugar in the sauce for flavor balance",
       "bitter": "spices and chili peppers can introduce a faint bitterness",
-      "water": "the dish is served in a flavorful, liquid-based sauce"
+      "water": "the dish is served in a flavorful, liquid-based sauce",
+      "ir94e": "heavy use of soy sauce, doubanjiang, and aromatics creates a rich umami profile"
     },
     "confidence": {
       "sugar": 0.9,
       "bitter": 0.8,
-      "water": 0.9
+      "water": 0.9,
+      "ir94e": 0.9
     },
     "review": "llm_v1",
-    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2"
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    }
   },
   {
     "key": "spinach",
@@ -5009,18 +5885,32 @@
     "sugar": "none",
     "bitter": "low",
     "water": "high",
+    "ir94e": "none",
     "reason": {
       "sugar": "contains no significant sugar content",
       "bitter": "contains mild oxalic acid which provides a faint bitterness",
-      "water": "high water content typical of leafy green vegetables"
+      "water": "high water content typical of leafy green vegetables",
+      "ir94e": "no significant free glutamate content"
     },
     "confidence": {
       "sugar": 1.0,
       "bitter": 0.9,
-      "water": 0.95
+      "water": 0.95,
+      "ir94e": 0.8
     },
     "review": "llm_v1",
-    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2"
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    },
+    "arbitration": {
+      "ir94e": {
+        "zh": "low",
+        "en": "none",
+        "chosen": "none",
+        "rule": "confidence"
+      }
+    }
   },
   {
     "key": "sports-drink",
@@ -5047,18 +5937,24 @@
     "sugar": "medium",
     "bitter": "none",
     "water": "medium",
+    "ir94e": "none",
     "reason": {
       "sugar": "contains significant amounts of added sugars for energy",
       "bitter": "no bitter ingredients present",
-      "water": "a flavored, sweetened aqueous solution"
+      "water": "a flavored, sweetened aqueous solution",
+      "ir94e": "no fermented or glutamate-rich ingredients"
     },
     "confidence": {
       "sugar": 0.95,
       "bitter": 0.975,
-      "water": 0.9
+      "water": 0.9,
+      "ir94e": 1.0
     },
     "review": "llm_v1",
-    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2"
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    }
   },
   {
     "key": "steak",
@@ -5080,18 +5976,32 @@
     "sugar": "none",
     "bitter": "none",
     "water": "low",
+    "ir94e": "low",
     "reason": {
       "sugar": "savory meat dish without added sugar",
       "bitter": "no bitter ingredients in standard preparation",
-      "water": "moist solid meat"
+      "water": "moist solid meat",
+      "ir94e": "contains natural amino acids from muscle tissue"
     },
     "confidence": {
       "sugar": 1.0,
       "bitter": 1.0,
-      "water": 0.9
+      "water": 0.9,
+      "ir94e": 0.9
     },
     "review": "llm_v1",
-    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2"
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    },
+    "arbitration": {
+      "ir94e": {
+        "zh": "low",
+        "en": "medium",
+        "chosen": "low",
+        "rule": "lower_level"
+      }
+    }
   },
   {
     "key": "steamed white rice",
@@ -5112,18 +6022,24 @@
     "sugar": "none",
     "bitter": "none",
     "water": "low",
+    "ir94e": "none",
     "reason": {
       "sugar": "contains only complex carbohydrates with no added sugar",
       "bitter": "no bitter compounds present",
-      "water": "moist solid with starch-bound water"
+      "water": "moist solid with starch-bound water",
+      "ir94e": "no fermented or high-glutamate ingredients"
     },
     "confidence": {
       "sugar": 1.0,
       "bitter": 1.0,
-      "water": 0.9
+      "water": 0.9,
+      "ir94e": 1.0
     },
     "review": "llm_v1",
-    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2"
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    }
   },
   {
     "key": "steamed-buns",
@@ -5153,24 +6069,36 @@
     "sugar": "none",
     "bitter": "none",
     "water": "low",
+    "ir94e": "none",
     "reason": {
       "sugar": "made from flour and water without added sugar",
       "bitter": "no bitter ingredients used",
-      "water": "moist solid with low free water content"
+      "water": "moist solid with low free water content",
+      "ir94e": "no fermented or glutamate-rich ingredients"
     },
     "confidence": {
       "sugar": 0.925,
       "bitter": 1.0,
-      "water": 0.9
+      "water": 0.9,
+      "ir94e": 0.875
     },
     "review": "llm_v1",
     "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    },
     "arbitration": {
       "sugar": {
         "zh": "low",
         "en": "none",
         "chosen": "none",
         "rule": "lower_level"
+      },
+      "ir94e": {
+        "zh": "low",
+        "en": "none",
+        "chosen": "none",
+        "rule": "confidence"
       }
     }
   },
@@ -5196,18 +6124,32 @@
     "sugar": "low",
     "bitter": "none",
     "water": "high",
+    "ir94e": "low",
     "reason": {
       "sugar": "often contains a small amount of sugar in the soy sauce seasoning",
       "bitter": "no bitter ingredients used in standard preparation",
-      "water": "the fish flesh is moist and the steaming process creates a broth-like sauce"
+      "water": "the fish flesh is moist and the steaming process creates a broth-like sauce",
+      "ir94e": "contains a small amount of soy sauce used for seasoning"
     },
     "confidence": {
       "sugar": 0.85,
       "bitter": 0.95,
-      "water": 0.9
+      "water": 0.9,
+      "ir94e": 0.9
     },
     "review": "llm_v1",
-    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2"
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    },
+    "arbitration": {
+      "ir94e": {
+        "zh": "low",
+        "en": "medium",
+        "chosen": "low",
+        "rule": "lower_level"
+      }
+    }
   },
   {
     "key": "stinky-tofu",
@@ -5233,18 +6175,24 @@
     "sugar": "none",
     "bitter": "low",
     "water": "low",
+    "ir94e": "medium",
     "reason": {
       "sugar": "savory dish without added sugar",
       "bitter": "fermentation process can introduce mild bitterness",
-      "water": "moist solid texture"
+      "water": "moist solid texture",
+      "ir94e": "heavily fermented tofu provides significant free amino acids"
     },
     "confidence": {
       "sugar": 0.85,
       "bitter": 0.7,
-      "water": 0.85
+      "water": 0.85,
+      "ir94e": 0.925
     },
     "review": "llm_v1",
     "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    },
     "arbitration": {
       "sugar": {
         "zh": "low",
@@ -5284,18 +6232,24 @@
     "sugar": "none",
     "bitter": "low",
     "water": "low",
+    "ir94e": "low",
     "reason": {
       "sugar": "savory dish with no added sugar",
       "bitter": "broccoli contains mild natural glucosinolates",
-      "water": "cooked vegetable with some moisture but not a liquid"
+      "water": "cooked vegetable with some moisture but not a liquid",
+      "ir94e": "often seasoned with a small amount of soy sauce or oyster sauce"
     },
     "confidence": {
       "sugar": 0.925,
       "bitter": 0.85,
-      "water": 0.875
+      "water": 0.875,
+      "ir94e": 0.8
     },
     "review": "llm_v1",
-    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2"
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    }
   },
   {
     "key": "strawberry",
@@ -5315,18 +6269,24 @@
     "sugar": "medium",
     "bitter": "none",
     "water": "medium",
+    "ir94e": "none",
     "reason": {
       "sugar": "naturally sweet fruit",
       "bitter": "no bitter compounds present",
-      "water": "high water content with dissolved sugars"
+      "water": "high water content with dissolved sugars",
+      "ir94e": "no significant free amino acids or glutamate"
     },
     "confidence": {
       "sugar": 0.9,
       "bitter": 1.0,
-      "water": 0.9
+      "water": 0.9,
+      "ir94e": 1.0
     },
     "review": "llm_v1",
-    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2"
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    }
   },
   {
     "key": "sukiyaki",
@@ -5349,18 +6309,24 @@
     "sugar": "medium",
     "bitter": "none",
     "water": "high",
+    "ir94e": "medium",
     "reason": {
       "sugar": "The sauce is a sweet soy-based mixture of mirin and sugar.",
       "bitter": "No significant bitter ingredients are typically used.",
-      "water": "It is a hot pot dish with a significant amount of broth."
+      "water": "It is a hot pot dish with a significant amount of broth.",
+      "ir94e": "The broth is rich in soy sauce and dashi, providing significant glutamate."
     },
     "confidence": {
       "sugar": 0.9,
       "bitter": 0.95,
-      "water": 0.9
+      "water": 0.9,
+      "ir94e": 0.9
     },
     "review": "llm_v1",
-    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2"
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    }
   },
   {
     "key": "sushi",
@@ -5383,18 +6349,32 @@
     "sugar": "low",
     "bitter": "none",
     "water": "low",
+    "ir94e": "low",
     "reason": {
       "sugar": "sushi rice is seasoned with a small amount of sugar",
       "bitter": "no inherently bitter ingredients in standard sushi",
-      "water": "the rice is a moist solid with moderate water content"
+      "water": "the rice is a moist solid with moderate water content",
+      "ir94e": "contains small amounts of soy sauce and potentially fish/seaweed"
     },
     "confidence": {
       "sugar": 0.9,
       "bitter": 0.95,
-      "water": 0.85
+      "water": 0.85,
+      "ir94e": 0.9
     },
     "review": "llm_v1",
-    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2"
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    },
+    "arbitration": {
+      "ir94e": {
+        "zh": "low",
+        "en": "medium",
+        "chosen": "low",
+        "rule": "lower_level"
+      }
+    }
   },
   {
     "key": "sweet red bean soup",
@@ -5415,18 +6395,24 @@
     "sugar": "medium",
     "bitter": "none",
     "water": "medium",
+    "ir94e": "none",
     "reason": {
       "sugar": "typically sweetened with sugar to make it a dessert soup",
       "bitter": "red beans are not inherently bitter when cooked as a dessert",
-      "water": "product-owner override 2026-09-11 (encoder v2.2 said high)"
+      "water": "product-owner override 2026-09-11 (encoder v2.2 said high)",
+      "ir94e": "no fermented or high-glutamate ingredients used"
     },
     "confidence": {
       "sugar": 0.925,
       "bitter": 0.95,
-      "water": 0.875
+      "water": 0.875,
+      "ir94e": 0.975
     },
     "review": "human_checked",
     "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    },
     "arbitration": {
       "sugar": {
         "zh": "medium",
@@ -5465,18 +6451,24 @@
     "sugar": "medium",
     "bitter": "none",
     "water": "low",
+    "ir94e": "low",
     "reason": {
       "sugar": "the sauce is a balance of sugar and vinegar",
       "bitter": "no bitter ingredients are used in the preparation",
-      "water": "the dish consists of fried meat coated in a thick, viscous sauce"
+      "water": "the dish consists of fried meat coated in a thick, viscous sauce",
+      "ir94e": "Contains a small amount of soy sauce or vinegar for seasoning."
     },
     "confidence": {
       "sugar": 0.925,
       "bitter": 1.0,
-      "water": 0.85
+      "water": 0.85,
+      "ir94e": 0.85
     },
     "review": "llm_v1",
     "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    },
     "arbitration": {
       "sugar": {
         "zh": "high",
@@ -5506,18 +6498,24 @@
     "sugar": "low",
     "bitter": "low",
     "water": "low",
+    "ir94e": "medium",
     "reason": {
       "sugar": "contains small amounts of sugar in sauces or corn tortillas",
       "bitter": "trace bitterness from spices like cumin or charred tortilla edges",
-      "water": "moist solid with some vegetable content but not a liquid"
+      "water": "moist solid with some vegetable content but not a liquid",
+      "ir94e": "contains seasoned meat, cheese, and salsa which provide significant glutamate"
     },
     "confidence": {
       "sugar": 0.9,
       "bitter": 0.8,
-      "water": 0.9
+      "water": 0.9,
+      "ir94e": 0.9
     },
     "review": "llm_v1",
     "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    },
     "arbitration": {
       "water": {
         "zh": "medium",
@@ -5552,18 +6550,24 @@
     "sugar": "low",
     "bitter": "none",
     "water": "low",
+    "ir94e": "medium",
     "reason": {
       "sugar": "contains a small amount of sugar in the batter and sauce",
       "bitter": "no significant bitter ingredients",
-      "water": "moist solid texture with some internal moisture"
+      "water": "moist solid texture with some internal moisture",
+      "ir94e": "contains dashi in the batter and is topped with savory sauce and bonito flakes"
     },
     "confidence": {
       "sugar": 0.9,
       "bitter": 0.95,
-      "water": 0.85
+      "water": 0.85,
+      "ir94e": 0.9
     },
     "review": "llm_v1",
-    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2"
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    }
   },
   {
     "key": "tangyuan",
@@ -5596,18 +6600,24 @@
     "sugar": "high",
     "bitter": "none",
     "water": "low",
+    "ir94e": "none",
     "reason": {
       "sugar": "typically filled with sweet pastes like black sesame or red bean",
       "bitter": "no bitter ingredients used in standard preparation",
-      "water": "glutinous rice dough is a moist solid, though served in water"
+      "water": "glutinous rice dough is a moist solid, though served in water",
+      "ir94e": "Contains no fermented or high-glutamate ingredients."
     },
     "confidence": {
       "sugar": 0.925,
       "bitter": 1.0,
-      "water": 0.85
+      "water": 0.85,
+      "ir94e": 1.0
     },
     "review": "llm_v1",
-    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2"
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    }
   },
   {
     "key": "tempura",
@@ -5631,18 +6641,24 @@
     "sugar": "low",
     "bitter": "none",
     "water": "low",
+    "ir94e": "low",
     "reason": {
       "sugar": "batter may contain trace sugar for browning",
       "bitter": "no significant bitter components",
-      "water": "moist fried solid with low free water content"
+      "water": "moist fried solid with low free water content",
+      "ir94e": "Often served with a dipping sauce containing soy sauce or dashi, providing a low level of glutamate."
     },
     "confidence": {
       "sugar": 0.9,
       "bitter": 0.95,
-      "water": 0.875
+      "water": 0.875,
+      "ir94e": 0.875
     },
     "review": "llm_v1",
-    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2"
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    }
   },
   {
     "key": "teriyaki-chicken",
@@ -5666,18 +6682,24 @@
     "sugar": "medium",
     "bitter": "none",
     "water": "low",
+    "ir94e": "medium",
     "reason": {
       "sugar": "teriyaki sauce contains significant sugar and mirin",
       "bitter": "no bitter ingredients in standard preparation",
-      "water": "moist solid meat with a viscous sauce coating"
+      "water": "moist solid meat with a viscous sauce coating",
+      "ir94e": "soy sauce is a primary component of the glaze"
     },
     "confidence": {
       "sugar": 0.925,
       "bitter": 0.925,
-      "water": 0.85
+      "water": 0.85,
+      "ir94e": 0.9
     },
     "review": "llm_v1",
-    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2"
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    }
   },
   {
     "key": "tiramisu",
@@ -5699,18 +6721,24 @@
     "sugar": "high",
     "bitter": "medium",
     "water": "low",
+    "ir94e": "low",
     "reason": {
       "sugar": "contains sugar in mascarpone cream and ladyfingers",
       "bitter": "contains espresso-soaked ladyfingers and cocoa powder",
-      "water": "moist solid texture with low free water content"
+      "water": "moist solid texture with low free water content",
+      "ir94e": "contains mascarpone cheese which provides a small amount of amino acids"
     },
     "confidence": {
       "sugar": 0.925,
       "bitter": 0.9,
-      "water": 0.825
+      "water": 0.825,
+      "ir94e": 0.75
     },
     "review": "llm_v1",
-    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2"
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    }
   },
   {
     "key": "toast",
@@ -5745,18 +6773,24 @@
     "sugar": "low",
     "bitter": "none",
     "water": "none",
+    "ir94e": "none",
     "reason": {
       "sugar": "contains small amounts of sugar in the dough",
       "bitter": "no bitter ingredients present",
-      "water": "a dry, toasted solid with very low moisture content"
+      "water": "a dry, toasted solid with very low moisture content",
+      "ir94e": "no significant free amino acids"
     },
     "confidence": {
       "sugar": 0.9,
       "bitter": 1.0,
-      "water": 0.9
+      "water": 0.9,
+      "ir94e": 1.0
     },
     "review": "llm_v1",
     "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    },
     "arbitration": {
       "water": {
         "zh": "low",
@@ -5786,18 +6820,24 @@
     "sugar": "none",
     "bitter": "none",
     "water": "low",
+    "ir94e": "none",
     "reason": {
       "sugar": "tofu is a savory soy product with no inherent sweetness",
       "bitter": "properly processed tofu has no bitter taste",
-      "water": "tofu has a high water content and soft texture (product-owner decision 2026-09-11: low)"
+      "water": "tofu has a high water content and soft texture (product-owner decision 2026-09-11: low)",
+      "ir94e": "fresh tofu contains minimal free amino acids compared to fermented soy products"
     },
     "confidence": {
       "sugar": 1.0,
       "bitter": 0.9,
-      "water": 0.85
+      "water": 0.85,
+      "ir94e": 0.8
     },
     "review": "human_checked",
     "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    },
     "arbitration": {
       "water": {
         "zh": "low",
@@ -5805,6 +6845,12 @@
         "chosen": "low",
         "rule": "human_checked",
         "note": "resolved by hand 2026-09-11: product-owner decision"
+      },
+      "ir94e": {
+        "zh": "none",
+        "en": "low",
+        "chosen": "none",
+        "rule": "lower_level"
       }
     }
   },
@@ -5839,18 +6885,24 @@
     "sugar": "low",
     "bitter": "low",
     "water": "high",
+    "ir94e": "medium",
     "reason": {
       "sugar": "contains a small amount of sugar for flavor balance",
       "bitter": "contains lime juice and herbs which can have faint bitter notes",
-      "water": "a thin, broth-based soup with low solute concentration"
+      "water": "a thin, broth-based soup with low solute concentration",
+      "ir94e": "contains fish sauce and shrimp stock as primary flavor components"
     },
     "confidence": {
       "sugar": 0.9,
       "bitter": 0.8,
-      "water": 0.95
+      "water": 0.95,
+      "ir94e": 0.9
     },
     "review": "llm_v1",
-    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2"
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    }
   },
   {
     "key": "tomato",
@@ -5873,18 +6925,24 @@
     "sugar": "low",
     "bitter": "none",
     "water": "medium",
+    "ir94e": "low",
     "reason": {
       "sugar": "contains natural sugars but is not sweet",
       "bitter": "no significant bitter compounds",
-      "water": "high water content with dissolved solutes"
+      "water": "high water content with dissolved solutes",
+      "ir94e": "contains natural free glutamates"
     },
     "confidence": {
       "sugar": 0.9,
       "bitter": 0.925,
-      "water": 0.925
+      "water": 0.925,
+      "ir94e": 0.9
     },
     "review": "llm_v1",
-    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2"
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    }
   },
   {
     "key": "tomato and egg stir-fry",
@@ -5903,18 +6961,24 @@
     "sugar": "low",
     "bitter": "none",
     "water": "medium",
+    "ir94e": "low",
     "reason": {
       "sugar": "often contains a small amount of sugar to balance the acidity of tomatoes",
       "bitter": "no bitter ingredients used in standard preparation",
-      "water": "tomatoes release significant juice during cooking creating a moist dish"
+      "water": "tomatoes release significant juice during cooking creating a moist dish",
+      "ir94e": "tomatoes provide natural glutamates and sometimes soy sauce is added"
     },
     "confidence": {
       "sugar": 0.9,
       "bitter": 1.0,
-      "water": 0.9
+      "water": 0.9,
+      "ir94e": 0.8
     },
     "review": "llm_v1",
-    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2"
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    }
   },
   {
     "key": "tonic water",
@@ -5932,18 +6996,24 @@
     "sugar": "high",
     "bitter": "very_high",
     "water": "medium",
+    "ir94e": "none",
     "reason": {
       "sugar": "product-owner override 2026-09-11 (encoder v2.2 said medium)",
       "bitter": "product-owner override 2026-09-11 (encoder v2.2 said very_high)",
-      "water": "product-owner override 2026-09-11 (encoder v2.2 said medium)"
+      "water": "product-owner override 2026-09-11 (encoder v2.2 said medium)",
+      "ir94e": "no fermented or glutamate-rich ingredients"
     },
     "confidence": {
       "sugar": 0.9,
       "bitter": 1.0,
-      "water": 0.9
+      "water": 0.9,
+      "ir94e": 1.0
     },
     "review": "human_checked",
     "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    },
     "arbitration": {
       "water": {
         "zh": "very_high",
@@ -5976,18 +7046,24 @@
     "sugar": "medium",
     "bitter": "none",
     "water": "low",
+    "ir94e": "medium",
     "reason": {
       "sugar": "gochujang sauce typically contains added sugar or corn syrup",
       "bitter": "no significant bitter ingredients in standard preparation",
-      "water": "chewy rice cakes are moist solids with a thick, viscous sauce"
+      "water": "chewy rice cakes are moist solids with a thick, viscous sauce",
+      "ir94e": "gochujang is a fermented soybean paste rich in glutamates"
     },
     "confidence": {
       "sugar": 0.9,
       "bitter": 0.95,
-      "water": 0.85
+      "water": 0.85,
+      "ir94e": 0.9
     },
     "review": "llm_v1",
-    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2"
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    }
   },
   {
     "key": "twice-cooked-pork",
@@ -6015,18 +7091,24 @@
     "sugar": "low",
     "bitter": "none",
     "water": "low",
+    "ir94e": "medium",
     "reason": {
       "sugar": "contains a small amount of sugar for seasoning balance",
       "bitter": "no bitter ingredients used in traditional preparation",
-      "water": "moist solid dish with rendered fat and sauce"
+      "water": "moist solid dish with rendered fat and sauce",
+      "ir94e": "heavily seasoned with fermented bean paste (doubanjiang) and soy sauce"
     },
     "confidence": {
       "sugar": 0.9,
       "bitter": 1.0,
-      "water": 0.9
+      "water": 0.9,
+      "ir94e": 0.95
     },
     "review": "llm_v1",
-    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2"
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    }
   },
   {
     "key": "udon",
@@ -6052,18 +7134,24 @@
     "sugar": "none",
     "bitter": "none",
     "water": "low",
+    "ir94e": "medium",
     "reason": {
       "sugar": "savory wheat noodle dish without added sugar",
       "bitter": "no bitter ingredients used in standard preparation",
-      "water": "moist solid noodle texture with some absorbed broth"
+      "water": "moist solid noodle texture with some absorbed broth",
+      "ir94e": "dashi broth is rich in glutamate from kombu and katsuobushi"
     },
     "confidence": {
       "sugar": 0.975,
       "bitter": 0.975,
-      "water": 0.9
+      "water": 0.9,
+      "ir94e": 0.9
     },
     "review": "llm_v1",
-    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2"
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    }
   },
   {
     "key": "waffle",
@@ -6088,18 +7176,24 @@
     "sugar": "medium",
     "bitter": "none",
     "water": "low",
+    "ir94e": "none",
     "reason": {
       "sugar": "contains sugar in the batter and often served with syrup",
       "bitter": "no bitter ingredients in standard preparation",
-      "water": "moist solid texture with low free water content"
+      "water": "moist solid texture with low free water content",
+      "ir94e": "no significant source of free amino acids"
     },
     "confidence": {
       "sugar": 0.9,
       "bitter": 1.0,
-      "water": 0.9
+      "water": 0.9,
+      "ir94e": 1.0
     },
     "review": "llm_v1",
-    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2"
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    }
   },
   {
     "key": "wasabi",
@@ -6129,18 +7223,24 @@
     "sugar": "none",
     "bitter": "medium",
     "water": "low",
+    "ir94e": "none",
     "reason": {
       "sugar": "contains no added sugar",
       "bitter": "has a distinct pungent and slightly bitter profile",
-      "water": "a moist paste consistency"
+      "water": "a moist paste consistency",
+      "ir94e": "does not contain significant free amino acids or glutamate"
     },
     "confidence": {
       "sugar": 1.0,
       "bitter": 0.8,
-      "water": 0.9
+      "water": 0.9,
+      "ir94e": 0.9
     },
     "review": "llm_v1",
-    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2"
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    }
   },
   {
     "key": "water",
@@ -6158,18 +7258,24 @@
     "sugar": "none",
     "bitter": "none",
     "water": "very_high",
+    "ir94e": "none",
     "reason": {
       "sugar": "pure water contains no sugars",
       "bitter": "pure water contains no bitter compounds",
-      "water": "pure water is the definition of very high water content"
+      "water": "pure water is the definition of very high water content",
+      "ir94e": "pure water contains no amino acids or glutamate"
     },
     "confidence": {
       "sugar": 1.0,
       "bitter": 1.0,
-      "water": 1.0
+      "water": 1.0,
+      "ir94e": 1.0
     },
     "review": "llm_v1",
-    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2"
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    }
   },
   {
     "key": "watermelon",
@@ -6185,18 +7291,24 @@
     "sugar": "medium",
     "bitter": "none",
     "water": "medium",
+    "ir94e": "none",
     "reason": {
       "sugar": "contains natural fructose and glucose",
       "bitter": "no bitter compounds present",
-      "water": "high water content with dissolved sugars"
+      "water": "high water content with dissolved sugars",
+      "ir94e": "no significant free amino acids or glutamate"
     },
     "confidence": {
       "sugar": 0.95,
       "bitter": 1.0,
-      "water": 0.9
+      "water": 0.9,
+      "ir94e": 1.0
     },
     "review": "llm_v1",
-    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2"
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    }
   },
   {
     "key": "whiskey",
@@ -6223,18 +7335,24 @@
     "sugar": "none",
     "bitter": "medium",
     "water": "low",
+    "ir94e": "none",
     "reason": {
       "sugar": "distilled spirit contains no sugar",
       "bitter": "contains tannins and congeners from barrel aging",
-      "water": "mostly water and ethanol solution (product-owner decision 2026-09-11: low)"
+      "water": "mostly water and ethanol solution (product-owner decision 2026-09-11: low)",
+      "ir94e": "no significant free amino acids or glutamate"
     },
     "confidence": {
       "sugar": 1.0,
       "bitter": 0.9,
-      "water": 0.9
+      "water": 0.9,
+      "ir94e": 0.975
     },
     "review": "human_checked",
     "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    },
     "arbitration": {
       "water": {
         "zh": "high",
@@ -6282,18 +7400,24 @@
     "sugar": "none",
     "bitter": "none",
     "water": "high",
+    "ir94e": "medium",
     "reason": {
       "sugar": "savory dish without added sugar",
       "bitter": "no bitter ingredients used in standard preparation",
-      "water": "clear broth base with high water content"
+      "water": "clear broth base with high water content",
+      "ir94e": "broth is typically made from long-simmered meat or bones rich in amino acids"
     },
     "confidence": {
       "sugar": 0.975,
       "bitter": 0.975,
-      "water": 0.9
+      "water": 0.9,
+      "ir94e": 0.9
     },
     "review": "llm_v1",
-    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2"
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    }
   },
   {
     "key": "xiaolongbao",
@@ -6328,18 +7452,24 @@
     "sugar": "low",
     "bitter": "none",
     "water": "medium",
+    "ir94e": "medium",
     "reason": {
       "sugar": "contains a small amount of sugar in the pork filling for flavor balance",
       "bitter": "no bitter ingredients are typically used in the preparation",
-      "water": "contains a significant amount of gelatinous soup inside the dumpling skin"
+      "water": "contains a significant amount of gelatinous soup inside the dumpling skin",
+      "ir94e": "rich in umami from pork, soy sauce, and long-simmered gelatinous stock"
     },
     "confidence": {
       "sugar": 0.9,
       "bitter": 1.0,
-      "water": 0.95
+      "water": 0.95,
+      "ir94e": 0.9
     },
     "review": "llm_v1",
-    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2"
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    }
   },
   {
     "key": "yogurt",
@@ -6365,18 +7495,24 @@
     "sugar": "low",
     "bitter": "none",
     "water": "high",
+    "ir94e": "low",
     "reason": {
       "sugar": "natural lactose provides mild sweetness, often supplemented with small amounts of added sugar",
       "bitter": "no significant bitter compounds present",
-      "water": "a semi-liquid dairy product with high water content and low solute concentration"
+      "water": "a semi-liquid dairy product with high water content and low solute concentration",
+      "ir94e": "contains small amounts of free amino acids from fermentation"
     },
     "confidence": {
       "sugar": 0.85,
       "bitter": 0.85,
-      "water": 0.9
+      "water": 0.9,
+      "ir94e": 0.75
     },
     "review": "llm_v1",
     "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    },
     "arbitration": {
       "bitter": {
         "zh": "none",
@@ -6412,18 +7548,24 @@
     "sugar": "none",
     "bitter": "none",
     "water": "none",
+    "ir94e": "none",
     "reason": {
       "sugar": "savory deep-fried flour dough with no added sugar",
       "bitter": "no bitter ingredients used in traditional preparation",
-      "water": "a dry, porous, deep-fried solid"
+      "water": "a dry, porous, deep-fried solid",
+      "ir94e": "it consists primarily of flour, water, and leavening agents without glutamate-rich additives"
     },
     "confidence": {
       "sugar": 1.0,
       "bitter": 1.0,
-      "water": 0.9
+      "water": 0.9,
+      "ir94e": 1.0
     },
     "review": "llm_v1",
     "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    },
     "arbitration": {
       "water": {
         "zh": "none",
@@ -6465,18 +7607,24 @@
     "sugar": "medium",
     "bitter": "none",
     "water": "low",
+    "ir94e": "medium",
     "reason": {
       "sugar": "The sauce is characterized by a balance of sweet, sour, and spicy flavors.",
       "bitter": "No bitter ingredients are typically used in this dish.",
-      "water": "it is a stir-fried dish with a thick, viscous sauce rather than a liquid soup"
+      "water": "it is a stir-fried dish with a thick, viscous sauce rather than a liquid soup",
+      "ir94e": "Contains soy sauce, doubanjiang (fermented bean paste), and pork, providing significant free glutamate."
     },
     "confidence": {
       "sugar": 0.9,
       "bitter": 1.0,
-      "water": 0.85
+      "water": 0.85,
+      "ir94e": 0.9
     },
     "review": "llm_v1",
     "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    },
     "arbitration": {
       "water": {
         "zh": "low",
@@ -6507,17 +7655,23 @@
     "sugar": "low",
     "bitter": "none",
     "water": "low",
+    "ir94e": "low",
     "reason": {
       "sugar": "savory versions are common, sweet versions contain mild sugar",
       "bitter": "no bitter ingredients in standard preparation",
-      "water": "steamed glutinous rice is a moist solid"
+      "water": "steamed glutinous rice is a moist solid",
+      "ir94e": "savory versions contain soy sauce or marinated meat"
     },
     "confidence": {
       "sugar": 0.8,
       "bitter": 1.0,
-      "water": 0.9
+      "water": 0.9,
+      "ir94e": 0.8
     },
     "review": "llm_v1",
-    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2"
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
+    "encoder_version_by_dimension": {
+      "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    }
   }
 ]
