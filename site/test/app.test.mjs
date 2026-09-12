@@ -6,8 +6,22 @@ import { fileURLToPath } from "node:url";
 import path from "node:path";
 
 import {
-  buildDictionary, buildLookup, cardLines, decide, ir94eLevel, issueUrl, lowInterest, normalizeName, scoreOptions, STRINGS, fmt,
+  buildDictionary, buildLookup, cardLines, decide, ir94eLevel, issueUrl, lowInterest, normalizeName, releaseLine, scoreOptions, STRINGS, fmt,
 } from "../app.js";
+
+test("footer release line: version · date · summary from site/data/release.json, version linked to the changelog", () => {
+  const release = JSON.parse(readFileSync(path.join(here, "..", "data", "release.json"), "utf8"));
+  const en = releaseLine(release, "en");
+  const zh = releaseLine(release, "zh");
+  assert.equal(en.text, `${release.version} · ${release.date} · ${STRINGS.en[release.summary_key]}`);
+  assert.equal(zh.summary, STRINGS.zh[release.summary_key]);
+  assert.match(en.href, /^https:\/\/github\.com\/.*CHANGELOG\.md$/);
+  const changelog = readFileSync(path.join(here, "..", "..", "CHANGELOG.md"), "utf8");
+  assert.ok(changelog.includes(`## ${release.version} — ${release.date}`), "release.json names the top changelog entry");
+  assert.equal(releaseLine(null, "en"), null);
+  assert.equal(releaseLine({ version: "1.1.1", date: "2026-09-12", summary_key: "releaseSummary" }, "en"), null, "version needs a v prefix");
+  assert.equal(releaseLine({ version: "v1.1.1", date: "2026-09-12", summary_key: "missingKey" }, "en"), null, "unknown summary key renders nothing");
+});
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const dishes = JSON.parse(readFileSync(path.join(here, "..", "data", "dishes.json"), "utf8"));

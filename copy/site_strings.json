@@ -716,6 +716,20 @@
       "max_length": 80
     },
     {
+      "key": "releaseSummary",
+      "context": "Footer 'what's new' line, one-line summary of the latest release; version and date come from site/data/release.json",
+      "en": "Brain view follows the fly to the dish it picks",
+      "zh": "脑图会跟着果蝇落到它选的那道菜上",
+      "max_length": 60
+    },
+    {
+      "key": "releaseLink",
+      "context": "Footer 'what's new' line: link text pointing at CHANGELOG.md on GitHub",
+      "en": "what's new",
+      "zh": "更新记录",
+      "max_length": 20
+    },
+    {
       "key": "title",
       "context": "Page heading top-left",
       "en": "Ask the Fly",

@@ -5,6 +5,11 @@ Ask the Fly lets a fruit-fly brain model taste a few dishes and pick one for you
 
 Try it: https://askthefly.app/
 
+**What's new** (full list in [CHANGELOG.md](CHANGELOG.md))
+- v1.1.1 (2026-09-12): the brain view follows the fly to the dish it picks; the empty "Brain response:" line is gone.
+- v1.1.0 (2026-09-12): the fly can tell savory dishes apart, with a new amino-acid dimension; meat- and soy-seasoned dishes now score very low (the model's property); a "didn't care much for any of these" line when nothing scores above 5 Hz.
+- v1.0.0 (2026-09-11): launch.
+
 ![Three dishes go in, the fly picks one](docs/media/demo-en.gif)
 
 ## Layout

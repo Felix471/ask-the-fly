@@ -9,6 +9,11 @@ Ask the Fly lets a fruit-fly brain model taste a few dishes and pick one for you
 
 Try it: https://askthefly.app/
 
+**What's new** (full list in [CHANGELOG.md](CHANGELOG.md))
+- v1.1.1 (2026-09-12): the brain view follows the fly to the dish it picks; the empty "Brain response:" line is gone.
+- v1.1.0 (2026-09-12): the fly can tell savory dishes apart, with a new amino-acid dimension; meat- and soy-seasoned dishes now score very low (the model's property); a "didn't care much for any of these" line when nothing scores above 5 Hz.
+- v1.0.0 (2026-09-11): launch.
+
 ![Three dishes go in, the fly picks one](docs/media/demo-en.gif)
 
 <!-- section: 2 | file: README.md | context: English README (GitHub landing page) — section 'Layout' -->
@@ -148,6 +153,11 @@ Names that mean more than one dish (for example "biscuit") are split into separa
 English: [README.md](README.md)
 
 在线试用：https://askthefly.app/
+
+**最近更新**（完整列表见 [CHANGELOG.md](CHANGELOG.md)）
+- v1.1.1（2026-09-12）：脑图会跟着果蝇落到它选的那道菜上；结果页里空着的"脑反应："一行去掉了。
+- v1.1.0（2026-09-12）：果蝇能分清咸味菜了，新增了氨基酸这一维；肉多、酱油重的菜现在得分很低（这是模型本身的性质）；没有一道超过 5 Hz 时会多一句"都不太想吃"。
+- v1.0.0（2026-09-11）：上线。
 
 ![丢进三道菜，果蝇选一道](docs/media/demo-zh.gif)
 

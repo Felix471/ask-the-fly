@@ -21,6 +21,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import re
 import math
 import sys
 from pathlib import Path
@@ -216,6 +217,48 @@ def check_site(root: Path) -> list[str]:
     return problems
 
 
+RELEASE_HEADING = re.compile(r"^## (v\d+\.\d+\.\d+) \S+ (\d{4}-\d{2}-\d{2})\s*$", re.M)
+
+
+def check_release(root: Path) -> list[str]:
+    """site/data/release.json must name the top CHANGELOG.md entry (version and date) and a
+    summary key that exists in site/strings.js for both languages, so the footer's
+    "what's new" line cannot go stale at a release."""
+    problems = []
+    release_path = root / "site" / "data" / "release.json"
+    changelog_path = root / "CHANGELOG.md"
+    if not release_path.exists():
+        return [f"release: {release_path} missing"]
+    if not changelog_path.exists():
+        return [f"release: {changelog_path} missing"]
+    try:
+        release = load_json(release_path)
+    except (OSError, ValueError) as exc:
+        return [f"release: {release_path} unreadable: {exc}"]
+    version, date_, key = release.get("version"), release.get("date"), release.get("summary_key")
+    if not isinstance(version, str) or not re.fullmatch(r"v\d+\.\d+\.\d+", version):
+        problems.append(f"release: version {version!r} is not vX.Y.Z")
+    if not isinstance(date_, str) or not re.fullmatch(r"\d{4}-\d{2}-\d{2}", date_):
+        problems.append(f"release: date {date_!r} is not YYYY-MM-DD")
+    headings = RELEASE_HEADING.findall(changelog_path.read_text(encoding="utf-8"))
+    if not headings:
+        problems.append("release: CHANGELOG.md has no '## vX.Y.Z — YYYY-MM-DD' heading")
+    else:
+        top_version, top_date = headings[0]
+        if version != top_version:
+            problems.append(f"release: release.json version {version!r} != CHANGELOG.md top entry {top_version!r}")
+        if date_ != top_date:
+            problems.append(f"release: release.json date {date_!r} != CHANGELOG.md top entry date {top_date!r}")
+    strings_path = root / "site" / "strings.js"
+    if not isinstance(key, str) or not key:
+        problems.append(f"release: summary_key {key!r} missing")
+    elif strings_path.exists():
+        count = strings_path.read_text(encoding="utf-8").count(f'"{key}":')
+        if count < 2:
+            problems.append(f"release: summary_key {key!r} is not defined for both languages in site/strings.js ({count} found)")
+    return problems
+
+
 def validate(root: Path) -> list[str]:
     problems, table = check_lookup(root)
     dict_problems, dishes = check_dictionary(root)
@@ -224,6 +267,7 @@ def validate(root: Path) -> list[str]:
     problems += check_sync(root)
     problems += check_replays(root, table, dishes)
     problems += check_site(root)
+    problems += check_release(root)
     return problems
 
 
