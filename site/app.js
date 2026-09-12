@@ -74,13 +74,16 @@ export function buildLookup(table) {
   };
 }
 
+export function ir94eLevel(entry) {
+  return entry && entry.ir94e ? entry.ir94e : "none";
+}
+
 export function scoreOptions(names, dictionary, lookup) {
   return names.map((name) => {
     const entry = dictionary.find(name);
     if (!entry) return { name, entry: null, cell: null };
-    const cell = lookup.get({ sugar: entry.sugar, bitter: entry.bitter, water: entry.water, ir94e: "none" });
-    // "Sugar response" = the same dish looked up with bitter = none. Equal to
-    // `cell` when the dish has no bitter; shown anyway.
+    const cell = lookup.get({ sugar: entry.sugar, bitter: entry.bitter, water: entry.water, ir94e: ir94eLevel(entry) });
+    // "Sugar response" = the same dish with bitter = none AND ir94e = none.
     const sugarOnly = lookup.get({ sugar: entry.sugar, bitter: "none", water: entry.water, ir94e: "none" });
     return { name, entry, cell, sugarOnly };
   });
@@ -143,6 +146,14 @@ export function decide(scored, mode) {
     known,
     misses,
   };
+}
+
+// Designed threshold (ours, not the model's): below 5 Hz MN9 the fly's own pick
+// is called "least uninteresting". Copy only; decisions and ties are unchanged.
+export const LOW_INTEREST_HZ = 5;
+export function lowInterest(decision, threshold = LOW_INTEREST_HZ) {
+  const pick = decision && decision.flyPick;
+  return Boolean(pick && pick.cell && pick.cell.mn9_mean < threshold);
 }
 
 // The fly's animation plan for a decision: taste every known dish in order,
@@ -262,8 +273,9 @@ export function cardLines(decision, lang) {
         sugar: names[lead.entry.sugar] ?? lead.entry.sugar,
         bitter: names[lead.entry.bitter] ?? lead.entry.bitter,
         water: names[lead.entry.water] ?? lead.entry.water,
+        ir94e: names[ir94eLevel(lead.entry)] ?? ir94eLevel(lead.entry),
       }
-    : Object.fromEntries(["dish", "hz", "hz_sugar_only", "sugar", "bitter", "water"].map((k) => [k, t.cardEmptyValue]));
+    : Object.fromEntries(["dish", "hz", "hz_sugar_only", "sugar", "bitter", "water", "ir94e"].map((k) => [k, t.cardEmptyValue]));
   return { fixed: t.fixedLines.map((line) => fmt(line, values)), bottom: t.cardHonesty };
 }
 
@@ -381,12 +393,12 @@ export function resolveShared(items, dictionary) {
   });
 }
 
-// "sugar low · bitter none · water high" for a lookup cell or dictionary entry,
+// "sugar low · bitter none · water high · amino acids medium" for a lookup cell or dictionary entry,
 // in the page's language; the raw cell id stays in the details HUD.
 export function levelsText(levels, lang) {
   const t = STRINGS[lang] || STRINGS.en;
   const name = (level) => t.levelNames[level] ?? level;
-  return fmt(t.levelsLine, { sugar: name(levels.sugar), bitter: name(levels.bitter), water: name(levels.water) });
+  return fmt(t.levelsLine, { sugar: name(levels.sugar), bitter: name(levels.bitter), water: name(levels.water), ir94e: name(levels.ir94e ?? "none") });
 }
 
 // ---------- silencing statistics (D08) ----------
@@ -1018,7 +1030,7 @@ if (isBrowser) {
     $("hud-mn9").textContent = `${st.mn9Left} / ${st.mn9Right}`;
     $("hud-cell").textContent = replay.header.cell_id || state.currentCell || "–";
     $("hud-latency").textContent = st.mn9FirstMs == null ? t.hudNone : fmt(t.hudMs, { ms: st.mn9FirstMs });
-    $("hud-inputs").textContent = fmt(t.hudRates, { sugar: st.hz.sugar, bitter: st.hz.bitter, water: st.hz.water });
+    $("hud-inputs").textContent = fmt(t.hudRates, { sugar: st.hz.sugar, bitter: st.hz.bitter, water: st.hz.water, ir94e: st.hz.ir94e });
   }
 
   // Silencing buttons: Clavicle plus the two neurons with the clearest, most
@@ -1394,6 +1406,12 @@ if (isBrowser) {
       strong.textContent = displayName(d.winner, state.lang);
     }
     if (!verdict.contains(strong)) verdict.append(lead, strong);
+    if (lowInterest(d)) {
+      const sub = document.createElement("span");
+      sub.className = "verdict-sub";
+      sub.textContent = t.lowInterest;
+      verdict.append(sub);
+    }
     renderHero().catch((error) => console.warn("hero failed:", error));
 
     const body = $("results-body");
@@ -1414,9 +1432,9 @@ if (isBrowser) {
       }
       tr.append(name);
       if (item.cell) {
-        for (const dimension of ["sugar", "bitter", "water"]) {
+        for (const dimension of ["sugar", "bitter", "water", "ir94e"]) {
           const td = document.createElement("td");
-          td.textContent = levelText(item.entry[dimension]);
+          td.textContent = levelText(item.entry[dimension] ?? "none");
           tr.append(td);
         }
         const mn9 = document.createElement("td");
@@ -1425,7 +1443,7 @@ if (isBrowser) {
         tr.append(mn9);
       } else {
         const td = document.createElement("td");
-        td.colSpan = 4;
+        td.colSpan = 5;
         td.textContent = t.missTitle;
         tr.append(td);
       }

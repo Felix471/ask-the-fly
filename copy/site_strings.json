@@ -219,6 +219,27 @@
       "max_length": 12
     },
     {
+      "key": "colIr94e",
+      "context": "Detail table header, fourth taste column: amino-acid aversion (Ir94e)",
+      "en": "Amino acids",
+      "zh": "氨基酸",
+      "max_length": 12
+    },
+    {
+      "key": "ir94eExplain",
+      "context": "One line under the detail table explaining the fourth column. The dimension is amino-acid aversion (Ir94e); zh may gloss it colloquially as 鲜 but never define it as salt or umami",
+      "en": "Amino acids = the Ir94e channel: in this model free amino acids and glutamate put the fly off, so soy-, stock- and meat-heavy dishes score low. Which level a dish gets is our estimate; the suppression is the model's.",
+      "zh": "氨基酸一列是 Ir94e 通道：在这个模型里，游离氨基酸和谷氨酸（俗称的“鲜”）会让果蝇扫兴，所以酱油、高汤、肉多的菜得分很低。菜对应哪个等级是我们估的，抑制本身是模型的。",
+      "max_length": 260
+    },
+    {
+      "key": "lowInterest",
+      "context": "Extra line under the pick when the fly's chosen dish scores below 5 Hz MN9 (threshold designed by us): none of the options interested the fly much",
+      "en": "The fly didn't care much for any of these. This one was just the least uninteresting.",
+      "zh": "这几样果蝇都不太感兴趣，这个只是最不无聊的一个。",
+      "max_length": 120
+    },
+    {
       "key": "details",
       "context": "Collapsed section under the result: the level / MN9 table (product owner wording)",
       "en": "How each dish was scored",
@@ -248,17 +269,17 @@
     },
     {
       "key": "fixedLines.1",
-      "context": "Card fixed line 2; {hz} {hz_sugar_only}",
-      "en": "MN9: {hz} Hz · sugar alone {hz_sugar_only} · after bitter {hz}",
-      "zh": "MN9：{hz} Hz（只有甜味时是 {hz_sugar_only}，加入苦味后是 {hz}）",
+      "context": "Card fixed line 2; {hz} = MN9 mean of the pick's cell, {hz_sugar_only} = same dish with bitter = none and ir94e = none",
+      "en": "MN9: {hz} Hz · sugar alone {hz_sugar_only} · with bitter and amino acids {hz}",
+      "zh": "MN9：{hz} Hz · 只看甜 {hz_sugar_only} · 加上苦和氨基酸 {hz}",
       "max_length": 90
     },
     {
       "key": "fixedLines.2",
-      "context": "Card fixed line 3; {sugar} {bitter} {water} = level words",
-      "en": "Taste estimate: sugar {sugar} · bitter {bitter} · water {water} (LLM)",
-      "zh": "味觉估算：甜 {sugar} · 苦 {bitter} · 水 {water}（由 LLM 估算）",
-      "max_length": 90
+      "context": "Card fixed line 3; {sugar} {bitter} {water} {ir94e} = level words",
+      "en": "Taste estimate: sugar {sugar} · bitter {bitter} · water {water} · amino acids {ir94e} (LLM)",
+      "zh": "味觉估算：甜 {sugar} · 苦 {bitter} · 水 {water} · 氨基酸 {ir94e}（由 LLM 估算）",
+      "max_length": 110
     },
     {
       "key": "fixedLines.3",
@@ -388,10 +409,10 @@
     },
     {
       "key": "levelsLine",
-      "context": "The three taste levels of a recorded run, shown instead of the internal cell id; {sugar} {bitter} {water} are level words",
-      "en": "sugar {sugar} · bitter {bitter} · water {water}",
-      "zh": "糖 {sugar} · 苦 {bitter} · 水 {water}",
-      "max_length": 60
+      "context": "The four taste levels of a recorded run, shown instead of the internal cell id; {sugar} {bitter} {water} {ir94e} are level words",
+      "en": "sugar {sugar} · bitter {bitter} · water {water} · amino acids {ir94e}",
+      "zh": "糖 {sugar} · 苦 {bitter} · 水 {water} · 氨基酸 {ir94e}",
+      "max_length": 80
     },
     {
       "key": "levelNames.high",
@@ -885,10 +906,10 @@
     },
     {
       "key": "hudRates",
-      "context": "HUD value: input rates; {sugar} {bitter} {water} in Hz",
-      "en": "sugar {sugar} · bitter {bitter} · water {water} Hz",
-      "zh": "甜 {sugar} · 苦 {bitter} · 水 {water} Hz",
-      "max_length": 50
+      "context": "HUD value: input rates; {sugar} {bitter} {water} {ir94e} in Hz",
+      "en": "sugar {sugar} · bitter {bitter} · water {water} · amino acids {ir94e} Hz",
+      "zh": "甜 {sugar} · 苦 {bitter} · 水 {water} · 氨基酸 {ir94e} Hz",
+      "max_length": 80
     },
     {
       "key": "silenceTitle",

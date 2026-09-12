@@ -55,12 +55,15 @@ English: [README.md](README.md)
 | 表达了去抑制（富集的 LB3 → Quasimodo → MN 回路） | **否** —— 基础放电为零，没有可释放的持续性抑制；v1 只包含前馈的 Clavicle 通路 | Tastekin et al. 2026，图 6I/6J、图 S17；docs/open_questions.md OQ-3 |
 | 覆盖完整的进食序列 | **否** —— 真实进食是一串检查点：足部刚毛 → 唇瓣刚毛 → 味觉钉 → 咽。本仿真只覆盖唇瓣刚毛这一站。 | Tastekin et al. 2026，讨论部分 "Sequential checkpoints and action control" |
 | 水在模型里是独立的味觉品质 | **否** —— 在这个模型里水是第二种食欲驱动，主要帮弱糖加分（糖 40 Hz + 水 40 Hz 得到 24 Hz MN9，单独糖只有 4 Hz；糖 200 Hz 时只多 7%）。所以湿的咸菜会赢过干的。这是连接组模型的性质，不是我们写的规则。 | docs/phase1_characterization.md，糖 × 水 |
+| Ir94e 是氨基酸厌恶通道（Tastekin et al. 2026，LB1e）。每道菜对应哪个 Ir94e 等级是我们定的（编码器 v2.3）。它对 MN9 的作用是模型的：在糖低 / 水低时，MN9 沿 无 / 低 / 中 / 高 从 61.8 → 9.3 → 1.6 → 0.5 Hz。在这个模型里，果蝇把清淡的主食排在所有肉类或酱油调味的菜之上。这种抑制的强度没有和行为数据校准过（docs/open_questions.md OQ-6）。 | 方向已复现，映射是设计的 | docs/phase1_characterization.md，糖 × ir94e；docs/encoder_stability_v2_3_batch2.md |
 | 使用了 2026 年 9 月的完整味觉接线（MaleCNS） | **否** —— 另一只动物，不在本仿真内 | docs/open_questions.md，v3 note |
 | 脑图是实时仿真 | **否** —— 它回放每个格子一次记录好的 1 秒试验（固定种子），来自同一个模型；位置是 FlyWire 胞体坐标，活动是记录到的放电时刻 | docs/site.md，`site/data/replay/` 文件头 |
 | 果蝇动画是测得的行为 | **否** —— 它是由查找表的 MN9 均值和记录回放驱动的脚本动画；模型没有身体、腿或口器，只有 MN9 放电 | docs/site.md |
 | 果蝇的排名是实时计算 | **否** —— 一张预先算好的 400 格查找表（每格 30 次试验，`data/lookup_table.json`）；页面只是读取它 | docs/grid_provenance.md |
 
 在这个模型里，微量的水只在帮糖时才被看见；只有食物基本是水时，果蝇才注意到水。因此查找网格把水的"低"和"中"放进同一个格子（60 Hz）：固定路径复核（docs/fixed_path_recheck.md）在任何一条曲线上都分不开它们。
+
+当果蝇自己选的那道菜 MN9 低于 5 Hz 时，结果会多一句"这个只是最不无聊的一个"；这个 5 Hz 阈值是我们定的，只改措辞，不改选择也不改平局。
 
 产品口号："它只管第一口。"
 

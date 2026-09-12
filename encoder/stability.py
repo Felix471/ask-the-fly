@@ -12,25 +12,23 @@ from collections import Counter, defaultdict
 from datetime import datetime, timezone
 from pathlib import Path
 
-from dotenv import load_dotenv
-
-from .client import RESPONSE_SCHEMA_VERSION
 from .encode import PROMPT_VERSION, _PROMPT_PATH_FOR, encode_dish
-from .levels import LEVELS
+from .levels import levels_for, prompt_has_ir94e
 from .normalize import normalize_name
 
-DIMENSIONS = ("sugar", "bitter", "water")
+DIMENSIONS = ("sugar", "bitter", "water", "ir94e")
 ROOT = Path(__file__).resolve().parents[1]
 FOODS_PATH = Path(__file__).with_name("foods_stability.json")
 RAW_PATH = ROOT / "results" / "encoder" / "stability_raw.jsonl"
 REPORT_PATH = ROOT / "docs" / "encoder_stability.md"
 
 
-def _mode(values: list[str]) -> str | None:
+def _mode(values: list[str], dimension: str) -> str | None:
     if not values:
         return None
     counts = Counter(values)
-    return max(LEVELS, key=lambda level: (counts[level], -LEVELS.index(level)))
+    allowed = levels_for(dimension)
+    return max(allowed, key=lambda level: (counts[level], -allowed.index(level)))
 
 
 def _fake_entry(food: dict[str, str], prompt_version: str) -> dict:
@@ -72,18 +70,34 @@ def _fake_entry(food: dict[str, str], prompt_version: str) -> dict:
             water = "high"
         elif any(x in en for x in ("chips", "crackers", "nuts", "jerky")):
             water = "none"
-    return {
+    result = {
         "key": normalize_name(food["en"]),
         "aliases": [normalize_name(food["zh"]), normalize_name(food["en"])],
         "display": dict(food),
         "sugar": sugar,
         "bitter": bitter,
         "water": water,
-        "reason": {dimension: "deterministic dry-run heuristic" for dimension in DIMENSIONS},
-        "confidence": {dimension: 0.9 for dimension in DIMENSIONS},
+        "reason": {
+            dimension: "deterministic dry-run heuristic"
+            for dimension in ("sugar", "bitter", "water")
+        },
+        "confidence": {dimension: 0.9 for dimension in ("sugar", "bitter", "water")},
         "review": "llm_v1",
         "encoder_version": f"dry-run@{prompt_version}",
     }
+    if prompt_has_ir94e(prompt_version):
+        if any(x in en for x in ("soy sauce", "msg", "marmite", "dashi")):
+            ir94e = "high"
+        elif any(x in en for x in ("miso", "ramen", "braised", "parmesan", "kimchi")):
+            ir94e = "medium"
+        elif any(x in en for x in ("cheese", "tomato", "pizza", "sauce", "curry")):
+            ir94e = "low"
+        else:
+            ir94e = "none"
+        result["ir94e"] = ir94e
+        result["reason"]["ir94e"] = "deterministic dry-run heuristic"
+        result["confidence"]["ir94e"] = 0.9
+    return result
 
 
 def _pct(value: float) -> str:
@@ -115,8 +129,12 @@ def _write_report(
     for index in range(len(foods)):
         for lang in langs:
             for dimension in dimensions:
-                values = [entry[dimension] for entry in grouped[(index, lang)]]
-                modal = _mode(values)
+                values = [
+                    level
+                    for entry in grouped[(index, lang)]
+                    if (level := entry.get(dimension)) is not None
+                ]
+                modal = _mode(values, dimension)
                 modes[(index, lang, dimension)] = modal
                 consistencies[(index, lang, dimension)] = (
                     values.count(modal) / repeats if modal else 0.0
@@ -128,7 +146,7 @@ def _write_report(
         f"- Model id: `{model_id}`",
         f"- Encoder version: `{encoder_version}`",
         f"- Prompt version: `{prompt_version}`",
-        f"- Response schema version: `{RESPONSE_SCHEMA_VERSION}`",
+        f"- Response schema version: `{next((record.get('schema_version') for record in records if record.get('schema_version')), 'schema_v2' if prompt_has_ir94e(prompt_version) else 'schema_v1')}`",
         f"- Date: {datetime.now(timezone.utc).date().isoformat()}",
         f"- Foods: {len(foods)}",
         f"- Repeats: {repeats}",
@@ -185,8 +203,8 @@ def _write_report(
 
                 def reason_example(lang: str, modal: str) -> str:
                     for entry in grouped[(index, lang)]:
-                        if entry[dimension] == modal:
-                            return _markdown_cell(entry["reason"][dimension])
+                        if entry.get(dimension) == modal:
+                            return _markdown_cell(entry.get("reason", {}).get(dimension, ""))
                     return "—"
 
                 disagreements.append(
@@ -328,10 +346,18 @@ def _run_observation(
         "model_id": current_model,
         "encoder_version": version,
         "prompt_version": prompt_version,
-        "schema_version": RESPONSE_SCHEMA_VERSION,
+        "schema_version": (
+            "schema_v2" if prompt_has_ir94e(prompt_version) else "schema_v1"
+        ) if dry_run else _schema_version_for(prompt_version),
         "timestamp": datetime.now(timezone.utc).isoformat(),
     })
     return record
+
+
+def _schema_version_for(prompt_version: str) -> str:
+    from .client import schema_version_for
+
+    return schema_version_for(prompt_version)
 
 
 def _report_metadata(records: list[dict]) -> tuple[int, list[str], str, str]:
@@ -383,7 +409,7 @@ def main() -> None:
              "run only the missing (food, lang, repeat) cells",
     )
     parser.add_argument("--prompt-version", default=PROMPT_VERSION)
-    parser.add_argument("--dimensions", default=",".join(DIMENSIONS))
+    parser.add_argument("--dimensions", default="sugar,bitter,water")
     parser.add_argument("--raw", type=Path, default=RAW_PATH)
     parser.add_argument("--report", type=Path, default=REPORT_PATH)
     parser.add_argument("--foods", type=Path, default=FOODS_PATH, help="food list JSON (default: encoder/foods_stability.json)")
@@ -403,7 +429,9 @@ def main() -> None:
         or any(value not in DIMENSIONS for value in dimensions)
         or len(dimensions) != len(set(dimensions))
     ):
-        parser.error("--dimensions must be a unique comma-separated subset of sugar,bitter,water")
+        parser.error(
+            "--dimensions must be a unique comma-separated subset of sugar,bitter,water,ir94e"
+        )
     if (
         not re.fullmatch(r"encode_v[0-9]+(?:\.[0-9]+)?", args.prompt_version)
         or args.prompt_version not in _PROMPT_PATH_FOR
@@ -433,6 +461,8 @@ def main() -> None:
         return
 
     if not args.dry_run:
+        from dotenv import load_dotenv
+
         load_dotenv(ROOT / ".env")
 
     if args.retry_errors:

@@ -6,7 +6,7 @@ import { fileURLToPath } from "node:url";
 import path from "node:path";
 
 import {
-  buildDictionary, buildLookup, cardLines, decide, issueUrl, normalizeName, scoreOptions, STRINGS, fmt,
+  buildDictionary, buildLookup, cardLines, decide, ir94eLevel, issueUrl, lowInterest, normalizeName, scoreOptions, STRINGS, fmt,
 } from "../app.js";
 
 const here = path.dirname(fileURLToPath(import.meta.url));
@@ -69,8 +69,48 @@ test("all-miss input yields no winner", () => {
 test("every dictionary entry resolves to a lookup cell", () => {
   const lookup = buildLookup(table);
   for (const entry of dishes) {
-    assert.doesNotThrow(() => lookup.get({ sugar: entry.sugar, bitter: entry.bitter, water: entry.water, ir94e: "none" }), entry.key);
+    assert.doesNotThrow(() => lookup.get({ sugar: entry.sugar, bitter: entry.bitter, water: entry.water, ir94e: ir94eLevel(entry) }), entry.key);
   }
+});
+
+test("Ir94e separates dishes and ask mode picks tomato and egg", () => {
+  const dictionary = buildDictionary(dishes);
+  const lookup = buildLookup(table);
+  const scored = scoreOptions(["kung pao chicken", "tomato and egg stir-fry", "steamed white rice"], dictionary, lookup);
+  for (const item of scored) assert.equal(item.cell.hz.ir94e, table.levels.ir94e[item.entry.ir94e], item.entry.key);
+  assert.equal(new Set(scored.map((item) => item.cell.mn9_mean)).size, 3);
+  const decision = decide(scored, "ask");
+  assert.equal(decision.winner.entry.key, "tomato and egg stir-fry");
+  assert.deepEqual(decision.tie, []);
+});
+
+test("Ir94e changes formerly shared cells and preserves missing-field fallback", () => {
+  const dictionary = buildDictionary(dishes);
+  const lookup = buildLookup(table);
+  const scored = scoreOptions(["pizza", "hamburger", "bread"], dictionary, lookup);
+  const [pizza, hamburger] = scored;
+  assert.equal(decide(scored, "ask").winner.entry.key, "bread");
+  assert.equal(pizza.cell, hamburger.cell);
+  assert.ok(pizza.cell.mn9_mean < 5);
+
+  const real = dictionary.find("pizza");
+  const withoutIr94e = { ...real };
+  delete withoutIr94e.ir94e;
+  const fallbackDictionary = buildDictionary([withoutIr94e]);
+  const noneDictionary = buildDictionary([{ ...real, ir94e: "none" }]);
+  assert.equal(scoreOptions([real.key], fallbackDictionary, lookup)[0].cell, scoreOptions([real.key], noneDictionary, lookup)[0].cell);
+  assert.equal(ir94eLevel({}), "none");
+  assert.equal(ir94eLevel(null), "none");
+});
+
+test("lowInterest applies only below the designed threshold to the fly's pick", () => {
+  assert.equal(lowInterest({ flyPick: { cell: { mn9_mean: 4.9 } } }), true);
+  assert.equal(lowInterest({ flyPick: { cell: { mn9_mean: 5 } } }), false);
+  assert.equal(lowInterest({ flyPick: null }), false);
+  const dictionary = buildDictionary(dishes);
+  const lookup = buildLookup(table);
+  assert.equal(lowInterest(decide(scoreOptions(["pizza", "hamburger", "bread"], dictionary, lookup), "ask")), false);
+  assert.equal(lowInterest(decide(scoreOptions(["pizza", "hamburger", "bacon"], dictionary, lookup), "ask")), true);
 });
 
 test("issue URL is prefilled and encoded", () => {
@@ -86,12 +126,13 @@ test("both languages define the same string keys and four fixed lines", () => {
   assert.equal(fmt("{a}-{b}", { a: 1, b: 2 }), "1-2");
 });
 
-test("sugar response is the same dish with bitter = none; equal when bitter is already none", () => {
+test("sugar response is the same dish with bitter = none AND ir94e = none; equal when both are already none", () => {
   const dictionary = buildDictionary(dishes);
   const lookup = buildLookup(table);
   const [coffee, water] = scoreOptions(["black coffee", "water"], dictionary, lookup);
   assert.equal(coffee.entry.bitter !== "none", true);
   assert.equal(coffee.sugarOnly.hz.bitter, 0);
+  assert.equal(coffee.sugarOnly.hz.ir94e, 0);
   assert.equal(coffee.sugarOnly.hz.sugar, coffee.cell.hz.sugar);
   assert.equal(coffee.sugarOnly.hz.water, coffee.cell.hz.water);
   assert.equal(water.entry.bitter, "none");
@@ -109,6 +150,7 @@ test("card lines are filled exactly from the spec templates", () => {
   assert.equal(en.fixed[1], fmt(STRINGS.en.fixedLines[1], { hz: w.cell.mn9_mean.toFixed(1), hz_sugar_only: w.sugarOnly.mn9_mean.toFixed(1) }));
   assert.ok(en.fixed[1].includes(w.sugarOnly.mn9_mean.toFixed(1)) && !/\{\w+\}/.test(en.fixed[1]), "both numbers filled");
   assert.ok(!/\{\w+\}/.test(en.fixed[2]) && en.fixed[2].includes(STRINGS.en.levelNames[w.entry.sugar]), "levels filled");
+  assert.ok(en.fixed[2].includes(STRINGS.en.levelNames[w.entry.ir94e]), "Ir94e level filled");
   assert.equal(en.fixed[3], STRINGS.en.fixedLines[3]);
   assert.equal(en.bottom, STRINGS.en.cardHonesty);
   assert.equal(zh.fixed[0], fmt(STRINGS.zh.fixedLines[0], { dish: w.entry.display.zh }));
@@ -121,8 +163,8 @@ test("two options in the same grid cell tie exactly and the card says so", () =>
   const dictionary = buildDictionary(dishes);
   const lookup = buildLookup(table);
   const a = dishes[0];
-  const b = dishes.find((e) => e !== a && lookup.get({ sugar: e.sugar, bitter: e.bitter, water: e.water, ir94e: "none" }) === lookup.get({ sugar: a.sugar, bitter: a.bitter, water: a.water, ir94e: "none" }))
-    || dishes.find((e) => e !== a && e.sugar === a.sugar && e.bitter === a.bitter && e.water === a.water);
+  const b = dishes.find((e) => e !== a && lookup.get({ sugar: e.sugar, bitter: e.bitter, water: e.water, ir94e: ir94eLevel(e) }) === lookup.get({ sugar: a.sugar, bitter: a.bitter, water: a.water, ir94e: ir94eLevel(a) }))
+    || dishes.find((e) => e !== a && e.sugar === a.sugar && e.bitter === a.bitter && e.water === a.water && ir94eLevel(e) === ir94eLevel(a));
   const pair = b ? [a.key, b.key] : ["water", "water"];
   const decision = decide(scoreOptions(pair, dictionary, lookup), "ask");
   if (b) {
@@ -151,7 +193,7 @@ test("every dictionary entry maps to a replay file that parses and matches the m
   const neurons = decodeNeurons(JSON.parse(readFileSync(path.join(here, "..", "data", "neurons.json"), "utf8")));
   assert.equal(manifest.n_cells, 400);
   for (const entry of dishes) {
-    const cell = lookup.get({ sugar: entry.sugar, bitter: entry.bitter, water: entry.water, ir94e: "none" });
+    const cell = lookup.get({ sugar: entry.sugar, bitter: entry.bitter, water: entry.water, ir94e: ir94eLevel(entry) });
     const id = cellIdFor(cell);
     assert.ok(manifest.cells[id], `${entry.key}: ${id} missing from manifest`);
     const buf = readFileSync(path.join(here, "..", "data", "replay", `${id}.bin`));
@@ -354,7 +396,8 @@ test("peak MN9 window is inside the trial and counts every MN9 spike it covers",
   const lookup = buildLookup(table);
   const neurons = decodeNeurons(JSON.parse(readFileSync(path.join(here, "..", "data", "neurons.json"), "utf8")));
   const load = (name) => {
-    const cell = lookup.get({ ...dictionary.find(name), ir94e: "none" });
+    const entry = dictionary.find(name);
+    const cell = lookup.get({ ...entry, ir94e: ir94eLevel(entry) });
     const buf = readFileSync(path.join(here, "..", "data", "replay", `${cellIdFor(cell)}.bin`));
     return parseReplay(buf.buffer.slice(buf.byteOffset, buf.byteOffset + buf.byteLength));
   };
@@ -439,11 +482,12 @@ test("replay caption shows levels in the page language, not the cell id", () => 
   const [pho] = scoreOptions(["pho"], dictionary, lookup);
   const en = levelsText(pho.cell, "en");
   const zh = levelsText(pho.cell, "zh");
-  assert.match(en, /^sugar \S+ · bitter \S+ · water \S+$/);
-  assert.match(zh, /^糖 \S+ · 苦 \S+ · 水 \S+$/);
+  assert.match(en, /^sugar \S+ · bitter \S+ · water \S+ · amino acids \S+$/);
+  assert.match(zh, /^糖 \S+ · 苦 \S+ · 水 \S+ · 氨基酸 \S+$/);
   assert.ok(!/G_s/.test(en) && !/G_s/.test(zh), "no raw cell id in the caption");
-  assert.equal(levelsText({ sugar: "low", bitter: "none", water: "high" }, "en"), "sugar low · bitter none · water high");
-  assert.equal(levelsText({ sugar: "low", bitter: "none", water: "high" }, "zh"), "糖 低 · 苦 无 · 水 高");
+  assert.equal(levelsText({ sugar: "low", bitter: "none", water: "high" }, "en"), `sugar low · bitter none · water high · amino acids ${STRINGS.en.levelNames.none}`);
+  assert.equal(levelsText({ sugar: "low", bitter: "none", water: "high" }, "zh"), `糖 低 · 苦 无 · 水 高 · 氨基酸 ${STRINGS.zh.levelNames.none}`);
+  assert.equal(levelsText({ sugar: "low", bitter: "none", water: "high", ir94e: "medium" }, "en"), "sugar low · bitter none · water high · amino acids medium");
 });
 
 test("opposite mode: the fly's own pick drives the fly; with three dishes the other two are the human's", () => {

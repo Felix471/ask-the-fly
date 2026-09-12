@@ -9,13 +9,15 @@ import random
 from collections import Counter, defaultdict
 from pathlib import Path
 
-from .levels import LEVELS
+from .levels import IR94E_LEVELS, LEVELS, levels_for
 from .normalize import normalize_name
 
 ROOT = Path(__file__).resolve().parents[1]
 FOODS_PATH = Path(__file__).with_name("foods_stability.json")
 AMBIGUOUS_PATH = ROOT / "data" / "ambiguous_names.json"
-DIMENSIONS = ("sugar", "bitter", "water")
+DIMENSIONS = ("sugar", "bitter", "water", "ir94e")
+CORE_DIMENSIONS = ("sugar", "bitter", "water")
+OPTIONAL_DIMENSIONS = ("ir94e",)
 REVIEWS = {"llm_v1", "needs_review", "human_checked", "proxy", "draft"}  # draft: never merged, never published
 
 
@@ -62,12 +64,13 @@ def _load_ambiguous_names() -> tuple[dict[str, dict], dict[str, list[str]]]:
 AMBIGUOUS_NAMES, SPLIT_ALIASES = _load_ambiguous_names()
 
 
-def _mode(values: list[str]) -> str:
+def _mode(values: list[str], dimension: str) -> str:
     counts = Counter(values)
-    return max(LEVELS, key=lambda level: (counts[level], -LEVELS.index(level)))
+    allowed = levels_for(dimension)
+    return max(allowed, key=lambda level: (counts[level], -allowed.index(level)))
 
 
-def _normalized_entry(entry: object, label: str) -> dict:
+def _normalized_entry(entry: object, label: str, *, require: tuple[str, ...] = ()) -> dict:
     if not isinstance(entry, dict):
         raise MergeError(f"{label} is not a JSON object")
     result = dict(entry)
@@ -109,9 +112,16 @@ def _normalized_entry(entry: object, label: str) -> dict:
 
     if result.get("review") not in REVIEWS:
         raise MergeError(f"{label} has invalid review {result.get('review')!r}")
-    for dimension in DIMENSIONS:
+    for dimension in CORE_DIMENSIONS:
         if result.get(dimension) not in LEVELS:
             raise MergeError(f"{label} has invalid {dimension} level {result.get(dimension)!r}")
+    if "ir94e" in result and result["ir94e"] not in IR94E_LEVELS:
+        raise MergeError(f"{label} has invalid ir94e level {result['ir94e']!r}")
+    for dimension in require:
+        if dimension not in result:
+            raise MergeError(
+                f"{label} lacks {dimension} (required by --only-dimension {dimension})"
+            )
     return result
 
 
@@ -180,14 +190,15 @@ def _arbitrate_dimension(
         for lang in ("zh", "en")
     }
     if not by_language["zh"] or not by_language["en"]:
-        return _mode([entry[dimension] for entry in normalized]), None
+        return _mode([entry[dimension] for entry in normalized], dimension), None
 
-    zh_level = _mode([entry[dimension] for entry in by_language["zh"]])
-    en_level = _mode([entry[dimension] for entry in by_language["en"]])
+    zh_level = _mode([entry[dimension] for entry in by_language["zh"]], dimension)
+    en_level = _mode([entry[dimension] for entry in by_language["en"]], dimension)
     if zh_level == en_level:
         return zh_level, None
 
-    distance = abs(LEVELS.index(zh_level) - LEVELS.index(en_level))
+    allowed = levels_for(dimension)
+    distance = abs(allowed.index(zh_level) - allowed.index(en_level))
     if distance >= 2:
         chosen = en_level
         rule = "needs_review"
@@ -203,7 +214,7 @@ def _arbitrate_dimension(
         # if the confidences differ by less than 0.1, take the LOWER level.
         # Never default to English on a tie.
         if abs(mean_confidence["zh"] - mean_confidence["en"]) < 0.1:
-            chosen = min((zh_level, en_level), key=LEVELS.index)
+            chosen = min((zh_level, en_level), key=allowed.index)
             rule = "lower_level"
         else:
             chosen = max(mean_confidence, key=mean_confidence.get)
@@ -269,7 +280,9 @@ def validate_stability(records: list[object], foods: list[dict], langs=None, rep
     return problems
 
 
-def _from_stability(records: list[object], draft: bool = False) -> list[dict]:
+def _from_stability(
+    records: list[object], draft: bool = False, require: tuple[str, ...] = ()
+) -> list[dict]:
     foods = json.loads((FOODS_OVERRIDE or FOODS_PATH).read_text(encoding="utf-8"))
     problems = validate_stability(records, foods)
     if problems and not draft:
@@ -306,8 +319,15 @@ def _from_stability(records: list[object], draft: bool = False) -> list[dict]:
             )
             continue
         normalized = [
-            _normalized_entry(record["entry"], f"food_index {food_index} result")
+            _normalized_entry(
+                record["entry"], f"food_index {food_index} result", require=require
+            )
             for record in food_records
+        ]
+        dimensions = [
+            dimension
+            for dimension in DIMENSIONS
+            if all(dimension in entry for entry in normalized)
         ]
         aliases = [food["zh"], food["en"]]
         for entry in normalized:
@@ -321,7 +341,7 @@ def _from_stability(records: list[object], draft: bool = False) -> list[dict]:
         ).most_common(1)[0][0]
         levels = {}
         arbitration = {}
-        for dimension in DIMENSIONS:
+        for dimension in dimensions:
             levels[dimension], detail = _arbitrate_dimension(
                 food_records, normalized, dimension
             )
@@ -336,7 +356,7 @@ def _from_stability(records: list[object], draft: bool = False) -> list[dict]:
                 dimension: _modal_reason(
                     food_records, normalized, dimension, levels[dimension]
                 )
-                for dimension in DIMENSIONS
+                for dimension in dimensions
             },
             "confidence": {
                 dimension: round(
@@ -344,7 +364,7 @@ def _from_stability(records: list[object], draft: bool = False) -> list[dict]:
                     / len(normalized),
                     4,
                 )
-                for dimension in DIMENSIONS
+                for dimension in dimensions
             },
             "review": (
                 "needs_review"
@@ -371,15 +391,19 @@ def _from_stability(records: list[object], draft: bool = False) -> list[dict]:
     return merged
 
 
-def _paired_entry(pair: dict, index: int) -> dict:
+def _paired_entry(pair: dict, index: int, require: tuple[str, ...] = ()) -> dict:
     label = f"paired input {index}"
     if set(pair) != {"zh_entry", "en_entry"}:
         raise MergeError(f"{label} must contain exactly zh_entry and en_entry")
-    zh_entry = _normalized_entry(pair["zh_entry"], f"{label} zh_entry")
-    en_entry = _normalized_entry(pair["en_entry"], f"{label} en_entry")
+    zh_entry = _normalized_entry(pair["zh_entry"], f"{label} zh_entry", require=require)
+    en_entry = _normalized_entry(pair["en_entry"], f"{label} en_entry", require=require)
+    dimensions = [
+        dimension for dimension in DIMENSIONS
+        if dimension in zh_entry and dimension in en_entry
+    ]
     disagreements = [
         f"{dimension}: zh={zh_entry[dimension]!r}, en={en_entry[dimension]!r}"
-        for dimension in DIMENSIONS
+        for dimension in dimensions
         if zh_entry[dimension] != en_entry[dimension]
     ]
     if disagreements:
@@ -397,20 +421,20 @@ def _paired_entry(pair: dict, index: int) -> dict:
             zh_entry["key"], *zh_entry["aliases"], en_entry["key"], *en_entry["aliases"]
         ])),
         "display": display,
-        **{dimension: en_entry[dimension] for dimension in DIMENSIONS},
+        **{dimension: en_entry[dimension] for dimension in dimensions},
         "reason": {
             dimension: (
                 f"zh: {zh_entry.get('reason', {}).get(dimension, '')}; "
                 f"en: {en_entry.get('reason', {}).get(dimension, '')}"
             ).strip()
-            for dimension in DIMENSIONS
+            for dimension in dimensions
         },
         "confidence": {
             dimension: min(
                 float(zh_entry.get("confidence", {}).get(dimension, 0.0)),
                 float(en_entry.get("confidence", {}).get(dimension, 0.0)),
             )
-            for dimension in DIMENSIONS
+            for dimension in dimensions
         },
         "review": "llm_v1",
         "encoder_version": en_entry.get("encoder_version", zh_entry.get("encoder_version")),
@@ -418,7 +442,9 @@ def _paired_entry(pair: dict, index: int) -> dict:
     return _normalized_entry(result, label)
 
 
-def _read_source(path: Path, draft: bool = False) -> list[dict]:
+def _read_source(
+    path: Path, draft: bool = False, require: tuple[str, ...] = ()
+) -> list[dict]:
     text = path.read_text(encoding="utf-8")
     try:
         value = json.loads(text)
@@ -431,15 +457,18 @@ def _read_source(path: Path, draft: bool = False) -> list[dict]:
                 records.append(json.loads(line))
             except json.JSONDecodeError as exc:
                 raise MergeError(f"invalid JSON on line {line_number}: {exc}") from exc
-        return _from_stability(records, draft=draft)
+        return _from_stability(records, draft=draft, require=require)
     if not isinstance(value, list):
         raise MergeError("input JSON must be an array of entries")
     paired = [isinstance(entry, dict) and ("zh_entry" in entry or "en_entry" in entry) for entry in value]
     if any(paired):
         if not all(paired):
             raise MergeError("input JSON cannot mix complete entries and paired raw encodings")
-        return [_paired_entry(entry, i) for i, entry in enumerate(value)]
-    return [_normalized_entry(entry, f"input entry {i}") for i, entry in enumerate(value)]
+        return [_paired_entry(entry, i, require=require) for i, entry in enumerate(value)]
+    return [
+        _normalized_entry(entry, f"input entry {i}", require=require)
+        for i, entry in enumerate(value)
+    ]
 
 
 def _read_dictionary(path: Path) -> list[dict]:
@@ -469,9 +498,15 @@ def merge(
     destination: Path,
     replace_llm: bool = False,
     arbitration_report: bool = False,
+    only_dimension: str | None = None,
 ) -> tuple[int, int, list[dict]]:
     """Merge entries; replace_llm explicitly requests the existing default LLM replacement."""
-    incoming = _read_source(source)
+    if only_dimension is not None and only_dimension not in OPTIONAL_DIMENSIONS:
+        raise MergeError(
+            f"--only-dimension must be one of {', '.join(OPTIONAL_DIMENSIONS)}"
+        )
+    require = (only_dimension,) if only_dimension else ()
+    incoming = _read_source(source, require=require)
     drafts = [entry["key"] for entry in incoming if entry.get("review") == "draft"]
     if drafts:
         raise MergeError(f"draft entries cannot be merged (re-encode a complete batch): {drafts[:10]}")
@@ -495,6 +530,91 @@ def merge(
             taken.setdefault(normalize_name(name), candidate["key"])
     _assert_unique(incoming, "incoming entries")
 
+    if only_dimension:
+        matches = []
+        for candidate in incoming:
+            matched = {owner[name] for name in _names(candidate) if name in owner}
+            if not matched:
+                raise MergeError(
+                    f"--only-dimension {only_dimension}: {candidate['key']!r} is not in "
+                    "the dictionary; encode it fully instead"
+                )
+            if len(matched) > 1:
+                targets = ", ".join(repr(existing[i]["key"]) for i in sorted(matched))
+                raise MergeError(
+                    f"incoming {candidate['key']!r} maps to multiple existing entries: {targets}"
+                )
+            matches.append(next(iter(matched)))
+
+        changed_entries: set[str] = set()
+        level_changes: list[tuple[str, str, str, str]] = []
+        for candidate, target in zip(incoming, matches):
+            current = existing[target]
+            old_level = current.get(only_dimension, "(absent)")
+            new_level = candidate[only_dimension]
+            if old_level != new_level:
+                changed_entries.add(current["key"])
+                level_changes.append((current["key"], only_dimension, old_level, new_level))
+            if only_dimension not in current:
+                rebuilt = {}
+                for key, value in current.items():
+                    rebuilt[key] = value
+                    if key == "water":
+                        rebuilt[only_dimension] = None
+                current.clear()
+                current.update(rebuilt)
+            current[only_dimension] = new_level
+            current.setdefault("reason", {})[only_dimension] = candidate["reason"][only_dimension]
+            current.setdefault("confidence", {})[only_dimension] = candidate["confidence"][only_dimension]
+
+            candidate_detail = candidate.get("arbitration", {}).get(only_dimension)
+            if candidate_detail is not None:
+                current.setdefault("arbitration", {})[only_dimension] = candidate_detail
+            elif "arbitration" in current:
+                current["arbitration"].pop(only_dimension, None)
+                if not current["arbitration"]:
+                    del current["arbitration"]
+
+            version_map = current.get("encoder_version_by_dimension")
+            if version_map is None:
+                rebuilt = {}
+                for key, value in current.items():
+                    rebuilt[key] = value
+                    if key == "encoder_version":
+                        rebuilt["encoder_version_by_dimension"] = {}
+                current.clear()
+                current.update(rebuilt)
+                version_map = current["encoder_version_by_dimension"]
+            version_map[only_dimension] = candidate["encoder_version"]
+
+            rule = candidate_detail.get("rule") if candidate_detail else None
+            if rule == "needs_review" and current["review"] == "llm_v1":
+                current["review"] = "needs_review"
+            if current["review"] == "human_checked":
+                print(
+                    f"filled {only_dimension} on human_checked entry {current['key']!r}: "
+                    f"{new_level} (rule: {rule or 'agreed'})"
+                )
+
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        destination.write_text(
+            json.dumps(existing, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+        )
+        print(f"Entries changed level on any dimension: {len(changed_entries)}")
+        if level_changes:
+            print("key | dimension | old -> new")
+            for key, dimension, old, new in level_changes:
+                print(f"{key} | {dimension} | {old} -> {new}")
+        if arbitration_report:
+            print("dish | dimension | zh | en | chosen | rule")
+            for entry in incoming:
+                for dimension, detail in entry.get("arbitration", {}).items():
+                    print(
+                        f"{entry['key']} | {dimension} | {detail['zh']} | {detail['en']} | "
+                        f"{detail['chosen']} | {detail['rule']}"
+                    )
+        return len(incoming), 0, existing
+
     skipped = 0
     changed_entries: set[str] = set()
     level_changes: list[tuple[str, str, str, str]] = []
@@ -513,7 +633,18 @@ def merge(
             target = next(iter(matched))
             old_entry = result[target]
             for dimension in DIMENSIONS:
-                if old_entry[dimension] != candidate[dimension]:
+                if dimension in old_entry and dimension not in candidate:
+                    # A full re-encode at a prompt without this dimension removes it;
+                    # scripts/validate_release.py refuses to publish such a dictionary.
+                    print(f"dropped {dimension} from {old_entry['key']!r}: incoming batch has no {dimension}")
+                    changed_entries.add(old_entry["key"])
+                    level_changes.append((old_entry["key"], dimension, old_entry[dimension], "(absent)"))
+                    continue
+                if (
+                    dimension in old_entry
+                    and dimension in candidate
+                    and old_entry[dimension] != candidate[dimension]
+                ):
                     changed_entries.add(old_entry["key"])
                     level_changes.append(
                         (old_entry["key"], dimension, old_entry[dimension], candidate[dimension])
@@ -572,7 +703,7 @@ def _sample(path: Path, count: int, seed: int | None) -> None:
     selected_needs_review = rng.sample(needs_review, min(count, len(needs_review)))
     selected_llm = rng.sample(llm_entries, count - len(selected_needs_review))
     print(_review_counts(entries))
-    print("review | key | display zh / en | sugar | bitter | water | min confidence | one-line reasons")
+    print("review | key | display zh / en | sugar | bitter | water | ir94e | min confidence | one-line reasons")
     for entry in [*selected_needs_review, *selected_llm]:
         display = entry.get("display", {})
         confidence = entry.get("confidence", {})
@@ -584,7 +715,8 @@ def _sample(path: Path, count: int, seed: int | None) -> None:
         print(
             f"{entry['review']} | {entry['key']} | {display.get('zh', '')} / {display.get('en', '')} | "
             f"{entry['sugar']} | {entry['bitter']} | {entry['water']} | "
-            f"{min(float(confidence.get(dimension, 0.0)) for dimension in DIMENSIONS):.4f} | "
+            f"{entry.get('ir94e', '-')} | "
+            f"{min(float(confidence.get(dimension, 0.0)) for dimension in CORE_DIMENSIONS):.4f} | "
             f"{one_line}"
         )
 
@@ -632,6 +764,13 @@ def main() -> None:
         action="store_true",
         help="print every cross-language arbitration performed by the merge",
     )
+    parser.add_argument(
+        "--only-dimension",
+        choices=OPTIONAL_DIMENSIONS,
+        help="write only this dimension (level, reason, confidence, arbitration, "
+             "encoder_version_by_dimension) into entries that already exist; every other "
+             "field is left untouched",
+    )
     args = parser.parse_args()
     FOODS_OVERRIDE = args.foods
     STABILITY_REPEATS = args.repeats
@@ -657,7 +796,8 @@ def main() -> None:
             if args.source is None:
                 parser.error("source is required unless --split-list, --sample, or --mark-checked is used")
             merged, skipped, result = merge(
-                args.source, args.into, args.replace_llm, args.arbitration_report
+                args.source, args.into, args.replace_llm, args.arbitration_report,
+                args.only_dimension,
             )
             print(f"Merged {merged} entries; skipped {skipped}; dictionary count: {len(result)}")
     except (OSError, MergeError) as exc:
