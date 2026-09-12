@@ -18,7 +18,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  test:
+  preflight:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
@@ -28,12 +28,12 @@ jobs:
       - name: Unit tests against the shipped data (pure functions + audit regressions)
         run: node --test site/test/app.test.mjs site/test/regress.test.mjs
       - name: Python quick tests (stdlib; encoder gate, release validator)
-        run: python3 -m unittest tests.test_merge_validation tests.test_validate_release -v 2>&1 | tail -5
+        run: python3 -m unittest tests.test_merge_validation tests.test_validate_release -v
       - name: Validate the production data bundle (Q06)
         run: python3 scripts/validate_release.py
 
   deploy:
-    needs: test
+    needs: preflight
     runs-on: ubuntu-latest
     environment:
       name: github-pages
