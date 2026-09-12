@@ -1602,6 +1602,10 @@ if (isBrowser) {
         const landing = finalLanding(plan, scored, state.currentCell);
         if (!landing || landing.index !== index) return;
         const item = scored[index];
+        // The stage caption names the plate the fly is on ("Trying {dish}…",
+        // the tasting string); untouched when no landing replay plays.
+        state.sceneStatus = { key: "sceneTasting", dish: item };
+        renderSceneStatus();
         let replay;
         try {
           replay = await state.loadReplay(landing.cellId);
