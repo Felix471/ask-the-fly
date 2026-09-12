@@ -182,8 +182,39 @@ Each question is answered against that brake's own drive-0 row, not against zero
 
 **cb0465 (CB0465, one cell, right side).** This brake does not hold MN9 down: at 100 Hz drive sugar still raises left MN9 to 37.2 ± 5.2 Hz at high and 54.6 ± 6.9 at very_high, 50% and 59% of the no-brake rates (74.1, 92.9), and even at 150 Hz to 22.9 and 35.5 Hz (31%, 38%); it delays onset (36 → 47 ms at sugar high, 100 Hz) but never silences a trial. Right MN9 is almost untouched (52.4 → 48.1 Hz at sugar high, 100 Hz), as its 10 synapses onto right MN9 predict. And sugar raises this brake's own firing rather than reducing it: with no drive the cell goes 0 → 6.3 → 11.3 → 16.5 → 25.6 Hz across the five sugar levels, and under drive the increment persists but shrinks (98.5 → 107.0 Hz at sugar high and 100 Hz drive, +8.5; 151.0 → 153.4 at 150 Hz), so the sugar-driven component adds sub-additively to the Poisson drive. That is **feed-forward inhibition, sugar → CB0465 → MN9**, the opposite direction from the disinhibition motif this condition was built to look for: in this model the sugar pathway recruits the strongest inhibitory input to left MN9 while it excites MN9, and that recruitment is already part of every sugar curve in the frozen grid (the drive-0 row here is the grid). Recorded as a separate finding under OQ-3.
 
-**Across the three brakes.** None of them shows the signature the condition was designed to find: no brake's own rate falls when sugar arrives. The sugar GRN set fires at its drive rate under every condition (sanity rows), so the brakes act downstream of the GRNs, not on them. Tastekin et al.'s 100 Hz is their choice for GNG015; 100 Hz on CB0806 or CB0862 is a full brake and 100 Hz on CB0465 is a partial one, which says only that the three neurons differ in synapse count onto MN9, nothing about the fly. Nothing in this document is calibrated against behaviour.
+**Across the three brakes.** Disinhibition was not observed under these three brakes at these drive levels: no brake's own rate falls when sugar arrives. That is a statement about this design (three connectome-chosen brakes, four drive levels, sugar alone), not about the model in general; a real GNG015 match, another brake or another drive could behave differently. The sugar GRN set fires at its drive rate under every condition (sanity rows), so the brakes act downstream of the GRNs, not on them. Tastekin et al.'s 100 Hz is their choice for GNG015; 100 Hz on CB0806 or CB0862 is a full brake and 100 Hz on CB0465 is a partial one, which says only that the three neurons differ in synapse count onto MN9, nothing about the fly. Nothing in this document is calibrated against behaviour.
 
 ## What is designed here
 
 Brake selection (synapse count onto left MN9, `docs/tonic_candidates.md`), the drive levels (0 / 50 / 100 / 150 Hz; 100 Hz after Tastekin, uncalibrated), the pairing with sugar only (bitter, water and ir94e at 0 Hz), the trial count and seeds. Nothing under `data/` changed; the frozen grid and its replays are untouched. This condition is not part of the product.
+
+## The sugar → CB0465 path (feed-forward inhibition)
+
+Connectivity only (`scripts/tonic_ffi_path.py`, no simulation): excitatory neurons at most two excitatory hops downstream of the frozen sugar GRN set that are presynaptic to CB0465 `720575940636809646`, ranked by synapses onto CB0465. Sign from `Excitatory x Connectivity`, counts from `Connectivity`; for a two-hop entry the intermediate shown is the one with the strongest sugar → intermediate → neuron chain (max of the smaller of the two counts). Annotation from Schlegel et al. 2024, Shiu names from the SEZ dictionary. Caveat: two excitatory hops from 23 GRNs reach a large part of the SEZ, so the counts, not the membership, carry the information; entries whose sugar → intermediate count is in single digits are weak paths.
+
+Excitatory inputs to `720575940636809646` (CB0465, right): 106 neurons, 892 synapses; 87 of them lie within two excitatory hops of the frozen sugar GRN set (23 cells) and carry 840 synapses (94%). Direct sugar-GRN → target synapses: 0.
+
+| # | presynaptic to CB0465 | hops from sugar GRNs | syn → CB0465 | sugar GRN → this neuron (1 hop) or → intermediate (2 hops) | via (2 hops: intermediate, its syn → this neuron) | cell_type | top_nt | side | Shiu name |
+|---:|---|---:|---:|---:|---|---|---|---|---|
+| 1 | 720575940632252743 | 2 | 94 | 120 | 720575940632047890 (CB0393, left; 31 syn) | CB0493 | acetylcholine | left | – |
+| 2 | 720575940629744599 | 2 | 88 | 25 | 720575940631703608 (CB0872, left; 78 syn) | CB0207 | glutamate | left | – |
+| 3 | 720575940614349974 | 2 | 65 | 2 | 720575940610482883 (CB3958, center; 2 syn) | CB0186 | acetylcholine | left | – |
+| 4 | 720575940627099338 | 2 | 56 | 39 | 720575940628802069 (CB0880, left; 71 syn) | DNge062 | acetylcholine | left | – |
+| 5 | 720575940626557442 | 2 | 47 | 52 | 720575940625867056 (CB0573, left; 24 syn) | DNge173 | acetylcholine | right | bract |
+| 6 | 720575940635530871 | 2 | 38 | 24 | 720575940626835146 (CB0277, left; 20 syn) | CB0922 | acetylcholine | right | – |
+| 7 | 720575940607386290 | 1 | 32 | 7 | – | CB0473 | acetylcholine | left | – |
+| 8 | 720575940630820919 | 2 | 27 | 125 | 720575940611015122 (CB0192, right; 1 syn) | CB0855 | acetylcholine | right | – |
+| 9 | 720575940614604525 | 2 | 21 | 7 | 720575940630461660 (CB0499, right; 28 syn) | CB0920 | acetylcholine | right | – |
+| 10 | 720575940627083294 | 1 | 19 | 11 | – | CB0473 | acetylcholine | right | – |
+| 11 | 720575940622155290 | 2 | 18 | 7 | 720575940607386290 (CB0473, left; 12 syn) | AN_GNG_20 | dopamine | right | – |
+| 12 | 720575940615583650 | 2 | 17 | 11 | 720575940637216624 (CB0588, left; 10 syn) | CB0035 | acetylcholine | right | – |
+| 13 | 720575940615970015 | 2 | 17 | 52 | 720575940625867056 (CB0573, left; 2 syn) | CB0900 | acetylcholine | left | – |
+| 14 | 720575940627285267 | 2 | 17 | 24 | 720575940626835146 (CB0277, left; 7 syn) | DNge174 | acetylcholine | right | bract |
+| 15 | 720575940616033563 | 2 | 15 | 11 | 720575940627083294 (CB0473, right; 17 syn) | CB0088 | dopamine | left | – |
+| 16 | 720575940623211725 | 2 | 15 | 332 | 720575940620874757 (CB0616, left; 33 syn) | CB0553 | acetylcholine | left | roundup |
+| 17 | 720575940607377586 | 2 | 12 | 11 | 720575940637216624 (CB0588, left; 6 syn) | CB0737 | acetylcholine | right | – |
+| 18 | 720575940611442296 | 2 | 12 | 262 | 720575940655014049 (AN_GNG_30, left; 26 syn) | CB0152 | acetylcholine | left | – |
+| 19 | 720575940630461660 | 1 | 11 | 7 | – | CB0499 | acetylcholine | right | rattle |
+| 20 | 720575940614165201 | 2 | 11 | 5 | 720575940647037492 (CB0917, right; 49 syn) | DNge028 | acetylcholine | right | – |
+
+Reading: no sugar GRN contacts CB0465 directly, and only three of its inputs are one hop away (CB0473 ×2, CB0499 "rattle"). The bulk arrives two hops out through cholinergic central-brain neurons (CB0493, CB0186, DNge062, CB0922, CB0855) and two Shiu-named cells, bract (DNge173, DNge174) and roundup (CB0553), which are the same named SEZ neurons the site offers for silencing. This is the route by which sugar recruits the strongest inhibitory input to left MN9 in the frozen grid.
