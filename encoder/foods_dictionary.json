@@ -1,0 +1,872 @@
+[
+ {
+  "zh": "火锅",
+  "en": "hotpot",
+  "key": "hotpot"
+ },
+ {
+  "zh": "牛肉面",
+  "en": "beef noodle soup",
+  "key": "beef-noodle-soup"
+ },
+ {
+  "zh": "炒饭",
+  "en": "fried rice",
+  "key": "fried-rice"
+ },
+ {
+  "zh": "炒面",
+  "en": "chow mein",
+  "key": "chow-mein"
+ },
+ {
+  "zh": "宫保鸡丁",
+  "en": "kung pao chicken",
+  "key": "kung-pao-chicken"
+ },
+ {
+  "zh": "回锅肉",
+  "en": "twice-cooked pork",
+  "key": "twice-cooked-pork"
+ },
+ {
+  "zh": "鱼香肉丝",
+  "en": "yuxiang shredded pork",
+  "key": "yuxiang-shredded-pork"
+ },
+ {
+  "zh": "糖醋里脊",
+  "en": "sweet and sour pork",
+  "key": "sweet-and-sour-pork"
+ },
+ {
+  "zh": "水煮鱼",
+  "en": "sichuan boiled fish",
+  "key": "sichuan-boiled-fish"
+ },
+ {
+  "zh": "酸菜鱼",
+  "en": "pickled cabbage fish soup",
+  "key": "pickled-cabbage-fish"
+ },
+ {
+  "zh": "酸辣粉",
+  "en": "hot and sour glass noodles",
+  "key": "hot-and-sour-noodles"
+ },
+ {
+  "zh": "小笼包",
+  "en": "xiaolongbao soup dumplings",
+  "key": "xiaolongbao"
+ },
+ {
+  "zh": "包子",
+  "en": "steamed buns",
+  "key": "steamed-buns"
+ },
+ {
+  "zh": "煎饼果子",
+  "en": "jianbing crepe",
+  "key": "jianbing"
+ },
+ {
+  "zh": "油条",
+  "en": "fried dough sticks",
+  "key": "youtiao"
+ },
+ {
+  "zh": "白粥",
+  "en": "congee",
+  "key": "congee"
+ },
+ {
+  "zh": "烤鸭",
+  "en": "peking duck",
+  "key": "peking-duck"
+ },
+ {
+  "zh": "羊肉串",
+  "en": "lamb skewers",
+  "key": "lamb-skewers"
+ },
+ {
+  "zh": "麻辣烫",
+  "en": "malatang",
+  "key": "malatang"
+ },
+ {
+  "zh": "螺蛳粉",
+  "en": "luosifen snail noodles",
+  "key": "luosifen"
+ },
+ {
+  "zh": "凉皮",
+  "en": "cold skin noodles",
+  "key": "liangpi"
+ },
+ {
+  "zh": "馄饨",
+  "en": "wonton soup",
+  "key": "wontons"
+ },
+ {
+  "zh": "葱油饼",
+  "en": "scallion pancake",
+  "key": "scallion-pancake"
+ },
+ {
+  "zh": "清蒸鱼",
+  "en": "steamed fish",
+  "key": "steamed-fish"
+ },
+ {
+  "zh": "炒西兰花",
+  "en": "stir-fried broccoli",
+  "key": "stir-fried-broccoli"
+ },
+ {
+  "zh": "汤圆",
+  "en": "tangyuan sweet rice balls",
+  "key": "tangyuan"
+ },
+ {
+  "zh": "粽子",
+  "en": "zongzi",
+  "key": "zongzi"
+ },
+ {
+  "zh": "豆腐脑",
+  "en": "douhua tofu pudding",
+  "key": "douhua"
+ },
+ {
+  "zh": "皮蛋",
+  "en": "century egg",
+  "key": "century-egg"
+ },
+ {
+  "zh": "臭豆腐",
+  "en": "stinky tofu",
+  "key": "stinky-tofu"
+ },
+ {
+  "zh": "麻辣小龙虾",
+  "en": "spicy crayfish",
+  "key": "spicy-crayfish"
+ },
+ {
+  "zh": "辣条",
+  "en": "latiao spicy gluten strips",
+  "key": "latiao"
+ },
+ {
+  "zh": "泡面",
+  "en": "instant noodles",
+  "key": "instant-noodles"
+ },
+ {
+  "zh": "蛋挞",
+  "en": "egg tart",
+  "key": "egg-tart"
+ },
+ {
+  "zh": "香菜",
+  "en": "cilantro",
+  "key": "cilantro"
+ },
+ {
+  "zh": "豆浆",
+  "en": "soy milk",
+  "key": "soy-milk"
+ },
+ {
+  "zh": "凉茶",
+  "en": "herbal tea (liangcha)",
+  "key": "herbal-tea"
+ },
+ {
+  "zh": "酸梅汤",
+  "en": "sour plum drink",
+  "key": "sour-plum-drink"
+ },
+ {
+  "zh": "白酒",
+  "en": "baijiu",
+  "key": "baijiu"
+ },
+ {
+  "zh": "寿司",
+  "en": "sushi",
+  "key": "sushi"
+ },
+ {
+  "zh": "刺身",
+  "en": "sashimi",
+  "key": "sashimi"
+ },
+ {
+  "zh": "拉面",
+  "en": "ramen",
+  "key": "ramen"
+ },
+ {
+  "zh": "乌冬面",
+  "en": "udon",
+  "key": "udon"
+ },
+ {
+  "zh": "天妇罗",
+  "en": "tempura",
+  "key": "tempura"
+ },
+ {
+  "zh": "章鱼烧",
+  "en": "takoyaki",
+  "key": "takoyaki"
+ },
+ {
+  "zh": "饭团",
+  "en": "onigiri",
+  "key": "onigiri"
+ },
+ {
+  "zh": "照烧鸡",
+  "en": "teriyaki chicken",
+  "key": "teriyaki-chicken"
+ },
+ {
+  "zh": "寿喜烧",
+  "en": "sukiyaki",
+  "key": "sukiyaki"
+ },
+ {
+  "zh": "纳豆",
+  "en": "natto",
+  "key": "natto"
+ },
+ {
+  "zh": "抹茶拿铁",
+  "en": "matcha latte",
+  "key": "matcha-latte"
+ },
+ {
+  "zh": "抹茶",
+  "en": "matcha",
+  "key": "matcha"
+ },
+ {
+  "zh": "芥末",
+  "en": "wasabi",
+  "key": "wasabi"
+ },
+ {
+  "zh": "麻薯",
+  "en": "mochi",
+  "key": "mochi"
+ },
+ {
+  "zh": "泡菜",
+  "en": "kimchi",
+  "key": "kimchi"
+ },
+ {
+  "zh": "石锅拌饭",
+  "en": "bibimbap",
+  "key": "bibimbap"
+ },
+ {
+  "zh": "韩式烤肉",
+  "en": "korean bbq",
+  "key": "korean-bbq"
+ },
+ {
+  "zh": "辣炒年糕",
+  "en": "tteokbokki",
+  "key": "tteokbokki"
+ },
+ {
+  "zh": "部队锅",
+  "en": "budae jjigae army stew",
+  "key": "budae-jjigae"
+ },
+ {
+  "zh": "泰式炒河粉",
+  "en": "pad thai",
+  "key": "pad-thai"
+ },
+ {
+  "zh": "冬阴功",
+  "en": "tom yum soup",
+  "key": "tom-yum"
+ },
+ {
+  "zh": "越南河粉",
+  "en": "pho",
+  "key": "pho"
+ },
+ {
+  "zh": "烤肉卷",
+  "en": "kebab",
+  "key": "kebab"
+ },
+ {
+  "zh": "鹰嘴豆泥",
+  "en": "hummus",
+  "key": "hummus"
+ },
+ {
+  "zh": "汉堡",
+  "en": "hamburger",
+  "key": "hamburger"
+ },
+ {
+  "zh": "薯条",
+  "en": "french fries",
+  "key": "french-fries"
+ },
+ {
+  "zh": "热狗",
+  "en": "hot dog",
+  "key": "hot-dog"
+ },
+ {
+  "zh": "三明治",
+  "en": "sandwich",
+  "key": "sandwich"
+ },
+ {
+  "zh": "凯撒沙拉",
+  "en": "caesar salad",
+  "key": "caesar-salad"
+ },
+ {
+  "zh": "牛排",
+  "en": "steak",
+  "key": "steak"
+ },
+ {
+  "zh": "肉酱意面",
+  "en": "spaghetti bolognese",
+  "key": "spaghetti-bolognese"
+ },
+ {
+  "zh": "千层面",
+  "en": "lasagna",
+  "key": "lasagna"
+ },
+ {
+  "zh": "塔可",
+  "en": "taco",
+  "key": "taco"
+ },
+ {
+  "zh": "墨西哥卷饼",
+  "en": "burrito",
+  "key": "burrito"
+ },
+ {
+  "zh": "炸鱼薯条",
+  "en": "fish and chips",
+  "key": "fish-and-chips"
+ },
+ {
+  "zh": "培根",
+  "en": "bacon",
+  "key": "bacon"
+ },
+ {
+  "zh": "煎蛋",
+  "en": "fried egg",
+  "key": "fried-egg"
+ },
+ {
+  "zh": "炒蛋",
+  "en": "scrambled eggs",
+  "key": "scrambled-eggs"
+ },
+ {
+  "zh": "麦片",
+  "en": "cereal with milk",
+  "key": "cereal"
+ },
+ {
+  "zh": "燕麦粥",
+  "en": "oatmeal",
+  "key": "oatmeal"
+ },
+ {
+  "zh": "吐司",
+  "en": "toast",
+  "key": "toast"
+ },
+ {
+  "zh": "牛角包",
+  "en": "croissant",
+  "key": "croissant"
+ },
+ {
+  "zh": "贝果",
+  "en": "bagel",
+  "key": "bagel"
+ },
+ {
+  "zh": "甜甜圈",
+  "en": "donut",
+  "key": "donut"
+ },
+ {
+  "zh": "华夫饼",
+  "en": "waffle",
+  "key": "waffle"
+ },
+ {
+  "zh": "松饼",
+  "en": "pancakes",
+  "key": "pancakes"
+ },
+ {
+  "zh": "奶酪",
+  "en": "cheese",
+  "key": "cheese"
+ },
+ {
+  "zh": "酸奶",
+  "en": "yogurt",
+  "key": "yogurt"
+ },
+ {
+  "zh": "芝士蛋糕",
+  "en": "cheesecake",
+  "key": "cheesecake"
+ },
+ {
+  "zh": "提拉米苏",
+  "en": "tiramisu",
+  "key": "tiramisu"
+ },
+ {
+  "zh": "布朗尼",
+  "en": "brownie",
+  "key": "brownie"
+ },
+ {
+  "zh": "苹果派",
+  "en": "apple pie",
+  "key": "apple-pie"
+ },
+ {
+  "zh": "牛奶巧克力",
+  "en": "milk chocolate",
+  "key": "milk-chocolate"
+ },
+ {
+  "zh": "花生酱",
+  "en": "peanut butter",
+  "key": "peanut-butter"
+ },
+ {
+  "zh": "爆米花",
+  "en": "popcorn",
+  "key": "popcorn"
+ },
+ {
+  "zh": "棉花糖",
+  "en": "marshmallow",
+  "key": "marshmallow"
+ },
+ {
+  "zh": "布丁",
+  "en": "pudding",
+  "key": "pudding"
+ },
+ {
+  "zh": "果冻",
+  "en": "jelly",
+  "key": "jelly"
+ },
+ {
+  "zh": "面包",
+  "en": "bread",
+  "key": "bread"
+ },
+ {
+  "zh": "土豆泥",
+  "en": "mashed potatoes",
+  "key": "mashed-potatoes"
+ },
+ {
+  "zh": "烤红薯",
+  "en": "roasted sweet potato",
+  "key": "roasted-sweet-potato"
+ },
+ {
+  "zh": "美式咖啡",
+  "en": "americano",
+  "key": "americano"
+ },
+ {
+  "zh": "卡布奇诺",
+  "en": "cappuccino",
+  "key": "cappuccino"
+ },
+ {
+  "zh": "热巧克力",
+  "en": "hot chocolate",
+  "key": "hot-chocolate"
+ },
+ {
+  "zh": "红茶",
+  "en": "black tea",
+  "key": "black-tea"
+ },
+ {
+  "zh": "乌龙茶",
+  "en": "oolong tea",
+  "key": "oolong-tea"
+ },
+ {
+  "zh": "柠檬茶",
+  "en": "lemon tea",
+  "key": "lemon-tea"
+ },
+ {
+  "zh": "柠檬水",
+  "en": "lemonade",
+  "key": "lemonade"
+ },
+ {
+  "zh": "气泡水",
+  "en": "sparkling water",
+  "key": "sparkling-water"
+ },
+ {
+  "zh": "苹果汁",
+  "en": "apple juice",
+  "key": "apple-juice"
+ },
+ {
+  "zh": "椰子水",
+  "en": "coconut water",
+  "key": "coconut-water"
+ },
+ {
+  "zh": "红酒",
+  "en": "red wine",
+  "key": "red-wine"
+ },
+ {
+  "zh": "威士忌",
+  "en": "whiskey",
+  "key": "whiskey"
+ },
+ {
+  "zh": "玛格丽特",
+  "en": "margarita",
+  "key": "margarita"
+ },
+ {
+  "zh": "能量饮料",
+  "en": "energy drink",
+  "key": "energy-drink"
+ },
+ {
+  "zh": "运动饮料",
+  "en": "sports drink",
+  "key": "sports-drink"
+ },
+ {
+  "zh": "草莓",
+  "en": "strawberries",
+  "key": "strawberry"
+ },
+ {
+  "zh": "葡萄",
+  "en": "grapes",
+  "key": "grapes"
+ },
+ {
+  "zh": "芒果",
+  "en": "mango",
+  "key": "mango"
+ },
+ {
+  "zh": "橙子",
+  "en": "orange",
+  "key": "orange"
+ },
+ {
+  "zh": "柠檬",
+  "en": "lemon",
+  "key": "lemon"
+ },
+ {
+  "zh": "蓝莓",
+  "en": "blueberries",
+  "key": "blueberries"
+ },
+ {
+  "zh": "榴莲",
+  "en": "durian",
+  "key": "durian"
+ },
+ {
+  "zh": "樱桃",
+  "en": "cherries",
+  "key": "cherries"
+ },
+ {
+  "zh": "桃子",
+  "en": "peach",
+  "key": "peach"
+ },
+ {
+  "zh": "菠萝",
+  "en": "pineapple",
+  "key": "pineapple"
+ },
+ {
+  "zh": "牛油果",
+  "en": "avocado",
+  "key": "avocado"
+ },
+ {
+  "zh": "番茄",
+  "en": "tomato",
+  "key": "tomato"
+ },
+ {
+  "zh": "黄瓜",
+  "en": "cucumber",
+  "key": "cucumber"
+ },
+ {
+  "zh": "胡萝卜",
+  "en": "carrot",
+  "key": "carrot"
+ },
+ {
+  "zh": "玉米",
+  "en": "corn on the cob",
+  "key": "corn-on-the-cob"
+ },
+ {
+  "zh": "豆腐",
+  "en": "tofu",
+  "key": "tofu"
+ },
+ {
+  "zh": "毛豆",
+  "en": "edamame",
+  "key": "edamame"
+ },
+ {
+  "zh": "菠菜",
+  "en": "spinach",
+  "key": "spinach"
+ },
+ {
+  "zh": "苹果",
+  "en": "apple",
+  "key": "apple"
+ },
+ {
+  "zh": "香蕉",
+  "en": "banana",
+  "key": "banana"
+ },
+ {
+  "zh": "牛肉干",
+  "en": "beef jerky",
+  "key": "beef jerky"
+ },
+ {
+  "zh": "啤酒",
+  "en": "beer",
+  "key": "beer"
+ },
+ {
+  "zh": "苦瓜",
+  "en": "bitter melon",
+  "key": "bitter melon"
+ },
+ {
+  "zh": "黑咖啡",
+  "en": "black coffee",
+  "key": "black coffee"
+ },
+ {
+  "zh": "红烧肉",
+  "en": "braised pork belly",
+  "key": "braised pork belly"
+ },
+ {
+  "zh": "珍珠奶茶",
+  "en": "bubble tea",
+  "key": "bubble tea"
+ },
+ {
+  "zh": "蛋糕",
+  "en": "cake",
+  "key": "cake"
+ },
+ {
+  "zh": "糖果",
+  "en": "candy",
+  "key": "candy"
+ },
+ {
+  "zh": "清汤",
+  "en": "clear broth",
+  "key": "clear broth"
+ },
+ {
+  "zh": "可乐",
+  "en": "cola",
+  "key": "cola"
+ },
+ {
+  "zh": "曲奇",
+  "en": "cookies",
+  "key": "cookies"
+ },
+ {
+  "zh": "咸饼干",
+  "en": "crackers",
+  "key": "crackers"
+ },
+ {
+  "zh": "咖喱",
+  "en": "curry",
+  "key": "curry"
+ },
+ {
+  "zh": "黑巧克力",
+  "en": "dark chocolate 85%",
+  "key": "dark chocolate 85%"
+ },
+ {
+  "zh": "饺子",
+  "en": "dumplings",
+  "key": "dumplings"
+ },
+ {
+  "zh": "苦菊",
+  "en": "endive",
+  "key": "endive"
+ },
+ {
+  "zh": "浓缩咖啡",
+  "en": "espresso",
+  "key": "espresso"
+ },
+ {
+  "zh": "炸鸡",
+  "en": "fried chicken",
+  "key": "fried chicken"
+ },
+ {
+  "zh": "芥蓝",
+  "en": "gai lan",
+  "key": "gai lan"
+ },
+ {
+  "zh": "西柚",
+  "en": "grapefruit",
+  "key": "grapefruit"
+ },
+ {
+  "zh": "绿茶",
+  "en": "green tea",
+  "key": "green tea"
+ },
+ {
+  "zh": "蜂蜜",
+  "en": "honey",
+  "key": "honey"
+ },
+ {
+  "zh": "冰淇淋",
+  "en": "ice cream",
+  "key": "ice cream"
+ },
+ {
+  "zh": "IPA啤酒",
+  "en": "IPA beer",
+  "key": "ipa beer"
+ },
+ {
+  "zh": "拿铁",
+  "en": "latte",
+  "key": "latte"
+ },
+ {
+  "zh": "麻婆豆腐",
+  "en": "mapo tofu",
+  "key": "mapo tofu"
+ },
+ {
+  "zh": "牛奶",
+  "en": "milk",
+  "key": "milk"
+ },
+ {
+  "zh": "味噌汤",
+  "en": "miso soup",
+  "key": "miso soup"
+ },
+ {
+  "zh": "坚果",
+  "en": "mixed nuts",
+  "key": "mixed nuts"
+ },
+ {
+  "zh": "月饼",
+  "en": "mooncake",
+  "key": "mooncake"
+ },
+ {
+  "zh": "橙汁",
+  "en": "orange juice",
+  "key": "orange juice"
+ },
+ {
+  "zh": "披萨",
+  "en": "pizza",
+  "key": "pizza"
+ },
+ {
+  "zh": "薯片",
+  "en": "potato chips",
+  "key": "potato chips"
+ },
+ {
+  "zh": "白米饭",
+  "en": "steamed white rice",
+  "key": "steamed white rice"
+ },
+ {
+  "zh": "红豆汤",
+  "en": "sweet red bean soup",
+  "key": "sweet red bean soup"
+ },
+ {
+  "zh": "番茄炒蛋",
+  "en": "tomato and egg stir-fry",
+  "key": "tomato and egg stir-fry"
+ },
+ {
+  "zh": "汤力水",
+  "en": "tonic water",
+  "key": "tonic water"
+ },
+ {
+  "zh": "水",
+  "en": "water",
+  "key": "water"
+ },
+ {
+  "zh": "西瓜",
+  "en": "watermelon",
+  "key": "watermelon"
+ }
+]
