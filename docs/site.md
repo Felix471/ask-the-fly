@@ -58,6 +58,7 @@ Annotated tags on `main`; every update ships under a version (feature branch off
 |---|---|---|
 | v1.0.0 | 019fe5d | launch |
 | v1.1.0 | 41f8b72 | Ir94e (amino-acid aversion) axis enabled in the encoder and the site; no simulation changes. |
+| v1.1.1 | 31021cb | Brain view follows the fly's final landing (caption, HUD, raster switch to the plate it lands on); the empty "Brain response:" page line dropped. |
 
 ## Tests
 
