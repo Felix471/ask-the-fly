@@ -385,7 +385,8 @@ export class FlyScene {
   // The fly's behaviour never depends on the mode: in "Do the opposite" it still
   // lands and extends its proboscis on its own pick; the captions say what the
   // human gets.
-  // hooks: { onTaste(index) -> Promise, onDone() }
+  // hooks: { onTaste(index) -> Promise, onLand(index) -> Promise (final landing,
+  // before the proboscis; not called for ties) }
   async run(plan, hooks, token) {
     const f = this.fly;
     f.state = "idle";
@@ -407,6 +408,8 @@ export class FlyScene {
     }
     if (plan.winner != null) {
       await this.visit(plan.winner, token);
+      if (hooks.onLand && !token.cancelled) await hooks.onLand(plan.winner, token);
+      if (token.cancelled) return;
       await this.proboscis(token);
     }
   }
