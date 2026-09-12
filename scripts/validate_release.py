@@ -88,8 +88,12 @@ def check_lookup(root: Path) -> tuple[list[str], dict | None]:
 
 
 def check_dictionary(root: Path) -> tuple[list[str], list[dict]]:
+    problems, dishes = check_dictionary_file(root / "site" / "data" / "dishes.json")
+    return problems, dishes
+
+
+def check_dictionary_file(path: Path) -> tuple[list[str], list[dict]]:
     problems = []
-    path = root / "site" / "data" / "dishes.json"
     if not path.exists():
         return [f"dictionary: {path} missing"], []
     dishes = load_json(path)
@@ -105,9 +109,16 @@ def check_dictionary(root: Path) -> tuple[list[str], list[dict]]:
         for dimension in ("sugar", "bitter", "water"):
             if dish.get(dimension) not in ("none", "low", "medium", "high", "very_high"):
                 problems.append(f"dictionary: {dish.get('key')!r} {dimension} level {dish.get(dimension)!r} invalid")
+        if dish.get("ir94e") not in ("none", "low", "medium", "high"):
+            problems.append(f"dictionary: {dish.get('key')!r} ir94e level {dish.get('ir94e')!r} invalid")
         if not dish.get("display", {}).get("zh") or not dish.get("display", {}).get("en"):
             problems.append(f"dictionary: {dish.get('key')!r} lacks a zh or en display name")
     return problems, dishes
+
+
+def check_source_dictionary(root: Path) -> list[str]:
+    problems, _ = check_dictionary_file(root / "data" / "dishes.json")
+    return problems
 
 
 def check_sync(root: Path) -> list[str]:
@@ -165,8 +176,11 @@ def check_replays(root: Path, table: dict | None, dishes: list[dict]) -> list[st
             hz = tuple(cell.get("hz", {}).get(d) for d in DIMENSIONS)
             by_hz[hz] = cell
         for dish in dishes:
+            if "ir94e" not in dish:
+                problems.append(f"replay: dish {dish.get('key')!r} lacks ir94e")
+                continue
             try:
-                hz = tuple(levels[d][dish[d] if d != "ir94e" else "none"] for d in DIMENSIONS)
+                hz = tuple(levels[d][dish[d]] for d in DIMENSIONS)
             except KeyError:
                 problems.append(f"replay: dish {dish.get('key')!r} has a level outside the lookup table")
                 continue
@@ -206,6 +220,7 @@ def validate(root: Path) -> list[str]:
     problems, table = check_lookup(root)
     dict_problems, dishes = check_dictionary(root)
     problems += dict_problems
+    problems += check_source_dictionary(root)
     problems += check_sync(root)
     problems += check_replays(root, table, dishes)
     problems += check_site(root)

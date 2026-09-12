@@ -14,14 +14,17 @@ from dotenv import load_dotenv
 from google import genai
 from google.genai import types
 
-from .levels import LEVELS
+from .levels import LEVELS, levels_for, prompt_has_ir94e
 
 
 RESPONSE_SCHEMA_VERSION = "schema_v1"
-_LEVEL_SCHEMA = types.Schema(type=types.Type.STRING, enum=list(LEVELS))
-RESPONSE_SCHEMA = types.Schema(
-    type=types.Type.OBJECT,
-    properties={
+_CORE_DIMENSIONS = ("sugar", "bitter", "water")
+
+
+def _schema(dimensions: tuple[str, ...]) -> types.Schema:
+    return types.Schema(
+        type=types.Type.OBJECT,
+        properties={
         "key": types.Schema(type=types.Type.STRING),
         "aliases": types.Schema(
             type=types.Type.ARRAY,
@@ -35,31 +38,39 @@ RESPONSE_SCHEMA = types.Schema(
             },
             required=["zh", "en"],
         ),
-        "sugar": _LEVEL_SCHEMA,
-        "bitter": _LEVEL_SCHEMA,
-        "water": _LEVEL_SCHEMA,
+        **{
+            dimension: types.Schema(type=types.Type.STRING, enum=list(levels_for(dimension)))
+            for dimension in dimensions
+        },
         "reason": types.Schema(
             type=types.Type.OBJECT,
             properties={
                 dimension: types.Schema(type=types.Type.STRING)
-                for dimension in ("sugar", "bitter", "water")
+                for dimension in dimensions
             },
-            required=["sugar", "bitter", "water"],
+            required=list(dimensions),
         ),
         "confidence": types.Schema(
             type=types.Type.OBJECT,
             properties={
                 dimension: types.Schema(type=types.Type.NUMBER)
-                for dimension in ("sugar", "bitter", "water")
+                for dimension in dimensions
             },
-            required=["sugar", "bitter", "water"],
+            required=list(dimensions),
         ),
-    },
-    required=[
-        "key", "aliases", "display", "sugar", "bitter", "water", "reason",
-        "confidence",
-    ],
-)
+        },
+        required=["key", "aliases", "display", *dimensions, "reason", "confidence"],
+    )
+
+
+schema_v1 = _schema(_CORE_DIMENSIONS)
+schema_v2 = _schema((*_CORE_DIMENSIONS, "ir94e"))
+RESPONSE_SCHEMAS = {"schema_v1": schema_v1, "schema_v2": schema_v2}
+RESPONSE_SCHEMA = schema_v1
+
+
+def schema_version_for(prompt_version: str) -> str:
+    return "schema_v2" if prompt_has_ir94e(prompt_version) else "schema_v1"
 
 _CLIENT: genai.Client | None = None
 
@@ -164,7 +175,7 @@ class GeminiEncoder:
             or "FORCIBLY CLOSED" in message
         )
 
-    def generate(self, prompt: str) -> str:
+    def generate(self, prompt: str, schema_version: str = RESPONSE_SCHEMA_VERSION) -> str:
         for attempt in range(8):
             try:
                 response = self._client.models.generate_content(
@@ -173,7 +184,7 @@ class GeminiEncoder:
                     config=types.GenerateContentConfig(
                         temperature=0,
                         response_mime_type="application/json",
-                        response_schema=RESPONSE_SCHEMA,
+                        response_schema=RESPONSE_SCHEMAS[schema_version],
                     ),
                 )
                 if not response.text:

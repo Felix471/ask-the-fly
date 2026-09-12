@@ -54,12 +54,15 @@ Product copy for provenance: "Scores come from a published female-brain LIF mode
 | Disinhibition (the enriched LB3 → Quasimodo → MN motif) is expressed | **no** — zero basal firing means there is no tonic inhibition to release; v1 captures the feedforward Clavicle path only | Tastekin et al. 2026, Fig 6I/6J, Fig S17; docs/open_questions.md OQ-3 |
 | Covers the whole feeding sequence | **no** — real feeding is a chain of checkpoints: leg bristles → labellar bristles → taste pegs → pharynx. This simulation covers the labellar-bristle checkpoint only. | Tastekin et al. 2026, Discussion, "Sequential checkpoints and action control" |
 | Water is a separate taste quality in the model | **no** — in this model water acts as a second appetitive drive that mainly boosts weak sugar (sugar 40 Hz + water 40 Hz gives 24 Hz MN9 vs 4 Hz alone; at sugar 200 Hz it adds 7%). That is why a wet savory dish outranks a dry one. This is a property of the connectome model, not a rule we wrote. | docs/phase1_characterization.md, sugar × water |
+| Ir94e is the amino-acid-aversion channel (Tastekin et al. 2026, LB1e). The assignment of each dish to an Ir94e level is ours (encoder v2.3). Its effect on MN9 is the model's: at sugar low / water low, MN9 goes 61.8 → 9.3 → 1.6 → 0.5 Hz across none / low / medium / high. In this model a fly ranks plain starches above every meat or soy-seasoned dish. The strength of this suppression is uncalibrated against behaviour (docs/open_questions.md OQ-6). | direction reproduced, mapping designed | docs/phase1_characterization.md, sugar × ir94e; docs/encoder_stability_v2_3_batch2.md |
 | Uses the September 2026 complete gustatory wiring (MaleCNS) | **no** — a different animal, not part of this simulation | docs/open_questions.md, v3 note |
 | The brain view shows a live simulation | **no** — it replays one recorded 1 s trial per grid cell (fixed seed) from the same model; positions are FlyWire soma coordinates, activity is the recorded spike times | docs/site.md, `site/data/replay/` headers |
 | The fly animation is measured behaviour | **no** — it is a scripted animation driven by the lookup table's MN9 means and the recorded replays; the model has no body, legs or proboscis, only MN9 firing | docs/site.md |
 | The fly's ranking is a live computation | **no** — a 400-cell lookup table precomputed from 30 trials per cell (`data/lookup_table.json`); the page only reads it | docs/grid_provenance.md |
 
 In this model weak water is only visible as a helper to sugar; the fly notices water when the food is mostly water. The lookup grid therefore gives water "low" and "medium" the same cell (60 Hz): the fixed-path recheck (docs/fixed_path_recheck.md) could not separate them on any curve.
+
+When the fly's own pick scores below 5 Hz MN9 the result adds "this one was just the least uninteresting"; that 5 Hz threshold is ours, it changes the wording only, never the pick or a tie.
 
 Product line: "It only does the first bite."
 

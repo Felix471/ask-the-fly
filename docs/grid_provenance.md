@@ -41,3 +41,7 @@ result only when that ledger matches the requested run exactly and lists every
 trial; a trial with no MN9 spike leaves no spike row, so without the ledger a missing
 trial would be counted as zero firing. Results without a ledger (all runs before this
 date) cannot be resumed; rerun them with `--force`.
+
+## The ir94e ≠ none slice is in use (2026-09-12)
+
+Until 2026-09-12 the product read only the 100 cells with ir94e = 0 Hz (the site hardcoded `ir94e: "none"`). Encoder v2.3 assigns every dish an ir94e level and the site now looks each dish up in its own slice, so all 400 cells (and their recorded replays in `site/data/replay/`) are consumed. No new simulation runs: the grid, `data/lookup_table.json` (cells sha256 unchanged since v1.0.0) and the replay pack are exactly the ones recorded above.
