@@ -167,6 +167,18 @@ export function scenePlan(decision, scored) {
   };
 }
 
+// The recorded run the brain shows when the fly makes its final landing: the
+// plate it lands on (plan.winner, the fly's own pick in every mode), unless the
+// brain already shows that cell because it was the last plate tasted. Null for
+// ties (the fly hovers; the brain keeps the last tasted run) and for no pick.
+export function finalLanding(plan, scored, currentCellId) {
+  if (plan.winner == null || (plan.tie && plan.tie.length > 1)) return null;
+  const item = scored[plan.winner];
+  if (!item || !item.cell) return null;
+  const cellId = cellIdFor(item.cell);
+  return cellId === currentCellId ? null : { index: plan.winner, cellId };
+}
+
 // Levenshtein distance with an early cutoff (characters, so CJK works too).
 export function editDistance(a, b, cutoff = 2) {
   if (Math.abs(a.length - b.length) > cutoff) return cutoff + 1;
@@ -1453,7 +1465,9 @@ if (isBrowser) {
     const cardLinesBox = $("card-lines");
     cardLinesBox.innerHTML = "";
     if (d.flyPick) {
-      for (const line of cardLines(d, state.lang).fixed) {
+      // Lines 1-3 only: the fourth ("Brain response:") was the label above the
+      // card's brain snapshot, which now carries its own caption.
+      for (const line of cardLines(d, state.lang).fixed.slice(0, 3)) {
         const li = document.createElement("li");
         li.textContent = line;
         cardLinesBox.append(li);
@@ -1578,28 +1592,51 @@ if (isBrowser) {
         item.tasted = true;
         state.scene.relabel(index, null, plateSub(item));
         if (token.cancelled) return; // skipped: the result view shows the numbers
-        state.currentCellLevels = item.cell;
-        state.brainCaption = { cell: item.cell, variant: "", n: replay.header.n_spikes };
-        renderBrainCaption();
-        $("mn9-count").textContent = "0";
-        $("mn9-pill").hidden = false;
-        $("hud-idle").hidden = true;
-        state.currentCell = cellId;
-        state.currentItem = item;
-        state.variant = "";
-        state.appliedVariant = "";
-        state.variantRequest += 1; // pending silencing requests for the previous dish are stale
-        $("silence-caption").textContent = "";
-        renderSilenceControls();
-        state.brain.onMn9 = (count) => { $("mn9-count").textContent = String(count); state.sound.click(); };
-        state.brain.onTime = (ms) => { if (state.raster) state.raster.draw(ms); };
-        state.brain.setReplay(replay);
-        showReplayDetails(replay);
-        const stopOnCancel = () => state.brain.stop();
-        token.onCancel.push(stopOnCancel);
-        await state.brain.play(speed());
+        await present(item, cellId, replay);
+      },
+      // Final landing: the brain switches to the run of the plate the fly lands
+      // on (its own pick), unless that run is already showing because the pick
+      // was the last plate tasted; then nothing restarts.
+      onLand: async (index) => {
+        if (!live()) return;
+        const landing = finalLanding(plan, scored, state.currentCell);
+        if (!landing || landing.index !== index) return;
+        const item = scored[index];
+        let replay;
+        try {
+          replay = await state.loadReplay(landing.cellId);
+        } catch (error) {
+          console.warn("replay load failed:", error);
+          return; // the last tasted run stays on screen
+        }
+        if (!live()) return;
+        await present(item, landing.cellId, replay);
       },
     };
+
+    // Show one recorded run: caption, HUD, raster, silencing state, then play it.
+    async function present(item, cellId, replay) {
+      state.currentCellLevels = item.cell;
+      state.brainCaption = { cell: item.cell, variant: "", n: replay.header.n_spikes };
+      renderBrainCaption();
+      $("mn9-count").textContent = "0";
+      $("mn9-pill").hidden = false;
+      $("hud-idle").hidden = true;
+      state.currentCell = cellId;
+      state.currentItem = item;
+      state.variant = "";
+      state.appliedVariant = "";
+      state.variantRequest += 1; // pending silencing requests for the previous dish are stale
+      $("silence-caption").textContent = "";
+      renderSilenceControls();
+      state.brain.onMn9 = (count) => { $("mn9-count").textContent = String(count); state.sound.click(); };
+      state.brain.onTime = (ms) => { if (state.raster) state.raster.draw(ms); };
+      state.brain.setReplay(replay);
+      showReplayDetails(replay);
+      const stopOnCancel = () => state.brain.stop();
+      token.onCancel.push(stopOnCancel);
+      await state.brain.play(speed());
+    }
     await state.scene.run(plan, hooks, token);
     if (state.session !== session || state.token !== token) return;
     token.cancel(); // the sequence is over: the player is free for manual experiments

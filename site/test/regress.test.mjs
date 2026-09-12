@@ -28,7 +28,7 @@ const ok = (bytes) => ({ ok: true, status: 200, arrayBuffer: async () => bytes }
 const fail = (status) => ({ ok: false, status, arrayBuffer: async () => new ArrayBuffer(0) });
 
 // ---- F01: a failed replay request must not be cached; in-flight dedupe stays ----
-import { makeReplayLoader } from "../brain.js";
+import { cellIdFor, makeReplayLoader } from "../brain.js";
 
 test("F01: first 503 then success -> two requests, second succeeds", async () => {
   const cell = "G_slow_bnone_whigh_inone";
@@ -123,6 +123,51 @@ test("F07: the animation plan hovers between the fly's ties, never the human's",
   const d2 = decide([item("A", 100), item("B", 100), item("C", 0)], "opposite");
   const plan2 = scenePlan(d2, [...d2.known, ...d2.misses]);
   assert.deepEqual(plan2.tie, [0, 1], "fly tie between A and B");
+});
+
+test("final landing: the brain switches to the plate the fly lands on, unless it is already showing", () => {
+  const { scenePlan, finalLanding } = appModule;
+  // cells with distinct level ids (cellIdFor reads the level names)
+  const levels = { A: "high", B: "low", C: "none" };
+  const item = (name, hz) => ({ name, entry: { key: name, display: { en: name, zh: name } }, cell: { ...cellOf(hz), sugar: levels[name], bitter: "none", water: "low", ir94e: "none" }, sugarOnly: cellOf(hz) });
+  // winner not last in input order: the last tasted run (C) is on screen, the landing switches to A
+  const d = decide([item("A", 100), item("B", 0), item("C", 0)], "ask");
+  const scored = [...d.known, ...d.misses];
+  const plan = scenePlan(d, scored);
+  const landing = finalLanding(plan, scored, cellIdFor(scored[2].cell));
+  assert.deepEqual(landing, { index: 0, cellId: cellIdFor(scored[0].cell) });
+  // winner last: its run is already showing, nothing restarts
+  const d2 = decide([item("B", 0), item("C", 0), item("A", 100)], "ask");
+  const scored2 = [...d2.known, ...d2.misses];
+  assert.equal(finalLanding(scenePlan(d2, scored2), scored2, cellIdFor(scored2[2].cell)), null);
+  // opposite mode: the fly lands on its own pick (A), the loser is the human's; the brain shows A
+  const d3 = decide([item("B", 0), item("A", 100), item("C", 50)], "opposite");
+  const scored3 = [...d3.known, ...d3.misses];
+  const plan3 = scenePlan(d3, scored3);
+  assert.equal(d3.flyPick.name, "A");
+  assert.deepEqual(keys(d3.humanSet).sort(), ["B", "C"], "three dishes: the fly takes A, the rest is the human's");
+  assert.deepEqual(finalLanding(plan3, scored3, cellIdFor(scored3[2].cell)), { index: 1, cellId: cellIdFor(scored3[1].cell) });
+  // tie: the fly hovers, the brain keeps the last tasted run
+  const d4 = decide([item("A", 100), item("B", 100), item("C", 0)], "ask");
+  const scored4 = [...d4.known, ...d4.misses];
+  assert.equal(finalLanding(scenePlan(d4, scored4), scored4, cellIdFor(scored4[2].cell)), null);
+});
+
+test("final landing: the scene calls onLand for the winner after tasting and before the proboscis, never for ties", async () => {
+  const { FlyScene, makeToken } = await import("../fly.js");
+  const calls = [];
+  const fake = {
+    fly: { state: "idle" }, highlight: -1,
+    visit: async (i) => { calls.push(`visit:${i}`); },
+    proboscis: async () => { calls.push("proboscis"); },
+    hoverBetween: async (idx) => { calls.push(`hover:${idx.join("+")}`); },
+  };
+  const hooks = { onTaste: async (i) => { calls.push(`taste:${i}`); }, onLand: async (i) => { calls.push(`land:${i}`); } };
+  await FlyScene.prototype.run.call(fake, { order: [0, 1, 2], winner: 1, tie: [] }, hooks, makeToken());
+  assert.deepEqual(calls, ["visit:0", "taste:0", "visit:1", "taste:1", "visit:2", "taste:2", "visit:1", "land:1", "proboscis"]);
+  calls.length = 0;
+  await FlyScene.prototype.run.call(fake, { order: [0, 1], winner: 0, tie: [0, 1] }, hooks, makeToken());
+  assert.deepEqual(calls, ["visit:0", "taste:0", "visit:1", "taste:1", "hover:0+1"], "ties: no landing hook");
 });
 
 test("F07: a real dictionary tie behaves the same through scoreOptions", () => {
