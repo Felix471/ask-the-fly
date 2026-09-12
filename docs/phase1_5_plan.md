@@ -2,6 +2,11 @@
 
 **Status: QUEUED (2026-09-10). Gated on: Phase 1 characterization report delivered AND user has confirmed dimensionality. Not started. Must not change anything in v1.**
 
+**Status update (2026-09-12).** The supplementary table (bioRxiv v2 "Supplemental table 2" = Table S1 of the Cell version, FlyWire rows; `docs/papers/`, gitignored) is in hand; its 411 GRN and 66 MN FlyWire body IDs are all in v783, so no version mapping was needed.
+- Task A (cell-set cross-check against Tastekin's typing): **done**, see `docs/cell_set_crosscheck.md` and `scripts/cross_check_cells.py`; findings recorded as OQ-7, sets unchanged.
+- Task B (the four GNG-series interneurons: Quasimodo/GNG042, Scapula/GNG087, GNG016, GNG510, plus GNG015): **still blocked**; the table contains GRNs and MNs only, no interneuron rows (OQ-5).
+- Tasks C, D and E (pharyngeal GRNs PhG1-16, feeding-MN IDs including MN9 / MN11D / MN11V / CEM, and LB3b / LB3d for salt): **unblocked**, every needed type is present with FlyWire IDs (counts in `docs/cell_set_crosscheck.md`). Not started.
+
 ## Why
 v1 encodes a dish as three abstract levels (sugar/bitter/water) chosen by us. v2 should encode a dish as chemical composition, then map composition to gustatory cell-class activation using published dose-response data. The connectome can only address cell classes, not receptors, so the goal is: every taste indicator collapses onto the four or five GRN classes that exist in the brain connectome, with a cited reason.
 
