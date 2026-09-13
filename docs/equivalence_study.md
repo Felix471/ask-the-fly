@@ -62,7 +62,7 @@ A == A2: **True**; A == A3: **True**. Totals: {'A': 9794, 'B': 9633, 'A2': 9794,
 
 Mean paired MN9-left difference (reusable - fresh): **0.000 Hz**. Exact spike-train equality: **10/10 seeds**.
 
-## Stimulus semantics (30 seeds)
+## Stimulus semantics (90 seeds)
 
 PoissonInput and PoissonGroup consume the RNG differently, so PoissonInput comparisons are distributional despite equal seed labels.
 
@@ -432,4 +432,4 @@ Relative to legacy PoissonInput, the reusable path is **inconclusive: difference
 | 3 | stimulus semantics vs legacy PoissonInput | MN9-L CI=[-2.010, 0.899] Hz, p=0.451963; total CI=[-80.569, 126.369] spikes/trial ([-0.834%, 1.308%] of legacy mean), p=0.662808 | MN9-L 95% CI within ±3 Hz and including 0; total CI covers 0 (no p-value rule) | PASS |
 | 4 | refractory quirk experiment | n=10; mean paired MN9-L count difference=-4.100 (different stream); exact=0/10; same-stream pure refractory difference=0.000, exact=10/10 | 10 matched seeds reported (diagnostic; no numerical equivalence bound) | PASS |
 
-**Recommendation:** Use the reusable path as the single downstream path. Criterion 4: the same-random-stream variant shows the refractory rule has zero measured effect; the per-channel rule (rfc=0 only for driven channels, as in model.py) is kept for fidelity, not because it changes results. Phase 0 condition A was re-run on the fixed path; its delta at 100 Hz (+0.1 Hz) is random-stream sampling noise, so Phase 1 was not re-run.
+**Recommendation:** Use the reusable path as the single downstream path. Criterion 4: the same-random-stream variant shows the refractory rule has zero measured effect; the per-channel rule (rfc=0 only for driven channels, as in model.py) is kept for fidelity, not because it changes results. Phase 0 condition A was re-run on the fixed path; its delta at 100 Hz (+0.1 Hz) is random-stream sampling noise. A Phase 1 subset was also re-run on the fixed path for the level-selection check (`docs/fixed_path_recheck.md`); the full characterization report (`docs/phase1_characterization.md`) retains its pre-fix results.
