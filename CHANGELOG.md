@@ -2,6 +2,12 @@
 
 What a visitor to askthefly.app would notice, newest first. One section per release; the heading is `## vX.Y.Z — YYYY-MM-DD` (the release tag on `main` and its date), and `scripts/validate_release.py` checks that `site/data/release.json` matches the top entry. Each entry ends with a line on whether the README honesty table changed.
 
+## v1.1.3 — 2026-09-13
+
+- Long dish names under the plates no longer run together on narrow screens: they end in an ellipsis, with the full name available in the title tooltip. Plate rows keep the same height.
+- No dish's score changed.
+- README honesty table: unchanged.
+
 ## v1.1.2 — 2026-09-12
 
 - The site footer now shows the latest release (version, date, one line) and links to this changelog.
