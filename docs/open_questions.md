@@ -162,3 +162,73 @@ not predict CEM firing. This informs the design of a later pharyngeal
 task; no pharyngeal stimulation, additional background, scoring change,
 or README honesty-table change was made. The causal chain and CEM response
 under other designs remain open.
+
+## OQ-9: pharyngeal screen activates MN9/MN11 but not CEM (2026-09-13)
+
+The [Phase P report](pharyngeal_screen.md) contains P0's source-only PhG1–16
+table and P1's **19 conditions × 10 trials = 190 runs**, with all individual CEM
+rates, MN9 L/R and MN11D/V mean ± population SD, conditional latency medians and
+driven-cell sanity. P0 uses only Tastekin's Cell PDF, distinguishes putative
+receptor/valence assignments from observations, and labels unreported properties
+“not characterised”; the FlyWire IDs are the fifty Table S1 pharyngeal rows.
+MN target labels are literal workbook `Target_Muscle` values: MN9 = `9`,
+MN11D = `11D`, MN11V = `11V`, CEM = `Crop Entry`, as cited in
+[the inventory](../data/mn_readout_ids.json).
+
+P1 drives each complete type at 100 Hz, all fifty together at 100 Hz, and a
+no-input baseline (18 conditions), plus PhG1 at 100 Hz with frozen sugar high
+at 120 Hz (one combined condition). All other labellar drives are zero.
+The frozen FlyWire v783 network and parameters are unchanged; this is our
+uncalibrated stimulation design, not the paper's MaleCNS connectivity metric
+or a product change. The explicit Phase P condition indices 0–18 use the
+published grid seed formula, with trials 0–9; they are not original grid cells.
+
+### Outcome
+
+No CEM neuron fired in any condition: **0 spikes across 1,140 CEM-neuron-trials**.
+Every driven source neuron did fire (1,310/1,310 driven-neuron-trials), so this
+was not an omitted/failed input. All six CEM neurons and all ten trials were
+explicitly saved and validated, including silent trials.
+
+PhG1, PhG4 and PhG10 activated both MN9s and MN11D/V in 10/10 trials.
+
+| Single type, 100 Hz | MN9 L, Hz | MN9 R, Hz | MN11D, Hz | MN11V, Hz |
+|---|---:|---:|---:|---:|
+| PhG1 | 53.200 ± 2.400 | 46.900 ± 3.390 | 140.700 ± 7.804 | 70.750 ± 3.970 |
+| PhG4 | 37.500 ± 6.087 | 32.000 ± 2.933 | 110.600 ± 11.933 | 58.000 ± 5.527 |
+| PhG10 | 11.100 ± 5.009 | 10.900 ± 3.885 | 17.650 ± 10.267 | 8.600 ± 4.898 |
+
+PhG9 produced MN11D/V means 3.650/0.050 Hz (7/10 and 1/10 active trials) with
+both MN9s silent; PhG13 produced one MN9 R spike in one trial; PhG16 produced
+sparse MN9/MN11 activity. The other ten single types and baseline were silent
+at every recorded MN. All-PhG means were MN9 L/R 23.000/18.600 and
+MN11D/V 127.550/67.700 Hz, still with zero CEM spikes.
+
+### PhG1 + sugar high does not show suppression in this comparison
+
+The C2b motivation was structural: 1,319 of 1,807 unique final-leg synapses on
+two-hop pharyngeal-to-CEM paths are negative under the frozen model's signs.
+That count does not establish their activity or a negative net MN response.
+
+| Readout | Existing sugar high only, n=30, Hz | PhG1 + sugar high, n=10, Hz | Combined / sugar-only mean |
+|---|---:|---:|---:|
+| MN9 L | 74.633 ± 4.476 | 82.800 ± 4.812 | 1.109424 |
+| MN9 R | 54.700 ± 4.713 | 57.100 ± 2.982 | 1.043876 |
+| MN11D | 92.733 ± 8.514 | 151.000 ± 6.546 | 1.628325 |
+| MN11V | 37.383 ± 3.991 | 74.150 ± 3.795 | 1.983504 |
+
+None of these means decreased. This uses the existing verified C2 sugar-only
+reference, not an additional control run. It is a descriptive **unpaired**
+comparison: Phase P constructs 151 Poisson units, C2 101, and their trial seeds
+and random-stream consumption differ. No matched-control effect or statistical
+independence is inferred from that layout change. Single-type zero-baseline
+conditions cannot reveal suppression below zero.
+
+P1 is **n=10, a screen, not a characterisation**. MN11-without-MN9 under PhG9 is
+a candidate dissociation; PhG1/4/10 are active follow-up candidates. A serial
+checkpoint chain or firing CEM checkpoint is not established. CEM activation
+was not observed under this design, not ruled out for other drives/backgrounds.
+P0's proposed valence labels are not rewritten to fit these firing readouts.
+Checkpoint P1: await the owner's selection before any 30-trial characterisation
+or additional control/background. No frozen data, `site/`, scoring, encoder or
+README honesty-table changes.
