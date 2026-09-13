@@ -67,26 +67,98 @@ The count is 25: 11 sugar GRNs outside LB3b + LB3c (7 LB3d + 4 LB4b), 7 water GR
 
 Cross-checking `data/cells.json` against Tastekin et al. 2025/2026 Supplemental table 2 (FlyWire rows; `docs/cell_set_crosscheck.md`, `scripts/cross_check_cells.py`): the 42 bitter GRNs are exactly LB1a-d, but seven of the 23 sugar GRNs are LB3d (high salt / heavy metal; ppk23, Ir7c, Ir47a; glutamatergic; aversive, per Tastekin), one is LB3b and four are LB4b (no receptor match), with only 11 LB3c; seven of the 18 water GRNs are LB3c (sugar); and seven of the 18 Ir94e GRNs are LB2a/b/c (no receptor match, putatively aversive), with 11 LB1e. These are differences between the Shiu et al. 2024 annotation the sets were frozen from and Tastekin's typing, not errors in our pipeline: the sets were frozen from the paper's own notebooks (docs/cell_ids.md) and the Phase 0 gates passed on them as they are. Consequences are not investigated: whether the seven LB3d cells in the sugar channel change the sugar curves, whether the seven LB3c cells in the water channel are part of why water acts as a second appetitive drive (README honesty table, water row), and whether the LB2 cells contribute to the Ir94e suppression (OQ-6) are all open. Re-freezing the sets to Tastekin's typing would be a v2 change requiring a full grid rerun and new replays; not done now. Also recorded there: the LB3b (25 cells) and LB3d (29 cells) FlyWire ID lists that Phase 1.5 salt work needs are now available, every one of them in v783.
 
-## OQ-8: MN11 can diverge from MN9; CEM remains silent in the existing replay screen (2026-09-13)
+## OQ-8: MN9/MN11 bitter separation replicated; CEM input audit (2026-09-13)
 
-The [feeding-MN C1 screen](feeding_mn_readouts.md) reads all 66 FlyWire MNs from
-the existing 400 whole-network replays, one extra trial per cell, with no new
-simulation. All IDs are monitored in v783; sparse absence means silence, not
-missing coverage. Per-type mean rates correlate with frozen left MN9 across
-the grid (Spearman: MN11D 0.910, MN11V 0.892), but at input Hz
-(sugar, bitter, water, Ir94e) = (200,100,60,200), MN11D/V fire at 52/18 Hz
-while left MN9 is silent; conversely, at (0,30,240,0), left MN9 fires at
-58 Hz while MN11V is silent. At sugar 120 Hz, bitter 100 Hz leaves substantial
-MN11 firing despite strongly reduced MN9. All six CEMs are silent in all
-400 trials, including Ir94e alone; their correlation is undefined, not zero.
+The [feeding-MN report](feeding_mn_readouts.md) contains C1 (400 existing
+single-trial replays), C2 (thirteen selected cells × 30 freshly rerun trials),
+and C2b (connectome only, no simulation). All sixty-six C1 MNs are monitored
+in v783; C2 records twelve source neurons. Target labels come only from
+the XLSX `MNs` sheet, FlyWire rows, `Target_Muscle` column:
+MN9 = `9`, MN11D = `11D`, MN11V = `11V`, CEM = `Crop Entry`;
+[the inventory](../data/mn_readout_ids.json) cites the workbook and its hash.
 
-Implication: a separate pumping readout is worth replicating before deciding
-whether to build a checkpoint-chain candidate; neither a serial causal chain
-nor a useful CEM checkpoint is established by this screen. The Ir94e input is
-the unchanged mixed LB1e/LB2 set, not isolated LB2, and CEM activation was not
-observed under this design, not ruled out in other designs. n = 1 per cell
-cannot characterise variability. The extra replay seeds do not match the
-lookup's 30 trial seeds; raw MN9 was checked against its same-trial packed
-replay/manifest instead. C2 selected-cell 30-trial replication awaits the
-owner's choice and go. No product score, frozen file or README honesty row
-changed.
+C2 reproduces the original grid seeds and exact spike trains for all
+twelve neurons in all 390 trials; these are the same stochastic trials,
+not an additional independent sample to pool with the original grid.
+The C1 extra replay seeds are different. Frozen protocol/network/GRN sets
+and product scores remain unchanged.
+
+### C2 bitter separation
+
+At sugar 120 Hz and water/Ir94e zero, mean rates (population SD, 30 trials)
+are MN9 L/R 74.633 ± 4.476 / 54.700 ± 4.713 Hz without bitter, versus
+1.700 ± 1.509 / 1.667 ± 1.193 Hz at bitter 100 Hz; MN11D/V are
+92.733 ± 8.514 / 37.383 ± 3.991 Hz without bitter, versus
+61.383 ± 13.992 / 24.950 ± 5.508 Hz at bitter 100 Hz.
+
+| Bitter input Hz | MN9 L ratio | MN9 R ratio | MN11D ratio | MN11V ratio |
+|---:|---:|---:|---:|---:|
+| 0 | 1.000000 | 1.000000 | 1.000000 | 1.000000 |
+| 60 | 0.317552 | 0.299208 | 0.914091 | 0.936246 |
+| 100 | 0.022778 | 0.030469 | 0.661934 | 0.667410 |
+| 160 | 0.000000 | 0.000000 | 0.009885 | 0.008471 |
+
+Ratios divide cell means by the no-bitter mean, not trial-wise ratios.
+The bitter veto acts on MN9 before it acts comparably on MN11 along the
+**bitter-drive axis**; this does not prove temporal or causal ordering.
+At bitter 160 Hz both MN9s are silent in 30/30 trials, while MN11D/V
+retain means 0.917/0.317 Hz (5/30 and 2/30 active trials).
+C2's per-cell mean±SD and conditional latency medians with active counts
+are in the [C2 tables](feeding_mn_readouts.md#c2-thirteen-cell-30-trial-rerun).
+
+CEM remains silent in every neuron/trial in C1 and C2, including Ir94e
+alone. Ir94e is the unchanged mixed LB1e/LB2 input, not isolated LB2.
+MN11 readouts can separate from MN9 under this design, but a serial
+checkpoint chain or an active CEM checkpoint is not established.
+
+### C2b CEM input table
+
+CEM target `Crop Entry` and sides below are the literal XLSX values
+cited above. The fifty PhG1–16 FlyWire IDs come from the same workbook's
+`GRNs` sheet. All source and target IDs are in v783. Counts use unsigned
+`Connectivity` from the frozen protocol's parquet: actual synapses on
+each directed edge, not products of weights or duplicated convergent paths.
+Source-group unions are recomputed; individual group rows are not additive.
+Full source hashes, definitions and edge audit are in the
+[C2b report](feeding_mn_readouts.md#c2b-cem-input-connectivity-no-simulation).
+
+<!-- BEGIN COMPUTED CEM INPUT TABLE -->
+D / A / B = direct source->CEM synapses / unique source->intermediate synapses on two-edge paths / unique intermediate->CEM synapses on those paths. The totals row instead gives unique presynaptic partners / total input synapses.
+
+| Source (n) | 720575940620008112 (L) | 720575940625799513 (L) | 720575940640681680 (L) | 720575940621126384 (R) | 720575940621169690 (R) | 720575940628781333 (R) | All six (union) |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| All presynaptic input: partners / synapses | 70 / 660 | 55 / 510 | 47 / 445 | 64 / 555 | 66 / 494 | 73 / 634 | 143 / 3298 |
+| sugar (23) | 0 / 5 / 17 | 0 / 10 / 16 | 0 / 5 / 20 | 0 / 0 / 0 | 0 / 3 / 2 | 0 / 4 / 4 | 0 / 13 / 59 |
+| bitter (42) | 0 / 15 / 5 | 0 / 119 / 5 | 0 / 1 / 2 | 0 / 1 / 2 | 0 / 0 / 0 | 0 / 70 / 14 | 0 / 189 / 28 |
+| water (18) | 0 / 4 / 17 | 0 / 16 / 16 | 0 / 4 / 20 | 0 / 0 / 0 | 0 / 2 / 2 | 0 / 3 / 3 | 0 / 18 / 58 |
+| ir94e (18) | 0 / 31 / 19 | 0 / 155 / 19 | 0 / 24 / 10 | 0 / 4 / 2 | 0 / 1 / 1 | 0 / 8 / 7 | 0 / 162 / 58 |
+| Labellar union (101) | 0 / 55 / 31 | 0 / 300 / 26 | 0 / 34 / 29 | 0 / 5 / 2 | 0 / 6 / 3 | 0 / 85 / 24 | 0 / 382 / 115 |
+| PhG1 (8) | 0 / 673 / 309 | 0 / 829 / 262 | 0 / 1044 / 241 | 0 / 820 / 276 | 0 / 1008 / 252 | 0 / 978 / 343 | 0 / 1553 / 1683 |
+| PhG2 (5) | 0 / 8 / 24 | 0 / 19 / 14 | 0 / 9 / 17 | 0 / 18 / 60 | 0 / 16 / 56 | 0 / 20 / 47 | 0 / 39 / 218 |
+| PhG3 (2) | 0 / 81 / 16 | 0 / 85 / 15 | 0 / 77 / 20 | 0 / 124 / 81 | 0 / 96 / 44 | 0 / 252 / 66 | 0 / 358 / 242 |
+| PhG4 (4) | 0 / 23 / 48 | 0 / 27 / 67 | 0 / 25 / 42 | 0 / 26 / 45 | 0 / 34 / 30 | 0 / 68 / 51 | 0 / 99 / 283 |
+| PhG5 (2) | 0 / 15 / 12 | 0 / 48 / 13 | 0 / 6 / 13 | 0 / 11 / 17 | 0 / 14 / 19 | 0 / 49 / 49 | 0 / 95 / 123 |
+| PhG6 (2) | 0 / 112 / 39 | 0 / 266 / 49 | 0 / 111 / 30 | 0 / 52 / 26 | 0 / 52 / 15 | 0 / 185 / 44 | 0 / 440 / 203 |
+| PhG7 (5) | 0 / 51 / 20 | 0 / 119 / 24 | 0 / 54 / 21 | 0 / 28 / 28 | 0 / 13 / 30 | 0 / 108 / 56 | 0 / 238 / 179 |
+| PhG8 (4) | 0 / 7 / 13 | 0 / 24 / 14 | 0 / 26 / 25 | 0 / 33 / 44 | 0 / 47 / 46 | 0 / 79 / 67 | 0 / 112 / 209 |
+| PhG9 (4) | 0 / 20 / 19 | 0 / 157 / 17 | 0 / 168 / 19 | 0 / 191 / 19 | 0 / 208 / 20 | 0 / 330 / 30 | 0 / 596 / 124 |
+| PhG10 (2) | 0 / 45 / 22 | 0 / 15 / 23 | 0 / 6 / 20 | 0 / 23 / 14 | 0 / 4 / 21 | 0 / 152 / 35 | 0 / 168 / 135 |
+| PhG11 (2) | 0 / 43 / 23 | 0 / 51 / 27 | 0 / 46 / 31 | 0 / 42 / 35 | 0 / 32 / 40 | 0 / 164 / 65 | 0 / 218 / 221 |
+| PhG12 (2) | 0 / 0 / 0 | 0 / 28 / 2 | 0 / 0 / 0 | 0 / 0 / 0 | 0 / 0 / 0 | 0 / 1 / 9 | 0 / 29 / 11 |
+| PhG13 (2) | 0 / 2 / 4 | 0 / 3 / 3 | 0 / 2 / 2 | 0 / 3 / 3 | 0 / 1 / 2 | 0 / 1 / 2 | 0 / 4 / 16 |
+| PhG14 (2) | 0 / 0 / 0 | 0 / 2 / 7 | 0 / 1 / 5 | 0 / 2 / 2 | 0 / 1 / 2 | 0 / 11 / 5 | 0 / 14 / 21 |
+| PhG15 (2) | 0 / 77 / 30 | 0 / 68 / 20 | 0 / 51 / 13 | 0 / 35 / 46 | 0 / 31 / 55 | 0 / 36 / 61 | 0 / 101 / 225 |
+| PhG16 (2) | 0 / 149 / 26 | 0 / 126 / 21 | 0 / 94 / 11 | 0 / 64 / 43 | 0 / 63 / 45 | 0 / 90 / 48 | 0 / 212 / 194 |
+| Pharyngeal union (50) | 0 / 1306 / 313 | 0 / 1867 / 263 | 0 / 1720 / 247 | 0 / 1472 / 325 | 0 / 1620 / 283 | 0 / 2524 / 376 | 0 / 4276 / 1807 |
+<!-- END COMPUTED CEM INPUT TABLE -->
+
+Pharyngeal input is structurally stronger than frozen labellar input at
+two hops—1,807 versus 115 unique final-leg synapses onto the six CEMs
+(15.7×), with no direct synapses from either group.
+
+The pharyngeal-associated final leg includes 488 positive and 1,319
+negative synapses under the model's signs, so larger unsigned input does
+not predict CEM firing. This informs the design of a later pharyngeal
+task; no pharyngeal stimulation, additional background, scoring change,
+or README honesty-table change was made. The causal chain and CEM response
+under other designs remain open.
