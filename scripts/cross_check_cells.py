@@ -177,7 +177,7 @@ def main() -> int:
         lines.append(f"| {t} | {len(rows)} | {', '.join(sorted({str(r.get('Target_Muscle')) for r in rows}))} |")
     phg = Counter(r.get("Type") for r in grns if str(r.get("Subclass", "")).startswith("Pharyngeal"))
     lines += ["", f"Pharyngeal GRN types with FlyWire IDs: {', '.join(f'{k} {v}' for k, v in sorted(phg.items(), key=lambda kv: int(re.sub(r'[^0-9]', '', kv[0]) or 0)))} ({sum(phg.values())} cells).",
-              f"LB3b (sugar + low salt) {sum(r.get('Subtype') == 'LB3b' for r in grns)} and LB3d (high salt / heavy metal, glutamatergic) {sum(r.get('Subtype') == 'LB3d' for r in grns)} cells have FlyWire IDs, all in v783: the ID lists Phase 1.5 Task E (salt) needs are in the per-set tables below (LB3d appears under the sugar set) and in the table itself.",
+              f"LB3b (sugar + low salt) {sum(r.get('Subtype') == 'LB3b' for r in grns)} and LB3d (high salt / heavy metal, glutamatergic) {sum(r.get('Subtype') == 'LB3d' for r in grns)} cells have FlyWire IDs, all in v783: the ID lists Phase 1.5 salt work needs are in the per-set tables below (LB3d appears under the sugar set) and in the table itself.",
               ""]
     lines += detail
     def subtype_counts(name: str) -> Counter:
