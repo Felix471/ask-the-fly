@@ -1,0 +1,194 @@
+{
+  "mn_protocol_version": "0.1",
+  "status": "C2 research only: owner-selected 13 cells, 30 trials each; product unchanged",
+  "base_protocol": "data/stim_protocol.json",
+  "base_protocol_sha256": "9f9495033281bfcd6f3b373551817987deb2cc083ae94ab61fece9065102d82a",
+  "inherits": "All model parameters, duration, four stimulus channels in original order, GRN sets and frozen MN9 readout are unchanged; only additional readouts are extracted.",
+  "readout_source": "data/mn_readout_ids.json",
+  "readout_source_note": "Exact MNs/FlyWire rows from the cited XLSX, including literal Target_Muscle; Root_Side is not the frozen MN9 side convention.",
+  "readout_neurons": [
+    {
+      "Body_ID": "720575940660219265",
+      "Root_Side": "R",
+      "Type": "MN9",
+      "Target_Muscle": "9",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940618238523",
+      "Root_Side": "L",
+      "Type": "MN9",
+      "Target_Muscle": "9",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940630868793",
+      "Root_Side": "R",
+      "Type": "MN11D",
+      "Target_Muscle": "11D",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940618165019",
+      "Root_Side": "L",
+      "Type": "MN11D",
+      "Target_Muscle": "11D",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940635360924",
+      "Root_Side": "R",
+      "Type": "MN11V",
+      "Target_Muscle": "11V",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940636165624",
+      "Root_Side": "L",
+      "Type": "MN11V",
+      "Target_Muscle": "11V",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940621126384",
+      "Root_Side": "R",
+      "Type": "CEM",
+      "Target_Muscle": "Crop Entry",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940621169690",
+      "Root_Side": "R",
+      "Type": "CEM",
+      "Target_Muscle": "Crop Entry",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940628781333",
+      "Root_Side": "R",
+      "Type": "CEM",
+      "Target_Muscle": "Crop Entry",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940620008112",
+      "Root_Side": "L",
+      "Type": "CEM",
+      "Target_Muscle": "Crop Entry",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940625799513",
+      "Root_Side": "L",
+      "Type": "CEM",
+      "Target_Muscle": "Crop Entry",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940640681680",
+      "Root_Side": "L",
+      "Type": "CEM",
+      "Target_Muscle": "Crop Entry",
+      "in_v783": true
+    }
+  ],
+  "selection_dimensions": [
+    "sugar",
+    "bitter",
+    "water",
+    "ir94e"
+  ],
+  "selected_cells_hz": [
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      200
+    ],
+    [
+      120,
+      0,
+      0,
+      0
+    ],
+    [
+      120,
+      60,
+      0,
+      0
+    ],
+    [
+      120,
+      100,
+      0,
+      0
+    ],
+    [
+      120,
+      160,
+      0,
+      0
+    ],
+    [
+      120,
+      0,
+      0,
+      200
+    ],
+    [
+      0,
+      0,
+      240,
+      0
+    ],
+    [
+      0,
+      30,
+      240,
+      0
+    ],
+    [
+      200,
+      100,
+      60,
+      200
+    ],
+    [
+      200,
+      100,
+      0,
+      200
+    ],
+    [
+      60,
+      0,
+      0,
+      0
+    ],
+    [
+      80,
+      0,
+      0,
+      0
+    ]
+  ],
+  "trial": {
+    "n_trials": 30,
+    "seed_scheme": "published_grid_v1_batch40",
+    "seed_rule": "20260910 + 1000 * (canonical_global_index % 40) + trial; trial = 0..29",
+    "seed_source": "docs/grid_provenance.md; historical batch-40 grid run, not today's v2 default or extra replay seeds"
+  },
+  "analysis": {
+    "rate": "spike count / full 1 s trial; type means include every member",
+    "std": "population standard deviation across 30 per-trial rates (ddof=0), matching the frozen grid",
+    "latency": "first spike from trial start; type latency is earliest member spike; median over trials with spikes, always report active/silent counts",
+    "bitter_ratio": "ratio of cell means to sugar-high/bitter-none baseline, not mean of trial ratios"
+  },
+  "results": "results/mn-readouts/c2/ (local/gitignored; no result enters the lookup table)"
+}
