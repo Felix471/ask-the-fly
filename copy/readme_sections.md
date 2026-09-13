@@ -63,7 +63,6 @@ Product copy for provenance: "Scores come from a published female-brain LIF mode
 | Claim | Status | Source |
 |---|---|---|
 | Scores come from a published female-brain LIF model on FlyWire v783 | yes | Shiu et al. 2024; docs/phase0_report.md |
-| Each dish is represented by four taste inputs: sugar, bitter, water and Ir94e (amino-acid aversion) | The encoder estimates and level-to-Hz mapping are our design; the MN9 means come from precomputed runs of the published connectome model. | docs/encoder.md; docs/grid_provenance.md |
 | Sugar drives, bitter suppresses, MN9 as the proboscis-extension readout | reproduced (directions) | docs/phase0_report.md, gates A–D |
 | The model has spontaneous activity | **no** — baseline is 0 Hz by construction | Shiu 2024 Methods; our condition D |
 | Disinhibition (the enriched LB3 → Quasimodo → MN motif) is expressed | **no** — zero basal firing means there is no tonic inhibition to release; v1 captures the feedforward Clavicle path only | Tastekin et al. 2026, Fig 6I/6J, Fig S17; docs/open_questions.md OQ-3 |
@@ -210,7 +209,6 @@ English: [README.md](README.md)
 | 说法 | 状态 | 依据 |
 |---|---|---|
 | 分数来自已发表的雌性果蝇脑 LIF 模型，运行在 FlyWire v783 上 | 是 | Shiu et al. 2024；docs/phase0_report.md |
-| 每道菜用四个味觉输入表示：甜、苦、水和 Ir94e（氨基酸厌恶） | 编码器的估算及等级到 Hz 的映射是我们设计的；MN9 均值来自已发表连接组模型的预计算仿真。 | docs/encoder.md；docs/grid_provenance.md |
 | 糖驱动、苦抑制、以 MN9 作为伸喙读数 | 已复现（方向） | docs/phase0_report.md，门槛 A–D |
 | 模型有自发活动 | **否** —— 基线按构造为 0 Hz | Shiu 2024 Methods；我们的条件 D |
 | 表达了去抑制（富集的 LB3 → Quasimodo → MN 回路） | **否** —— 基础放电为零，没有可释放的持续性抑制；v1 只包含前馈的 Clavicle 通路 | Tastekin et al. 2026，图 6I/6J、图 S17；docs/open_questions.md OQ-3 |

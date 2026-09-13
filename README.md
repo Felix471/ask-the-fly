@@ -54,7 +54,6 @@ Product copy for provenance: "Scores come from a published female-brain LIF mode
 | Claim | Status | Source |
 |---|---|---|
 | Scores come from a published female-brain LIF model on FlyWire v783 | yes | Shiu et al. 2024; docs/phase0_report.md |
-| Each dish is represented by four taste inputs: sugar, bitter, water and Ir94e (amino-acid aversion) | The encoder estimates and level-to-Hz mapping are our design; the MN9 means come from precomputed runs of the published connectome model. | docs/encoder.md; docs/grid_provenance.md |
 | Sugar drives, bitter suppresses, MN9 as the proboscis-extension readout | reproduced (directions) | docs/phase0_report.md, gates A–D |
 | The model has spontaneous activity | **no** — baseline is 0 Hz by construction | Shiu 2024 Methods; our condition D |
 | Disinhibition (the enriched LB3 → Quasimodo → MN motif) is expressed | **no** — zero basal firing means there is no tonic inhibition to release; v1 captures the feedforward Clavicle path only | Tastekin et al. 2026, Fig 6I/6J, Fig S17; docs/open_questions.md OQ-3 |
