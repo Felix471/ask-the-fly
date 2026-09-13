@@ -1937,7 +1937,7 @@ if (isBrowser) {
         } catch (_) { manifest.unmatched = []; }
       }
       renderSilenceControls();
-      state.scene = new FlyScene($("scene-canvas"), sprites);
+      state.scene = new FlyScene($("scene-canvas"), sprites, $("plate-labels"));
       state.idleFly = new IdleFly($("idle-fly"), sprites);
       renderOptions();
       $("layout-note").hidden = neurons.layout !== "placeholder";
