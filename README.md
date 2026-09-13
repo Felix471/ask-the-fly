@@ -6,9 +6,10 @@ Ask the Fly lets a fruit-fly brain model taste a few dishes and pick one for you
 Try it: https://askthefly.app/
 
 **What's new** (full list in [CHANGELOG.md](CHANGELOG.md))
+
+- v1.1.3 (2026-09-13): long plate names stay separate on narrow screens, with ellipsis and full-name titles; row heights stay the same. No dish's score changed; the honesty table is unchanged.
 - v1.1.2 (2026-09-12): the site footer shows the latest release and links to the changelog; this "What's new" block; the honesty table gains a tonic-inhibition row (a designed experiment, not in the product). No dish's score changed.
 - v1.1.1 (2026-09-12): the brain view follows the fly to the dish it picks; the empty "Brain response:" line is gone.
-- v1.1.0 (2026-09-12): the fly can tell savory dishes apart, with a new amino-acid dimension; meat- and soy-seasoned dishes now score very low (the model's property); a "didn't care much for any of these" line when nothing scores above 5 Hz.
 
 ![Three dishes go in, the fly picks one](docs/media/demo-en.gif)
 
@@ -47,7 +48,7 @@ Product copy for provenance: "Scores come from a published female-brain LIF mode
 
 - **A recorded brain replay.** The dark panel shows 29,326 neurons at their FlyWire soma positions and replays one recorded second of activity for the current taste condition. The flashes are recorded spike times from the Brian2 model, not a live browser simulation.
 - **A fly animation driven by the model's result.** The fly visits each plate, then lands on the option with the strongest mean MN9 response; that is what the fly does in both modes. "Ask the fly" hands you the fly's pick. "Let the fly eat first" hands you what is left: with two dishes the other one, with more the rest, and the result and share card say so. Exact ties stay tied.
-- **Taste estimates from an LLM, brain responses from the connectome model.** Each dish is assigned sugar, bitter, and water levels by the encoder (`data/dishes.json`). Those levels point to one cell in a precomputed 400-cell lookup table.
+- **Taste estimates from an LLM, brain responses from the connectome model.** Each dish is assigned sugar, bitter, water and Ir94e (amino-acid aversion) levels by the encoder (`data/dishes.json`). These four taste inputs point to one cell in a precomputed 400-cell lookup table. The dish-to-input mapping is our design; the MN9 response comes from the connectome model.
 - **Everything is reproducible.** The replay files store the condition, firing levels, seed, commit, and protocol hash. `scripts/run_replay.py` generates them.
 
 ## What the model does — and what it doesn't
@@ -130,7 +131,7 @@ The gates are directional (A rises, B falls, C and D stay at zero); absolute val
 The site only knows dishes in `data/dishes.json`. If it answers "the fly hasn't tried this one yet":
 
 1. Press **Report it** on that line. It opens a prefilled issue at https://github.com/Felix471/ask-the-fly/issues/new with the name you typed. Add the Chinese name, the English name, and one line on what the dish is. (You can also open the issue by hand with the same four fields.)
-2. We encode the dish with the LLM encoder (`encoder/encode.py`, prompt `encode_v2.2`) in both languages, six repeats each, and merge with the cross-language arbitration rules in `docs/encoder.md`. Disagreements two levels apart are marked `needs_review` and resolved by hand.
-3. No simulation is needed: the three levels (sugar, bitter, water) map onto the precomputed 400-cell grid. The dish appears in the dictionary and on the site at the next deploy.
+2. For a new dish, we estimate sugar, bitter and water with `encode_v2.2`, then add only Ir94e from `encode_v2.3` using `--only-dimension ir94e`. Each prompt is run in both languages, six repeats each, with the cross-language arbitration rules in `docs/encoder.md`. `encoder_version_by_dimension` records the Ir94e version; frozen sugar, bitter and water values are preserved. Disagreements two levels apart are marked `needs_review` and resolved by hand.
+3. No simulation is needed: the four taste inputs (sugar, bitter, water and Ir94e) map onto the precomputed 400-cell grid. The dish appears in the dictionary and on the site after review and release.
 
 Names that mean more than one dish (for example "biscuit") are split into separate entries via `data/ambiguous_names.json`; say so in the issue if your dish is one of those.

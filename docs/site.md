@@ -1,9 +1,11 @@
-# Static site (Phase 3 scaffold)
+# Static site
 
-The front end in `site/` is a dependency-free static page: one HTML file, one stylesheet, one ES module. It makes no LLM calls. It reads two JSON files from `site/data/`:
+The front end in `site/` is a static page with no build step or LLM calls: `index.html`, `style.css`, the `app.js`, `brain.js` and `fly.js` ES modules, generated `strings.js`, and the vendored QR-code module. Its two scoring inputs in `site/data/` are:
 
 - `dishes.json` — the dish dictionary (copied from `data/dishes.json`); lookup is exact on the normalized key or a normalized alias, mirroring `encoder/normalize.py`.
 - `lookup_table.json` — the `lookup_v1` table (`levels` → cells with `hz`, `mn9_mean`, `mn9_std`). Cells are indexed by their Hz vector, mirroring `sim/lookup.py`, so water `low` and `medium` (both 60 Hz) resolve to the same cell.
+
+The page also reads dish sections, release metadata, neuron positions, named neurons, neuropil outlines, and the replay manifest and binary files from `site/data/`. The canonical URL comes from `site/config.json`; sprites, fonts, backgrounds and sprite-fallback mappings come from `site/assets/`.
 
 ## Replay pack and brain view
 
@@ -16,6 +18,8 @@ The result view is a fly with a brain tasting the options. Every visual of neura
 - `site/fly.js` lays the options out as plates (row, grid on narrow screens) and runs the sequence: idle → fly to plate → land → replay that plate's cell → next plate → winner + proboscis frames. The fly's behaviour is the same in both modes: it lands on its own pick (the highest MN9); "Let the fly eat first" changes only who gets what in the verdict and on the card. The final landing replays the run of the plate the fly lands on (its own pick, in every mode), so caption, HUD and raster show that plate; when the pick was the last plate tasted its run is already on screen and nothing restarts. Ties hover between the tied plates and the brain keeps the last tasted run. Skip jumps to the result. The level/MN9 table stays below, collapsed.
 
 - **Neuroscience layers (details toggle).** `site/data/neuropils.json` (`scripts/export_neuropils.py`): 2D convex outlines of SEZ, antennal lobes, mushroom bodies, central complex and optic lobes from the JFRC2NP surfaces in FlyWire space, drawn under the dots with small bilingual labels. `data/named_neurons.json` (`scripts/build_named_neurons.py`): Clavicle, Bract I/II, Roundup, Sink and Synch, Fdg, DNg103 and Bluebell resolved to v783 IDs, drawn as larger labelled dots and given their own raster rows; Quasimodo, Scapula, GNG016 and GNG510 have no v783 match and are skipped. The raster strip (sugar / bitter / water GRNs, named neurons, MN9 L/R, 0–1000 ms) and the HUD (neurons in the model, neurons that fired, MN9 counts, latency to the first MN9 spike, input rates) are built only from the replay file. Silencing: `scripts/run_replay.py run --silence clavicle` records every cell with Clavicle's incoming and outgoing synapses set to zero (as in Tastekin 2026); the files ship as `<cell>_silence_clavicle.bin`, and the "Silence …" buttons replay them with the MN9 delta in the caption. Every named neuron with v783 IDs has a recorded silencing run; the manifest carries per-neuron statistics over the cells where baseline MN9 fired (median change, share of cells that dropped / stayed / rose), and the site shows Clavicle plus the two neurons with the largest and most consistent effect as buttons, the rest behind "More neurons". A neuron whose silencing leaves MN9 unchanged in the current cell and has a zero median across cells gets a caption that says so: that is a result, not a missing one. A per-MN9-spike click is available, off by default.
+
+The raster currently groups only sugar, bitter and water GRNs; it has no separate Ir94e row (`rasterRows` in `site/brain.js`). Ir94e is included in the four-axis score lookup, brain-dot colouring, caption and HUD input rates. The raster's three GRN rows do not describe the full set of taste inputs.
 
 Sprites come from `site/assets/` when present (see `docs/assets.md`); otherwise a coloured circle per dish and a drawn fly stand in.
 
@@ -59,25 +63,28 @@ Annotated tags on `main`; every update ships under a version (feature branch off
 | v1.0.0 | 019fe5d | launch |
 | v1.1.0 | 41f8b72 | Ir94e (amino-acid aversion) axis enabled in the encoder and the site; no simulation changes. |
 | v1.1.1 | 31021cb | Brain view follows the fly's final landing (caption, HUD, raster switch to the plate it lands on); the empty "Brain response:" page line dropped. |
-| v1.1.2 | pending | Footer "what's new" line and CHANGELOG.md; README "What's new"; tonic-inhibition honesty row (designed experiment, not in the product); no dish score changed. |
+| v1.1.2 | 65fa510 | Footer "what's new" line and CHANGELOG.md; README "What's new"; tonic-inhibition honesty row (designed experiment, not in the product); no dish score changed. |
 
 ### Changelog and the footer "what's new" line
 
-`CHANGELOG.md` at the repo root is the single source for what changed: one `## vX.Y.Z — YYYY-MM-DD` section per release, newest first, two or three plain-language lines on what a visitor notices, and one line on whether the README honesty table changed. Three things follow from it. The README "What's new" block (the three latest entries, en and zh) lives in `copy/readme_sections.md` and is rebuilt with `scripts/import_copy.py --readme`. The site footer shows the latest release only, `v1.1.1 · 2026-09-12 · summary`, with the version and a "what's new" link pointing at `CHANGELOG.md` on GitHub: version, date, summary key and changelog URL come from `site/data/release.json`; the zh/en summary is the `releaseSummary` string in `copy/site_strings.json` (`releaseLink` is the link text), regenerated by the importer; nothing is hard-coded in `index.html` (`releaseLine` / `renderReleaseLine` in `site/app.js`). `scripts/validate_release.py` refuses a release whose `release.json` version or date differs from the top `CHANGELOG.md` entry or whose summary key is missing from `site/strings.js` (`tests/test_validate_release.py`).
+`CHANGELOG.md` at the repo root is the single source for what changed: one `## vX.Y.Z — YYYY-MM-DD` section per release, newest first, two or three plain-language lines on what a visitor notices, and one line on whether the README honesty table changed. Three things follow from it. The README "What's new" block (the three latest entries, en and zh) lives in `copy/readme_sections.md` and is rebuilt with `scripts/import_copy.py --readme`. The site footer shows the latest release only, `vX.Y.Z · YYYY-MM-DD · summary`, with the version and a "what's new" link pointing at `CHANGELOG.md` on GitHub: version, date, summary key and changelog URL come from `site/data/release.json`; the zh/en summary is the `releaseSummary` string in `copy/site_strings.json` (`releaseLink` is the link text), regenerated by the importer; nothing is hard-coded in `index.html` (`releaseLine` / `renderReleaseLine` in `site/app.js`). `scripts/validate_release.py` refuses a release whose `release.json` version or date differs from the top `CHANGELOG.md` entry or whose summary key is missing from `site/strings.js` (`tests/test_validate_release.py`).
 
 Release checklist: add the `CHANGELOG.md` entry → update `site/data/release.json` (version, date) and the `releaseSummary` en/zh strings → refresh the README "What's new" block in `copy/readme_sections.md` → `python scripts/import_copy.py --readme` → `python scripts/validate_release.py` → PR into `dev`, PR `dev` → `main`, tag after the automatic deploy is verified, then add the row to the Releases table above.
 
 ## Tests
 
 ```
-node --test site/test/app.test.mjs
+node --test site/test/app.test.mjs site/test/regress.test.mjs
 ```
 
 Pure functions (`normalizeName`, `buildDictionary`, `buildLookup`, `scoreOptions`, `decide`, `issueUrl`, share-card strings) are exported from `site/app.js`; the replay parser, neuron decoder, plate layout and cancel token from `site/brain.js` / `site/fly.js`. The tests parse every dictionary entry's replay file against the manifest. DOM wiring only runs in a browser.
 
+With a local server serving `site/` on port 8765, run `python scripts/browser_checks.py` for browser regressions and `python scripts/check_plate_labels.py` for the longest dictionary names in en/zh at 360, 390 and 430 px. The latter saves six screenshots and a JSON report under `results/plate-labels/after/`, and checks full names/titles, non-overlap, stable scene height, language switching, resize, skip and reset. `--baseline --out results/plate-labels/before` records the original canvas-label overlap before applying the fix; `--compare results/plate-labels/before/report.json` also checks heights against that baseline.
+
 ## Behaviour
 
 - Mobile-first, zh/en toggle (remembered per browser in `localStorage`).
+- Plate names use fixed-height, single-line HTML captions over the canvas; long names end in a CSS ellipsis, with the unchanged full name in the caption's text and `title`. The plate layout and scene height do not change with name length or language.
 - Options are added one at a time or pasted as a list (newline, comma, 、 or ; separated).
 - Autocomplete: typing shows up to 6 matches on key, both display names and aliases, ranked prefix → substring → edit distance (tolerance grows with query length: Latin none under 3 chars, 1 up to 5, then 2; CJK 1 from 2 chars). Arrow keys move, Enter or tap selects, Escape closes. With no match the dropdown says "Not tasted yet; closest: …" (edit distance ≤ 3, tappable) or "Press Enter to add it anyway", and Enter adds the raw text, which then takes the miss path.
 - Page order: one-line intro, input with autocomplete, the selected dishes ("On the table": removable chips with a 26 px sprite thumbnail; the idle fly sprite rests on the table's edge; a one-line hint while empty), "Ask the fly" / "Let the fly eat first", then "Browse dishes": a horizontal row of 12 popular dishes as picture tiles (`popular` in `data/dish_sections.json`, copied to `site/data/sections.json`), and "View all" for search, section tabs (中餐/日韩/东南亚/西餐/饮料/水果蔬菜) and a tile grid (4 per row from 560 px, 2 on phones). Tiles toggle the selection and show a check when selected. Selections are stored as dish keys (typed unknown text as typed), so the language toggle relabels everything in place without rerunning or changing a number. Dishes without a sprite (typed, unknown) use one neutral placeholder plate; sprites without their own file use `site/assets/dishes/fallbacks.json`.

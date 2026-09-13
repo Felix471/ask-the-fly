@@ -273,7 +273,7 @@ Noise floor: pooled std = 3.1 Hz; distinguishability threshold = 4.6 Hz.
 
 ### ir94e
 
-The modifier curve at sugar=200 Hz is used because the single-channel range is 0.0 Hz, which does not exceed max(2 Hz, 2 × pooled std) = 2.0 Hz. Measured for completeness; v1 does not encode ir94e.
+The modifier curve at sugar=200 Hz is used because the single-channel range is 0.0 Hz, which does not exceed max(2 Hz, 2 × pooled std) = 2.0 Hz. At this report's 2026-09-10 checkpoint, Ir94e was measured for completeness and was not yet encoded for dishes. Since v1.1.0 (2026-09-12), every dish carries an Ir94e level from encoder v2.3 and the site uses it with sugar, bitter and water in the existing four-axis grid (`docs/encoder.md`, `docs/grid_provenance.md`). The measurements and provisional mappings below remain the historical report.
 Measured response direction: **decreasing** (observed trend: **non-increasing**).
 
 | Level | proposed Hz | MN9 at that Hz (mean ± std) | Δ vs previous level | distinguishable? |
@@ -299,6 +299,8 @@ Noise floor: pooled std = 5.5 Hz; distinguishability threshold = 8.3 Hz.
 These values are proposals from measured points; the frozen protocol covers mechanics only. Level→Hz is confirmed by the user before any grid is generated.
 
 ## Dimensionality options
+
+These were the alternatives at the 2026-09-10 checkpoint, before the grid was generated. The shipped grid has four axes, and the product uses all four since v1.1.0; see `docs/grid_provenance.md`. The original alternatives and pending-decision note below are retained as history.
 
 - **3D sugar×bitter×water.** The observed alone effects are sugar=excitatory, bitter=no effect, and water=excitatory; bitter is suppressive and water is facilitating as a sugar modifier. The characterization does not measure bitter×water or three-way interactions.
 - **2D sugar×bitter with water as a modifier.** This directly represents the measured sugar×bitter plane (suppressive) while treating the measured water effect (facilitating) outside the two primary axes.

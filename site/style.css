@@ -253,6 +253,7 @@ body { padding: 0 16px 32px; max-width: 640px; margin: 0 auto; }
 /* Stage: tablecloth at 2x behind the plates (plate shadows drawn by the scene;
    measured contrast on the tile: ink 14.2:1, muted 4.9:1, so no overlay) with a
    thin darker rim. */
+.scene-stage { position: relative; }
 .scene-canvas {
   display: block; width: 100%; height: 220px; border-radius: 14px;
   background: var(--soft) url("assets/bg/tablecloth.png") repeat;
@@ -260,6 +261,15 @@ body { padding: 0 16px 32px; max-width: 640px; margin: 0 auto; }
   image-rendering: pixelated;
   border: 2px solid #d9c6a8;
   box-shadow: inset 0 0 0 1px rgba(120, 90, 60, 0.18);
+}
+/* Match the canvas content box. Percentage positions follow its CSS scaling
+   without relaying out the plates or restarting an in-flight animation. */
+.plate-labels { position: absolute; inset: 2px; pointer-events: none; }
+.plate-label {
+  position: absolute; transform: translateX(-50%);
+  height: 18px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;
+  color: #1f1a17; text-align: center; pointer-events: auto;
+  font: 600 13px/18px system-ui, -apple-system, 'Segoe UI', 'PingFang SC', 'Noto Sans CJK SC', sans-serif;
 }
 @media (prefers-color-scheme: dark) {
   .scene-canvas { border-color: #5a4a38; }
@@ -344,5 +354,4 @@ body { padding: 0 16px 32px; max-width: 640px; margin: 0 auto; }
 .silence-controls .unavailable { color: var(--muted); font-size: 0.85rem; align-self: center; }
 .sound { display: inline-flex; align-items: center; gap: 8px; margin-top: 10px; font-size: 0.9rem; }
 .silence-summary { flex-basis: 100%; color: var(--muted); font-size: 0.8rem; font-variant-numeric: tabular-nums; }
-
 

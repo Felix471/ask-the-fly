@@ -396,7 +396,7 @@ def report(protocol: dict) -> None:
     lines += ["", f"Mean paired MN9-left difference (reusable - fresh): "
               f"**{pair['mean_paired_difference_hz']:.3f} Hz**. Exact spike-train equality: "
               f"**{pair['exact_equal_seeds']}/{pair['n_seeds']} seeds**.",
-              "", "## Stimulus semantics (30 seeds)", "",
+              "", f"## Stimulus semantics ({len(sem['rows'])} seeds)", "",
               "PoissonInput and PoissonGroup consume the RNG differently, so PoissonInput comparisons are distributional despite equal seed labels.", ""]
     for metric, label in (("left", "MN9-left rate (Hz)"), ("right", "MN9-right rate (Hz)"),
                           ("total", "network-wide spike count")):
@@ -504,8 +504,10 @@ def report(protocol: dict) -> None:
         recommendation += (" Criterion 4: the same-random-stream variant shows the refractory rule has zero "
                            "measured effect; the per-channel rule (rfc=0 only for driven channels, as in model.py) "
                            "is kept for fidelity, not because it changes results. Phase 0 condition A was re-run "
-                           "on the fixed path; its delta at 100 Hz (+0.1 Hz) is random-stream sampling noise, so "
-                           "Phase 1 was not re-run.")
+                           "on the fixed path; its delta at 100 Hz (+0.1 Hz) is random-stream sampling noise. "
+                           "A Phase 1 subset was also re-run on the fixed path for the level-selection check "
+                           "(`docs/fixed_path_recheck.md`); the full characterization report "
+                           "(`docs/phase1_characterization.md`) retains its pre-fix results.")
     elif quirk["any_difference"]:
         recommendation += (" Criterion 4 shows a pure refractory effect, so the reusable path must use the "
                            "legacy rule: set `rfc=0` only for channels with a nonzero rate in the condition.")

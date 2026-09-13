@@ -1,14 +1,18 @@
 # Phase 1.5: Literature-grounded input encoding (v2 groundwork)
 
-**Status: QUEUED (2026-09-10). Gated on: Phase 1 characterization report delivered AND user has confirmed dimensionality. Not started. Must not change anything in v1.**
+**Initial status (2026-09-10): QUEUED. Gated on: Phase 1 characterization report delivered AND user has confirmed dimensionality. Not started at that date. Must not change anything in v1.**
 
 **Status update (2026-09-12).** The supplementary table (bioRxiv v2 "Supplemental table 2" = Table S1 of the Cell version, FlyWire rows; `docs/papers/`, gitignored) is in hand; its 411 GRN and 66 MN FlyWire body IDs are all in v783, so no version mapping was needed.
-- Task A (cell-set cross-check against Tastekin's typing): **done**, see `docs/cell_set_crosscheck.md` and `scripts/cross_check_cells.py`; findings recorded as OQ-7, sets unchanged.
-- Task B (the four GNG-series interneurons: Quasimodo/GNG042, Scapula/GNG087, GNG016, GNG510, plus GNG015): **still blocked**; the table contains GRNs and MNs only, no interneuron rows (OQ-5).
-- Tasks C, D and E (pharyngeal GRNs PhG1-16, feeding-MN IDs including MN9 / MN11D / MN11V / CEM, and LB3b / LB3d for salt): **unblocked**, every needed type is present with FlyWire IDs (counts in `docs/cell_set_crosscheck.md`). Not started.
+
+Status is listed by subject. The task letters below keep their original meanings: A = cell-class inventory, B = indicator-to-class map, C = v2 encoder schema proposal, D = feeding-MN sequence readouts.
+
+- **Cell-set cross-check against Tastekin's typing: done.** See `docs/cell_set_crosscheck.md` and `scripts/cross_check_cells.py`; findings recorded as OQ-7, sets unchanged. This completes the cross-check within the cell-class inventory, not the full inventory or annotation-retyping audit.
+- **GNG-series interneuron identification: still blocked.** Quasimodo/GNG042, Scapula/GNG087, GNG016, GNG510 and GNG015 remain unresolved; the table contains GRNs and MNs only, no interneuron rows (OQ-5).
+- **Pharyngeal GRNs PhG1-16, feeding-MN readouts including MN9 / MN11D / MN11V / CEM, and LB3b / LB3d salt work: IDs available.** Every needed type is present with FlyWire IDs (counts in `docs/cell_set_crosscheck.md`). The research and design work is not started and awaits owner authorization; ID availability does not authorize it.
+- The remaining cell-class inventory and annotation-retyping audit, indicator-to-class map, and v2 encoder-schema proposal remain gated as specified below; this status update does not mark them complete.
 
 ## Why
-v1 encodes a dish as three abstract levels (sugar/bitter/water) chosen by us. v2 should encode a dish as chemical composition, then map composition to gustatory cell-class activation using published dose-response data. The connectome can only address cell classes, not receptors, so the goal is: every taste indicator collapses onto the four or five GRN classes that exist in the brain connectome, with a cited reason.
+v1.0.0 launched with three dish-encoding axes (sugar/bitter/water). Since v1.1.0, the shipped dish encoding has four: sugar, bitter, water and Ir94e (amino-acid aversion). The abstract levels and dish-to-level mapping are our design; the lookup responses come from the model. Existing sugar/bitter/water values remain frozen, with the separate Ir94e encoder provenance recorded in `encoder_version_by_dimension`. v2 should encode a dish as chemical composition, then map composition to gustatory cell-class activation using published dose-response data. The connectome can only address cell classes, not receptors, so the goal is: every taste indicator collapses onto the four or five GRN classes that exist in the brain connectome, with a cited reason.
 
 ## Task A: Cell-class inventory (cheap, do first)
 

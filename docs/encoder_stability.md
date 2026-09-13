@@ -1,5 +1,7 @@
 # Encoder stability
 
+Historical report for the three-dimension `encode_v1` prompt (sugar, bitter and water). These results are unchanged; the current dictionary also includes Ir94e (amino-acid aversion), measured separately with v2.3 in `docs/encoder_stability_v2_3.md` and `docs/encoder_stability_v2_3_batch2.md`. See `docs/encoder.md` for versions by dimension.
+
 - Model id: `gemini-3.1-flash-lite`
 - Encoder version: `gemini-3.1-flash-lite@encode_v1`
 - Prompt version: `encode_v1`

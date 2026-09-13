@@ -718,8 +718,8 @@
     {
       "key": "releaseSummary",
       "context": "Footer 'what's new' line, one-line summary of the latest release; version and date come from site/data/release.json",
-      "en": "Footer shows what changed; no scores changed",
-      "zh": "页脚会显示更新内容；分数没有变",
+      "en": "Long plate names stay separate; no scores changed",
+      "zh": "长菜名不再挤在一起；分数没有变",
       "max_length": 60
     },
     {

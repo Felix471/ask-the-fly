@@ -147,8 +147,10 @@ export class IdleFly {
 }
 
 export class FlyScene {
-  constructor(canvas, sprites) {
+  constructor(canvas, sprites, labelContainer) {
     this.canvas = canvas;
+    this.labelContainer = labelContainer;
+    this.labels = [];
     this.sprites = sprites || { fly: {}, dishCache: new Map(), base: "assets/" };
     this.plates = [];
     this.positions = [];
@@ -168,6 +170,19 @@ export class FlyScene {
     this.canvas.width = Math.round(width * this.pixelRatio);
     this.canvas.height = Math.round(height * this.pixelRatio);
     this.canvas.style.height = `${height}px`;
+    // Names are HTML so CSS can clip them without changing the source text.
+    // 112 px leaves 12 px between captions at the 124 px plate-center spacing.
+    this.labels = plates.map((plate, i) => {
+      const label = this.labelContainer.ownerDocument.createElement("span");
+      label.className = "plate-label";
+      label.textContent = plate.label;
+      label.title = plate.label;
+      label.style.left = `${positions[i].x / width * 100}%`;
+      label.style.top = `${(positions[i].y + PLATE / 2 + 7) / height * 100}%`;
+      label.style.width = `${112 / width * 100}%`;
+      return label;
+    });
+    this.labelContainer.replaceChildren(...this.labels);
     this.fly.x = width / 2;
     this.fly.y = 34;
     const generation = ++this.generation;
@@ -181,7 +196,11 @@ export class FlyScene {
   relabel(index, label, sub) {
     const plate = this.plates[index];
     if (!plate) return;
-    if (label != null) plate.label = label;
+    if (label != null) {
+      plate.label = label;
+      this.labels[index].textContent = label;
+      this.labels[index].title = label;
+    }
     if (sub != null) plate.sub = sub;
     if (!this.raf) this.draw();
   }
@@ -234,10 +253,7 @@ export class FlyScene {
       ctx.fill();
       ctx.stroke();
     }
-    ctx.fillStyle = "#1f1a17";
-    ctx.font = "600 13px system-ui, -apple-system, 'Segoe UI', 'PingFang SC', 'Noto Sans CJK SC', sans-serif";
     ctx.textAlign = "center";
-    ctx.fillText(plate.label, 0, r + 22);
     if (plate.sub) {
       ctx.fillStyle = "#6b625b";
       ctx.font = "12px system-ui, -apple-system, 'Segoe UI', sans-serif";
