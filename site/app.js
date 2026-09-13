@@ -291,6 +291,19 @@ export function cardLines(decision, lang) {
   return { fixed: t.fixedLines.map((line) => fmt(line, values)), bottom: t.cardHonesty };
 }
 
+// Footer "what's new" line from site/data/release.json: `v1.1.1 · 2026-09-12 · summary`,
+// the version linking to CHANGELOG.md on GitHub. Null when the file is missing or malformed.
+export function releaseLine(release, lang, strings = STRINGS) {
+  if (!release || typeof release.version !== "string" || !/^v\d+\.\d+\.\d+$/.test(release.version)) return null;
+  if (typeof release.date !== "string" || !/^\d{4}-\d{2}-\d{2}$/.test(release.date)) return null;
+  const t = strings[lang] || strings.en;
+  const summary = typeof release.summary_key === "string" ? t[release.summary_key] : null;
+  if (!summary) return null;
+  const href = typeof release.changelog_url === "string" && /^https:\/\//.test(release.changelog_url)
+    ? release.changelog_url : `${REPO_URL}/blob/main/CHANGELOG.md`;
+  return { version: release.version, date: release.date, summary, href, text: `${release.version} · ${release.date} · ${summary}` };
+}
+
 // ---------- share links ----------
 
 // Canonical public URL; the page overrides it from site/config.json at load.
@@ -985,6 +998,7 @@ if (isBrowser) {
         trials: table.n_trials_per_cell,
       });
     }
+    renderReleaseLine();
     renderOptions();
     renderTasted();
     if (state.brain) state.brain.setLang(state.lang);
@@ -994,6 +1008,28 @@ if (isBrowser) {
     relabelPlates();
     if (state.decision) renderDecision(); // text only; the phase is untouched
     if (state.decision && $("card-dialog").open) showCard().catch((error) => console.warn("share card redraw failed:", error));
+  }
+
+  // Footer: latest release only (site/data/release.json), version linked to the changelog.
+  function renderReleaseLine() {
+    const box = $("release-line");
+    box.textContent = "";
+    const line = releaseLine(state.release, state.lang);
+    if (!line) { box.hidden = true; return; }
+    box.hidden = false;
+    const link = document.createElement("a");
+    link.href = line.href;
+    link.target = "_blank";
+    link.rel = "noopener";
+    link.textContent = line.version;
+    const t = STRINGS[state.lang];
+    box.append(link, ` · ${line.date} · ${line.summary} · `);
+    const more = document.createElement("a");
+    more.href = line.href;
+    more.target = "_blank";
+    more.rel = "noopener";
+    more.textContent = t.releaseLink;
+    box.append(more);
   }
 
   function renderBrainCaption() {
@@ -1869,13 +1905,15 @@ if (isBrowser) {
     state.dictionary = buildDictionary(dishes);
     state.lookup = buildLookup(table);
     $("stub-banner").hidden = !table.stub;
-    const [fallbacks, sections, config] = await Promise.all([
+    const [fallbacks, sections, config, release] = await Promise.all([
       fetch("assets/dishes/fallbacks.json").then((r) => (r.ok ? r.json() : null)).catch(() => null),
       fetch("data/sections.json").then((r) => (r.ok ? r.json() : null)).catch(() => null),
       fetch("config.json").then((r) => (r.ok ? r.json() : null)).catch(() => null),
+      fetch("data/release.json").then((r) => (r.ok ? r.json() : null)).catch(() => null),
     ]);
     state.spriteFallbacks = (fallbacks && fallbacks.fallbacks) || {};
     state.sections = sections;
+    state.release = release;
     if (config && typeof config.site_url === "string" && /^https?:\/\//.test(config.site_url)) state.siteUrl = config.site_url;
     applyStrings();
     // Scene data loads after the dictionary so the buttons enable early; the
