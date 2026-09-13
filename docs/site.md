@@ -74,14 +74,17 @@ Release checklist: add the `CHANGELOG.md` entry → update `site/data/release.js
 ## Tests
 
 ```
-node --test site/test/app.test.mjs
+node --test site/test/app.test.mjs site/test/regress.test.mjs
 ```
 
 Pure functions (`normalizeName`, `buildDictionary`, `buildLookup`, `scoreOptions`, `decide`, `issueUrl`, share-card strings) are exported from `site/app.js`; the replay parser, neuron decoder, plate layout and cancel token from `site/brain.js` / `site/fly.js`. The tests parse every dictionary entry's replay file against the manifest. DOM wiring only runs in a browser.
 
+With a local server serving `site/` on port 8765, run `python scripts/browser_checks.py` for browser regressions and `python scripts/check_plate_labels.py` for the longest dictionary names in en/zh at 360, 390 and 430 px. The latter saves six screenshots and a JSON report under `results/plate-labels/after/`, and checks full names/titles, non-overlap, stable scene height, language switching, resize, skip and reset. `--baseline --out results/plate-labels/before` records the original canvas-label overlap before applying the fix; `--compare results/plate-labels/before/report.json` also checks heights against that baseline.
+
 ## Behaviour
 
 - Mobile-first, zh/en toggle (remembered per browser in `localStorage`).
+- Plate names use fixed-height, single-line HTML captions over the canvas; long names end in a CSS ellipsis, with the unchanged full name in the caption's text and `title`. The plate layout and scene height do not change with name length or language.
 - Options are added one at a time or pasted as a list (newline, comma, 、 or ; separated).
 - Autocomplete: typing shows up to 6 matches on key, both display names and aliases, ranked prefix → substring → edit distance (tolerance grows with query length: Latin none under 3 chars, 1 up to 5, then 2; CJK 1 from 2 chars). Arrow keys move, Enter or tap selects, Escape closes. With no match the dropdown says "Not tasted yet; closest: …" (edit distance ≤ 3, tappable) or "Press Enter to add it anyway", and Enter adds the raw text, which then takes the miss path.
 - Page order: one-line intro, input with autocomplete, the selected dishes ("On the table": removable chips with a 26 px sprite thumbnail; the idle fly sprite rests on the table's edge; a one-line hint while empty), "Ask the fly" / "Let the fly eat first", then "Browse dishes": a horizontal row of 12 popular dishes as picture tiles (`popular` in `data/dish_sections.json`, copied to `site/data/sections.json`), and "View all" for search, section tabs (中餐/日韩/东南亚/西餐/饮料/水果蔬菜) and a tile grid (4 per row from 560 px, 2 on phones). Tiles toggle the selection and show a check when selected. Selections are stored as dish keys (typed unknown text as typed), so the language toggle relabels everything in place without rerunning or changing a number. Dishes without a sprite (typed, unknown) use one neutral placeholder plate; sprites without their own file use `site/assets/dishes/fallbacks.json`.

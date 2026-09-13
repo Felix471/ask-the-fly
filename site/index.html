@@ -87,7 +87,10 @@
         </label>
         <button id="skip-btn" class="btn btn-secondary btn-small" type="button" data-i18n="skip"></button>
       </div>
-      <canvas id="scene-canvas" class="scene-canvas" data-i18n-aria="ariaSceneCanvas"></canvas>
+      <div class="scene-stage">
+        <canvas id="scene-canvas" class="scene-canvas" data-i18n-aria="ariaSceneCanvas"></canvas>
+        <div id="plate-labels" class="plate-labels"></div>
+      </div>
       <div class="brain-wrap">
         <canvas id="brain-canvas" class="brain-canvas" data-i18n-aria="ariaBrainCanvas"></canvas>
         <div id="mn9-pill" class="mn9-counter" hidden><span data-i18n="mn9Label"></span> <strong id="mn9-count">0</strong></div>
