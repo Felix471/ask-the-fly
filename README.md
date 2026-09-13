@@ -47,13 +47,14 @@ Product copy for provenance: "Scores come from a published female-brain LIF mode
 
 - **A recorded brain replay.** The dark panel shows 29,326 neurons at their FlyWire soma positions and replays one recorded second of activity for the current taste condition. The flashes are recorded spike times from the Brian2 model, not a live browser simulation.
 - **A fly animation driven by the model's result.** The fly visits each plate, then lands on the option with the strongest mean MN9 response; that is what the fly does in both modes. "Ask the fly" hands you the fly's pick. "Let the fly eat first" hands you what is left: with two dishes the other one, with more the rest, and the result and share card say so. Exact ties stay tied.
-- **Taste estimates from an LLM, brain responses from the connectome model.** Each dish is assigned sugar, bitter, and water levels by the encoder (`data/dishes.json`). Those levels point to one cell in a precomputed 400-cell lookup table.
+- **Taste estimates from an LLM, brain responses from the connectome model.** Each dish is assigned sugar, bitter, water and Ir94e (amino-acid aversion) levels by the encoder (`data/dishes.json`). These four taste inputs point to one cell in a precomputed 400-cell lookup table. The dish-to-input mapping is our design; the MN9 response comes from the connectome model.
 - **Everything is reproducible.** The replay files store the condition, firing levels, seed, commit, and protocol hash. `scripts/run_replay.py` generates them.
 
 ## What the model does — and what it doesn't
 | Claim | Status | Source |
 |---|---|---|
 | Scores come from a published female-brain LIF model on FlyWire v783 | yes | Shiu et al. 2024; docs/phase0_report.md |
+| Each dish is represented by four taste inputs: sugar, bitter, water and Ir94e (amino-acid aversion) | The encoder estimates and level-to-Hz mapping are our design; the MN9 means come from precomputed runs of the published connectome model. | docs/encoder.md; docs/grid_provenance.md |
 | Sugar drives, bitter suppresses, MN9 as the proboscis-extension readout | reproduced (directions) | docs/phase0_report.md, gates A–D |
 | The model has spontaneous activity | **no** — baseline is 0 Hz by construction | Shiu 2024 Methods; our condition D |
 | Disinhibition (the enriched LB3 → Quasimodo → MN motif) is expressed | **no** — zero basal firing means there is no tonic inhibition to release; v1 captures the feedforward Clavicle path only | Tastekin et al. 2026, Fig 6I/6J, Fig S17; docs/open_questions.md OQ-3 |
@@ -130,7 +131,7 @@ The gates are directional (A rises, B falls, C and D stay at zero); absolute val
 The site only knows dishes in `data/dishes.json`. If it answers "the fly hasn't tried this one yet":
 
 1. Press **Report it** on that line. It opens a prefilled issue at https://github.com/Felix471/ask-the-fly/issues/new with the name you typed. Add the Chinese name, the English name, and one line on what the dish is. (You can also open the issue by hand with the same four fields.)
-2. We encode the dish with the LLM encoder (`encoder/encode.py`, prompt `encode_v2.2`) in both languages, six repeats each, and merge with the cross-language arbitration rules in `docs/encoder.md`. Disagreements two levels apart are marked `needs_review` and resolved by hand.
-3. No simulation is needed: the three levels (sugar, bitter, water) map onto the precomputed 400-cell grid. The dish appears in the dictionary and on the site at the next deploy.
+2. For a new dish, we estimate sugar, bitter and water with `encode_v2.2`, then add only Ir94e from `encode_v2.3` using `--only-dimension ir94e`. Each prompt is run in both languages, six repeats each, with the cross-language arbitration rules in `docs/encoder.md`. `encoder_version_by_dimension` records the Ir94e version; frozen sugar, bitter and water values are preserved. Disagreements two levels apart are marked `needs_review` and resolved by hand.
+3. No simulation is needed: the four taste inputs (sugar, bitter, water and Ir94e) map onto the precomputed 400-cell grid. The dish appears in the dictionary and on the site after review and release.
 
 Names that mean more than one dish (for example "biscuit") are split into separate entries via `data/ambiguous_names.json`; say so in the issue if your dish is one of those.
