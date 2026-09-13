@@ -66,3 +66,27 @@ What the axis did to the dictionary when enabled (encoder v2.3, `--only-dimensio
 The count is 25: 11 sugar GRNs outside LB3b + LB3c (7 LB3d + 4 LB4b), 7 water GRNs outside LB3a, and 7 Ir94e GRNs outside LB1e; all 42 bitter GRNs match LB1a-d. The earlier count of 21 omitted the four sugar-set LB4b cells. The one sugar-set LB3b cell is within the mapped sugar subtypes and is not counted as a mismatch.
 
 Cross-checking `data/cells.json` against Tastekin et al. 2025/2026 Supplemental table 2 (FlyWire rows; `docs/cell_set_crosscheck.md`, `scripts/cross_check_cells.py`): the 42 bitter GRNs are exactly LB1a-d, but seven of the 23 sugar GRNs are LB3d (high salt / heavy metal; ppk23, Ir7c, Ir47a; glutamatergic; aversive, per Tastekin), one is LB3b and four are LB4b (no receptor match), with only 11 LB3c; seven of the 18 water GRNs are LB3c (sugar); and seven of the 18 Ir94e GRNs are LB2a/b/c (no receptor match, putatively aversive), with 11 LB1e. These are differences between the Shiu et al. 2024 annotation the sets were frozen from and Tastekin's typing, not errors in our pipeline: the sets were frozen from the paper's own notebooks (docs/cell_ids.md) and the Phase 0 gates passed on them as they are. Consequences are not investigated: whether the seven LB3d cells in the sugar channel change the sugar curves, whether the seven LB3c cells in the water channel are part of why water acts as a second appetitive drive (README honesty table, water row), and whether the LB2 cells contribute to the Ir94e suppression (OQ-6) are all open. Re-freezing the sets to Tastekin's typing would be a v2 change requiring a full grid rerun and new replays; not done now. Also recorded there: the LB3b (25 cells) and LB3d (29 cells) FlyWire ID lists that Phase 1.5 salt work needs are now available, every one of them in v783.
+
+## OQ-8: MN11 can diverge from MN9; CEM remains silent in the existing replay screen (2026-09-13)
+
+The [feeding-MN C1 screen](feeding_mn_readouts.md) reads all 66 FlyWire MNs from
+the existing 400 whole-network replays, one extra trial per cell, with no new
+simulation. All IDs are monitored in v783; sparse absence means silence, not
+missing coverage. Per-type mean rates correlate with frozen left MN9 across
+the grid (Spearman: MN11D 0.910, MN11V 0.892), but at input Hz
+(sugar, bitter, water, Ir94e) = (200,100,60,200), MN11D/V fire at 52/18 Hz
+while left MN9 is silent; conversely, at (0,30,240,0), left MN9 fires at
+58 Hz while MN11V is silent. At sugar 120 Hz, bitter 100 Hz leaves substantial
+MN11 firing despite strongly reduced MN9. All six CEMs are silent in all
+400 trials, including Ir94e alone; their correlation is undefined, not zero.
+
+Implication: a separate pumping readout is worth replicating before deciding
+whether to build a checkpoint-chain candidate; neither a serial causal chain
+nor a useful CEM checkpoint is established by this screen. The Ir94e input is
+the unchanged mixed LB1e/LB2 set, not isolated LB2, and CEM activation was not
+observed under this design, not ruled out in other designs. n = 1 per cell
+cannot characterise variability. The extra replay seeds do not match the
+lookup's 30 trial seeds; raw MN9 was checked against its same-trial packed
+replay/manifest instead. C2 selected-cell 30-trial replication awaits the
+owner's choice and go. No product score, frozen file or README honesty row
+changed.
