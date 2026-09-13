@@ -716,6 +716,20 @@
       "max_length": 80
     },
     {
+      "key": "releaseSummary",
+      "context": "Footer 'what's new' line, one-line summary of the latest release; version and date come from site/data/release.json",
+      "en": "Footer shows what changed; no scores changed",
+      "zh": "页脚会显示更新内容；分数没有变",
+      "max_length": 60
+    },
+    {
+      "key": "releaseLink",
+      "context": "Footer 'what's new' line: link text pointing at CHANGELOG.md on GitHub",
+      "en": "what's new",
+      "zh": "更新记录",
+      "max_length": 20
+    },
+    {
       "key": "title",
       "context": "Page heading top-left",
       "en": "Ask the Fly",

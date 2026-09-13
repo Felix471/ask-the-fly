@@ -142,7 +142,9 @@ export const STRINGS = {
     "oppositeLeast": "Its least favorite: {lowest}",
     "colIr94e": "Amino acids",
     "ir94eExplain": "Amino acids = the Ir94e channel: in this model free amino acids and glutamate put the fly off, so soy-, stock- and meat-heavy dishes score low. Which level a dish gets is our estimate; the suppression is the model's.",
-    "lowInterest": "The fly didn't care much for any of these. This one was just the least uninteresting."
+    "lowInterest": "The fly didn't care much for any of these. This one was just the least uninteresting.",
+    "releaseSummary": "Footer shows what changed; no scores changed",
+    "releaseLink": "what's new"
   },
   "zh": {
     "add": "添加",
@@ -285,6 +287,8 @@ export const STRINGS = {
     "oppositeLeast": "它最不想吃的是{lowest}",
     "colIr94e": "氨基酸",
     "ir94eExplain": "氨基酸一列是 Ir94e 通道：在这个模型里，游离氨基酸和谷氨酸（俗称的“鲜”）会让果蝇扫兴，所以酱油、高汤、肉多的菜得分很低。菜对应哪个等级是我们估的，抑制本身是模型的。",
-    "lowInterest": "这几样果蝇都不太想吃，勉强挑了这个。"
+    "lowInterest": "这几样果蝇都不太想吃，勉强挑了这个。",
+    "releaseSummary": "页脚会显示更新内容；分数没有变",
+    "releaseLink": "更新记录"
   }
 };

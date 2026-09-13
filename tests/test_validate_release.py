@@ -50,7 +50,11 @@ class Bundle:
             path = self.root / rel
             path.parent.mkdir(parents=True, exist_ok=True)
             path.write_text(json.dumps(obj), encoding="utf-8")
-        (self.root / "site" / "strings.js").write_text("export const STRINGS = {};", encoding="utf-8")
+        (self.root / "site" / "strings.js").write_text(
+            'export const STRINGS = { en: { "releaseSummary": "x" }, zh: { "releaseSummary": "y" } };', encoding="utf-8")
+        (self.root / "CHANGELOG.md").write_text("# Changelog\n\n## v1.2.0 — 2026-09-13\n\n- x\n\n## v1.1.1 — 2026-09-12\n\n- y\n", encoding="utf-8")
+        (self.root / "site" / "data" / "release.json").write_text(
+            json.dumps({"version": "v1.2.0", "date": "2026-09-13", "summary_key": "releaseSummary"}), encoding="utf-8")
         (self.root / "site" / "index.html").write_text('<script type="module" src="app.js"></script>', encoding="utf-8")
         replay = self.root / "site" / "data" / "replay"
         replay.mkdir(parents=True, exist_ok=True)
@@ -137,6 +141,19 @@ class ValidateRelease(unittest.TestCase):
         shipped_root = Path(__file__).resolve().parents[1]
         shipped_problems, _ = vr.check_dictionary(shipped_root)
         self.assertFalse(any("ir94e level" in p for p in shipped_problems), shipped_problems)
+
+    def test_release_json_must_match_changelog_top_entry(self):
+        self.assertFalse([p for p in self.b.problems() if p.startswith("release:")])
+        release = self.b.root / "site" / "data" / "release.json"
+        release.write_text(json.dumps({"version": "v1.1.1", "date": "2026-09-12", "summary_key": "releaseSummary"}), encoding="utf-8")
+        problems = self.b.problems()
+        self.assertTrue(any("version 'v1.1.1' != CHANGELOG.md top entry 'v1.2.0'" in p for p in problems), problems)
+        release.write_text(json.dumps({"version": "v1.2.0", "date": "2026-09-12", "summary_key": "releaseSummary"}), encoding="utf-8")
+        self.assertTrue(any("date '2026-09-12' != CHANGELOG.md top entry date '2026-09-13'" in p for p in self.b.problems()))
+        release.write_text(json.dumps({"version": "v1.2.0", "date": "2026-09-13", "summary_key": "nope"}), encoding="utf-8")
+        self.assertTrue(any("summary_key 'nope' is not defined" in p for p in self.b.problems()))
+        release.unlink()
+        self.assertTrue(any("release.json missing" in p for p in self.b.problems()))
 
     def test_placeholder_layout_fails(self):
         (self.b.root / "site" / "data" / "neurons.json").write_text(json.dumps({"layout": "placeholder"}), encoding="utf-8")

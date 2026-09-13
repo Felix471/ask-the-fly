@@ -1,0 +1,52 @@
+{
+  "tonic_protocol_version": "0.1",
+  "status": "Phase T draft, 2026-09-12; designed condition, nothing here is calibrated against behaviour",
+  "base_protocol": "data/stim_protocol.json",
+  "inherits": "dt, w_syn, f_poi, duration, n_trials, seed rule, connectivity and completeness files, GRN cell sets (data/cells.json) and the MN9 readout come from base_protocol unchanged",
+  "brake_channel": {
+    "name": "brake",
+    "mechanism": "same as the GRN channels: PoissonInput per cell, N=1, weight=w_syn*f_poi, refractory of driven cells set to 0 while driven (model.py rule via SimNet.set_rates)",
+    "drive_hz": [0, 50, 100, 150],
+    "drive_note": "100 Hz is Tastekin et al. 2026 Fig S17's level for GNG015; their choice, uncalibrated; ours is too. 0 Hz is the reproducibility check against the frozen grid's sugar-only column (bitter, water, ir94e all 0 Hz)."
+  },
+  "brakes": {
+    "buddy": {
+      "cell_type": "CB0806",
+      "shiu_name": "buddy",
+      "ids": [720575940626961241, 720575940618028125, 720575940647010356, 720575940627293540],
+      "source": "docs/tonic_candidates.md rows 4, 5, 14, 15 (all four CB0806 cells, two per side)"
+    },
+    "cb0862": {
+      "cell_type": "CB0862",
+      "ids": [720575940620156209, 720575940611167842],
+      "source": "docs/tonic_candidates.md rows 2 and 7 (left/right pair)"
+    },
+    "cb0465": {
+      "cell_type": "CB0465",
+      "ids": [720575940636809646],
+      "source": "docs/tonic_candidates.md row 1 (right cell only; the strongest single inhibitory input to left MN9)"
+    }
+  },
+  "taste": {
+    "sugar_levels": "all five sugar levels of data/grid_levels.json (none 0, low 60, medium 80, high 120, very_high 200 Hz)",
+    "bitter_hz": 0,
+    "water_hz": 0,
+    "ir94e_hz": 0
+  },
+  "trial": {
+    "n_trials": 30,
+    "seed_rule": "seed = base_seed + trial + 1000 * global_index, global_index = position in (brake, drive, sugar) product order (seed scheme v2, as the grid); results are statistically, not spike-for-spike, comparable with the grid because the stimulus PoissonGroup gains the brake units"
+  },
+  "readouts": [
+    "left and right MN9 rate (base readout)",
+    "mean rate of the brake cells (spikes of the brake ids / n cells / duration)",
+    "latency to the first left-MN9 spike (ms; per trial, summarised as median over trials with a spike, and the count of silent trials)",
+    "rate of the frozen sugar GRN set (sanity: it should follow the sugar drive and not the brake)"
+  ],
+  "replays": {
+    "conditions": "per brake: drive 100 Hz with sugar high, and drive 100 Hz with sugar none",
+    "format": "one extra whole-network trial per condition saved as results/tonic/replays/<cond_id>.npz in the grid replay layout (flywire_id, t_ms, seed, rates); not packed, not shipped",
+    "seed_rule": "base_seed + 700000 + 100000 + global_index (disjoint from grid and grid-replay seeds)"
+  },
+  "results": "results/tonic/ (gitignored); summary in docs/tonic_inhibition.md"
+}
