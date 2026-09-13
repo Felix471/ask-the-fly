@@ -54,7 +54,7 @@ Product copy for provenance: "Scores come from a published female-brain LIF mode
 ## What you see on screen
 
 - **A recorded brain replay.** The dark panel shows 29,326 neurons at their FlyWire soma positions and replays one recorded second of activity for the current taste condition. The flashes are recorded spike times from the Brian2 model, not a live browser simulation.
-- **A fly animation driven by the model's result.** The fly visits each plate, then goes to the option with the strongest mean MN9 response. "Do the opposite" picks the weakest instead. Exact ties stay tied.
+- **A fly animation driven by the model's result.** The fly visits each plate, then lands on the option with the strongest mean MN9 response; that is what the fly does in both modes. "Ask the fly" hands you the fly's pick. "Let the fly eat first" hands you what is left: with two dishes the other one, with more the rest, and the result and share card say so. Exact ties stay tied.
 - **Taste estimates from an LLM, brain responses from the connectome model.** Each dish is assigned sugar, bitter, and water levels by the encoder (`data/dishes.json`). Those levels point to one cell in a precomputed 400-cell lookup table.
 - **Everything is reproducible.** The replay files store the condition, firing levels, seed, commit, and protocol hash. `scripts/run_replay.py` generates them.
 
@@ -200,7 +200,7 @@ English: [README.md](README.md)
 ## 屏幕上看到的是什么
 
 - **一段真实仿真结果的回放。** 深色脑图会按照 FlyWire 的胞体坐标画出 29,326 个神经元，然后播放当前味觉条件下预先记录好的一秒放电。画面里的每一次闪烁，都对应 Brian2 模型实际记录到的 spike；这里展示的是回放，并不是在浏览器里现场跑仿真。
-- **果蝇动画由模型结果来驱动。** 它会挨个去尝每个盘子，最后飞向 MN9 平均反应最强的那一道；如果点“反着来”，就会改选反应最弱的一道。结果完全相同的菜会并列。
+- **果蝇动画由模型结果来驱动。** 它会挨个去尝每个盘子，最后落在 MN9 平均反应最强的那一道上；两种模式里果蝇都是这么做的。“问问果蝇想吃啥”把果蝇选的那道给你；“让果蝇先吃”把剩下的给你：两道菜时是另一道，更多时是余下的全部，结果页和分享卡都会这么写。结果完全相同的菜会并列。
 - **LLM 负责把菜转成味觉输入，连接组模型负责算出脑反应。** 编码器会先估算每道菜的甜、苦、水三个等级（`data/dishes.json`），然后再用这三个等级去查预先算好的 400 格结果表。
 - **这些结果都可以复现。** 每个回放文件里都会保存对应的条件、刺激等级、随机种子、commit 和协议哈希，并由 `scripts/run_replay.py` 统一生成。
 

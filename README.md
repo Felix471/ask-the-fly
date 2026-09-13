@@ -46,7 +46,7 @@ Product copy for provenance: "Scores come from a published female-brain LIF mode
 ## What you see on screen
 
 - **A recorded brain replay.** The dark panel shows 29,326 neurons at their FlyWire soma positions and replays one recorded second of activity for the current taste condition. The flashes are recorded spike times from the Brian2 model, not a live browser simulation.
-- **A fly animation driven by the model's result.** The fly visits each plate, then goes to the option with the strongest mean MN9 response. "Do the opposite" picks the weakest instead. Exact ties stay tied.
+- **A fly animation driven by the model's result.** The fly visits each plate, then lands on the option with the strongest mean MN9 response; that is what the fly does in both modes. "Ask the fly" hands you the fly's pick. "Let the fly eat first" hands you what is left: with two dishes the other one, with more the rest, and the result and share card say so. Exact ties stay tied.
 - **Taste estimates from an LLM, brain responses from the connectome model.** Each dish is assigned sugar, bitter, and water levels by the encoder (`data/dishes.json`). Those levels point to one cell in a precomputed 400-cell lookup table.
 - **Everything is reproducible.** The replay files store the condition, firing levels, seed, commit, and protocol hash. `scripts/run_replay.py` generates them.
 
