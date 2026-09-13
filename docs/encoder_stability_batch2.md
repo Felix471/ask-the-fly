@@ -1,5 +1,7 @@
 # Encoder stability
 
+Historical report for the three-dimension `encode_v2.2` batch (sugar, bitter and water). These measurements and review snapshots are unchanged. The same dishes later received Ir94e (amino-acid aversion) from v2.3; its results are in `docs/encoder_stability_v2_3_batch2.md`, and its provenance is recorded in `encoder_version_by_dimension`.
+
 - Model id: `gemini-3.1-flash-lite`
 - Encoder version: `gemini-3.1-flash-lite@encode_v2.2`
 - Prompt version: `encode_v2.2`

@@ -59,7 +59,7 @@ The MNs sheet labels 720575940660219265 as R and 720575940618238523 as L, matchi
 | MNx05 | 2 | Unknown |
 
 Pharyngeal GRN types with FlyWire IDs: PhG1 8, PhG2 5, PhG3 2, PhG4 4, PhG5 2, PhG6 2, PhG7 5, PhG8 4, PhG9 4, PhG10 2, PhG11 2, PhG12 2, PhG13 2, PhG14 2, PhG15 2, PhG16 2 (50 cells).
-LB3b (sugar + low salt) 25 and LB3d (high salt / heavy metal, glutamatergic) 29 cells have FlyWire IDs, all in v783: the ID lists Phase 1.5 Task E (salt) needs are in the per-set tables below (LB3d appears under the sugar set) and in the table itself.
+LB3b (sugar + low salt) 25 and LB3d (high salt / heavy metal, glutamatergic) 29 cells have FlyWire IDs, all in v783: the ID lists Phase 1.5 salt work needs are in the per-set tables below (LB3d appears under the sugar set) and in the table itself.
 
 
 ## sugar (23 IDs; modality subtypes LB3b + LB3c)
