@@ -5,7 +5,9 @@ that are presynaptic to CB0465 (720575940636809646), ranked by synapses onto CB0
 
 Names the path behind the feed-forward inhibition seen in Phase T (sugar raises CB0465's firing,
 CB0465 is the strongest inhibitory input to left MN9). Connectivity only, no simulation.
-Sign from `Excitatory x Connectivity` as in sim/network.py; synapse count from `Connectivity`.
+Sign from `Excitatory x Connectivity` (Excitatory x Connectivity, one sign per presynaptic neuron) as in
+sim/network.py; synapse count from `Connectivity`. The annotation's top_nt is reported alongside and can
+disagree with that sign (CB0207 is +1 in the table and glutamate in the annotation).
 
   .venv\\Scripts\\python scripts/tonic_ffi_path.py [--target 720575940636809646] [--top 20]
 

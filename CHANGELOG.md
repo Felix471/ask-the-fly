@@ -2,6 +2,14 @@
 
 What a visitor to askthefly.app would notice, newest first. One section per release; the heading is `## vX.Y.Z — YYYY-MM-DD` (the release tag on `main` and its date), and `scripts/validate_release.py` checks that `site/data/release.json` matches the top entry. Each entry ends with a line on whether the README honesty table changed.
 
+## v1.1.2 — 2026-09-12
+
+- The site footer now shows the latest release (version, date, one line) and links to this changelog.
+- The README has a "What's new" section.
+- The honesty table gains a row on tonic inhibition: a designed experiment on the model, not part of the product.
+- No dish's score changed.
+- README honesty table: changed, new tonic-inhibition row.
+
 ## v1.1.1 — 2026-09-12
 
 - The brain view now follows the fly all the way: when it lands on the dish it picks, the brain replay, caption and spike raster switch to that dish instead of staying on the last one tasted.
