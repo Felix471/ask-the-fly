@@ -1,0 +1,480 @@
+{
+  "schema_version": "mn_readout_ids_v1",
+  "source": {
+    "file": "docs/papers/Tastekin_2025_bioRxiv_v2_SupplTable2_GRN_MN_body_IDs.xlsx",
+    "sheet": "MNs",
+    "filter": {
+      "Connectome": "FAFB – Flywire"
+    },
+    "citation": "Tastekin et al., bioRxiv 10.1101/2025.08.25.671814v2, Supplemental table 2; Table S1 of Cell 189 (2026), doi:10.1016/j.cell.2026.08.016. Source workbook is local/gitignored; this is a FlyWire MN-row extract.",
+    "biorxiv_url": "https://www.biorxiv.org/content/10.1101/2025.08.25.671814v2",
+    "sha256": "7b28d5f3ae45d68c510b8a3616700f0df2a5a6f2e2d2dba490d172939f2b64c9",
+    "completeness_file": "vendor/fly-brain/data/2025_Completeness_783.csv",
+    "completeness_sha256": "52b0ac6094cd32c546f8d4c341e094376f48f4e791f8db9b166de5dff8199ea4"
+  },
+  "n_neurons": 66,
+  "neurons": [
+    {
+      "Body_ID": "720575940623415849",
+      "Root_Side": "R",
+      "Type": "MN1",
+      "Target_Muscle": "1",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940629936348",
+      "Root_Side": "R",
+      "Type": "MN1",
+      "Target_Muscle": "1",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940615500030",
+      "Root_Side": "L",
+      "Type": "MN1",
+      "Target_Muscle": "1",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940616340639",
+      "Root_Side": "L",
+      "Type": "MN1",
+      "Target_Muscle": "1",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940645697828",
+      "Root_Side": "R",
+      "Type": "MN2Da",
+      "Target_Muscle": "2D",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940628998659",
+      "Root_Side": "L",
+      "Type": "MN2Da",
+      "Target_Muscle": "2D",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940617403622",
+      "Root_Side": "R",
+      "Type": "MN2Db",
+      "Target_Muscle": "Unknown",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940618600246",
+      "Root_Side": "L",
+      "Type": "MN2Db",
+      "Target_Muscle": "Unknown",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940614734754",
+      "Root_Side": "R",
+      "Type": "MN2V",
+      "Target_Muscle": "2V",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940619682368",
+      "Root_Side": "L",
+      "Type": "MN2V",
+      "Target_Muscle": "2V",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940644726432",
+      "Root_Side": "R",
+      "Type": "MN3M",
+      "Target_Muscle": "3M",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940610679876",
+      "Root_Side": "L",
+      "Type": "MN3M",
+      "Target_Muscle": "3M",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940623993015",
+      "Root_Side": "R",
+      "Type": "MN3L",
+      "Target_Muscle": "3L",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940647474979",
+      "Root_Side": "L",
+      "Type": "MN3L",
+      "Target_Muscle": "3L",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940645528430",
+      "Root_Side": "R",
+      "Type": "MN3L",
+      "Target_Muscle": "3L",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940630580854",
+      "Root_Side": "L",
+      "Type": "MN3L",
+      "Target_Muscle": "3L",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940629561347",
+      "Root_Side": "R",
+      "Type": "MN4a",
+      "Target_Muscle": "4",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940607193986",
+      "Root_Side": "R",
+      "Type": "MN4a",
+      "Target_Muscle": "4",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940614386070",
+      "Root_Side": "L",
+      "Type": "MN4a",
+      "Target_Muscle": "4",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940625612474",
+      "Root_Side": "L",
+      "Type": "MN4a",
+      "Target_Muscle": "4",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940629810748",
+      "Root_Side": "R",
+      "Type": "MN4b",
+      "Target_Muscle": "Unknown",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940630865724",
+      "Root_Side": "L",
+      "Type": "MN4b",
+      "Target_Muscle": "Unknown",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940626939737",
+      "Root_Side": "R",
+      "Type": "MN5",
+      "Target_Muscle": "5",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940623390246",
+      "Root_Side": "L",
+      "Type": "MN5",
+      "Target_Muscle": "5",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940628826128",
+      "Root_Side": "R",
+      "Type": "MN6",
+      "Target_Muscle": "6",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940627410451",
+      "Root_Side": "L",
+      "Type": "MN6",
+      "Target_Muscle": "6",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940626094350",
+      "Root_Side": "R",
+      "Type": "MN7",
+      "Target_Muscle": "7",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940628997123",
+      "Root_Side": "R",
+      "Type": "MN7",
+      "Target_Muscle": "7",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940621586854",
+      "Root_Side": "L",
+      "Type": "MN7",
+      "Target_Muscle": "7",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940633185567",
+      "Root_Side": "L",
+      "Type": "MN7",
+      "Target_Muscle": "7",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940612888178",
+      "Root_Side": "R",
+      "Type": "MN8",
+      "Target_Muscle": "8",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940623352063",
+      "Root_Side": "L",
+      "Type": "MN8",
+      "Target_Muscle": "8",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940660219265",
+      "Root_Side": "R",
+      "Type": "MN9",
+      "Target_Muscle": "9",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940618238523",
+      "Root_Side": "L",
+      "Type": "MN9",
+      "Target_Muscle": "9",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940620025620",
+      "Root_Side": "R",
+      "Type": "MN10",
+      "Target_Muscle": "10",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940622810153",
+      "Root_Side": "L",
+      "Type": "MN10",
+      "Target_Muscle": "10",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940628743752",
+      "Root_Side": "R",
+      "Type": "MN10",
+      "Target_Muscle": "10",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940630868793",
+      "Root_Side": "R",
+      "Type": "MN11D",
+      "Target_Muscle": "11D",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940618165019",
+      "Root_Side": "L",
+      "Type": "MN11D",
+      "Target_Muscle": "11D",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940635360924",
+      "Root_Side": "R",
+      "Type": "MN11V",
+      "Target_Muscle": "11V",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940636165624",
+      "Root_Side": "L",
+      "Type": "MN11V",
+      "Target_Muscle": "11V",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940645527918",
+      "Root_Side": "R",
+      "Type": "MN12D",
+      "Target_Muscle": "12D",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940630233404",
+      "Root_Side": "R",
+      "Type": "MN12D",
+      "Target_Muscle": "12D",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940615197747",
+      "Root_Side": "L",
+      "Type": "MN12D",
+      "Target_Muscle": "12D",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940618539810",
+      "Root_Side": "L",
+      "Type": "MN12D",
+      "Target_Muscle": "12D",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940623137818",
+      "Root_Side": "R",
+      "Type": "MN13",
+      "Target_Muscle": "13",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940633195148",
+      "Root_Side": "L",
+      "Type": "MN13",
+      "Target_Muscle": "13",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940621126384",
+      "Root_Side": "R",
+      "Type": "CEM",
+      "Target_Muscle": "Crop Entry",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940621169690",
+      "Root_Side": "R",
+      "Type": "CEM",
+      "Target_Muscle": "Crop Entry",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940628781333",
+      "Root_Side": "R",
+      "Type": "CEM",
+      "Target_Muscle": "Crop Entry",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940620008112",
+      "Root_Side": "L",
+      "Type": "CEM",
+      "Target_Muscle": "Crop Entry",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940625799513",
+      "Root_Side": "L",
+      "Type": "CEM",
+      "Target_Muscle": "Crop Entry",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940640681680",
+      "Root_Side": "L",
+      "Type": "CEM",
+      "Target_Muscle": "Crop Entry",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940631999080",
+      "Root_Side": "R",
+      "Type": "MNx01",
+      "Target_Muscle": "Unknown",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940632304711",
+      "Root_Side": "R",
+      "Type": "MNx01",
+      "Target_Muscle": "Unknown",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940629778554",
+      "Root_Side": "R",
+      "Type": "MNx01",
+      "Target_Muscle": "Unknown",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940661338497",
+      "Root_Side": "R",
+      "Type": "MNx02",
+      "Target_Muscle": "Unknown",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940632281927",
+      "Root_Side": "L",
+      "Type": "MNx02",
+      "Target_Muscle": "Unknown",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940620553654",
+      "Root_Side": "R",
+      "Type": "MNx03",
+      "Target_Muscle": "Unknown",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940624554170",
+      "Root_Side": "L",
+      "Type": "MNx03",
+      "Target_Muscle": "Unknown",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940646274670",
+      "Root_Side": "L",
+      "Type": "MNx03",
+      "Target_Muscle": "Unknown",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940648804217",
+      "Root_Side": "L",
+      "Type": "MNx03",
+      "Target_Muscle": "Unknown",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940624967612",
+      "Root_Side": "R",
+      "Type": "MNx04",
+      "Target_Muscle": "Unknown",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940613935535",
+      "Root_Side": "L",
+      "Type": "MNx04",
+      "Target_Muscle": "Unknown",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940628096586",
+      "Root_Side": "R",
+      "Type": "MNx05",
+      "Target_Muscle": "Unknown",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940622137633",
+      "Root_Side": "L",
+      "Type": "MNx05",
+      "Target_Muscle": "Unknown",
+      "in_v783": true
+    }
+  ]
+}
