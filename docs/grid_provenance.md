@@ -23,7 +23,7 @@ under v1:
 
 | product | run | batch size | consequence |
 |---|---|---|---|
-| `data/lookup_table.json` (cells_sha256 `bd7c6f61…`), `results/grid/full` | `scripts/run_grid.py --stage full`, 400 cells | 40 (10 batches) | cell *k* used index *k mod 40*: cells 40 apart shared seeds |
+| `data/lookup_table.json` (cells_sha256 `2e08e5f6b3738ce7eb5150b117a0671f561ab8543568e012332ef6c2dc4df15c`), `results/grid/full` | `scripts/run_grid.py --stage full`, 400 cells | 40 (10 batches) | cell *k* used index *k mod 40*: cells 40 apart shared seeds |
 | Phase 0 / Phase 1 / fixed-path recheck | `run_conditions` on the whole condition list | single batch | index = global position (identical to v2) |
 | replay pack (`site/data/replay`) | `scripts/run_replay.py` | n/a | `base_seed + 700000 + global condition index`: unaffected |
 
