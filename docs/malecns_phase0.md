@@ -542,3 +542,13 @@ Interpretation under the unchanged gates: the unscaled brain cut has a five-leve
 Verification:55 male tests,315 existing Python tests,67 Node tests, release validation,82 local report links, generated-report comparison and diff whitespace checks pass.
 
 Checkpoint only: no further variant is selected or run.
+
+## M1h pre-declaration — 2026-09-14
+
+Owner-authorised final structural candidate, declared before substrate selection or simulation. Rationale: Shiu's female-calibrated `w_syn = 0.275 mV` is tested on a male graph matched to the female's mean unsigned synaptic in-degree. This is a density-matching construction, not precision matching or gate optimisation; matching density does not establish biological equivalence. M1g did not identify a precision-matched cutoff, rather than proving that none exists.
+
+Use the full v1.0 `minconf-0.5` partner export, the exact M1f 146,221-neuron roster and endpoint cut (including crossing cells), and the unchanged male sign rule. Keep isolated neurons in the density denominator. Retain contacts only when both pre- and postsynaptic confidence meet `c*`. Choose among stored confidence breakpoints the cutoff minimising absolute distance of the male/female mean unsigned in-degree ratio from 1.00; ties choose the lower cutoff. Require ratio 1.00 ± 0.02. Target is the frozen female 54,492,922 synapses / 138,639 neurons. No model activity or gate data enter this choice. No intermediate `w_syn` is tested.
+
+Before simulation, report full-file URL/size/SHA256, `c*`, graph counts, exact synapses-per-edge histogram, and incoming synapse counts for all 91 input cells and both MN9s versus the same brain cut at 0.5. Flag every loss strictly greater than 50%; a zero baseline is reported separately. Recall at `c*` requires published threshold-calibrated validation, not retained-contact fraction; report unavailable if that calibration cannot be established. **Stop at this substrate checkpoint and await the owner's go.**
+
+After that checkpoint only: one candidate, recurrent0.275 mV, stimulus68.75 mV/event unchanged, remaining protocol unchanged. Gates A–D plus S decide on L10331; R16949 is recorded, not deciding. Same M1 seeds20260910–20260939,420 A–D trials plus60 A′ trials (sugar17 and LB3c12 at120 Hz),480 total. Pass requires A, B, C, D and all S components on10331. No isolated gate repair or additional candidate follows. Whatever the result, append a dated ledger of M1, M1c all/mn9, M1d, M1f unscaled/density and M1h, preserving original rules/results, and close the male line pending replies from Tastekin and the fly-brain-minecraft author; update the memo then. No M1h trials have run.
