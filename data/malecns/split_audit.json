@@ -1,0 +1,25 @@
+{
+  "raw_trials": 480,
+  "MN9_neuron_trials": 960,
+  "M1_Poisson_arrays_identical": 480,
+  "AP_shared_trains_identical": 360,
+  "A200_B0_network_pairs_identical": 30,
+  "rates_latencies_source_counts_network_counts_summaries_gates_AP": "PASS",
+  "sources": [
+    {
+      "path": "data/malecns/split_results.json",
+      "bytes": 14551,
+      "sha256": "a568890688a5b5a059e8d0e2e81ab064950ee9df84e96d6fe728beb69ee88744"
+    },
+    {
+      "path": "data/malecns/runs/m1d/full_results.json",
+      "bytes": 1007751,
+      "sha256": "49d9d3df59f192277ebd69193a0ad94605666a3d9811a4f7afa3b612a460f7aa"
+    },
+    {
+      "path": "sim/malecns/audit_split.py",
+      "bytes": 3871,
+      "sha256": "a7ac138173e1ce5f6b102746d94fb8ff01253f275a4982d5a225476eff94c97d"
+    }
+  ]
+}

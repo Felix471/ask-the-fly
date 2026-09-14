@@ -1,0 +1,31 @@
+{
+  "candidates": {
+    "density_matched": {
+      "raw_trials": 480,
+      "MN9_neuron_trials": 960,
+      "M1_input_arrays_identical": 480,
+      "A200_B0_network_pairs_identical": 30,
+      "AP_shared_trains_identical": 360,
+      "runtime_weight_logs": 8,
+      "raw_stats_gates_AP_source_and_weight_checks": "PASS",
+      "sources": [
+        {
+          "path": "data/malecns/m1h_results.json",
+          "bytes": 18021,
+          "sha256": "a955e955fbd900486f4498294aac8c907434790e2f58ddde5ef35eb433c10003"
+        },
+        {
+          "path": "data/malecns/runs/m1h/density_matched/full_results.json",
+          "bytes": 1019189,
+          "sha256": "8fc6485565af2e065bae821944a366796a6701437d367cfb6bd634a46c56d2d6"
+        }
+      ]
+    }
+  },
+  "cross_candidate_comparison": "Not applicable: one M1h candidate",
+  "auditor": {
+    "path": "sim/malecns/audit_density_matched.py",
+    "bytes": 5201,
+    "sha256": "cf3a0c35d35f9766885fb7a61dee398944916892fa46adbd275c84cb013ff97a"
+  }
+}

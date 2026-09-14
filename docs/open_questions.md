@@ -425,3 +425,51 @@ Nine workers were selected from available RAM with headroom, not copied from
 the female run. All 960 MN9-neuron trials and 2,910 shared input-train
 comparisons were audited. [Audit record](../data/malecns/phase0_audit.json).
 M2 has not run. No female, product or README honesty-table change.
+
+**Pre-M1c tracing check:** [neuPrint male-cns:v1.0](https://neuprint.janelia.org/)
+and the frozen Berg annotation both mark R16949 `status=Traced`,
+`statusLabel=RT Hard to trace`, versus L10331 `Traced` / `Roughly traced`.
+No numerical completeness measure or cropped flag is supplied; absent is unknown.
+The [M1b density audit](malecns_m1b.md) finds **556 versus 6,012 incoming
+synapses** in the retained substrate (not neuPrint's broader post counts).
+Reconstruction incompleteness is therefore a likely cause of the reversal,
+not an established explanation; this remains tentative pending bilateral M1c.
+Tastekin's workbook (`MNs!A66:G67`), Berg's release and the live MN9 query
+name no other MN9-typed body on either side. [Source hashes and extracted
+fields](../data/malecns/rescale_preflight.json). No readout was substituted.
+
+**M1c complete, pre-declared rescaling only:** the two mean-derived weights
+0.1451040891 mV (`all`) and 0.1385035017 mV (`mn9`) each pass historical
+A–D on **L10331 only**; R16949 fails A/B and passes C/D for both.
+All 960 trials (including A′) use M1's seeds and fixed layout, with the
+external Poisson kick still tied to `w_syn*f_poi`. [Bilateral tables,
+network activity, protocols and audit](malecns_phase0.md#m1c--two-pre-declared-rescalings).
+
+The pass has a narrow meaning: L sugar means at 25/50/100/200 Hz are
+0/0/0/8.667 Hz (`all`) and 0/0/0/7.400 Hz (`mn9`); A permits adjacent
+zeros and requires the endpoint >5 Hz. Endpoint SDs are 2.948 and
+2.703 Hz (n=30). This does not establish a graded lower-dose response.
+R is silent throughout, so B's strict endpoint comparison fails (0 < 0
+is false), not a demonstrated reversal of suppression. Both A′ sets at
+120 Hz are silent on both sides, with paired differences 0 ± 0 Hz.
+Both literal baseline-zero and bitter-alone-zero checks pass.
+
+Sugar200 network spikes remain substantial: median [min–max] 299,441.5
+[232,765–333,567] (`all`) and 246,019 [20,982–292,980] (`mn9`), while
+the existing female grid replay has 17,150 (n=1, unpaired). Passing MN9
+gates is not a network-wide normality check. The 556-versus-6,012 input
+asymmetry and tracing labels remain a likely reconstruction explanation,
+**not proven by bilateral M1c**; rescaling does not control reconstruction
+completeness. No primary-readout or candidate selection has been made.
+Stop at M1c; no third weight, M2, female or product change.
+
+**Post-M1c owner decision — 2026-09-14:** the primary male readout is **L10331**, chosen on reconstruction-completeness grounds; **R16949 remains recorded as secondary**. R16949 has 556 retained incoming synapses versus 6,012 for L10331, with neuPrint status labels `RT Hard to trace` versus `Roughly traced`. GNG postsynaptic capture is approximately 35% (35.3665%), an **ROI-wide figure, not either neuron's completeness estimate**. The owner records reconstruction completeness as the most likely explanation for the laterality reversal, not a demonstrated causal result. The cross-brain mapping places both bodies with the female MN9s in CB0701; it does not indicate that Table S1 identified the wrong bodies.
+
+This decision was made **after M1c completed and its results were reported**.
+The completed runs, candidate protocols and original pre-declared stop rule
+remain unchanged: all four gates must pass on at least one side. **Both
+candidates passed under that original rule, on L10331.** This is not a
+retrospective amendment to the run design. Candidate selection is still
+pending; no rerun is performed or authorised by this record.
+[Mapping, tracing and ROI-capture evidence](malecns_m1b.md#additional-mapping-and-roi-capture-check);
+[dated report decision](malecns_phase0.md#post-m1c-decision--2026-09-14).

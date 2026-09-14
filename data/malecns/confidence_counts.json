@@ -1,0 +1,153 @@
+{
+  "scope": "Read-only counts, no substrate export or simulation; illustrative cutoffs, not candidates.",
+  "rule": "Both conf_pre and conf_post >= cutoff; same M0 roster and M1f brain endpoint mask; retain isolated neurons.",
+  "source": {
+    "path": "data/malecns/downloads/syn-partners-male-cns-v1.0-minconf-0.5-traced-only.feather",
+    "bytes": 2965367002,
+    "sha256": "3db100d3b4c7cfdc9b34506b3eb8b5ead2d9760b38952e5656285bb362327efc"
+  },
+  "source_url": "https://storage.googleapis.com/flyem-male-cns/v1.0/connectome-data/flat-connectome/syn-partners-male-cns-v1.0-minconf-0.5-traced-only.feather",
+  "raw_rows": 124025046,
+  "baseline_full_graph_equality": "FAIL: traced-only export is smaller than original roster graph",
+  "retained_edge_weights_match_original": "PASS",
+  "omissions": {
+    "whole": {
+      "edges": 24267,
+      "synapses": 167724
+    },
+    "brain": {
+      "edges": 16873,
+      "synapses": 141179
+    }
+  },
+  "rows": [
+    {
+      "cutoff": 0.5,
+      "whole": {
+        "neurons": 166700,
+        "edges_lower": 25558671,
+        "edges_upper": 25582938,
+        "synapses_lower": 124009893,
+        "synapses_upper": 124177617,
+        "density_ratio_lower": 1.8926314564320112,
+        "density_ratio_upper": 1.8951912499349262
+      },
+      "brain": {
+        "neurons": 146221,
+        "edges_lower": 21868062,
+        "edges_upper": 21884935,
+        "synapses_lower": 101079336,
+        "synapses_upper": 101220515,
+        "density_ratio_lower": 1.7587250592138193,
+        "density_ratio_upper": 1.761181496453719
+      }
+    },
+    {
+      "cutoff": 0.6,
+      "whole": {
+        "neurons": 166700,
+        "edges_lower": 24377901,
+        "edges_upper": 24402168,
+        "synapses_lower": 116630527,
+        "synapses_upper": 116798251,
+        "density_ratio_lower": 1.7800080206539894,
+        "density_ratio_upper": 1.7825678141569044
+      },
+      "brain": {
+        "neurons": 146221,
+        "edges_lower": 20847267,
+        "edges_upper": 20864140,
+        "synapses_lower": 94920838,
+        "synapses_upper": 95062017,
+        "density_ratio_lower": 1.6515705686093478,
+        "density_ratio_upper": 1.6540270058492479
+      }
+    },
+    {
+      "cutoff": 0.7,
+      "whole": {
+        "neurons": 166700,
+        "edges_lower": 22989061,
+        "edges_upper": 23013328,
+        "synapses_lower": 106194417,
+        "synapses_upper": 106362141,
+        "density_ratio_lower": 1.6207327435695662,
+        "density_ratio_upper": 1.6232925370724811
+      },
+      "brain": {
+        "neurons": 146221,
+        "edges_lower": 19653247,
+        "edges_upper": 19670120,
+        "synapses_lower": 86240752,
+        "synapses_upper": 86381931,
+        "density_ratio_lower": 1.500541828528081,
+        "density_ratio_upper": 1.502998265767981
+      }
+    },
+    {
+      "cutoff": 0.8,
+      "whole": {
+        "neurons": 166700,
+        "edges_lower": 20499435,
+        "edges_upper": 20523702,
+        "synapses_lower": 86789187,
+        "synapses_upper": 86956911,
+        "density_ratio_lower": 1.3245713016973588,
+        "density_ratio_upper": 1.3271310952002737
+      },
+      "brain": {
+        "neurons": 146221,
+        "edges_lower": 17540309,
+        "edges_upper": 17557182,
+        "synapses_lower": 70516254,
+        "synapses_upper": 70657433,
+        "density_ratio_lower": 1.2269441796856155,
+        "density_ratio_upper": 1.2294006169255154
+      }
+    },
+    {
+      "cutoff": 0.9,
+      "whole": {
+        "neurons": 166700,
+        "edges_lower": 16652838,
+        "edges_upper": 16677105,
+        "synapses_lower": 60860177,
+        "synapses_upper": 61027901,
+        "density_ratio_lower": 0.9288443256234403,
+        "density_ratio_upper": 0.9314041191263555
+      },
+      "brain": {
+        "neurons": 146221,
+        "edges_lower": 14272685,
+        "edges_upper": 14289558,
+        "synapses_lower": 49610485,
+        "synapses_upper": 49751664,
+        "density_ratio_lower": 0.8631952545597578,
+        "density_ratio_upper": 0.8656516917996576
+      }
+    }
+  ],
+  "sources": [
+    {
+      "path": "data/malecns/derived/neuron_index.csv",
+      "bytes": 27521575,
+      "sha256": "a5727228e839339f8045f8a431f02b4900aed40109684fa7e6ed2f21a620cbe9"
+    },
+    {
+      "path": "data/malecns/derived/brain/neuron_index.csv",
+      "bytes": 23842803,
+      "sha256": "704f99379279b1437bc90ca48a35d1a9a9c20edb1fb85a66ac837df007bf1e47"
+    },
+    {
+      "path": "data/malecns/derived/connectivity.parquet",
+      "bytes": 136299562,
+      "sha256": "b31ae9884cba41fedac392e4c80bada5c0c8a33efb9258b0e7308a1bbcbfa6f3"
+    }
+  ],
+  "wall_seconds": 32.17493069998454,
+  "code": {
+    "path": "sim/malecns/confidence_counts.py",
+    "bytes": 4970,
+    "sha256": "59efa48a91a24dd8ea917d1330557e5539b55aed0cb8650cdb14b07fa82c5f07"
+  }
+}

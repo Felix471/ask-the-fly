@@ -1,0 +1,14 @@
+{
+  "edges_compared": 21884935,
+  "neuron_ids_signs_indices_edges_counts": "PASS",
+  "source": {
+    "path": "data/malecns/substrate_record_brain.json",
+    "bytes": 5689,
+    "sha256": "0420688e48b7dc706c1b72621b427ac3d0ee3017b07daa38c8c875bf103b5b66"
+  },
+  "auditor": {
+    "path": "sim/malecns/audit_brain.py",
+    "bytes": 7387,
+    "sha256": "8151bdde320afea1cad95da543712261c8023b197a57b398ace81c7969fec024"
+  }
+}

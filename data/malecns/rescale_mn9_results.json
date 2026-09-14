@@ -1,0 +1,570 @@
+{
+  "conditions": [
+    {
+      "id": "A_s25_b0",
+      "gate": "A",
+      "sugar_hz": 25,
+      "bitter_hz": 0,
+      "sugar_set": "sugar",
+      "n_trials": 30,
+      "R_mean": 0.0,
+      "R_sd": 0.0,
+      "R_latency_median_ms": null,
+      "R_firing_trials": 0,
+      "L_mean": 0.0,
+      "L_sd": 0.0,
+      "L_latency_median_ms": null,
+      "L_firing_trials": 0,
+      "whole_network_spikes": {
+        "median": 462.0,
+        "min": 426,
+        "max": 515
+      },
+      "neurons_fired": {
+        "median": 23.0,
+        "min": 22,
+        "max": 25
+      }
+    },
+    {
+      "id": "A_s50_b0",
+      "gate": "A",
+      "sugar_hz": 50,
+      "bitter_hz": 0,
+      "sugar_set": "sugar",
+      "n_trials": 30,
+      "R_mean": 0.0,
+      "R_sd": 0.0,
+      "R_latency_median_ms": null,
+      "R_firing_trials": 0,
+      "L_mean": 0.0,
+      "L_sd": 0.0,
+      "L_latency_median_ms": null,
+      "L_firing_trials": 0,
+      "whole_network_spikes": {
+        "median": 1059.5,
+        "min": 1005,
+        "max": 1225
+      },
+      "neurons_fired": {
+        "median": 41.5,
+        "min": 30,
+        "max": 50
+      }
+    },
+    {
+      "id": "A_s100_b0",
+      "gate": "A",
+      "sugar_hz": 100,
+      "bitter_hz": 0,
+      "sugar_set": "sugar",
+      "n_trials": 30,
+      "R_mean": 0.0,
+      "R_sd": 0.0,
+      "R_latency_median_ms": null,
+      "R_firing_trials": 0,
+      "L_mean": 0.0,
+      "L_sd": 0.0,
+      "L_latency_median_ms": null,
+      "L_firing_trials": 0,
+      "whole_network_spikes": {
+        "median": 2640.0,
+        "min": 2397,
+        "max": 2808
+      },
+      "neurons_fired": {
+        "median": 64.0,
+        "min": 58,
+        "max": 81
+      }
+    },
+    {
+      "id": "A_s200_b0",
+      "gate": "A",
+      "sugar_hz": 200,
+      "bitter_hz": 0,
+      "sugar_set": "sugar",
+      "n_trials": 30,
+      "R_mean": 0.0,
+      "R_sd": 0.0,
+      "R_latency_median_ms": null,
+      "R_firing_trials": 0,
+      "L_mean": 7.4,
+      "L_sd": 2.7030846576951055,
+      "L_latency_median_ms": 325.6,
+      "L_firing_trials": 29,
+      "whole_network_spikes": {
+        "median": 246019.0,
+        "min": 20982,
+        "max": 292980
+      },
+      "neurons_fired": {
+        "median": 6399.5,
+        "min": 4684,
+        "max": 6524
+      }
+    },
+    {
+      "id": "B_s200_b0",
+      "gate": "B",
+      "sugar_hz": 200,
+      "bitter_hz": 0,
+      "sugar_set": "sugar",
+      "n_trials": 30,
+      "R_mean": 0.0,
+      "R_sd": 0.0,
+      "R_latency_median_ms": null,
+      "R_firing_trials": 0,
+      "L_mean": 7.4,
+      "L_sd": 2.7030846576951055,
+      "L_latency_median_ms": 325.6,
+      "L_firing_trials": 29,
+      "whole_network_spikes": {
+        "median": 246019.0,
+        "min": 20982,
+        "max": 292980
+      },
+      "neurons_fired": {
+        "median": 6399.5,
+        "min": 4684,
+        "max": 6524
+      }
+    },
+    {
+      "id": "B_s200_b25",
+      "gate": "B",
+      "sugar_hz": 200,
+      "bitter_hz": 25,
+      "sugar_set": "sugar",
+      "n_trials": 30,
+      "R_mean": 0.0,
+      "R_sd": 0.0,
+      "R_latency_median_ms": null,
+      "R_firing_trials": 0,
+      "L_mean": 0.03333333333333333,
+      "L_sd": 0.1795054935711501,
+      "L_latency_median_ms": 966.4000000000001,
+      "L_firing_trials": 1,
+      "whole_network_spikes": {
+        "median": 85972.5,
+        "min": 10039,
+        "max": 296751
+      },
+      "neurons_fired": {
+        "median": 6283.5,
+        "min": 323,
+        "max": 6620
+      }
+    },
+    {
+      "id": "B_s200_b50",
+      "gate": "B",
+      "sugar_hz": 200,
+      "bitter_hz": 50,
+      "sugar_set": "sugar",
+      "n_trials": 30,
+      "R_mean": 0.0,
+      "R_sd": 0.0,
+      "R_latency_median_ms": null,
+      "R_firing_trials": 0,
+      "L_mean": 0.0,
+      "L_sd": 0.0,
+      "L_latency_median_ms": null,
+      "L_firing_trials": 0,
+      "whole_network_spikes": {
+        "median": 13286.0,
+        "min": 12825,
+        "max": 298101
+      },
+      "neurons_fired": {
+        "median": 400.0,
+        "min": 361,
+        "max": 6545
+      }
+    },
+    {
+      "id": "B_s200_b100",
+      "gate": "B",
+      "sugar_hz": 200,
+      "bitter_hz": 100,
+      "sugar_set": "sugar",
+      "n_trials": 30,
+      "R_mean": 0.0,
+      "R_sd": 0.0,
+      "R_latency_median_ms": null,
+      "R_firing_trials": 0,
+      "L_mean": 0.0,
+      "L_sd": 0.0,
+      "L_latency_median_ms": null,
+      "L_firing_trials": 0,
+      "whole_network_spikes": {
+        "median": 18957.5,
+        "min": 17803,
+        "max": 302837
+      },
+      "neurons_fired": {
+        "median": 554.5,
+        "min": 478,
+        "max": 6631
+      }
+    },
+    {
+      "id": "B_s200_b200",
+      "gate": "B",
+      "sugar_hz": 200,
+      "bitter_hz": 200,
+      "sugar_set": "sugar",
+      "n_trials": 30,
+      "R_mean": 0.0,
+      "R_sd": 0.0,
+      "R_latency_median_ms": null,
+      "R_firing_trials": 0,
+      "L_mean": 0.0,
+      "L_sd": 0.0,
+      "L_latency_median_ms": null,
+      "L_firing_trials": 0,
+      "whole_network_spikes": {
+        "median": 130049.5,
+        "min": 28699,
+        "max": 315481
+      },
+      "neurons_fired": {
+        "median": 6521.5,
+        "min": 656,
+        "max": 6823
+      }
+    },
+    {
+      "id": "C_s0_b25",
+      "gate": "C",
+      "sugar_hz": 0,
+      "bitter_hz": 25,
+      "sugar_set": "sugar",
+      "n_trials": 30,
+      "R_mean": 0.0,
+      "R_sd": 0.0,
+      "R_latency_median_ms": null,
+      "R_firing_trials": 0,
+      "L_mean": 0.0,
+      "L_sd": 0.0,
+      "L_latency_median_ms": null,
+      "L_firing_trials": 0,
+      "whole_network_spikes": {
+        "median": 5119.0,
+        "min": 4738,
+        "max": 5459
+      },
+      "neurons_fired": {
+        "median": 245.5,
+        "min": 221,
+        "max": 266
+      }
+    },
+    {
+      "id": "C_s0_b50",
+      "gate": "C",
+      "sugar_hz": 0,
+      "bitter_hz": 50,
+      "sugar_set": "sugar",
+      "n_trials": 30,
+      "R_mean": 0.0,
+      "R_sd": 0.0,
+      "R_latency_median_ms": null,
+      "R_firing_trials": 0,
+      "L_mean": 0.0,
+      "L_sd": 0.0,
+      "L_latency_median_ms": null,
+      "L_firing_trials": 0,
+      "whole_network_spikes": {
+        "median": 8184.0,
+        "min": 7691,
+        "max": 8604
+      },
+      "neurons_fired": {
+        "median": 296.5,
+        "min": 264,
+        "max": 313
+      }
+    },
+    {
+      "id": "C_s0_b100",
+      "gate": "C",
+      "sugar_hz": 0,
+      "bitter_hz": 100,
+      "sugar_set": "sugar",
+      "n_trials": 30,
+      "R_mean": 0.0,
+      "R_sd": 0.0,
+      "R_latency_median_ms": null,
+      "R_firing_trials": 0,
+      "L_mean": 0.0,
+      "L_sd": 0.0,
+      "L_latency_median_ms": null,
+      "L_firing_trials": 0,
+      "whole_network_spikes": {
+        "median": 13642.5,
+        "min": 12951,
+        "max": 15124
+      },
+      "neurons_fired": {
+        "median": 437.5,
+        "min": 377,
+        "max": 488
+      }
+    },
+    {
+      "id": "C_s0_b200",
+      "gate": "C",
+      "sugar_hz": 0,
+      "bitter_hz": 200,
+      "sugar_set": "sugar",
+      "n_trials": 30,
+      "R_mean": 0.0,
+      "R_sd": 0.0,
+      "R_latency_median_ms": null,
+      "R_firing_trials": 0,
+      "L_mean": 0.0,
+      "L_sd": 0.0,
+      "L_latency_median_ms": null,
+      "L_firing_trials": 0,
+      "whole_network_spikes": {
+        "median": 24799.0,
+        "min": 23943,
+        "max": 25887
+      },
+      "neurons_fired": {
+        "median": 598.0,
+        "min": 544,
+        "max": 624
+      }
+    },
+    {
+      "id": "D_s0_b0",
+      "gate": "D",
+      "sugar_hz": 0,
+      "bitter_hz": 0,
+      "sugar_set": "sugar",
+      "n_trials": 30,
+      "R_mean": 0.0,
+      "R_sd": 0.0,
+      "R_latency_median_ms": null,
+      "R_firing_trials": 0,
+      "L_mean": 0.0,
+      "L_sd": 0.0,
+      "L_latency_median_ms": null,
+      "L_firing_trials": 0,
+      "whole_network_spikes": {
+        "median": 0.0,
+        "min": 0,
+        "max": 0
+      },
+      "neurons_fired": {
+        "median": 0.0,
+        "min": 0,
+        "max": 0
+      }
+    },
+    {
+      "id": "AP_sugar_120",
+      "gate": "AP",
+      "sugar_hz": 120,
+      "bitter_hz": 0,
+      "sugar_set": "sugar",
+      "n_trials": 30,
+      "R_mean": 0.0,
+      "R_sd": 0.0,
+      "R_latency_median_ms": null,
+      "R_firing_trials": 0,
+      "L_mean": 0.0,
+      "L_sd": 0.0,
+      "L_latency_median_ms": null,
+      "L_firing_trials": 0,
+      "whole_network_spikes": {
+        "median": 3276.0,
+        "min": 3037,
+        "max": 3457
+      },
+      "neurons_fired": {
+        "median": 70.0,
+        "min": 64,
+        "max": 89
+      }
+    },
+    {
+      "id": "AP_sugar_lb3c_120",
+      "gate": "AP",
+      "sugar_hz": 120,
+      "bitter_hz": 0,
+      "sugar_set": "sugar_lb3c",
+      "n_trials": 30,
+      "R_mean": 0.0,
+      "R_sd": 0.0,
+      "R_latency_median_ms": null,
+      "R_firing_trials": 0,
+      "L_mean": 0.0,
+      "L_sd": 0.0,
+      "L_latency_median_ms": null,
+      "L_firing_trials": 0,
+      "whole_network_spikes": {
+        "median": 2485.0,
+        "min": 2287,
+        "max": 2679
+      },
+      "neurons_fired": {
+        "median": 67.0,
+        "min": 51,
+        "max": 85
+      }
+    }
+  ],
+  "gates": {
+    "R": {
+      "A": false,
+      "B": false,
+      "C": true,
+      "D": true,
+      "D_literal_zero": true,
+      "C_literal_zero": true,
+      "A_threshold_hz": 5.0,
+      "C_limit_hz": 1.0,
+      "bitter200_suppression_fraction": null,
+      "overall": false
+    },
+    "L": {
+      "A": true,
+      "B": true,
+      "C": true,
+      "D": true,
+      "D_literal_zero": true,
+      "C_literal_zero": true,
+      "A_threshold_hz": 5.0,
+      "C_limit_hz": 1.0,
+      "bitter200_suppression_fraction": 1.0,
+      "overall": true
+    }
+  },
+  "a_prime": {
+    "R": {
+      "difference_definition": "LB3c12 minus sugar17, paired by seed",
+      "mean_hz": 0.0,
+      "sd_hz": 0.0,
+      "lower_trials": 0,
+      "equal_trials": 30,
+      "higher_trials": 0
+    },
+    "L": {
+      "difference_definition": "LB3c12 minus sugar17, paired by seed",
+      "mean_hz": 0.0,
+      "sd_hz": 0.0,
+      "lower_trials": 0,
+      "equal_trials": 30,
+      "higher_trials": 0
+    }
+  },
+  "metadata": {
+    "stage": "M1c",
+    "candidate": "mn9",
+    "started_utc": "2026-09-14T08:39:18.265915+00:00",
+    "git_commit": "92d8be5b56c5fdaab6336dea82344a57d0c12031",
+    "plan": {
+      "path": "data/malecns/rescale_plan.json",
+      "bytes": 5945,
+      "sha256": "17c6d34f29be7a1040ea83c3e58a4bf63c64299542c85003eefc22eed71ae0c0"
+    },
+    "protocol": {
+      "path": "data/malecns/stim_protocol_malecns_mn9.json",
+      "bytes": 6761,
+      "sha256": "afe2f86f3ec2de79bd642f0bf0bae74f54eb3855401a7ed95adc2b7f1c1bfe0d"
+    },
+    "python": "3.10.21 | packaged by conda-forge | (main, Aug 21 2026, 22:42:31) [GCC 14.4.0]",
+    "brian2": "2.9.0",
+    "codegen": "cython",
+    "memory": {
+      "workers": 8,
+      "wsl_available_gib": 60.58198547363281,
+      "host_free_gib": 85.3429183959961,
+      "limiting_available_gib": 60.58198547363281,
+      "reserve_gib": 15.145496368408203,
+      "worker_budget_gib": 5.4,
+      "cpus": 32,
+      "rule": "min(16 conditions, logical_cpus//2, floor((min(WSL available, host free)-max(8GiB,25%))/ceil(1.5*M1 peak to 0.1GiB)))",
+      "measured_m1_peak_gib": 3.5776214599609375
+    },
+    "sources": [
+      {
+        "path": "sim/malecns/rescale.py",
+        "bytes": 10826,
+        "sha256": "f07a7ffd4bc4cda53653b943e68ec00dc86247e29e5abf77dce663bc95c2f24f"
+      },
+      {
+        "path": "sim/malecns/phase0.py",
+        "bytes": 13472,
+        "sha256": "f6342a04adec37ed011d6aa9481ae7d044509fa33761ad23dfa92acfe4c43267"
+      },
+      {
+        "path": "sim/malecns/adapter.py",
+        "bytes": 2112,
+        "sha256": "e438f86a33d1dab4290333cd3e5e13f77d5dc8344d10726bda4cbb0cea6b0d7a"
+      },
+      {
+        "path": "sim/malecns/substrate.py",
+        "bytes": 16531,
+        "sha256": "1b6c7bd7122f9ad8a3d43aa87365c5b147d55d66067abcc4e7dce6fdcc63cac6"
+      },
+      {
+        "path": "sim/network.py",
+        "bytes": 9535,
+        "sha256": "eee33ef855203a47e03920b56b4aba98551cc400ab22107ebb91edc385475ae7"
+      },
+      {
+        "path": "data/stim_protocol.json",
+        "bytes": 3484,
+        "sha256": "9f9495033281bfcd6f3b373551817987deb2cc083ae94ab61fece9065102d82a"
+      },
+      {
+        "path": "data/malecns/stim_protocol_malecns.json",
+        "bytes": 5142,
+        "sha256": "88a36bb624b4c304759f5178826248b92a699fcb56751b894b347e21ce673173"
+      },
+      {
+        "path": "data/malecns/cells.json",
+        "bytes": 20697,
+        "sha256": "f29dd1511e5484d70062cf44d448acfa63e8ef89b49ab7cc281108e5be234c99"
+      },
+      {
+        "path": "data/malecns/substrate_record.json",
+        "bytes": 6763,
+        "sha256": "95c6a973217ac793fe5d3d02b813d890f0ba7620d123c647587518d40868582f"
+      },
+      {
+        "path": "data/malecns/m1b_diagnosis.json",
+        "bytes": 99564,
+        "sha256": "62fb9e4a5f358e6addc9c374b7401fd4bafbd7cdf003b6d904abb2d516e847d0"
+      },
+      {
+        "path": "data/malecns/rescale_preflight.json",
+        "bytes": 7106,
+        "sha256": "c2a300b31d20c3dfd1c6a829e2e2f5515974154870b85358c45af6ec00452c51"
+      },
+      {
+        "path": "data/malecns/stim_protocol_malecns_all.json",
+        "bytes": 6655,
+        "sha256": "0af82a5e3f6b6e3141f84fda5f07d2b13a8a6fc8b47c633c24dfaca0731dbb42"
+      },
+      {
+        "path": "data/malecns/stim_protocol_malecns_mn9.json",
+        "bytes": 6761,
+        "sha256": "afe2f86f3ec2de79bd642f0bf0bae74f54eb3855401a7ed95adc2b7f1c1bfe0d"
+      }
+    ],
+    "completed_utc": "2026-09-14T08:45:03.263267+00:00",
+    "walltime_s": 344.99737128099997,
+    "total_trials": 480,
+    "peak_worker_rss_gib": 3.339183807373047
+  },
+  "raw_ledger": {
+    "path": "data/malecns/runs/m1c/mn9/full_results.json",
+    "bytes": 1008773,
+    "sha256": "1f36a12c76f172867f2f817c1ac38fe6e7087db0b96dec8e73cec3989abe26ab"
+  }
+}
