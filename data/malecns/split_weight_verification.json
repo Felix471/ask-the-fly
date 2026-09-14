@@ -1,0 +1,57 @@
+{
+  "scope": "Post-run reconstruction of frozen construction and restore; no historical runtime weight dump existed; no new positive-duration run.",
+  "sources": [
+    {
+      "path": "data/malecns/stim_protocol_malecns_split.json",
+      "bytes": 7821,
+      "sha256": "f669963f1babb177df66f03d77427d4ed6541d21d9265dfcb653ffd631821a34"
+    },
+    {
+      "path": "data/malecns/split_plan.json",
+      "bytes": 5674,
+      "sha256": "0eaf67c0d6acc38f7508ebb858755c4c09ddc36a2557dc72ad332bf87203322f"
+    },
+    {
+      "path": "data/malecns/split_results.json",
+      "bytes": 14551,
+      "sha256": "a568890688a5b5a059e8d0e2e81ab064950ee9df84e96d6fe728beb69ee88744"
+    },
+    {
+      "path": "data/malecns/rescale_all_results.json",
+      "bytes": 13892,
+      "sha256": "aa3ff62d2c1a3ac25bfc549c07a6df9d69df76c1f832a0b8b508360fcdc8de95"
+    }
+  ],
+  "observed_weights": [
+    {
+      "state": "constructed",
+      "stimulus_mV_min": 68.75,
+      "stimulus_mV_max": 68.75,
+      "recurrent_mV_per_signed_count_min": 0.14510408910416955,
+      "recurrent_mV_per_signed_count_max": 0.1451040891041696
+    },
+    {
+      "state": "restored",
+      "stimulus_mV_min": 68.75,
+      "stimulus_mV_max": 68.75,
+      "recurrent_mV_per_signed_count_min": 0.14510408910416955,
+      "recurrent_mV_per_signed_count_max": 0.1451040891041696
+    }
+  ],
+  "historical_M1c_all_external_kick_mV": 36.2760222760424,
+  "exact_whole_network_and_input_trial_pairs": 480,
+  "driven_cell_trials": 14580,
+  "equal_input_output_counts": 4109,
+  "event_plus_dt_exact_driven_trains": 3800,
+  "simulation_trials": 0,
+  "full_ledger": {
+    "path": "data/malecns/runs/m1d/split_weight_verification_full.json",
+    "bytes": 1375778,
+    "sha256": "2a391549088c01513ce2b798155acbcac193369e1f7f098ca8f6b5b5a9c8afbb"
+  },
+  "M1c_all_protocol": "data/malecns/stim_protocol_malecns_all.json",
+  "exception_summary": {
+    "more_spikes_than_events": 4665,
+    "fewer_spikes_than_events": 5786
+  }
+}

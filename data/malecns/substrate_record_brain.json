@@ -1,0 +1,137 @@
+{
+  "stage": "M1f",
+  "built_utc": "2026-09-14T18:25:04.572922+00:00",
+  "structural_rationale": "Female FlyWire contains no VNC and Shiu parameters were calibrated brain-only. A male brain-only endpoint cut is a structural substrate comparison, not a fitted weight. Hypnagogia reports about80Hz male MN9 at200Hz with brain-only scope and0.581 count scaling; that different design motivates testing scope but does not set our weight or prove equivalence.",
+  "scope": "Brain-only endpoint approximation, retaining crossing neurons",
+  "cut": "Original superclass-nonnull roster; drop vnc_* and ENS, retain every other class including ascending/descending; no new status filter.",
+  "synapse_location": "Unavailable in aggregate weights (only body_pre/body_post/weight). No partner-file download. Remove edges incident on any dropped body; retain all counts between retained bodies. VNC-local contacts between retained crossing bodies remain; brain contacts on removed bodies are also lost.",
+  "hypnagogia": {
+    "source": "https://github.com/ankthba/hypnagogia/blob/86da5f93e25a2f1ac78c2fa810f34a4a57992b66/src/hypnagogia/connectome.py#L342-L371",
+    "same": "drop vnc_* and ENS; retain crossing cells; endpoint rather than synapse-location cut",
+    "different": "They additionally require status Traced, report144209neurons, use histamine negative/DPM correction/gradedAPL and0.581scaling. We retain original roster/sign rule and compute r_brain, not adopt0.581."
+  },
+  "counts": {
+    "neurons": 146221,
+    "edges": 21884935,
+    "synapses": 101220515,
+    "removed_neurons": 20479,
+    "removed_edges": 3698003,
+    "removed_synapses": 22957102,
+    "retained_superclasses": {
+      "ol_intrinsic": 89403,
+      "cb_intrinsic": 32164,
+      "visual_projection": 9201,
+      "ol_sensory": 6098,
+      "cb_sensory": 4868,
+      "ascending_neuron": 1846,
+      "descending_neuron": 1314,
+      "visual_centrifugal": 563,
+      "sensory_ascending": 537,
+      "cb_motor": 107,
+      "cb_endocrine": 72,
+      "cb_sensory_tbc": 14,
+      "sensory_descending": 12,
+      "efferent_ascending": 8,
+      "efferent_descending": 4,
+      "cb_efferent": 4,
+      "visual_projection_tbc": 2,
+      "sensory_ascending_tbc": 2,
+      "descending_neuron_tbc": 2
+    },
+    "dropped_superclasses": {
+      "vnc_intrinsic": 13161,
+      "vnc_sensory": 6370,
+      "vnc_motor": 708,
+      "vnc_efferent": 94,
+      "ENS": 50,
+      "vnc_tbc": 38,
+      "vnc_sensory_tbc": 36,
+      "vnc_endocrine": 22
+    },
+    "positive_neurons": 102610,
+    "negative_neurons": 43611,
+    "default_positive_neurons": 1862
+  },
+  "density": {
+    "definition": "Mean unsigned incoming synapse counts over every retained neuron, including isolated; female frozen roster denominator.",
+    "male_mean": 692.2433508182819,
+    "male_median": 336.0,
+    "female_neurons": 138639,
+    "female_synapses": 54492922,
+    "female_mean": 393.05622516030843,
+    "female_median": 198.0,
+    "r_brain": 1.761181496453719,
+    "r_all": 1.8951912499349262,
+    "scaled_w_syn_rec_mV": 0.1561451789913389
+  },
+  "sign_rule": {
+    "column": "consensus_nt (neuPrint consensusNt)",
+    "join": "bodyId = body",
+    "negative": [
+      "gaba",
+      "glutamate"
+    ],
+    "positive": "all other consensus labels",
+    "default_positive": [
+      "unclear",
+      "missing"
+    ],
+    "authority": "Owner decision; Tastekin GABA/glutamate negative, otherwise positive"
+  },
+  "sources": [
+    {
+      "path": "data/malecns/substrate_record.json",
+      "bytes": 6763,
+      "sha256": "95c6a973217ac793fe5d3d02b813d890f0ba7620d123c647587518d40868582f"
+    },
+    {
+      "path": "data/malecns/derived/connectivity.parquet",
+      "bytes": 136299562,
+      "sha256": "b31ae9884cba41fedac392e4c80bada5c0c8a33efb9258b0e7308a1bbcbfa6f3"
+    },
+    {
+      "path": "data/malecns/downloads/body-annotations-male-cns-v1.0-minconf-0.5.feather",
+      "bytes": 14483314,
+      "sha256": "2177e246113e4cfbf1e7772ec37c6da1955ff22e8063d0b1f833101f99a9a3b2",
+      "url": "https://storage.googleapis.com/flyem-male-cns/v1.0/connectome-data/flat-connectome/body-annotations-male-cns-v1.0-minconf-0.5.feather"
+    },
+    {
+      "path": "data/malecns/downloads/body-neurotransmitters-male-cns-v1.0.feather",
+      "bytes": 43282834,
+      "sha256": "95c9289220663abeb3409f3ad9e5a7f8a53f8093f5139d15502cd08da8879621",
+      "url": "https://storage.googleapis.com/flyem-male-cns/v1.0/connectome-data/flat-connectome/body-neurotransmitters-male-cns-v1.0.feather"
+    },
+    {
+      "path": "vendor/fly-brain/data/2025_Connectivity_783.parquet",
+      "bytes": 100804642,
+      "sha256": "efeb23fb99098e9c390f6869969b2a121a2ee92c833cfc45ecb2c1d8e1af0347"
+    },
+    {
+      "path": "vendor/fly-brain/data/2025_Completeness_783.csv",
+      "bytes": 3465987,
+      "sha256": "52b0ac6094cd32c546f8d4c341e094376f48f4e791f8db9b166de5dff8199ea4"
+    }
+  ],
+  "builder": {
+    "path": "sim/malecns/brain_substrate.py",
+    "bytes": 6966,
+    "sha256": "bdba57cb5ac558aebfae59fd0e5a57e32d8daa3b56cc069ed341a3d06f0e696b"
+  },
+  "artifacts": {
+    "neuron_index.csv": {
+      "path": "data/malecns/derived/brain/neuron_index.csv",
+      "bytes": 23842803,
+      "sha256": "704f99379279b1437bc90ca48a35d1a9a9c20edb1fb85a66ac837df007bf1e47"
+    },
+    "completeness.csv": {
+      "path": "data/malecns/derived/brain/completeness.csv",
+      "bytes": 951648,
+      "sha256": "c3b0048a2cfd71b99bcb54747031a8260bf4a05253143bfc1b04ef5a78d404a3"
+    },
+    "connectivity.parquet": {
+      "path": "data/malecns/derived/brain/connectivity.parquet",
+      "bytes": 85739862,
+      "sha256": "7b59f3f015bbdb3e7ac08876a7e48ff17a31ba3f35c183fe12bc47ee6e850cb4"
+    }
+  }
+}
