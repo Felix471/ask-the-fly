@@ -123,6 +123,29 @@ Sources: [neuPrint male-cns:v1.0](https://neuprint.janelia.org/), [release annot
 
 Neither record provides a numerical tracing-completeness field or a cropped flag; absent metadata is unknown, not evidence of complete tracing. Both have `exitNerve=PhN` and `group=10331`. neuPrint post counts differ from the proofread-endpoint-filtered substrate incoming counts. The workbook, Berg release annotations and live type query identify only these two MN9 bodies: no alternative MN9-typed body on either side. Reconstruction incompleteness is a likely cause of the laterality reversal given the R tracing label and 556 versus 6,012 retained inputs, **a hypothesis, not established causation**; both M1c sides must be read before drawing a conclusion. [OQ-11](open_questions.md#oq-11-malecns-substrate-and-reversed-sugar-to-mn9-laterality-2026-09-14).
 
+### Additional mapping and ROI-capture check
+
+**Source check only; no new conclusion.** In the [cross-brain mapping](https://github.com/flyconnectome/2025malecns/blob/67767d2233657983993ff6c2be48e836a935863c/supplemental_data/mcns_fw_edge_comp_mappings.json), both female MN9 IDs `720575940660219265` and `720575940618238523` have the label **CB0701**. Exactly two male bodies share that label: **10331 and 16949**. Thus **16949 is included**. These four IDs are the complete label group; this mapping is a cross-matched group assignment, not a one-to-one left/right pairing.
+
+The saved neuPrint response (`male-cns:v1.0`, retrieved 2026-09-14T08:23:39.950382+00:00) gives the following status and postsynaptic ROI counts. The local body-annotation export has no dendrite-ROI field; `roiInfo.post` identifies input locations, **not explicitly segmented dendritic arbors**.
+
+| Male body / side | status | statusLabel | Mapping label | GNG postsynapses | CentralBrain-unspecified postsynapses |
+|---|---|---|---|---:|---:|
+| 16949 / R | Traced | RT Hard to trace | CB0701 | 433 | 200 |
+| 10331 / L | Traced | Roughly traced | CB0701 | 4,920 | 1,438 |
+
+These leaf counts sum to 633 (R) and 6,358 (L). `CentralBrain` is the parent ROI, not an additional disjoint compartment. Both leaf ROIs contain postsynapses in both bodies.
+
+The requested [capture CSV](https://github.com/flyconnectome/2025malecns/blob/67767d2233657983993ff6c2be48e836a935863c/supplemental_data/male-cns-v1.0-traced-synapse-capture-by-roi.csv) reports ROI-wide fractions:
+
+| ROI | Presynapses on proofread neurons | Postsynapses on proofread neurons | Connections with both endpoints proofread |
+|---|---:|---:|---:|
+| GNG | 90.7709% | 35.3665% | 32.2026% |
+| CentralBrain-unspecified | not reported | not reported | not reported |
+| CentralBrain (parent, context only) | 94.5107% | 36.8483% | 35.1027% |
+
+GNG is CSV line 31; CentralBrain is line 3 (header counted). There is no `CentralBrain-unspecified` row and no left/right GNG breakdown. The parent fraction is not substituted for the missing leaf fraction. These are **ROI-wide capture fractions, not either MN9’s tracing-completeness percentage**. [Source definitions](https://github.com/flyconnectome/2025malecns/blob/67767d2233657983993ff6c2be48e836a935863c/README.md#synapse-capture); [extracted fields, source commit, sizes and SHA256 hashes](../data/malecns/mn9_mapping_capture.json). No simulation, body substitution, verdict or causal conclusion is added.
+
 ## Tastekin comparison
 
 [Tastekin Figure S17B, condition 1](https://ars.els-cdn.com/content/image/1-s2.0-S0092867426009438-mmc1.pdf) shows LB3 activation at 200 Hz as an MN9 boxplot, n=30. No exact numerical mean or median is printed next to that condition; visual inspection places its median at approximately **105 Hz** (graph estimate, not an extracted numerical result). Our M1 means are **34.367 Hz R / 129.800 Hz L**. The caption does not identify the MN9 side or equate its LB3 pool with our one-sided typed17; this is not an established matched-condition replication.

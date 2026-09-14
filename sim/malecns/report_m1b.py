@@ -2,6 +2,7 @@
 """Render the saved-spike M1b checkpoint; no model imports or simulation."""
 import json
 from sim.malecns.substrate import DATA
+from sim.malecns.mn9_mapping_capture import render as mapping_capture_section
 
 
 def generate():
@@ -181,7 +182,8 @@ def generate():
             'was recorded before any rescaled run. The owner accepted M1b and both mean-based '
             'definitions, including the 137-partner exception. M1c uses exactly these two weights '
             'and the unchanged tied external kick; no third weight will be tried.', '']
-    return '\n'.join(lines)
+    result='\n'.join(lines)
+    return result.replace('## Tastekin comparison',mapping_capture_section()+'\n## Tastekin comparison')
 
 
 if __name__=='__main__':
