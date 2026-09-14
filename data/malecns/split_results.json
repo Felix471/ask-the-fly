@@ -1,0 +1,604 @@
+{
+  "conditions": [
+    {
+      "id": "A_s25_b0",
+      "gate": "A",
+      "sugar_hz": 25,
+      "bitter_hz": 0,
+      "sugar_set": "sugar",
+      "n_trials": 30,
+      "R_mean": 0.0,
+      "R_sd": 0.0,
+      "R_latency_median_ms": null,
+      "R_firing_trials": 0,
+      "L_mean": 0.0,
+      "L_sd": 0.0,
+      "L_latency_median_ms": null,
+      "L_firing_trials": 0,
+      "whole_network_spikes": {
+        "median": 468.5,
+        "min": 433,
+        "max": 520
+      },
+      "neurons_fired": {
+        "median": 23.0,
+        "min": 22,
+        "max": 27
+      }
+    },
+    {
+      "id": "A_s50_b0",
+      "gate": "A",
+      "sugar_hz": 50,
+      "bitter_hz": 0,
+      "sugar_set": "sugar",
+      "n_trials": 30,
+      "R_mean": 0.0,
+      "R_sd": 0.0,
+      "R_latency_median_ms": null,
+      "R_firing_trials": 0,
+      "L_mean": 0.0,
+      "L_sd": 0.0,
+      "L_latency_median_ms": null,
+      "L_firing_trials": 0,
+      "whole_network_spikes": {
+        "median": 1098.5,
+        "min": 1047,
+        "max": 1293
+      },
+      "neurons_fired": {
+        "median": 46.0,
+        "min": 37,
+        "max": 52
+      }
+    },
+    {
+      "id": "A_s100_b0",
+      "gate": "A",
+      "sugar_hz": 100,
+      "bitter_hz": 0,
+      "sugar_set": "sugar",
+      "n_trials": 30,
+      "R_mean": 0.0,
+      "R_sd": 0.0,
+      "R_latency_median_ms": null,
+      "R_firing_trials": 0,
+      "L_mean": 0.0,
+      "L_sd": 0.0,
+      "L_latency_median_ms": null,
+      "L_firing_trials": 0,
+      "whole_network_spikes": {
+        "median": 2774.5,
+        "min": 2539,
+        "max": 2903
+      },
+      "neurons_fired": {
+        "median": 73.0,
+        "min": 64,
+        "max": 86
+      }
+    },
+    {
+      "id": "A_s200_b0",
+      "gate": "A",
+      "sugar_hz": 200,
+      "bitter_hz": 0,
+      "sugar_set": "sugar",
+      "n_trials": 30,
+      "R_mean": 0.0,
+      "R_sd": 0.0,
+      "R_latency_median_ms": null,
+      "R_firing_trials": 0,
+      "L_mean": 8.666666666666666,
+      "L_sd": 2.947692129257886,
+      "L_latency_median_ms": 213.5,
+      "L_firing_trials": 30,
+      "whole_network_spikes": {
+        "median": 299441.5,
+        "min": 232765,
+        "max": 333567
+      },
+      "neurons_fired": {
+        "median": 7081.5,
+        "min": 6959,
+        "max": 7550
+      }
+    },
+    {
+      "id": "B_s200_b0",
+      "gate": "B",
+      "sugar_hz": 200,
+      "bitter_hz": 0,
+      "sugar_set": "sugar",
+      "n_trials": 30,
+      "R_mean": 0.0,
+      "R_sd": 0.0,
+      "R_latency_median_ms": null,
+      "R_firing_trials": 0,
+      "L_mean": 8.666666666666666,
+      "L_sd": 2.947692129257886,
+      "L_latency_median_ms": 213.5,
+      "L_firing_trials": 30,
+      "whole_network_spikes": {
+        "median": 299441.5,
+        "min": 232765,
+        "max": 333567
+      },
+      "neurons_fired": {
+        "median": 7081.5,
+        "min": 6959,
+        "max": 7550
+      }
+    },
+    {
+      "id": "B_s200_b25",
+      "gate": "B",
+      "sugar_hz": 200,
+      "bitter_hz": 25,
+      "sugar_set": "sugar",
+      "n_trials": 30,
+      "R_mean": 0.0,
+      "R_sd": 0.0,
+      "R_latency_median_ms": null,
+      "R_firing_trials": 0,
+      "L_mean": 0.0,
+      "L_sd": 0.0,
+      "L_latency_median_ms": null,
+      "L_firing_trials": 0,
+      "whole_network_spikes": {
+        "median": 28357.5,
+        "min": 12073,
+        "max": 335725
+      },
+      "neurons_fired": {
+        "median": 3410.5,
+        "min": 392,
+        "max": 7850
+      }
+    },
+    {
+      "id": "B_s200_b50",
+      "gate": "B",
+      "sugar_hz": 200,
+      "bitter_hz": 50,
+      "sugar_set": "sugar",
+      "n_trials": 30,
+      "R_mean": 0.0,
+      "R_sd": 0.0,
+      "R_latency_median_ms": null,
+      "R_firing_trials": 0,
+      "L_mean": 0.0,
+      "L_sd": 0.0,
+      "L_latency_median_ms": null,
+      "L_firing_trials": 0,
+      "whole_network_spikes": {
+        "median": 15373.5,
+        "min": 14479,
+        "max": 285358
+      },
+      "neurons_fired": {
+        "median": 468.5,
+        "min": 434,
+        "max": 7518
+      }
+    },
+    {
+      "id": "B_s200_b100",
+      "gate": "B",
+      "sugar_hz": 200,
+      "bitter_hz": 100,
+      "sugar_set": "sugar",
+      "n_trials": 30,
+      "R_mean": 0.0,
+      "R_sd": 0.0,
+      "R_latency_median_ms": null,
+      "R_firing_trials": 0,
+      "L_mean": 0.0,
+      "L_sd": 0.0,
+      "L_latency_median_ms": null,
+      "L_firing_trials": 0,
+      "whole_network_spikes": {
+        "median": 22875.0,
+        "min": 21400,
+        "max": 351962
+      },
+      "neurons_fired": {
+        "median": 675.5,
+        "min": 629,
+        "max": 7988
+      }
+    },
+    {
+      "id": "B_s200_b200",
+      "gate": "B",
+      "sugar_hz": 200,
+      "bitter_hz": 200,
+      "sugar_set": "sugar",
+      "n_trials": 30,
+      "R_mean": 0.0,
+      "R_sd": 0.0,
+      "R_latency_median_ms": null,
+      "R_firing_trials": 0,
+      "L_mean": 0.0,
+      "L_sd": 0.0,
+      "L_latency_median_ms": null,
+      "L_firing_trials": 0,
+      "whole_network_spikes": {
+        "median": 32900.0,
+        "min": 32055,
+        "max": 354517
+      },
+      "neurons_fired": {
+        "median": 817.0,
+        "min": 771,
+        "max": 7353
+      }
+    },
+    {
+      "id": "C_s0_b25",
+      "gate": "C",
+      "sugar_hz": 0,
+      "bitter_hz": 25,
+      "sugar_set": "sugar",
+      "n_trials": 30,
+      "R_mean": 0.0,
+      "R_sd": 0.0,
+      "R_latency_median_ms": null,
+      "R_firing_trials": 0,
+      "L_mean": 0.0,
+      "L_sd": 0.0,
+      "L_latency_median_ms": null,
+      "L_firing_trials": 0,
+      "whole_network_spikes": {
+        "median": 6911.5,
+        "min": 6516,
+        "max": 7249
+      },
+      "neurons_fired": {
+        "median": 303.5,
+        "min": 289,
+        "max": 316
+      }
+    },
+    {
+      "id": "C_s0_b50",
+      "gate": "C",
+      "sugar_hz": 0,
+      "bitter_hz": 50,
+      "sugar_set": "sugar",
+      "n_trials": 30,
+      "R_mean": 0.0,
+      "R_sd": 0.0,
+      "R_latency_median_ms": null,
+      "R_firing_trials": 0,
+      "L_mean": 0.0,
+      "L_sd": 0.0,
+      "L_latency_median_ms": null,
+      "L_firing_trials": 0,
+      "whole_network_spikes": {
+        "median": 10007.5,
+        "min": 9501,
+        "max": 10318
+      },
+      "neurons_fired": {
+        "median": 353.0,
+        "min": 332,
+        "max": 370
+      }
+    },
+    {
+      "id": "C_s0_b100",
+      "gate": "C",
+      "sugar_hz": 0,
+      "bitter_hz": 100,
+      "sugar_set": "sugar",
+      "n_trials": 30,
+      "R_mean": 0.0,
+      "R_sd": 0.0,
+      "R_latency_median_ms": null,
+      "R_firing_trials": 0,
+      "L_mean": 0.0,
+      "L_sd": 0.0,
+      "L_latency_median_ms": null,
+      "L_firing_trials": 0,
+      "whole_network_spikes": {
+        "median": 17853.5,
+        "min": 16641,
+        "max": 18882
+      },
+      "neurons_fired": {
+        "median": 570.0,
+        "min": 538,
+        "max": 595
+      }
+    },
+    {
+      "id": "C_s0_b200",
+      "gate": "C",
+      "sugar_hz": 0,
+      "bitter_hz": 200,
+      "sugar_set": "sugar",
+      "n_trials": 30,
+      "R_mean": 0.0,
+      "R_sd": 0.0,
+      "R_latency_median_ms": null,
+      "R_firing_trials": 0,
+      "L_mean": 0.0,
+      "L_sd": 0.0,
+      "L_latency_median_ms": null,
+      "L_firing_trials": 0,
+      "whole_network_spikes": {
+        "median": 28299.5,
+        "min": 27332,
+        "max": 29162
+      },
+      "neurons_fired": {
+        "median": 718.0,
+        "min": 685,
+        "max": 748
+      }
+    },
+    {
+      "id": "D_s0_b0",
+      "gate": "D",
+      "sugar_hz": 0,
+      "bitter_hz": 0,
+      "sugar_set": "sugar",
+      "n_trials": 30,
+      "R_mean": 0.0,
+      "R_sd": 0.0,
+      "R_latency_median_ms": null,
+      "R_firing_trials": 0,
+      "L_mean": 0.0,
+      "L_sd": 0.0,
+      "L_latency_median_ms": null,
+      "L_firing_trials": 0,
+      "whole_network_spikes": {
+        "median": 0.0,
+        "min": 0,
+        "max": 0
+      },
+      "neurons_fired": {
+        "median": 0.0,
+        "min": 0,
+        "max": 0
+      }
+    },
+    {
+      "id": "AP_sugar_120",
+      "gate": "AP",
+      "sugar_hz": 120,
+      "bitter_hz": 0,
+      "sugar_set": "sugar",
+      "n_trials": 30,
+      "R_mean": 0.0,
+      "R_sd": 0.0,
+      "R_latency_median_ms": null,
+      "R_firing_trials": 0,
+      "L_mean": 0.0,
+      "L_sd": 0.0,
+      "L_latency_median_ms": null,
+      "L_firing_trials": 0,
+      "whole_network_spikes": {
+        "median": 3422.0,
+        "min": 3211,
+        "max": 3577
+      },
+      "neurons_fired": {
+        "median": 84.5,
+        "min": 74,
+        "max": 109
+      }
+    },
+    {
+      "id": "AP_sugar_lb3c_120",
+      "gate": "AP",
+      "sugar_hz": 120,
+      "bitter_hz": 0,
+      "sugar_set": "sugar_lb3c",
+      "n_trials": 30,
+      "R_mean": 0.0,
+      "R_sd": 0.0,
+      "R_latency_median_ms": null,
+      "R_firing_trials": 0,
+      "L_mean": 0.0,
+      "L_sd": 0.0,
+      "L_latency_median_ms": null,
+      "L_firing_trials": 0,
+      "whole_network_spikes": {
+        "median": 2680.0,
+        "min": 2480,
+        "max": 2940
+      },
+      "neurons_fired": {
+        "median": 77.0,
+        "min": 61,
+        "max": 97
+      }
+    }
+  ],
+  "gates": {
+    "R": {
+      "A": false,
+      "B": false,
+      "C": true,
+      "D": true,
+      "D_literal_zero": true,
+      "C_literal_zero": true,
+      "A_threshold_hz": 5.0,
+      "C_limit_hz": 1.0,
+      "bitter200_suppression_fraction": null,
+      "overall": false
+    },
+    "L": {
+      "A": true,
+      "B": true,
+      "C": true,
+      "D": true,
+      "D_literal_zero": true,
+      "C_literal_zero": true,
+      "A_threshold_hz": 5.0,
+      "C_limit_hz": 1.0,
+      "bitter200_suppression_fraction": 1.0,
+      "overall": true
+    }
+  },
+  "a_prime": {
+    "R": {
+      "difference_definition": "LB3c12 minus sugar17, paired by seed",
+      "mean_hz": 0.0,
+      "sd_hz": 0.0,
+      "lower_trials": 0,
+      "equal_trials": 30,
+      "higher_trials": 0
+    },
+    "L": {
+      "difference_definition": "LB3c12 minus sugar17, paired by seed",
+      "mean_hz": 0.0,
+      "sd_hz": 0.0,
+      "lower_trials": 0,
+      "equal_trials": 30,
+      "higher_trials": 0
+    }
+  },
+  "shape_gate": {
+    "coverage": 1,
+    "adjacent": [
+      {
+        "from_hz": 25,
+        "to_hz": 50,
+        "decrease_hz": 0.0,
+        "pooled_sd_hz": 0.0
+      },
+      {
+        "from_hz": 50,
+        "to_hz": 100,
+        "decrease_hz": 0.0,
+        "pooled_sd_hz": 0.0
+      },
+      {
+        "from_hz": 100,
+        "to_hz": 120,
+        "decrease_hz": 0.0,
+        "pooled_sd_hz": 0.0
+      },
+      {
+        "from_hz": 120,
+        "to_hz": 200,
+        "decrease_hz": -8.666666666666666,
+        "pooled_sd_hz": 2.0843330934484645
+      }
+    ],
+    "network_max_min_ratio": 1.4330633901144931,
+    "S1": false,
+    "S2": true,
+    "S3": true,
+    "S": false
+  },
+  "overall_primary": false,
+  "metadata": {
+    "stage": "M1d",
+    "started_utc": "2026-09-14T18:07:07.530010+00:00",
+    "git_commit": "48b54ab95541f88e5403bbed6c17537e890ff063",
+    "plan": {
+      "path": "data/malecns/split_plan.json",
+      "bytes": 5674,
+      "sha256": "0eaf67c0d6acc38f7508ebb858755c4c09ddc36a2557dc72ad332bf87203322f"
+    },
+    "protocol": {
+      "path": "data/malecns/stim_protocol_malecns_split.json",
+      "bytes": 7821,
+      "sha256": "f669963f1babb177df66f03d77427d4ed6541d21d9265dfcb653ffd631821a34"
+    },
+    "sources": [
+      {
+        "path": "sim/malecns/rescale.py",
+        "bytes": 10826,
+        "sha256": "f07a7ffd4bc4cda53653b943e68ec00dc86247e29e5abf77dce663bc95c2f24f"
+      },
+      {
+        "path": "sim/malecns/phase0.py",
+        "bytes": 13472,
+        "sha256": "f6342a04adec37ed011d6aa9481ae7d044509fa33761ad23dfa92acfe4c43267"
+      },
+      {
+        "path": "sim/malecns/adapter.py",
+        "bytes": 2112,
+        "sha256": "e438f86a33d1dab4290333cd3e5e13f77d5dc8344d10726bda4cbb0cea6b0d7a"
+      },
+      {
+        "path": "sim/malecns/substrate.py",
+        "bytes": 16531,
+        "sha256": "1b6c7bd7122f9ad8a3d43aa87365c5b147d55d66067abcc4e7dce6fdcc63cac6"
+      },
+      {
+        "path": "sim/network.py",
+        "bytes": 9535,
+        "sha256": "eee33ef855203a47e03920b56b4aba98551cc400ab22107ebb91edc385475ae7"
+      },
+      {
+        "path": "data/stim_protocol.json",
+        "bytes": 3484,
+        "sha256": "9f9495033281bfcd6f3b373551817987deb2cc083ae94ab61fece9065102d82a"
+      },
+      {
+        "path": "data/malecns/stim_protocol_malecns.json",
+        "bytes": 5142,
+        "sha256": "88a36bb624b4c304759f5178826248b92a699fcb56751b894b347e21ce673173"
+      },
+      {
+        "path": "data/malecns/cells.json",
+        "bytes": 20697,
+        "sha256": "f29dd1511e5484d70062cf44d448acfa63e8ef89b49ab7cc281108e5be234c99"
+      },
+      {
+        "path": "data/malecns/substrate_record.json",
+        "bytes": 6763,
+        "sha256": "95c6a973217ac793fe5d3d02b813d890f0ba7620d123c647587518d40868582f"
+      },
+      {
+        "path": "data/malecns/m1b_diagnosis.json",
+        "bytes": 99564,
+        "sha256": "62fb9e4a5f358e6addc9c374b7401fd4bafbd7cdf003b6d904abb2d516e847d0"
+      },
+      {
+        "path": "data/malecns/rescale_preflight.json",
+        "bytes": 7106,
+        "sha256": "c2a300b31d20c3dfd1c6a829e2e2f5515974154870b85358c45af6ec00452c51"
+      },
+      {
+        "path": "sim/malecns/split.py",
+        "bytes": 9337,
+        "sha256": "e48b8c6bccecf4e3877b4318eb983d1630494a9fa3a75516a2a77bf05d488223"
+      },
+      {
+        "path": "data/malecns/stim_protocol_malecns_split.json",
+        "bytes": 7821,
+        "sha256": "f669963f1babb177df66f03d77427d4ed6541d21d9265dfcb653ffd631821a34"
+      }
+    ],
+    "memory": {
+      "workers": 8,
+      "wsl_available_gib": 60.6527099609375,
+      "host_free_gib": 80.16440200805664,
+      "limiting_available_gib": 60.6527099609375,
+      "reserve_gib": 15.163177490234375,
+      "worker_budget_gib": 5.4,
+      "cpus": 32,
+      "rule": "min(16 conditions, logical_cpus//2, floor((min(WSL available, host free)-max(8GiB,25%))/ceil(1.5*M1 peak to 0.1GiB)))",
+      "measured_m1_peak_gib": 3.5776214599609375
+    },
+    "python": "3.10.21 | packaged by conda-forge | (main, Aug 21 2026, 22:42:31) [GCC 14.4.0]",
+    "brian2": "2.9.0",
+    "codegen": "cython",
+    "completed_utc": "2026-09-14T18:13:28.205122+00:00",
+    "walltime_s": 380.675136589,
+    "total_trials": 480,
+    "peak_worker_rss_gib": 3.346172332763672
+  },
+  "raw_ledger": {
+    "path": "data/malecns/runs/m1d/full_results.json",
+    "bytes": 1007751,
+    "sha256": "49d9d3df59f192277ebd69193a0ad94605666a3d9811a4f7afa3b612a460f7aa"
+  }
+}

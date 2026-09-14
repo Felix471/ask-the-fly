@@ -1,4 +1,4 @@
-# MaleCNS Phase 0 report — M1 and pre-declared M1c
+# MaleCNS Phase 0 report — M1, M1c and M1d
 
 ## Run metadata
 
@@ -350,3 +350,63 @@ Software verification: 40 male-only unit tests, 315 existing Python tests, 67 No
 **Post-M1c owner decision — 2026-09-14:** the primary male readout is **L10331**, chosen on reconstruction-completeness grounds; **R16949 remains recorded as secondary**. R16949 has 556 retained incoming synapses versus 6,012 for L10331, with neuPrint status labels `RT Hard to trace` versus `Roughly traced`. GNG postsynaptic capture is approximately 35% (35.3665%), an **ROI-wide figure, not either neuron's completeness estimate**. The owner records reconstruction completeness as the most likely explanation for the laterality reversal, not a demonstrated causal result. The cross-brain mapping places both bodies with the female MN9s in CB0701; it does not indicate that Table S1 identified the wrong bodies.
 
 This decision was made **after M1c completed and its results were reported**. The completed runs, candidate protocols and original pre-declared stop rule remain unchanged: all four gates must pass on at least one side. **Both candidates passed under that original rule, on L10331.** This is not a retrospective amendment to the run design. Candidate selection is still pending; no rerun is performed or authorised by this record. [Mapping, tracing and ROI-capture evidence](malecns_m1b.md#additional-mapping-and-roi-capture-check); [OQ-11](open_questions.md#oq-11-malecns-substrate-and-reversed-sugar-to-mn9-laterality-2026-09-14).
+## M1d checkpoint — split stimulus and recurrent weights
+
+**Overall primary L10331: FAIL.** A–D pass, but shape gate S fails coverage S1: only 1 of five levels has a positive mean. S2 and S3 pass. This failed variant remains in the record; no automatic follow-up variant is run.
+
+[Pre-run protocol](../data/malecns/stim_protocol_malecns_split.json); [plan](../data/malecns/split_plan.json); [results](../data/malecns/split_results.json); [raw-event audit](../data/malecns/split_audit.json).
+
+Protocol/source declaration `dc633d7`; run commit `48b54ab95541f88e5403bbed6c17537e890ff063`. Exactly 480 trials, seeds20260910–20260939, 30 per condition, duration1 s. Eight workers; WSL free 60.65 GiB, host free 80.16 GiB, reserve 15.16 GiB, budget5.4 GiB/worker (>1.5× M1 peak). Brian2 2.9.0 cython; wall 380.7 s, peak worker 3.346 GiB. Completed 2026-09-14T18:13:28.205122+00:00.
+
+| Gate | L10331 primary | R16949 secondary (not deciding) |
+|---|---|---|
+| A | PASS | FAIL |
+| B | PASS | FAIL |
+| C | PASS | PASS |
+| D | PASS | PASS |
+| S1: coverage ≥4/5 | FAIL: 1/5 | Not evaluated |
+| S2: adjacent decrease ≤ pooled SD | PASS | Not evaluated |
+| S3: network max/min <3 at200 | PASS: 1.433063 | Not evaluated |
+| S overall | FAIL | Not evaluated |
+| A–D plus S | FAIL | Not deciding |
+
+Historical D checks completeness; additionally, baseline and bitter-alone MN9 rates are literally zero on both sides. A retains its historical adjacent-zero exception, which is why A can pass while S1 fails. S3 is the owner-defined count-ratio criterion, not a general statistical test proving unimodality.
+
+### Five-level sugar curve
+
+Mean ± population SD, Hz. Female is frozen23 throughout: historical pre-correction Phase0 at25/50/100/200; **120 uses the corrected frozen grid**, not the typed33 A′ arm. Different layouts/seed schemes and historical refractory handling make this a contextual comparison, not one matched female curve or a controlled sex comparison. Female Shiu L is contralateral; Shiu R is ipsilateral. [Female Phase0 source](../data/malecns/phase0_female_reference.json); [grid source](../data/lookup_table.json).
+
+| Sugar Hz | Male L10331 ipsi | Male R16949 contra | Female Shiu L contra | Female Shiu R ipsi | Male network spikes: median [min–max] |
+|---|---:|---:|---:|---:|---:|
+| 25 | 0.000 ± 0.000 | 0.000 ± 0.000 | 0.100 ± 0.300 | 0.067 ± 0.359 | 468.5 [433–520] |
+| 50 | 0.000 ± 0.000 | 0.000 ± 0.000 | 17.633 ± 4.854 | 13.267 ± 3.872 | 1,098.5 [1,047–1,293] |
+| 100 | 0.000 ± 0.000 | 0.000 ± 0.000 | 67.233 ± 4.724 | 49.500 ± 4.105 | 2,774.5 [2,539–2,903] |
+| 120 | 0.000 ± 0.000 | 0.000 ± 0.000 | 74.633 ± 4.476 | 54.700 ± 4.713 | 3,422.0 [3,211–3,577] |
+| 200 | 8.667 ± 2.948 | 0.000 ± 0.000 | 93.300 ± 5.780 | 62.067 ± 4.633 | 299,441.5 [232,765–333,567] |
+
+### Every condition and A′
+
+| Condition (sugar/bitter Hz) | L10331 Hz | R16949 Hz | Network spikes: median [min–max] | Neurons fired: median [min–max] |
+|---|---:|---:|---:|---:|
+| A_s25_b0 | 0.000 ± 0.000 | 0.000 ± 0.000 | 468.5 [433–520] | 23.0 [22–27] |
+| A_s50_b0 | 0.000 ± 0.000 | 0.000 ± 0.000 | 1,098.5 [1,047–1,293] | 46.0 [37–52] |
+| A_s100_b0 | 0.000 ± 0.000 | 0.000 ± 0.000 | 2,774.5 [2,539–2,903] | 73.0 [64–86] |
+| A_s200_b0 | 8.667 ± 2.948 | 0.000 ± 0.000 | 299,441.5 [232,765–333,567] | 7,081.5 [6,959–7,550] |
+| B_s200_b0 | 8.667 ± 2.948 | 0.000 ± 0.000 | 299,441.5 [232,765–333,567] | 7,081.5 [6,959–7,550] |
+| B_s200_b25 | 0.000 ± 0.000 | 0.000 ± 0.000 | 28,357.5 [12,073–335,725] | 3,410.5 [392–7,850] |
+| B_s200_b50 | 0.000 ± 0.000 | 0.000 ± 0.000 | 15,373.5 [14,479–285,358] | 468.5 [434–7,518] |
+| B_s200_b100 | 0.000 ± 0.000 | 0.000 ± 0.000 | 22,875.0 [21,400–351,962] | 675.5 [629–7,988] |
+| B_s200_b200 | 0.000 ± 0.000 | 0.000 ± 0.000 | 32,900.0 [32,055–354,517] | 817.0 [771–7,353] |
+| C_s0_b25 | 0.000 ± 0.000 | 0.000 ± 0.000 | 6,911.5 [6,516–7,249] | 303.5 [289–316] |
+| C_s0_b50 | 0.000 ± 0.000 | 0.000 ± 0.000 | 10,007.5 [9,501–10,318] | 353.0 [332–370] |
+| C_s0_b100 | 0.000 ± 0.000 | 0.000 ± 0.000 | 17,853.5 [16,641–18,882] | 570.0 [538–595] |
+| C_s0_b200 | 0.000 ± 0.000 | 0.000 ± 0.000 | 28,299.5 [27,332–29,162] | 718.0 [685–748] |
+| D_s0_b0 | 0.000 ± 0.000 | 0.000 ± 0.000 | 0.0 [0–0] | 0.0 [0–0] |
+| AP_sugar_120 | 0.000 ± 0.000 | 0.000 ± 0.000 | 3,422.0 [3,211–3,577] | 84.5 [74–109] |
+| AP_sugar_lb3c_120 | 0.000 ± 0.000 | 0.000 ± 0.000 | 2,680.0 [2,480–2,940] | 77.0 [61–97] |
+
+A′: sugar17 versus LB3c12 at120 Hz, same layout/seeds. Both are **0 ±0 Hz on both MN9s**; paired subset-minus-union is **0 ±0 Hz**, equal in30/30 trials on each side. Duplicate A200/B0 runs are not pooled as n=60.
+
+Saved-event audit: 480 trials / 960 MN9-neuron trials; all rates, latencies, source-cell counts, network counts, summaries, gates and paired differences verified. All480 Poisson event arrays match M1; all360 shared A′ LB3c trains match; all30 A200/B0 whole-network pairs match. No female simulation or product/frozen-data change. 49 male tests,315 existing Python tests,67 Node tests and release validation pass.
+
+M1e is the separate [community survey](malecns_community_survey.md). Stop at this checkpoint; no further variant is selected or run.
