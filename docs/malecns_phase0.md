@@ -111,3 +111,26 @@ No male PyTorch/CUDA cross-check was authorised or run; Brian2 is the simulation
 - Female A–D source: `results/phase0/full/summary.csv`.
 - [Frozen female comparison values and source hashes](../data/malecns/phase0_female_reference.json).
 - Female typed A′ sources: `results/refreeze/sugar_r1/readout_summary.csv` and `group_trials.csv`.
+
+## M1b / M1c decision boundary (declared before rescaled runs)
+
+M1b diagnoses saved M1 spikes and unsigned synaptic in-degree only; no new simulations.
+See the [M1b tables, diagnosis and density-definition checkpoint](malecns_m1b.md).
+The owner has pre-declared exactly two M1c candidates: original `w_syn / r_all`
+and original `w_syn / r_mn9`, with every other protocol parameter unchanged.
+M1b must be reported and the derivations confirmed before either candidate runs.
+No search over `w_syn` is authorised.
+
+**Stop rule:** a candidate counts as passing only if all four historical A–D gates
+pass on at least one MN9 side, evaluated separately with the unchanged criteria above.
+If neither candidate passes, the male line stops and this report will say so;
+no third value will be tried in this task. The primary readout is not switched in advance.
+
+Each candidate will retain 30 trials per condition with M1's seeds: 420 A–D trials
+plus both 120-Hz A′ arms (sugar17 and LB3c12, 30 each), i.e. 480 per candidate,
+960 including A′ across the two candidates. No M1c trial has run.
+
+The exact requested 200-partner `r_mn9` is presently undefined: male contralateral
+R16949 has only 137 retained presynaptic partners. An explicitly labeled
+available-partner alternative may be reported at M1b but requires owner confirmation;
+missing partners will not be fabricated or silently padded with zeros.
