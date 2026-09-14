@@ -162,3 +162,140 @@ not predict CEM firing. This informs the design of a later pharyngeal
 task; no pharyngeal stimulation, additional background, scoring change,
 or README honesty-table change was made. The causal chain and CEM response
 under other designs remain open.
+
+## OQ-9: pharyngeal screen activates MN9/MN11 but not CEM (2026-09-13)
+
+The [Phase P report](pharyngeal_screen.md) contains P0's source-only PhG1–16
+table, P1's **19 conditions × 10 trials = 190 runs**, and P2's PhG1/PhG4 dose
+curves and paired combination (**13 conditions × 30 trials = 390 runs**), with
+individual CEM rates, MN9 L/R and MN11D/V mean ± population SD, conditional
+latency medians and input-cell sanity. P0 uses only Tastekin's Cell PDF, distinguishes putative
+receptor/valence assignments from observations, and labels unreported properties
+“not characterised”; the FlyWire IDs are the fifty Table S1 pharyngeal rows.
+MN target labels are literal workbook `Target_Muscle` values: MN9 = `9`,
+MN11D = `11D`, MN11V = `11V`, CEM = `Crop Entry`, as cited in
+[the inventory](../data/mn_readout_ids.json).
+
+P1 drives each complete type at 100 Hz, all fifty together at 100 Hz, and a
+no-input baseline (18 conditions), plus PhG1 at 100 Hz with frozen sugar high
+at 120 Hz (one combined condition). All other labellar drives are zero.
+The frozen FlyWire v783 network and parameters are unchanged; this is our
+uncalibrated stimulation design, not the paper's MaleCNS connectivity metric
+or a product change. The explicit Phase P condition indices 0–18 use the
+published grid seed formula, with trials 0–9; they are not original grid cells.
+
+### P1 outcome
+
+No CEM neuron fired in any condition: **0 spikes across 1,140 CEM-neuron-trials**.
+Every driven source neuron did fire (1,310/1,310 driven-neuron-trials), so this
+was not an omitted/failed input. All six CEM neurons and all ten trials were
+explicitly saved and validated, including silent trials.
+
+PhG1, PhG4 and PhG10 activated both MN9s and MN11D/V in 10/10 trials.
+
+| Single type, 100 Hz | MN9 L, Hz | MN9 R, Hz | MN11D, Hz | MN11V, Hz |
+|---|---:|---:|---:|---:|
+| PhG1 | 53.200 ± 2.400 | 46.900 ± 3.390 | 140.700 ± 7.804 | 70.750 ± 3.970 |
+| PhG4 | 37.500 ± 6.087 | 32.000 ± 2.933 | 110.600 ± 11.933 | 58.000 ± 5.527 |
+| PhG10 | 11.100 ± 5.009 | 10.900 ± 3.885 | 17.650 ± 10.267 | 8.600 ± 4.898 |
+
+PhG9 produced MN11D/V means 3.650/0.050 Hz (7/10 and 1/10 active trials) with
+both MN9s silent; PhG13 produced one MN9 R spike in one trial; PhG16 produced
+sparse MN9/MN11 activity. The other ten single types and baseline were silent
+at every recorded MN. All-PhG means were MN9 L/R 23.000/18.600 and
+MN11D/V 127.550/67.700 Hz, still with zero CEM spikes.
+
+**PhG4 disagreement:** Tastekin predicts PhG4 (putative ppk28/water association,
+Fig. 3E; aversive prediction, Fig. 7F), whereas stimulating that type drives
+MN9/MN11 in this model.
+
+### P2 dose curves and paired combination
+
+P2 uses PhG1 and PhG4 at 0/60/80/120/200 Hz, thirty trials each, and three
+paired conditions: (a) frozen labellar sugar high at 120 Hz, (b) PhG1 at
+100 Hz, (c) both. Every condition uses the same 151-unit stimulation layout;
+the paired conditions use identical thirty seeds. The thirteen conditions
+total 390 runs (330 distinct seed values), preserving both zero-dose rows.
+
+The new paired comparison **replaces P1's unpaired historical-reference ratio**;
+P1 raw results remain preserved. Ratios are the mean ± population SD of thirty
+trial-wise `c/a` values; a zero denominator makes the full ratio undefined.
+Additivity compares paired `c - (a+b)` values, not separately shuffled trials.
+The reported relation describes the observed mean, not statistical equivalence.
+
+<!-- BEGIN COMPUTED P2 OQ TABLES -->
+### PhG1_dose: MN rate (mean ± population SD, Hz; n = 30)
+
+| Condition | MN9_L | MN9_R | MN11D | MN11V |
+|---|---:|---:|---:|---:|
+| P2_PhG1_0 | 0.000 ± 0.000 | 0.000 ± 0.000 | 0.000 ± 0.000 | 0.000 ± 0.000 |
+| P2_PhG1_60 | 44.733 ± 4.211 | 38.133 ± 3.685 | 116.583 ± 9.037 | 56.083 ± 4.317 |
+| P2_PhG1_80 | 49.800 ± 4.400 | 43.400 ± 3.565 | 131.917 ± 7.729 | 64.817 ± 3.978 |
+| P2_PhG1_120 | 59.833 ± 3.716 | 52.900 ± 3.360 | 148.917 ± 7.055 | 75.283 ± 2.455 |
+| P2_PhG1_200 | 69.600 ± 4.152 | 62.500 ± 3.364 | 161.633 ± 6.099 | 84.250 ± 2.886 |
+
+### PhG4_dose: MN rate (mean ± population SD, Hz; n = 30)
+
+| Condition | MN9_L | MN9_R | MN11D | MN11V |
+|---|---:|---:|---:|---:|
+| P2_PhG4_0 | 0.000 ± 0.000 | 0.000 ± 0.000 | 0.000 ± 0.000 | 0.000 ± 0.000 |
+| P2_PhG4_60 | 27.767 ± 3.989 | 27.033 ± 4.750 | 92.517 ± 11.419 | 45.667 ± 5.122 |
+| P2_PhG4_80 | 32.933 ± 5.033 | 30.433 ± 4.104 | 109.450 ± 10.058 | 55.533 ± 4.465 |
+| P2_PhG4_120 | 38.800 ± 4.167 | 33.800 ± 4.254 | 117.917 ± 9.683 | 60.650 ± 3.878 |
+| P2_PhG4_200 | 40.867 ± 3.471 | 34.933 ± 3.660 | 123.950 ± 7.141 | 63.283 ± 3.822 |
+
+### Paired combination (trial-wise mean ± population SD)
+
+| Readout | a: sugar Hz | b: PhG1 Hz | c: both Hz | c/a | c-a-b Hz | Mean relation | Above/equal/below sum trials |
+|---|---:|---:|---:|---:|---:|---|---:|
+| MN9_L | 73.667 ± 5.088 | 53.867 ± 3.730 | 83.433 ± 4.544 | 1.138449 ± 0.104545 | -44.100 ± 8.467 | falls short | 0/0/30 |
+| MN9_R | 53.167 ± 3.908 | 48.167 ± 3.215 | 58.133 ± 4.145 | 1.099654 ± 0.114927 | -43.200 ± 7.591 | falls short | 0/0/30 |
+| MN11D | 95.250 ± 11.548 | 141.383 ± 5.255 | 152.367 ± 8.250 | 1.621558 ± 0.203065 | -84.267 ± 13.638 | falls short | 0/0/30 |
+| MN11V | 37.783 ± 4.387 | 71.183 ± 3.275 | 74.467 ± 3.568 | 1.994462 ± 0.224526 | -34.500 ± 6.445 | falls short | 0/0/30 |
+| CEM_L1 | 0.000 ± 0.000 | 0.000 ± 0.000 | 0.000 ± 0.000 | undefined (0/30 defined) | 0.000 ± 0.000 | equal | 0/30/0 |
+| CEM_L2 | 0.000 ± 0.000 | 0.000 ± 0.000 | 0.000 ± 0.000 | undefined (0/30 defined) | 0.000 ± 0.000 | equal | 0/30/0 |
+| CEM_L3 | 0.000 ± 0.000 | 0.000 ± 0.000 | 0.000 ± 0.000 | undefined (0/30 defined) | 0.000 ± 0.000 | equal | 0/30/0 |
+| CEM_R1 | 0.000 ± 0.000 | 0.000 ± 0.000 | 0.000 ± 0.000 | undefined (0/30 defined) | 0.000 ± 0.000 | equal | 0/30/0 |
+| CEM_R2 | 0.000 ± 0.000 | 0.000 ± 0.000 | 0.000 ± 0.000 | undefined (0/30 defined) | 0.000 ± 0.000 | equal | 0/30/0 |
+| CEM_R3 | 0.000 ± 0.000 | 0.000 ± 0.000 | 0.000 ± 0.000 | undefined (0/30 defined) | 0.000 ± 0.000 | equal | 0/30/0 |
+| CEM | 0.000 ± 0.000 | 0.000 ± 0.000 | 0.000 ± 0.000 | undefined (0/30 defined) | 0.000 ± 0.000 | equal | 0/30/0 |
+| monitored_pharyngeal | 0.000 ± 0.000 | 98.700 ± 3.573 | 98.700 ± 3.573 | undefined (0/30 defined) | 0.000 ± 0.000 | equal | 0/30/0 |
+| monitored_sugar | 118.519 ± 2.127 | 0.000 ± 0.000 | 118.499 ± 2.128 | 0.999829 ± 0.000208 | -0.020 ± 0.024 | falls short | 0/17/13 |
+
+Shared active-channel Poisson spike trains verified identical for every paired trial: sugar a/c and PhG1 b/c.
+<!-- END COMPUTED P2 OQ TABLES -->
+
+Every nonzero PhG1 and PhG4 dose activates MN9 L/R and MN11D/V in 30/30
+trials; both zero-dose conditions are silent. In the paired combination,
+all four MN readouts fall short of a+b in **every one of the thirty trials**.
+Mean deficits are 44.100/43.200/84.267/34.500 Hz (MN9 L/R, MN11D/V).
+Mean paired c/a ratios exceed one, but individual MN9 trials are not uniformly
+higher: L exceeds a in 28/30, R in 22/30 (two equal); MN11D/V exceed a in 30/30.
+All 930 shared input trains were verified identical: 690 sugar a/c and
+240 PhG1 b/c. All 3,300 genuinely driven-source-neuron-trials fired.
+
+In plain terms, combining pharyngeal and labellar sugar at the tested drives
+(PhG1 100 Hz; labellar sugar 120 Hz) produces a larger mean response than
+either input alone in all four readouts (MN9 L/R,
+MN11D/V), but falls short of their sum in 30/30 trials for each readout.
+This sublinear combination is consistent with saturation on shared downstream
+targets rather than two independent additive channels; shared-target saturation
+is an interpretation, not a mechanism established by these readout measurements.
+See the [paired P2 findings](pharyngeal_screen.md#p2-findings).
+
+### CEM outcome
+
+CEM is silent in all 390 P2 trials (2,340 individual CEM-neuron-trials),
+as in the 400-cell labellar C1 screen, thirteen-cell C2 and nineteen-condition
+P1 screen. Each CEM ratio is undefined, not zero; equality to a+b describes
+three silent conditions. These observations concern the unchanged frozen
+1-second, zero-basal-firing design and tested sets/drives, not an estimate
+of zero response probability under every possible state or input.
+
+no gustatory input class tested in this model (labellar, 400 cells; pharyngeal, 16 types, all 50 together, and combined with labellar sugar) drives CEM; the pharyngeal station of a checkpoint-chain readout cannot be built on CEM in this model.
+
+### Status
+
+P2 complete; no further simulation. The next task is a separately specified
+v2 decision memo. No frozen data, model/P1 code, `site/`, scoring, encoder
+or README honesty-table changes.
