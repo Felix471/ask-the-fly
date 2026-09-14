@@ -1,4 +1,4 @@
-# MaleCNS Phase 0 report — M1 full
+# MaleCNS Phase 0 report — M1 and pre-declared M1c
 
 ## Run metadata
 
@@ -128,9 +128,9 @@ no third value will be tried in this task. The primary readout is not switched i
 
 Each candidate will retain 30 trials per condition with M1's seeds: 420 A–D trials
 plus both 120-Hz A′ arms (sugar17 and LB3c12, 30 each), i.e. 480 per candidate,
-960 including A′ across the two candidates. No M1c trial has run.
+960 including A′ across the two candidates. At this declaration no M1c trial had run.
 
-The exact requested 200-partner `r_mn9` is presently undefined: male contralateral
+At M1b the exact requested 200-partner `r_mn9` was undefined: male contralateral
 R16949 has only 137 retained presynaptic partners. An explicitly labeled
 available-partner alternative may be reported at M1b but requires owner confirmation;
 missing partners will not be fabricated or silently padded with zeros.
@@ -143,3 +143,167 @@ These are the full-precision versions of the approved 0.145104 / 0.138504 mV
 candidates, not additional candidates. The external Poisson kick remains
 `w_syn*f_poi`; all other model/trial parameters remain unchanged. The
 [preflight additions](malecns_m1b.md) were recorded before rescaled runs.
+
+## M1c — two pre-declared rescalings
+
+Only `w_syn` changes; the external Poisson kick remains tied as `w_syn*f_poi`. The full-precision definitions and stop rule above were frozen before any candidate result. Both candidates reuse the unchanged M1 trial runner, physical 91-cell input layout, seeds 20260910–20260939, one-second duration, and historical gate predicates. No readout was substituted and no third weight or M2 was run.
+
+The [pre-run plan](../data/malecns/rescale_plan.json) chose 8 workers: WSL available 60.58 GiB, host free 85.34 GiB, reserve 15.15 GiB, budget 5.4 GiB/worker (over 1.5× measured M1 peak). Candidate pools ran sequentially. Each candidate has 420 A–D plus 60 A′ trials, **960 total**, not 840 including A′. Means ± population SD use n=30. Network counts are median [minimum–maximum]; Poisson-source events are excluded.
+
+### Candidate `all` — 0.145104089 mV
+
+[Protocol and derivation](../data/malecns/stim_protocol_malecns_all.json); [results and raw-ledger hash](../data/malecns/rescale_all_results.json). Simulation commit `92d8be5b56c5fdaab6336dea82344a57d0c12031`; Brian2 2.9.0 / cython; parallel walltime 393.0 s, peak worker RSS 3.340 GiB. Completed 2026-09-14T08:39:18.136968+00:00.
+
+| Condition | M1 R Hz | M1 L Hz | Rescaled R Hz | Rescaled L Hz | M1 network spikes | Rescaled network spikes |
+|---|---:|---:|---:|---:|---:|---:|
+| A_s25_b0 | 10.400 ± 12.727 | 43.033 ± 45.558 | 0.000 ± 0.000 | 0.000 ± 0.000 | 315,526 [101,199–987,904] | 468.5 [433–520] |
+| A_s50_b0 | 8.867 ± 7.719 | 42.333 ± 28.293 | 0.000 ± 0.000 | 0.000 ± 0.000 | 935,017 [144,175–1,048,059] | 1,098.5 [1,047–1,293] |
+| A_s100_b0 | 8.067 ± 3.245 | 58.567 ± 19.164 | 0.000 ± 0.000 | 0.000 ± 0.000 | 1,107,911 [994,456–1,141,791] | 2,774.5 [2,539–2,903] |
+| A_s200_b0 | 34.367 ± 3.082 | 129.800 ± 5.243 | 0.000 ± 0.000 | 8.667 ± 2.948 | 1,156,672.5 [1,132,192–1,166,319] | 299,441.5 [232,765–333,567] |
+| B_s200_b0 | 34.367 ± 3.082 | 129.800 ± 5.243 | 0.000 ± 0.000 | 8.667 ± 2.948 | 1,156,672.5 [1,132,192–1,166,319] | 299,441.5 [232,765–333,567] |
+| B_s200_b25 | 0.000 ± 0.000 | 9.700 ± 29.703 | 0.000 ± 0.000 | 0.000 ± 0.000 | 1,146,230.5 [1,100,800–1,156,474] | 28,357.5 [12,073–335,725] |
+| B_s200_b50 | 0.000 ± 0.000 | 1.300 ± 1.320 | 0.000 ± 0.000 | 0.000 ± 0.000 | 1,148,973.5 [1,097,898–1,158,387] | 15,373.5 [14,479–285,358] |
+| B_s200_b100 | 0.000 ± 0.000 | 3.033 ± 1.622 | 0.000 ± 0.000 | 0.000 ± 0.000 | 1,152,283.5 [1,114,405–1,157,934] | 22,875 [21,400–351,962] |
+| B_s200_b200 | 0.000 ± 0.000 | 6.567 ± 2.305 | 0.000 ± 0.000 | 0.000 ± 0.000 | 1,164,084 [1,129,965–1,170,541] | 32,900 [32,055–354,517] |
+| C_s0_b25 | 0.000 ± 0.000 | 19.000 ± 42.782 | 0.000 ± 0.000 | 0.000 ± 0.000 | 1,062,197 [224,387–1,091,812] | 6,911.5 [6,516–7,249] |
+| C_s0_b50 | 0.000 ± 0.000 | 10.733 ± 31.228 | 0.000 ± 0.000 | 0.000 ± 0.000 | 1,096,009 [1,064,489–1,121,085] | 10,007.5 [9,501–10,318] |
+| C_s0_b100 | 0.000 ± 0.000 | 6.200 ± 22.275 | 0.000 ± 0.000 | 0.000 ± 0.000 | 1,097,902 [237,110–1,112,628] | 17,853.5 [16,641–18,882] |
+| C_s0_b200 | 0.000 ± 0.000 | 6.767 ± 23.308 | 0.000 ± 0.000 | 0.000 ± 0.000 | 1,113,387.5 [1,092,999–1,134,876] | 28,299.5 [27,332–29,162] |
+| D_s0_b0 | 0.000 ± 0.000 | 0.000 ± 0.000 | 0.000 ± 0.000 | 0.000 ± 0.000 | 0 [0–0] | 0 [0–0] |
+
+| Gate | M1 R | M1 L | Rescaled R16949 (contra) | Rescaled L10331 (ipsi) |
+|---|---|---|---|---|
+| A: sugar rises | FAIL | FAIL | FAIL | PASS |
+| B: bitter suppresses | PASS | FAIL | FAIL | PASS |
+| C: bitter-alone limit | PASS | FAIL | PASS | PASS |
+| D: completeness | PASS | PASS | PASS | PASS |
+| Baseline literal zero (additional) | PASS | PASS | PASS | PASS |
+| Bitter-alone literal zero (additional) | PASS | FAIL | PASS | PASS |
+| Overall A–D | FAIL | FAIL | FAIL | PASS |
+
+R sugar means at 25/50/100/200 Hz: **0.000/0.000/0.000/0.000 Hz**. A does not pass.
+
+L sugar means at 25/50/100/200 Hz: **0.000/0.000/0.000/8.667 Hz**. A passes the historical adjacent-zero exception and >5 Hz endpoint; this is not evidence of a graded response over the lower levels.
+
+R is silent in every B condition: B fails its strict endpoint test (`0 < 0` is false), not a measured reversal of bitter suppression.
+
+| Soft indicator (not a gate) | Rescaled R | Rescaled L |
+|---|---:|---:|
+| Sugar100 / sugar200 | undefined (0/0) | 0.000 |
+| Bitter200 suppression vs bitter0 | undefined (0/0) | 100.00% |
+
+**A′ at 120 Hz:** same seeds and fixed layout; difference = LB3c12 minus sugar17.
+
+| Set / comparison | M1 R Hz | M1 L Hz | Rescaled R Hz | Rescaled L Hz | Network spikes |
+|---|---:|---:|---:|---:|---:|
+| AP_sugar_120 | 13.433 ± 5.590 | 80.333 ± 21.229 | 0.000 ± 0.000 | 0.000 ± 0.000 | 3,422 [3,211–3,577] |
+| AP_sugar_lb3c_120 | 10.667 ± 3.486 | 63.600 ± 20.318 | 0.000 ± 0.000 | 0.000 ± 0.000 | 2,680 [2,480–2,940] |
+| Paired difference | -2.767 ± 6.731 | -16.733 ± 32.179 | 0.000 ± 0.000 | 0.000 ± 0.000 | — |
+
+Paired lower/equal/higher trial counts: R 0/30/0, L 0/30/0.
+
+| Condition | Neurons fired: median [min–max] | R latency median, ms (firing trials/30) | L latency median, ms (firing trials/30) |
+|---|---:|---:|---:|
+| A_s25_b0 | 23 [22–27] | none (0/30) | none (0/30) |
+| A_s50_b0 | 46 [37–52] | none (0/30) | none (0/30) |
+| A_s100_b0 | 73 [64–86] | none (0/30) | none (0/30) |
+| A_s200_b0 | 7,081.5 [6,959–7,550] | none (0/30) | 213.50 (30/30) |
+| B_s200_b0 | 7,081.5 [6,959–7,550] | none (0/30) | 213.50 (30/30) |
+| B_s200_b25 | 3,410.5 [392–7,850] | none (0/30) | none (0/30) |
+| B_s200_b50 | 468.5 [434–7,518] | none (0/30) | none (0/30) |
+| B_s200_b100 | 675.5 [629–7,988] | none (0/30) | none (0/30) |
+| B_s200_b200 | 817 [771–7,353] | none (0/30) | none (0/30) |
+| C_s0_b25 | 303.5 [289–316] | none (0/30) | none (0/30) |
+| C_s0_b50 | 353 [332–370] | none (0/30) | none (0/30) |
+| C_s0_b100 | 570 [538–595] | none (0/30) | none (0/30) |
+| C_s0_b200 | 718 [685–748] | none (0/30) | none (0/30) |
+| D_s0_b0 | 0 [0–0] | none (0/30) | none (0/30) |
+| AP_sugar_120 | 84.5 [74–109] | none (0/30) | none (0/30) |
+| AP_sugar_lb3c_120 | 77 [61–97] | none (0/30) | none (0/30) |
+
+Latency medians include firing trials only; silence is none, not zero latency.
+
+### Candidate `mn9` — 0.138503502 mV
+
+[Protocol and derivation](../data/malecns/stim_protocol_malecns_mn9.json); [results and raw-ledger hash](../data/malecns/rescale_mn9_results.json). Simulation commit `92d8be5b56c5fdaab6336dea82344a57d0c12031`; Brian2 2.9.0 / cython; parallel walltime 345.0 s, peak worker RSS 3.339 GiB. Completed 2026-09-14T08:45:03.263267+00:00.
+
+| Condition | M1 R Hz | M1 L Hz | Rescaled R Hz | Rescaled L Hz | M1 network spikes | Rescaled network spikes |
+|---|---:|---:|---:|---:|---:|---:|
+| A_s25_b0 | 10.400 ± 12.727 | 43.033 ± 45.558 | 0.000 ± 0.000 | 0.000 ± 0.000 | 315,526 [101,199–987,904] | 462 [426–515] |
+| A_s50_b0 | 8.867 ± 7.719 | 42.333 ± 28.293 | 0.000 ± 0.000 | 0.000 ± 0.000 | 935,017 [144,175–1,048,059] | 1,059.5 [1,005–1,225] |
+| A_s100_b0 | 8.067 ± 3.245 | 58.567 ± 19.164 | 0.000 ± 0.000 | 0.000 ± 0.000 | 1,107,911 [994,456–1,141,791] | 2,640 [2,397–2,808] |
+| A_s200_b0 | 34.367 ± 3.082 | 129.800 ± 5.243 | 0.000 ± 0.000 | 7.400 ± 2.703 | 1,156,672.5 [1,132,192–1,166,319] | 246,019 [20,982–292,980] |
+| B_s200_b0 | 34.367 ± 3.082 | 129.800 ± 5.243 | 0.000 ± 0.000 | 7.400 ± 2.703 | 1,156,672.5 [1,132,192–1,166,319] | 246,019 [20,982–292,980] |
+| B_s200_b25 | 0.000 ± 0.000 | 9.700 ± 29.703 | 0.000 ± 0.000 | 0.033 ± 0.180 | 1,146,230.5 [1,100,800–1,156,474] | 85,972.5 [10,039–296,751] |
+| B_s200_b50 | 0.000 ± 0.000 | 1.300 ± 1.320 | 0.000 ± 0.000 | 0.000 ± 0.000 | 1,148,973.5 [1,097,898–1,158,387] | 13,286 [12,825–298,101] |
+| B_s200_b100 | 0.000 ± 0.000 | 3.033 ± 1.622 | 0.000 ± 0.000 | 0.000 ± 0.000 | 1,152,283.5 [1,114,405–1,157,934] | 18,957.5 [17,803–302,837] |
+| B_s200_b200 | 0.000 ± 0.000 | 6.567 ± 2.305 | 0.000 ± 0.000 | 0.000 ± 0.000 | 1,164,084 [1,129,965–1,170,541] | 130,049.5 [28,699–315,481] |
+| C_s0_b25 | 0.000 ± 0.000 | 19.000 ± 42.782 | 0.000 ± 0.000 | 0.000 ± 0.000 | 1,062,197 [224,387–1,091,812] | 5,119 [4,738–5,459] |
+| C_s0_b50 | 0.000 ± 0.000 | 10.733 ± 31.228 | 0.000 ± 0.000 | 0.000 ± 0.000 | 1,096,009 [1,064,489–1,121,085] | 8,184 [7,691–8,604] |
+| C_s0_b100 | 0.000 ± 0.000 | 6.200 ± 22.275 | 0.000 ± 0.000 | 0.000 ± 0.000 | 1,097,902 [237,110–1,112,628] | 13,642.5 [12,951–15,124] |
+| C_s0_b200 | 0.000 ± 0.000 | 6.767 ± 23.308 | 0.000 ± 0.000 | 0.000 ± 0.000 | 1,113,387.5 [1,092,999–1,134,876] | 24,799 [23,943–25,887] |
+| D_s0_b0 | 0.000 ± 0.000 | 0.000 ± 0.000 | 0.000 ± 0.000 | 0.000 ± 0.000 | 0 [0–0] | 0 [0–0] |
+
+| Gate | M1 R | M1 L | Rescaled R16949 (contra) | Rescaled L10331 (ipsi) |
+|---|---|---|---|---|
+| A: sugar rises | FAIL | FAIL | FAIL | PASS |
+| B: bitter suppresses | PASS | FAIL | FAIL | PASS |
+| C: bitter-alone limit | PASS | FAIL | PASS | PASS |
+| D: completeness | PASS | PASS | PASS | PASS |
+| Baseline literal zero (additional) | PASS | PASS | PASS | PASS |
+| Bitter-alone literal zero (additional) | PASS | FAIL | PASS | PASS |
+| Overall A–D | FAIL | FAIL | FAIL | PASS |
+
+R sugar means at 25/50/100/200 Hz: **0.000/0.000/0.000/0.000 Hz**. A does not pass.
+
+L sugar means at 25/50/100/200 Hz: **0.000/0.000/0.000/7.400 Hz**. A passes the historical adjacent-zero exception and >5 Hz endpoint; this is not evidence of a graded response over the lower levels.
+
+R is silent in every B condition: B fails its strict endpoint test (`0 < 0` is false), not a measured reversal of bitter suppression.
+
+| Soft indicator (not a gate) | Rescaled R | Rescaled L |
+|---|---:|---:|
+| Sugar100 / sugar200 | undefined (0/0) | 0.000 |
+| Bitter200 suppression vs bitter0 | undefined (0/0) | 100.00% |
+
+**A′ at 120 Hz:** same seeds and fixed layout; difference = LB3c12 minus sugar17.
+
+| Set / comparison | M1 R Hz | M1 L Hz | Rescaled R Hz | Rescaled L Hz | Network spikes |
+|---|---:|---:|---:|---:|---:|
+| AP_sugar_120 | 13.433 ± 5.590 | 80.333 ± 21.229 | 0.000 ± 0.000 | 0.000 ± 0.000 | 3,276 [3,037–3,457] |
+| AP_sugar_lb3c_120 | 10.667 ± 3.486 | 63.600 ± 20.318 | 0.000 ± 0.000 | 0.000 ± 0.000 | 2,485 [2,287–2,679] |
+| Paired difference | -2.767 ± 6.731 | -16.733 ± 32.179 | 0.000 ± 0.000 | 0.000 ± 0.000 | — |
+
+Paired lower/equal/higher trial counts: R 0/30/0, L 0/30/0.
+
+| Condition | Neurons fired: median [min–max] | R latency median, ms (firing trials/30) | L latency median, ms (firing trials/30) |
+|---|---:|---:|---:|
+| A_s25_b0 | 23 [22–25] | none (0/30) | none (0/30) |
+| A_s50_b0 | 41.5 [30–50] | none (0/30) | none (0/30) |
+| A_s100_b0 | 64 [58–81] | none (0/30) | none (0/30) |
+| A_s200_b0 | 6,399.5 [4,684–6,524] | none (0/30) | 325.60 (29/30) |
+| B_s200_b0 | 6,399.5 [4,684–6,524] | none (0/30) | 325.60 (29/30) |
+| B_s200_b25 | 6,283.5 [323–6,620] | none (0/30) | 966.40 (1/30) |
+| B_s200_b50 | 400 [361–6,545] | none (0/30) | none (0/30) |
+| B_s200_b100 | 554.5 [478–6,631] | none (0/30) | none (0/30) |
+| B_s200_b200 | 6,521.5 [656–6,823] | none (0/30) | none (0/30) |
+| C_s0_b25 | 245.5 [221–266] | none (0/30) | none (0/30) |
+| C_s0_b50 | 296.5 [264–313] | none (0/30) | none (0/30) |
+| C_s0_b100 | 437.5 [377–488] | none (0/30) | none (0/30) |
+| C_s0_b200 | 598 [544–624] | none (0/30) | none (0/30) |
+| D_s0_b0 | 0 [0–0] | none (0/30) | none (0/30) |
+| AP_sugar_120 | 70 [64–89] | none (0/30) | none (0/30) |
+| AP_sugar_lb3c_120 | 67 [51–85] | none (0/30) | none (0/30) |
+
+Latency medians include firing trials only; silence is none, not zero latency.
+
+### M1c checkpoint and stop rule
+
+Passing candidate/side combinations: **all/L, mn9/L**. These satisfy the pre-declared gate rule, not behavioural calibration or a primary-readout decision.
+
+The tracing-status evidence and 556-versus-6,012 input asymmetry remain a likely reconstruction explanation, not a causal demonstration: rescaling does not repair or control tracing completeness. Both sides are reported; the primary readout remains an owner decision. [Tracing preflight and female replay comparison](malecns_m1b.md).
+
+[Raw-event audit](../data/malecns/rescale_audit.json): 960 trials / 1920 MN9-neuron trials reconstructed; all network counts, rates, latencies, summaries, A′ paired differences and bilateral gates agree. All 960 complete Poisson event arrays match their M1 counterparts; 43,680 physical-slot trains match between candidates. Each candidate has 30 identical A200/B0 whole-network pairs and 360 identical shared A′ LB3c input trains. Duplicate A200/B0 observations are not n=60; the two weights and M1 are paired by seed, not pooled replicates.
+
+Brian2 retained the historical `rates` namespace warning and used its internal variable; input-event equality was checked rather than suppressing the warning. Raw spikes, source rates and ledgers remain ignored under `data/malecns/runs/m1c/`. Female frozen data, pipeline, site, scoring and README honesty table are unchanged. Stop here; no M2.
+
+Software verification: 40 male-only unit tests, 315 existing Python tests, 67 Node tests and release validation pass. These checks do not establish behavioural validity.

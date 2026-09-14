@@ -437,3 +437,28 @@ not an established explanation; this remains tentative pending bilateral M1c.
 Tastekin's workbook (`MNs!A66:G67`), Berg's release and the live MN9 query
 name no other MN9-typed body on either side. [Source hashes and extracted
 fields](../data/malecns/rescale_preflight.json). No readout was substituted.
+
+**M1c complete, pre-declared rescaling only:** the two mean-derived weights
+0.1451040891 mV (`all`) and 0.1385035017 mV (`mn9`) each pass historical
+A–D on **L10331 only**; R16949 fails A/B and passes C/D for both.
+All 960 trials (including A′) use M1's seeds and fixed layout, with the
+external Poisson kick still tied to `w_syn*f_poi`. [Bilateral tables,
+network activity, protocols and audit](malecns_phase0.md#m1c--two-pre-declared-rescalings).
+
+The pass has a narrow meaning: L sugar means at 25/50/100/200 Hz are
+0/0/0/8.667 Hz (`all`) and 0/0/0/7.400 Hz (`mn9`); A permits adjacent
+zeros and requires the endpoint >5 Hz. Endpoint SDs are 2.948 and
+2.703 Hz (n=30). This does not establish a graded lower-dose response.
+R is silent throughout, so B's strict endpoint comparison fails (0 < 0
+is false), not a demonstrated reversal of suppression. Both A′ sets at
+120 Hz are silent on both sides, with paired differences 0 ± 0 Hz.
+Both literal baseline-zero and bitter-alone-zero checks pass.
+
+Sugar200 network spikes remain substantial: median [min–max] 299,441.5
+[232,765–333,567] (`all`) and 246,019 [20,982–292,980] (`mn9`), while
+the existing female grid replay has 17,150 (n=1, unpaired). Passing MN9
+gates is not a network-wide normality check. The 556-versus-6,012 input
+asymmetry and tracing labels remain a likely reconstruction explanation,
+**not proven by bilateral M1c**; rescaling does not control reconstruction
+completeness. No primary-readout or candidate selection has been made.
+Stop at M1c; no third weight, M2, female or product change.
