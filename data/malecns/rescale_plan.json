@@ -1,0 +1,254 @@
+{
+  "stage": "M1c",
+  "planned_utc": "2026-09-14T08:31:49.336770+00:00",
+  "candidates": [
+    "all",
+    "mn9"
+  ],
+  "conditions": [
+    {
+      "id": "A_s25_b0",
+      "gate": "A",
+      "sugar_hz": 25,
+      "bitter_hz": 0,
+      "sugar_set": "sugar",
+      "n_trials": 30
+    },
+    {
+      "id": "A_s50_b0",
+      "gate": "A",
+      "sugar_hz": 50,
+      "bitter_hz": 0,
+      "sugar_set": "sugar",
+      "n_trials": 30
+    },
+    {
+      "id": "A_s100_b0",
+      "gate": "A",
+      "sugar_hz": 100,
+      "bitter_hz": 0,
+      "sugar_set": "sugar",
+      "n_trials": 30
+    },
+    {
+      "id": "A_s200_b0",
+      "gate": "A",
+      "sugar_hz": 200,
+      "bitter_hz": 0,
+      "sugar_set": "sugar",
+      "n_trials": 30
+    },
+    {
+      "id": "B_s200_b0",
+      "gate": "B",
+      "sugar_hz": 200,
+      "bitter_hz": 0,
+      "sugar_set": "sugar",
+      "n_trials": 30
+    },
+    {
+      "id": "B_s200_b25",
+      "gate": "B",
+      "sugar_hz": 200,
+      "bitter_hz": 25,
+      "sugar_set": "sugar",
+      "n_trials": 30
+    },
+    {
+      "id": "B_s200_b50",
+      "gate": "B",
+      "sugar_hz": 200,
+      "bitter_hz": 50,
+      "sugar_set": "sugar",
+      "n_trials": 30
+    },
+    {
+      "id": "B_s200_b100",
+      "gate": "B",
+      "sugar_hz": 200,
+      "bitter_hz": 100,
+      "sugar_set": "sugar",
+      "n_trials": 30
+    },
+    {
+      "id": "B_s200_b200",
+      "gate": "B",
+      "sugar_hz": 200,
+      "bitter_hz": 200,
+      "sugar_set": "sugar",
+      "n_trials": 30
+    },
+    {
+      "id": "C_s0_b25",
+      "gate": "C",
+      "sugar_hz": 0,
+      "bitter_hz": 25,
+      "sugar_set": "sugar",
+      "n_trials": 30
+    },
+    {
+      "id": "C_s0_b50",
+      "gate": "C",
+      "sugar_hz": 0,
+      "bitter_hz": 50,
+      "sugar_set": "sugar",
+      "n_trials": 30
+    },
+    {
+      "id": "C_s0_b100",
+      "gate": "C",
+      "sugar_hz": 0,
+      "bitter_hz": 100,
+      "sugar_set": "sugar",
+      "n_trials": 30
+    },
+    {
+      "id": "C_s0_b200",
+      "gate": "C",
+      "sugar_hz": 0,
+      "bitter_hz": 200,
+      "sugar_set": "sugar",
+      "n_trials": 30
+    },
+    {
+      "id": "D_s0_b0",
+      "gate": "D",
+      "sugar_hz": 0,
+      "bitter_hz": 0,
+      "sugar_set": "sugar",
+      "n_trials": 30
+    },
+    {
+      "id": "AP_sugar_120",
+      "gate": "AP",
+      "sugar_hz": 120,
+      "bitter_hz": 0,
+      "sugar_set": "sugar",
+      "n_trials": 30
+    },
+    {
+      "id": "AP_sugar_lb3c_120",
+      "gate": "AP",
+      "sugar_hz": 120,
+      "bitter_hz": 0,
+      "sugar_set": "sugar_lb3c",
+      "n_trials": 30
+    }
+  ],
+  "trials_per_candidate": 480,
+  "total_trials": 960,
+  "gate_trials": 840,
+  "a_prime_trials": 120,
+  "seeds": [
+    20260910,
+    20260911,
+    20260912,
+    20260913,
+    20260914,
+    20260915,
+    20260916,
+    20260917,
+    20260918,
+    20260919,
+    20260920,
+    20260921,
+    20260922,
+    20260923,
+    20260924,
+    20260925,
+    20260926,
+    20260927,
+    20260928,
+    20260929,
+    20260930,
+    20260931,
+    20260932,
+    20260933,
+    20260934,
+    20260935,
+    20260936,
+    20260937,
+    20260938,
+    20260939
+  ],
+  "memory": {
+    "workers": 8,
+    "wsl_available_gib": 60.58198547363281,
+    "host_free_gib": 85.3429183959961,
+    "limiting_available_gib": 60.58198547363281,
+    "reserve_gib": 15.145496368408203,
+    "worker_budget_gib": 5.4,
+    "cpus": 32,
+    "rule": "min(16 conditions, logical_cpus//2, floor((min(WSL available, host free)-max(8GiB,25%))/ceil(1.5*M1 peak to 0.1GiB)))",
+    "measured_m1_peak_gib": 3.5776214599609375
+  },
+  "execution": "Sequential candidate pools; no simultaneous candidate pools or automatic retries.",
+  "sources": [
+    {
+      "path": "sim/malecns/rescale.py",
+      "bytes": 10826,
+      "sha256": "f07a7ffd4bc4cda53653b943e68ec00dc86247e29e5abf77dce663bc95c2f24f"
+    },
+    {
+      "path": "sim/malecns/phase0.py",
+      "bytes": 13472,
+      "sha256": "f6342a04adec37ed011d6aa9481ae7d044509fa33761ad23dfa92acfe4c43267"
+    },
+    {
+      "path": "sim/malecns/adapter.py",
+      "bytes": 2112,
+      "sha256": "e438f86a33d1dab4290333cd3e5e13f77d5dc8344d10726bda4cbb0cea6b0d7a"
+    },
+    {
+      "path": "sim/malecns/substrate.py",
+      "bytes": 16531,
+      "sha256": "1b6c7bd7122f9ad8a3d43aa87365c5b147d55d66067abcc4e7dce6fdcc63cac6"
+    },
+    {
+      "path": "sim/network.py",
+      "bytes": 9535,
+      "sha256": "eee33ef855203a47e03920b56b4aba98551cc400ab22107ebb91edc385475ae7"
+    },
+    {
+      "path": "data/stim_protocol.json",
+      "bytes": 3484,
+      "sha256": "9f9495033281bfcd6f3b373551817987deb2cc083ae94ab61fece9065102d82a"
+    },
+    {
+      "path": "data/malecns/stim_protocol_malecns.json",
+      "bytes": 5142,
+      "sha256": "88a36bb624b4c304759f5178826248b92a699fcb56751b894b347e21ce673173"
+    },
+    {
+      "path": "data/malecns/cells.json",
+      "bytes": 20697,
+      "sha256": "f29dd1511e5484d70062cf44d448acfa63e8ef89b49ab7cc281108e5be234c99"
+    },
+    {
+      "path": "data/malecns/substrate_record.json",
+      "bytes": 6763,
+      "sha256": "95c6a973217ac793fe5d3d02b813d890f0ba7620d123c647587518d40868582f"
+    },
+    {
+      "path": "data/malecns/m1b_diagnosis.json",
+      "bytes": 99564,
+      "sha256": "62fb9e4a5f358e6addc9c374b7401fd4bafbd7cdf003b6d904abb2d516e847d0"
+    },
+    {
+      "path": "data/malecns/rescale_preflight.json",
+      "bytes": 7106,
+      "sha256": "c2a300b31d20c3dfd1c6a829e2e2f5515974154870b85358c45af6ec00452c51"
+    },
+    {
+      "path": "data/malecns/stim_protocol_malecns_all.json",
+      "bytes": 6655,
+      "sha256": "0af82a5e3f6b6e3141f84fda5f07d2b13a8a6fc8b47c633c24dfaca0731dbb42"
+    },
+    {
+      "path": "data/malecns/stim_protocol_malecns_mn9.json",
+      "bytes": 6761,
+      "sha256": "afe2f86f3ec2de79bd642f0bf0bae74f54eb3855401a7ed95adc2b7f1c1bfe0d"
+    }
+  ],
+  "stop_rule": "Pass only if all historical A-D gates pass on at least one side. If neither candidate passes, male line stops; no third weight."
+}
