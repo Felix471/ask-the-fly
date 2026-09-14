@@ -63,7 +63,7 @@ MN9 aggregation = left_only (contralateral to the right-hemisphere sugar GRNs), 
 
 ## Appendix A'
 
-A' uses benchmark.py's 21 sugar IDs instead of the notebook's 23 (19 IDs in common). It does not affect gates.
+A' uses benchmark.py's 21 sugar IDs instead of the notebook's 23 (20 IDs in common). It does not affect gates.
 
 | Sugar frequency | A aggregated mean ± std (Hz) | A' aggregated mean ± std (Hz) | Absolute difference (Hz) | Percent difference vs A |
 |---:|---:|---:|---:|---:|
