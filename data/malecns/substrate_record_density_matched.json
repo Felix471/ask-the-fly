@@ -1,0 +1,3224 @@
+{
+  "stage": "M1h substrate checkpoint; no simulation",
+  "built_utc": "2026-09-14T20:29:30.684553+00:00",
+  "declaration_commit": "a8234d3",
+  "source": {
+    "path": "data/malecns/downloads/syn-partners-male-cns-v1.0-minconf-0.5.feather",
+    "bytes": 6777179098,
+    "sha256": "959d8ef4173b35382a3e6acfaf5167c795b6d10b877572d146af04e1b487bc07"
+  },
+  "source_url": "https://storage.googleapis.com/flyem-male-cns/v1.0/connectome-data/flat-connectome/syn-partners-male-cns-v1.0-minconf-0.5.feather",
+  "raw_partner_rows": 311833243,
+  "baseline_edge_for_edge_match": "PASS: full contacts reproduce all M1f brain edge counts",
+  "rule": "Both conf_pre and conf_post >= c_star, float32 source confidence; original M1f roster, signs and endpoint cut; keep isolated neurons.",
+  "selection_rule": "Minimise exact absolute cross-product error retained_synapses*female_neurons - female_synapses*male_neurons over stored confidence breakpoints; lower cutoff breaks ties. No activity read.",
+  "c_star": 0.8690000176429749,
+  "selection": {
+    "distinct_breakpoints": 486079,
+    "absolute_cross_product_error": 3714235973,
+    "neighbouring_breakpoints": [
+      {
+        "cutoff": 0.8689990043640137,
+        "synapses": 57499950,
+        "ratio": 1.0004676224677775
+      },
+      {
+        "cutoff": 0.8690000176429749,
+        "synapses": 57499865,
+        "ratio": 1.000466143514354
+      },
+      {
+        "cutoff": 0.8690009713172913,
+        "synapses": 57356709,
+        "ratio": 0.9979753075577663
+      }
+    ]
+  },
+  "counts": {
+    "neurons": 146221,
+    "edges": 15569773,
+    "synapses": 57499865
+  },
+  "density": {
+    "female_neurons": 138639,
+    "female_synapses": 54492922,
+    "female_mean": 393.05622516030843,
+    "male_mean": 393.23944577044335,
+    "ratio": 1.000466143514354,
+    "baseline_ratio": 1.761181496453719
+  },
+  "retention": {
+    "contacts_fraction": 0.5680653274684485,
+    "interpretation": "Contact retention is not measured recall."
+  },
+  "synapses_per_edge_histogram": [
+    {
+      "synapses_per_edge": 1,
+      "edges": 7248536
+    },
+    {
+      "synapses_per_edge": 2,
+      "edges": 2908892
+    },
+    {
+      "synapses_per_edge": 3,
+      "edges": 1533547
+    },
+    {
+      "synapses_per_edge": 4,
+      "edges": 935401
+    },
+    {
+      "synapses_per_edge": 5,
+      "edges": 620638
+    },
+    {
+      "synapses_per_edge": 6,
+      "edges": 435382
+    },
+    {
+      "synapses_per_edge": 7,
+      "edges": 319179
+    },
+    {
+      "synapses_per_edge": 8,
+      "edges": 242323
+    },
+    {
+      "synapses_per_edge": 9,
+      "edges": 189498
+    },
+    {
+      "synapses_per_edge": 10,
+      "edges": 150446
+    },
+    {
+      "synapses_per_edge": 11,
+      "edges": 121731
+    },
+    {
+      "synapses_per_edge": 12,
+      "edges": 100443
+    },
+    {
+      "synapses_per_edge": 13,
+      "edges": 83864
+    },
+    {
+      "synapses_per_edge": 14,
+      "edges": 70976
+    },
+    {
+      "synapses_per_edge": 15,
+      "edges": 60485
+    },
+    {
+      "synapses_per_edge": 16,
+      "edges": 52075
+    },
+    {
+      "synapses_per_edge": 17,
+      "edges": 45402
+    },
+    {
+      "synapses_per_edge": 18,
+      "edges": 39956
+    },
+    {
+      "synapses_per_edge": 19,
+      "edges": 35024
+    },
+    {
+      "synapses_per_edge": 20,
+      "edges": 30958
+    },
+    {
+      "synapses_per_edge": 21,
+      "edges": 27192
+    },
+    {
+      "synapses_per_edge": 22,
+      "edges": 24302
+    },
+    {
+      "synapses_per_edge": 23,
+      "edges": 21452
+    },
+    {
+      "synapses_per_edge": 24,
+      "edges": 19610
+    },
+    {
+      "synapses_per_edge": 25,
+      "edges": 17357
+    },
+    {
+      "synapses_per_edge": 26,
+      "edges": 15862
+    },
+    {
+      "synapses_per_edge": 27,
+      "edges": 14045
+    },
+    {
+      "synapses_per_edge": 28,
+      "edges": 12947
+    },
+    {
+      "synapses_per_edge": 29,
+      "edges": 11845
+    },
+    {
+      "synapses_per_edge": 30,
+      "edges": 10724
+    },
+    {
+      "synapses_per_edge": 31,
+      "edges": 9867
+    },
+    {
+      "synapses_per_edge": 32,
+      "edges": 9021
+    },
+    {
+      "synapses_per_edge": 33,
+      "edges": 8171
+    },
+    {
+      "synapses_per_edge": 34,
+      "edges": 7874
+    },
+    {
+      "synapses_per_edge": 35,
+      "edges": 7131
+    },
+    {
+      "synapses_per_edge": 36,
+      "edges": 6669
+    },
+    {
+      "synapses_per_edge": 37,
+      "edges": 6310
+    },
+    {
+      "synapses_per_edge": 38,
+      "edges": 5797
+    },
+    {
+      "synapses_per_edge": 39,
+      "edges": 5368
+    },
+    {
+      "synapses_per_edge": 40,
+      "edges": 4967
+    },
+    {
+      "synapses_per_edge": 41,
+      "edges": 4685
+    },
+    {
+      "synapses_per_edge": 42,
+      "edges": 4396
+    },
+    {
+      "synapses_per_edge": 43,
+      "edges": 4066
+    },
+    {
+      "synapses_per_edge": 44,
+      "edges": 3842
+    },
+    {
+      "synapses_per_edge": 45,
+      "edges": 3604
+    },
+    {
+      "synapses_per_edge": 46,
+      "edges": 3376
+    },
+    {
+      "synapses_per_edge": 47,
+      "edges": 3038
+    },
+    {
+      "synapses_per_edge": 48,
+      "edges": 2923
+    },
+    {
+      "synapses_per_edge": 49,
+      "edges": 2690
+    },
+    {
+      "synapses_per_edge": 50,
+      "edges": 2615
+    },
+    {
+      "synapses_per_edge": 51,
+      "edges": 2422
+    },
+    {
+      "synapses_per_edge": 52,
+      "edges": 2285
+    },
+    {
+      "synapses_per_edge": 53,
+      "edges": 2154
+    },
+    {
+      "synapses_per_edge": 54,
+      "edges": 2168
+    },
+    {
+      "synapses_per_edge": 55,
+      "edges": 1974
+    },
+    {
+      "synapses_per_edge": 56,
+      "edges": 1824
+    },
+    {
+      "synapses_per_edge": 57,
+      "edges": 1777
+    },
+    {
+      "synapses_per_edge": 58,
+      "edges": 1721
+    },
+    {
+      "synapses_per_edge": 59,
+      "edges": 1601
+    },
+    {
+      "synapses_per_edge": 60,
+      "edges": 1545
+    },
+    {
+      "synapses_per_edge": 61,
+      "edges": 1428
+    },
+    {
+      "synapses_per_edge": 62,
+      "edges": 1358
+    },
+    {
+      "synapses_per_edge": 63,
+      "edges": 1312
+    },
+    {
+      "synapses_per_edge": 64,
+      "edges": 1238
+    },
+    {
+      "synapses_per_edge": 65,
+      "edges": 1256
+    },
+    {
+      "synapses_per_edge": 66,
+      "edges": 1136
+    },
+    {
+      "synapses_per_edge": 67,
+      "edges": 1099
+    },
+    {
+      "synapses_per_edge": 68,
+      "edges": 1090
+    },
+    {
+      "synapses_per_edge": 69,
+      "edges": 1033
+    },
+    {
+      "synapses_per_edge": 70,
+      "edges": 957
+    },
+    {
+      "synapses_per_edge": 71,
+      "edges": 999
+    },
+    {
+      "synapses_per_edge": 72,
+      "edges": 958
+    },
+    {
+      "synapses_per_edge": 73,
+      "edges": 943
+    },
+    {
+      "synapses_per_edge": 74,
+      "edges": 848
+    },
+    {
+      "synapses_per_edge": 75,
+      "edges": 838
+    },
+    {
+      "synapses_per_edge": 76,
+      "edges": 844
+    },
+    {
+      "synapses_per_edge": 77,
+      "edges": 789
+    },
+    {
+      "synapses_per_edge": 78,
+      "edges": 743
+    },
+    {
+      "synapses_per_edge": 79,
+      "edges": 707
+    },
+    {
+      "synapses_per_edge": 80,
+      "edges": 733
+    },
+    {
+      "synapses_per_edge": 81,
+      "edges": 683
+    },
+    {
+      "synapses_per_edge": 82,
+      "edges": 630
+    },
+    {
+      "synapses_per_edge": 83,
+      "edges": 635
+    },
+    {
+      "synapses_per_edge": 84,
+      "edges": 605
+    },
+    {
+      "synapses_per_edge": 85,
+      "edges": 605
+    },
+    {
+      "synapses_per_edge": 86,
+      "edges": 553
+    },
+    {
+      "synapses_per_edge": 87,
+      "edges": 558
+    },
+    {
+      "synapses_per_edge": 88,
+      "edges": 508
+    },
+    {
+      "synapses_per_edge": 89,
+      "edges": 499
+    },
+    {
+      "synapses_per_edge": 90,
+      "edges": 491
+    },
+    {
+      "synapses_per_edge": 91,
+      "edges": 498
+    },
+    {
+      "synapses_per_edge": 92,
+      "edges": 432
+    },
+    {
+      "synapses_per_edge": 93,
+      "edges": 459
+    },
+    {
+      "synapses_per_edge": 94,
+      "edges": 405
+    },
+    {
+      "synapses_per_edge": 95,
+      "edges": 401
+    },
+    {
+      "synapses_per_edge": 96,
+      "edges": 370
+    },
+    {
+      "synapses_per_edge": 97,
+      "edges": 382
+    },
+    {
+      "synapses_per_edge": 98,
+      "edges": 398
+    },
+    {
+      "synapses_per_edge": 99,
+      "edges": 343
+    },
+    {
+      "synapses_per_edge": 100,
+      "edges": 313
+    },
+    {
+      "synapses_per_edge": 101,
+      "edges": 336
+    },
+    {
+      "synapses_per_edge": 102,
+      "edges": 327
+    },
+    {
+      "synapses_per_edge": 103,
+      "edges": 320
+    },
+    {
+      "synapses_per_edge": 104,
+      "edges": 305
+    },
+    {
+      "synapses_per_edge": 105,
+      "edges": 309
+    },
+    {
+      "synapses_per_edge": 106,
+      "edges": 285
+    },
+    {
+      "synapses_per_edge": 107,
+      "edges": 288
+    },
+    {
+      "synapses_per_edge": 108,
+      "edges": 310
+    },
+    {
+      "synapses_per_edge": 109,
+      "edges": 275
+    },
+    {
+      "synapses_per_edge": 110,
+      "edges": 236
+    },
+    {
+      "synapses_per_edge": 111,
+      "edges": 254
+    },
+    {
+      "synapses_per_edge": 112,
+      "edges": 241
+    },
+    {
+      "synapses_per_edge": 113,
+      "edges": 268
+    },
+    {
+      "synapses_per_edge": 114,
+      "edges": 227
+    },
+    {
+      "synapses_per_edge": 115,
+      "edges": 222
+    },
+    {
+      "synapses_per_edge": 116,
+      "edges": 227
+    },
+    {
+      "synapses_per_edge": 117,
+      "edges": 204
+    },
+    {
+      "synapses_per_edge": 118,
+      "edges": 241
+    },
+    {
+      "synapses_per_edge": 119,
+      "edges": 208
+    },
+    {
+      "synapses_per_edge": 120,
+      "edges": 212
+    },
+    {
+      "synapses_per_edge": 121,
+      "edges": 213
+    },
+    {
+      "synapses_per_edge": 122,
+      "edges": 197
+    },
+    {
+      "synapses_per_edge": 123,
+      "edges": 189
+    },
+    {
+      "synapses_per_edge": 124,
+      "edges": 186
+    },
+    {
+      "synapses_per_edge": 125,
+      "edges": 189
+    },
+    {
+      "synapses_per_edge": 126,
+      "edges": 180
+    },
+    {
+      "synapses_per_edge": 127,
+      "edges": 182
+    },
+    {
+      "synapses_per_edge": 128,
+      "edges": 174
+    },
+    {
+      "synapses_per_edge": 129,
+      "edges": 155
+    },
+    {
+      "synapses_per_edge": 130,
+      "edges": 162
+    },
+    {
+      "synapses_per_edge": 131,
+      "edges": 163
+    },
+    {
+      "synapses_per_edge": 132,
+      "edges": 153
+    },
+    {
+      "synapses_per_edge": 133,
+      "edges": 145
+    },
+    {
+      "synapses_per_edge": 134,
+      "edges": 140
+    },
+    {
+      "synapses_per_edge": 135,
+      "edges": 147
+    },
+    {
+      "synapses_per_edge": 136,
+      "edges": 122
+    },
+    {
+      "synapses_per_edge": 137,
+      "edges": 122
+    },
+    {
+      "synapses_per_edge": 138,
+      "edges": 115
+    },
+    {
+      "synapses_per_edge": 139,
+      "edges": 110
+    },
+    {
+      "synapses_per_edge": 140,
+      "edges": 106
+    },
+    {
+      "synapses_per_edge": 141,
+      "edges": 118
+    },
+    {
+      "synapses_per_edge": 142,
+      "edges": 113
+    },
+    {
+      "synapses_per_edge": 143,
+      "edges": 94
+    },
+    {
+      "synapses_per_edge": 144,
+      "edges": 106
+    },
+    {
+      "synapses_per_edge": 145,
+      "edges": 109
+    },
+    {
+      "synapses_per_edge": 146,
+      "edges": 83
+    },
+    {
+      "synapses_per_edge": 147,
+      "edges": 95
+    },
+    {
+      "synapses_per_edge": 148,
+      "edges": 87
+    },
+    {
+      "synapses_per_edge": 149,
+      "edges": 89
+    },
+    {
+      "synapses_per_edge": 150,
+      "edges": 80
+    },
+    {
+      "synapses_per_edge": 151,
+      "edges": 82
+    },
+    {
+      "synapses_per_edge": 152,
+      "edges": 67
+    },
+    {
+      "synapses_per_edge": 153,
+      "edges": 76
+    },
+    {
+      "synapses_per_edge": 154,
+      "edges": 87
+    },
+    {
+      "synapses_per_edge": 155,
+      "edges": 75
+    },
+    {
+      "synapses_per_edge": 156,
+      "edges": 73
+    },
+    {
+      "synapses_per_edge": 157,
+      "edges": 66
+    },
+    {
+      "synapses_per_edge": 158,
+      "edges": 69
+    },
+    {
+      "synapses_per_edge": 159,
+      "edges": 85
+    },
+    {
+      "synapses_per_edge": 160,
+      "edges": 62
+    },
+    {
+      "synapses_per_edge": 161,
+      "edges": 57
+    },
+    {
+      "synapses_per_edge": 162,
+      "edges": 57
+    },
+    {
+      "synapses_per_edge": 163,
+      "edges": 56
+    },
+    {
+      "synapses_per_edge": 164,
+      "edges": 49
+    },
+    {
+      "synapses_per_edge": 165,
+      "edges": 49
+    },
+    {
+      "synapses_per_edge": 166,
+      "edges": 55
+    },
+    {
+      "synapses_per_edge": 167,
+      "edges": 49
+    },
+    {
+      "synapses_per_edge": 168,
+      "edges": 59
+    },
+    {
+      "synapses_per_edge": 169,
+      "edges": 44
+    },
+    {
+      "synapses_per_edge": 170,
+      "edges": 52
+    },
+    {
+      "synapses_per_edge": 171,
+      "edges": 48
+    },
+    {
+      "synapses_per_edge": 172,
+      "edges": 44
+    },
+    {
+      "synapses_per_edge": 173,
+      "edges": 49
+    },
+    {
+      "synapses_per_edge": 174,
+      "edges": 60
+    },
+    {
+      "synapses_per_edge": 175,
+      "edges": 40
+    },
+    {
+      "synapses_per_edge": 176,
+      "edges": 44
+    },
+    {
+      "synapses_per_edge": 177,
+      "edges": 45
+    },
+    {
+      "synapses_per_edge": 178,
+      "edges": 40
+    },
+    {
+      "synapses_per_edge": 179,
+      "edges": 37
+    },
+    {
+      "synapses_per_edge": 180,
+      "edges": 46
+    },
+    {
+      "synapses_per_edge": 181,
+      "edges": 45
+    },
+    {
+      "synapses_per_edge": 182,
+      "edges": 33
+    },
+    {
+      "synapses_per_edge": 183,
+      "edges": 37
+    },
+    {
+      "synapses_per_edge": 184,
+      "edges": 33
+    },
+    {
+      "synapses_per_edge": 185,
+      "edges": 43
+    },
+    {
+      "synapses_per_edge": 186,
+      "edges": 41
+    },
+    {
+      "synapses_per_edge": 187,
+      "edges": 44
+    },
+    {
+      "synapses_per_edge": 188,
+      "edges": 37
+    },
+    {
+      "synapses_per_edge": 189,
+      "edges": 40
+    },
+    {
+      "synapses_per_edge": 190,
+      "edges": 37
+    },
+    {
+      "synapses_per_edge": 191,
+      "edges": 45
+    },
+    {
+      "synapses_per_edge": 192,
+      "edges": 30
+    },
+    {
+      "synapses_per_edge": 193,
+      "edges": 34
+    },
+    {
+      "synapses_per_edge": 194,
+      "edges": 28
+    },
+    {
+      "synapses_per_edge": 195,
+      "edges": 24
+    },
+    {
+      "synapses_per_edge": 196,
+      "edges": 29
+    },
+    {
+      "synapses_per_edge": 197,
+      "edges": 31
+    },
+    {
+      "synapses_per_edge": 198,
+      "edges": 37
+    },
+    {
+      "synapses_per_edge": 199,
+      "edges": 25
+    },
+    {
+      "synapses_per_edge": 200,
+      "edges": 27
+    },
+    {
+      "synapses_per_edge": 201,
+      "edges": 43
+    },
+    {
+      "synapses_per_edge": 202,
+      "edges": 34
+    },
+    {
+      "synapses_per_edge": 203,
+      "edges": 26
+    },
+    {
+      "synapses_per_edge": 204,
+      "edges": 19
+    },
+    {
+      "synapses_per_edge": 205,
+      "edges": 24
+    },
+    {
+      "synapses_per_edge": 206,
+      "edges": 31
+    },
+    {
+      "synapses_per_edge": 207,
+      "edges": 32
+    },
+    {
+      "synapses_per_edge": 208,
+      "edges": 27
+    },
+    {
+      "synapses_per_edge": 209,
+      "edges": 20
+    },
+    {
+      "synapses_per_edge": 210,
+      "edges": 19
+    },
+    {
+      "synapses_per_edge": 211,
+      "edges": 16
+    },
+    {
+      "synapses_per_edge": 212,
+      "edges": 17
+    },
+    {
+      "synapses_per_edge": 213,
+      "edges": 26
+    },
+    {
+      "synapses_per_edge": 214,
+      "edges": 27
+    },
+    {
+      "synapses_per_edge": 215,
+      "edges": 13
+    },
+    {
+      "synapses_per_edge": 216,
+      "edges": 27
+    },
+    {
+      "synapses_per_edge": 217,
+      "edges": 19
+    },
+    {
+      "synapses_per_edge": 218,
+      "edges": 18
+    },
+    {
+      "synapses_per_edge": 219,
+      "edges": 27
+    },
+    {
+      "synapses_per_edge": 220,
+      "edges": 16
+    },
+    {
+      "synapses_per_edge": 221,
+      "edges": 22
+    },
+    {
+      "synapses_per_edge": 222,
+      "edges": 13
+    },
+    {
+      "synapses_per_edge": 223,
+      "edges": 17
+    },
+    {
+      "synapses_per_edge": 224,
+      "edges": 21
+    },
+    {
+      "synapses_per_edge": 225,
+      "edges": 11
+    },
+    {
+      "synapses_per_edge": 226,
+      "edges": 12
+    },
+    {
+      "synapses_per_edge": 227,
+      "edges": 12
+    },
+    {
+      "synapses_per_edge": 228,
+      "edges": 18
+    },
+    {
+      "synapses_per_edge": 229,
+      "edges": 18
+    },
+    {
+      "synapses_per_edge": 230,
+      "edges": 15
+    },
+    {
+      "synapses_per_edge": 231,
+      "edges": 12
+    },
+    {
+      "synapses_per_edge": 232,
+      "edges": 16
+    },
+    {
+      "synapses_per_edge": 233,
+      "edges": 18
+    },
+    {
+      "synapses_per_edge": 234,
+      "edges": 15
+    },
+    {
+      "synapses_per_edge": 235,
+      "edges": 9
+    },
+    {
+      "synapses_per_edge": 236,
+      "edges": 16
+    },
+    {
+      "synapses_per_edge": 237,
+      "edges": 8
+    },
+    {
+      "synapses_per_edge": 238,
+      "edges": 19
+    },
+    {
+      "synapses_per_edge": 239,
+      "edges": 12
+    },
+    {
+      "synapses_per_edge": 240,
+      "edges": 19
+    },
+    {
+      "synapses_per_edge": 241,
+      "edges": 14
+    },
+    {
+      "synapses_per_edge": 242,
+      "edges": 13
+    },
+    {
+      "synapses_per_edge": 243,
+      "edges": 20
+    },
+    {
+      "synapses_per_edge": 244,
+      "edges": 9
+    },
+    {
+      "synapses_per_edge": 245,
+      "edges": 9
+    },
+    {
+      "synapses_per_edge": 246,
+      "edges": 13
+    },
+    {
+      "synapses_per_edge": 247,
+      "edges": 16
+    },
+    {
+      "synapses_per_edge": 248,
+      "edges": 15
+    },
+    {
+      "synapses_per_edge": 249,
+      "edges": 11
+    },
+    {
+      "synapses_per_edge": 250,
+      "edges": 14
+    },
+    {
+      "synapses_per_edge": 251,
+      "edges": 13
+    },
+    {
+      "synapses_per_edge": 252,
+      "edges": 10
+    },
+    {
+      "synapses_per_edge": 253,
+      "edges": 9
+    },
+    {
+      "synapses_per_edge": 254,
+      "edges": 15
+    },
+    {
+      "synapses_per_edge": 255,
+      "edges": 7
+    },
+    {
+      "synapses_per_edge": 256,
+      "edges": 13
+    },
+    {
+      "synapses_per_edge": 257,
+      "edges": 20
+    },
+    {
+      "synapses_per_edge": 258,
+      "edges": 7
+    },
+    {
+      "synapses_per_edge": 259,
+      "edges": 14
+    },
+    {
+      "synapses_per_edge": 260,
+      "edges": 11
+    },
+    {
+      "synapses_per_edge": 261,
+      "edges": 14
+    },
+    {
+      "synapses_per_edge": 262,
+      "edges": 15
+    },
+    {
+      "synapses_per_edge": 263,
+      "edges": 14
+    },
+    {
+      "synapses_per_edge": 264,
+      "edges": 15
+    },
+    {
+      "synapses_per_edge": 265,
+      "edges": 6
+    },
+    {
+      "synapses_per_edge": 266,
+      "edges": 6
+    },
+    {
+      "synapses_per_edge": 267,
+      "edges": 12
+    },
+    {
+      "synapses_per_edge": 268,
+      "edges": 10
+    },
+    {
+      "synapses_per_edge": 269,
+      "edges": 12
+    },
+    {
+      "synapses_per_edge": 270,
+      "edges": 6
+    },
+    {
+      "synapses_per_edge": 271,
+      "edges": 12
+    },
+    {
+      "synapses_per_edge": 272,
+      "edges": 8
+    },
+    {
+      "synapses_per_edge": 273,
+      "edges": 10
+    },
+    {
+      "synapses_per_edge": 274,
+      "edges": 4
+    },
+    {
+      "synapses_per_edge": 275,
+      "edges": 15
+    },
+    {
+      "synapses_per_edge": 276,
+      "edges": 5
+    },
+    {
+      "synapses_per_edge": 277,
+      "edges": 12
+    },
+    {
+      "synapses_per_edge": 278,
+      "edges": 10
+    },
+    {
+      "synapses_per_edge": 279,
+      "edges": 8
+    },
+    {
+      "synapses_per_edge": 280,
+      "edges": 12
+    },
+    {
+      "synapses_per_edge": 281,
+      "edges": 7
+    },
+    {
+      "synapses_per_edge": 282,
+      "edges": 9
+    },
+    {
+      "synapses_per_edge": 283,
+      "edges": 10
+    },
+    {
+      "synapses_per_edge": 284,
+      "edges": 5
+    },
+    {
+      "synapses_per_edge": 285,
+      "edges": 4
+    },
+    {
+      "synapses_per_edge": 286,
+      "edges": 5
+    },
+    {
+      "synapses_per_edge": 287,
+      "edges": 8
+    },
+    {
+      "synapses_per_edge": 288,
+      "edges": 6
+    },
+    {
+      "synapses_per_edge": 289,
+      "edges": 5
+    },
+    {
+      "synapses_per_edge": 290,
+      "edges": 10
+    },
+    {
+      "synapses_per_edge": 291,
+      "edges": 5
+    },
+    {
+      "synapses_per_edge": 292,
+      "edges": 5
+    },
+    {
+      "synapses_per_edge": 293,
+      "edges": 2
+    },
+    {
+      "synapses_per_edge": 294,
+      "edges": 3
+    },
+    {
+      "synapses_per_edge": 295,
+      "edges": 4
+    },
+    {
+      "synapses_per_edge": 296,
+      "edges": 4
+    },
+    {
+      "synapses_per_edge": 298,
+      "edges": 6
+    },
+    {
+      "synapses_per_edge": 299,
+      "edges": 9
+    },
+    {
+      "synapses_per_edge": 300,
+      "edges": 8
+    },
+    {
+      "synapses_per_edge": 301,
+      "edges": 10
+    },
+    {
+      "synapses_per_edge": 302,
+      "edges": 4
+    },
+    {
+      "synapses_per_edge": 303,
+      "edges": 6
+    },
+    {
+      "synapses_per_edge": 304,
+      "edges": 8
+    },
+    {
+      "synapses_per_edge": 305,
+      "edges": 6
+    },
+    {
+      "synapses_per_edge": 306,
+      "edges": 5
+    },
+    {
+      "synapses_per_edge": 307,
+      "edges": 5
+    },
+    {
+      "synapses_per_edge": 308,
+      "edges": 4
+    },
+    {
+      "synapses_per_edge": 309,
+      "edges": 4
+    },
+    {
+      "synapses_per_edge": 310,
+      "edges": 3
+    },
+    {
+      "synapses_per_edge": 311,
+      "edges": 5
+    },
+    {
+      "synapses_per_edge": 312,
+      "edges": 7
+    },
+    {
+      "synapses_per_edge": 313,
+      "edges": 8
+    },
+    {
+      "synapses_per_edge": 314,
+      "edges": 2
+    },
+    {
+      "synapses_per_edge": 315,
+      "edges": 5
+    },
+    {
+      "synapses_per_edge": 316,
+      "edges": 7
+    },
+    {
+      "synapses_per_edge": 317,
+      "edges": 6
+    },
+    {
+      "synapses_per_edge": 318,
+      "edges": 2
+    },
+    {
+      "synapses_per_edge": 320,
+      "edges": 10
+    },
+    {
+      "synapses_per_edge": 321,
+      "edges": 4
+    },
+    {
+      "synapses_per_edge": 322,
+      "edges": 4
+    },
+    {
+      "synapses_per_edge": 323,
+      "edges": 5
+    },
+    {
+      "synapses_per_edge": 324,
+      "edges": 5
+    },
+    {
+      "synapses_per_edge": 325,
+      "edges": 5
+    },
+    {
+      "synapses_per_edge": 326,
+      "edges": 5
+    },
+    {
+      "synapses_per_edge": 327,
+      "edges": 5
+    },
+    {
+      "synapses_per_edge": 328,
+      "edges": 4
+    },
+    {
+      "synapses_per_edge": 329,
+      "edges": 4
+    },
+    {
+      "synapses_per_edge": 330,
+      "edges": 6
+    },
+    {
+      "synapses_per_edge": 331,
+      "edges": 5
+    },
+    {
+      "synapses_per_edge": 332,
+      "edges": 2
+    },
+    {
+      "synapses_per_edge": 333,
+      "edges": 6
+    },
+    {
+      "synapses_per_edge": 334,
+      "edges": 3
+    },
+    {
+      "synapses_per_edge": 335,
+      "edges": 6
+    },
+    {
+      "synapses_per_edge": 336,
+      "edges": 2
+    },
+    {
+      "synapses_per_edge": 337,
+      "edges": 5
+    },
+    {
+      "synapses_per_edge": 338,
+      "edges": 4
+    },
+    {
+      "synapses_per_edge": 339,
+      "edges": 2
+    },
+    {
+      "synapses_per_edge": 340,
+      "edges": 2
+    },
+    {
+      "synapses_per_edge": 341,
+      "edges": 4
+    },
+    {
+      "synapses_per_edge": 342,
+      "edges": 2
+    },
+    {
+      "synapses_per_edge": 343,
+      "edges": 3
+    },
+    {
+      "synapses_per_edge": 344,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 345,
+      "edges": 3
+    },
+    {
+      "synapses_per_edge": 346,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 347,
+      "edges": 3
+    },
+    {
+      "synapses_per_edge": 348,
+      "edges": 2
+    },
+    {
+      "synapses_per_edge": 349,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 350,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 351,
+      "edges": 4
+    },
+    {
+      "synapses_per_edge": 352,
+      "edges": 4
+    },
+    {
+      "synapses_per_edge": 353,
+      "edges": 2
+    },
+    {
+      "synapses_per_edge": 354,
+      "edges": 4
+    },
+    {
+      "synapses_per_edge": 355,
+      "edges": 2
+    },
+    {
+      "synapses_per_edge": 356,
+      "edges": 6
+    },
+    {
+      "synapses_per_edge": 357,
+      "edges": 5
+    },
+    {
+      "synapses_per_edge": 359,
+      "edges": 4
+    },
+    {
+      "synapses_per_edge": 360,
+      "edges": 2
+    },
+    {
+      "synapses_per_edge": 361,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 362,
+      "edges": 4
+    },
+    {
+      "synapses_per_edge": 363,
+      "edges": 3
+    },
+    {
+      "synapses_per_edge": 364,
+      "edges": 4
+    },
+    {
+      "synapses_per_edge": 365,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 367,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 368,
+      "edges": 2
+    },
+    {
+      "synapses_per_edge": 369,
+      "edges": 2
+    },
+    {
+      "synapses_per_edge": 370,
+      "edges": 4
+    },
+    {
+      "synapses_per_edge": 371,
+      "edges": 2
+    },
+    {
+      "synapses_per_edge": 373,
+      "edges": 3
+    },
+    {
+      "synapses_per_edge": 374,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 375,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 376,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 377,
+      "edges": 2
+    },
+    {
+      "synapses_per_edge": 378,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 379,
+      "edges": 2
+    },
+    {
+      "synapses_per_edge": 380,
+      "edges": 5
+    },
+    {
+      "synapses_per_edge": 381,
+      "edges": 3
+    },
+    {
+      "synapses_per_edge": 382,
+      "edges": 3
+    },
+    {
+      "synapses_per_edge": 383,
+      "edges": 4
+    },
+    {
+      "synapses_per_edge": 384,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 385,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 386,
+      "edges": 2
+    },
+    {
+      "synapses_per_edge": 387,
+      "edges": 2
+    },
+    {
+      "synapses_per_edge": 388,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 389,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 390,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 391,
+      "edges": 4
+    },
+    {
+      "synapses_per_edge": 392,
+      "edges": 2
+    },
+    {
+      "synapses_per_edge": 393,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 394,
+      "edges": 3
+    },
+    {
+      "synapses_per_edge": 396,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 397,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 398,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 399,
+      "edges": 2
+    },
+    {
+      "synapses_per_edge": 400,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 401,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 402,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 403,
+      "edges": 2
+    },
+    {
+      "synapses_per_edge": 404,
+      "edges": 4
+    },
+    {
+      "synapses_per_edge": 405,
+      "edges": 3
+    },
+    {
+      "synapses_per_edge": 406,
+      "edges": 2
+    },
+    {
+      "synapses_per_edge": 407,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 408,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 409,
+      "edges": 2
+    },
+    {
+      "synapses_per_edge": 410,
+      "edges": 2
+    },
+    {
+      "synapses_per_edge": 411,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 413,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 414,
+      "edges": 3
+    },
+    {
+      "synapses_per_edge": 416,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 417,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 418,
+      "edges": 2
+    },
+    {
+      "synapses_per_edge": 419,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 420,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 422,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 426,
+      "edges": 4
+    },
+    {
+      "synapses_per_edge": 427,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 429,
+      "edges": 2
+    },
+    {
+      "synapses_per_edge": 430,
+      "edges": 3
+    },
+    {
+      "synapses_per_edge": 431,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 433,
+      "edges": 2
+    },
+    {
+      "synapses_per_edge": 434,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 435,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 438,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 440,
+      "edges": 2
+    },
+    {
+      "synapses_per_edge": 441,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 442,
+      "edges": 3
+    },
+    {
+      "synapses_per_edge": 444,
+      "edges": 2
+    },
+    {
+      "synapses_per_edge": 446,
+      "edges": 3
+    },
+    {
+      "synapses_per_edge": 451,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 452,
+      "edges": 2
+    },
+    {
+      "synapses_per_edge": 453,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 454,
+      "edges": 2
+    },
+    {
+      "synapses_per_edge": 455,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 456,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 458,
+      "edges": 2
+    },
+    {
+      "synapses_per_edge": 459,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 460,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 462,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 465,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 466,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 467,
+      "edges": 2
+    },
+    {
+      "synapses_per_edge": 469,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 470,
+      "edges": 2
+    },
+    {
+      "synapses_per_edge": 471,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 475,
+      "edges": 2
+    },
+    {
+      "synapses_per_edge": 479,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 480,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 481,
+      "edges": 2
+    },
+    {
+      "synapses_per_edge": 482,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 485,
+      "edges": 2
+    },
+    {
+      "synapses_per_edge": 486,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 489,
+      "edges": 4
+    },
+    {
+      "synapses_per_edge": 494,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 495,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 496,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 497,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 502,
+      "edges": 2
+    },
+    {
+      "synapses_per_edge": 504,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 514,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 517,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 519,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 521,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 525,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 526,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 527,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 534,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 535,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 538,
+      "edges": 2
+    },
+    {
+      "synapses_per_edge": 548,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 554,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 557,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 558,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 566,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 569,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 589,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 590,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 591,
+      "edges": 2
+    },
+    {
+      "synapses_per_edge": 594,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 598,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 601,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 606,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 621,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 624,
+      "edges": 2
+    },
+    {
+      "synapses_per_edge": 625,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 636,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 646,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 653,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 656,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 664,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 679,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 680,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 682,
+      "edges": 2
+    },
+    {
+      "synapses_per_edge": 685,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 687,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 695,
+      "edges": 3
+    },
+    {
+      "synapses_per_edge": 701,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 711,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 714,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 716,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 717,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 737,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 739,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 746,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 751,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 754,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 765,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 769,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 770,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 780,
+      "edges": 3
+    },
+    {
+      "synapses_per_edge": 787,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 795,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 796,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 800,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 835,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 852,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 860,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 863,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 881,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 883,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 890,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 898,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 931,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 937,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 944,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 955,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 968,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 975,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 987,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 991,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 998,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 1005,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 1014,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 1076,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 1078,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 1088,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 1102,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 1117,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 1127,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 1136,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 1139,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 1198,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 1250,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 1276,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 1291,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 1296,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 1298,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 1340,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 1374,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 1377,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 1407,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 1461,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 1468,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 1522,
+      "edges": 1
+    },
+    {
+      "synapses_per_edge": 1618,
+      "edges": 1
+    }
+  ],
+  "input_and_readout_degrees": [
+    {
+      "bodyId": 44816,
+      "label": "ir94e",
+      "incoming_at_0_5": 352,
+      "incoming_at_c_star": 175,
+      "retained_fraction": 0.4971590909090909,
+      "loss_gt_half": true,
+      "baseline_zero": false
+    },
+    {
+      "bodyId": 54104,
+      "label": "bitter",
+      "incoming_at_0_5": 157,
+      "incoming_at_c_star": 66,
+      "retained_fraction": 0.42038216560509556,
+      "loss_gt_half": true,
+      "baseline_zero": false
+    },
+    {
+      "bodyId": 71254,
+      "label": "sugar",
+      "incoming_at_0_5": 341,
+      "incoming_at_c_star": 210,
+      "retained_fraction": 0.6158357771260997,
+      "loss_gt_half": false,
+      "baseline_zero": false
+    },
+    {
+      "bodyId": 78240,
+      "label": "sugar",
+      "incoming_at_0_5": 326,
+      "incoming_at_c_star": 160,
+      "retained_fraction": 0.49079754601226994,
+      "loss_gt_half": true,
+      "baseline_zero": false
+    },
+    {
+      "bodyId": 81741,
+      "label": "bitter",
+      "incoming_at_0_5": 177,
+      "incoming_at_c_star": 83,
+      "retained_fraction": 0.4689265536723164,
+      "loss_gt_half": true,
+      "baseline_zero": false
+    },
+    {
+      "bodyId": 85806,
+      "label": "sugar",
+      "incoming_at_0_5": 337,
+      "incoming_at_c_star": 154,
+      "retained_fraction": 0.456973293768546,
+      "loss_gt_half": true,
+      "baseline_zero": false
+    },
+    {
+      "bodyId": 107241,
+      "label": "bitter",
+      "incoming_at_0_5": 180,
+      "incoming_at_c_star": 83,
+      "retained_fraction": 0.46111111111111114,
+      "loss_gt_half": true,
+      "baseline_zero": false
+    },
+    {
+      "bodyId": 111660,
+      "label": "ir94e",
+      "incoming_at_0_5": 209,
+      "incoming_at_c_star": 113,
+      "retained_fraction": 0.5406698564593302,
+      "loss_gt_half": false,
+      "baseline_zero": false
+    },
+    {
+      "bodyId": 115666,
+      "label": "bitter",
+      "incoming_at_0_5": 118,
+      "incoming_at_c_star": 44,
+      "retained_fraction": 0.3728813559322034,
+      "loss_gt_half": true,
+      "baseline_zero": false
+    },
+    {
+      "bodyId": 125111,
+      "label": "bitter",
+      "incoming_at_0_5": 197,
+      "incoming_at_c_star": 89,
+      "retained_fraction": 0.4517766497461929,
+      "loss_gt_half": true,
+      "baseline_zero": false
+    },
+    {
+      "bodyId": 136183,
+      "label": "water",
+      "incoming_at_0_5": 175,
+      "incoming_at_c_star": 89,
+      "retained_fraction": 0.5085714285714286,
+      "loss_gt_half": false,
+      "baseline_zero": false
+    },
+    {
+      "bodyId": 137497,
+      "label": "ir94e",
+      "incoming_at_0_5": 246,
+      "incoming_at_c_star": 119,
+      "retained_fraction": 0.483739837398374,
+      "loss_gt_half": true,
+      "baseline_zero": false
+    },
+    {
+      "bodyId": 139178,
+      "label": "bitter",
+      "incoming_at_0_5": 158,
+      "incoming_at_c_star": 66,
+      "retained_fraction": 0.4177215189873418,
+      "loss_gt_half": true,
+      "baseline_zero": false
+    },
+    {
+      "bodyId": 140619,
+      "label": "water",
+      "incoming_at_0_5": 120,
+      "incoming_at_c_star": 59,
+      "retained_fraction": 0.49166666666666664,
+      "loss_gt_half": true,
+      "baseline_zero": false
+    },
+    {
+      "bodyId": 141663,
+      "label": "water",
+      "incoming_at_0_5": 125,
+      "incoming_at_c_star": 50,
+      "retained_fraction": 0.4,
+      "loss_gt_half": true,
+      "baseline_zero": false
+    },
+    {
+      "bodyId": 144334,
+      "label": "bitter",
+      "incoming_at_0_5": 132,
+      "incoming_at_c_star": 56,
+      "retained_fraction": 0.42424242424242425,
+      "loss_gt_half": true,
+      "baseline_zero": false
+    },
+    {
+      "bodyId": 154359,
+      "label": "ir94e",
+      "incoming_at_0_5": 208,
+      "incoming_at_c_star": 81,
+      "retained_fraction": 0.3894230769230769,
+      "loss_gt_half": true,
+      "baseline_zero": false
+    },
+    {
+      "bodyId": 154544,
+      "label": "bitter",
+      "incoming_at_0_5": 129,
+      "incoming_at_c_star": 37,
+      "retained_fraction": 0.2868217054263566,
+      "loss_gt_half": true,
+      "baseline_zero": false
+    },
+    {
+      "bodyId": 159772,
+      "label": "sugar",
+      "incoming_at_0_5": 228,
+      "incoming_at_c_star": 100,
+      "retained_fraction": 0.43859649122807015,
+      "loss_gt_half": true,
+      "baseline_zero": false
+    },
+    {
+      "bodyId": 160435,
+      "label": "water",
+      "incoming_at_0_5": 227,
+      "incoming_at_c_star": 95,
+      "retained_fraction": 0.4185022026431718,
+      "loss_gt_half": true,
+      "baseline_zero": false
+    },
+    {
+      "bodyId": 163395,
+      "label": "bitter",
+      "incoming_at_0_5": 108,
+      "incoming_at_c_star": 48,
+      "retained_fraction": 0.4444444444444444,
+      "loss_gt_half": true,
+      "baseline_zero": false
+    },
+    {
+      "bodyId": 166190,
+      "label": "water",
+      "incoming_at_0_5": 104,
+      "incoming_at_c_star": 39,
+      "retained_fraction": 0.375,
+      "loss_gt_half": true,
+      "baseline_zero": false
+    },
+    {
+      "bodyId": 167663,
+      "label": "water",
+      "incoming_at_0_5": 118,
+      "incoming_at_c_star": 57,
+      "retained_fraction": 0.4830508474576271,
+      "loss_gt_half": true,
+      "baseline_zero": false
+    },
+    {
+      "bodyId": 168492,
+      "label": "bitter",
+      "incoming_at_0_5": 142,
+      "incoming_at_c_star": 59,
+      "retained_fraction": 0.4154929577464789,
+      "loss_gt_half": true,
+      "baseline_zero": false
+    },
+    {
+      "bodyId": 173462,
+      "label": "bitter",
+      "incoming_at_0_5": 164,
+      "incoming_at_c_star": 72,
+      "retained_fraction": 0.43902439024390244,
+      "loss_gt_half": true,
+      "baseline_zero": false
+    },
+    {
+      "bodyId": 175572,
+      "label": "ir94e",
+      "incoming_at_0_5": 226,
+      "incoming_at_c_star": 99,
+      "retained_fraction": 0.43805309734513276,
+      "loss_gt_half": true,
+      "baseline_zero": false
+    },
+    {
+      "bodyId": 178913,
+      "label": "water",
+      "incoming_at_0_5": 62,
+      "incoming_at_c_star": 31,
+      "retained_fraction": 0.5,
+      "loss_gt_half": false,
+      "baseline_zero": false
+    },
+    {
+      "bodyId": 180314,
+      "label": "sugar",
+      "incoming_at_0_5": 105,
+      "incoming_at_c_star": 40,
+      "retained_fraction": 0.38095238095238093,
+      "loss_gt_half": true,
+      "baseline_zero": false
+    },
+    {
+      "bodyId": 183061,
+      "label": "water",
+      "incoming_at_0_5": 52,
+      "incoming_at_c_star": 20,
+      "retained_fraction": 0.38461538461538464,
+      "loss_gt_half": true,
+      "baseline_zero": false
+    },
+    {
+      "bodyId": 187776,
+      "label": "water",
+      "incoming_at_0_5": 129,
+      "incoming_at_c_star": 59,
+      "retained_fraction": 0.4573643410852713,
+      "loss_gt_half": true,
+      "baseline_zero": false
+    },
+    {
+      "bodyId": 190769,
+      "label": "sugar",
+      "incoming_at_0_5": 88,
+      "incoming_at_c_star": 46,
+      "retained_fraction": 0.5227272727272727,
+      "loss_gt_half": false,
+      "baseline_zero": false
+    },
+    {
+      "bodyId": 199308,
+      "label": "water",
+      "incoming_at_0_5": 83,
+      "incoming_at_c_star": 37,
+      "retained_fraction": 0.4457831325301205,
+      "loss_gt_half": true,
+      "baseline_zero": false
+    },
+    {
+      "bodyId": 200001,
+      "label": "ir94e",
+      "incoming_at_0_5": 203,
+      "incoming_at_c_star": 95,
+      "retained_fraction": 0.46798029556650245,
+      "loss_gt_half": true,
+      "baseline_zero": false
+    },
+    {
+      "bodyId": 203234,
+      "label": "water",
+      "incoming_at_0_5": 57,
+      "incoming_at_c_star": 27,
+      "retained_fraction": 0.47368421052631576,
+      "loss_gt_half": true,
+      "baseline_zero": false
+    },
+    {
+      "bodyId": 208885,
+      "label": "bitter",
+      "incoming_at_0_5": 65,
+      "incoming_at_c_star": 19,
+      "retained_fraction": 0.2923076923076923,
+      "loss_gt_half": true,
+      "baseline_zero": false
+    },
+    {
+      "bodyId": 209688,
+      "label": "ir94e",
+      "incoming_at_0_5": 259,
+      "incoming_at_c_star": 116,
+      "retained_fraction": 0.44787644787644787,
+      "loss_gt_half": true,
+      "baseline_zero": false
+    },
+    {
+      "bodyId": 232730,
+      "label": "ir94e",
+      "incoming_at_0_5": 44,
+      "incoming_at_c_star": 20,
+      "retained_fraction": 0.45454545454545453,
+      "loss_gt_half": true,
+      "baseline_zero": false
+    },
+    {
+      "bodyId": 256844,
+      "label": "bitter",
+      "incoming_at_0_5": 152,
+      "incoming_at_c_star": 67,
+      "retained_fraction": 0.4407894736842105,
+      "loss_gt_half": true,
+      "baseline_zero": false
+    },
+    {
+      "bodyId": 261450,
+      "label": "sugar",
+      "incoming_at_0_5": 94,
+      "incoming_at_c_star": 44,
+      "retained_fraction": 0.46808510638297873,
+      "loss_gt_half": true,
+      "baseline_zero": false
+    },
+    {
+      "bodyId": 262567,
+      "label": "sugar",
+      "incoming_at_0_5": 28,
+      "incoming_at_c_star": 12,
+      "retained_fraction": 0.42857142857142855,
+      "loss_gt_half": true,
+      "baseline_zero": false
+    },
+    {
+      "bodyId": 272263,
+      "label": "sugar",
+      "incoming_at_0_5": 108,
+      "incoming_at_c_star": 47,
+      "retained_fraction": 0.4351851851851852,
+      "loss_gt_half": true,
+      "baseline_zero": false
+    },
+    {
+      "bodyId": 374701,
+      "label": "water",
+      "incoming_at_0_5": 86,
+      "incoming_at_c_star": 39,
+      "retained_fraction": 0.45348837209302323,
+      "loss_gt_half": true,
+      "baseline_zero": false
+    },
+    {
+      "bodyId": 375038,
+      "label": "bitter",
+      "incoming_at_0_5": 75,
+      "incoming_at_c_star": 25,
+      "retained_fraction": 0.3333333333333333,
+      "loss_gt_half": true,
+      "baseline_zero": false
+    },
+    {
+      "bodyId": 511882,
+      "label": "bitter",
+      "incoming_at_0_5": 229,
+      "incoming_at_c_star": 95,
+      "retained_fraction": 0.4148471615720524,
+      "loss_gt_half": true,
+      "baseline_zero": false
+    },
+    {
+      "bodyId": 512551,
+      "label": "sugar",
+      "incoming_at_0_5": 395,
+      "incoming_at_c_star": 206,
+      "retained_fraction": 0.5215189873417722,
+      "loss_gt_half": false,
+      "baseline_zero": false
+    },
+    {
+      "bodyId": 514546,
+      "label": "bitter",
+      "incoming_at_0_5": 214,
+      "incoming_at_c_star": 82,
+      "retained_fraction": 0.38317757009345793,
+      "loss_gt_half": true,
+      "baseline_zero": false
+    },
+    {
+      "bodyId": 514547,
+      "label": "bitter",
+      "incoming_at_0_5": 237,
+      "incoming_at_c_star": 93,
+      "retained_fraction": 0.3924050632911392,
+      "loss_gt_half": true,
+      "baseline_zero": false
+    },
+    {
+      "bodyId": 517255,
+      "label": "bitter",
+      "incoming_at_0_5": 228,
+      "incoming_at_c_star": 106,
+      "retained_fraction": 0.4649122807017544,
+      "loss_gt_half": true,
+      "baseline_zero": false
+    },
+    {
+      "bodyId": 518112,
+      "label": "bitter",
+      "incoming_at_0_5": 219,
+      "incoming_at_c_star": 97,
+      "retained_fraction": 0.4429223744292237,
+      "loss_gt_half": true,
+      "baseline_zero": false
+    },
+    {
+      "bodyId": 518542,
+      "label": "water",
+      "incoming_at_0_5": 129,
+      "incoming_at_c_star": 52,
+      "retained_fraction": 0.40310077519379844,
+      "loss_gt_half": true,
+      "baseline_zero": false
+    },
+    {
+      "bodyId": 522746,
+      "label": "bitter",
+      "incoming_at_0_5": 260,
+      "incoming_at_c_star": 131,
+      "retained_fraction": 0.5038461538461538,
+      "loss_gt_half": false,
+      "baseline_zero": false
+    },
+    {
+      "bodyId": 522752,
+      "label": "bitter",
+      "incoming_at_0_5": 173,
+      "incoming_at_c_star": 59,
+      "retained_fraction": 0.34104046242774566,
+      "loss_gt_half": true,
+      "baseline_zero": false
+    },
+    {
+      "bodyId": 522753,
+      "label": "bitter",
+      "incoming_at_0_5": 236,
+      "incoming_at_c_star": 121,
+      "retained_fraction": 0.5127118644067796,
+      "loss_gt_half": false,
+      "baseline_zero": false
+    },
+    {
+      "bodyId": 522754,
+      "label": "bitter",
+      "incoming_at_0_5": 189,
+      "incoming_at_c_star": 83,
+      "retained_fraction": 0.43915343915343913,
+      "loss_gt_half": true,
+      "baseline_zero": false
+    },
+    {
+      "bodyId": 522761,
+      "label": "bitter",
+      "incoming_at_0_5": 220,
+      "incoming_at_c_star": 93,
+      "retained_fraction": 0.42272727272727273,
+      "loss_gt_half": true,
+      "baseline_zero": false
+    },
+    {
+      "bodyId": 522762,
+      "label": "bitter",
+      "incoming_at_0_5": 235,
+      "incoming_at_c_star": 94,
+      "retained_fraction": 0.4,
+      "loss_gt_half": true,
+      "baseline_zero": false
+    },
+    {
+      "bodyId": 522841,
+      "label": "bitter",
+      "incoming_at_0_5": 278,
+      "incoming_at_c_star": 143,
+      "retained_fraction": 0.5143884892086331,
+      "loss_gt_half": false,
+      "baseline_zero": false
+    },
+    {
+      "bodyId": 531237,
+      "label": "sugar",
+      "incoming_at_0_5": 213,
+      "incoming_at_c_star": 97,
+      "retained_fraction": 0.45539906103286387,
+      "loss_gt_half": true,
+      "baseline_zero": false
+    },
+    {
+      "bodyId": 533618,
+      "label": "bitter",
+      "incoming_at_0_5": 143,
+      "incoming_at_c_star": 67,
+      "retained_fraction": 0.46853146853146854,
+      "loss_gt_half": true,
+      "baseline_zero": false
+    },
+    {
+      "bodyId": 534361,
+      "label": "ir94e",
+      "incoming_at_0_5": 298,
+      "incoming_at_c_star": 157,
+      "retained_fraction": 0.5268456375838926,
+      "loss_gt_half": false,
+      "baseline_zero": false
+    },
+    {
+      "bodyId": 549024,
+      "label": "bitter",
+      "incoming_at_0_5": 135,
+      "incoming_at_c_star": 54,
+      "retained_fraction": 0.4,
+      "loss_gt_half": true,
+      "baseline_zero": false
+    },
+    {
+      "bodyId": 556797,
+      "label": "bitter",
+      "incoming_at_0_5": 135,
+      "incoming_at_c_star": 56,
+      "retained_fraction": 0.4148148148148148,
+      "loss_gt_half": true,
+      "baseline_zero": false
+    },
+    {
+      "bodyId": 557937,
+      "label": "bitter",
+      "incoming_at_0_5": 117,
+      "incoming_at_c_star": 45,
+      "retained_fraction": 0.38461538461538464,
+      "loss_gt_half": true,
+      "baseline_zero": false
+    },
+    {
+      "bodyId": 908747,
+      "label": "ir94e",
+      "incoming_at_0_5": 256,
+      "incoming_at_c_star": 120,
+      "retained_fraction": 0.46875,
+      "loss_gt_half": true,
+      "baseline_zero": false
+    },
+    {
+      "bodyId": 912379,
+      "label": "bitter",
+      "incoming_at_0_5": 164,
+      "incoming_at_c_star": 56,
+      "retained_fraction": 0.34146341463414637,
+      "loss_gt_half": true,
+      "baseline_zero": false
+    },
+    {
+      "bodyId": 919429,
+      "label": "ir94e",
+      "incoming_at_0_5": 46,
+      "incoming_at_c_star": 20,
+      "retained_fraction": 0.43478260869565216,
+      "loss_gt_half": true,
+      "baseline_zero": false
+    },
+    {
+      "bodyId": 933317,
+      "label": "sugar",
+      "incoming_at_0_5": 457,
+      "incoming_at_c_star": 231,
+      "retained_fraction": 0.5054704595185996,
+      "loss_gt_half": false,
+      "baseline_zero": false
+    },
+    {
+      "bodyId": 140334446,
+      "label": "bitter",
+      "incoming_at_0_5": 146,
+      "incoming_at_c_star": 63,
+      "retained_fraction": 0.4315068493150685,
+      "loss_gt_half": true,
+      "baseline_zero": false
+    },
+    {
+      "bodyId": 144295263,
+      "label": "bitter",
+      "incoming_at_0_5": 21,
+      "incoming_at_c_star": 4,
+      "retained_fraction": 0.19047619047619047,
+      "loss_gt_half": true,
+      "baseline_zero": false
+    },
+    {
+      "bodyId": 158893964,
+      "label": "sugar",
+      "incoming_at_0_5": 74,
+      "incoming_at_c_star": 29,
+      "retained_fraction": 0.3918918918918919,
+      "loss_gt_half": true,
+      "baseline_zero": false
+    },
+    {
+      "bodyId": 174444965,
+      "label": "sugar",
+      "incoming_at_0_5": 10,
+      "incoming_at_c_star": 2,
+      "retained_fraction": 0.2,
+      "loss_gt_half": true,
+      "baseline_zero": false
+    },
+    {
+      "bodyId": 214700177,
+      "label": "ir94e",
+      "incoming_at_0_5": 98,
+      "incoming_at_c_star": 53,
+      "retained_fraction": 0.5408163265306123,
+      "loss_gt_half": false,
+      "baseline_zero": false
+    },
+    {
+      "bodyId": 304136793,
+      "label": "bitter",
+      "incoming_at_0_5": 69,
+      "incoming_at_c_star": 23,
+      "retained_fraction": 0.3333333333333333,
+      "loss_gt_half": true,
+      "baseline_zero": false
+    },
+    {
+      "bodyId": 324178811,
+      "label": "bitter",
+      "incoming_at_0_5": 168,
+      "incoming_at_c_star": 70,
+      "retained_fraction": 0.4166666666666667,
+      "loss_gt_half": true,
+      "baseline_zero": false
+    },
+    {
+      "bodyId": 349137284,
+      "label": "sugar",
+      "incoming_at_0_5": 12,
+      "incoming_at_c_star": 1,
+      "retained_fraction": 0.08333333333333333,
+      "loss_gt_half": true,
+      "baseline_zero": false
+    },
+    {
+      "bodyId": 388541892,
+      "label": "water",
+      "incoming_at_0_5": 66,
+      "incoming_at_c_star": 26,
+      "retained_fraction": 0.3939393939393939,
+      "loss_gt_half": true,
+      "baseline_zero": false
+    },
+    {
+      "bodyId": 418840426,
+      "label": "ir94e",
+      "incoming_at_0_5": 95,
+      "incoming_at_c_star": 32,
+      "retained_fraction": 0.3368421052631579,
+      "loss_gt_half": true,
+      "baseline_zero": false
+    },
+    {
+      "bodyId": 456838775,
+      "label": "water",
+      "incoming_at_0_5": 19,
+      "incoming_at_c_star": 7,
+      "retained_fraction": 0.3684210526315789,
+      "loss_gt_half": true,
+      "baseline_zero": false
+    },
+    {
+      "bodyId": 475202322,
+      "label": "sugar",
+      "incoming_at_0_5": 21,
+      "incoming_at_c_star": 9,
+      "retained_fraction": 0.42857142857142855,
+      "loss_gt_half": true,
+      "baseline_zero": false
+    },
+    {
+      "bodyId": 491986845,
+      "label": "ir94e",
+      "incoming_at_0_5": 45,
+      "incoming_at_c_star": 16,
+      "retained_fraction": 0.35555555555555557,
+      "loss_gt_half": true,
+      "baseline_zero": false
+    },
+    {
+      "bodyId": 551057545,
+      "label": "ir94e",
+      "incoming_at_0_5": 46,
+      "incoming_at_c_star": 15,
+      "retained_fraction": 0.32608695652173914,
+      "loss_gt_half": true,
+      "baseline_zero": false
+    },
+    {
+      "bodyId": 553738738,
+      "label": "water",
+      "incoming_at_0_5": 17,
+      "incoming_at_c_star": 7,
+      "retained_fraction": 0.4117647058823529,
+      "loss_gt_half": true,
+      "baseline_zero": false
+    },
+    {
+      "bodyId": 602736959,
+      "label": "bitter",
+      "incoming_at_0_5": 38,
+      "incoming_at_c_star": 12,
+      "retained_fraction": 0.3157894736842105,
+      "loss_gt_half": true,
+      "baseline_zero": false
+    },
+    {
+      "bodyId": 633272971,
+      "label": "ir94e",
+      "incoming_at_0_5": 15,
+      "incoming_at_c_star": 3,
+      "retained_fraction": 0.2,
+      "loss_gt_half": true,
+      "baseline_zero": false
+    },
+    {
+      "bodyId": 766547228,
+      "label": "sugar",
+      "incoming_at_0_5": 22,
+      "incoming_at_c_star": 6,
+      "retained_fraction": 0.2727272727272727,
+      "loss_gt_half": true,
+      "baseline_zero": false
+    },
+    {
+      "bodyId": 772366874,
+      "label": "bitter",
+      "incoming_at_0_5": 87,
+      "incoming_at_c_star": 26,
+      "retained_fraction": 0.2988505747126437,
+      "loss_gt_half": true,
+      "baseline_zero": false
+    },
+    {
+      "bodyId": 786482749,
+      "label": "water",
+      "incoming_at_0_5": 12,
+      "incoming_at_c_star": 4,
+      "retained_fraction": 0.3333333333333333,
+      "loss_gt_half": true,
+      "baseline_zero": false
+    },
+    {
+      "bodyId": 792429427,
+      "label": "ir94e",
+      "incoming_at_0_5": 48,
+      "incoming_at_c_star": 22,
+      "retained_fraction": 0.4583333333333333,
+      "loss_gt_half": true,
+      "baseline_zero": false
+    },
+    {
+      "bodyId": 911389008,
+      "label": "bitter",
+      "incoming_at_0_5": 45,
+      "incoming_at_c_star": 18,
+      "retained_fraction": 0.4,
+      "loss_gt_half": true,
+      "baseline_zero": false
+    },
+    {
+      "bodyId": 912111327,
+      "label": "ir94e",
+      "incoming_at_0_5": 82,
+      "incoming_at_c_star": 29,
+      "retained_fraction": 0.35365853658536583,
+      "loss_gt_half": true,
+      "baseline_zero": false
+    },
+    {
+      "bodyId": 947005552,
+      "label": "ir94e",
+      "incoming_at_0_5": 36,
+      "incoming_at_c_star": 17,
+      "retained_fraction": 0.4722222222222222,
+      "loss_gt_half": true,
+      "baseline_zero": false
+    },
+    {
+      "bodyId": 10331,
+      "label": "MN9 L primary",
+      "incoming_at_0_5": 6012,
+      "incoming_at_c_star": 3814,
+      "retained_fraction": 0.634397870924817,
+      "loss_gt_half": false,
+      "baseline_zero": false
+    },
+    {
+      "bodyId": 16949,
+      "label": "MN9 R secondary",
+      "incoming_at_0_5": 556,
+      "incoming_at_c_star": 282,
+      "retained_fraction": 0.5071942446043165,
+      "loss_gt_half": false,
+      "baseline_zero": false
+    }
+  ],
+  "flagged_body_ids": [
+    44816,
+    54104,
+    78240,
+    81741,
+    85806,
+    107241,
+    115666,
+    125111,
+    137497,
+    139178,
+    140619,
+    141663,
+    144334,
+    154359,
+    154544,
+    159772,
+    160435,
+    163395,
+    166190,
+    167663,
+    168492,
+    173462,
+    175572,
+    180314,
+    183061,
+    187776,
+    199308,
+    200001,
+    203234,
+    208885,
+    209688,
+    232730,
+    256844,
+    261450,
+    262567,
+    272263,
+    374701,
+    375038,
+    511882,
+    514546,
+    514547,
+    517255,
+    518112,
+    518542,
+    522752,
+    522754,
+    522761,
+    522762,
+    531237,
+    533618,
+    549024,
+    556797,
+    557937,
+    908747,
+    912379,
+    919429,
+    140334446,
+    144295263,
+    158893964,
+    174444965,
+    304136793,
+    324178811,
+    349137284,
+    388541892,
+    418840426,
+    456838775,
+    475202322,
+    491986845,
+    551057545,
+    553738738,
+    602736959,
+    633272971,
+    766547228,
+    772366874,
+    786482749,
+    792429427,
+    911389008,
+    912111327,
+    947005552
+  ],
+  "zero_baseline_body_ids": [],
+  "sources": [
+    {
+      "path": "data/malecns/substrate_record_brain.json",
+      "bytes": 5689,
+      "sha256": "0420688e48b7dc706c1b72621b427ac3d0ee3017b07daa38c8c875bf103b5b66"
+    },
+    {
+      "path": "data/malecns/cells.json",
+      "bytes": 20697,
+      "sha256": "f29dd1511e5484d70062cf44d448acfa63e8ef89b49ab7cc281108e5be234c99"
+    }
+  ],
+  "builder": {
+    "path": "sim/malecns/density_match_substrate.py",
+    "bytes": 7943,
+    "sha256": "a47c4d83cbe07964a842748b9d3028593ff7ed22326ba86a18454013d970b8b7"
+  },
+  "artifacts": {
+    "neuron_index.csv": {
+      "path": "data/malecns/derived/density_matched/neuron_index.csv",
+      "bytes": 23842803,
+      "sha256": "704f99379279b1437bc90ca48a35d1a9a9c20edb1fb85a66ac837df007bf1e47"
+    },
+    "completeness.csv": {
+      "path": "data/malecns/derived/density_matched/completeness.csv",
+      "bytes": 951648,
+      "sha256": "c3b0048a2cfd71b99bcb54747031a8260bf4a05253143bfc1b04ef5a78d404a3"
+    },
+    "connectivity.parquet": {
+      "path": "data/malecns/derived/density_matched/connectivity.parquet",
+      "bytes": 55247331,
+      "sha256": "ae69a47a5c60581ccc1fe51454192b453fd481c367672f2d2bcbd5cd9af2b0fa"
+    }
+  },
+  "wall_seconds": 38.969608299958054
+}

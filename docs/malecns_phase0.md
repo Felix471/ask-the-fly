@@ -552,3 +552,158 @@ Use the full v1.0 `minconf-0.5` partner export, the exact M1f 146,221-neuron ros
 Before simulation, report full-file URL/size/SHA256, `c*`, graph counts, exact synapses-per-edge histogram, and incoming synapse counts for all 91 input cells and both MN9s versus the same brain cut at 0.5. Flag every loss strictly greater than 50%; a zero baseline is reported separately. Recall at `c*` requires published threshold-calibrated validation, not retained-contact fraction; report unavailable if that calibration cannot be established. **Stop at this substrate checkpoint and await the owner's go.**
 
 After that checkpoint only: one candidate, recurrent0.275 mV, stimulus68.75 mV/event unchanged, remaining protocol unchanged. Gates A–D plus S decide on L10331; R16949 is recorded, not deciding. Same M1 seeds20260910–20260939,420 A–D trials plus60 A′ trials (sugar17 and LB3c12 at120 Hz),480 total. Pass requires A, B, C, D and all S components on10331. No isolated gate repair or additional candidate follows. Whatever the result, append a dated ledger of M1, M1c all/mn9, M1d, M1f unscaled/density and M1h, preserving original rules/results, and close the male line pending replies from Tastekin and the fly-brain-minecraft author; update the memo then. No M1h trials have run.
+
+## M1h substrate checkpoint — 2026-09-14
+
+**STOP before simulation:** 79 of 91 input cells lose more than half their incoming synapses. Neither MN9 crosses that threshold. No M1h trial has run.
+
+Density-only declaration `a8234d3`; builder `5187492`. Full-file contacts reproduce every M1f brain edge count at0.5 exactly. Same roster, endpoint cut and signs; VNC-local contacts between retained crossing neurons remain. The cutoff is selected without reading any trial activity.
+
+| Measure | Value |
+|---|---:|
+| `c*` (display) | 0.869 |
+| `c*` (exact stored float32 value) | 0.8690000176429749 |
+| Neurons, including isolated | 146,221 |
+| Edges | 15,569,773 |
+| Synapses | 57,499,865 |
+| Male mean unsigned in-degree | 393.239445770 |
+| Female mean unsigned in-degree | 393.056225160 |
+| Ratio | 1.000466144 |
+| M1f ratio at0.5 | 1.761181496 |
+| Contacts retained versus brain0.5 | 56.8065% |
+
+Full [partner file](https://storage.googleapis.com/flyem-male-cns/v1.0/connectome-data/flat-connectome/syn-partners-male-cns-v1.0-minconf-0.5.feather): **6,777,179,098 bytes**; SHA256 `959d8ef4173b35382a3e6acfaf5167c795b6d10b877572d146af04e1b487bc07`. [Substrate record, exact histogram, per-cell degrees and artifact hashes](../data/malecns/substrate_record_density_matched.json). Build/count/audit wall time 39.0s, excluding download. No Brian2 run.
+
+The selected breakpoint is the closest density match among all486,079 distinct stored brain confidence values. Neighbouring achievable choices establish the discontinuity; no contacts tied at the cutoff are selectively removed:
+
+| Cutoff | Retained synapses | Density ratio |
+|---|---:|---:|
+| 0.8689990043640137 | 57,499,950 | 1.000467622 |
+| 0.8690000176429749 | 57,499,865 | 1.000466144 |
+| 0.8690009713172913 | 57,356,709 | 0.997975308 |
+
+### Synapses per edge
+
+| Synapses per edge | Number of edges |
+|---|---:|
+| 1 | 7,248,536 |
+| 2 | 2,908,892 |
+| 3 | 1,533,547 |
+| 4 | 935,401 |
+| ≥5 | 2,943,397 |
+| Total | 15,569,773 |
+
+The record contains every integer-weight bin, not just the grouped ≥5 bin.
+
+### Recall cost and source limitation
+
+The newly retrieved [Berg supplement, Fig. S8E](https://ars.els-cdn.com/content/image/1-s2.0-S0092867426009426-mmc1.pdf) explicitly reports precision0.82 and recall0.81 at released cutoff0.5. The rest of its precision–recall curve has no confidence labels. The published ROI connection/T-bar tables likewise contain no cutoff column. Therefore **recall at0.869 is unavailable from these sources**, not0.81 and not56.8%. Contact retention is a graph-size measurement, not ground-truth recall; neither multiplication by0.81 nor interpolation along an unlabeled curve establishes it. This missing calibration is a cost uncertainty at the checkpoint. Supplement SHA256 `a7bd4e6e572a658635f082ae7e812b096ef0f7c9b964bb7adf35d207191572fb`,10,650,236 bytes; whole S8 page and caption visually inspected. See the [M1g source follow-up](malecns_synapse_confidence.md#m1h-source-follow-up--2026-09-14).
+
+### Incoming synapse loss before any run
+
+Comparison is within the same M1f brain roster at0.5, not the whole-CNS degree. Loss means incoming synapse count, not unique partners; strictly greater than50% is flagged. All91 inputs have nonzero baseline degree. The flag does not measure loss of the external Poisson drive, which remains unchanged.
+
+| Class | Cells flagged / total |
+|---|---:|
+| sugar | 13/17 |
+| bitter | 35/38 |
+| water | 15/17 |
+| ir94e | 16/19 |
+
+| Cell / class | Body ID | Incoming at0.5 | Incoming at `c*` | Retained | Loss >50% |
+|---|---:|---:|---:|---:|---|
+| MN9 L primary | 10331 | 6,012 | 3,814 | 63.44% | No |
+| MN9 R secondary | 16949 | 556 | 282 | 50.72% | No |
+| ir94e | 44816 | 352 | 175 | 49.72% | FLAG |
+| bitter | 54104 | 157 | 66 | 42.04% | FLAG |
+| sugar | 71254 | 341 | 210 | 61.58% | No |
+| sugar | 78240 | 326 | 160 | 49.08% | FLAG |
+| bitter | 81741 | 177 | 83 | 46.89% | FLAG |
+| sugar | 85806 | 337 | 154 | 45.70% | FLAG |
+| bitter | 107241 | 180 | 83 | 46.11% | FLAG |
+| ir94e | 111660 | 209 | 113 | 54.07% | No |
+| bitter | 115666 | 118 | 44 | 37.29% | FLAG |
+| bitter | 125111 | 197 | 89 | 45.18% | FLAG |
+| water | 136183 | 175 | 89 | 50.86% | No |
+| ir94e | 137497 | 246 | 119 | 48.37% | FLAG |
+| bitter | 139178 | 158 | 66 | 41.77% | FLAG |
+| water | 140619 | 120 | 59 | 49.17% | FLAG |
+| water | 141663 | 125 | 50 | 40.00% | FLAG |
+| bitter | 144334 | 132 | 56 | 42.42% | FLAG |
+| ir94e | 154359 | 208 | 81 | 38.94% | FLAG |
+| bitter | 154544 | 129 | 37 | 28.68% | FLAG |
+| sugar | 159772 | 228 | 100 | 43.86% | FLAG |
+| water | 160435 | 227 | 95 | 41.85% | FLAG |
+| bitter | 163395 | 108 | 48 | 44.44% | FLAG |
+| water | 166190 | 104 | 39 | 37.50% | FLAG |
+| water | 167663 | 118 | 57 | 48.31% | FLAG |
+| bitter | 168492 | 142 | 59 | 41.55% | FLAG |
+| bitter | 173462 | 164 | 72 | 43.90% | FLAG |
+| ir94e | 175572 | 226 | 99 | 43.81% | FLAG |
+| water | 178913 | 62 | 31 | 50.00% | No |
+| sugar | 180314 | 105 | 40 | 38.10% | FLAG |
+| water | 183061 | 52 | 20 | 38.46% | FLAG |
+| water | 187776 | 129 | 59 | 45.74% | FLAG |
+| sugar | 190769 | 88 | 46 | 52.27% | No |
+| water | 199308 | 83 | 37 | 44.58% | FLAG |
+| ir94e | 200001 | 203 | 95 | 46.80% | FLAG |
+| water | 203234 | 57 | 27 | 47.37% | FLAG |
+| bitter | 208885 | 65 | 19 | 29.23% | FLAG |
+| ir94e | 209688 | 259 | 116 | 44.79% | FLAG |
+| ir94e | 232730 | 44 | 20 | 45.45% | FLAG |
+| bitter | 256844 | 152 | 67 | 44.08% | FLAG |
+| sugar | 261450 | 94 | 44 | 46.81% | FLAG |
+| sugar | 262567 | 28 | 12 | 42.86% | FLAG |
+| sugar | 272263 | 108 | 47 | 43.52% | FLAG |
+| water | 374701 | 86 | 39 | 45.35% | FLAG |
+| bitter | 375038 | 75 | 25 | 33.33% | FLAG |
+| bitter | 511882 | 229 | 95 | 41.48% | FLAG |
+| sugar | 512551 | 395 | 206 | 52.15% | No |
+| bitter | 514546 | 214 | 82 | 38.32% | FLAG |
+| bitter | 514547 | 237 | 93 | 39.24% | FLAG |
+| bitter | 517255 | 228 | 106 | 46.49% | FLAG |
+| bitter | 518112 | 219 | 97 | 44.29% | FLAG |
+| water | 518542 | 129 | 52 | 40.31% | FLAG |
+| bitter | 522746 | 260 | 131 | 50.38% | No |
+| bitter | 522752 | 173 | 59 | 34.10% | FLAG |
+| bitter | 522753 | 236 | 121 | 51.27% | No |
+| bitter | 522754 | 189 | 83 | 43.92% | FLAG |
+| bitter | 522761 | 220 | 93 | 42.27% | FLAG |
+| bitter | 522762 | 235 | 94 | 40.00% | FLAG |
+| bitter | 522841 | 278 | 143 | 51.44% | No |
+| sugar | 531237 | 213 | 97 | 45.54% | FLAG |
+| bitter | 533618 | 143 | 67 | 46.85% | FLAG |
+| ir94e | 534361 | 298 | 157 | 52.68% | No |
+| bitter | 549024 | 135 | 54 | 40.00% | FLAG |
+| bitter | 556797 | 135 | 56 | 41.48% | FLAG |
+| bitter | 557937 | 117 | 45 | 38.46% | FLAG |
+| ir94e | 908747 | 256 | 120 | 46.88% | FLAG |
+| bitter | 912379 | 164 | 56 | 34.15% | FLAG |
+| ir94e | 919429 | 46 | 20 | 43.48% | FLAG |
+| sugar | 933317 | 457 | 231 | 50.55% | No |
+| bitter | 140334446 | 146 | 63 | 43.15% | FLAG |
+| bitter | 144295263 | 21 | 4 | 19.05% | FLAG |
+| sugar | 158893964 | 74 | 29 | 39.19% | FLAG |
+| sugar | 174444965 | 10 | 2 | 20.00% | FLAG |
+| ir94e | 214700177 | 98 | 53 | 54.08% | No |
+| bitter | 304136793 | 69 | 23 | 33.33% | FLAG |
+| bitter | 324178811 | 168 | 70 | 41.67% | FLAG |
+| sugar | 349137284 | 12 | 1 | 8.33% | FLAG |
+| water | 388541892 | 66 | 26 | 39.39% | FLAG |
+| ir94e | 418840426 | 95 | 32 | 33.68% | FLAG |
+| water | 456838775 | 19 | 7 | 36.84% | FLAG |
+| sugar | 475202322 | 21 | 9 | 42.86% | FLAG |
+| ir94e | 491986845 | 45 | 16 | 35.56% | FLAG |
+| ir94e | 551057545 | 46 | 15 | 32.61% | FLAG |
+| water | 553738738 | 17 | 7 | 41.18% | FLAG |
+| bitter | 602736959 | 38 | 12 | 31.58% | FLAG |
+| ir94e | 633272971 | 15 | 3 | 20.00% | FLAG |
+| sugar | 766547228 | 22 | 6 | 27.27% | FLAG |
+| bitter | 772366874 | 87 | 26 | 29.89% | FLAG |
+| water | 786482749 | 12 | 4 | 33.33% | FLAG |
+| ir94e | 792429427 | 48 | 22 | 45.83% | FLAG |
+| bitter | 911389008 | 45 | 18 | 40.00% | FLAG |
+| ir94e | 912111327 | 82 | 29 | 35.37% | FLAG |
+| ir94e | 947005552 | 36 | 17 | 47.22% | FLAG |
+
+The 480-trial experiment, final variant ledger/closing section and corresponding memo closure remain pending this checkpoint. No gate result or pass/fail is assigned to M1h yet.
