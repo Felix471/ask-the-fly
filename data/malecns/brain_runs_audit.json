@@ -1,0 +1,52 @@
+{
+  "candidates": {
+    "unscaled": {
+      "raw_trials": 480,
+      "MN9_neuron_trials": 960,
+      "M1_input_arrays_identical": 480,
+      "A200_B0_network_pairs_identical": 30,
+      "AP_shared_trains_identical": 360,
+      "runtime_weight_logs": 8,
+      "raw_stats_gates_AP_source_and_weight_checks": "PASS",
+      "sources": [
+        {
+          "path": "data/malecns/brain_unscaled_results.json",
+          "bytes": 18040,
+          "sha256": "5e270b82d27dec7cff973719276b01d88c2cc10f0fa79b2f1baeb8b1dfdcdec5"
+        },
+        {
+          "path": "data/malecns/runs/m1f/unscaled/full_results.json",
+          "bytes": 1026018,
+          "sha256": "f8f02f8c15484c8bf81865aefe3391e7c6775f95820365ec05d40df544ce09f8"
+        }
+      ]
+    },
+    "density": {
+      "raw_trials": 480,
+      "MN9_neuron_trials": 960,
+      "M1_input_arrays_identical": 480,
+      "A200_B0_network_pairs_identical": 30,
+      "AP_shared_trains_identical": 360,
+      "runtime_weight_logs": 8,
+      "raw_stats_gates_AP_source_and_weight_checks": "PASS",
+      "sources": [
+        {
+          "path": "data/malecns/brain_density_results.json",
+          "bytes": 17332,
+          "sha256": "f4b3490b4da0c9c16144d4e96821c4e51537c07d5020b87d7762049b5d891332"
+        },
+        {
+          "path": "data/malecns/runs/m1f/density/full_results.json",
+          "bytes": 1015275,
+          "sha256": "3c2ab7c3f17051f70326418c5090a376f5aba6ad1a672549b81cfcce12079bcf"
+        }
+      ]
+    }
+  },
+  "cross_candidate_input_trains_identical": 43680,
+  "auditor": {
+    "path": "sim/malecns/audit_brain.py",
+    "bytes": 7387,
+    "sha256": "8151bdde320afea1cad95da543712261c8023b197a57b398ace81c7969fec024"
+  }
+}

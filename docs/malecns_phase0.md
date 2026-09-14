@@ -1,4 +1,4 @@
-# MaleCNS Phase 0 report — M1, M1c and M1d
+# MaleCNS Phase 0 report — M1, M1c, M1d and M1f
 
 ## Run metadata
 
@@ -444,3 +444,97 @@ Direct histograms of the unsigned `Connectivity` column, before simulation filte
 [Shiu et al. 2024, Methods, Computational model](https://pmc.ncbi.nlm.nih.gov/articles/PMC11446845/) defines connection strength as FlyWire connectivity times presynaptic sign times `W_syn`. It specifies a cleft-score cutoff of 50 in the neurotransmitter-prediction procedure, **not** a five-synapse-per-edge cutoff; no >=5 edge threshold is stated there. The paper describes v630, whereas the directly audited frozen female file is `2025_Connectivity_783.parquet`. The male graph uses the `minconf-0.5` release with endpoint-roster filtering and no additional edge-count threshold; synapse confidence and aggregate edge count are different filters.
 
 **Decision:** the female graph is not effectively >=5. The owner's conditional third M1f candidate is therefore not triggered; the two pre-declared candidates and their substrates remain unchanged. `r_all = 1.895191250` and `r_brain = 1.761181496` do not measure a female >=5 versus male all-edge discrepancy. This does not establish equivalence of upstream synapse detection, confidence filtering, reconstruction, or roster policies. No new simulation was used for this audit.
+
+## M1f checkpoint — brain-only endpoint approximation
+
+Results: **unscaled: FAIL**, **density: FAIL**. No candidate is selected automatically; no additional variant is run.
+
+Structural rationale, cut limitations, two weights and S criteria were declared above before results. Source declaration `4d1bb58`; preflight `b2dbc51`. Unscaled started at `b2dbc51`, density at `7140e47` after the separate edge-threshold audit commit; all frozen simulation-source and protocol hashes stayed identical. Same91 physical input slots and M1 seeds20260910–20260939,30 trials per condition;480 per candidate,960 total. Pools sequential,8 workers; reserve15.13 GiB from60.51 GiB WSL available (host80.45 GiB),5.4 GiB/worker budget.
+
+| Substrate | Neurons | Edges | Synapses | Mean unsigned in-degree | Male/female ratio |
+|---|---:|---:|---:|---:|---:|
+| Male brain endpoint cut | 146,221 | 21,884,935 | 101,220,515 | 692.243351 | 1.761181496 |
+| Male whole CNS (M0) | 166,700 | 25,582,938 | 124,177,617 | 744.916719 | 1.895191250 |
+| Female frozen | 138,639 | 15,091,983 | 54,492,922 | 393.056225 | 1 |
+
+[Brain record and SHA256 hashes](../data/malecns/substrate_record_brain.json); [edge-for-edge audit](../data/malecns/brain_substrate_audit.json). This is not an exact anatomical brain cut: crossing-body VNC synapses cannot be removed from aggregate endpoint counts. No sign rule, female substrate, product or scoring changes.
+
+| Gate, L10331 only | Unscaled0.275 | Density-scaled0.156145179 |
+|---|---|---|
+| A | PASS | PASS |
+| B | FAIL | PASS |
+| C | FAIL | PASS |
+| D | PASS | PASS |
+| S1 | PASS (5/5 positive) | FAIL (2/5 positive) |
+| S2 | PASS | PASS |
+| S3 | PASS (max/min 1.013630) | PASS (max/min 1.306577) |
+| S | PASS | FAIL |
+| Overall A–D + S | FAIL | FAIL |
+
+| Secondary R16949 gate | Unscaled | Density-scaled |
+|---|---|---|
+| A | FAIL | FAIL |
+| B | PASS | FAIL |
+| C | PASS | PASS |
+| D | PASS | PASS |
+
+R16949 is recorded but not used for acceptance; S is evaluated on L10331 only, as pre-declared. Historical D is the completeness predicate; literal baseline-zero passes on both sides for both candidates. S3 is the specified sugar200 max/min bound, not a general statistical test of unimodality.
+
+### Five-level sugar curve
+
+Mean ± population SD, Hz, n=30. Female frozen23 reference is historical pre-correction Phase0 at25/50/100/200 and the corrected frozen-grid120 point; not a matched five-level female rerun. Shiu L is female contralateral, Shiu R ipsilateral; male L is ipsilateral. Hypnagogia reports **80.4 Hz at200**, with brain-only144,209 neurons,0.581 scaling, different roster/sign and mapped-input definitions; no matched bilateral values or lower-dose curve are supplied by that reported comparison. It is contextual evidence, not a gate or target fit. [Female references](../data/malecns/phase0_female_reference.json); [grid120](../data/lookup_table.json); [hypnagogia source](https://github.com/ankthba/hypnagogia/blob/86da5f93e25a2f1ac78c2fa810f34a4a57992b66/results.md#L45-L60).
+
+| Sugar Hz | Unscaled L | Unscaled R | Density L | Density R | Female Shiu L | Female Shiu R | Hypnagogia MN9 |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| 25 | 28.800 ± 34.783 | 5.967 ± 8.890 | 0.000 ± 0.000 | 0.000 ± 0.000 | 0.100 ± 0.300 | 0.067 ± 0.359 | Not reported |
+| 50 | 33.267 ± 20.898 | 5.867 ± 4.193 | 0.000 ± 0.000 | 0.000 ± 0.000 | 17.633 ± 4.854 | 13.267 ± 3.872 | Not reported |
+| 100 | 76.100 ± 16.232 | 11.733 ± 4.033 | 0.000 ± 0.000 | 0.000 ± 0.000 | 67.233 ± 4.724 | 49.500 ± 4.105 | Not reported |
+| 120 | 88.267 ± 11.673 | 14.600 ± 3.738 | 0.833 ± 3.257 | 0.000 ± 0.000 | 74.633 ± 4.476 | 54.700 ± 4.713 | Not reported |
+| 200 | 126.200 ± 4.996 | 30.967 ± 2.316 | 19.733 ± 3.596 | 0.000 ± 0.000 | 93.300 ± 5.780 | 62.067 ± 4.633 | 80.4 (reported mean) |
+
+### All conditions: network activity and both MN9s
+
+| Condition | Unscaled L Hz | Unscaled R Hz | Unscaled network spikes median [min–max] | Density L Hz | Density R Hz | Density network spikes median [min–max] |
+|---|---:|---:|---:|---:|---:|---:|
+| A_s25_b0 | 28.800 ± 34.783 | 5.967 ± 8.890 | 787,162.0 [107,784–951,255] | 0.000 ± 0.000 | 0.000 ± 0.000 | 482.5 [438–537] |
+| A_s50_b0 | 33.267 ± 20.898 | 5.867 ± 4.193 | 929,500.5 [143,673–992,204] | 0.000 ± 0.000 | 0.000 ± 0.000 | 1,211.5 [1,116–1,432] |
+| A_s100_b0 | 76.100 ± 16.232 | 11.733 ± 4.033 | 1,054,082.5 [956,940–1,081,850] | 0.000 ± 0.000 | 0.000 ± 0.000 | 3,011.0 [2,665–3,304] |
+| A_s200_b0 | 126.200 ± 4.996 | 30.967 ± 2.316 | 1,102,476.5 [1,093,286–1,108,188] | 19.733 ± 3.596 | 0.000 ± 0.000 | 391,462.0 [315,748–412,549] |
+| B_s200_b0 | 126.200 ± 4.996 | 30.967 ± 2.316 | 1,102,476.5 [1,093,286–1,108,188] | 19.733 ± 3.596 | 0.000 ± 0.000 | 391,462.0 [315,748–412,549] |
+| B_s200_b25 | 13.133 ± 33.389 | 0.000 ± 0.000 | 1,104,273.5 [1,060,696–1,114,221] | 0.067 ± 0.249 | 0.000 ± 0.000 | 342,943.5 [15,254–419,762] |
+| B_s200_b50 | 0.000 ± 0.000 | 0.000 ± 0.000 | 1,105,089.5 [1,056,398–1,113,666] | 0.000 ± 0.000 | 0.000 ± 0.000 | 315,401.5 [17,806–421,184] |
+| B_s200_b100 | 0.000 ± 0.000 | 0.000 ± 0.000 | 1,107,289.5 [1,068,213–1,117,447] | 0.000 ± 0.000 | 0.000 ± 0.000 | 373,675.0 [24,584–430,175] |
+| B_s200_b200 | 0.033 ± 0.180 | 0.000 ± 0.000 | 1,119,421.0 [1,084,981–1,123,868] | 0.000 ± 0.000 | 0.000 ± 0.000 | 296,485.0 [32,727–438,182] |
+| C_s0_b25 | 25.067 ± 45.483 | 0.000 ± 0.000 | 1,023,031.5 [192,577–1,060,388] | 0.000 ± 0.000 | 0.000 ± 0.000 | 9,992.0 [9,329–369,109] |
+| C_s0_b50 | 28.767 ± 47.645 | 0.000 ± 0.000 | 1,055,591.0 [1,025,867–1,076,162] | 0.000 ± 0.000 | 0.000 ± 0.000 | 115,099.5 [12,512–345,689] |
+| C_s0_b100 | 76.600 ± 50.215 | 0.000 ± 0.000 | 1,058,075.5 [1,001,729–1,073,774] | 0.000 ± 0.000 | 0.000 ± 0.000 | 206,150.0 [18,170–380,748] |
+| C_s0_b200 | 35.433 ± 54.136 | 0.000 ± 0.000 | 1,075,743.0 [1,051,980–1,092,783] | 0.000 ± 0.000 | 0.000 ± 0.000 | 27,721.0 [26,776–382,835] |
+| D_s0_b0 | 0.000 ± 0.000 | 0.000 ± 0.000 | 0.0 [0–0] | 0.000 ± 0.000 | 0.000 ± 0.000 | 0.0 [0–0] |
+| AP_sugar_120 | 88.267 ± 11.673 | 14.600 ± 3.738 | 1,075,834.0 [1,051,247–1,089,050] | 0.833 ± 3.257 | 0.000 ± 0.000 | 3,745.0 [3,435–336,581] |
+| AP_sugar_lb3c_120 | 82.467 ± 17.517 | 13.367 ± 4.658 | 1,044,834.0 [932,651–1,081,932] | 0.033 ± 0.180 | 0.000 ± 0.000 | 3,000.0 [2,626–3,250] |
+
+### A′ at120 Hz
+
+Both sets are newly run with paired seeds and identical91-slot layout; subset=LB3c12, union=sugar17.
+
+| Candidate | L subset−union Hz | R subset−union Hz | L lower/equal/higher trials | R lower/equal/higher trials |
+|---|---:|---:|---:|---:|
+| unscaled | -5.800 ± 21.394 | -1.233 ± 6.184 | 19/1/10 | 18/2/10 |
+| density | -0.800 ± 3.270 | 0.000 ± 0.000 | 3/26/1 | 0/30/0 |
+
+### Execution and verification
+
+| Candidate | Parallel wall seconds | Peak worker GiB | Completion UTC |
+|---|---:|---:|---|
+| unscaled | 812.1 | 3.089 | 2026-09-14T18:45:57.391006+00:00 |
+| density | 368.4 | 3.101 | 2026-09-14T18:52:05.996071+00:00 |
+
+Live per-worker weights were checked after construction and restore before positive-duration runs: stimulus68.75 mV/event for both; recurrence0.275 or0.1561451789913389 mV per signed synapse. All worker logs are hashed in the result manifests. [Unscaled result](../data/malecns/brain_unscaled_results.json); [density result](../data/malecns/brain_density_results.json).
+
+[Saved-event audit](../data/malecns/brain_runs_audit.json): 960 trials /1920 MN9-neuron trials reconstructed; rates, latencies, driven-cell counts, network counts, gates and A′ statistics pass. Every input array matches M1; 43,680 cross-candidate input trains match; each candidate has360 identical shared A′ trains and30 identical A200/B0 network pairs. Repeated A200/B0 or seeds across variants are not independent extra replicates. Raw spikes remain ignored under data/malecns/runs/m1f/.
+
+Interpretation under the unchanged gates: the unscaled brain cut has a five-level rising mean sugar curve, but fails B because the mean rises from0 at bitter100 to0.033 Hz at bitter200, and fails C because bitter-alone L means25.067–76.600 Hz exceed1 Hz. The density-scaled cut passes A–D but has positive L means only at120 and200 Hz, so fails S1. Large network counts can persist when MN9 is silent; passing S3 at200 does not establish network stability at other conditions. Neither candidate passes the complete pre-declared rule.
+
+Verification:55 male tests,315 existing Python tests,67 Node tests, release validation,82 local report links, generated-report comparison and diff whitespace checks pass.
+
+Checkpoint only: no further variant is selected or run.
