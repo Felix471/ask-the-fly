@@ -1,0 +1,218 @@
+{
+  "protocol_version": "malecns-phase0-1.0",
+  "data_version": "male-cns:v1.0",
+  "connectivity_file": "data/malecns/derived/connectivity.parquet",
+  "completeness_file": "data/malecns/derived/completeness.csv",
+  "model": {
+    "source": "vendor/fly-brain/code/paper-phil-drosophila/model.py (MIT, Shiu et al. 2024)",
+    "v_0_mV": -52,
+    "v_rst_mV": -52,
+    "v_th_mV": -45,
+    "t_mbr_ms": 20,
+    "tau_ms": 5,
+    "t_rfc_ms": 2.2,
+    "t_dly_ms": 1.8,
+    "w_syn_mV": 0.275,
+    "f_poi": 250,
+    "integration": "linear",
+    "dt_ms": 0.1
+  },
+  "trial": {
+    "duration_ms": 1000,
+    "n_trials": 30,
+    "sanity_n_trials": 5,
+    "seed_rule": "trial i uses seed base_seed+i; base_seed=20260910"
+  },
+  "stimulus": {
+    "type": "PoissonInput per GRN, N=1, weight=w_syn*f_poi, refractory of stimulated GRNs set to 0",
+    "channels": {
+      "sugar": {
+        "cell_set": "sugar",
+        "count": 17
+      },
+      "bitter": {
+        "cell_set": "bitter",
+        "count": 38
+      },
+      "water": {
+        "cell_set": "water",
+        "count": 17,
+        "phase": "1"
+      },
+      "ir94e": {
+        "cell_set": "ir94e",
+        "count": 19,
+        "phase": "1"
+      }
+    }
+  },
+  "readout": {
+    "neuron": "MN9",
+    "primary": 16949,
+    "secondary": 10331,
+    "primary_xlsx_side": "R",
+    "secondary_xlsx_side": "L",
+    "aggregation": "primary_only",
+    "aggregation_rationale": "Stimulate XLSX Root_Side L sugar, mirroring the female frozen set side. Read contralateral XLSX R MN9 (16949); also record XLSX L MN9 (10331). Shiu historical left/right aliases are not XLSX side labels.",
+    "rate_definition": "spikes in [0, duration] / duration, mean over trials; also report std over trials"
+  },
+  "phase0_conditions": {
+    "A_sugar_dose": {
+      "sugar_hz": [
+        25,
+        50,
+        100,
+        200
+      ],
+      "bitter_hz": 0
+    },
+    "B_bitter_suppression": {
+      "sugar_hz": 200,
+      "bitter_hz": [
+        0,
+        25,
+        50,
+        100,
+        200
+      ]
+    },
+    "C_bitter_alone": {
+      "sugar_hz": 0,
+      "bitter_hz": [
+        25,
+        50,
+        100,
+        200
+      ]
+    },
+    "D_baseline": {
+      "sugar_hz": 0,
+      "bitter_hz": 0
+    },
+    "A_prime_sugar_lb3c": {
+      "reference_cell_set": "sugar",
+      "cell_set": "sugar_lb3c",
+      "sugar_hz": [
+        120
+      ],
+      "bitter_hz": 0,
+      "trials_each": 30,
+      "paired_seeds": true,
+      "note": "Two fresh 120 Hz conditions; neither is in the A-D 420 trials. Not executed at M0."
+    }
+  },
+  "phase1_characterization": {
+    "sugar_hz": [
+      0,
+      20,
+      40,
+      60,
+      80,
+      100,
+      120,
+      140,
+      160,
+      180,
+      200
+    ],
+    "bitter_hz": [
+      0,
+      20,
+      40,
+      60,
+      80,
+      100,
+      120,
+      140,
+      160,
+      180,
+      200
+    ],
+    "water_hz": [
+      0,
+      20,
+      40,
+      60,
+      80,
+      100,
+      120,
+      140,
+      160,
+      180,
+      200,
+      220,
+      240,
+      260
+    ],
+    "ir94e_hz": [
+      0,
+      20,
+      40,
+      60,
+      80,
+      100,
+      120,
+      140,
+      160,
+      180,
+      200
+    ],
+    "pairs": [
+      "sugar_x_bitter",
+      "sugar_x_water",
+      "sugar_x_ir94e"
+    ]
+  },
+  "notes": [
+    "Paper calibrated w_syn on FlyWire v630; we run v783 only, absolute Hz may differ.",
+    "Model baseline firing is 0 Hz by construction (no intrinsic activity); condition D measures it anyway."
+  ],
+  "male_provenance": {
+    "reference_protocol": "data/stim_protocol.json",
+    "reference_protocol_sha256": "9f9495033281bfcd6f3b373551817987deb2cc083ae94ab61fece9065102d82a",
+    "substrate_record": "data/malecns/substrate_record.json",
+    "cells_file": "data/malecns/cells.json",
+    "model_parameters": "Inherited byte-for-value unchanged, including model.source attribution.",
+    "adapter": "sim/malecns/adapter.py",
+    "rederived_fields": [
+      "protocol_version",
+      "data_version",
+      "connectivity_file",
+      "completeness_file",
+      "stimulus.channels.*.count",
+      "readout identifiers/side aliases/aggregation/rationale",
+      "phase0_conditions.A_prime_sugar_bench21 -> A_prime_sugar_lb3c"
+    ],
+    "unchanged_fields": [
+      "model",
+      "trial",
+      "stimulus.type",
+      "stimulus.channels.*.cell_set",
+      "stimulus.channels.water.phase",
+      "stimulus.channels.ir94e.phase",
+      "readout.neuron",
+      "readout.rate_definition",
+      "phase0_conditions.A-D",
+      "phase1_characterization",
+      "notes"
+    ],
+    "seed_scheme": {
+      "base_seed": 20260910,
+      "formula": "20260910 + trial_index",
+      "same_seeds_across_conditions": true,
+      "trial_index_base": 0
+    },
+    "stimulation_layout": {
+      "channel_order": [
+        "sugar",
+        "bitter",
+        "water",
+        "ir94e"
+      ],
+      "within_channel_order": "ascending numeric Body_ID",
+      "poisson_units": 91
+    },
+    "scope": "Whole CNS; M0 only baseline and sugar200 five-trial benchmarks. M1/M2 require checkpoints.",
+    "calibration": "Transfer is a model assumption, not male behavioural calibration."
+  }
+}
