@@ -1,0 +1,316 @@
+{
+  "stage": "M0",
+  "completed_utc": "2026-09-14T06:17:18.974013+00:00",
+  "git_commit": "c7bf991f218a3732ceec9abc9b24528fdf224263",
+  "platform": "Linux-6.18.33.2-microsoft-standard-WSL2-x86_64-with-glibc2.35",
+  "python": "3.10.21 | packaged by conda-forge | (main, Aug 21 2026, 22:42:31) [GCC 14.4.0]",
+  "brian2": "2.9.0",
+  "cpu_model": "AMD Ryzen 9 7950X3D 16-Core Processor",
+  "wsl_mem_total": "MemTotal:       65384116 kB",
+  "logical_cpus": 32,
+  "workers_simultaneous": 1,
+  "fresh_workers": 2,
+  "codegen": "cython",
+  "sources": [
+    {
+      "path": "sim/malecns/adapter.py",
+      "bytes": 2112,
+      "sha256": "e438f86a33d1dab4290333cd3e5e13f77d5dc8344d10726bda4cbb0cea6b0d7a"
+    },
+    {
+      "path": "sim/malecns/benchmark.py",
+      "bytes": 8130,
+      "sha256": "9346288833e19428bf84b51a0b1a0d09fee43a44cf25f9ff0f022917f7015c69"
+    },
+    {
+      "path": "sim/malecns/substrate.py",
+      "bytes": 16531,
+      "sha256": "1b6c7bd7122f9ad8a3d43aa87365c5b147d55d66067abcc4e7dce6fdcc63cac6"
+    },
+    {
+      "path": "sim/network.py",
+      "bytes": 9535,
+      "sha256": "eee33ef855203a47e03920b56b4aba98551cc400ab22107ebb91edc385475ae7"
+    },
+    {
+      "path": "data/malecns/substrate_record.json",
+      "bytes": 6763,
+      "sha256": "95c6a973217ac793fe5d3d02b813d890f0ba7620d123c647587518d40868582f"
+    },
+    {
+      "path": "data/stim_protocol.json",
+      "bytes": 3484,
+      "sha256": "9f9495033281bfcd6f3b373551817987deb2cc083ae94ab61fece9065102d82a"
+    }
+  ],
+  "total_wall_s": 147.917173908,
+  "timing_definition": "Per trial includes restore, drive assignment, run(1000 ms), and spike extraction; excludes graph build, zero-duration compile/preparation and file writes. No warm-up simulation.",
+  "memory_definition": "Linux resource.RUSAGE_SELF.ru_maxrss (KiB): lifetime peak Python worker RSS, including graph load/build and preparation; compiler subprocess RSS excluded.",
+  "seed_definition": "Both conditions use seeds 20260910..20260914; fixed 91-Poisson-unit layout.",
+  "summary": {
+    "baseline": {
+      "trials": 5,
+      "per_trial_wall_s": [
+        3.9543272700000003,
+        3.860985992,
+        4.132167430000003,
+        3.819952012999998,
+        3.892765374999996
+      ],
+      "mean_wall_s": 3.9320396159999995,
+      "sd_wall_s": 0.10927268249035453,
+      "median_wall_s": 3.892765374999996,
+      "min_wall_s": 3.819952012999998,
+      "max_wall_s": 4.132167430000003,
+      "peak_worker_rss_gib": 2.9735565185546875,
+      "MN9_R_primary_hz": {
+        "mean": 0.0,
+        "sd": 0.0
+      },
+      "MN9_L_secondary_hz": {
+        "mean": 0.0,
+        "sd": 0.0
+      },
+      "driven_sugar_mean_hz": null
+    },
+    "sugar200": {
+      "trials": 5,
+      "per_trial_wall_s": [
+        9.447228552999995,
+        9.450198270000001,
+        9.220083673999994,
+        9.390446193999992,
+        9.08874530700001
+      ],
+      "mean_wall_s": 9.319340399599998,
+      "sd_wall_s": 0.14252100920984995,
+      "median_wall_s": 9.390446193999992,
+      "min_wall_s": 9.08874530700001,
+      "max_wall_s": 9.450198270000001,
+      "peak_worker_rss_gib": 3.0380020141601562,
+      "MN9_R_primary_hz": {
+        "mean": 35.8,
+        "sd": 1.3266499161421599
+      },
+      "MN9_L_secondary_hz": {
+        "mean": 133.4,
+        "sd": 5.748043145279966
+      },
+      "driven_sugar_mean_hz": {
+        "mean": 198.1529411764706,
+        "sd": 2.7024530699266047
+      }
+    }
+  },
+  "workers": [
+    {
+      "condition": "baseline",
+      "build_wall_s": 2.5575127009999967,
+      "zero_duration_prepare_s": 0.6540920330000013,
+      "peak_worker_rss_kib": 3118000,
+      "brian2": "2.9.0",
+      "pid": 856
+    },
+    {
+      "condition": "sugar200",
+      "build_wall_s": 2.4705304869999978,
+      "zero_duration_prepare_s": 0.5909488009999961,
+      "peak_worker_rss_kib": 3185576,
+      "brian2": "2.9.0",
+      "pid": 1040
+    }
+  ],
+  "trials": [
+    {
+      "condition": "baseline",
+      "trial": 0,
+      "seed": 20260910,
+      "sugar_hz": 0,
+      "trial_wall_s": 3.9543272700000003,
+      "peak_worker_rss_kib": 3117304,
+      "MN9_R_primary_hz": 0.0,
+      "MN9_L_secondary_hz": 0.0,
+      "MN9_R_latency_ms": null,
+      "MN9_L_latency_ms": null,
+      "driven_sugar_mean_hz": null,
+      "whole_network_spikes": 0,
+      "spikes": {
+        "path": "data/malecns/runs/m0/baseline/trial_00.npz",
+        "bytes": 22,
+        "sha256": "8739c76e681f900923b900c9df0ef75cf421d39cabb54650c4b9ad19b6a76d85"
+      }
+    },
+    {
+      "condition": "baseline",
+      "trial": 1,
+      "seed": 20260911,
+      "sugar_hz": 0,
+      "trial_wall_s": 3.860985992,
+      "peak_worker_rss_kib": 3117508,
+      "MN9_R_primary_hz": 0.0,
+      "MN9_L_secondary_hz": 0.0,
+      "MN9_R_latency_ms": null,
+      "MN9_L_latency_ms": null,
+      "driven_sugar_mean_hz": null,
+      "whole_network_spikes": 0,
+      "spikes": {
+        "path": "data/malecns/runs/m0/baseline/trial_01.npz",
+        "bytes": 22,
+        "sha256": "8739c76e681f900923b900c9df0ef75cf421d39cabb54650c4b9ad19b6a76d85"
+      }
+    },
+    {
+      "condition": "baseline",
+      "trial": 2,
+      "seed": 20260912,
+      "sugar_hz": 0,
+      "trial_wall_s": 4.132167430000003,
+      "peak_worker_rss_kib": 3117660,
+      "MN9_R_primary_hz": 0.0,
+      "MN9_L_secondary_hz": 0.0,
+      "MN9_R_latency_ms": null,
+      "MN9_L_latency_ms": null,
+      "driven_sugar_mean_hz": null,
+      "whole_network_spikes": 0,
+      "spikes": {
+        "path": "data/malecns/runs/m0/baseline/trial_02.npz",
+        "bytes": 22,
+        "sha256": "8739c76e681f900923b900c9df0ef75cf421d39cabb54650c4b9ad19b6a76d85"
+      }
+    },
+    {
+      "condition": "baseline",
+      "trial": 3,
+      "seed": 20260913,
+      "sugar_hz": 0,
+      "trial_wall_s": 3.819952012999998,
+      "peak_worker_rss_kib": 3117924,
+      "MN9_R_primary_hz": 0.0,
+      "MN9_L_secondary_hz": 0.0,
+      "MN9_R_latency_ms": null,
+      "MN9_L_latency_ms": null,
+      "driven_sugar_mean_hz": null,
+      "whole_network_spikes": 0,
+      "spikes": {
+        "path": "data/malecns/runs/m0/baseline/trial_03.npz",
+        "bytes": 22,
+        "sha256": "8739c76e681f900923b900c9df0ef75cf421d39cabb54650c4b9ad19b6a76d85"
+      }
+    },
+    {
+      "condition": "baseline",
+      "trial": 4,
+      "seed": 20260914,
+      "sugar_hz": 0,
+      "trial_wall_s": 3.892765374999996,
+      "peak_worker_rss_kib": 3118000,
+      "MN9_R_primary_hz": 0.0,
+      "MN9_L_secondary_hz": 0.0,
+      "MN9_R_latency_ms": null,
+      "MN9_L_latency_ms": null,
+      "driven_sugar_mean_hz": null,
+      "whole_network_spikes": 0,
+      "spikes": {
+        "path": "data/malecns/runs/m0/baseline/trial_04.npz",
+        "bytes": 22,
+        "sha256": "8739c76e681f900923b900c9df0ef75cf421d39cabb54650c4b9ad19b6a76d85"
+      }
+    },
+    {
+      "condition": "sugar200",
+      "trial": 0,
+      "seed": 20260910,
+      "sugar_hz": 200,
+      "trial_wall_s": 9.447228552999995,
+      "peak_worker_rss_kib": 3167028,
+      "MN9_R_primary_hz": 34.0,
+      "MN9_L_secondary_hz": 136.0,
+      "MN9_R_latency_ms": 33.7,
+      "MN9_L_latency_ms": 28.5,
+      "driven_sugar_mean_hz": 196.8235294117647,
+      "whole_network_spikes": 1162668,
+      "spikes": {
+        "path": "data/malecns/runs/m0/sugar200/trial_00.npz",
+        "bytes": 11819190,
+        "sha256": "eab2ec92e7f67818adcfdd0f2f874214b8b15f764cacad9a53b914391bc517eb"
+      }
+    },
+    {
+      "condition": "sugar200",
+      "trial": 1,
+      "seed": 20260911,
+      "sugar_hz": 200,
+      "trial_wall_s": 9.450198270000001,
+      "peak_worker_rss_kib": 3185248,
+      "MN9_R_primary_hz": 36.0,
+      "MN9_L_secondary_hz": 135.0,
+      "MN9_R_latency_ms": 39.6,
+      "MN9_L_latency_ms": 28.900000000000002,
+      "driven_sugar_mean_hz": 193.52941176470588,
+      "whole_network_spikes": 1163678,
+      "spikes": {
+        "path": "data/malecns/runs/m0/sugar200/trial_01.npz",
+        "bytes": 11788690,
+        "sha256": "9db1125fdd78b5dbb6cbcdeb23a7377d51c5afd60fb64210c52ee6f9fb4a6230"
+      }
+    },
+    {
+      "condition": "sugar200",
+      "trial": 2,
+      "seed": 20260912,
+      "sugar_hz": 200,
+      "trial_wall_s": 9.220083673999994,
+      "peak_worker_rss_kib": 3185304,
+      "MN9_R_primary_hz": 35.0,
+      "MN9_L_secondary_hz": 127.0,
+      "MN9_R_latency_ms": 39.5,
+      "MN9_L_latency_ms": 33.800000000000004,
+      "driven_sugar_mean_hz": 200.64705882352942,
+      "whole_network_spikes": 1158368,
+      "spikes": {
+        "path": "data/malecns/runs/m0/sugar200/trial_02.npz",
+        "bytes": 11788229,
+        "sha256": "8aa67e37ab39e6fd19f992e12092029686fe28e7e0669ff761e43f0976bd4058"
+      }
+    },
+    {
+      "condition": "sugar200",
+      "trial": 3,
+      "seed": 20260913,
+      "sugar_hz": 200,
+      "trial_wall_s": 9.390446193999992,
+      "peak_worker_rss_kib": 3185576,
+      "MN9_R_primary_hz": 36.0,
+      "MN9_L_secondary_hz": 127.0,
+      "MN9_R_latency_ms": 38.800000000000004,
+      "MN9_L_latency_ms": 33.4,
+      "driven_sugar_mean_hz": 200.64705882352942,
+      "whole_network_spikes": 1157781,
+      "spikes": {
+        "path": "data/malecns/runs/m0/sugar200/trial_03.npz",
+        "bytes": 11753443,
+        "sha256": "5a1f5e3bebd7ddeb39bd4161204ba3dd3b49e30be7b87e11331bdcd6b1b948f5"
+      }
+    },
+    {
+      "condition": "sugar200",
+      "trial": 4,
+      "seed": 20260914,
+      "sugar_hz": 200,
+      "trial_wall_s": 9.08874530700001,
+      "peak_worker_rss_kib": 3185576,
+      "MN9_R_primary_hz": 38.0,
+      "MN9_L_secondary_hz": 142.0,
+      "MN9_R_latency_ms": 38.6,
+      "MN9_L_latency_ms": 34.1,
+      "driven_sugar_mean_hz": 199.11764705882354,
+      "whole_network_spikes": 1149970,
+      "spikes": {
+        "path": "data/malecns/runs/m0/sugar200/trial_04.npz",
+        "bytes": 11687982,
+        "sha256": "a3002a33302475d7e870aa53f95d53f46227e3fe3341aa064b3da992d473b61c"
+      }
+    }
+  ],
+  "scope": "Ten M0 benchmark trials only; not a Phase 0 gate result. M1/M2 not executed."
+}

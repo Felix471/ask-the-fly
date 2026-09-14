@@ -373,3 +373,55 @@ reproducible high-salt-associated aversion under a justified, versioned
 input/substrate design and an explicit product mapping. Female-brain
 simulation work is closed; no further simulation or product change is
 authorised. MaleCNS feasibility is a separate future specification.
+
+## OQ-11: MaleCNS substrate and reversed sugar-to-MN9 laterality (2026-09-14)
+
+**M0 accepted; unresolved laterality.** Under the same XLSX-L sugar-set
+convention, the dominant MN9 response is reversed between the two substrates.
+The female [Phase 0 report](phase0_report.md), sugar200 with the frozen23,
+has contralateral MN9 93.3 Hz versus ipsilateral 62.1 Hz (n=30; Shiu's
+historical L/R aliases respectively). The male [M0 benchmark](../data/malecns/benchmark_m0.json),
+sugar200 with typed17, has contralateral XLSX-R16949 35.8 Hz versus
+ipsilateral XLSX-L10331 133.4 Hz (n=5). Possible causes are the `Root_Side`
+convention, reconstruction, or a real difference; unresolved. These are
+different typed/frozen sets and substrates, not a controlled sex comparison.
+
+The [frozen male substrate record](../data/malecns/substrate_record.json)
+records whole CNS, consensus-derived signs and explicitly positive defaults
+for unclear/missing labels. Before M1, the owner required both MN9s in every
+run and separate bilateral gates. R16949 was not replaced on the basis of
+the M0 rates; the choice of primary male readout was deferred until after M1.
+
+**M1 complete; primary decision still deferred.** All 480 trials finished:
+420 A–D plus sugar17 versus LB3c12 at 120 Hz, 30 trials per condition, same
+seeds across conditions. At sugar200, contra R16949 is 34.367 ± 3.082 Hz
+and ipsi L10331 is 129.800 ± 5.243 Hz (population SD, n=30), preserving the
+M0 laterality observation. Possible causes remain unresolved; no readout
+switch or parameter tuning was made. [Full report and female comparison](malecns_phase0.md).
+
+| Gate | Male contra R16949 | Male ipsi L10331 |
+|---|---|---|
+| A: sugar rises | FAIL | FAIL |
+| B: bitter suppression | PASS | FAIL |
+| C: bitter-alone limit | PASS | FAIL |
+| D: historical completeness | PASS | PASS |
+| Additional literal baseline-zero check | PASS | PASS |
+| Overall A–D | FAIL | FAIL |
+
+Observed sugar means are nonmonotonic: R 10.400/8.867/8.067/34.367 Hz and
+L 43.033/42.333/58.567/129.800 Hz at 25/50/100/200 Hz. L fails B despite
+94.94% endpoint suppression because its bitter means rise from 1.300 to
+3.033 to 6.567 Hz at bitter50/100/200. L bitter-alone means are
+19.000/10.733/6.200/6.767 Hz, above the 1 Hz limit; R is zero. These are
+sample-mean gate outcomes, not claims that the population curve is known
+precisely. Historical D tests trial completeness; literal zero is separately
+confirmed, rather than silently changing the predicate.
+
+A′ paired LB3c12-minus-sugar17 differences at 120 Hz are R −2.767 ± 6.731 Hz
+and L −16.733 ± 32.179 Hz. The subset is lower/equal/higher in 19/2/9 R
+trials and 21/1/8 L trials. [A′ and the female typed33/20 reference](malecns_phase0.md#appendix-a--120-hz).
+
+Nine workers were selected from available RAM with headroom, not copied from
+the female run. All 960 MN9-neuron trials and 2,910 shared input-train
+comparisons were audited. [Audit record](../data/malecns/phase0_audit.json).
+M2 has not run. No female, product or README honesty-table change.

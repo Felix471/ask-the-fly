@@ -112,15 +112,17 @@ the male cell sets must be defined that way; the typed sugar set passes all
 four Phase 0 gates on the female brain. A-prime shows that adding LB3b13 to
 LB3c20 contributes 10.667 ± 6.529 Hz to left MN9 at 120 Hz, so LB3b stays in
 the v2 sugar set. This records policy, not a re-freeze or male-substrate
-validation. No further female-brain runs; MaleCNS feasibility awaits its
-separate specification. [Owner decision and A-prime](open_questions.md#r1-checkpoint-decision-v1-retained-v2-typed-not-executed-2026-09-13).
+validation. No further female-brain runs; male validation is separate.
+[Owner decision and A-prime](open_questions.md#r1-checkpoint-decision-v1-retained-v2-typed-not-executed-2026-09-13).
 
 ### MaleCNS as the substrate — Blocked
 
-The existing substrate audit identifies signed-edge-list reconstruction and
-renewed Phase 0 checks as prerequisites; Tastekin's LB3 200 Hz → MN9 result
-is precedent, not a validated drop-in migration. Unblocking requires a
-versioned, model-ready substrate and a repeated Phase 0 pass on that substrate. [Substrate audit](open_questions.md#v3-note-updated-2026-09-10-malecns-as-a-substrate).
+The versioned whole-CNS signed substrate is built, but M1 (30 trials per
+condition) fails sugar monotonicity on both MN9 sides: R passes B/C/D;
+L also fails B/C. Neither passes all four gates, and the reversed sugar200
+laterality remains unresolved. The owner has deferred the primary-readout
+choice; no side switch, parameter tuning or M2 run was made.
+[M1 gates and laterality](malecns_phase0.md#hard-gates), [OQ-11](open_questions.md#oq-11-malecns-substrate-and-reversed-sugar-to-mn9-laterality-2026-09-14).
 
 ### Salt (LB3b/LB3d) as a fifth axis — Closed
 
@@ -139,15 +141,16 @@ leg/labellar stations form a sequence rather than concurrent outputs. [Current e
 
 Pharyngeal product axis: unblock with a dish-to-pharyngeal-drive mapping that cites its source or states an explicitly designed rule, plus a user-facing meaning signed off by the owner. [Mapping basis](phase1_5_plan.md#task-c-v2-encoder-schema-proposal-design-only-no-implementation), [Pharyngeal evidence](pharyngeal_screen.md).
 
-MaleCNS: unblock with a signed edge list using `consensusNt`, a versioned substrate, and a repeated Phase 0 pass on that substrate. [Substrate audit](open_questions.md#v3-note-updated-2026-09-10-malecns-as-a-substrate).
+MaleCNS: the `consensusNt`-signed substrate is now frozen; unblocking still requires an explicit primary-readout decision and a repeated Phase 0 pass under the stated criteria, not a post-hoc side switch. [M1 checkpoint](malecns_phase0.md#laterality-and-decision-boundary).
 
 ## Standing caveats
 
-Our simulation findings are inside Shiu's FlyWire model, not calibrated against
+Our simulation findings are inside Shiu's model, not calibrated against
 behaviour; stimulus choices and proposed budgets are ours. [Phase T scope](tonic_inhibition.md#what-is-designed-here), [Phase P scope](pharyngeal_screen.md).
 C1 is a one-trial screen, P1 a ten-trial screen; C2/P2 use 30 trials, and C2
 reproduces the original grid seeds rather than adding an independent sample. [C2 provenance](feeding_mn_readouts.md#c2-thirteen-cell-30-trial-rerun), [P1/P2](pharyngeal_screen.md).
 S1 is a ten-trial screen; R1 uses thirty-trial conditions, not a full replacement grid. [S1/R1 provenance](salt_and_refreeze.md#provenance-verification-and-limits).
+MaleCNS M0 uses five-trial benchmarks; M1 uses thirty-trial conditions, not behavioural calibration. [Male provenance](malecns_phase0.md#provenance-and-side-convention).
 MN target labels remain the workbook's `Target_Muscle` values: MN9 `9`,
 MN11D `11D`, MN11V `11V`, CEM `Crop Entry`, without added functional labels. [Source labels](feeding_mn_readouts.md#source-target-muscle-labels).
 The memo changes no frozen data, scoring, site, encoder values or README
