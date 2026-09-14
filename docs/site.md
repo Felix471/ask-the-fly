@@ -7,6 +7,33 @@ The front end in `site/` is a static page with no build step or LLM calls: `inde
 
 The page also reads dish sections, release metadata, neuron positions, named neurons, neuropil outlines, and the replay manifest and binary files from `site/data/`. The canonical URL comes from `site/config.json`; sprites, fonts, backgrounds and sprite-fallback mappings come from `site/assets/`.
 
+## v1.2 data preparation (not yet used by the site)
+
+Step 1 stages `data/lookup_table_v1_2.json` and the expanded baseline replay pack in
+`data/replay_v1_2/`; the site continues to read its existing files. The state rule,
+also recorded in the new table header, is an owner-designed interpretation of model
+rates, not a new model output or a behavioural calibration:
+
+| Left MN9 mean | MN11D mean | Internal state |
+|---|---|---|
+| Active | Active | `eats` |
+| Silent | Active | `mouth_moves` |
+| Active | Silent | `proboscis_only` |
+| Silent | Silent | `no_response` |
+
+Active means **mean ≥ 5.0 Hz**; silent means **mean < 5.0 Hz**, using the existing
+low-interest threshold for both readouts. MN9 is the 30-trial mean of the frozen
+left readout, `720575940660219265`. MN11D is the 30-trial mean of each trial's
+two-cell mean rate. MN9 right and both MN11V cells are recorded, but do not decide
+the state; their display belongs to Step 2. Ties are not a state: existing MN9 tie
+handling remains unchanged. User-facing English/Chinese state wording and the
+associated honesty-table claims require separate approval before site integration.
+
+Later animation work must use the existing art pipeline: original fly sheet
+`assets/raw/fly/fly.png` and dish inputs `assets/raw/<slug>.png`, processed by
+[`scripts/prep_assets.py`](../scripts/prep_assets.py) as documented in
+[`docs/assets.md`](assets.md). This step creates no artwork or animation frames.
+
 ## Replay pack and brain view
 
 The result view is a fly with a brain tasting the options. Every visual of neural activity is a **replay of recorded simulation output**, labelled as such on the page.
