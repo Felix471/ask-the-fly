@@ -373,3 +373,22 @@ reproducible high-salt-associated aversion under a justified, versioned
 input/substrate design and an explicit product mapping. Female-brain
 simulation work is closed; no further simulation or product change is
 authorised. MaleCNS feasibility is a separate future specification.
+
+## OQ-11: MaleCNS substrate and reversed sugar-to-MN9 laterality (2026-09-14)
+
+**M0 accepted; unresolved laterality.** Under the same XLSX-L sugar-set
+convention, the dominant MN9 response is reversed between the two substrates.
+The female [Phase 0 report](phase0_report.md), sugar200 with the frozen23,
+has contralateral MN9 93.3 Hz versus ipsilateral 62.1 Hz (n=30; Shiu's
+historical L/R aliases respectively). The male [M0 benchmark](../data/malecns/benchmark_m0.json),
+sugar200 with typed17, has contralateral XLSX-R16949 35.8 Hz versus
+ipsilateral XLSX-L10331 133.4 Hz (n=5). Possible causes are the `Root_Side`
+convention, reconstruction, or a real difference; unresolved. These are
+different typed/frozen sets and substrates, not a controlled sex comparison.
+
+The [frozen male substrate record](../data/malecns/substrate_record.json)
+records whole CNS, consensus-derived signs and explicitly positive defaults
+for unclear/missing labels. M1 will record both MN9s in every run and evaluate
+the four gates separately on both sides. R16949 is not replaced on the basis
+of the M0 rates; the choice of primary male readout is deferred until after M1.
+No female, product or README honesty-table change.
