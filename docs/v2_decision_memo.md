@@ -74,7 +74,7 @@ parallel firing measurements as stages reached. [CEM conclusion](pharyngeal_scre
 ### Pharyngeal input axis in the product — Blocked
 
 PhG1 changes the existing outputs, but the reports supply neither a
-dish-to-pharyngeal-drive mapping nor a defensible new behavioural meaning
+dish-to-pharyngeal-drive mapping nor a signed-off user-facing meaning
 for a product axis; additional response curves alone would not supply those.
 Unblocking requires owner-approved semantics and a source-backed or explicitly
 designed mapping, without treating the inputs as independent additive channels.
@@ -107,7 +107,7 @@ this would not validate the water/Ir94e replacements or authorise re-freezing. [
 The existing substrate audit identifies signed-edge-list reconstruction and
 renewed Phase 0 checks as prerequisites; Tastekin's LB3 200 Hz → MN9 result
 is precedent, not a validated drop-in migration. Unblocking requires a
-versioned, model-ready substrate and a separately approved validation plan. [Substrate audit](open_questions.md#v3-note-updated-2026-09-10-malecns-as-a-substrate).
+versioned, model-ready substrate and a repeated Phase 0 pass on that substrate. [Substrate audit](open_questions.md#v3-note-updated-2026-09-10-malecns-as-a-substrate).
 
 ### Salt (LB3b/LB3d) as a fifth axis — Open
 
@@ -119,11 +119,15 @@ designed 100 Hz with other inputs undriven, plus baseline; **3 × 10 ≈ 30 runs
 recording MN9 and MN11 before choosing any dose curve or fifth-axis mapping.
 This borrows P1's screening design, not a calibrated salt concentration. [P1 design](pharyngeal_screen.md#p1--ten-trial-single-type-screen).
 
-## What would change a Closed verdict
+## What would change a Closed or Blocked verdict
 
 Checkpoint chain: reopen with a reproducibly active, input-selective pharyngeal
 readout under a justified protocol/substrate, plus evidence that it and the
 leg/labellar stations form a sequence rather than concurrent outputs. [Current endpoint and sequencing limits](pharyngeal_screen.md#cem--conclusion-across-the-tested-inputs), [C2 limits](feeding_mn_readouts.md#c2-finding-and-limits).
+
+Pharyngeal product axis: unblock with a dish-to-pharyngeal-drive mapping that cites its source or states an explicitly designed rule, plus a user-facing meaning signed off by the owner. [Mapping basis](phase1_5_plan.md#task-c-v2-encoder-schema-proposal-design-only-no-implementation), [Pharyngeal evidence](pharyngeal_screen.md).
+
+MaleCNS: unblock with a signed edge list using `consensusNt`, a versioned substrate, and a repeated Phase 0 pass on that substrate. [Substrate audit](open_questions.md#v3-note-updated-2026-09-10-malecns-as-a-substrate).
 
 ## Standing caveats
 
