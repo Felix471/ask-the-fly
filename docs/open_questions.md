@@ -274,6 +274,15 @@ higher: L exceeds a in 28/30, R in 22/30 (two equal); MN11D/V exceed a in 30/30.
 All 930 shared input trains were verified identical: 690 sugar a/c and
 240 PhG1 b/c. All 3,300 genuinely driven-source-neuron-trials fired.
 
+In plain terms, combining pharyngeal and labellar sugar at the tested drives
+(PhG1 100 Hz; labellar sugar 120 Hz) produces a larger mean response than
+either input alone in all four readouts (MN9 L/R,
+MN11D/V), but falls short of their sum in 30/30 trials for each readout.
+This sublinear combination is consistent with saturation on shared downstream
+targets rather than two independent additive channels; shared-target saturation
+is an interpretation, not a mechanism established by these readout measurements.
+See the [paired P2 findings](pharyngeal_screen.md#p2-findings).
+
 ### CEM outcome
 
 CEM is silent in all 390 P2 trials (2,340 individual CEM-neuron-trials),
