@@ -63,9 +63,42 @@ What the axis did to the dictionary when enabled (encoder v2.3, `--only-dimensio
 
 ## OQ-7: 25 of 101 frozen v1 GRNs fall outside the mapped Tastekin subtypes (2026-09-12)
 
+The following is the initial cross-check; the subsequent R1 finding and
+owner decision are recorded immediately below it.
+
 The count is 25: 11 sugar GRNs outside LB3b + LB3c (7 LB3d + 4 LB4b), 7 water GRNs outside LB3a, and 7 Ir94e GRNs outside LB1e; all 42 bitter GRNs match LB1a-d. The earlier count of 21 omitted the four sugar-set LB4b cells. The one sugar-set LB3b cell is within the mapped sugar subtypes and is not counted as a mismatch.
 
 Cross-checking `data/cells.json` against Tastekin et al. 2025/2026 Supplemental table 2 (FlyWire rows; `docs/cell_set_crosscheck.md`, `scripts/cross_check_cells.py`): the 42 bitter GRNs are exactly LB1a-d, but seven of the 23 sugar GRNs are LB3d (high salt / heavy metal; ppk23, Ir7c, Ir47a; glutamatergic; aversive, per Tastekin), one is LB3b and four are LB4b (no receptor match), with only 11 LB3c; seven of the 18 water GRNs are LB3c (sugar); and seven of the 18 Ir94e GRNs are LB2a/b/c (no receptor match, putatively aversive), with 11 LB1e. These are differences between the Shiu et al. 2024 annotation the sets were frozen from and Tastekin's typing, not errors in our pipeline: the sets were frozen from the paper's own notebooks (docs/cell_ids.md) and the Phase 0 gates passed on them as they are. Consequences are not investigated: whether the seven LB3d cells in the sugar channel change the sugar curves, whether the seven LB3c cells in the water channel are part of why water acts as a second appetitive drive (README honesty table, water row), and whether the LB2 cells contribute to the Ir94e suppression (OQ-6) are all open. Re-freezing the sets to Tastekin's typing would be a v2 change requiring a full grid rerun and new replays; not done now. Also recorded there: the LB3b (25 cells) and LB3d (29 cells) FlyWire ID lists that Phase 1.5 salt work needs are now available, every one of them in v783.
+
+### R1 checkpoint decision: v1 retained, v2 typed; not executed (2026-09-13)
+
+The [R1 report](salt_and_refreeze.md#r1-results--n--30-per-condition) now
+compares frozen sugar23 with Tastekin LB3b13 + LB3c20 on XLSX L (33 cells,
+the same physical side) in 30-trial matched-layout curves and full Phase 0
+controls: 660 runs including the adapted A-prime. All four original Phase 0
+gates pass on the female brain. MN9 L new/old mean ratios at 60/80/120/200 Hz
+are 1.473/1.204/1.101/1.007; MN11D/V are lower at 60/80 Hz. Own-200-normalised
+shape differences cross the predeclared two-SD paired-spread rule only for
+MN11D/V at 60/80, not MN9. This does not demonstrate equivalent curves or
+unchanged mixed-taste rankings. The water/Ir94e replacement questions above
+remain untested. [Normalisation and limits](salt_and_refreeze.md#curves-normalised-to-their-own-200-hz-mean).
+
+**Owner decision, recorded not executed:** v1 keeps the frozen Shiu sets.
+Above 80 Hz, the MN9 differences remain within the pilot's specified two-SD
+trial-spread criterion; a swap would require a full grid rerun and new
+replays for prospective ranking changes the owner judges near noise, not
+ranking changes measured by this sugar-only pilot. For v2's planned two-brain
+design, use Tastekin's typing on both brains: the male sets must be defined
+that way in this design, and the typed sugar set passes all four Phase 0
+gates on the female brain. This is a cell-set policy, not a MaleCNS
+feasibility result or an instruction to replace any frozen file.
+
+**LB3b stays in the v2 sugar set.** At 120 Hz, dropping the 13 LB3b cells
+from candidate33 leaves LB3c20 and reduces MN9 L by 10.667 ± 6.529 Hz
+(paired population SD; 30/30 lower); MN9 R falls 7.933 ± 5.790 Hz.
+Thus LB3b contributes about 10 Hz to left MN9 under this design, not a
+universal additive contribution. Historical A-prime (21 versus 23) had
+left-MN9 differences <0.5 Hz. [A-prime comparison](salt_and_refreeze.md#adapted-a-prime-lb3c-only-l-subset-20-cells).
 
 ## OQ-8: MN9/MN11 bitter separation replicated; CEM input audit (2026-09-13)
 
@@ -209,6 +242,12 @@ MN11D/V 127.550/67.700 Hz, still with zero CEM spikes.
 Fig. 3E; aversive prediction, Fig. 7F), whereas stimulating that type drives
 MN9/MN11 in this model.
 
+**LB3d disagreement (OQ-10):** LB3d29 at 100 Hz drives left MN9 to 61.5 Hz
+(18.7 Hz after removing the seven frozen-sugar-overlap cells); adding the
+remaining 22 to sugar raises all four readouts in 10/10 trials. The model
+does not express high-salt aversion under this design, contrary to Tastekin's
+prediction for LB3d. Salt as a fifth axis is Closed; see OQ-10 below.
+
 ### P2 dose curves and paired combination
 
 P2 uses PhG1 and PhG4 at 0/60/80/120/200 Hz, thirty trials each, and three
@@ -299,3 +338,38 @@ no gustatory input class tested in this model (labellar, 400 cells; pharyngeal, 
 P2 complete; no further simulation. The next task is a separately specified
 v2 decision memo. No frozen data, model/P1 code, `site/`, scoring, encoder
 or README honesty-table changes.
+
+## OQ-10: salt fifth axis Closed — LB3d aversion not expressed under S1 (2026-09-13)
+
+**Disagreement, without explanation:** in this model LB3d29 alone at 100 Hz
+drives left MN9 to 61.5 Hz (18.7 Hz with the seven frozen-sugar-overlap cells
+removed), and adding the 22 non-overlap cells at 100 Hz to frozen sugar23
+at 120 Hz raises MN9 L/R and MN11D/V in 10/10 paired trials. The model does
+not express high-salt aversion under this design, contrary to Tastekin's
+prediction for LB3d. This is a ten-trial screen, not behavioural calibration;
+the disagreement is also recorded next to the PhG4 line above.
+[S1 tables](salt_and_refreeze.md#s1-results--n--10-screen-only).
+
+**Output signs, no simulation:** every output edge was checked using the
+parquet's `Excitatory` and `Excitatory x Connectivity` columns. All 54 cells
+have outputs; each cell's sign is consistent across its edges.
+
+| Set | Positive cells | Negative cells | Disagree with local annotation-derived sign |
+|---|---:|---:|---:|
+| LB3d29 | 27 | 2 | 5 / 29 |
+| LB3b25 | 25 | 0 | 0 / 25 |
+
+Against **Tastekin's class-level glutamatergic LB3d label**, 27/29 have the
+opposite (positive) model sign. This is distinct from the local Schlegel
+per-cell `top_nt` comparison: LB3d has 18 acetylcholine, 4 serotonin and
+7 glutamate annotations, with five glutamate cells assigned positive
+outputs; LB3b has 21 acetylcholine and 4 serotonin annotations, all assigned
+positive outputs. The sign convention treats glutamate/GABA as negative
+and these other transmitters as positive; no transmitter labels or model
+signs are changed. [Source hashes, per-ID results and definitions](salt_and_refreeze.md#output-sign-check--connectivity-only).
+
+**Owner decision:** salt as a fifth axis is Closed. Reopen only with
+reproducible high-salt-associated aversion under a justified, versioned
+input/substrate design and an explicit product mapping. Female-brain
+simulation work is closed; no further simulation or product change is
+authorised. MaleCNS feasibility is a separate future specification.

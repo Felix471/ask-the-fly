@@ -1,7 +1,8 @@
 # v2 decision memo
 
-2026-09-13. Decision proposals for the owner, not a roadmap or an authorisation
-to run experiments. No new analysis or simulation accompanies this memo.
+2026-09-13, updated after the S1/R1 checkpoint. Records the owner's salt and
+cell-set decisions; other candidates remain unranked proposals, not a roadmap
+or an authorisation to run experiments. Findings are taken from linked reports.
 
 ## What the product is today
 
@@ -50,20 +51,26 @@ inside the frozen responses. [Phase T reading](tonic_inhibition.md#reading).
 sugar-set cells are LB3d, seven water-set cells are LB3c, and seven Ir94e-set
 cells are LB2a/b/c under Tastekin's typing. Four additional sugar-set LB4b
 cells bring the mismatch total to 25/101; all 42 bitter cells match.
-These are annotation differences, not a failed pipeline, and their effects
-have not been isolated. [Cell-set findings](cell_set_crosscheck.md#findings-recorded-not-acted-on), [OQ-7](open_questions.md#oq-7-25-of-101-frozen-v1-grns-fall-outside-the-mapped-tastekin-subtypes-2026-09-12).
+These are annotation differences, not a failed pipeline. R1's typed sugar33
+passes all four Phase 0 gates; its count and membership effects are not
+isolated. [Cell-set findings](cell_set_crosscheck.md#findings-recorded-not-acted-on), [R1 gates](salt_and_refreeze.md#full-candidate-phase-0-gates).
 
 (f) **PhG4 disagreement remains unresolved.** Tastekin predicts aversion
 for PhG4 (putative ppk28/water association), whereas P2 activated MN9 L/R
 and MN11D/V in 30/30 trials at each nonzero dose, 60/80/120/200 Hz. [P0 association and prediction](pharyngeal_screen.md#p0--what-tastekin-reports-for-phg1phg16), [P2 disagreement](pharyngeal_screen.md#p2-findings).
 
+(g) **LB3d disagreement:** 100 Hz drives left MN9 to 61.5 Hz, or 18.7 Hz
+without the seven sugar-overlap cells; adding the other 22 to sugar raises
+all four readouts in 10/10 trials, contrary to predicted high-salt aversion.
+No explanation is assigned. [S1 and sign check](salt_and_refreeze.md#checkpoint-decisions--recorded-not-executed).
+
 ## Candidates and verdicts — unranked
 
 Closed means the specified route is unsupported under the current design;
 Open means worth a bounded next decision, not ready to ship; Blocked means
-a prerequisite is missing. Verdicts and next steps below are proposals based
-on the linked evidence. Run counts are rough design budgets, not findings
-or commitments; one run means one simulated trial.
+a prerequisite is missing. Decided records owner policy without execution.
+Salt and cell-set decisions supersede their earlier proposals; remaining
+next steps are not authorisations. One run means one simulated trial.
 
 ### Checkpoint-chain readout: leg → labellum → pharynx — Closed
 
@@ -92,15 +99,21 @@ Smallest next step: a paper prototype using the existing thirteen-cell C2
 tables, keeping MN11D/V separate until an explicit readout rule is chosen;
 **0 new runs** for that decision, not a claim of product-wide coverage. [C2 tables](feeding_mn_readouts.md#c2-thirteen-cell-30-trial-rerun).
 
-### Re-freezing cell sets to Tastekin's typing — Open
+### Cell-set policy — Decided, not executed
 
-The mismatch warrants a controlled comparison, not silently replacing
-published inputs; membership and hemisphere policy need an explicit decision.
-Shipping replacement sets would require a full grid rerun and new replays. [Cell-set comparison](cell_set_crosscheck.md), [OQ-7](open_questions.md#oq-7-25-of-101-frozen-v1-grns-fall-outside-the-mapped-tastekin-subtypes-2026-09-12).
+**v1 keeps the frozen Shiu sets.** Above 80 Hz, MN9 curve differences remain
+within R1's predeclared two-SD trial-spread rule; a swap costs a full grid
+rerun and new replays for prospective ranking changes the owner judges near
+noise. Mixed-taste ranking changes were not measured, nor was equivalence
+established. [R1 curves and limits](salt_and_refreeze.md#curves-normalised-to-their-own-200-hz-mean).
 
-Smallest next step: approve the exact candidate sugar set, then a matched-layout
-old/new sugar-only pilot at five drives and 30 trials: about **300 runs**;
-this would not validate the water/Ir94e replacements or authorise re-freezing. [Set definitions](cell_set_crosscheck.md#summary), [existing five-drive design](tonic_inhibition.md#method).
+**v2 uses Tastekin typing on both brains.** In the planned two-brain design,
+the male cell sets must be defined that way; the typed sugar set passes all
+four Phase 0 gates on the female brain. A-prime shows that adding LB3b13 to
+LB3c20 contributes 10.667 ± 6.529 Hz to left MN9 at 120 Hz, so LB3b stays in
+the v2 sugar set. This records policy, not a re-freeze or male-substrate
+validation. No further female-brain runs; MaleCNS feasibility awaits its
+separate specification. [Owner decision and A-prime](open_questions.md#r1-checkpoint-decision-v1-retained-v2-typed-not-executed-2026-09-13).
 
 ### MaleCNS as the substrate — Blocked
 
@@ -109,17 +122,16 @@ renewed Phase 0 checks as prerequisites; Tastekin's LB3 200 Hz → MN9 result
 is precedent, not a validated drop-in migration. Unblocking requires a
 versioned, model-ready substrate and a repeated Phase 0 pass on that substrate. [Substrate audit](open_questions.md#v3-note-updated-2026-09-10-malecns-as-a-substrate).
 
-### Salt (LB3b/LB3d) as a fifth axis — Open
+### Salt (LB3b/LB3d) as a fifth axis — Closed
 
-The 25 LB3b and 29 LB3d FlyWire IDs are available in v783, but ID availability
-does not establish a separable salt response or a concentration-to-drive map. [Inventory](cell_set_crosscheck.md#feeding-mn-types-available-with-flywire-ids), [proposed mapping](phase1_5_plan.md#task-b-revised-map-docsindicator_class_mapmd-each-row-citing-the-tastekin-figure).
-
-Smallest next step: isolated LB3b and LB3d screens in one fixed layout, at a
-designed 100 Hz with other inputs undriven, plus baseline; **3 × 10 ≈ 30 runs**,
-recording MN9 and MN11 before choosing any dose curve or fifth-axis mapping.
-This borrows P1's screening design, not a calibrated salt concentration. [P1 design](pharyngeal_screen.md#p1--ten-trial-single-type-screen).
+The owner closes this route: S1 does not express high-salt aversion under
+the tested design, contrary to Tastekin's LB3d prediction; the combined
+response instead rises in all four readouts in 10/10 trials. Record the
+disagreement without explanation or a product salt mapping. [OQ-10](open_questions.md#oq-10-salt-fifth-axis-closed--lb3d-aversion-not-expressed-under-s1-2026-09-13).
 
 ## What would change a Closed or Blocked verdict
+
+Salt: reopen with reproducible high-salt-associated aversion under a justified, versioned input/substrate design and an explicit product mapping. [Checkpoint decision](salt_and_refreeze.md#checkpoint-decisions--recorded-not-executed).
 
 Checkpoint chain: reopen with a reproducibly active, input-selective pharyngeal
 readout under a justified protocol/substrate, plus evidence that it and the
@@ -135,6 +147,7 @@ Our simulation findings are inside Shiu's FlyWire model, not calibrated against
 behaviour; stimulus choices and proposed budgets are ours. [Phase T scope](tonic_inhibition.md#what-is-designed-here), [Phase P scope](pharyngeal_screen.md).
 C1 is a one-trial screen, P1 a ten-trial screen; C2/P2 use 30 trials, and C2
 reproduces the original grid seeds rather than adding an independent sample. [C2 provenance](feeding_mn_readouts.md#c2-thirteen-cell-30-trial-rerun), [P1/P2](pharyngeal_screen.md).
+S1 is a ten-trial screen; R1 uses thirty-trial conditions, not a full replacement grid. [S1/R1 provenance](salt_and_refreeze.md#provenance-verification-and-limits).
 MN target labels remain the workbook's `Target_Muscle` values: MN9 `9`,
 MN11D `11D`, MN11V `11V`, CEM `Crop Entry`, without added functional labels. [Source labels](feeding_mn_readouts.md#source-target-muscle-labels).
 The memo changes no frozen data, scoring, site, encoder values or README

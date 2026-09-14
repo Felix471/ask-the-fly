@@ -1,0 +1,1287 @@
+{
+  "schema_version": "refreeze_sugar_r1_v1",
+  "base_protocol": "data/stim_protocol.json",
+  "base_protocol_sha256": "9f9495033281bfcd6f3b373551817987deb2cc083ae94ab61fece9065102d82a",
+  "p1_protocol": "data/stim_protocol_pharyngeal.json",
+  "p1_protocol_sha256": "71a40572a12aa9600afb7f63ef18e9c1535adeef6c69786ce81370478475b90a",
+  "frozen_cells_sha256": "f78f5071af3bf0984e2e71326f715777c567794e03c0e6369846a147015b395a",
+  "candidate_source": {
+    "file": "docs/papers/Tastekin_2025_bioRxiv_v2_SupplTable2_GRN_MN_body_IDs.xlsx",
+    "sha256": "7b28d5f3ae45d68c510b8a3616700f0df2a5a6f2e2d2dba490d172939f2b64c9",
+    "sheet": "GRNs",
+    "Connectome": "FAFB – Flywire",
+    "completeness_file": "vendor/fly-brain/data/2025_Completeness_783.csv",
+    "completeness_sha256": "52b0ac6094cd32c546f8d4c341e094376f48f4e791f8db9b166de5dff8199ea4",
+    "citation": "Tastekin et al. Cell 2026 Table S1; local bioRxiv v2 SupplTable2 workbook, GRNs sheet, FlyWire rows only",
+    "selection": "Exact FlyWire rows, Type LB3, Subtype LB3b or LB3c, Root_Side L; 13+20=33 cells. XLSX L is the frozen Shiu right-stimulus side."
+  },
+  "candidate_neurons": [
+    {
+      "Body_ID": "720575940607737099",
+      "Root_Side": "L",
+      "Type": "LB3",
+      "Subtype": "LB3b",
+      "Entry_Nerve": "MxLbN",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940609919897",
+      "Root_Side": "L",
+      "Type": "LB3",
+      "Subtype": "LB3b",
+      "Entry_Nerve": "MxLbN",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940617181725",
+      "Root_Side": "L",
+      "Type": "LB3",
+      "Subtype": "LB3b",
+      "Entry_Nerve": "MxLbN",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940617937543",
+      "Root_Side": "L",
+      "Type": "LB3",
+      "Subtype": "LB3b",
+      "Entry_Nerve": "MxLbN",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940622413508",
+      "Root_Side": "L",
+      "Type": "LB3",
+      "Subtype": "LB3b",
+      "Entry_Nerve": "MxLbN",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940622825736",
+      "Root_Side": "L",
+      "Type": "LB3",
+      "Subtype": "LB3b",
+      "Entry_Nerve": "MxLbN",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940627490663",
+      "Root_Side": "L",
+      "Type": "LB3",
+      "Subtype": "LB3b",
+      "Entry_Nerve": "MxLbN",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940629025324",
+      "Root_Side": "L",
+      "Type": "LB3",
+      "Subtype": "LB3b",
+      "Entry_Nerve": "MxLbN",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940639043280",
+      "Root_Side": "L",
+      "Type": "LB3",
+      "Subtype": "LB3b",
+      "Entry_Nerve": "MxLbN",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940607347634",
+      "Root_Side": "L",
+      "Type": "LB3",
+      "Subtype": "LB3b",
+      "Entry_Nerve": "MxLbN",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940631393484",
+      "Root_Side": "L",
+      "Type": "LB3",
+      "Subtype": "LB3b",
+      "Entry_Nerve": "MxLbN",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940629176663",
+      "Root_Side": "L",
+      "Type": "LB3",
+      "Subtype": "LB3b",
+      "Entry_Nerve": "MxLbN",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940632510479",
+      "Root_Side": "L",
+      "Type": "LB3",
+      "Subtype": "LB3b",
+      "Entry_Nerve": "MxLbN",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940616885538",
+      "Root_Side": "L",
+      "Type": "LB3",
+      "Subtype": "LB3c",
+      "Entry_Nerve": "MxLbN",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940612670570",
+      "Root_Side": "L",
+      "Type": "LB3",
+      "Subtype": "LB3c",
+      "Entry_Nerve": "MxLbN",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940617000768",
+      "Root_Side": "L",
+      "Type": "LB3",
+      "Subtype": "LB3c",
+      "Entry_Nerve": "MxLbN",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940621502051",
+      "Root_Side": "L",
+      "Type": "LB3",
+      "Subtype": "LB3c",
+      "Entry_Nerve": "MxLbN",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940621754367",
+      "Root_Side": "L",
+      "Type": "LB3",
+      "Subtype": "LB3c",
+      "Entry_Nerve": "MxLbN",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940628853239",
+      "Root_Side": "L",
+      "Type": "LB3",
+      "Subtype": "LB3c",
+      "Entry_Nerve": "MxLbN",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940639198653",
+      "Root_Side": "L",
+      "Type": "LB3",
+      "Subtype": "LB3c",
+      "Entry_Nerve": "MxLbN",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940639259967",
+      "Root_Side": "L",
+      "Type": "LB3",
+      "Subtype": "LB3c",
+      "Entry_Nerve": "MxLbN",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940639332736",
+      "Root_Side": "L",
+      "Type": "LB3",
+      "Subtype": "LB3c",
+      "Entry_Nerve": "MxLbN",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940640649691",
+      "Root_Side": "L",
+      "Type": "LB3",
+      "Subtype": "LB3c",
+      "Entry_Nerve": "MxLbN",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940606002609",
+      "Root_Side": "L",
+      "Type": "LB3",
+      "Subtype": "LB3c",
+      "Entry_Nerve": "MxLbN",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940625861168",
+      "Root_Side": "L",
+      "Type": "LB3",
+      "Subtype": "LB3c",
+      "Entry_Nerve": "MxLbN",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940612579053",
+      "Root_Side": "L",
+      "Type": "LB3",
+      "Subtype": "LB3c",
+      "Entry_Nerve": "MxLbN",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940612950568",
+      "Root_Side": "L",
+      "Type": "LB3",
+      "Subtype": "LB3c",
+      "Entry_Nerve": "MxLbN",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940622486922",
+      "Root_Side": "L",
+      "Type": "LB3",
+      "Subtype": "LB3c",
+      "Entry_Nerve": "MxLbN",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940629852866",
+      "Root_Side": "L",
+      "Type": "LB3",
+      "Subtype": "LB3c",
+      "Entry_Nerve": "MxLbN",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940635172191",
+      "Root_Side": "L",
+      "Type": "LB3",
+      "Subtype": "LB3c",
+      "Entry_Nerve": "MxLbN",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940645332259",
+      "Root_Side": "L",
+      "Type": "LB3",
+      "Subtype": "LB3c",
+      "Entry_Nerve": "MxLbN",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940613601698",
+      "Root_Side": "L",
+      "Type": "LB3",
+      "Subtype": "LB3c",
+      "Entry_Nerve": "MxLbN",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940623629292",
+      "Root_Side": "L",
+      "Type": "LB3",
+      "Subtype": "LB3c",
+      "Entry_Nerve": "MxLbN",
+      "in_v783": true
+    }
+  ],
+  "source_neurons": [
+    {
+      "Body_ID": "720575940617433830",
+      "Root_Side": "R",
+      "Type": "LB1",
+      "Subtype": "LB1a",
+      "Entry_Nerve": "MxLbN",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940618682526",
+      "Root_Side": "R",
+      "Type": "LB1",
+      "Subtype": "LB1a",
+      "Entry_Nerve": "MxLbN",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940619659861",
+      "Root_Side": "R",
+      "Type": "LB1",
+      "Subtype": "LB1a",
+      "Entry_Nerve": "MxLbN",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940621864060",
+      "Root_Side": "R",
+      "Type": "LB1",
+      "Subtype": "LB1a",
+      "Entry_Nerve": "MxLbN",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940624310345",
+      "Root_Side": "R",
+      "Type": "LB1",
+      "Subtype": "LB1a",
+      "Entry_Nerve": "MxLbN",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940629416318",
+      "Root_Side": "R",
+      "Type": "LB1",
+      "Subtype": "LB1a",
+      "Entry_Nerve": "MxLbN",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940634859188",
+      "Root_Side": "R",
+      "Type": "LB1",
+      "Subtype": "LB1a",
+      "Entry_Nerve": "MxLbN",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940638312262",
+      "Root_Side": "R",
+      "Type": "LB1",
+      "Subtype": "LB1a",
+      "Entry_Nerve": "MxLbN",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940604027168",
+      "Root_Side": "L",
+      "Type": "LB1",
+      "Subtype": "LB1a",
+      "Entry_Nerve": "MxLbN",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940610259370",
+      "Root_Side": "L",
+      "Type": "LB1",
+      "Subtype": "LB1a",
+      "Entry_Nerve": "MxLbN",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940617094208",
+      "Root_Side": "L",
+      "Type": "LB1",
+      "Subtype": "LB1a",
+      "Entry_Nerve": "MxLbN",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940619028208",
+      "Root_Side": "L",
+      "Type": "LB1",
+      "Subtype": "LB1a",
+      "Entry_Nerve": "MxLbN",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940621008895",
+      "Root_Side": "L",
+      "Type": "LB1",
+      "Subtype": "LB1a",
+      "Entry_Nerve": "MxLbN",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940626287336",
+      "Root_Side": "L",
+      "Type": "LB1",
+      "Subtype": "LB1a",
+      "Entry_Nerve": "MxLbN",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940627692048",
+      "Root_Side": "L",
+      "Type": "LB1",
+      "Subtype": "LB1a",
+      "Entry_Nerve": "MxLbN",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940630195909",
+      "Root_Side": "L",
+      "Type": "LB1",
+      "Subtype": "LB1a",
+      "Entry_Nerve": "MxLbN",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940623183083",
+      "Root_Side": "R",
+      "Type": "LB1",
+      "Subtype": "LB1b",
+      "Entry_Nerve": "MxLbN",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940625750105",
+      "Root_Side": "R",
+      "Type": "LB1",
+      "Subtype": "LB1b",
+      "Entry_Nerve": "MxLbN",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940629481516",
+      "Root_Side": "R",
+      "Type": "LB1",
+      "Subtype": "LB1b",
+      "Entry_Nerve": "MxLbN",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940618025199",
+      "Root_Side": "R",
+      "Type": "LB1",
+      "Subtype": "LB1b",
+      "Entry_Nerve": "MxLbN",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940646212996",
+      "Root_Side": "L",
+      "Type": "LB1",
+      "Subtype": "LB1b",
+      "Entry_Nerve": "MxLbN",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940610483162",
+      "Root_Side": "L",
+      "Type": "LB1",
+      "Subtype": "LB1b",
+      "Entry_Nerve": "MxLbN",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940621778381",
+      "Root_Side": "L",
+      "Type": "LB1",
+      "Subtype": "LB1b",
+      "Entry_Nerve": "MxLbN",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940618887217",
+      "Root_Side": "R",
+      "Type": "LB1",
+      "Subtype": "LB1c",
+      "Entry_Nerve": "MxLbN",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940604714528",
+      "Root_Side": "R",
+      "Type": "LB1",
+      "Subtype": "LB1c",
+      "Entry_Nerve": "MxLbN",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940603266592",
+      "Root_Side": "R",
+      "Type": "LB1",
+      "Subtype": "LB1c",
+      "Entry_Nerve": "MxLbN",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940610773090",
+      "Root_Side": "R",
+      "Type": "LB1",
+      "Subtype": "LB1c",
+      "Entry_Nerve": "MxLbN",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940637742911",
+      "Root_Side": "R",
+      "Type": "LB1",
+      "Subtype": "LB1c",
+      "Entry_Nerve": "MxLbN",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940642088333",
+      "Root_Side": "R",
+      "Type": "LB1",
+      "Subtype": "LB1c",
+      "Entry_Nerve": "MxLbN",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940619197093",
+      "Root_Side": "L",
+      "Type": "LB1",
+      "Subtype": "LB1c",
+      "Entry_Nerve": "MxLbN",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940629146711",
+      "Root_Side": "L",
+      "Type": "LB1",
+      "Subtype": "LB1c",
+      "Entry_Nerve": "MxLbN",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940613061118",
+      "Root_Side": "L",
+      "Type": "LB1",
+      "Subtype": "LB1c",
+      "Entry_Nerve": "MxLbN",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940619072513",
+      "Root_Side": "L",
+      "Type": "LB1",
+      "Subtype": "LB1c",
+      "Entry_Nerve": "MxLbN",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940645743412",
+      "Root_Side": "L",
+      "Type": "LB1",
+      "Subtype": "LB1c",
+      "Entry_Nerve": "MxLbN",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940628962407",
+      "Root_Side": "R",
+      "Type": "LB1",
+      "Subtype": "LB1d",
+      "Entry_Nerve": "MxLbN",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940615641798",
+      "Root_Side": "R",
+      "Type": "LB1",
+      "Subtype": "LB1d",
+      "Entry_Nerve": "MxLbN",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940617239197",
+      "Root_Side": "R",
+      "Type": "LB1",
+      "Subtype": "LB1d",
+      "Entry_Nerve": "MxLbN",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940602353632",
+      "Root_Side": "L",
+      "Type": "LB1",
+      "Subtype": "LB1d",
+      "Entry_Nerve": "MxLbN",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940622298631",
+      "Root_Side": "L",
+      "Type": "LB1",
+      "Subtype": "LB1d",
+      "Entry_Nerve": "MxLbN",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940610481370",
+      "Root_Side": "L",
+      "Type": "LB1",
+      "Subtype": "LB1d",
+      "Entry_Nerve": "MxLbN",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940627578156",
+      "Root_Side": "L",
+      "Type": "LB1",
+      "Subtype": "LB1d",
+      "Entry_Nerve": "MxLbN",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940614281266",
+      "Root_Side": "L",
+      "Type": "LB1",
+      "Subtype": "LB1d",
+      "Entry_Nerve": "MxLbN",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940607737099",
+      "Root_Side": "L",
+      "Type": "LB3",
+      "Subtype": "LB3b",
+      "Entry_Nerve": "MxLbN",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940609919897",
+      "Root_Side": "L",
+      "Type": "LB3",
+      "Subtype": "LB3b",
+      "Entry_Nerve": "MxLbN",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940617181725",
+      "Root_Side": "L",
+      "Type": "LB3",
+      "Subtype": "LB3b",
+      "Entry_Nerve": "MxLbN",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940617937543",
+      "Root_Side": "L",
+      "Type": "LB3",
+      "Subtype": "LB3b",
+      "Entry_Nerve": "MxLbN",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940622413508",
+      "Root_Side": "L",
+      "Type": "LB3",
+      "Subtype": "LB3b",
+      "Entry_Nerve": "MxLbN",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940622825736",
+      "Root_Side": "L",
+      "Type": "LB3",
+      "Subtype": "LB3b",
+      "Entry_Nerve": "MxLbN",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940627490663",
+      "Root_Side": "L",
+      "Type": "LB3",
+      "Subtype": "LB3b",
+      "Entry_Nerve": "MxLbN",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940629025324",
+      "Root_Side": "L",
+      "Type": "LB3",
+      "Subtype": "LB3b",
+      "Entry_Nerve": "MxLbN",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940639043280",
+      "Root_Side": "L",
+      "Type": "LB3",
+      "Subtype": "LB3b",
+      "Entry_Nerve": "MxLbN",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940607347634",
+      "Root_Side": "L",
+      "Type": "LB3",
+      "Subtype": "LB3b",
+      "Entry_Nerve": "MxLbN",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940631393484",
+      "Root_Side": "L",
+      "Type": "LB3",
+      "Subtype": "LB3b",
+      "Entry_Nerve": "MxLbN",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940629176663",
+      "Root_Side": "L",
+      "Type": "LB3",
+      "Subtype": "LB3b",
+      "Entry_Nerve": "MxLbN",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940632510479",
+      "Root_Side": "L",
+      "Type": "LB3",
+      "Subtype": "LB3b",
+      "Entry_Nerve": "MxLbN",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940616885538",
+      "Root_Side": "L",
+      "Type": "LB3",
+      "Subtype": "LB3c",
+      "Entry_Nerve": "MxLbN",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940612670570",
+      "Root_Side": "L",
+      "Type": "LB3",
+      "Subtype": "LB3c",
+      "Entry_Nerve": "MxLbN",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940617000768",
+      "Root_Side": "L",
+      "Type": "LB3",
+      "Subtype": "LB3c",
+      "Entry_Nerve": "MxLbN",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940621502051",
+      "Root_Side": "L",
+      "Type": "LB3",
+      "Subtype": "LB3c",
+      "Entry_Nerve": "MxLbN",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940621754367",
+      "Root_Side": "L",
+      "Type": "LB3",
+      "Subtype": "LB3c",
+      "Entry_Nerve": "MxLbN",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940628853239",
+      "Root_Side": "L",
+      "Type": "LB3",
+      "Subtype": "LB3c",
+      "Entry_Nerve": "MxLbN",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940639198653",
+      "Root_Side": "L",
+      "Type": "LB3",
+      "Subtype": "LB3c",
+      "Entry_Nerve": "MxLbN",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940639259967",
+      "Root_Side": "L",
+      "Type": "LB3",
+      "Subtype": "LB3c",
+      "Entry_Nerve": "MxLbN",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940639332736",
+      "Root_Side": "L",
+      "Type": "LB3",
+      "Subtype": "LB3c",
+      "Entry_Nerve": "MxLbN",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940640649691",
+      "Root_Side": "L",
+      "Type": "LB3",
+      "Subtype": "LB3c",
+      "Entry_Nerve": "MxLbN",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940606002609",
+      "Root_Side": "L",
+      "Type": "LB3",
+      "Subtype": "LB3c",
+      "Entry_Nerve": "MxLbN",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940625861168",
+      "Root_Side": "L",
+      "Type": "LB3",
+      "Subtype": "LB3c",
+      "Entry_Nerve": "MxLbN",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940612579053",
+      "Root_Side": "L",
+      "Type": "LB3",
+      "Subtype": "LB3c",
+      "Entry_Nerve": "MxLbN",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940612950568",
+      "Root_Side": "L",
+      "Type": "LB3",
+      "Subtype": "LB3c",
+      "Entry_Nerve": "MxLbN",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940622486922",
+      "Root_Side": "L",
+      "Type": "LB3",
+      "Subtype": "LB3c",
+      "Entry_Nerve": "MxLbN",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940629852866",
+      "Root_Side": "L",
+      "Type": "LB3",
+      "Subtype": "LB3c",
+      "Entry_Nerve": "MxLbN",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940635172191",
+      "Root_Side": "L",
+      "Type": "LB3",
+      "Subtype": "LB3c",
+      "Entry_Nerve": "MxLbN",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940645332259",
+      "Root_Side": "L",
+      "Type": "LB3",
+      "Subtype": "LB3c",
+      "Entry_Nerve": "MxLbN",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940613601698",
+      "Root_Side": "L",
+      "Type": "LB3",
+      "Subtype": "LB3c",
+      "Entry_Nerve": "MxLbN",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940623629292",
+      "Root_Side": "L",
+      "Type": "LB3",
+      "Subtype": "LB3c",
+      "Entry_Nerve": "MxLbN",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940611875570",
+      "Root_Side": "L",
+      "Type": "LB3",
+      "Subtype": "LB3d",
+      "Entry_Nerve": "MxLbN",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940632425919",
+      "Root_Side": "L",
+      "Type": "LB3",
+      "Subtype": "LB3d",
+      "Entry_Nerve": "MxLbN",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940632889389",
+      "Root_Side": "L",
+      "Type": "LB3",
+      "Subtype": "LB3d",
+      "Entry_Nerve": "MxLbN",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940633143833",
+      "Root_Side": "L",
+      "Type": "LB3",
+      "Subtype": "LB3d",
+      "Entry_Nerve": "MxLbN",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940610788069",
+      "Root_Side": "L",
+      "Type": "LB3",
+      "Subtype": "LB3d",
+      "Entry_Nerve": "MxLbN",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940623172843",
+      "Root_Side": "L",
+      "Type": "LB3",
+      "Subtype": "LB3d",
+      "Entry_Nerve": "MxLbN",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940630797113",
+      "Root_Side": "L",
+      "Type": "LB3",
+      "Subtype": "LB3d",
+      "Entry_Nerve": "MxLbN",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940624963786",
+      "Root_Side": "L",
+      "Type": "LB4",
+      "Subtype": "LB4b",
+      "Entry_Nerve": "MxLbN",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940630233916",
+      "Root_Side": "L",
+      "Type": "LB4",
+      "Subtype": "LB4b",
+      "Entry_Nerve": "MxLbN",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940637568838",
+      "Root_Side": "L",
+      "Type": "LB4",
+      "Subtype": "LB4b",
+      "Entry_Nerve": "MxLbN",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940638202345",
+      "Root_Side": "L",
+      "Type": "LB4",
+      "Subtype": "LB4b",
+      "Entry_Nerve": "MxLbN",
+      "in_v783": true
+    }
+  ],
+  "readout_neurons": [
+    {
+      "Body_ID": "720575940660219265",
+      "Root_Side": "R",
+      "Type": "MN9",
+      "Target_Muscle": "9",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940618238523",
+      "Root_Side": "L",
+      "Type": "MN9",
+      "Target_Muscle": "9",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940630868793",
+      "Root_Side": "R",
+      "Type": "MN11D",
+      "Target_Muscle": "11D",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940618165019",
+      "Root_Side": "L",
+      "Type": "MN11D",
+      "Target_Muscle": "11D",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940635360924",
+      "Root_Side": "R",
+      "Type": "MN11V",
+      "Target_Muscle": "11V",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940636165624",
+      "Root_Side": "L",
+      "Type": "MN11V",
+      "Target_Muscle": "11V",
+      "in_v783": true
+    }
+  ],
+  "n_poisson_units": 165,
+  "layout": "Original P1 physical order (151 roots), followed by 14 missing candidate roots sorted numerically. One singleton channel per unique root; candidate overlaps 12 frozen sugar and seven frozen water cells. Every physical neuron receives one effective rate/refractory assignment.",
+  "trial": {
+    "n_trials": 30,
+    "base_seed": 20260910,
+    "seed_scheme": "published_grid_v1_batch40",
+    "seed_rule": "20260910+1000*(seed_index%40)+trial, trial0..29. Old/new five-dose curves share seedindices0..4; eleven Phase0 additions use5..15; Aprime120 shares3 with new120. 660 runs, 480 distinct seed values."
+  },
+  "conditions": [
+    {
+      "cond_id": "R1_old_0",
+      "condition_index": 0,
+      "seed_index": 0,
+      "group_rates": {
+        "frozen_sugar23": 0,
+        "candidate33": 0,
+        "LB3c20": 0,
+        "bitter42": 0
+      }
+    },
+    {
+      "cond_id": "R1_old_60",
+      "condition_index": 1,
+      "seed_index": 1,
+      "group_rates": {
+        "frozen_sugar23": 60,
+        "candidate33": 0,
+        "LB3c20": 0,
+        "bitter42": 0
+      }
+    },
+    {
+      "cond_id": "R1_old_80",
+      "condition_index": 2,
+      "seed_index": 2,
+      "group_rates": {
+        "frozen_sugar23": 80,
+        "candidate33": 0,
+        "LB3c20": 0,
+        "bitter42": 0
+      }
+    },
+    {
+      "cond_id": "R1_old_120",
+      "condition_index": 3,
+      "seed_index": 3,
+      "group_rates": {
+        "frozen_sugar23": 120,
+        "candidate33": 0,
+        "LB3c20": 0,
+        "bitter42": 0
+      }
+    },
+    {
+      "cond_id": "R1_old_200",
+      "condition_index": 4,
+      "seed_index": 4,
+      "group_rates": {
+        "frozen_sugar23": 200,
+        "candidate33": 0,
+        "LB3c20": 0,
+        "bitter42": 0
+      }
+    },
+    {
+      "cond_id": "R1_new_0",
+      "condition_index": 5,
+      "seed_index": 0,
+      "group_rates": {
+        "frozen_sugar23": 0,
+        "candidate33": 0,
+        "LB3c20": 0,
+        "bitter42": 0
+      }
+    },
+    {
+      "cond_id": "R1_new_60",
+      "condition_index": 6,
+      "seed_index": 1,
+      "group_rates": {
+        "frozen_sugar23": 0,
+        "candidate33": 60,
+        "LB3c20": 0,
+        "bitter42": 0
+      }
+    },
+    {
+      "cond_id": "R1_new_80",
+      "condition_index": 7,
+      "seed_index": 2,
+      "group_rates": {
+        "frozen_sugar23": 0,
+        "candidate33": 80,
+        "LB3c20": 0,
+        "bitter42": 0
+      }
+    },
+    {
+      "cond_id": "R1_new_120",
+      "condition_index": 8,
+      "seed_index": 3,
+      "group_rates": {
+        "frozen_sugar23": 0,
+        "candidate33": 120,
+        "LB3c20": 0,
+        "bitter42": 0
+      }
+    },
+    {
+      "cond_id": "R1_new_200",
+      "condition_index": 9,
+      "seed_index": 4,
+      "group_rates": {
+        "frozen_sugar23": 0,
+        "candidate33": 200,
+        "LB3c20": 0,
+        "bitter42": 0
+      }
+    },
+    {
+      "cond_id": "R1_A_new_25",
+      "condition_index": 10,
+      "seed_index": 5,
+      "group_rates": {
+        "frozen_sugar23": 0,
+        "candidate33": 25,
+        "LB3c20": 0,
+        "bitter42": 0
+      }
+    },
+    {
+      "cond_id": "R1_A_new_50",
+      "condition_index": 11,
+      "seed_index": 6,
+      "group_rates": {
+        "frozen_sugar23": 0,
+        "candidate33": 50,
+        "LB3c20": 0,
+        "bitter42": 0
+      }
+    },
+    {
+      "cond_id": "R1_A_new_100",
+      "condition_index": 12,
+      "seed_index": 7,
+      "group_rates": {
+        "frozen_sugar23": 0,
+        "candidate33": 100,
+        "LB3c20": 0,
+        "bitter42": 0
+      }
+    },
+    {
+      "cond_id": "R1_B_new200_bitter25",
+      "condition_index": 13,
+      "seed_index": 8,
+      "group_rates": {
+        "frozen_sugar23": 0,
+        "candidate33": 200,
+        "LB3c20": 0,
+        "bitter42": 25
+      }
+    },
+    {
+      "cond_id": "R1_B_new200_bitter50",
+      "condition_index": 14,
+      "seed_index": 9,
+      "group_rates": {
+        "frozen_sugar23": 0,
+        "candidate33": 200,
+        "LB3c20": 0,
+        "bitter42": 50
+      }
+    },
+    {
+      "cond_id": "R1_B_new200_bitter100",
+      "condition_index": 15,
+      "seed_index": 10,
+      "group_rates": {
+        "frozen_sugar23": 0,
+        "candidate33": 200,
+        "LB3c20": 0,
+        "bitter42": 100
+      }
+    },
+    {
+      "cond_id": "R1_B_new200_bitter200",
+      "condition_index": 16,
+      "seed_index": 11,
+      "group_rates": {
+        "frozen_sugar23": 0,
+        "candidate33": 200,
+        "LB3c20": 0,
+        "bitter42": 200
+      }
+    },
+    {
+      "cond_id": "R1_C_bitter25",
+      "condition_index": 17,
+      "seed_index": 12,
+      "group_rates": {
+        "frozen_sugar23": 0,
+        "candidate33": 0,
+        "LB3c20": 0,
+        "bitter42": 25
+      }
+    },
+    {
+      "cond_id": "R1_C_bitter50",
+      "condition_index": 18,
+      "seed_index": 13,
+      "group_rates": {
+        "frozen_sugar23": 0,
+        "candidate33": 0,
+        "LB3c20": 0,
+        "bitter42": 50
+      }
+    },
+    {
+      "cond_id": "R1_C_bitter100",
+      "condition_index": 19,
+      "seed_index": 14,
+      "group_rates": {
+        "frozen_sugar23": 0,
+        "candidate33": 0,
+        "LB3c20": 0,
+        "bitter42": 100
+      }
+    },
+    {
+      "cond_id": "R1_C_bitter200",
+      "condition_index": 20,
+      "seed_index": 15,
+      "group_rates": {
+        "frozen_sugar23": 0,
+        "candidate33": 0,
+        "LB3c20": 0,
+        "bitter42": 200
+      }
+    },
+    {
+      "cond_id": "R1_Aprime_LB3c20_120",
+      "condition_index": 21,
+      "seed_index": 3,
+      "group_rates": {
+        "frozen_sugar23": 0,
+        "candidate33": 0,
+        "LB3c20": 120,
+        "bitter42": 0
+      }
+    }
+  ],
+  "reused_conditions": {
+    "D_baseline": "R1_new_0",
+    "A_sugar200": "R1_new_200",
+    "B_bitter0": "R1_new_200",
+    "Aprime_candidate120": "R1_new_120"
+  },
+  "analysis": {
+    "rate": "Count per full1second; MN9 L/R individual, MN11D/V two-cell mean; all86sourceGRNs recorded individually including inactive sources; groups overlap and are not additive.",
+    "std": "Population SD across30trials, ddof=0.",
+    "latency": "First-spike median among active trials with active counts; group first spike is earliest member.",
+    "normalization": "Divide each set's mean and each trial rate at every dose by that set's OWN mean at200Hz; 200Hz means become1 while trial SD remains nonzero. Do not propagate uncertainty in the estimated200Hz mean; zero denominator means undefined.",
+    "paired": "Old/new ratio of means at each dose and paired differences; normalized new-minus-old per-trial differences. Aprime LB3c20-minus-candidate33 at120Hz paired mean/SD. Verify actual shared-root Poisson events.",
+    "shape_flag": "Preregistered descriptive screen: at interior60/80/120Hz flag if absolute mean paired normalized difference exceeds twice its population SD. Our design, not a significance test or a demonstrated change of full-grid dish ranking.",
+    "size_caveat": "33/23 is the ratio of expected total external Poisson input at equal per-cell Hz, not a predicted MN-output ratio; cell identities and circuit interactions also change.",
+    "phase0": "Require exact A25/50/100/200, B0/25/50/100/200 at candidate200, C25/50/100/200, and D0 coverage with30trials each. Original left-only hard gates retained: A strict increases except zero/zero and A200>Dmean+5Dsd+5; B nonincrease and B200<0.5B0; Cmean<=Dmean+2Dsd+1; D complete. Also report strict all-zero C/D for both MN9 sides separately."
+  },
+  "results": "results/refreeze/sugar_r1/ (local/gitignored; no product or lookup changes)"
+}
