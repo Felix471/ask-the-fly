@@ -707,3 +707,145 @@ Comparison is within the same M1f brain roster at0.5, not the whole-CNS degree. 
 | ir94e | 947005552 | 36 | 17 | 47.22% | FLAG |
 
 The 480-trial experiment, final variant ledger/closing section and corresponding memo closure remain pending this checkpoint. No gate result or pass/fail is assigned to M1h yet.
+
+## M1h outgoing-retention checkpoint — 2026-09-14
+
+**STOP: all four input sets retain less than half their outgoing synapses. The owner’s conditional run criterion fails. No M1h trials are run; no A–D/S result is assigned.**
+
+At `c* = 0.869` the graph keeps **56.8% of brain contacts**; recall at that cutoff is unknown (**0.81 at0.5 per Berg S8E**). This is a **heavily pruned graph, density-matched by construction**. The previous incoming-loss flags are not the run criterion for these Poisson-driven inputs; the owner instead requires each input set to retain at least half its outputs.
+
+[Hashed outgoing audit and all values](../data/malecns/m1h_output_retention.json). Counts are unsigned synapse totals within the same M1f brain endpoint cut, not unique partners or signed net drive. Set retention is a ratio of totals, not the average of per-cell fractions.
+
+| Set | Cells | Outgoing at0.5 | Outgoing at `c*` | Retained | Below half |
+|---|---:|---:|---:|---:|---|
+| sugar | 17 | 6,674 | 3,111 | 46.61% | FLAG |
+| bitter | 38 | 23,430 | 10,640 | 45.41% | FLAG |
+| water | 17 | 4,633 | 1,994 | 43.04% | FLAG |
+| ir94e | 19 | 7,052 | 3,375 | 47.86% | FLAG |
+
+### Both MN9s and all91 input cells
+
+| Cell / set | Body ID | Outgoing at0.5 | Outgoing at `c*` | Retained |
+|---|---:|---:|---:|---:|
+| MN9 L primary | 10331 | 280 | 27 | 9.64% |
+| MN9 R secondary | 16949 | 445 | 87 | 19.55% |
+| sugar | 71254 | 779 | 358 | 45.96% |
+| sugar | 78240 | 425 | 130 | 30.59% |
+| sugar | 85806 | 791 | 410 | 51.83% |
+| sugar | 159772 | 422 | 185 | 43.84% |
+| sugar | 180314 | 178 | 37 | 20.79% |
+| sugar | 190769 | 353 | 203 | 57.51% |
+| sugar | 261450 | 354 | 174 | 49.15% |
+| sugar | 262567 | 266 | 128 | 48.12% |
+| sugar | 272263 | 296 | 135 | 45.61% |
+| sugar | 512551 | 876 | 432 | 49.32% |
+| sugar | 531237 | 414 | 181 | 43.72% |
+| sugar | 933317 | 1,024 | 515 | 50.29% |
+| sugar | 158893964 | 107 | 30 | 28.04% |
+| sugar | 174444965 | 42 | 18 | 42.86% |
+| sugar | 349137284 | 64 | 33 | 51.56% |
+| sugar | 475202322 | 149 | 75 | 50.34% |
+| sugar | 766547228 | 134 | 67 | 50.00% |
+| bitter | 54104 | 416 | 193 | 46.39% |
+| bitter | 81741 | 738 | 363 | 49.19% |
+| bitter | 107241 | 1,127 | 546 | 48.45% |
+| bitter | 115666 | 367 | 180 | 49.05% |
+| bitter | 125111 | 807 | 380 | 47.09% |
+| bitter | 139178 | 420 | 218 | 51.90% |
+| bitter | 144334 | 372 | 167 | 44.89% |
+| bitter | 154544 | 400 | 195 | 48.75% |
+| bitter | 163395 | 327 | 151 | 46.18% |
+| bitter | 168492 | 380 | 183 | 48.16% |
+| bitter | 173462 | 381 | 201 | 52.76% |
+| bitter | 208885 | 340 | 145 | 42.65% |
+| bitter | 256844 | 976 | 445 | 45.59% |
+| bitter | 375038 | 102 | 28 | 27.45% |
+| bitter | 511882 | 997 | 474 | 47.54% |
+| bitter | 514546 | 911 | 419 | 45.99% |
+| bitter | 514547 | 835 | 382 | 45.75% |
+| bitter | 517255 | 572 | 203 | 35.49% |
+| bitter | 518112 | 827 | 386 | 46.67% |
+| bitter | 522746 | 913 | 417 | 45.67% |
+| bitter | 522752 | 991 | 440 | 44.40% |
+| bitter | 522753 | 996 | 467 | 46.89% |
+| bitter | 522754 | 1,007 | 477 | 47.37% |
+| bitter | 522761 | 985 | 380 | 38.58% |
+| bitter | 522762 | 889 | 394 | 44.32% |
+| bitter | 522841 | 1,190 | 525 | 44.12% |
+| bitter | 533618 | 786 | 344 | 43.77% |
+| bitter | 549024 | 302 | 149 | 49.34% |
+| bitter | 556797 | 437 | 205 | 46.91% |
+| bitter | 557937 | 279 | 108 | 38.71% |
+| bitter | 912379 | 825 | 342 | 41.45% |
+| bitter | 140334446 | 334 | 163 | 48.80% |
+| bitter | 144295263 | 75 | 38 | 50.67% |
+| bitter | 304136793 | 625 | 300 | 48.00% |
+| bitter | 324178811 | 740 | 315 | 42.57% |
+| bitter | 602736959 | 98 | 38 | 38.78% |
+| bitter | 772366874 | 436 | 184 | 42.20% |
+| bitter | 911389008 | 227 | 95 | 41.85% |
+| water | 136183 | 392 | 191 | 48.72% |
+| water | 140619 | 295 | 118 | 40.00% |
+| water | 141663 | 324 | 119 | 36.73% |
+| water | 160435 | 485 | 205 | 42.27% |
+| water | 166190 | 401 | 171 | 42.64% |
+| water | 167663 | 334 | 144 | 43.11% |
+| water | 178913 | 306 | 127 | 41.50% |
+| water | 183061 | 369 | 183 | 49.59% |
+| water | 187776 | 357 | 147 | 41.18% |
+| water | 199308 | 227 | 95 | 41.85% |
+| water | 203234 | 266 | 127 | 47.74% |
+| water | 374701 | 97 | 34 | 35.05% |
+| water | 518542 | 290 | 130 | 44.83% |
+| water | 388541892 | 239 | 101 | 42.26% |
+| water | 456838775 | 78 | 28 | 35.90% |
+| water | 553738738 | 65 | 30 | 46.15% |
+| water | 786482749 | 108 | 44 | 40.74% |
+| ir94e | 44816 | 1,097 | 579 | 52.78% |
+| ir94e | 111660 | 487 | 238 | 48.87% |
+| ir94e | 137497 | 635 | 321 | 50.55% |
+| ir94e | 154359 | 465 | 230 | 49.46% |
+| ir94e | 175572 | 390 | 175 | 44.87% |
+| ir94e | 200001 | 365 | 166 | 45.48% |
+| ir94e | 209688 | 560 | 262 | 46.79% |
+| ir94e | 232730 | 131 | 53 | 40.46% |
+| ir94e | 534361 | 594 | 293 | 49.33% |
+| ir94e | 908747 | 536 | 260 | 48.51% |
+| ir94e | 919429 | 110 | 54 | 49.09% |
+| ir94e | 214700177 | 446 | 220 | 49.33% |
+| ir94e | 418840426 | 163 | 45 | 27.61% |
+| ir94e | 491986845 | 233 | 105 | 45.06% |
+| ir94e | 551057545 | 163 | 79 | 48.47% |
+| ir94e | 633272971 | 149 | 53 | 35.57% |
+| ir94e | 792429427 | 160 | 82 | 51.25% |
+| ir94e | 912111327 | 262 | 133 | 50.76% |
+| ir94e | 947005552 | 106 | 27 | 25.47% |
+
+### L10331 top20 direct presynaptic partners
+
+Rank fixed using the0.5 graph: strongest direct synapse count into L10331, ties by ascending body ID. Total outgoing retention alone does not establish last-hop retention, so both are shown; zero surviving direct contacts would be explicit. These rows do not select or adjust `c*`.
+
+| Rank | Partner body | All outputs0.5 | All outputs `c*` | Retained | Into L10331 at0.5 | Into L10331 at `c*` | Last-hop retained |
+|---:|---:|---:|---:|---:|---:|---:|---:|
+| 1 | 10833 | 2,427 | 1,261 | 51.96% | 464 | 250 | 53.88% |
+| 2 | 10881 | 2,087 | 1,252 | 59.99% | 359 | 247 | 68.80% |
+| 3 | 13754 | 1,442 | 941 | 65.26% | 357 | 275 | 77.03% |
+| 4 | 12851 | 2,850 | 1,649 | 57.86% | 351 | 199 | 56.70% |
+| 5 | 26764 | 3,970 | 2,806 | 70.68% | 348 | 273 | 78.45% |
+| 6 | 523590 | 2,548 | 1,600 | 62.79% | 266 | 219 | 82.33% |
+| 7 | 10849 | 6,418 | 3,155 | 49.16% | 241 | 130 | 53.94% |
+| 8 | 513655 | 2,040 | 1,225 | 60.05% | 214 | 141 | 65.89% |
+| 9 | 14891 | 2,278 | 1,318 | 57.86% | 198 | 119 | 60.10% |
+| 10 | 17782 | 1,877 | 1,063 | 56.63% | 187 | 130 | 69.52% |
+| 11 | 28181 | 1,865 | 1,296 | 69.49% | 177 | 148 | 83.62% |
+| 12 | 11755 | 6,124 | 2,958 | 48.30% | 160 | 91 | 56.88% |
+| 13 | 523679 | 2,243 | 1,445 | 64.42% | 142 | 103 | 72.54% |
+| 14 | 16142 | 2,098 | 1,233 | 58.77% | 136 | 98 | 72.06% |
+| 15 | 12752 | 3,699 | 1,974 | 53.37% | 101 | 60 | 59.41% |
+| 16 | 12364 | 3,623 | 1,987 | 54.84% | 96 | 59 | 61.46% |
+| 17 | 10673 | 5,602 | 2,513 | 44.86% | 92 | 54 | 58.70% |
+| 18 | 238142 | 1,116 | 598 | 53.58% | 92 | 60 | 65.22% |
+| 19 | 13402 | 2,156 | 1,139 | 52.83% | 78 | 54 | 69.23% |
+| 20 | 522702 | 2,490 | 1,579 | 63.41% | 76 | 50 | 65.79% |
+
+These fixed20 partners retain 2,760/4,135 direct synapses into L10331 (66.75%). This does not override the input-set stop condition. The experiment remains stopped before simulation, awaiting the owner’s decision.
