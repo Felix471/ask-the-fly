@@ -445,6 +445,10 @@ Direct histograms of the unsigned `Connectivity` column, before simulation filte
 
 **Decision:** the female graph is not effectively >=5. The owner's conditional third M1f candidate is therefore not triggered; the two pre-declared candidates and their substrates remain unchanged. `r_all = 1.895191250` and `r_brain = 1.761181496` do not measure a female >=5 versus male all-edge discrepancy. This does not establish equivalence of upstream synapse detection, confidence filtering, reconstruction, or roster policies. No new simulation was used for this audit.
 
+## Accepted reading — 2026-09-14
+
+The owner accepts both failures as bracketing the desired behaviour: unscaled brain-only has a graded sugar curve and passes S, but bitter alone activates MN9 and the network runs hot; density scaling reduces activity and passes A–D and sugar-200 S3, but loses the required sugar coverage. Here “stable” is limited to that S3 result, not established network-wide stability: the saved network ranges below still include large high-activity excursions in other conditions. **No intermediate `w_syn` will be tried.** The next authorised work is [M1g confidence feasibility](malecns_synapse_confidence.md), research only; no M1g simulation is pre-declared or authorised.
+
 ## M1f checkpoint — brain-only endpoint approximation
 
 Results: **unscaled: FAIL**, **density: FAIL**. No candidate is selected automatically; no additional variant is run.
