@@ -1,0 +1,687 @@
+{
+  "conditions": [
+    {
+      "id": "A_s25_b0",
+      "gate": "A",
+      "sugar_hz": 25,
+      "bitter_hz": 0,
+      "sugar_set": "sugar",
+      "n_trials": 30,
+      "R_mean": 0.0,
+      "R_sd": 0.0,
+      "R_latency_median_ms": null,
+      "R_firing_trials": 0,
+      "L_mean": 0.0,
+      "L_sd": 0.0,
+      "L_latency_median_ms": null,
+      "L_firing_trials": 0,
+      "whole_network_spikes": {
+        "median": 470.5,
+        "min": 433,
+        "max": 527
+      },
+      "neurons_fired": {
+        "median": 23.5,
+        "min": 23,
+        "max": 28
+      }
+    },
+    {
+      "id": "A_s50_b0",
+      "gate": "A",
+      "sugar_hz": 50,
+      "bitter_hz": 0,
+      "sugar_set": "sugar",
+      "n_trials": 30,
+      "R_mean": 0.0,
+      "R_sd": 0.0,
+      "R_latency_median_ms": null,
+      "R_firing_trials": 0,
+      "L_mean": 0.0,
+      "L_sd": 0.0,
+      "L_latency_median_ms": null,
+      "L_firing_trials": 0,
+      "whole_network_spikes": {
+        "median": 1085.5,
+        "min": 1042,
+        "max": 1257
+      },
+      "neurons_fired": {
+        "median": 37.0,
+        "min": 33,
+        "max": 71
+      }
+    },
+    {
+      "id": "A_s100_b0",
+      "gate": "A",
+      "sugar_hz": 100,
+      "bitter_hz": 0,
+      "sugar_set": "sugar",
+      "n_trials": 30,
+      "R_mean": 0.0,
+      "R_sd": 0.0,
+      "R_latency_median_ms": null,
+      "R_firing_trials": 0,
+      "L_mean": 0.0,
+      "L_sd": 0.0,
+      "L_latency_median_ms": null,
+      "L_firing_trials": 0,
+      "whole_network_spikes": {
+        "median": 2560.5,
+        "min": 2365,
+        "max": 2707
+      },
+      "neurons_fired": {
+        "median": 84.0,
+        "min": 54,
+        "max": 95
+      }
+    },
+    {
+      "id": "A_s200_b0",
+      "gate": "A",
+      "sugar_hz": 200,
+      "bitter_hz": 0,
+      "sugar_set": "sugar",
+      "n_trials": 30,
+      "R_mean": 0.0,
+      "R_sd": 0.0,
+      "R_latency_median_ms": null,
+      "R_firing_trials": 0,
+      "L_mean": 5.266666666666667,
+      "L_sd": 9.369928257759263,
+      "L_latency_median_ms": 284.50000000000006,
+      "L_firing_trials": 25,
+      "whole_network_spikes": {
+        "median": 5565.5,
+        "min": 5317,
+        "max": 285822
+      },
+      "neurons_fired": {
+        "median": 139.0,
+        "min": 100,
+        "max": 5996
+      }
+    },
+    {
+      "id": "B_s200_b0",
+      "gate": "B",
+      "sugar_hz": 200,
+      "bitter_hz": 0,
+      "sugar_set": "sugar",
+      "n_trials": 30,
+      "R_mean": 0.0,
+      "R_sd": 0.0,
+      "R_latency_median_ms": null,
+      "R_firing_trials": 0,
+      "L_mean": 5.266666666666667,
+      "L_sd": 9.369928257759263,
+      "L_latency_median_ms": 284.50000000000006,
+      "L_firing_trials": 25,
+      "whole_network_spikes": {
+        "median": 5565.5,
+        "min": 5317,
+        "max": 285822
+      },
+      "neurons_fired": {
+        "median": 139.0,
+        "min": 100,
+        "max": 5996
+      }
+    },
+    {
+      "id": "B_s200_b25",
+      "gate": "B",
+      "sugar_hz": 200,
+      "bitter_hz": 25,
+      "sugar_set": "sugar",
+      "n_trials": 30,
+      "R_mean": 0.0,
+      "R_sd": 0.0,
+      "R_latency_median_ms": null,
+      "R_firing_trials": 0,
+      "L_mean": 2.3666666666666667,
+      "L_sd": 6.529335511537312,
+      "L_latency_median_ms": 427.45000000000005,
+      "L_firing_trials": 4,
+      "whole_network_spikes": {
+        "median": 12484.0,
+        "min": 11982,
+        "max": 270125
+      },
+      "neurons_fired": {
+        "median": 398.5,
+        "min": 376,
+        "max": 6117
+      }
+    },
+    {
+      "id": "B_s200_b50",
+      "gate": "B",
+      "sugar_hz": 200,
+      "bitter_hz": 50,
+      "sugar_set": "sugar",
+      "n_trials": 30,
+      "R_mean": 0.0,
+      "R_sd": 0.0,
+      "R_latency_median_ms": null,
+      "R_firing_trials": 0,
+      "L_mean": 4.7,
+      "L_sd": 7.568134952989849,
+      "L_latency_median_ms": 398.45000000000005,
+      "L_firing_trials": 10,
+      "whole_network_spikes": {
+        "median": 14902.0,
+        "min": 14324,
+        "max": 278048
+      },
+      "neurons_fired": {
+        "median": 484.0,
+        "min": 397,
+        "max": 6150
+      }
+    },
+    {
+      "id": "B_s200_b100",
+      "gate": "B",
+      "sugar_hz": 200,
+      "bitter_hz": 100,
+      "sugar_set": "sugar",
+      "n_trials": 30,
+      "R_mean": 0.0,
+      "R_sd": 0.0,
+      "R_latency_median_ms": null,
+      "R_firing_trials": 0,
+      "L_mean": 2.9,
+      "L_sd": 3.496188400720609,
+      "L_latency_median_ms": 564.6,
+      "L_firing_trials": 17,
+      "whole_network_spikes": {
+        "median": 72177.5,
+        "min": 18907,
+        "max": 281922
+      },
+      "neurons_fired": {
+        "median": 5909.0,
+        "min": 457,
+        "max": 6347
+      }
+    },
+    {
+      "id": "B_s200_b200",
+      "gate": "B",
+      "sugar_hz": 200,
+      "bitter_hz": 200,
+      "sugar_set": "sugar",
+      "n_trials": 30,
+      "R_mean": 0.0,
+      "R_sd": 0.0,
+      "R_latency_median_ms": null,
+      "R_firing_trials": 0,
+      "L_mean": 0.06666666666666667,
+      "L_sd": 0.24944382578492943,
+      "L_latency_median_ms": 831.3000000000001,
+      "L_firing_trials": 2,
+      "whole_network_spikes": {
+        "median": 99399.5,
+        "min": 27051,
+        "max": 306870
+      },
+      "neurons_fired": {
+        "median": 6083.0,
+        "min": 573,
+        "max": 6426
+      }
+    },
+    {
+      "id": "C_s0_b25",
+      "gate": "C",
+      "sugar_hz": 0,
+      "bitter_hz": 25,
+      "sugar_set": "sugar",
+      "n_trials": 30,
+      "R_mean": 0.0,
+      "R_sd": 0.0,
+      "R_latency_median_ms": null,
+      "R_firing_trials": 0,
+      "L_mean": 2.3,
+      "L_sd": 6.11091918890549,
+      "L_latency_median_ms": 719.95,
+      "L_firing_trials": 6,
+      "whole_network_spikes": {
+        "median": 7837.0,
+        "min": 7207,
+        "max": 252327
+      },
+      "neurons_fired": {
+        "median": 440.5,
+        "min": 298,
+        "max": 6091
+      }
+    },
+    {
+      "id": "C_s0_b50",
+      "gate": "C",
+      "sugar_hz": 0,
+      "bitter_hz": 50,
+      "sugar_set": "sugar",
+      "n_trials": 30,
+      "R_mean": 0.0,
+      "R_sd": 0.0,
+      "R_latency_median_ms": null,
+      "R_firing_trials": 0,
+      "L_mean": 3.1666666666666665,
+      "L_sd": 5.692587773197315,
+      "L_latency_median_ms": 580.8500000000001,
+      "L_firing_trials": 8,
+      "whole_network_spikes": {
+        "median": 10195.5,
+        "min": 9471,
+        "max": 259474
+      },
+      "neurons_fired": {
+        "median": 503.5,
+        "min": 336,
+        "max": 6152
+      }
+    },
+    {
+      "id": "C_s0_b100",
+      "gate": "C",
+      "sugar_hz": 0,
+      "bitter_hz": 100,
+      "sugar_set": "sugar",
+      "n_trials": 30,
+      "R_mean": 0.0,
+      "R_sd": 0.0,
+      "R_latency_median_ms": null,
+      "R_firing_trials": 0,
+      "L_mean": 1.4,
+      "L_sd": 1.8547236990991405,
+      "L_latency_median_ms": 672.6,
+      "L_firing_trials": 16,
+      "whole_network_spikes": {
+        "median": 82430.5,
+        "min": 14082,
+        "max": 256806
+      },
+      "neurons_fired": {
+        "median": 5904.0,
+        "min": 387,
+        "max": 6364
+      }
+    },
+    {
+      "id": "C_s0_b200",
+      "gate": "C",
+      "sugar_hz": 0,
+      "bitter_hz": 200,
+      "sugar_set": "sugar",
+      "n_trials": 30,
+      "R_mean": 0.0,
+      "R_sd": 0.0,
+      "R_latency_median_ms": null,
+      "R_firing_trials": 0,
+      "L_mean": 0.0,
+      "L_sd": 0.0,
+      "L_latency_median_ms": null,
+      "L_firing_trials": 0,
+      "whole_network_spikes": {
+        "median": 89159.5,
+        "min": 22338,
+        "max": 286399
+      },
+      "neurons_fired": {
+        "median": 6024.5,
+        "min": 523,
+        "max": 6413
+      }
+    },
+    {
+      "id": "D_s0_b0",
+      "gate": "D",
+      "sugar_hz": 0,
+      "bitter_hz": 0,
+      "sugar_set": "sugar",
+      "n_trials": 30,
+      "R_mean": 0.0,
+      "R_sd": 0.0,
+      "R_latency_median_ms": null,
+      "R_firing_trials": 0,
+      "L_mean": 0.0,
+      "L_sd": 0.0,
+      "L_latency_median_ms": null,
+      "L_firing_trials": 0,
+      "whole_network_spikes": {
+        "median": 0.0,
+        "min": 0,
+        "max": 0
+      },
+      "neurons_fired": {
+        "median": 0.0,
+        "min": 0,
+        "max": 0
+      }
+    },
+    {
+      "id": "AP_sugar_120",
+      "gate": "AP",
+      "sugar_hz": 120,
+      "bitter_hz": 0,
+      "sugar_set": "sugar",
+      "n_trials": 30,
+      "R_mean": 0.0,
+      "R_sd": 0.0,
+      "R_latency_median_ms": null,
+      "R_firing_trials": 0,
+      "L_mean": 0.0,
+      "L_sd": 0.0,
+      "L_latency_median_ms": null,
+      "L_firing_trials": 0,
+      "whole_network_spikes": {
+        "median": 3124.5,
+        "min": 2970,
+        "max": 3276
+      },
+      "neurons_fired": {
+        "median": 68.0,
+        "min": 61,
+        "max": 97
+      }
+    },
+    {
+      "id": "AP_sugar_lb3c_120",
+      "gate": "AP",
+      "sugar_hz": 120,
+      "bitter_hz": 0,
+      "sugar_set": "sugar_lb3c",
+      "n_trials": 30,
+      "R_mean": 0.0,
+      "R_sd": 0.0,
+      "R_latency_median_ms": null,
+      "R_firing_trials": 0,
+      "L_mean": 0.0,
+      "L_sd": 0.0,
+      "L_latency_median_ms": null,
+      "L_firing_trials": 0,
+      "whole_network_spikes": {
+        "median": 2327.0,
+        "min": 2128,
+        "max": 2473
+      },
+      "neurons_fired": {
+        "median": 54.0,
+        "min": 49,
+        "max": 58
+      }
+    }
+  ],
+  "gates": {
+    "R": {
+      "A": false,
+      "B": false,
+      "C": true,
+      "D": true,
+      "D_literal_zero": true,
+      "C_literal_zero": true,
+      "A_threshold_hz": 5.0,
+      "C_limit_hz": 1.0,
+      "bitter200_suppression_fraction": null,
+      "overall": false
+    },
+    "L": {
+      "A": true,
+      "B": false,
+      "C": false,
+      "D": true,
+      "D_literal_zero": true,
+      "C_literal_zero": false,
+      "A_threshold_hz": 5.0,
+      "C_limit_hz": 1.0,
+      "bitter200_suppression_fraction": 0.9873417721518988,
+      "overall": false
+    }
+  },
+  "a_prime": {
+    "R": {
+      "difference_definition": "LB3c12 minus sugar17, paired by seed",
+      "mean_hz": 0.0,
+      "sd_hz": 0.0,
+      "lower_trials": 0,
+      "equal_trials": 30,
+      "higher_trials": 0
+    },
+    "L": {
+      "difference_definition": "LB3c12 minus sugar17, paired by seed",
+      "mean_hz": 0.0,
+      "sd_hz": 0.0,
+      "lower_trials": 0,
+      "equal_trials": 30,
+      "higher_trials": 0
+    }
+  },
+  "shape_gate": {
+    "coverage": 1,
+    "adjacent": [
+      {
+        "from_hz": 25,
+        "to_hz": 50,
+        "decrease_hz": 0.0,
+        "pooled_sd_hz": 0.0
+      },
+      {
+        "from_hz": 50,
+        "to_hz": 100,
+        "decrease_hz": 0.0,
+        "pooled_sd_hz": 0.0
+      },
+      {
+        "from_hz": 100,
+        "to_hz": 120,
+        "decrease_hz": 0.0,
+        "pooled_sd_hz": 0.0
+      },
+      {
+        "from_hz": 120,
+        "to_hz": 200,
+        "decrease_hz": -5.266666666666667,
+        "pooled_sd_hz": 6.625539810293028
+      }
+    ],
+    "network_max_min_ratio": 53.75625352642468,
+    "S1": false,
+    "S2": true,
+    "S3": false,
+    "S": false
+  },
+  "overall_primary": false,
+  "metadata": {
+    "stage": "M1h",
+    "candidate": "density_matched",
+    "started_utc": "2026-09-14T21:07:49.307368+00:00",
+    "git_commit": "02db48f3801f6a66c311c0d8192d5390ebcd023d",
+    "plan": {
+      "path": "data/malecns/density_matched_plan.json",
+      "bytes": 7107,
+      "sha256": "be082f256c1c7426d3e962d60d2ba9f5348e6e1cf1ede96a90bff5afbe4439d5"
+    },
+    "protocol": {
+      "path": "data/malecns/stim_protocol_malecns_density_matched.json",
+      "bytes": 7356,
+      "sha256": "63fd2970c3e20df0fe1c715c5fe38c0e5b6275ace568b81200ca5f26eb3cba15"
+    },
+    "sources": [
+      {
+        "path": "sim/malecns/rescale.py",
+        "bytes": 10826,
+        "sha256": "f07a7ffd4bc4cda53653b943e68ec00dc86247e29e5abf77dce663bc95c2f24f"
+      },
+      {
+        "path": "sim/malecns/phase0.py",
+        "bytes": 13472,
+        "sha256": "f6342a04adec37ed011d6aa9481ae7d044509fa33761ad23dfa92acfe4c43267"
+      },
+      {
+        "path": "sim/malecns/adapter.py",
+        "bytes": 2112,
+        "sha256": "e438f86a33d1dab4290333cd3e5e13f77d5dc8344d10726bda4cbb0cea6b0d7a"
+      },
+      {
+        "path": "sim/malecns/substrate.py",
+        "bytes": 16531,
+        "sha256": "1b6c7bd7122f9ad8a3d43aa87365c5b147d55d66067abcc4e7dce6fdcc63cac6"
+      },
+      {
+        "path": "sim/network.py",
+        "bytes": 9535,
+        "sha256": "eee33ef855203a47e03920b56b4aba98551cc400ab22107ebb91edc385475ae7"
+      },
+      {
+        "path": "data/stim_protocol.json",
+        "bytes": 3484,
+        "sha256": "9f9495033281bfcd6f3b373551817987deb2cc083ae94ab61fece9065102d82a"
+      },
+      {
+        "path": "data/malecns/stim_protocol_malecns.json",
+        "bytes": 5142,
+        "sha256": "88a36bb624b4c304759f5178826248b92a699fcb56751b894b347e21ce673173"
+      },
+      {
+        "path": "data/malecns/cells.json",
+        "bytes": 20697,
+        "sha256": "f29dd1511e5484d70062cf44d448acfa63e8ef89b49ab7cc281108e5be234c99"
+      },
+      {
+        "path": "data/malecns/substrate_record.json",
+        "bytes": 6763,
+        "sha256": "95c6a973217ac793fe5d3d02b813d890f0ba7620d123c647587518d40868582f"
+      },
+      {
+        "path": "data/malecns/m1b_diagnosis.json",
+        "bytes": 99564,
+        "sha256": "62fb9e4a5f358e6addc9c374b7401fd4bafbd7cdf003b6d904abb2d516e847d0"
+      },
+      {
+        "path": "data/malecns/rescale_preflight.json",
+        "bytes": 7106,
+        "sha256": "c2a300b31d20c3dfd1c6a829e2e2f5515974154870b85358c45af6ec00452c51"
+      },
+      {
+        "path": "sim/malecns/split.py",
+        "bytes": 9337,
+        "sha256": "e48b8c6bccecf4e3877b4318eb983d1630494a9fa3a75516a2a77bf05d488223"
+      },
+      {
+        "path": "data/malecns/stim_protocol_malecns_split.json",
+        "bytes": 7821,
+        "sha256": "f669963f1babb177df66f03d77427d4ed6541d21d9265dfcb653ffd631821a34"
+      },
+      {
+        "path": "sim/malecns/brain_phase0.py",
+        "bytes": 9534,
+        "sha256": "a8dcd7cdc25408d4a993a6e571ba8d400ffa7ad129183040a428c00fb3d5f8ad"
+      },
+      {
+        "path": "sim/malecns/brain_substrate.py",
+        "bytes": 6966,
+        "sha256": "bdba57cb5ac558aebfae59fd0e5a57e32d8daa3b56cc069ed341a3d06f0e696b"
+      },
+      {
+        "path": "data/malecns/substrate_record_brain.json",
+        "bytes": 5689,
+        "sha256": "0420688e48b7dc706c1b72621b427ac3d0ee3017b07daa38c8c875bf103b5b66"
+      },
+      {
+        "path": "sim/malecns/density_matched_phase0.py",
+        "bytes": 9492,
+        "sha256": "feb370ff00770b8cf847580c5197b5d5d9bde1c5e66dd46e38519117355006b1"
+      },
+      {
+        "path": "sim/malecns/density_match_substrate.py",
+        "bytes": 7943,
+        "sha256": "a47c4d83cbe07964a842748b9d3028593ff7ed22326ba86a18454013d970b8b7"
+      },
+      {
+        "path": "data/malecns/substrate_record_density_matched.json",
+        "bytes": 60208,
+        "sha256": "fd3a9b7d9c48dc430abbbce74e50342983fce5dd6314015cd840b9c79029a89e"
+      },
+      {
+        "path": "data/malecns/m1h_output_retention.json",
+        "bytes": 27138,
+        "sha256": "68cf0b466a3bb637028ed99ebe958fc7351fcaf45df8648e6492bd63844a8d48"
+      },
+      {
+        "path": "data/malecns/stim_protocol_malecns_density_matched.json",
+        "bytes": 7356,
+        "sha256": "63fd2970c3e20df0fe1c715c5fe38c0e5b6275ace568b81200ca5f26eb3cba15"
+      }
+    ],
+    "memory": {
+      "workers": 8,
+      "wsl_available_gib": 60.526214599609375,
+      "host_free_gib": 84.13409423828125,
+      "limiting_available_gib": 60.526214599609375,
+      "reserve_gib": 15.131553649902344,
+      "worker_budget_gib": 5.4,
+      "cpus": 32,
+      "rule": "min(16 conditions, logical_cpus//2, floor((min(WSL available, host free)-max(8GiB,25%))/ceil(1.5*M1 peak to 0.1GiB)))",
+      "measured_m1_peak_gib": 3.5776214599609375
+    },
+    "python": "3.10.21 | packaged by conda-forge | (main, Aug 21 2026, 22:42:31) [GCC 14.4.0]",
+    "brian2": "2.9.0",
+    "codegen": "cython",
+    "completed_utc": "2026-09-14T21:12:04.007412+00:00",
+    "walltime_s": 254.700064957,
+    "total_trials": 480,
+    "peak_worker_rss_gib": 2.175861358642578,
+    "weight_logs": [
+      {
+        "path": "data/malecns/runs/m1h/density_matched/worker_839_weights.json",
+        "bytes": 485,
+        "sha256": "1f7886c7c1eef38ad258bd973165424db3729659eef733530c5ddd4e91ab56e6"
+      },
+      {
+        "path": "data/malecns/runs/m1h/density_matched/worker_842_weights.json",
+        "bytes": 485,
+        "sha256": "f4afe81e40ae34d1b273d3a369e6861a08f8857b0d65f9e119dfce531b06796b"
+      },
+      {
+        "path": "data/malecns/runs/m1h/density_matched/worker_843_weights.json",
+        "bytes": 485,
+        "sha256": "94d7737aea9e97ca286df5373a4aa0bd13c513573b952174d57ecf79e41f6919"
+      },
+      {
+        "path": "data/malecns/runs/m1h/density_matched/worker_844_weights.json",
+        "bytes": 485,
+        "sha256": "6058d6a0bd257f7ea4a76dca851ea8f2fdfe20c1bd8352086355fa4a84ba111b"
+      },
+      {
+        "path": "data/malecns/runs/m1h/density_matched/worker_845_weights.json",
+        "bytes": 485,
+        "sha256": "00ac56c0feb62fa7461e08ff56b5f77bba2e8252611620713aaf6bea3ecd2612"
+      },
+      {
+        "path": "data/malecns/runs/m1h/density_matched/worker_846_weights.json",
+        "bytes": 485,
+        "sha256": "e9d2450c25254ba676f2c716aec8bb01c1a547d44b49e79c9a0dfe174da885e9"
+      },
+      {
+        "path": "data/malecns/runs/m1h/density_matched/worker_847_weights.json",
+        "bytes": 485,
+        "sha256": "4e48427be6dd078642e669e83aa1d17e1b4c3cbf62cfab6253e2ecfe024e9938"
+      },
+      {
+        "path": "data/malecns/runs/m1h/density_matched/worker_848_weights.json",
+        "bytes": 485,
+        "sha256": "273423c3c9dc22b3b2d7f5d0d67781e179d4f9e93a4d2c9bd41f15c2ca3b26c1"
+      }
+    ]
+  },
+  "raw_ledger": {
+    "path": "data/malecns/runs/m1h/density_matched/full_results.json",
+    "bytes": 1019189,
+    "sha256": "8fc6485565af2e065bae821944a366796a6701437d367cfb6bd634a46c56d2d6"
+  }
+}

@@ -1,6 +1,6 @@
 # v2 decision memo
 
-2026-09-13, updated after the S1/R1 checkpoint. Records the owner's salt and
+2026-09-13, updated 2026-09-14 after M1h and male-line closure. Records the owner's salt and
 cell-set decisions; other candidates remain unranked proposals, not a roadmap
 or an authorisation to run experiments. Findings are taken from linked reports.
 
@@ -115,14 +115,21 @@ the v2 sugar set. This records policy, not a re-freeze or male-substrate
 validation. No further female-brain runs; male validation is separate.
 [Owner decision and A-prime](open_questions.md#r1-checkpoint-decision-v1-retained-v2-typed-not-executed-2026-09-13).
 
-### MaleCNS as the substrate — Blocked
+### MaleCNS as the substrate — Closed pending external replies
 
-The versioned whole-CNS signed substrate is built, but M1 (30 trials per
-condition) fails sugar monotonicity on both MN9 sides: R passes B/C/D;
-L also fails B/C. Neither passes all four gates, and the reversed sugar200
-laterality remains unresolved. The owner has deferred the primary-readout
-choice; no side switch, parameter tuning or M2 run was made.
-[M1 gates and laterality](malecns_phase0.md#hard-gates), [OQ-11](open_questions.md#oq-11-malecns-substrate-and-reversed-sugar-to-mn9-laterality-2026-09-14).
+The owner closes this line pending replies from Tastekin and the
+fly-brain-minecraft author. M1h's final density-matched graph fails B, C,
+S1 and S3 on primary L10331 over30 trials per condition; sugar200 gives
+5.267 ±9.370 Hz and network spike max/min53.756. The graph retains56.8%
+of brain contacts, with unknown recall at its cutoff. All four input sets
+crossed the outgoing50% flag; the owner explicitly waived it before running,
+without changing the gates. [M1h and closing ledger](malecns_phase0.md#m1h-results-checkpoint--2026-09-14).
+
+M1c's two candidates retain their passes under the earlier A–D rule;
+subsequent M1d/M1f/M1h do not pass A–D plus S. The post-M1c choice of
+L10331 was on reconstruction-completeness grounds, with R16949 retained
+as secondary. No further variant or product integration is authorised.
+[All variants and their original rules](malecns_phase0.md#male-line-closing-decision--2026-09-14), [readout decision](open_questions.md#oq-11-malecns-substrate-and-reversed-sugar-to-mn9-laterality-2026-09-14).
 
 ### Salt (LB3b/LB3d) as a fifth axis — Closed
 
@@ -141,7 +148,7 @@ leg/labellar stations form a sequence rather than concurrent outputs. [Current e
 
 Pharyngeal product axis: unblock with a dish-to-pharyngeal-drive mapping that cites its source or states an explicitly designed rule, plus a user-facing meaning signed off by the owner. [Mapping basis](phase1_5_plan.md#task-c-v2-encoder-schema-proposal-design-only-no-implementation), [Pharyngeal evidence](pharyngeal_screen.md).
 
-MaleCNS: the `consensusNt`-signed substrate is now frozen; unblocking still requires an explicit primary-readout decision and a repeated Phase 0 pass under the stated criteria, not a post-hoc side switch. [M1 checkpoint](malecns_phase0.md#laterality-and-decision-boundary).
+MaleCNS: reopen only by an owner decision after external replies provide a distinct structural rationale or new data; any future validation must be pre-declared, retain failures and include A–D plus S, not another weight sweep. [Closing decision](malecns_phase0.md#male-line-closing-decision--2026-09-14).
 
 ## Standing caveats
 
@@ -150,7 +157,7 @@ behaviour; stimulus choices and proposed budgets are ours. [Phase T scope](tonic
 C1 is a one-trial screen, P1 a ten-trial screen; C2/P2 use 30 trials, and C2
 reproduces the original grid seeds rather than adding an independent sample. [C2 provenance](feeding_mn_readouts.md#c2-thirteen-cell-30-trial-rerun), [P1/P2](pharyngeal_screen.md).
 S1 is a ten-trial screen; R1 uses thirty-trial conditions, not a full replacement grid. [S1/R1 provenance](salt_and_refreeze.md#provenance-verification-and-limits).
-MaleCNS M0 uses five-trial benchmarks; M1 uses thirty-trial conditions, not behavioural calibration. [Male provenance](malecns_phase0.md#provenance-and-side-convention).
+MaleCNS M0 uses five-trial benchmarks; M1–M1h use thirty-trial conditions, not behavioural calibration. [Male provenance](malecns_phase0.md#provenance-and-side-convention), [closing ledger](malecns_phase0.md#male-line-closing-decision--2026-09-14).
 MN target labels remain the workbook's `Target_Muscle` values: MN9 `9`,
 MN11D `11D`, MN11V `11V`, CEM `Crop Entry`, without added functional labels. [Source labels](feeding_mn_readouts.md#source-target-muscle-labels).
 The memo changes no frozen data, scoring, site, encoder values or README

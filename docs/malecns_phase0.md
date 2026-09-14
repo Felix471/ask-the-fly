@@ -855,3 +855,87 @@ These fixed20 partners retain 2,760/4,135 direct synapses into L10331 (66.75%). 
 After seeing the outgoing audit and before any M1h trial, the owner chose to proceed despite the pre-declared50% outgoing-synapse threshold being crossed by all four input sets (43–48% retained). **The flag remains crossed in the record; this is a post-audit waiver, not a pass or a retroactive threshold change.** The owner's stated reasons: the round50% threshold had no derivation; the input sets retain slightly less than the graph average56.8%; stimulus entry remains intact in absolute-count terms (sugar3,111 and bitter10,640 outgoing synapses); the last hop into L10331 retains66.8%, with all top20 partners still connected. These are the owner's reasons to test, not evidence that function survived pruning or that recall is known.
 
 Run the single declared candidate at recurrent0.275 mV and unchanged stimulus68.75 mV/event, all historical A–D plus S criteria onL10331, R16949 recorded, A′ included, M1 seeds,480 trials. The density cutoff and graph remain frozen; no further candidate is selected. After this result the male line closes pending replies from Tastekin and the fly-brain-minecraft author, regardless of the gate result.
+
+## M1h results checkpoint — 2026-09-14
+
+**Overall on primary L10331: FAIL.** All480 trials completed once; no extra candidate or rerun. The crossed outgoing-retention flag and dated owner waiver above remain intact.
+
+| Gate | L10331 primary | R16949 secondary |
+|---|---|---|
+| A | PASS | FAIL |
+| B | FAIL | FAIL |
+| C | FAIL | PASS |
+| D | PASS | PASS |
+| S1 | FAIL (1/5 positive levels) | Not evaluated; non-deciding |
+| S2 | PASS | Not evaluated; non-deciding |
+| S3 | FAIL (network max/min=53.756254) | Not evaluated; non-deciding |
+| S | FAIL | Not evaluated; non-deciding |
+| Overall A–D + S | FAIL | Non-deciding |
+
+Historical D is the completeness predicate; baseline-zero is separately reported. S3 is the declared sugar200 spike-count max/min bound, not proof of general network stability. S and acceptance apply only to L10331.
+
+B fails because bitter25→50 raises the L mean from2.367 to4.700 Hz, despite98.7% endpoint suppression at bitter200. C fails because bitter-alone25/50/100 means2.300/3.167/1.400 Hz exceed the unchanged1 Hz limit. D literal baseline-zero passes on both sides. Sugar200 ranges5,317–285,822 network spikes, failing S3; no new mechanism is assigned.
+
+### Five-level sugar curve
+
+Mean ± population SD, Hz, n=30. Female Shiu L/R are historical aliases (contralateral/ipsilateral); male L10331 is ipsilateral. Female25/50/100/200 come from historical pre-correction Phase0,120 from the corrected frozen grid, so this is not a matched five-level female rerun. M1f unscaled is the previously recorded brain endpoint graph at confidence0.5 and recurrent0.275. [Female reference](../data/malecns/phase0_female_reference.json), [female120](../data/lookup_table.json), [M1f unscaled](../data/malecns/brain_unscaled_results.json).
+
+| Sugar Hz | M1h L | M1h R | Female Shiu L | Female Shiu R | M1f unscaled L | M1f unscaled R |
+|---|---:|---:|---:|---:|---:|---:|
+| 25 | 0.000 ± 0.000 | 0.000 ± 0.000 | 0.100 ± 0.300 | 0.067 ± 0.359 | 28.800 ± 34.783 | 5.967 ± 8.890 |
+| 50 | 0.000 ± 0.000 | 0.000 ± 0.000 | 17.633 ± 4.854 | 13.267 ± 3.872 | 33.267 ± 20.898 | 5.867 ± 4.193 |
+| 100 | 0.000 ± 0.000 | 0.000 ± 0.000 | 67.233 ± 4.724 | 49.500 ± 4.105 | 76.100 ± 16.232 | 11.733 ± 4.033 |
+| 120 | 0.000 ± 0.000 | 0.000 ± 0.000 | 74.633 ± 4.476 | 54.700 ± 4.713 | 88.267 ± 11.673 | 14.600 ± 3.738 |
+| 200 | 5.267 ± 9.370 | 0.000 ± 0.000 | 93.300 ± 5.780 | 62.067 ± 4.633 | 126.200 ± 4.996 | 30.967 ± 2.316 |
+
+### Every condition: both MN9s and network counts
+
+| Condition | L Hz | R Hz | Network spikes median [min–max] | Neurons fired median [min–max] |
+|---|---:|---:|---:|---:|
+| A_s25_b0 | 0.000 ± 0.000 | 0.000 ± 0.000 | 470.5 [433–527] | 23.5 [23–28] |
+| A_s50_b0 | 0.000 ± 0.000 | 0.000 ± 0.000 | 1,085.5 [1,042–1,257] | 37.0 [33–71] |
+| A_s100_b0 | 0.000 ± 0.000 | 0.000 ± 0.000 | 2,560.5 [2,365–2,707] | 84.0 [54–95] |
+| A_s200_b0 | 5.267 ± 9.370 | 0.000 ± 0.000 | 5,565.5 [5,317–285,822] | 139.0 [100–5,996] |
+| B_s200_b0 | 5.267 ± 9.370 | 0.000 ± 0.000 | 5,565.5 [5,317–285,822] | 139.0 [100–5,996] |
+| B_s200_b25 | 2.367 ± 6.529 | 0.000 ± 0.000 | 12,484.0 [11,982–270,125] | 398.5 [376–6,117] |
+| B_s200_b50 | 4.700 ± 7.568 | 0.000 ± 0.000 | 14,902.0 [14,324–278,048] | 484.0 [397–6,150] |
+| B_s200_b100 | 2.900 ± 3.496 | 0.000 ± 0.000 | 72,177.5 [18,907–281,922] | 5,909.0 [457–6,347] |
+| B_s200_b200 | 0.067 ± 0.249 | 0.000 ± 0.000 | 99,399.5 [27,051–306,870] | 6,083.0 [573–6,426] |
+| C_s0_b25 | 2.300 ± 6.111 | 0.000 ± 0.000 | 7,837.0 [7,207–252,327] | 440.5 [298–6,091] |
+| C_s0_b50 | 3.167 ± 5.693 | 0.000 ± 0.000 | 10,195.5 [9,471–259,474] | 503.5 [336–6,152] |
+| C_s0_b100 | 1.400 ± 1.855 | 0.000 ± 0.000 | 82,430.5 [14,082–256,806] | 5,904.0 [387–6,364] |
+| C_s0_b200 | 0.000 ± 0.000 | 0.000 ± 0.000 | 89,159.5 [22,338–286,399] | 6,024.5 [523–6,413] |
+| D_s0_b0 | 0.000 ± 0.000 | 0.000 ± 0.000 | 0.0 [0–0] | 0.0 [0–0] |
+| AP_sugar_120 | 0.000 ± 0.000 | 0.000 ± 0.000 | 3,124.5 [2,970–3,276] | 68.0 [61–97] |
+| AP_sugar_lb3c_120 | 0.000 ± 0.000 | 0.000 ± 0.000 | 2,327.0 [2,128–2,473] | 54.0 [49–58] |
+
+### A′ sugar17 versus LB3c12 at120 Hz
+
+| Side | Sugar17 Hz | LB3c12 Hz | Paired subset−union Hz | Lower/equal/higher trials |
+|---|---:|---:|---:|---:|
+| L | 0.000 ± 0.000 | 0.000 ± 0.000 | 0.000 ± 0.000 | 0/30/0 |
+| R | 0.000 ± 0.000 | 0.000 ± 0.000 | 0.000 ± 0.000 | 0/30/0 |
+
+### Execution and verification
+
+Protocol/source freeze `e163c6e`, execution-plan commit `02db48f`; run HEAD `02db48f3801f6a66c311c0d8192d5390ebcd023d`. Same91 physical slots and M1 seeds20260910–20260939,420 A–D plus60 A′ trials. 8 workers, reserve15.13GiB, budget5.4GiB/worker. Wall254.7s; peak worker2.176GiB; completed2026-09-14T21:12:04.007412+00:00.
+
+Actual weights checked after construction and restore: recurrent0.275 mV per signed synapse and stimulus68.75 mV/event. [Results](../data/malecns/m1h_results.json), [protocol](../data/malecns/stim_protocol_malecns_density_matched.json), [saved-event audit](../data/malecns/m1h_runs_audit.json). Raw spikes, per-trial ledgers and live weight logs are retained locally. The audit reconstructs480 trials/960 MN9-neuron trials, all network counts, gates, A′, and verifies identical Poisson input arrays against M1. Repeated seeds and A200/B0 are not independent extra replicates.
+
+Cost: confidence0.869 retains56.8% of brain contacts; recall there is unknown (Berg S8E gives0.81 at0.5). This is a heavily pruned graph, density-matched by construction. Gate results do not establish behavioural calibration or compensate for reconstruction differences.
+
+## Male line closing decision — 2026-09-14
+
+Per the owner’s instruction before M1h results, **the male line is closed pending replies from Tastekin and the fly-brain-minecraft author**. Every attempted variant remains in the record. No intermediate weight, additional candidate, M2, or product change follows this checkpoint.
+
+| Variant | Structural rationale / design | Recorded result under its declared rule |
+|---|---|---|
+| [M1](#hard-gates) | Whole CNS, original Shiu weights, typed male inputs | Neither side passes A–D. L fails A/B/C; R fails A. S not yet declared. |
+| [M1c all](../data/malecns/rescale_all_results.json) | Scale recurrent and tied external weights by whole-network mean density ratio | Passes original A–D-on-at-least-one-side rule on L; R fails A/B. Only200 Hz activates L among A levels; S not yet declared. |
+| [M1c mn9](../data/malecns/rescale_mn9_results.json) | Scale by equal-side mean density of strongest MN9 input partners, with the declared137-partner exception | Passes original A–D rule on L; R fails A/B. Only200 Hz activates L among A levels; S not yet declared. |
+| [M1d](../data/malecns/split_results.json) | Keep female external kick; scale recurrent weights by whole-network density | FAIL: A–D pass on L, S1 fails (1/5). Saved activity identical to M1c all. |
+| [M1f unscaled](../data/malecns/brain_unscaled_results.json) | Brain endpoint cut, original recurrent weight, female kick | FAIL: L B/C fail; graded sugar and S pass. |
+| [M1f density](../data/malecns/brain_density_results.json) | Same brain cut; recurrent weight scaled by its density | FAIL: L A–D pass; S1 fails (2/5). |
+| [M1h](#m1h-results-checkpoint--2026-09-14) | Confidence-pruned brain graph matched to female density; original weight/kick; outgoing flag explicitly waived | FAIL under A–D + S on L10331; full gate breakdown above. |
+
+This closure is an owner decision about further work pending external information, not a claim that every possible male model fails. Historical M1c passes retain their original rule; the later S gate is not applied retroactively. Female pipeline, frozen scores, site and README honesty table remain unchanged.
