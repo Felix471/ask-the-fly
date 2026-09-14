@@ -8,24 +8,26 @@ Sources: [M1 report](malecns_phase0.md), [M1b summary/provenance](../data/malecn
 
 Median [minimum–maximum] across 30 trials. Neurons fired means distinct neuron IDs with at least one spike in [0, 1 s); Poisson-source events are not network spikes.
 
-| Condition: sugar/bitter Hz | Network spikes | Neurons fired | High-count trials / 30 |
-|---|---:|---:|---:|
-| A_s25_b0 | 315,526 [101,199–987,904] | 17,778 [7,552–18,643] | 13 |
-| A_s50_b0 | 935,017 [144,175–1,048,059] | 18,421.5 [8,155–18,857] | 25 |
-| A_s100_b0 | 1,107,911 [994,456–1,141,791] | 18,125 [17,698–18,596] | 30 |
-| A_s200_b0 | 1,156,672.5 [1,132,192–1,166,319] | 17,709 [17,369–17,975] | 30 |
-| B_s200_b0 | 1,156,672.5 [1,132,192–1,166,319] | 17,709 [17,369–17,975] | 30 |
-| B_s200_b25 | 1,146,230.5 [1,100,800–1,156,474] | 17,771 [17,449–18,060] | 30 |
-| B_s200_b50 | 1,148,973.5 [1,097,898–1,158,387] | 17,650 [17,442–18,226] | 30 |
-| B_s200_b100 | 1,152,283.5 [1,114,405–1,157,934] | 17,652.5 [17,406–17,880] | 30 |
-| B_s200_b200 | 1,164,084 [1,129,965–1,170,541] | 17,741.5 [17,444–17,990] | 30 |
-| C_s0_b25 | 1,062,197 [224,387–1,091,812] | 18,028.5 [8,716–18,361] | 29 |
-| C_s0_b50 | 1,096,009 [1,064,489–1,121,085] | 17,984.5 [17,564–18,385] | 30 |
-| C_s0_b100 | 1,097,902 [237,110–1,112,628] | 18,018 [8,799–18,345] | 29 |
-| C_s0_b200 | 1,113,387.5 [1,092,999–1,134,876] | 17,994.5 [17,548–18,345] | 30 |
-| D_s0_b0 | 0 [0–0] | 0 [0–0] | 0 |
-| AP_sugar_120 | 1,128,043.5 [1,104,520–1,143,597] | 17,963 [17,548–18,255] | 30 |
-| AP_sugar_lb3c_120 | 1,100,944.5 [866,930–1,138,771] | 18,391 [18,053–18,734] | 30 |
+Female columns are existing full-network grid replays: **n=1**, different seeds, not paired with male trials. A25/0 and C0/25 do not exist in the frozen grid (sugar levels 0/60/80/120/200, bitter 0/30/60/100/160); no substitute or new run was used. A dash means not requested. [Replay files, seeds and hashes](../data/malecns/rescale_preflight.json); [grid provenance](grid_provenance.md).
+
+| Condition: sugar/bitter Hz | Male network spikes | Male neurons fired | High-count trials / 30 | Female spikes (n=1) | Female neurons (n=1) |
+|---|---:|---:|---:|---:|---:|
+| A_s25_b0 | 315,526 [101,199–987,904] | 17,778 [7,552–18,643] | 13 | no 25 Hz cell | no 25 Hz cell |
+| A_s50_b0 | 935,017 [144,175–1,048,059] | 18,421.5 [8,155–18,857] | 25 | — | — |
+| A_s100_b0 | 1,107,911 [994,456–1,141,791] | 18,125 [17,698–18,596] | 30 | — | — |
+| A_s200_b0 | 1,156,672.5 [1,132,192–1,166,319] | 17,709 [17,369–17,975] | 30 | 17,150 | 402 |
+| B_s200_b0 | 1,156,672.5 [1,132,192–1,166,319] | 17,709 [17,369–17,975] | 30 | — | — |
+| B_s200_b25 | 1,146,230.5 [1,100,800–1,156,474] | 17,771 [17,449–18,060] | 30 | — | — |
+| B_s200_b50 | 1,148,973.5 [1,097,898–1,158,387] | 17,650 [17,442–18,226] | 30 | — | — |
+| B_s200_b100 | 1,152,283.5 [1,114,405–1,157,934] | 17,652.5 [17,406–17,880] | 30 | 18,219 | 401 |
+| B_s200_b200 | 1,164,084 [1,129,965–1,170,541] | 17,741.5 [17,444–17,990] | 30 | — | — |
+| C_s0_b25 | 1,062,197 [224,387–1,091,812] | 18,028.5 [8,716–18,361] | 29 | no 25 Hz cell | no 25 Hz cell |
+| C_s0_b50 | 1,096,009 [1,064,489–1,121,085] | 17,984.5 [17,564–18,385] | 30 | — | — |
+| C_s0_b100 | 1,097,902 [237,110–1,112,628] | 18,018 [8,799–18,345] | 29 | — | — |
+| C_s0_b200 | 1,113,387.5 [1,092,999–1,134,876] | 17,994.5 [17,548–18,345] | 30 | — | — |
+| D_s0_b0 | 0 [0–0] | 0 [0–0] | 0 | 0 | 0 |
+| AP_sugar_120 | 1,128,043.5 [1,104,520–1,143,597] | 17,963 [17,548–18,255] | 30 | — | — |
+| AP_sugar_lb3c_120 | 1,100,944.5 [866,930–1,138,771] | 18,391 [18,053–18,734] | 30 | — | — |
 
 ## Quiet / runaway split
 
@@ -97,7 +99,7 @@ In-degree here is **unsigned incoming synapse count**, `sum(Connectivity)` per p
 | contra MN9 partners (available up to 200) | 200 | 137 | 1832.370 / 1409.5 | 3628.219 / 2678.0 | 1.980069 | 1.899965 |
 | ipsi MN9 partners (available up to 200) | 200 | 200 | 1820.750 / 1399.5 | 3625.085 / 2694.5 | 1.990984 | 1.925330 |
 
-**Exact 200-per-MN9 specification cannot be met:** male R16949 has 137 partners total (male L has 278; female contra/ipsi have 227/241). Its displayed statistics use all 137, explicitly not 200. No zero padding or invented partners. Therefore the requested exact `r_mn9` remains undefined pending the owner’s decision.
+**Exact 200-per-MN9 specification cannot be met:** male R16949 has 137 partners total (male L has 278; female contra/ipsi have 227/241). Its displayed statistics use all 137, explicitly not 200. No zero padding or invented partners. Therefore the requested exact `r_mn9` was left undefined at M1b. The owner subsequently approved this available-partner exception before M1c, with equal weighting of the two side means.
 
 | MN9 relative side | Female incoming synapses | Male incoming synapses |
 |---|---:|---:|
@@ -106,9 +108,20 @@ In-degree here is **unsigned incoming synapse count**, `sum(Connectivity)` per p
 
 Use of **means** (not medians) gives `r_all = 1.895191250`, hence `0.275 / r_all = 0.145104089 mV`.
 
-One possible definition for owner confirmation is **min(200, available) partners per MN9**, then the ratio of equally weighted side means: `(male_contra_mean + male_ipsi_mean) / (female_contra_mean + female_ipsi_mean)`. Shared partners count once in each neighborhood; this is not a pooled 337-versus-400 mean. That alternative gives `1.985509367` and `0.138503502 mV`. It has not been adopted or simulated. The mean-versus-median and bilateral aggregation choices are explicit design definitions to confirm, not values chosen after candidate gate outcomes.
+The owner-confirmed definition is **min(200, available) partners per MN9**, then the ratio of equally weighted side means: `(male_contra_mean + male_ipsi_mean) / (female_contra_mean + female_ipsi_mean)`. Shared partners count once in each neighborhood; this is not a pooled 337-versus-400 mean. That alternative gives `1.985509367` and `0.138503502 mV`. Both definitions were accepted before any M1c gate outcome. Full-precision ratios are used; the displayed weights round to 0.145104 and 0.138504 mV. These are pre-declared design definitions, not values selected by searching gate outcomes.
 
 Changing `w_syn` also changes the existing external Poisson kick `w_syn * f_poi`; `f_poi` and that formula would remain unchanged. This is not a recurrent-edge-only rescaling. Source: [unchanged network builder](../sim/network.py).
+
+## MN9 tracing-status check before M1c
+
+Sources: [neuPrint male-cns:v1.0](https://neuprint.janelia.org/), [release annotation provenance](../data/malecns/substrate_record.json), and Tastekin Table S1 (local workbook `MNs!A66:G67`). The [preflight record](../data/malecns/rescale_preflight.json) records the query response hash, release fields, workbook hash and exact IDs.
+
+| Body / XLSX side | status (live and release) | statusLabel (live and release) | neuPrint pre / post | Retained incoming synapses |
+|---|---|---|---:|---:|
+| 16949 / R | Traced | RT Hard to trace | 244 / 633 | 556 |
+| 10331 / L | Traced | Roughly traced | 172 / 6,358 | 6,012 |
+
+Neither record provides a numerical tracing-completeness field or a cropped flag; absent metadata is unknown, not evidence of complete tracing. Both have `exitNerve=PhN` and `group=10331`. neuPrint post counts differ from the proofread-endpoint-filtered substrate incoming counts. The workbook, Berg release annotations and live type query identify only these two MN9 bodies: no alternative MN9-typed body on either side. Reconstruction incompleteness is a likely cause of the laterality reversal given the R tracing label and 556 versus 6,012 retained inputs, **a hypothesis, not established causation**; both M1c sides must be read before drawing a conclusion. [OQ-11](open_questions.md#oq-11-malecns-substrate-and-reversed-sugar-to-mn9-laterality-2026-09-14).
 
 ## Tastekin comparison
 
@@ -126,4 +139,4 @@ All 480 trial counts/seeds, condition medians/ranges, window/bin totals, and 737
 
 ## Checkpoint
 
-The [pre-declared M1c stop rule](malecns_phase0.md#m1b--m1c-decision-boundary-declared-before-rescaled-runs) is recorded before any rescaled run. M1c has not started. Confirm the density definitions (especially the 137-partner exception) and candidates, or stop; no third weight will be tried.
+The [pre-declared M1c stop rule](malecns_phase0.md#m1b--m1c-decision-boundary-declared-before-rescaled-runs) was recorded before any rescaled run. The owner accepted M1b and both mean-based definitions, including the 137-partner exception. M1c uses exactly these two weights and the unchanged tied external kick; no third weight will be tried.

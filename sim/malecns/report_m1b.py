@@ -8,6 +8,8 @@ def generate():
     d=json.loads((DATA/'m1b_diagnosis.json').read_text())
     full=json.loads((DATA/'runs/m1b/full_diagnosis.json').read_text())
     audit=json.loads((DATA/'runs/m1b/audit.json').read_text())
+    preflight=json.loads((DATA/'rescale_preflight.json').read_text())
+    female={r['male_condition']:r for r in preflight['female_activity']}
     def rangefmt(s, decimals=0):
         if s is None:
             return '—'
@@ -28,10 +30,17 @@ def generate():
            '## Network activity per condition', '',
            'Median [minimum–maximum] across 30 trials. Neurons fired means distinct neuron IDs with at least '
            'one spike in [0, 1 s); Poisson-source events are not network spikes.', '',
-           '| Condition: sugar/bitter Hz | Network spikes | Neurons fired | High-count trials / 30 |',
-           '|---|---:|---:|---:|']
+           'Female columns are existing full-network grid replays: **n=1**, different seeds, not paired '
+           'with male trials. A25/0 and C0/25 do not exist in the frozen grid (sugar levels '
+           '0/60/80/120/200, bitter 0/30/60/100/160); no substitute or new run was used. '
+           'A dash means not requested. [Replay files, seeds and hashes](../data/malecns/rescale_preflight.json); '
+           '[grid provenance](grid_provenance.md).', '',
+           '| Condition: sugar/bitter Hz | Male network spikes | Male neurons fired | High-count trials / 30 | Female spikes (n=1) | Female neurons (n=1) |',
+           '|---|---:|---:|---:|---:|---:|']
     for row in d['conditions']:
-        lines.append(f"| {row['condition']} | {rangefmt(row['spikes'])} | {rangefmt(row['neurons'])} | {row['runaway_n']} |")
+        f=female.get(row['condition'])
+        refs=['—','—'] if f is None else ['no 25 Hz cell']*2 if not f['n_trials'] else [f"{f[k]:,}" for k in ('network_spikes','neurons_fired')]
+        lines.append(f"| {row['condition']} | {rangefmt(row['spikes'])} | {rangefmt(row['neurons'])} | {row['runaway_n']} | {' | '.join(refs)} |")
     lines+=['', '## Quiet / runaway split', '',
             '**Descriptive analyst rule, not a biological threshold or gate:** quiet <500,000 network spikes '
             'in one second; runaway/high-count ≥500,000. “Quiet” is relative and does not mean silent. '
@@ -98,23 +107,42 @@ def generate():
     lines+=['', '**Exact 200-per-MN9 specification cannot be met:** male R16949 has 137 partners total '
             '(male L has 278; female contra/ipsi have 227/241). Its displayed statistics use all 137, '
             'explicitly not 200. No zero padding or invented partners. Therefore the requested exact '
-            '`r_mn9` remains undefined pending the owner’s decision.', '',
+            '`r_mn9` was left undefined at M1b. The owner subsequently approved this available-partner '
+            'exception before M1c, with equal weighting of the two side means.', '',
             '| MN9 relative side | Female incoming synapses | Male incoming synapses |', '|---|---:|---:|']
     for s in ('contra','ipsi'):
         lines.append(f"| {s} | {f['neighborhoods'][s]['incoming_synapses']:,} | {m['neighborhoods'][s]['incoming_synapses']:,} |")
     p=d['proposed_candidates']; alt=p['alternative_needs_owner_approval']
     lines+=['', f"Use of **means** (not medians) gives `r_all = {p['r_all']:.9f}`, hence "
             f"`0.275 / r_all = {p['all_w_syn_mV']:.9f} mV`.", '',
-            'One possible definition for owner confirmation is **min(200, available) partners per MN9**, '
+            'The owner-confirmed definition is **min(200, available) partners per MN9**, '
             'then the ratio of equally weighted side means: '
             '`(male_contra_mean + male_ipsi_mean) / (female_contra_mean + female_ipsi_mean)`. '
             'Shared partners count once in each neighborhood; this is not a pooled 337-versus-400 mean. '
             f"That alternative gives `{alt['ratio']:.9f}` and `{alt['w_syn_mV']:.9f} mV`. "
-            'It has not been adopted or simulated. The mean-versus-median and bilateral aggregation choices '
-            'are explicit design definitions to confirm, not values chosen after candidate gate outcomes.', '',
+            'Both definitions were accepted before any M1c gate outcome. Full-precision ratios are used; '
+            'the displayed weights round to 0.145104 and 0.138504 mV. These are pre-declared design '
+            'definitions, not values selected by searching gate outcomes.', '',
             'Changing `w_syn` also changes the existing external Poisson kick `w_syn * f_poi`; '
             '`f_poi` and that formula would remain unchanged. This is not a recurrent-edge-only rescaling. '
             'Source: [unchanged network builder](../sim/network.py).', '',
+            '## MN9 tracing-status check before M1c', '',
+            'Sources: [neuPrint male-cns:v1.0](https://neuprint.janelia.org/), '
+            '[release annotation provenance](../data/malecns/substrate_record.json), and Tastekin Table S1 '
+            '(local workbook `MNs!A66:G67`). The [preflight record](../data/malecns/rescale_preflight.json) '
+            'records the query response hash, release fields, workbook hash and exact IDs.', '',
+            '| Body / XLSX side | status (live and release) | statusLabel (live and release) | neuPrint pre / post | Retained incoming synapses |',
+            '|---|---|---|---:|---:|',
+            '| 16949 / R | Traced | RT Hard to trace | 244 / 633 | 556 |',
+            '| 10331 / L | Traced | Roughly traced | 172 / 6,358 | 6,012 |', '',
+            'Neither record provides a numerical tracing-completeness field or a cropped flag; absent '
+            'metadata is unknown, not evidence of complete tracing. Both have `exitNerve=PhN` and '
+            '`group=10331`. neuPrint post counts differ from the proofread-endpoint-filtered substrate '
+            'incoming counts. The workbook, Berg release annotations and live type query identify only '
+            'these two MN9 bodies: no alternative MN9-typed body on either side. Reconstruction '
+            'incompleteness is a likely cause of the laterality reversal given the R tracing label and '
+            '556 versus 6,012 retained inputs, **a hypothesis, not established causation**; both M1c '
+            'sides must be read before drawing a conclusion. [OQ-11](open_questions.md#oq-11-malecns-substrate-and-reversed-sugar-to-mn9-laterality-2026-09-14).', '',
             '## Tastekin comparison', '',
             '[Tastekin Figure S17B, condition 1](https://ars.els-cdn.com/content/image/1-s2.0-S0092867426009438-mmc1.pdf) '
             'shows LB3 activation at 200 Hz as an MN9 boxplot, n=30. No exact numerical mean or median '
@@ -150,8 +178,9 @@ def generate():
             'These software checks do not change any M1 gate verdict.', '',
             '## Checkpoint', '',
             'The [pre-declared M1c stop rule](malecns_phase0.md#m1b--m1c-decision-boundary-declared-before-rescaled-runs) '
-            'is recorded before any rescaled run. M1c has not started. Confirm the density definitions '
-            '(especially the 137-partner exception) and candidates, or stop; no third weight will be tried.', '']
+            'was recorded before any rescaled run. The owner accepted M1b and both mean-based '
+            'definitions, including the 137-partner exception. M1c uses exactly these two weights '
+            'and the unchanged tied external kick; no third weight will be tried.', '']
     return '\n'.join(lines)
 
 

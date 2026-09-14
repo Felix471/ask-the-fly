@@ -425,3 +425,15 @@ Nine workers were selected from available RAM with headroom, not copied from
 the female run. All 960 MN9-neuron trials and 2,910 shared input-train
 comparisons were audited. [Audit record](../data/malecns/phase0_audit.json).
 M2 has not run. No female, product or README honesty-table change.
+
+**Pre-M1c tracing check:** [neuPrint male-cns:v1.0](https://neuprint.janelia.org/)
+and the frozen Berg annotation both mark R16949 `status=Traced`,
+`statusLabel=RT Hard to trace`, versus L10331 `Traced` / `Roughly traced`.
+No numerical completeness measure or cropped flag is supplied; absent is unknown.
+The [M1b density audit](malecns_m1b.md) finds **556 versus 6,012 incoming
+synapses** in the retained substrate (not neuPrint's broader post counts).
+Reconstruction incompleteness is therefore a likely cause of the reversal,
+not an established explanation; this remains tentative pending bilateral M1c.
+Tastekin's workbook (`MNs!A66:G67`), Berg's release and the live MN9 query
+name no other MN9-typed body on either side. [Source hashes and extracted
+fields](../data/malecns/rescale_preflight.json). No readout was substituted.

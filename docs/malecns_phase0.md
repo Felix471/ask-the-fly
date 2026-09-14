@@ -134,3 +134,12 @@ The exact requested 200-partner `r_mn9` is presently undefined: male contralater
 R16949 has only 137 retained presynaptic partners. An explicitly labeled
 available-partner alternative may be reported at M1b but requires owner confirmation;
 missing partners will not be fabricated or silently padded with zeros.
+
+**Owner confirmation, before M1c:** means are used for both ratios; the
+137-partner exception is accepted with the two sides' mean degrees equally
+weighted. `r_all=1.8951912499349262` gives `w_syn=0.14510408910416958 mV`;
+`r_mn9=1.985509366815815` gives `w_syn=0.13850350171906808 mV`.
+These are the full-precision versions of the approved 0.145104 / 0.138504 mV
+candidates, not additional candidates. The external Poisson kick remains
+`w_syn*f_poi`; all other model/trial parameters remain unchanged. The
+[preflight additions](malecns_m1b.md) were recorded before rescaled runs.
