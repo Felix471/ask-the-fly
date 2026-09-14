@@ -849,3 +849,9 @@ Rank fixed using the0.5 graph: strongest direct synapse count into L10331, ties 
 | 20 | 522702 | 2,490 | 1,579 | 63.41% | 76 | 50 | 65.79% |
 
 These fixed20 partners retain 2,760/4,135 direct synapses into L10331 (66.75%). This does not override the input-set stop condition. The experiment remains stopped before simulation, awaiting the owner’s decision.
+
+## M1h owner decision to proceed — 2026-09-14
+
+After seeing the outgoing audit and before any M1h trial, the owner chose to proceed despite the pre-declared50% outgoing-synapse threshold being crossed by all four input sets (43–48% retained). **The flag remains crossed in the record; this is a post-audit waiver, not a pass or a retroactive threshold change.** The owner's stated reasons: the round50% threshold had no derivation; the input sets retain slightly less than the graph average56.8%; stimulus entry remains intact in absolute-count terms (sugar3,111 and bitter10,640 outgoing synapses); the last hop into L10331 retains66.8%, with all top20 partners still connected. These are the owner's reasons to test, not evidence that function survived pruning or that recall is known.
+
+Run the single declared candidate at recurrent0.275 mV and unchanged stimulus68.75 mV/event, all historical A–D plus S criteria onL10331, R16949 recorded, A′ included, M1 seeds,480 trials. The density cutoff and graph remain frozen; no further candidate is selected. After this result the male line closes pending replies from Tastekin and the fly-brain-minecraft author, regardless of the gate result.
