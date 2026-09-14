@@ -1,0 +1,218 @@
+{
+  "stage": "M1",
+  "planned_utc": "2026-09-14T06:53:45.541943+00:00",
+  "conditions": [
+    {
+      "id": "A_s25_b0",
+      "gate": "A",
+      "sugar_hz": 25,
+      "bitter_hz": 0,
+      "sugar_set": "sugar",
+      "n_trials": 30
+    },
+    {
+      "id": "A_s50_b0",
+      "gate": "A",
+      "sugar_hz": 50,
+      "bitter_hz": 0,
+      "sugar_set": "sugar",
+      "n_trials": 30
+    },
+    {
+      "id": "A_s100_b0",
+      "gate": "A",
+      "sugar_hz": 100,
+      "bitter_hz": 0,
+      "sugar_set": "sugar",
+      "n_trials": 30
+    },
+    {
+      "id": "A_s200_b0",
+      "gate": "A",
+      "sugar_hz": 200,
+      "bitter_hz": 0,
+      "sugar_set": "sugar",
+      "n_trials": 30
+    },
+    {
+      "id": "B_s200_b0",
+      "gate": "B",
+      "sugar_hz": 200,
+      "bitter_hz": 0,
+      "sugar_set": "sugar",
+      "n_trials": 30
+    },
+    {
+      "id": "B_s200_b25",
+      "gate": "B",
+      "sugar_hz": 200,
+      "bitter_hz": 25,
+      "sugar_set": "sugar",
+      "n_trials": 30
+    },
+    {
+      "id": "B_s200_b50",
+      "gate": "B",
+      "sugar_hz": 200,
+      "bitter_hz": 50,
+      "sugar_set": "sugar",
+      "n_trials": 30
+    },
+    {
+      "id": "B_s200_b100",
+      "gate": "B",
+      "sugar_hz": 200,
+      "bitter_hz": 100,
+      "sugar_set": "sugar",
+      "n_trials": 30
+    },
+    {
+      "id": "B_s200_b200",
+      "gate": "B",
+      "sugar_hz": 200,
+      "bitter_hz": 200,
+      "sugar_set": "sugar",
+      "n_trials": 30
+    },
+    {
+      "id": "C_s0_b25",
+      "gate": "C",
+      "sugar_hz": 0,
+      "bitter_hz": 25,
+      "sugar_set": "sugar",
+      "n_trials": 30
+    },
+    {
+      "id": "C_s0_b50",
+      "gate": "C",
+      "sugar_hz": 0,
+      "bitter_hz": 50,
+      "sugar_set": "sugar",
+      "n_trials": 30
+    },
+    {
+      "id": "C_s0_b100",
+      "gate": "C",
+      "sugar_hz": 0,
+      "bitter_hz": 100,
+      "sugar_set": "sugar",
+      "n_trials": 30
+    },
+    {
+      "id": "C_s0_b200",
+      "gate": "C",
+      "sugar_hz": 0,
+      "bitter_hz": 200,
+      "sugar_set": "sugar",
+      "n_trials": 30
+    },
+    {
+      "id": "D_s0_b0",
+      "gate": "D",
+      "sugar_hz": 0,
+      "bitter_hz": 0,
+      "sugar_set": "sugar",
+      "n_trials": 30
+    },
+    {
+      "id": "AP_sugar_120",
+      "gate": "AP",
+      "sugar_hz": 120,
+      "bitter_hz": 0,
+      "sugar_set": "sugar",
+      "n_trials": 30
+    },
+    {
+      "id": "AP_sugar_lb3c_120",
+      "gate": "AP",
+      "sugar_hz": 120,
+      "bitter_hz": 0,
+      "sugar_set": "sugar_lb3c",
+      "n_trials": 30
+    }
+  ],
+  "total_trials": 480,
+  "gate_trials": 420,
+  "a_prime_trials": 60,
+  "seeds": [
+    20260910,
+    20260911,
+    20260912,
+    20260913,
+    20260914,
+    20260915,
+    20260916,
+    20260917,
+    20260918,
+    20260919,
+    20260920,
+    20260921,
+    20260922,
+    20260923,
+    20260924,
+    20260925,
+    20260926,
+    20260927,
+    20260928,
+    20260929,
+    20260930,
+    20260931,
+    20260932,
+    20260933,
+    20260934,
+    20260935,
+    20260936,
+    20260937,
+    20260938,
+    20260939
+  ],
+  "reference_protocol": {
+    "path": "data/malecns/stim_protocol_malecns.json",
+    "bytes": 5142,
+    "sha256": "88a36bb624b4c304759f5178826248b92a699fcb56751b894b347e21ce673173"
+  },
+  "substrate_record": {
+    "path": "data/malecns/substrate_record.json",
+    "bytes": 6763,
+    "sha256": "95c6a973217ac793fe5d3d02b813d890f0ba7620d123c647587518d40868582f"
+  },
+  "cells": {
+    "path": "data/malecns/cells.json",
+    "bytes": 20697,
+    "sha256": "f29dd1511e5484d70062cf44d448acfa63e8ef89b49ab7cc281108e5be234c99"
+  },
+  "m0_benchmark": {
+    "path": "data/malecns/benchmark_m0.json",
+    "bytes": 9971,
+    "sha256": "65181e1ab3ea3361561f8c101b61dd001c9529c49aa3f782d7ad2d9799bc84bc"
+  },
+  "female_gate_source": {
+    "path": "scripts/phase0_report.py",
+    "bytes": 17228,
+    "sha256": "69bdd7922fefdf5876e8ec3d6ddda939b1e2b19095f264ffcccfbca91b27d5e4"
+  },
+  "female_comparison": {
+    "path": "results/phase0/full/summary.csv",
+    "bytes": 2593,
+    "sha256": "bae6a1f8450e3a4be23c95862da65ea8e18feaf9a6b5dabd2d966537dc46782d"
+  },
+  "memory": {
+    "workers": 9,
+    "wsl_available_gib": 60.5805778503418,
+    "host_free_gib": 85.02323532104492,
+    "limiting_available_gib": 60.5805778503418,
+    "reserve_gib": 15.14514446258545,
+    "worker_budget_gib": 4.6,
+    "measured_m0_peak_gib": 3.0380020141601562,
+    "cpus": 32,
+    "rule": "min(16 conditions, logical_cpus//2, floor((min(WSL available, host free)-max(8GiB,25%))/ceil(1.5*M0 peak to 0.1GiB)))"
+  },
+  "readouts": {
+    "R": 16949,
+    "L": 10331
+  },
+  "readout_decision": "Both MN9s gated separately; R16949 retained as M0 reference only; primary choice deferred until after M1.",
+  "layout": "Same 91 physical Poisson slots/order as M0, including inactive channels. A-prime zeros only the five LB3b slots/rates; their refractory returns to t_rfc.",
+  "gate_rule": "Exact A-D predicates from female report source, separately per side. Historical D is trial-count completeness; literal D-zero and C-zero are additional reported checks.",
+  "scope": "M1 only; no M2, no model-parameter or frozen-file changes."
+}
