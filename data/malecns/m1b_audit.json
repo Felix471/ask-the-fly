@@ -1,0 +1,22 @@
+{
+  "verified_trials": 480,
+  "verified_top_partner_rows": 737,
+  "onset_and_region_rechecks": 72,
+  "network_bins": "20 half-open 50-ms bins, spike counts (not neuron counts)",
+  "selected_conditions_max_pooled_vnc_share_any_50ms_bin": {
+    "A_s25_b0": 0.38312511316313597,
+    "B_s200_b25": 0.05461153331586279,
+    "C_s0_b25": 0.22212195274801028
+  },
+  "individual_trial_bins_with_vnc_majority": [],
+  "diagnosis": {
+    "path": "data/malecns/m1b_diagnosis.json",
+    "bytes": 99564,
+    "sha256": "62fb9e4a5f358e6addc9c374b7401fd4bafbd7cdf003b6d904abb2d516e847d0"
+  },
+  "full_bin_audit": {
+    "path": "data/malecns/runs/m1b/audit.json",
+    "bytes": 127279,
+    "sha256": "f8eff3993fdfb5e592f3c594e9120c832ac5c6f35fbd8a810640909ee6101619"
+  }
+}
