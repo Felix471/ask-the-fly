@@ -61,6 +61,39 @@ class Phase0Tests(unittest.TestCase):
         with self.assertRaises(ValueError):
             evaluate_gates(self.fixture()[:-1])
 
+    def test_positive_plateau_fails_A(self):
+        rows = self.fixture()
+        rows[1]['R_mean'] = rows[0]['R_mean']
+        self.assertFalse(evaluate_gates(rows)['R']['A'])
+
+    def test_exact_half_response_fails_B(self):
+        rows = self.fixture()
+        rows[8]['R_mean'] = 50
+        self.assertFalse(evaluate_gates(rows)['R']['B'])
+
+    def test_C_tolerance_and_side_independence(self):
+        rows = self.fixture()
+        rows[9]['R_mean'] = 1
+        rows[9]['L_mean'] = 1.01
+        gates = evaluate_gates(rows)
+        self.assertTrue(gates['R']['C'])
+        self.assertFalse(gates['L']['C'])
+
+    def test_missing_trials_rejected_even_if_means_pass(self):
+        rows = self.fixture()
+        rows[0]['n_trials'] = 29
+        with self.assertRaises(ValueError):
+            evaluate_gates(rows)
+
+    def test_independent_raw_audit_agrees(self):
+        from sim.malecns.audit_phase0 import raw_gate_checks
+        rows = self.fixture()
+        rows[5]['L_mean'] = 110
+        for side in ['R','L']:
+            expected = evaluate_gates(rows)[side]
+            for key,value in raw_gate_checks(rows,side).items():
+                self.assertEqual(value,expected[key])
+
 
 if __name__ == '__main__':
     unittest.main()
