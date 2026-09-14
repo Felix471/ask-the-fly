@@ -1,0 +1,60 @@
+{
+  "graphs": {
+    "female": {
+      "source": {
+        "path": "vendor/fly-brain/data/2025_Connectivity_783.parquet",
+        "bytes": 100804642,
+        "sha256": "efeb23fb99098e9c390f6869969b2a121a2ee92c833cfc45ecb2c1d8e1af0347"
+      },
+      "minimum": 1,
+      "edges": 15091983,
+      "counts": {
+        "1": 7496016,
+        "2": 2679736,
+        "3": 1379004,
+        "4": 836714,
+        ">=5": 2700513
+      }
+    },
+    "male_whole": {
+      "source": {
+        "path": "data/malecns/derived/connectivity.parquet",
+        "bytes": 136299562,
+        "sha256": "b31ae9884cba41fedac392e4c80bada5c0c8a33efb9258b0e7308a1bbcbfa6f3"
+      },
+      "minimum": 1,
+      "edges": 25582938,
+      "counts": {
+        "1": 10299701,
+        "2": 4762806,
+        "3": 2621228,
+        "4": 1657085,
+        ">=5": 6242118
+      }
+    },
+    "male_brain": {
+      "source": {
+        "path": "data/malecns/derived/brain/connectivity.parquet",
+        "bytes": 85739862,
+        "sha256": "7b59f3f015bbdb3e7ac08876a7e48ff17a31ba3f35c183fe12bc47ee6e850cb4"
+      },
+      "minimum": 1,
+      "edges": 21884935,
+      "counts": {
+        "1": 8861233,
+        "2": 4128470,
+        "3": 2270061,
+        "4": 1429353,
+        ">=5": 5195818
+      }
+    }
+  },
+  "methods_source": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11446845/",
+  "methods": "Computational model: cleft-score cutoff 50 in the neurotransmitter-prediction procedure; no stated five-synapse edge cutoff. Published model uses v630; our audited frozen file is v783.",
+  "decision": "Female minimum is 1, not >=5; conditional third M1f candidate not triggered. No graph or protocol change.",
+  "audit_code": {
+    "path": "sim/malecns/edge_threshold_audit.py",
+    "bytes": 2087,
+    "sha256": "b1e74fc2617ad3228bf8d96325583fc88a0a13fe6c0b04d2eec25ca815ced73e"
+  }
+}

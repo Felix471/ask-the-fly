@@ -426,3 +426,21 @@ A′: sugar17 versus LB3c12 at120 Hz, same layout/seeds. Both are **0 ±0 Hz on 
 Saved-event audit: 480 trials / 960 MN9-neuron trials; all rates, latencies, source-cell counts, network counts, summaries, gates and paired differences verified. All480 Poisson event arrays match M1; all360 shared A′ LB3c trains match; all30 A200/B0 whole-network pairs match. No female simulation or product/frozen-data change. 49 male tests,315 existing Python tests,67 Node tests and release validation pass.
 
 M1e is the separate [community survey](malecns_community_survey.md). Stop at this checkpoint; no further variant is selected or run.
+
+## M1f edge-threshold check — 2026-09-14
+
+Direct histograms of the unsigned `Connectivity` column, before simulation filtering or scaling, are recorded with source sizes and SHA256 in [the audit record](../data/malecns/edge_threshold_audit.json); [audit code](../sim/malecns/edge_threshold_audit.py). Each row of these tables is a directed edge, not an individual synapse.
+
+| Synapses per edge | Female frozen v783 | Male whole CNS | Male brain-only endpoint cut |
+|---|---:|---:|---:|
+| 1 | 7,496,016 | 10,299,701 | 8,861,233 |
+| 2 | 2,679,736 | 4,762,806 | 4,128,470 |
+| 3 | 1,379,004 | 2,621,228 | 2,270,061 |
+| 4 | 836,714 | 1,657,085 | 1,429,353 |
+| >=5 | 2,700,513 | 6,242,118 | 5,195,818 |
+| Total edges | 15,091,983 | 25,582,938 | 21,884,935 |
+| Minimum | 1 | 1 | 1 |
+
+[Shiu et al. 2024, Methods, Computational model](https://pmc.ncbi.nlm.nih.gov/articles/PMC11446845/) defines connection strength as FlyWire connectivity times presynaptic sign times `W_syn`. It specifies a cleft-score cutoff of 50 in the neurotransmitter-prediction procedure, **not** a five-synapse-per-edge cutoff; no >=5 edge threshold is stated there. The paper describes v630, whereas the directly audited frozen female file is `2025_Connectivity_783.parquet`. The male graph uses the `minconf-0.5` release with endpoint-roster filtering and no additional edge-count threshold; synapse confidence and aggregate edge count are different filters.
+
+**Decision:** the female graph is not effectively >=5. The owner's conditional third M1f candidate is therefore not triggered; the two pre-declared candidates and their substrates remain unchanged. `r_all = 1.895191250` and `r_brain = 1.761181496` do not measure a female >=5 versus male all-edge discrepancy. This does not establish equivalence of upstream synapse detection, confidence filtering, reconstruction, or roster policies. No new simulation was used for this audit.
