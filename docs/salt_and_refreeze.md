@@ -4,8 +4,9 @@
 
 S1 and R1 are research experiments on the unchanged Shiu/FlyWire v783 model,
 not changes to the product, frozen data or encoder. All 720 approved trials
-are complete and independently audited. This is the S1/R1 tables-and-conclusions
-checkpoint, before OQ or memo-verdict updates and before opening a PR.
+are complete and independently audited. The owner has reviewed the checkpoint:
+salt is Closed as a fifth axis; v1 keeps its frozen sets and v2 adopts
+Tastekin typing as a recorded, unexecuted two-brain cell-set policy.
 
 ## Source identities and hemisphere policy
 
@@ -320,4 +321,72 @@ Independent raw audits, without importing the experiment statistics helpers, ver
 
 S1 is a ten-trial screen; R1 is a thirty-trial comparison, not a full re-freeze or validation of every input combination. Everything is inside Shiu's model and is not calibrated against behaviour. Cell-type associations do not make the designed 100 Hz drive a salt-concentration measurement. Membership, population size and wiring change together; neither the normalised curves nor A-prime isolate all of those effects.
 
-An unrelated historical wording error was noticed but left unchanged: `docs/phase0_report.md` and its generator say the 21/23 sets share 19 IDs; the frozen inventory and [cell IDs](cell_ids.md#overlaps) correctly give 20. OQ-7, OQ-10, memo verdicts and the PR are deliberately deferred until the owner's checkpoint review. No further simulations are authorised.
+The historical 19-versus-20 shared-ID wording in `docs/phase0_report.md` and
+its generator was corrected to 20 in a separate post-run commit, `036a8ca`;
+no gate or numeric result changed. R1's run metadata hashes the earlier
+generator, so its strict current-source `--summarize-only` guard will reject
+that later wording-only change; the successful reconstruction above preceded
+the correction. Original artifacts and hashes are retained, not rewritten.
+
+## Output-sign check — connectivity only
+
+[Reproducible check](../scripts/salt_output_signs.py): all 54 XLSX-selected
+cells have outgoing edges, and each has one consistent `Excitatory` value
+across every output edge in `2025_Connectivity_783.parquet`; every
+`Excitatory x Connectivity` value equals `Excitatory` times `Connectivity`.
+These are the unchanged signs consumed by the model, not `consensusNt`.
+Counts below are neurons, not edges or synapses.
+
+| Set | Model positive outputs (+1) | Model negative outputs (-1) | Local annotation `top_nt` | Cells disagreeing with annotation-derived sign |
+|---|---:|---:|---|---:|
+| LB3d29 | 27 | 2 | 18 acetylcholine; 4 serotonin; 7 glutamate | 5 / 29 |
+| LB3b25 | 25 | 0 | 21 acetylcholine; 4 serotonin | 0 / 25 |
+
+Two distinct annotation comparisons must not be conflated. **Against
+Tastekin's class-level glutamatergic LB3d label, 27/29 cells disagree:**
+their model outputs are positive rather than negative. The local Schlegel
+per-neuron annotation TSV instead labels only seven LB3d cells as glutamate;
+five of those seven have positive model outputs, while the other two have
+negative outputs. LB3b has no sign disagreements with its local annotations.
+For this sign comparison, glutamate/GABA map to negative and acetylcholine/
+serotonin to positive under the [documented Shiu convention](open_questions.md#v3-note-updated-2026-09-10-malecns-as-a-substrate);
+agreement of signs does not mean agreement of transmitter identity.
+
+The two negative-output LB3d IDs are `720575940609645124` and
+`720575940623172843`. The five local-annotation sign mismatches are
+`720575940612208406`, `720575940623138485`, `720575940630552151`,
+`720575940609476562`, and `720575940620926234`.
+
+Source hashes: connectivity parquet
+`efeb23fb99098e9c390f6869969b2a121a2ee92c833cfc45ecb2c1d8e1af0347`;
+`data/external/Supplemental_file1_neuron_annotations.tsv`
+`9a4f8b2f843196074431ebd7cd883536afa1be86c8a4ce90970441e8be81d1be`.
+The XLSX hash and row selection are recorded above. This check changes no
+signs and offers no explanation for the simulated firing outcomes.
+Its six synthetic tests pass; the post-decision checks pass all 315 Python
+tests, 67 Node tests, release validation and 69 local documentation links.
+
+## Checkpoint decisions — recorded, not executed
+
+**Salt as a fifth axis: Closed.** LB3d29 at 100 Hz drives left MN9 to
+61.5 Hz, or 18.7 Hz with the seven frozen-sugar-overlap cells removed;
+adding the non-overlap 22 to frozen sugar at 120 Hz raises all four readouts
+in 10/10 trials. The model does not express high-salt aversion under this
+design, contrary to Tastekin's prediction for LB3d. No explanation is
+assigned. Reopen only with reproducible high-salt-associated aversion under
+a justified, versioned input/substrate design and an explicit product mapping.
+
+**Cell-set policy:** v1 retains the frozen Shiu sets. Above 80 Hz the MN9
+curve differences remain within the predeclared two-SD trial-spread rule;
+the owner judges a full grid/replay rerun unjustified for prospective ranking
+changes near noise. These are not measured mixed-taste ranking changes.
+For v2's planned two-brain design, use Tastekin typing on both brains,
+because the male sets must be defined through that typing in this design
+and the typed sugar set passes all four Phase 0 gates on the female brain.
+A-prime attributes about 10 Hz of left-MN9 drive to adding LB3b13 to LB3c20
+at 120 Hz, so LB3b stays in the v2 sugar set. The comparison does not validate
+the male substrate or other replacement axes. No re-freeze is executed.
+
+[OQ-7 and OQ-10](open_questions.md) and the [v2 memo](v2_decision_memo.md)
+record these decisions. This closes simulation work on the female brain;
+MaleCNS feasibility awaits a separately specified task after this PR merges.
