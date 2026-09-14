@@ -111,6 +111,16 @@ def generate():
               'pipeline, site, scoring and README honesty table are unchanged. Stop here; no M2.', '']
     lines += ['Software verification: 40 male-only unit tests, 315 existing Python tests, '
               '67 Node tests and release validation pass. These checks do not establish behavioural validity.', '']
+    lines += ['### Post-M1c decision — 2026-09-14', '',
+              "**Post-M1c owner decision — 2026-09-14:** the primary male readout is **L10331**, chosen on reconstruction-completeness grounds; **R16949 remains recorded as secondary**. R16949 has 556 retained incoming synapses versus 6,012 for L10331, with neuPrint status labels `RT Hard to trace` versus `Roughly traced`. GNG postsynaptic capture is approximately 35% (35.3665%), an **ROI-wide figure, not either neuron's completeness estimate**. The owner records reconstruction completeness as the most likely explanation for the laterality reversal, not a demonstrated causal result. The cross-brain mapping places both bodies with the female MN9s in CB0701; it does not indicate that Table S1 identified the wrong bodies.", '',
+              'This decision was made **after M1c completed and its results were reported**. '
+              'The completed runs, candidate protocols and original pre-declared stop rule '
+              'remain unchanged: all four gates must pass on at least one side. **Both '
+              'candidates passed under that original rule, on L10331.** This is not a '
+              'retrospective amendment to the run design. Candidate selection is still '
+              'pending; no rerun is performed or authorised by this record. '
+              '[Mapping, tracing and ROI-capture evidence](malecns_m1b.md#additional-mapping-and-roi-capture-check); '
+              '[OQ-11](open_questions.md#oq-11-malecns-substrate-and-reversed-sugar-to-mn9-laterality-2026-09-14).', '']
     return '\n'.join(lines)
 
 
