@@ -1,0 +1,672 @@
+{
+  "conditions": [
+    {
+      "id": "A_s25_b0",
+      "gate": "A",
+      "sugar_hz": 25,
+      "bitter_hz": 0,
+      "sugar_set": "sugar",
+      "n_trials": 30,
+      "R_mean": 5.966666666666667,
+      "R_sd": 8.890006874138074,
+      "R_latency_median_ms": 197.40000000000003,
+      "R_firing_trials": 17,
+      "L_mean": 28.8,
+      "L_sd": 34.78256268112899,
+      "L_latency_median_ms": 137.3,
+      "L_firing_trials": 29,
+      "whole_network_spikes": {
+        "median": 787162.0,
+        "min": 107784,
+        "max": 951255
+      },
+      "neurons_fired": {
+        "median": 15843.5,
+        "min": 5776,
+        "max": 16300
+      }
+    },
+    {
+      "id": "A_s50_b0",
+      "gate": "A",
+      "sugar_hz": 50,
+      "bitter_hz": 0,
+      "sugar_set": "sugar",
+      "n_trials": 30,
+      "R_mean": 5.866666666666666,
+      "R_sd": 4.19311605160437,
+      "R_latency_median_ms": 110.60000000000001,
+      "R_firing_trials": 23,
+      "L_mean": 33.266666666666666,
+      "L_sd": 20.8980594527073,
+      "L_latency_median_ms": 64.10000000000001,
+      "L_firing_trials": 30,
+      "whole_network_spikes": {
+        "median": 929500.5,
+        "min": 143673,
+        "max": 992204
+      },
+      "neurons_fired": {
+        "median": 15935.0,
+        "min": 7224,
+        "max": 16510
+      }
+    },
+    {
+      "id": "A_s100_b0",
+      "gate": "A",
+      "sugar_hz": 100,
+      "bitter_hz": 0,
+      "sugar_set": "sugar",
+      "n_trials": 30,
+      "R_mean": 11.733333333333333,
+      "R_sd": 4.032644569289764,
+      "R_latency_median_ms": 51.650000000000006,
+      "R_firing_trials": 30,
+      "L_mean": 76.1,
+      "L_sd": 16.232375057273657,
+      "L_latency_median_ms": 41.5,
+      "L_firing_trials": 30,
+      "whole_network_spikes": {
+        "median": 1054082.5,
+        "min": 956940,
+        "max": 1081850
+      },
+      "neurons_fired": {
+        "median": 15595.5,
+        "min": 15431,
+        "max": 16086
+      }
+    },
+    {
+      "id": "A_s200_b0",
+      "gate": "A",
+      "sugar_hz": 200,
+      "bitter_hz": 0,
+      "sugar_set": "sugar",
+      "n_trials": 30,
+      "R_mean": 30.966666666666665,
+      "R_sd": 2.316366887078892,
+      "R_latency_median_ms": 38.35,
+      "R_firing_trials": 30,
+      "L_mean": 126.2,
+      "L_sd": 4.995998398718719,
+      "L_latency_median_ms": 32.0,
+      "L_firing_trials": 30,
+      "whole_network_spikes": {
+        "median": 1102476.5,
+        "min": 1093286,
+        "max": 1108188
+      },
+      "neurons_fired": {
+        "median": 15462.5,
+        "min": 15309,
+        "max": 15677
+      }
+    },
+    {
+      "id": "B_s200_b0",
+      "gate": "B",
+      "sugar_hz": 200,
+      "bitter_hz": 0,
+      "sugar_set": "sugar",
+      "n_trials": 30,
+      "R_mean": 30.966666666666665,
+      "R_sd": 2.316366887078892,
+      "R_latency_median_ms": 38.35,
+      "R_firing_trials": 30,
+      "L_mean": 126.2,
+      "L_sd": 4.995998398718719,
+      "L_latency_median_ms": 32.0,
+      "L_firing_trials": 30,
+      "whole_network_spikes": {
+        "median": 1102476.5,
+        "min": 1093286,
+        "max": 1108188
+      },
+      "neurons_fired": {
+        "median": 15462.5,
+        "min": 15309,
+        "max": 15677
+      }
+    },
+    {
+      "id": "B_s200_b25",
+      "gate": "B",
+      "sugar_hz": 200,
+      "bitter_hz": 25,
+      "sugar_set": "sugar",
+      "n_trials": 30,
+      "R_mean": 0.0,
+      "R_sd": 0.0,
+      "R_latency_median_ms": null,
+      "R_firing_trials": 0,
+      "L_mean": 13.133333333333333,
+      "L_sd": 33.38935292707676,
+      "L_latency_median_ms": 70.2,
+      "L_firing_trials": 5,
+      "whole_network_spikes": {
+        "median": 1104273.5,
+        "min": 1060696,
+        "max": 1114221
+      },
+      "neurons_fired": {
+        "median": 15544.5,
+        "min": 15344,
+        "max": 15703
+      }
+    },
+    {
+      "id": "B_s200_b50",
+      "gate": "B",
+      "sugar_hz": 200,
+      "bitter_hz": 50,
+      "sugar_set": "sugar",
+      "n_trials": 30,
+      "R_mean": 0.0,
+      "R_sd": 0.0,
+      "R_latency_median_ms": null,
+      "R_firing_trials": 0,
+      "L_mean": 0.0,
+      "L_sd": 0.0,
+      "L_latency_median_ms": null,
+      "L_firing_trials": 0,
+      "whole_network_spikes": {
+        "median": 1105089.5,
+        "min": 1056398,
+        "max": 1113666
+      },
+      "neurons_fired": {
+        "median": 15448.0,
+        "min": 15255,
+        "max": 15585
+      }
+    },
+    {
+      "id": "B_s200_b100",
+      "gate": "B",
+      "sugar_hz": 200,
+      "bitter_hz": 100,
+      "sugar_set": "sugar",
+      "n_trials": 30,
+      "R_mean": 0.0,
+      "R_sd": 0.0,
+      "R_latency_median_ms": null,
+      "R_firing_trials": 0,
+      "L_mean": 0.0,
+      "L_sd": 0.0,
+      "L_latency_median_ms": null,
+      "L_firing_trials": 0,
+      "whole_network_spikes": {
+        "median": 1107289.5,
+        "min": 1068213,
+        "max": 1117447
+      },
+      "neurons_fired": {
+        "median": 15402.5,
+        "min": 15270,
+        "max": 15573
+      }
+    },
+    {
+      "id": "B_s200_b200",
+      "gate": "B",
+      "sugar_hz": 200,
+      "bitter_hz": 200,
+      "sugar_set": "sugar",
+      "n_trials": 30,
+      "R_mean": 0.0,
+      "R_sd": 0.0,
+      "R_latency_median_ms": null,
+      "R_firing_trials": 0,
+      "L_mean": 0.03333333333333333,
+      "L_sd": 0.1795054935711501,
+      "L_latency_median_ms": 87.00000000000001,
+      "L_firing_trials": 1,
+      "whole_network_spikes": {
+        "median": 1119421.0,
+        "min": 1084981,
+        "max": 1123868
+      },
+      "neurons_fired": {
+        "median": 15405.5,
+        "min": 15265,
+        "max": 15645
+      }
+    },
+    {
+      "id": "C_s0_b25",
+      "gate": "C",
+      "sugar_hz": 0,
+      "bitter_hz": 25,
+      "sugar_set": "sugar",
+      "n_trials": 30,
+      "R_mean": 0.0,
+      "R_sd": 0.0,
+      "R_latency_median_ms": null,
+      "R_firing_trials": 0,
+      "L_mean": 25.066666666666666,
+      "L_sd": 45.482548545812854,
+      "L_latency_median_ms": 57.0,
+      "L_firing_trials": 7,
+      "whole_network_spikes": {
+        "median": 1023031.5,
+        "min": 192577,
+        "max": 1060388
+      },
+      "neurons_fired": {
+        "median": 15481.5,
+        "min": 6772,
+        "max": 16184
+      }
+    },
+    {
+      "id": "C_s0_b50",
+      "gate": "C",
+      "sugar_hz": 0,
+      "bitter_hz": 50,
+      "sugar_set": "sugar",
+      "n_trials": 30,
+      "R_mean": 0.0,
+      "R_sd": 0.0,
+      "R_latency_median_ms": null,
+      "R_firing_trials": 0,
+      "L_mean": 28.766666666666666,
+      "L_sd": 47.64499507351802,
+      "L_latency_median_ms": 52.400000000000006,
+      "L_firing_trials": 9,
+      "whole_network_spikes": {
+        "median": 1055591.0,
+        "min": 1025867,
+        "max": 1076162
+      },
+      "neurons_fired": {
+        "median": 15567.0,
+        "min": 15328,
+        "max": 15867
+      }
+    },
+    {
+      "id": "C_s0_b100",
+      "gate": "C",
+      "sugar_hz": 0,
+      "bitter_hz": 100,
+      "sugar_set": "sugar",
+      "n_trials": 30,
+      "R_mean": 0.0,
+      "R_sd": 0.0,
+      "R_latency_median_ms": null,
+      "R_firing_trials": 0,
+      "L_mean": 76.6,
+      "L_sd": 50.21526992194042,
+      "L_latency_median_ms": 44.2,
+      "L_firing_trials": 21,
+      "whole_network_spikes": {
+        "median": 1058075.5,
+        "min": 1001729,
+        "max": 1073774
+      },
+      "neurons_fired": {
+        "median": 15869.0,
+        "min": 15466,
+        "max": 16192
+      }
+    },
+    {
+      "id": "C_s0_b200",
+      "gate": "C",
+      "sugar_hz": 0,
+      "bitter_hz": 200,
+      "sugar_set": "sugar",
+      "n_trials": 30,
+      "R_mean": 0.0,
+      "R_sd": 0.0,
+      "R_latency_median_ms": null,
+      "R_firing_trials": 0,
+      "L_mean": 35.43333333333333,
+      "L_sd": 54.136052887352456,
+      "L_latency_median_ms": 39.0,
+      "L_firing_trials": 9,
+      "whole_network_spikes": {
+        "median": 1075743.0,
+        "min": 1051980,
+        "max": 1092783
+      },
+      "neurons_fired": {
+        "median": 15765.5,
+        "min": 15284,
+        "max": 16128
+      }
+    },
+    {
+      "id": "D_s0_b0",
+      "gate": "D",
+      "sugar_hz": 0,
+      "bitter_hz": 0,
+      "sugar_set": "sugar",
+      "n_trials": 30,
+      "R_mean": 0.0,
+      "R_sd": 0.0,
+      "R_latency_median_ms": null,
+      "R_firing_trials": 0,
+      "L_mean": 0.0,
+      "L_sd": 0.0,
+      "L_latency_median_ms": null,
+      "L_firing_trials": 0,
+      "whole_network_spikes": {
+        "median": 0.0,
+        "min": 0,
+        "max": 0
+      },
+      "neurons_fired": {
+        "median": 0.0,
+        "min": 0,
+        "max": 0
+      }
+    },
+    {
+      "id": "AP_sugar_120",
+      "gate": "AP",
+      "sugar_hz": 120,
+      "bitter_hz": 0,
+      "sugar_set": "sugar",
+      "n_trials": 30,
+      "R_mean": 14.6,
+      "R_sd": 3.73809220503365,
+      "R_latency_median_ms": 45.400000000000006,
+      "R_firing_trials": 30,
+      "L_mean": 88.26666666666667,
+      "L_sd": 11.673141060666671,
+      "L_latency_median_ms": 37.75,
+      "L_firing_trials": 30,
+      "whole_network_spikes": {
+        "median": 1075834.0,
+        "min": 1051247,
+        "max": 1089050
+      },
+      "neurons_fired": {
+        "median": 15519.5,
+        "min": 15380,
+        "max": 15956
+      }
+    },
+    {
+      "id": "AP_sugar_lb3c_120",
+      "gate": "AP",
+      "sugar_hz": 120,
+      "bitter_hz": 0,
+      "sugar_set": "sugar_lb3c",
+      "n_trials": 30,
+      "R_mean": 13.366666666666667,
+      "R_sd": 4.6582066172389665,
+      "R_latency_median_ms": 51.50000000000001,
+      "R_firing_trials": 30,
+      "L_mean": 82.46666666666667,
+      "L_sd": 17.51710275384856,
+      "L_latency_median_ms": 41.25,
+      "L_firing_trials": 30,
+      "whole_network_spikes": {
+        "median": 1044834.0,
+        "min": 932651,
+        "max": 1081932
+      },
+      "neurons_fired": {
+        "median": 15778.0,
+        "min": 15443,
+        "max": 16203
+      }
+    }
+  ],
+  "gates": {
+    "R": {
+      "A": false,
+      "B": true,
+      "C": true,
+      "D": true,
+      "D_literal_zero": true,
+      "C_literal_zero": true,
+      "A_threshold_hz": 5.0,
+      "C_limit_hz": 1.0,
+      "bitter200_suppression_fraction": 1.0,
+      "overall": false
+    },
+    "L": {
+      "A": true,
+      "B": false,
+      "C": false,
+      "D": true,
+      "D_literal_zero": true,
+      "C_literal_zero": false,
+      "A_threshold_hz": 5.0,
+      "C_limit_hz": 1.0,
+      "bitter200_suppression_fraction": 0.9997358689910195,
+      "overall": false
+    }
+  },
+  "a_prime": {
+    "R": {
+      "difference_definition": "LB3c12 minus sugar17, paired by seed",
+      "mean_hz": -1.2333333333333334,
+      "sd_hz": 6.184299115951261,
+      "lower_trials": 18,
+      "equal_trials": 2,
+      "higher_trials": 10
+    },
+    "L": {
+      "difference_definition": "LB3c12 minus sugar17, paired by seed",
+      "mean_hz": -5.8,
+      "sd_hz": 21.39376856314318,
+      "lower_trials": 19,
+      "equal_trials": 1,
+      "higher_trials": 10
+    }
+  },
+  "shape_gate": {
+    "coverage": 5,
+    "adjacent": [
+      {
+        "from_hz": 25,
+        "to_hz": 50,
+        "decrease_hz": -4.466666666666665,
+        "pooled_sd_hz": 28.69281752944067
+      },
+      {
+        "from_hz": 50,
+        "to_hz": 100,
+        "decrease_hz": -42.83333333333333,
+        "pooled_sd_hz": 18.71121173105698
+      },
+      {
+        "from_hz": 100,
+        "to_hz": 120,
+        "decrease_hz": -12.166666666666671,
+        "pooled_sd_hz": 14.137754811536063
+      },
+      {
+        "from_hz": 120,
+        "to_hz": 200,
+        "decrease_hz": -37.93333333333334,
+        "pooled_sd_hz": 8.978369067437088
+      }
+    ],
+    "network_max_min_ratio": 1.0136304681483161,
+    "S1": true,
+    "S2": true,
+    "S3": true,
+    "S": true
+  },
+  "overall_primary": false,
+  "metadata": {
+    "stage": "M1f",
+    "candidate": "unscaled",
+    "started_utc": "2026-09-14T18:32:25.283165+00:00",
+    "git_commit": "b2dbc5150d7b9909e984d785bec1f3085c7689f1",
+    "plan": {
+      "path": "data/malecns/brain_plan.json",
+      "bytes": 6595,
+      "sha256": "d65ed3102ce5f9026d75846ac76328dd92b1f45d3703cad2c7030c6d56f63738"
+    },
+    "protocol": {
+      "path": "data/malecns/stim_protocol_malecns_brain_unscaled.json",
+      "bytes": 7706,
+      "sha256": "b00128bd9a35c04e0c92bc0d97a70a472a1c2f0f0299fffd0e54ae1e6ff7386b"
+    },
+    "sources": [
+      {
+        "path": "sim/malecns/rescale.py",
+        "bytes": 10826,
+        "sha256": "f07a7ffd4bc4cda53653b943e68ec00dc86247e29e5abf77dce663bc95c2f24f"
+      },
+      {
+        "path": "sim/malecns/phase0.py",
+        "bytes": 13472,
+        "sha256": "f6342a04adec37ed011d6aa9481ae7d044509fa33761ad23dfa92acfe4c43267"
+      },
+      {
+        "path": "sim/malecns/adapter.py",
+        "bytes": 2112,
+        "sha256": "e438f86a33d1dab4290333cd3e5e13f77d5dc8344d10726bda4cbb0cea6b0d7a"
+      },
+      {
+        "path": "sim/malecns/substrate.py",
+        "bytes": 16531,
+        "sha256": "1b6c7bd7122f9ad8a3d43aa87365c5b147d55d66067abcc4e7dce6fdcc63cac6"
+      },
+      {
+        "path": "sim/network.py",
+        "bytes": 9535,
+        "sha256": "eee33ef855203a47e03920b56b4aba98551cc400ab22107ebb91edc385475ae7"
+      },
+      {
+        "path": "data/stim_protocol.json",
+        "bytes": 3484,
+        "sha256": "9f9495033281bfcd6f3b373551817987deb2cc083ae94ab61fece9065102d82a"
+      },
+      {
+        "path": "data/malecns/stim_protocol_malecns.json",
+        "bytes": 5142,
+        "sha256": "88a36bb624b4c304759f5178826248b92a699fcb56751b894b347e21ce673173"
+      },
+      {
+        "path": "data/malecns/cells.json",
+        "bytes": 20697,
+        "sha256": "f29dd1511e5484d70062cf44d448acfa63e8ef89b49ab7cc281108e5be234c99"
+      },
+      {
+        "path": "data/malecns/substrate_record.json",
+        "bytes": 6763,
+        "sha256": "95c6a973217ac793fe5d3d02b813d890f0ba7620d123c647587518d40868582f"
+      },
+      {
+        "path": "data/malecns/m1b_diagnosis.json",
+        "bytes": 99564,
+        "sha256": "62fb9e4a5f358e6addc9c374b7401fd4bafbd7cdf003b6d904abb2d516e847d0"
+      },
+      {
+        "path": "data/malecns/rescale_preflight.json",
+        "bytes": 7106,
+        "sha256": "c2a300b31d20c3dfd1c6a829e2e2f5515974154870b85358c45af6ec00452c51"
+      },
+      {
+        "path": "sim/malecns/split.py",
+        "bytes": 9337,
+        "sha256": "e48b8c6bccecf4e3877b4318eb983d1630494a9fa3a75516a2a77bf05d488223"
+      },
+      {
+        "path": "data/malecns/stim_protocol_malecns_split.json",
+        "bytes": 7821,
+        "sha256": "f669963f1babb177df66f03d77427d4ed6541d21d9265dfcb653ffd631821a34"
+      },
+      {
+        "path": "sim/malecns/brain_phase0.py",
+        "bytes": 9534,
+        "sha256": "a8dcd7cdc25408d4a993a6e571ba8d400ffa7ad129183040a428c00fb3d5f8ad"
+      },
+      {
+        "path": "sim/malecns/brain_substrate.py",
+        "bytes": 6966,
+        "sha256": "bdba57cb5ac558aebfae59fd0e5a57e32d8daa3b56cc069ed341a3d06f0e696b"
+      },
+      {
+        "path": "data/malecns/substrate_record_brain.json",
+        "bytes": 5689,
+        "sha256": "0420688e48b7dc706c1b72621b427ac3d0ee3017b07daa38c8c875bf103b5b66"
+      },
+      {
+        "path": "data/malecns/stim_protocol_malecns_brain_unscaled.json",
+        "bytes": 7706,
+        "sha256": "b00128bd9a35c04e0c92bc0d97a70a472a1c2f0f0299fffd0e54ae1e6ff7386b"
+      },
+      {
+        "path": "data/malecns/stim_protocol_malecns_brain_density.json",
+        "bytes": 7755,
+        "sha256": "fdab4ced152530dc4da3d78f8d76353c59f23223794b8a3ceb303e88067a5ade"
+      }
+    ],
+    "memory": {
+      "workers": 8,
+      "wsl_available_gib": 60.50641632080078,
+      "host_free_gib": 80.44532012939453,
+      "limiting_available_gib": 60.50641632080078,
+      "reserve_gib": 15.126604080200195,
+      "worker_budget_gib": 5.4,
+      "cpus": 32,
+      "rule": "min(16 conditions, logical_cpus//2, floor((min(WSL available, host free)-max(8GiB,25%))/ceil(1.5*M1 peak to 0.1GiB)))",
+      "measured_m1_peak_gib": 3.5776214599609375
+    },
+    "python": "3.10.21 | packaged by conda-forge | (main, Aug 21 2026, 22:42:31) [GCC 14.4.0]",
+    "brian2": "2.9.0",
+    "codegen": "cython",
+    "completed_utc": "2026-09-14T18:45:57.391006+00:00",
+    "walltime_s": 812.107862994,
+    "total_trials": 480,
+    "peak_worker_rss_gib": 3.0889358520507812,
+    "weight_logs": [
+      {
+        "path": "data/malecns/runs/m1f/unscaled/worker_842_weights.json",
+        "bytes": 478,
+        "sha256": "7dfc0de459ab9499a8baaadcb3f14b32276daca6c348f26c0049ab51caad798a"
+      },
+      {
+        "path": "data/malecns/runs/m1f/unscaled/worker_845_weights.json",
+        "bytes": 478,
+        "sha256": "d94cf494d0f28f59d63abbacec8fda55e13ab079302848e352dfa2242923f7c1"
+      },
+      {
+        "path": "data/malecns/runs/m1f/unscaled/worker_846_weights.json",
+        "bytes": 478,
+        "sha256": "cb8793293db09694cdc30fc5d83b08fd9ab6e43086081fc1a190ba583752417a"
+      },
+      {
+        "path": "data/malecns/runs/m1f/unscaled/worker_847_weights.json",
+        "bytes": 478,
+        "sha256": "63019de17281202deea291ea546b03b503ea6c49b4681bdac48cecce71ff8ad9"
+      },
+      {
+        "path": "data/malecns/runs/m1f/unscaled/worker_848_weights.json",
+        "bytes": 478,
+        "sha256": "96e9c532480bf37d530f871fe1904357b3e2c72ea519153889a85714912726a8"
+      },
+      {
+        "path": "data/malecns/runs/m1f/unscaled/worker_849_weights.json",
+        "bytes": 478,
+        "sha256": "429a0324f3996dea2db8e1bad5015069cb4290f0279f84a084f4428a8b69b0a4"
+      },
+      {
+        "path": "data/malecns/runs/m1f/unscaled/worker_850_weights.json",
+        "bytes": 478,
+        "sha256": "da02bd94a9662a3750079fc7043ed083b0ddbfaed59233736799471ec2402c1a"
+      },
+      {
+        "path": "data/malecns/runs/m1f/unscaled/worker_851_weights.json",
+        "bytes": 478,
+        "sha256": "3e47c2d224b1b77664196234d8e6472fa8c2cda82e43c0f8f880ae8688f7d12d"
+      }
+    ]
+  },
+  "raw_ledger": {
+    "path": "data/malecns/runs/m1f/unscaled/full_results.json",
+    "bytes": 1026018,
+    "sha256": "f8f02f8c15484c8bf81865aefe3391e7c6775f95820365ec05d40df544ce09f8"
+  }
+}

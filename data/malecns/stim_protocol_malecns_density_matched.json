@@ -1,0 +1,287 @@
+{
+  "protocol_version": "malecns-m1h-density-matched-1.0",
+  "data_version": "male-cns:v1.0-brain-density-matched-1",
+  "connectivity_file": "data/malecns/derived/density_matched/connectivity.parquet",
+  "completeness_file": "data/malecns/derived/density_matched/completeness.csv",
+  "model": {
+    "source": "vendor/fly-brain/code/paper-phil-drosophila/model.py (MIT, Shiu et al. 2024)",
+    "v_0_mV": -52,
+    "v_rst_mV": -52,
+    "v_th_mV": -45,
+    "t_mbr_ms": 20,
+    "tau_ms": 5,
+    "t_rfc_ms": 2.2,
+    "t_dly_ms": 1.8,
+    "w_syn_mV": 0.275,
+    "f_poi": 250,
+    "integration": "linear",
+    "dt_ms": 0.1
+  },
+  "trial": {
+    "duration_ms": 1000,
+    "n_trials": 30,
+    "sanity_n_trials": 5,
+    "seed_rule": "trial i uses seed base_seed+i; base_seed=20260910"
+  },
+  "stimulus": {
+    "type": "PoissonInput per GRN, N=1, weight=w_syn*f_poi, refractory of stimulated GRNs set to 0",
+    "channels": {
+      "sugar": {
+        "cell_set": "sugar",
+        "count": 17
+      },
+      "bitter": {
+        "cell_set": "bitter",
+        "count": 38
+      },
+      "water": {
+        "cell_set": "water",
+        "count": 17,
+        "phase": "1"
+      },
+      "ir94e": {
+        "cell_set": "ir94e",
+        "count": 19,
+        "phase": "1"
+      }
+    }
+  },
+  "readout": {
+    "neuron": "MN9",
+    "primary": 10331,
+    "secondary": 16949,
+    "primary_xlsx_side": "L",
+    "secondary_xlsx_side": "R",
+    "aggregation": "primary_only",
+    "aggregation_rationale": "Post-M1c completeness decision: L10331 primary, R16949 secondary; both recorded.",
+    "rate_definition": "spikes in [0, duration] / duration, mean over trials; also report std over trials"
+  },
+  "phase0_conditions": {
+    "A_sugar_dose": {
+      "sugar_hz": [
+        25,
+        50,
+        100,
+        200
+      ],
+      "bitter_hz": 0
+    },
+    "B_bitter_suppression": {
+      "sugar_hz": 200,
+      "bitter_hz": [
+        0,
+        25,
+        50,
+        100,
+        200
+      ]
+    },
+    "C_bitter_alone": {
+      "sugar_hz": 0,
+      "bitter_hz": [
+        25,
+        50,
+        100,
+        200
+      ]
+    },
+    "D_baseline": {
+      "sugar_hz": 0,
+      "bitter_hz": 0
+    },
+    "A_prime_sugar_lb3c": {
+      "reference_cell_set": "sugar",
+      "cell_set": "sugar_lb3c",
+      "sugar_hz": [
+        120
+      ],
+      "bitter_hz": 0,
+      "trials_each": 30,
+      "paired_seeds": true,
+      "note": "Two fresh 120 Hz conditions; neither is in the A-D 420 trials. Not executed at M0."
+    }
+  },
+  "phase1_characterization": {
+    "sugar_hz": [
+      0,
+      20,
+      40,
+      60,
+      80,
+      100,
+      120,
+      140,
+      160,
+      180,
+      200
+    ],
+    "bitter_hz": [
+      0,
+      20,
+      40,
+      60,
+      80,
+      100,
+      120,
+      140,
+      160,
+      180,
+      200
+    ],
+    "water_hz": [
+      0,
+      20,
+      40,
+      60,
+      80,
+      100,
+      120,
+      140,
+      160,
+      180,
+      200,
+      220,
+      240,
+      260
+    ],
+    "ir94e_hz": [
+      0,
+      20,
+      40,
+      60,
+      80,
+      100,
+      120,
+      140,
+      160,
+      180,
+      200
+    ],
+    "pairs": [
+      "sugar_x_bitter",
+      "sugar_x_water",
+      "sugar_x_ir94e"
+    ]
+  },
+  "notes": [
+    "Paper calibrated w_syn on FlyWire v630; we run v783 only, absolute Hz may differ.",
+    "Model baseline firing is 0 Hz by construction (no intrinsic activity); condition D measures it anyway."
+  ],
+  "male_provenance": {
+    "reference_protocol": "data/stim_protocol.json",
+    "reference_protocol_sha256": "9f9495033281bfcd6f3b373551817987deb2cc083ae94ab61fece9065102d82a",
+    "substrate_record": "data/malecns/substrate_record.json",
+    "cells_file": "data/malecns/cells.json",
+    "model_parameters": "Inherited byte-for-value unchanged, including model.source attribution.",
+    "adapter": "sim/malecns/adapter.py",
+    "rederived_fields": [
+      "protocol_version",
+      "data_version",
+      "connectivity_file",
+      "completeness_file",
+      "stimulus.channels.*.count",
+      "readout identifiers/side aliases/aggregation/rationale",
+      "phase0_conditions.A_prime_sugar_bench21 -> A_prime_sugar_lb3c"
+    ],
+    "unchanged_fields": [
+      "model",
+      "trial",
+      "stimulus.type",
+      "stimulus.channels.*.cell_set",
+      "stimulus.channels.water.phase",
+      "stimulus.channels.ir94e.phase",
+      "readout.neuron",
+      "readout.rate_definition",
+      "phase0_conditions.A-D",
+      "phase1_characterization",
+      "notes"
+    ],
+    "seed_scheme": {
+      "base_seed": 20260910,
+      "formula": "20260910 + trial_index",
+      "same_seeds_across_conditions": true,
+      "trial_index_base": 0
+    },
+    "stimulation_layout": {
+      "channel_order": [
+        "sugar",
+        "bitter",
+        "water",
+        "ir94e"
+      ],
+      "within_channel_order": "ascending numeric Body_ID",
+      "poisson_units": 91
+    },
+    "scope": "Whole CNS; M0 only baseline and sugar200 five-trial benchmarks. M1/M2 require checkpoints.",
+    "calibration": "Transfer is a model assumption, not male behavioural calibration."
+  },
+  "density_matched_provenance": {
+    "substrate": {
+      "path": "data/malecns/substrate_record_density_matched.json",
+      "bytes": 60208,
+      "sha256": "fd3a9b7d9c48dc430abbbce74e50342983fce5dd6314015cd840b9c79029a89e"
+    },
+    "c_star": 0.8690000176429749,
+    "density_ratio": 1.000466143514354,
+    "rationale": "Density, not gates, selected the graph cutoff. Female-calibrated recurrent0.275 mV; no weight search.",
+    "w_syn_rec_mV": 0.275,
+    "external_kick_mV": 68.75,
+    "shape_gate": {
+      "side": "L10331",
+      "sugar_hz": [
+        25,
+        50,
+        100,
+        120,
+        200
+      ],
+      "other_inputs_hz": 0,
+      "n": 30,
+      "seeds": [
+        20260910,
+        20260911,
+        20260912,
+        20260913,
+        20260914,
+        20260915,
+        20260916,
+        20260917,
+        20260918,
+        20260919,
+        20260920,
+        20260921,
+        20260922,
+        20260923,
+        20260924,
+        20260925,
+        20260926,
+        20260927,
+        20260928,
+        20260929,
+        20260930,
+        20260931,
+        20260932,
+        20260933,
+        20260934,
+        20260935,
+        20260936,
+        20260937,
+        20260938,
+        20260939
+      ],
+      "S1": "At least four of five mean MN9 rates > 0 Hz.",
+      "S2": "Every adjacent decrease <= sqrt((population_SD_before^2 + population_SD_after^2)/2).",
+      "S3": "Sugar200 whole-network spike max/min < 3; zero minimum fails (undefined or infinite ratio).",
+      "reuse": "A provides 25/50/100/200; AP_sugar_120 provides 120. No added S runs."
+    },
+    "pass_rule": "Historical A-D and S1-S3 all pass on L10331; R16949 recorded, not deciding.",
+    "scope": "One candidate,420 A-D plus60 AP,480 trials. M1 seeds. No subsequent variant pending external replies.",
+    "outgoing_audit": {
+      "path": "data/malecns/m1h_output_retention.json",
+      "bytes": 27138,
+      "sha256": "68cf0b466a3bb637028ed99ebe958fc7351fcaf45df8648e6492bd63844a8d48"
+    },
+    "flag_decision": "2026-09-14 after audit, before simulation: owner proceeds despite all four sets below50%; crossed flag remains.",
+    "changes": "Only substrate changes versus M1f unscaled; all dynamics, stimulus layout, seeds and refractory rules unchanged."
+  }
+}

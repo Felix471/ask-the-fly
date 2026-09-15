@@ -1,0 +1,262 @@
+{
+  "stage": "M1c additions, no simulation",
+  "female_activity": [
+    {
+      "male_condition": "A_s25_b0",
+      "requested_rates_hz": [
+        25,
+        0,
+        0,
+        0
+      ],
+      "female_cell": null,
+      "n_trials": 0,
+      "status": "unavailable: 25 Hz is not a frozen female grid level",
+      "network_spikes": null,
+      "neurons_fired": null
+    },
+    {
+      "male_condition": "A_s200_b0",
+      "requested_rates_hz": [
+        200,
+        0,
+        0,
+        0
+      ],
+      "female_cell": "G_svery_high_bnone_wnone_inone",
+      "n_trials": 1,
+      "status": "saved full-network replay, n=1, not paired with male seeds",
+      "network_spikes": 17150,
+      "neurons_fired": 402,
+      "seed": 20961230,
+      "condition_index": 320,
+      "source": {
+        "path": "results/replay/G_svery_high_bnone_wnone_inone.npz",
+        "bytes": 57579,
+        "sha256": "ccb327d70177ed45a74374b20dd67cd11484702662bc2b236a1b252c829514a0"
+      }
+    },
+    {
+      "male_condition": "B_s200_b100",
+      "requested_rates_hz": [
+        200,
+        100,
+        0,
+        0
+      ],
+      "female_cell": "G_svery_high_bhigh_wnone_inone",
+      "n_trials": 1,
+      "status": "saved full-network replay, n=1, not paired with male seeds",
+      "network_spikes": 18219,
+      "neurons_fired": 401,
+      "seed": 20961278,
+      "condition_index": 368,
+      "source": {
+        "path": "results/replay/G_svery_high_bhigh_wnone_inone.npz",
+        "bytes": 60064,
+        "sha256": "b2a38177b235ec95544bdafc0d8ab3cea543c288fd167590e6c0c38fcc2278b4"
+      }
+    },
+    {
+      "male_condition": "C_s0_b25",
+      "requested_rates_hz": [
+        0,
+        25,
+        0,
+        0
+      ],
+      "female_cell": null,
+      "n_trials": 0,
+      "status": "unavailable: 25 Hz is not a frozen female grid level",
+      "network_spikes": null,
+      "neurons_fired": null
+    },
+    {
+      "male_condition": "D_s0_b0",
+      "requested_rates_hz": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "female_cell": "G_snone_bnone_wnone_inone",
+      "n_trials": 1,
+      "status": "saved full-network replay, n=1, not paired with male seeds",
+      "network_spikes": 0,
+      "neurons_fired": 0,
+      "seed": 20960910,
+      "condition_index": 0,
+      "source": {
+        "path": "results/replay/G_snone_bnone_wnone_inone.npz",
+        "bytes": 1164,
+        "sha256": "6ac541f1abe000aba099b0b6de770baa08e0b370bb2792819f7f69f83e055d20"
+      }
+    }
+  ],
+  "mn9_status": [
+    {
+      "body_id": 16949,
+      "xlsx_row": 66,
+      "xlsx_side": "R",
+      "live": {
+        "bodyId": 16949,
+        "type": "MN9",
+        "instance": "MN9_R",
+        "somaSide": "R",
+        "status": "Traced",
+        "statusLabel": "RT Hard to trace",
+        "cropped": null,
+        "pre": 244,
+        "post": 633,
+        "size": 1888624644,
+        "statusConfidence": null,
+        "tracingCompleteness": null,
+        "matchingNotes": null,
+        "dimorphism": null,
+        "rootSide": null,
+        "somaNeuromere": null,
+        "exitNerve": "PhN",
+        "group": 10331
+      },
+      "live_property_keys": [
+        "CentralBrain",
+        "CentralBrain-unspecified",
+        "GNG",
+        "bodyId",
+        "celltypePredictedNt",
+        "celltypePredictedNtConfidence",
+        "celltypeTotalNtPredictions",
+        "consensusNt",
+        "downstream",
+        "exitNerve",
+        "flywireType",
+        "group",
+        "instance",
+        "itoleeHl",
+        "post",
+        "pre",
+        "predictedNt",
+        "predictedNtConfidence",
+        "roiInfo",
+        "size",
+        "somaLocation",
+        "somaSide",
+        "status",
+        "statusLabel",
+        "subclass",
+        "superclass",
+        "synweight",
+        "totalNtPredictions",
+        "type",
+        "upstream",
+        "vfbId"
+      ],
+      "release_status": "Traced",
+      "release_statusLabel": "RT Hard to trace",
+      "missing_metadata_policy": "Absent/cropped null is unknown, not proof of complete tracing; no numerical tracing completeness available in these fields."
+    },
+    {
+      "body_id": 10331,
+      "xlsx_row": 67,
+      "xlsx_side": "L",
+      "live": {
+        "bodyId": 10331,
+        "type": "MN9",
+        "instance": "MN9_L",
+        "somaSide": "L",
+        "status": "Traced",
+        "statusLabel": "Roughly traced",
+        "cropped": null,
+        "pre": 172,
+        "post": 6358,
+        "size": 4345588050,
+        "statusConfidence": null,
+        "tracingCompleteness": null,
+        "matchingNotes": null,
+        "dimorphism": null,
+        "rootSide": null,
+        "somaNeuromere": null,
+        "exitNerve": "PhN",
+        "group": 10331
+      },
+      "live_property_keys": [
+        "CentralBrain",
+        "CentralBrain-unspecified",
+        "GNG",
+        "bodyId",
+        "celltypePredictedNt",
+        "celltypePredictedNtConfidence",
+        "celltypeTotalNtPredictions",
+        "consensusNt",
+        "downstream",
+        "exitNerve",
+        "flywireType",
+        "group",
+        "instance",
+        "itoleeHl",
+        "post",
+        "pre",
+        "predictedNt",
+        "predictedNtConfidence",
+        "roiInfo",
+        "size",
+        "somaLocation",
+        "somaSide",
+        "status",
+        "statusLabel",
+        "subclass",
+        "superclass",
+        "synweight",
+        "totalNtPredictions",
+        "type",
+        "upstream",
+        "vfbId"
+      ],
+      "release_status": "Traced",
+      "release_statusLabel": "Roughly traced",
+      "missing_metadata_policy": "Absent/cropped null is unknown, not proof of complete tracing; no numerical tracing completeness available in these fields."
+    }
+  ],
+  "all_release_mn9_ids": [
+    10331,
+    16949
+  ],
+  "all_live_mn9_ids": [
+    10331,
+    16949
+  ],
+  "all_workbook_mn9_ids": [
+    16949,
+    10331
+  ],
+  "workbook_sheet": "MNs",
+  "workbook_range": "A66:G67",
+  "sources": [
+    {
+      "path": "docs/papers/Tastekin_2025_bioRxiv_v2_SupplTable2_GRN_MN_body_IDs.xlsx",
+      "bytes": 186967,
+      "sha256": "7b28d5f3ae45d68c510b8a3616700f0df2a5a6f2e2d2dba490d172939f2b64c9"
+    },
+    {
+      "path": "data/malecns/downloads/body-annotations-male-cns-v1.0-minconf-0.5.feather",
+      "bytes": 14483314,
+      "sha256": "2177e246113e4cfbf1e7772ec37c6da1955ff22e8063d0b1f833101f99a9a3b2"
+    },
+    {
+      "path": "data/malecns/runs/m1c_preflight/neuprint.json",
+      "bytes": 4123,
+      "sha256": "4ec63c1ce94be541876e20856e1453ea883be1d4f0ee8498c05b2d76ea05608a"
+    },
+    {
+      "path": "data/grid_levels.json",
+      "bytes": 1997,
+      "sha256": "33a1dab4a03a440298d12c7ba2365e88457268b4ee3a220f15981b2702350780"
+    },
+    {
+      "path": "results/replay/run_meta.json",
+      "bytes": 679,
+      "sha256": "3631afbc14b3588662cd40147312165b801738f992925fbb850e0114c13f4185"
+    }
+  ],
+  "interpretation": "R16949 hard-to-trace status and 556 vs 6012 proofread-substrate input synapses make reconstruction incompleteness a likely cause of laterality reversal; hypothesis, not established, pending bilateral M1c. No substitute MN9 identified."
+}

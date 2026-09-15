@@ -1,0 +1,498 @@
+{
+  "schema_version": "pharyngeal_screen_p2_v1",
+  "base_protocol": "data/stim_protocol.json",
+  "base_protocol_sha256": "9f9495033281bfcd6f3b373551817987deb2cc083ae94ab61fece9065102d82a",
+  "p1_protocol": "data/stim_protocol_pharyngeal.json",
+  "p1_protocol_sha256": "71a40572a12aa9600afb7f63ef18e9c1535adeef6c69786ce81370478475b90a",
+  "source": "All neuron IDs, source workbook fields, fixed cell sets, and model parameters are inherited from the hash-verified P1 referencing protocol. This new research protocol does not alter frozen data or published numbers.",
+  "channels": [
+    "sugar",
+    "bitter",
+    "water",
+    "ir94e",
+    "PhG1",
+    "PhG2",
+    "PhG3",
+    "PhG4",
+    "PhG5",
+    "PhG6",
+    "PhG7",
+    "PhG8",
+    "PhG9",
+    "PhG10",
+    "PhG11",
+    "PhG12",
+    "PhG13",
+    "PhG14",
+    "PhG15",
+    "PhG16"
+  ],
+  "n_poisson_units": 151,
+  "trial": {
+    "n_trials": 30,
+    "base_seed": 20260910,
+    "seed_scheme": "published_grid_v1_batch40",
+    "seed_rule": "20260910 + 1000 * (seed_index % 40) + trial; trial=0..29. Dose conditions use indices 0..9. All three paired conditions use seed_index=10.",
+    "seed_source": "Published grid formula applied to explicit new P2 condition indices, not original lookup-grid or replay trials."
+  },
+  "conditions": [
+    {
+      "cond_id": "P2_PhG1_0",
+      "condition_index": 0,
+      "seed_index": 0,
+      "phase": "PhG1_dose",
+      "rates": {
+        "sugar": 0,
+        "bitter": 0,
+        "water": 0,
+        "ir94e": 0,
+        "PhG1": 0,
+        "PhG2": 0,
+        "PhG3": 0,
+        "PhG4": 0,
+        "PhG5": 0,
+        "PhG6": 0,
+        "PhG7": 0,
+        "PhG8": 0,
+        "PhG9": 0,
+        "PhG10": 0,
+        "PhG11": 0,
+        "PhG12": 0,
+        "PhG13": 0,
+        "PhG14": 0,
+        "PhG15": 0,
+        "PhG16": 0
+      },
+      "monitored_types": [
+        "PhG1"
+      ],
+      "driven_types": [],
+      "monitor_sugar": false
+    },
+    {
+      "cond_id": "P2_PhG1_60",
+      "condition_index": 1,
+      "seed_index": 1,
+      "phase": "PhG1_dose",
+      "rates": {
+        "sugar": 0,
+        "bitter": 0,
+        "water": 0,
+        "ir94e": 0,
+        "PhG1": 60,
+        "PhG2": 0,
+        "PhG3": 0,
+        "PhG4": 0,
+        "PhG5": 0,
+        "PhG6": 0,
+        "PhG7": 0,
+        "PhG8": 0,
+        "PhG9": 0,
+        "PhG10": 0,
+        "PhG11": 0,
+        "PhG12": 0,
+        "PhG13": 0,
+        "PhG14": 0,
+        "PhG15": 0,
+        "PhG16": 0
+      },
+      "monitored_types": [
+        "PhG1"
+      ],
+      "driven_types": [
+        "PhG1"
+      ],
+      "monitor_sugar": false
+    },
+    {
+      "cond_id": "P2_PhG1_80",
+      "condition_index": 2,
+      "seed_index": 2,
+      "phase": "PhG1_dose",
+      "rates": {
+        "sugar": 0,
+        "bitter": 0,
+        "water": 0,
+        "ir94e": 0,
+        "PhG1": 80,
+        "PhG2": 0,
+        "PhG3": 0,
+        "PhG4": 0,
+        "PhG5": 0,
+        "PhG6": 0,
+        "PhG7": 0,
+        "PhG8": 0,
+        "PhG9": 0,
+        "PhG10": 0,
+        "PhG11": 0,
+        "PhG12": 0,
+        "PhG13": 0,
+        "PhG14": 0,
+        "PhG15": 0,
+        "PhG16": 0
+      },
+      "monitored_types": [
+        "PhG1"
+      ],
+      "driven_types": [
+        "PhG1"
+      ],
+      "monitor_sugar": false
+    },
+    {
+      "cond_id": "P2_PhG1_120",
+      "condition_index": 3,
+      "seed_index": 3,
+      "phase": "PhG1_dose",
+      "rates": {
+        "sugar": 0,
+        "bitter": 0,
+        "water": 0,
+        "ir94e": 0,
+        "PhG1": 120,
+        "PhG2": 0,
+        "PhG3": 0,
+        "PhG4": 0,
+        "PhG5": 0,
+        "PhG6": 0,
+        "PhG7": 0,
+        "PhG8": 0,
+        "PhG9": 0,
+        "PhG10": 0,
+        "PhG11": 0,
+        "PhG12": 0,
+        "PhG13": 0,
+        "PhG14": 0,
+        "PhG15": 0,
+        "PhG16": 0
+      },
+      "monitored_types": [
+        "PhG1"
+      ],
+      "driven_types": [
+        "PhG1"
+      ],
+      "monitor_sugar": false
+    },
+    {
+      "cond_id": "P2_PhG1_200",
+      "condition_index": 4,
+      "seed_index": 4,
+      "phase": "PhG1_dose",
+      "rates": {
+        "sugar": 0,
+        "bitter": 0,
+        "water": 0,
+        "ir94e": 0,
+        "PhG1": 200,
+        "PhG2": 0,
+        "PhG3": 0,
+        "PhG4": 0,
+        "PhG5": 0,
+        "PhG6": 0,
+        "PhG7": 0,
+        "PhG8": 0,
+        "PhG9": 0,
+        "PhG10": 0,
+        "PhG11": 0,
+        "PhG12": 0,
+        "PhG13": 0,
+        "PhG14": 0,
+        "PhG15": 0,
+        "PhG16": 0
+      },
+      "monitored_types": [
+        "PhG1"
+      ],
+      "driven_types": [
+        "PhG1"
+      ],
+      "monitor_sugar": false
+    },
+    {
+      "cond_id": "P2_PhG4_0",
+      "condition_index": 5,
+      "seed_index": 5,
+      "phase": "PhG4_dose",
+      "rates": {
+        "sugar": 0,
+        "bitter": 0,
+        "water": 0,
+        "ir94e": 0,
+        "PhG1": 0,
+        "PhG2": 0,
+        "PhG3": 0,
+        "PhG4": 0,
+        "PhG5": 0,
+        "PhG6": 0,
+        "PhG7": 0,
+        "PhG8": 0,
+        "PhG9": 0,
+        "PhG10": 0,
+        "PhG11": 0,
+        "PhG12": 0,
+        "PhG13": 0,
+        "PhG14": 0,
+        "PhG15": 0,
+        "PhG16": 0
+      },
+      "monitored_types": [
+        "PhG4"
+      ],
+      "driven_types": [],
+      "monitor_sugar": false
+    },
+    {
+      "cond_id": "P2_PhG4_60",
+      "condition_index": 6,
+      "seed_index": 6,
+      "phase": "PhG4_dose",
+      "rates": {
+        "sugar": 0,
+        "bitter": 0,
+        "water": 0,
+        "ir94e": 0,
+        "PhG1": 0,
+        "PhG2": 0,
+        "PhG3": 0,
+        "PhG4": 60,
+        "PhG5": 0,
+        "PhG6": 0,
+        "PhG7": 0,
+        "PhG8": 0,
+        "PhG9": 0,
+        "PhG10": 0,
+        "PhG11": 0,
+        "PhG12": 0,
+        "PhG13": 0,
+        "PhG14": 0,
+        "PhG15": 0,
+        "PhG16": 0
+      },
+      "monitored_types": [
+        "PhG4"
+      ],
+      "driven_types": [
+        "PhG4"
+      ],
+      "monitor_sugar": false
+    },
+    {
+      "cond_id": "P2_PhG4_80",
+      "condition_index": 7,
+      "seed_index": 7,
+      "phase": "PhG4_dose",
+      "rates": {
+        "sugar": 0,
+        "bitter": 0,
+        "water": 0,
+        "ir94e": 0,
+        "PhG1": 0,
+        "PhG2": 0,
+        "PhG3": 0,
+        "PhG4": 80,
+        "PhG5": 0,
+        "PhG6": 0,
+        "PhG7": 0,
+        "PhG8": 0,
+        "PhG9": 0,
+        "PhG10": 0,
+        "PhG11": 0,
+        "PhG12": 0,
+        "PhG13": 0,
+        "PhG14": 0,
+        "PhG15": 0,
+        "PhG16": 0
+      },
+      "monitored_types": [
+        "PhG4"
+      ],
+      "driven_types": [
+        "PhG4"
+      ],
+      "monitor_sugar": false
+    },
+    {
+      "cond_id": "P2_PhG4_120",
+      "condition_index": 8,
+      "seed_index": 8,
+      "phase": "PhG4_dose",
+      "rates": {
+        "sugar": 0,
+        "bitter": 0,
+        "water": 0,
+        "ir94e": 0,
+        "PhG1": 0,
+        "PhG2": 0,
+        "PhG3": 0,
+        "PhG4": 120,
+        "PhG5": 0,
+        "PhG6": 0,
+        "PhG7": 0,
+        "PhG8": 0,
+        "PhG9": 0,
+        "PhG10": 0,
+        "PhG11": 0,
+        "PhG12": 0,
+        "PhG13": 0,
+        "PhG14": 0,
+        "PhG15": 0,
+        "PhG16": 0
+      },
+      "monitored_types": [
+        "PhG4"
+      ],
+      "driven_types": [
+        "PhG4"
+      ],
+      "monitor_sugar": false
+    },
+    {
+      "cond_id": "P2_PhG4_200",
+      "condition_index": 9,
+      "seed_index": 9,
+      "phase": "PhG4_dose",
+      "rates": {
+        "sugar": 0,
+        "bitter": 0,
+        "water": 0,
+        "ir94e": 0,
+        "PhG1": 0,
+        "PhG2": 0,
+        "PhG3": 0,
+        "PhG4": 200,
+        "PhG5": 0,
+        "PhG6": 0,
+        "PhG7": 0,
+        "PhG8": 0,
+        "PhG9": 0,
+        "PhG10": 0,
+        "PhG11": 0,
+        "PhG12": 0,
+        "PhG13": 0,
+        "PhG14": 0,
+        "PhG15": 0,
+        "PhG16": 0
+      },
+      "monitored_types": [
+        "PhG4"
+      ],
+      "driven_types": [
+        "PhG4"
+      ],
+      "monitor_sugar": false
+    },
+    {
+      "cond_id": "P2_pair_a_sugar",
+      "condition_index": 10,
+      "seed_index": 10,
+      "phase": "paired",
+      "rates": {
+        "sugar": 120,
+        "bitter": 0,
+        "water": 0,
+        "ir94e": 0,
+        "PhG1": 0,
+        "PhG2": 0,
+        "PhG3": 0,
+        "PhG4": 0,
+        "PhG5": 0,
+        "PhG6": 0,
+        "PhG7": 0,
+        "PhG8": 0,
+        "PhG9": 0,
+        "PhG10": 0,
+        "PhG11": 0,
+        "PhG12": 0,
+        "PhG13": 0,
+        "PhG14": 0,
+        "PhG15": 0,
+        "PhG16": 0
+      },
+      "monitored_types": [
+        "PhG1"
+      ],
+      "driven_types": [],
+      "monitor_sugar": true
+    },
+    {
+      "cond_id": "P2_pair_b_PhG1",
+      "condition_index": 11,
+      "seed_index": 10,
+      "phase": "paired",
+      "rates": {
+        "sugar": 0,
+        "bitter": 0,
+        "water": 0,
+        "ir94e": 0,
+        "PhG1": 100,
+        "PhG2": 0,
+        "PhG3": 0,
+        "PhG4": 0,
+        "PhG5": 0,
+        "PhG6": 0,
+        "PhG7": 0,
+        "PhG8": 0,
+        "PhG9": 0,
+        "PhG10": 0,
+        "PhG11": 0,
+        "PhG12": 0,
+        "PhG13": 0,
+        "PhG14": 0,
+        "PhG15": 0,
+        "PhG16": 0
+      },
+      "monitored_types": [
+        "PhG1"
+      ],
+      "driven_types": [
+        "PhG1"
+      ],
+      "monitor_sugar": true
+    },
+    {
+      "cond_id": "P2_pair_c_both",
+      "condition_index": 12,
+      "seed_index": 10,
+      "phase": "paired",
+      "rates": {
+        "sugar": 120,
+        "bitter": 0,
+        "water": 0,
+        "ir94e": 0,
+        "PhG1": 100,
+        "PhG2": 0,
+        "PhG3": 0,
+        "PhG4": 0,
+        "PhG5": 0,
+        "PhG6": 0,
+        "PhG7": 0,
+        "PhG8": 0,
+        "PhG9": 0,
+        "PhG10": 0,
+        "PhG11": 0,
+        "PhG12": 0,
+        "PhG13": 0,
+        "PhG14": 0,
+        "PhG15": 0,
+        "PhG16": 0
+      },
+      "monitored_types": [
+        "PhG1"
+      ],
+      "driven_types": [
+        "PhG1"
+      ],
+      "monitor_sugar": true
+    }
+  ],
+  "analysis": {
+    "rate": "Spike count / full 1 s trial. Per-neuron outputs plus group means including silent members. MN9 L/R separately, MN11D/V two-cell means, all six CEM individually and six-cell mean.",
+    "std": "Population SD across 30 per-trial observations (ddof=0).",
+    "latency": "Median first-spike latency among active trials, always with active-trial count. Group first spike is the earliest member spike.",
+    "sanity": "Monitor selected curve cells even at zero drive. Monitor the same 8 PhG1 and 23 sugar cells in all paired conditions, reporting monitored and actually driven groups separately. Record their Poisson input events to verify exact paired shared-active-channel source spike equality.",
+    "ratio": "Mean and population SD of trial-wise c/a. If any a is zero, overall ratio mean and SD are undefined; report defined count and retain each trial value.",
+    "additivity": "Compute paired delta=c-a-b per trial, then mean and population SD and positive/zero/negative trial counts. Mean delta >0, =0, <0 is described as superadditive, equal, or falls short, without an inferential claim."
+  },
+  "results": "results/pharyngeal/p2/ (local/gitignored; no results enter the lookup table)"
+}

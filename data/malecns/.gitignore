@@ -1,0 +1,5 @@
+# Source downloads and generated large graph/index artifacts stay local.
+/downloads/
+/derived/
+/runs/
+*.partial

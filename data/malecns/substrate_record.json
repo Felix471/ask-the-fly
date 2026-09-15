@@ -1,0 +1,187 @@
+{
+  "schema_version": 1,
+  "substrate_version": "male-cns-v1.0-shiu-signs-1",
+  "built_utc": "2026-09-14T05:54:40.226727+00:00",
+  "scope": "whole CNS",
+  "licence": {
+    "data": "CC BY 4.0",
+    "url": "https://creativecommons.org/licenses/by/4.0/",
+    "attribution": "Berg et al. 2026 / MaleCNS collaboration",
+    "paper": "https://doi.org/10.1016/j.cell.2026.08.015",
+    "adaptation": "Proofread endpoint filtering; contiguous indices; model sign assignment."
+  },
+  "sources": {
+    "weights": {
+      "path": "data/malecns/downloads/connectome-weights-male-cns-v1.0-minconf-0.5.feather",
+      "bytes": 1051241946,
+      "sha256": "e35da783d1c686b2b58b3b87cd6a403ae43bfcfba8bff28e08ef752c1a56afc1",
+      "url": "https://storage.googleapis.com/flyem-male-cns/v1.0/connectome-data/flat-connectome/connectome-weights-male-cns-v1.0-minconf-0.5.feather"
+    },
+    "annotations": {
+      "path": "data/malecns/downloads/body-annotations-male-cns-v1.0-minconf-0.5.feather",
+      "bytes": 14483314,
+      "sha256": "2177e246113e4cfbf1e7772ec37c6da1955ff22e8063d0b1f833101f99a9a3b2",
+      "url": "https://storage.googleapis.com/flyem-male-cns/v1.0/connectome-data/flat-connectome/body-annotations-male-cns-v1.0-minconf-0.5.feather"
+    },
+    "neurotransmitters": {
+      "path": "data/malecns/downloads/body-neurotransmitters-male-cns-v1.0.feather",
+      "bytes": 43282834,
+      "sha256": "95c9289220663abeb3409f3ad9e5a7f8a53f8093f5139d15502cd08da8879621",
+      "url": "https://storage.googleapis.com/flyem-male-cns/v1.0/connectome-data/flat-connectome/body-neurotransmitters-male-cns-v1.0.feather"
+    },
+    "tastekin_table_s1": {
+      "path": "docs/papers/Tastekin_2025_bioRxiv_v2_SupplTable2_GRN_MN_body_IDs.xlsx",
+      "bytes": 186967,
+      "sha256": "7b28d5f3ae45d68c510b8a3616700f0df2a5a6f2e2d2dba490d172939f2b64c9",
+      "url": "https://doi.org/10.1016/j.cell.2026.08.016"
+    },
+    "female_reference_protocol": {
+      "path": "data/stim_protocol.json",
+      "bytes": 3484,
+      "sha256": "9f9495033281bfcd6f3b373551817987deb2cc083ae94ab61fece9065102d82a"
+    },
+    "shared_shiu_implementation": {
+      "path": "sim/network.py",
+      "bytes": 9535,
+      "sha256": "eee33ef855203a47e03920b56b4aba98551cc400ab22107ebb91edc385475ae7"
+    }
+  },
+  "builder": {
+    "path": "sim/malecns/substrate.py",
+    "bytes": 16531,
+    "sha256": "1b6c7bd7122f9ad8a3d43aa87365c5b147d55d66067abcc4e7dce6fdcc63cac6",
+    "initial_build_sha256": "4ff21d23705f945b3f8692ae859045d2facd579cebb46d31d0f4fdf62a088b11",
+    "pre_freeze_change": "Only SHA256 helper changed from Python 3.11 file_digest to equivalent chunked hashing for WSL Python 3.10. No graph, cell-set, protocol or artifact hash changed."
+  },
+  "artifacts": {
+    "neuron_index": {
+      "path": "data/malecns/derived/neuron_index.csv",
+      "bytes": 27521575,
+      "sha256": "a5727228e839339f8045f8a431f02b4900aed40109684fa7e6ed2f21a620cbe9"
+    },
+    "completeness": {
+      "path": "data/malecns/derived/completeness.csv",
+      "bytes": 1097049,
+      "sha256": "b023fed77421d5606fe156d0e9408765b1233180406d5e2ca331cf37c1b5c00f"
+    },
+    "signed_connectivity": {
+      "path": "data/malecns/derived/connectivity.parquet",
+      "bytes": 136299562,
+      "sha256": "b31ae9884cba41fedac392e4c80bada5c0c8a33efb9258b0e7308a1bbcbfa6f3"
+    },
+    "cells": {
+      "path": "data/malecns/cells.json",
+      "bytes": 20697,
+      "sha256": "f29dd1511e5484d70062cf44d448acfa63e8ef89b49ab7cc281108e5be234c99"
+    },
+    "protocol": {
+      "path": "data/malecns/stim_protocol_malecns.json",
+      "bytes": 5142,
+      "sha256": "88a36bb624b4c304759f5178826248b92a699fcb56751b894b347e21ce673173"
+    }
+  },
+  "roster_rule": "body annotations superclass is non-null; ascending numeric bodyId; retain isolated neurons; both edge endpoints must belong to this roster",
+  "edge_rule": "Release minconf-0.5 weights, every positive-count directed edge; no additional cutoff; source order retained; duplicate pairs rejected",
+  "sign_rule": {
+    "column": "consensus_nt (neuPrint consensusNt)",
+    "join": "bodyId = body",
+    "negative": [
+      "gaba",
+      "glutamate"
+    ],
+    "positive": "all other consensus labels",
+    "default_positive": [
+      "unclear",
+      "missing"
+    ],
+    "authority": "Owner decision; Tastekin GABA/glutamate negative, otherwise positive"
+  },
+  "counts": {
+    "neurons": 166700,
+    "raw_edges": 151856684,
+    "edges": 25582938,
+    "synapses": 124177617,
+    "positive_neurons": 115329,
+    "negative_neurons": 51371,
+    "default_positive_neurons": 3177,
+    "default_positive_with_outgoing_edges": 2927,
+    "unresolved_by_label": {
+      "unclear": {
+        "neurons": 2999,
+        "with_outgoing_edges": 2927
+      },
+      "missing": {
+        "neurons": 178,
+        "with_outgoing_edges": 0
+      }
+    },
+    "consensus_labels": {
+      "acetylcholine": 103720,
+      "glutamate": 29302,
+      "gaba": 22069,
+      "histamine": 7891,
+      "unclear": 2999,
+      "dopamine": 392,
+      "missing": 178,
+      "octopamine": 101,
+      "serotonin": 48
+    },
+    "neurons_with_outgoing_edges": 165480,
+    "neurons_with_any_edges": 166483,
+    "isolated_neurons": 217
+  },
+  "input_sign_audit": {
+    "sugar": {
+      "cells": 17,
+      "negative": 0,
+      "positive": 17,
+      "default_positive": 0,
+      "negative_ids": [],
+      "consensus_labels": {
+        "acetylcholine": 17
+      }
+    },
+    "bitter": {
+      "cells": 38,
+      "negative": 0,
+      "positive": 38,
+      "default_positive": 6,
+      "negative_ids": [],
+      "consensus_labels": {
+        "acetylcholine": 32,
+        "unclear": 6
+      }
+    },
+    "water": {
+      "cells": 17,
+      "negative": 0,
+      "positive": 17,
+      "default_positive": 0,
+      "negative_ids": [],
+      "consensus_labels": {
+        "acetylcholine": 17
+      }
+    },
+    "ir94e": {
+      "cells": 19,
+      "negative": 0,
+      "positive": 19,
+      "default_positive": 0,
+      "negative_ids": [],
+      "consensus_labels": {
+        "acetylcholine": 19
+      }
+    }
+  },
+  "readout": {
+    "neuron": "MN9",
+    "primary": 16949,
+    "secondary": 10331,
+    "primary_xlsx_side": "R",
+    "secondary_xlsx_side": "L",
+    "aggregation": "primary_only",
+    "aggregation_rationale": "Stimulate XLSX Root_Side L sugar, mirroring the female frozen set side. Read contralateral XLSX R MN9 (16949); also record XLSX L MN9 (10331). Shiu historical left/right aliases are not XLSX side labels.",
+    "rate_definition": "spikes in [0, duration] / duration, mean over trials; also report std over trials"
+  },
+  "female_comparison": "Female frozen LB3d: 27/29 positive despite Tastekin glutamatergic class. Male typed sugar is LB3b/LB3c, not LB3d; this is not a matched-class comparison."
+}

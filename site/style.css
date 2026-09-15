@@ -355,3 +355,9 @@ body { padding: 0 16px 32px; max-width: 640px; margin: 0 auto; }
 .sound { display: inline-flex; align-items: center; gap: 8px; margin-top: 10px; font-size: 0.9rem; }
 .silence-summary { flex-basis: 100%; color: var(--muted); font-size: 0.8rem; font-variant-numeric: tabular-nums; }
 
+/* v1.2: captions stay separate from plate labels; no visitor data is transmitted. */
+.fly-bubble { position:absolute; width:180px; box-sizing:border-box; padding:7px 10px; border:1px solid #b6a68f; border-radius:14px; background:#fffaf1; color:#302819; font:14px/1.4 system-ui; text-align:center; pointer-events:none; z-index:2; overflow-wrap:anywhere; }
+.response-detail { display:flex; gap:16px; align-items:center; margin:10px 0; }
+.response-detail[hidden] { display:none; }
+.response-detail canvas { width:96px; height:96px; image-rendering:pixelated; flex-shrink:0; }
+.results { display:block; overflow-x:auto; }

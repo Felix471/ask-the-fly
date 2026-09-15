@@ -3,9 +3,63 @@
 The front end in `site/` is a static page with no build step or LLM calls: `index.html`, `style.css`, the `app.js`, `brain.js` and `fly.js` ES modules, generated `strings.js`, and the vendored QR-code module. Its two scoring inputs in `site/data/` are:
 
 - `dishes.json` — the dish dictionary (copied from `data/dishes.json`); lookup is exact on the normalized key or a normalized alias, mirroring `encoder/normalize.py`.
-- `lookup_table.json` — the `lookup_v1` table (`levels` → cells with `hz`, `mn9_mean`, `mn9_std`). Cells are indexed by their Hz vector, mirroring `sim/lookup.py`, so water `low` and `medium` (both 60 Hz) resolve to the same cell.
+- `lookup_table_v1_2.json` — the additive table with unchanged MN9 fields plus MN9 right, MN11D/V means and SDs, and a designed state. Cells are indexed by their Hz vector, mirroring `sim/lookup.py`, so water `low` and `medium` (both 60 Hz) resolve to the same cell. The old table remains untouched.
 
 The page also reads dish sections, release metadata, neuron positions, named neurons, neuropil outlines, and the replay manifest and binary files from `site/data/`. The canonical URL comes from `site/config.json`; sprites, fonts, backgrounds and sprite-fallback mappings come from `site/assets/`.
+
+## v1.2 readouts and presentation
+
+Step 1 staged `data/lookup_table_v1_2.json` and the expanded baseline replay pack in
+`data/replay_v1_2/`. Step 2 copies them to additive paths under `site/data/` using
+`scripts/export_mn11_site.py`; baseline replay loading now uses `replay_v1_2/`.
+The original table and replay files remain unchanged. The state rule,
+also recorded in the new table header, is an owner-designed interpretation of model
+rates, not a new model output or a behavioural calibration:
+
+| Left MN9 mean | MN11D mean | Internal state |
+|---|---|---|
+| Active | Active | `eats` |
+| Silent | Active | `mouth_moves` |
+| Active | Silent | `proboscis_only` |
+| Silent | Silent | `no_response` |
+
+Active means **mean ≥ 5.0 Hz**; silent means **mean < 5.0 Hz**, using the existing
+low-interest threshold for both readouts. MN9 is the 30-trial mean of the frozen
+left readout, `720575940660219265`. MN11D is the 30-trial mean of each trial's
+two-cell mean rate. MN9 right and both MN11V cells are recorded, but do not decide
+the state; the result table displays them. Ties are not a state: existing MN9 tie
+handling remains unchanged. Raster rows show each MN11D/V cell from the single
+recorded replay, not the 30-trial mean used for state classification. Legacy
+silencing replays retain their original path and lack these added rows; the UI
+says they are unavailable, not zero, and does not classify a silencing trial.
+
+Animation uses the existing art pipeline: original fly sheet
+`assets/raw/fly/fly.png` and dish inputs `assets/raw/<slug>.png`, processed by
+[`scripts/prep_assets.py`](../scripts/prep_assets.py) as documented in
+[`docs/assets.md`](assets.md). The approved action board is
+`assets/raw/mn11_preview/mn11-actions-v3.png`; `scripts/mn11_anim_preview.py`
+uses the `prep_assets.py` palette/background/nearest-neighbour helpers to prepare
+four body frames and four mouth insets per state. `scripts/export_mn11_site.py`
+copies these 32 approved frames into `site/assets/response/`.
+
+Actions, emoji bubbles and mouth insets are illustrations, not measured behaviour.
+The final `no_response` fly leaves without ownership speech, including in
+`opposite` mode; ranking, ties and human allocation are unchanged. Speech comes
+from `copy/fly_lines.json`, emitted as `site/fly_lines.js` by the copy importer.
+Rules use the four input levels, first matching bucket wins, and the line index
+is `seed % 3`. A fresh run draws a random presentation seed; share URLs include
+`&seed=N`, and older links without it use 0. It is not a visitor identifier, is
+not persisted, and never affects scoring. No third-party requests, analytics or
+tracking are added. The README state/animation honesty rows require owner review
+before release.
+
+Integration checks (2026-09-15): 74 Node tests, 345 Python tests, release
+validation, F02/F03/F04/F05/F06/F08/F15 browser regressions, all four full
+state flows in both languages, and the six 360/390/430 px plate-caption cases
+pass. All 400 baseline replay MN9 header fields and event bodies retain their
+original bytes; every dish-pair decision in both modes matches the old table.
+Three-, four- and five-dish share-card checks cover QR decoding and text bounds.
+`scripts/check_mn11_site.py` stores local screenshots under `results/mn11-site/`.
 
 ## Replay pack and brain view
 
@@ -64,6 +118,7 @@ Annotated tags on `main`; every update ships under a version (feature branch off
 | v1.1.0 | 41f8b72 | Ir94e (amino-acid aversion) axis enabled in the encoder and the site; no simulation changes. |
 | v1.1.1 | 31021cb | Brain view follows the fly's final landing (caption, HUD, raster switch to the plate it lands on); the empty "Brain response:" page line dropped. |
 | v1.1.2 | 65fa510 | Footer "what's new" line and CHANGELOG.md; README "What's new"; tonic-inhibition honesty row (designed experiment, not in the product); no dish score changed. |
+| v1.1.3 | c58c735 | Long plate names no longer overlap on narrow screens: ellipsis with full-name titles; row heights unchanged; no dish score changed. |
 
 ### Changelog and the footer "what's new" line
 
@@ -90,11 +145,11 @@ With a local server serving `site/` on port 8765, run `python scripts/browser_ch
 - Page order: one-line intro, input with autocomplete, the selected dishes ("On the table": removable chips with a 26 px sprite thumbnail; the idle fly sprite rests on the table's edge; a one-line hint while empty), "Ask the fly" / "Let the fly eat first", then "Browse dishes": a horizontal row of 12 popular dishes as picture tiles (`popular` in `data/dish_sections.json`, copied to `site/data/sections.json`), and "View all" for search, section tabs (中餐/日韩/东南亚/西餐/饮料/水果蔬菜) and a tile grid (4 per row from 560 px, 2 on phones). Tiles toggle the selection and show a check when selected. Selections are stored as dish keys (typed unknown text as typed), so the language toggle relabels everything in place without rerunning or changing a number. Dishes without a sprite (typed, unknown) use one neutral placeholder plate; sprites without their own file use `site/assets/dishes/fallbacks.json`.
 - "Ask the fly" gives the human the fly's pick (highest MN9). "Let the fly eat first" (`mode: "opposite"`) gives the human what the fly leaves: with two dishes the other one (the lowest), with three or more every dish except the fly's pick (`humanSet`); the fly itself still goes to its own pick, and the verdict, stage caption and share card state both sides. Equal MN9 is reported as a tie.
 - Each dish is looked up in its own grid cell on all four axes: sugar, bitter, water and ir94e (`ir94eLevel(entry)`, `none` for an entry without the field). Since 2026-09-12 (encoder v2.3) every entry carries `ir94e`, so soy-, stock- and meat-heavy dishes land in the ir94e low / medium slices and score far lower than plain starches; that ordering is the model's (README honesty table, OQ-6). The level table shows an "Amino acids" column with a one-line explanation under it (`colIr94e`, `ir94eExplain`); the brain caption and HUD input rates include the ir94e level / Hz.
-- Low-interest caption: when the fly's own pick (`decision.flyPick`, the winner in "Ask the fly", the fly's dish in "Let the fly eat first") has MN9 mean below 5 Hz, the result adds one line under the pick (`lowInterest`, `LOW_INTEREST_HZ` in `site/app.js`): "The fly didn't care much for any of these. This one was just the least uninteresting." The 5 Hz threshold is ours; it is copy only and changes no decision, tie or animation.
-- The result view leads with the chosen dish sprite and the fly (proboscis frame), the other dishes small, greyscale and struck beside it (`drawResultHero`); the level / MN9 table (mean ± std, MN9 order) and the card's fixed lines sit collapsed under "How each dish was scored". "Ask again" is primary, "Share" secondary. During the run, plates show no Hz until the fly has tasted them ("loading…" while a replay is fetched); replays are prefetched at run start.
+- Low-interest caption: when the fly's own pick (`decision.flyPick`, the winner in "Ask the fly", the fly's dish in "Let the fly eat first") has MN9 mean below 5 Hz, the result adds one line under the pick (`lowInterest`, `LOW_INTEREST_HZ` in `site/app.js`): "The fly didn't care much for any of these. This one was just the least uninteresting." The 5 Hz threshold is ours; the caption changes no decision or tie. Separately, v1.2 uses the same threshold for its designed state animation, as specified above.
+- The result view leads with the chosen dish sprite and the fly's designed state frame (no fly for `no_response`), the other dishes small, greyscale and struck beside it (`drawResultHero`); the level / MN9 L/R / MN11D/V table (mean ± SD, MN9 order), with a designed-state column and the card's fixed lines sit collapsed under "How each dish was scored". "Ask again" is primary, "Share" secondary. During the run, plates show no Hz until the fly has tasted them ("loading…" while a replay is fetched); replays are prefetched at run start.
 - Unknown names take the miss path: "the fly hasn't tasted this yet" and a "Report it" button that opens the "New dish request" issue form (`.github/ISSUE_TEMPLATE/dish-request.yml`, `REPO_URL` in `site/app.js`) with the typed name and page language prefilled; the form asks for the Chinese name, the English name and a one-line description.
-- The share card is a 3:4 canvas (900 × 1200) opened in a modal (`<dialog>`, near full-screen on phones, a centred sheet from 560 px). Content, top to bottom: title, headline, the chosen name; the chosen dish sprite with the fly on it (proboscis-out frame; ties show every tied sprite with the fly hovering above; in "Let the fly eat first" no fly on the chosen (human's) dish); the MN9 bar comparison (shared scale, at most four rows, then "+N"); the MN9 line (`fixedLines[1]`); one honesty sentence (`cardHonesty`: taste levels are LLM estimates, the response comes from precomputed runs of a published fly-connectome model); then the brain snapshot, grown into the remaining height, with its caption, and the QR code (error correction M, 4-module quiet zone) with the short URL in monospace. The taste-levels line and the rest of the fixed lines are shown on the page instead, under "How each dish was scored". "Save image" downloads the PNG.
-- Share links: `?d=slug,slug,…&lang=zh|en[&m=opposite]` (`shareUrl` / `parseShareParams` / `resolveShared` in `site/app.js`). Known dishes travel as their sprite slug (`slugFor(key)`: ASCII, hyphens), unknown names as typed, URL-encoded. On load the site resolves each slug back through the dictionary (a slug is looked up as is, then with hyphens as spaces), fills the options, applies `lang` for that view only (the saved preference is untouched) and runs the sequence; unresolved names take the miss path as usual. `scripts/export_share_card.py` renders a card from such a link with Playwright and decodes the QR with OpenCV to check it.
+- The share card is a 3:4 canvas (900 × 1200) opened in a modal (`<dialog>`, near full-screen on phones, a centred sheet from 560 px). Content, top to bottom: title, headline, the chosen name; the chosen dish sprite with the fly on it (state frame, absent for `no_response`; ties show every tied sprite with the fly hovering above; in "Let the fly eat first" no fly on the chosen (human's) dish); the MN9 bar comparison with state and MN11D/V means (shared MN9 scale, at most four rows, then "+N"); the MN9 line (`fixedLines[1]`); one honesty sentence (`cardHonesty`: taste levels are LLM estimates, the response comes from precomputed runs of a published fly-connectome model); then the brain snapshot, grown into the remaining height, with its caption, and the QR code (error correction M, 4-module quiet zone) with the short URL in monospace. The taste-levels line and the rest of the fixed lines are shown on the page instead, under "How each dish was scored". "Save image" downloads the PNG.
+- Share links: `?d=slug,slug,…&lang=zh|en[&m=opposite][&seed=N]` (`shareUrl` / `parseShareParams` / `resolveShared` in `site/app.js`). Known dishes travel as their sprite slug (`slugFor(key)`: ASCII, hyphens), unknown names as typed, URL-encoded. On load the site resolves each slug back through the dictionary (a slug is looked up as is, then with hyphens as spaces), fills the options, applies `lang` for that view only (the saved preference is untouched) and runs the sequence; unresolved names take the miss path as usual. `scripts/export_share_card.py` renders a card from such a link with Playwright and decodes the QR with OpenCV to check it.
 - QR codes come from `site/vendor/qrcode-generator/qrcode.mjs` (qrcode-generator 2.0.4 by Kazuhiko Arase, MIT; license and provenance next to it). No other third-party code ships with the site.
 - Footer provenance: the lookup table records the git commit of the grid run as it was when the run happened. The repository history was rewritten on 2026-09-11 (commit trailers stripped), so `COMMIT_REWRITE` in `site/app.js` maps the recorded hash to the same commit's current hash and the footer shows the latter; the data file keeps the original. Mapping: `4d66cfcc6d080da46e316bf57dabe30132e0d5eb` → `01a798e042a412edcb44f482ec6c9706c585d767` (see docs/grid_provenance.md).
 

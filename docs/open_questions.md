@@ -63,6 +63,413 @@ What the axis did to the dictionary when enabled (encoder v2.3, `--only-dimensio
 
 ## OQ-7: 25 of 101 frozen v1 GRNs fall outside the mapped Tastekin subtypes (2026-09-12)
 
+The following is the initial cross-check; the subsequent R1 finding and
+owner decision are recorded immediately below it.
+
 The count is 25: 11 sugar GRNs outside LB3b + LB3c (7 LB3d + 4 LB4b), 7 water GRNs outside LB3a, and 7 Ir94e GRNs outside LB1e; all 42 bitter GRNs match LB1a-d. The earlier count of 21 omitted the four sugar-set LB4b cells. The one sugar-set LB3b cell is within the mapped sugar subtypes and is not counted as a mismatch.
 
 Cross-checking `data/cells.json` against Tastekin et al. 2025/2026 Supplemental table 2 (FlyWire rows; `docs/cell_set_crosscheck.md`, `scripts/cross_check_cells.py`): the 42 bitter GRNs are exactly LB1a-d, but seven of the 23 sugar GRNs are LB3d (high salt / heavy metal; ppk23, Ir7c, Ir47a; glutamatergic; aversive, per Tastekin), one is LB3b and four are LB4b (no receptor match), with only 11 LB3c; seven of the 18 water GRNs are LB3c (sugar); and seven of the 18 Ir94e GRNs are LB2a/b/c (no receptor match, putatively aversive), with 11 LB1e. These are differences between the Shiu et al. 2024 annotation the sets were frozen from and Tastekin's typing, not errors in our pipeline: the sets were frozen from the paper's own notebooks (docs/cell_ids.md) and the Phase 0 gates passed on them as they are. Consequences are not investigated: whether the seven LB3d cells in the sugar channel change the sugar curves, whether the seven LB3c cells in the water channel are part of why water acts as a second appetitive drive (README honesty table, water row), and whether the LB2 cells contribute to the Ir94e suppression (OQ-6) are all open. Re-freezing the sets to Tastekin's typing would be a v2 change requiring a full grid rerun and new replays; not done now. Also recorded there: the LB3b (25 cells) and LB3d (29 cells) FlyWire ID lists that Phase 1.5 salt work needs are now available, every one of them in v783.
+
+### R1 checkpoint decision: v1 retained, v2 typed; not executed (2026-09-13)
+
+The [R1 report](salt_and_refreeze.md#r1-results--n--30-per-condition) now
+compares frozen sugar23 with Tastekin LB3b13 + LB3c20 on XLSX L (33 cells,
+the same physical side) in 30-trial matched-layout curves and full Phase 0
+controls: 660 runs including the adapted A-prime. All four original Phase 0
+gates pass on the female brain. MN9 L new/old mean ratios at 60/80/120/200 Hz
+are 1.473/1.204/1.101/1.007; MN11D/V are lower at 60/80 Hz. Own-200-normalised
+shape differences cross the predeclared two-SD paired-spread rule only for
+MN11D/V at 60/80, not MN9. This does not demonstrate equivalent curves or
+unchanged mixed-taste rankings. The water/Ir94e replacement questions above
+remain untested. [Normalisation and limits](salt_and_refreeze.md#curves-normalised-to-their-own-200-hz-mean).
+
+**Owner decision, recorded not executed:** v1 keeps the frozen Shiu sets.
+Above 80 Hz, the MN9 differences remain within the pilot's specified two-SD
+trial-spread criterion; a swap would require a full grid rerun and new
+replays for prospective ranking changes the owner judges near noise, not
+ranking changes measured by this sugar-only pilot. For v2's planned two-brain
+design, use Tastekin's typing on both brains: the male sets must be defined
+that way in this design, and the typed sugar set passes all four Phase 0
+gates on the female brain. This is a cell-set policy, not a MaleCNS
+feasibility result or an instruction to replace any frozen file.
+
+**LB3b stays in the v2 sugar set.** At 120 Hz, dropping the 13 LB3b cells
+from candidate33 leaves LB3c20 and reduces MN9 L by 10.667 ± 6.529 Hz
+(paired population SD; 30/30 lower); MN9 R falls 7.933 ± 5.790 Hz.
+Thus LB3b contributes about 10 Hz to left MN9 under this design, not a
+universal additive contribution. Historical A-prime (21 versus 23) had
+left-MN9 differences <0.5 Hz. [A-prime comparison](salt_and_refreeze.md#adapted-a-prime-lb3c-only-l-subset-20-cells).
+
+## OQ-8: MN9/MN11 bitter separation replicated; CEM input audit (2026-09-13)
+
+The [feeding-MN report](feeding_mn_readouts.md) contains C1 (400 existing
+single-trial replays), C2 (thirteen selected cells × 30 freshly rerun trials),
+and C2b (connectome only, no simulation). All sixty-six C1 MNs are monitored
+in v783; C2 records twelve source neurons. Target labels come only from
+the XLSX `MNs` sheet, FlyWire rows, `Target_Muscle` column:
+MN9 = `9`, MN11D = `11D`, MN11V = `11V`, CEM = `Crop Entry`;
+[the inventory](../data/mn_readout_ids.json) cites the workbook and its hash.
+
+C2 reproduces the original grid seeds and exact spike trains for all
+twelve neurons in all 390 trials; these are the same stochastic trials,
+not an additional independent sample to pool with the original grid.
+The C1 extra replay seeds are different. Frozen protocol/network/GRN sets
+and product scores remain unchanged.
+
+### C2 bitter separation
+
+At sugar 120 Hz and water/Ir94e zero, mean rates (population SD, 30 trials)
+are MN9 L/R 74.633 ± 4.476 / 54.700 ± 4.713 Hz without bitter, versus
+1.700 ± 1.509 / 1.667 ± 1.193 Hz at bitter 100 Hz; MN11D/V are
+92.733 ± 8.514 / 37.383 ± 3.991 Hz without bitter, versus
+61.383 ± 13.992 / 24.950 ± 5.508 Hz at bitter 100 Hz.
+
+| Bitter input Hz | MN9 L ratio | MN9 R ratio | MN11D ratio | MN11V ratio |
+|---:|---:|---:|---:|---:|
+| 0 | 1.000000 | 1.000000 | 1.000000 | 1.000000 |
+| 60 | 0.317552 | 0.299208 | 0.914091 | 0.936246 |
+| 100 | 0.022778 | 0.030469 | 0.661934 | 0.667410 |
+| 160 | 0.000000 | 0.000000 | 0.009885 | 0.008471 |
+
+Ratios divide cell means by the no-bitter mean, not trial-wise ratios.
+The bitter veto acts on MN9 before it acts comparably on MN11 along the
+**bitter-drive axis**; this does not prove temporal or causal ordering.
+At bitter 160 Hz both MN9s are silent in 30/30 trials, while MN11D/V
+retain means 0.917/0.317 Hz (5/30 and 2/30 active trials).
+C2's per-cell mean±SD and conditional latency medians with active counts
+are in the [C2 tables](feeding_mn_readouts.md#c2-thirteen-cell-30-trial-rerun).
+
+CEM remains silent in every neuron/trial in C1 and C2, including Ir94e
+alone. Ir94e is the unchanged mixed LB1e/LB2 input, not isolated LB2.
+MN11 readouts can separate from MN9 under this design, but a serial
+checkpoint chain or an active CEM checkpoint is not established.
+
+### C2b CEM input table
+
+CEM target `Crop Entry` and sides below are the literal XLSX values
+cited above. The fifty PhG1–16 FlyWire IDs come from the same workbook's
+`GRNs` sheet. All source and target IDs are in v783. Counts use unsigned
+`Connectivity` from the frozen protocol's parquet: actual synapses on
+each directed edge, not products of weights or duplicated convergent paths.
+Source-group unions are recomputed; individual group rows are not additive.
+Full source hashes, definitions and edge audit are in the
+[C2b report](feeding_mn_readouts.md#c2b-cem-input-connectivity-no-simulation).
+
+<!-- BEGIN COMPUTED CEM INPUT TABLE -->
+D / A / B = direct source->CEM synapses / unique source->intermediate synapses on two-edge paths / unique intermediate->CEM synapses on those paths. The totals row instead gives unique presynaptic partners / total input synapses.
+
+| Source (n) | 720575940620008112 (L) | 720575940625799513 (L) | 720575940640681680 (L) | 720575940621126384 (R) | 720575940621169690 (R) | 720575940628781333 (R) | All six (union) |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| All presynaptic input: partners / synapses | 70 / 660 | 55 / 510 | 47 / 445 | 64 / 555 | 66 / 494 | 73 / 634 | 143 / 3298 |
+| sugar (23) | 0 / 5 / 17 | 0 / 10 / 16 | 0 / 5 / 20 | 0 / 0 / 0 | 0 / 3 / 2 | 0 / 4 / 4 | 0 / 13 / 59 |
+| bitter (42) | 0 / 15 / 5 | 0 / 119 / 5 | 0 / 1 / 2 | 0 / 1 / 2 | 0 / 0 / 0 | 0 / 70 / 14 | 0 / 189 / 28 |
+| water (18) | 0 / 4 / 17 | 0 / 16 / 16 | 0 / 4 / 20 | 0 / 0 / 0 | 0 / 2 / 2 | 0 / 3 / 3 | 0 / 18 / 58 |
+| ir94e (18) | 0 / 31 / 19 | 0 / 155 / 19 | 0 / 24 / 10 | 0 / 4 / 2 | 0 / 1 / 1 | 0 / 8 / 7 | 0 / 162 / 58 |
+| Labellar union (101) | 0 / 55 / 31 | 0 / 300 / 26 | 0 / 34 / 29 | 0 / 5 / 2 | 0 / 6 / 3 | 0 / 85 / 24 | 0 / 382 / 115 |
+| PhG1 (8) | 0 / 673 / 309 | 0 / 829 / 262 | 0 / 1044 / 241 | 0 / 820 / 276 | 0 / 1008 / 252 | 0 / 978 / 343 | 0 / 1553 / 1683 |
+| PhG2 (5) | 0 / 8 / 24 | 0 / 19 / 14 | 0 / 9 / 17 | 0 / 18 / 60 | 0 / 16 / 56 | 0 / 20 / 47 | 0 / 39 / 218 |
+| PhG3 (2) | 0 / 81 / 16 | 0 / 85 / 15 | 0 / 77 / 20 | 0 / 124 / 81 | 0 / 96 / 44 | 0 / 252 / 66 | 0 / 358 / 242 |
+| PhG4 (4) | 0 / 23 / 48 | 0 / 27 / 67 | 0 / 25 / 42 | 0 / 26 / 45 | 0 / 34 / 30 | 0 / 68 / 51 | 0 / 99 / 283 |
+| PhG5 (2) | 0 / 15 / 12 | 0 / 48 / 13 | 0 / 6 / 13 | 0 / 11 / 17 | 0 / 14 / 19 | 0 / 49 / 49 | 0 / 95 / 123 |
+| PhG6 (2) | 0 / 112 / 39 | 0 / 266 / 49 | 0 / 111 / 30 | 0 / 52 / 26 | 0 / 52 / 15 | 0 / 185 / 44 | 0 / 440 / 203 |
+| PhG7 (5) | 0 / 51 / 20 | 0 / 119 / 24 | 0 / 54 / 21 | 0 / 28 / 28 | 0 / 13 / 30 | 0 / 108 / 56 | 0 / 238 / 179 |
+| PhG8 (4) | 0 / 7 / 13 | 0 / 24 / 14 | 0 / 26 / 25 | 0 / 33 / 44 | 0 / 47 / 46 | 0 / 79 / 67 | 0 / 112 / 209 |
+| PhG9 (4) | 0 / 20 / 19 | 0 / 157 / 17 | 0 / 168 / 19 | 0 / 191 / 19 | 0 / 208 / 20 | 0 / 330 / 30 | 0 / 596 / 124 |
+| PhG10 (2) | 0 / 45 / 22 | 0 / 15 / 23 | 0 / 6 / 20 | 0 / 23 / 14 | 0 / 4 / 21 | 0 / 152 / 35 | 0 / 168 / 135 |
+| PhG11 (2) | 0 / 43 / 23 | 0 / 51 / 27 | 0 / 46 / 31 | 0 / 42 / 35 | 0 / 32 / 40 | 0 / 164 / 65 | 0 / 218 / 221 |
+| PhG12 (2) | 0 / 0 / 0 | 0 / 28 / 2 | 0 / 0 / 0 | 0 / 0 / 0 | 0 / 0 / 0 | 0 / 1 / 9 | 0 / 29 / 11 |
+| PhG13 (2) | 0 / 2 / 4 | 0 / 3 / 3 | 0 / 2 / 2 | 0 / 3 / 3 | 0 / 1 / 2 | 0 / 1 / 2 | 0 / 4 / 16 |
+| PhG14 (2) | 0 / 0 / 0 | 0 / 2 / 7 | 0 / 1 / 5 | 0 / 2 / 2 | 0 / 1 / 2 | 0 / 11 / 5 | 0 / 14 / 21 |
+| PhG15 (2) | 0 / 77 / 30 | 0 / 68 / 20 | 0 / 51 / 13 | 0 / 35 / 46 | 0 / 31 / 55 | 0 / 36 / 61 | 0 / 101 / 225 |
+| PhG16 (2) | 0 / 149 / 26 | 0 / 126 / 21 | 0 / 94 / 11 | 0 / 64 / 43 | 0 / 63 / 45 | 0 / 90 / 48 | 0 / 212 / 194 |
+| Pharyngeal union (50) | 0 / 1306 / 313 | 0 / 1867 / 263 | 0 / 1720 / 247 | 0 / 1472 / 325 | 0 / 1620 / 283 | 0 / 2524 / 376 | 0 / 4276 / 1807 |
+<!-- END COMPUTED CEM INPUT TABLE -->
+
+Pharyngeal input is structurally stronger than frozen labellar input at
+two hops—1,807 versus 115 unique final-leg synapses onto the six CEMs
+(15.7×), with no direct synapses from either group.
+
+The pharyngeal-associated final leg includes 488 positive and 1,319
+negative synapses under the model's signs, so larger unsigned input does
+not predict CEM firing. This informs the design of a later pharyngeal
+task; no pharyngeal stimulation, additional background, scoring change,
+or README honesty-table change was made. The causal chain and CEM response
+under other designs remain open.
+
+## OQ-9: pharyngeal screen activates MN9/MN11 but not CEM (2026-09-13)
+
+The [Phase P report](pharyngeal_screen.md) contains P0's source-only PhG1–16
+table, P1's **19 conditions × 10 trials = 190 runs**, and P2's PhG1/PhG4 dose
+curves and paired combination (**13 conditions × 30 trials = 390 runs**), with
+individual CEM rates, MN9 L/R and MN11D/V mean ± population SD, conditional
+latency medians and input-cell sanity. P0 uses only Tastekin's Cell PDF, distinguishes putative
+receptor/valence assignments from observations, and labels unreported properties
+“not characterised”; the FlyWire IDs are the fifty Table S1 pharyngeal rows.
+MN target labels are literal workbook `Target_Muscle` values: MN9 = `9`,
+MN11D = `11D`, MN11V = `11V`, CEM = `Crop Entry`, as cited in
+[the inventory](../data/mn_readout_ids.json).
+
+P1 drives each complete type at 100 Hz, all fifty together at 100 Hz, and a
+no-input baseline (18 conditions), plus PhG1 at 100 Hz with frozen sugar high
+at 120 Hz (one combined condition). All other labellar drives are zero.
+The frozen FlyWire v783 network and parameters are unchanged; this is our
+uncalibrated stimulation design, not the paper's MaleCNS connectivity metric
+or a product change. The explicit Phase P condition indices 0–18 use the
+published grid seed formula, with trials 0–9; they are not original grid cells.
+
+### P1 outcome
+
+No CEM neuron fired in any condition: **0 spikes across 1,140 CEM-neuron-trials**.
+Every driven source neuron did fire (1,310/1,310 driven-neuron-trials), so this
+was not an omitted/failed input. All six CEM neurons and all ten trials were
+explicitly saved and validated, including silent trials.
+
+PhG1, PhG4 and PhG10 activated both MN9s and MN11D/V in 10/10 trials.
+
+| Single type, 100 Hz | MN9 L, Hz | MN9 R, Hz | MN11D, Hz | MN11V, Hz |
+|---|---:|---:|---:|---:|
+| PhG1 | 53.200 ± 2.400 | 46.900 ± 3.390 | 140.700 ± 7.804 | 70.750 ± 3.970 |
+| PhG4 | 37.500 ± 6.087 | 32.000 ± 2.933 | 110.600 ± 11.933 | 58.000 ± 5.527 |
+| PhG10 | 11.100 ± 5.009 | 10.900 ± 3.885 | 17.650 ± 10.267 | 8.600 ± 4.898 |
+
+PhG9 produced MN11D/V means 3.650/0.050 Hz (7/10 and 1/10 active trials) with
+both MN9s silent; PhG13 produced one MN9 R spike in one trial; PhG16 produced
+sparse MN9/MN11 activity. The other ten single types and baseline were silent
+at every recorded MN. All-PhG means were MN9 L/R 23.000/18.600 and
+MN11D/V 127.550/67.700 Hz, still with zero CEM spikes.
+
+**PhG4 disagreement:** Tastekin predicts PhG4 (putative ppk28/water association,
+Fig. 3E; aversive prediction, Fig. 7F), whereas stimulating that type drives
+MN9/MN11 in this model.
+
+**LB3d disagreement (OQ-10):** LB3d29 at 100 Hz drives left MN9 to 61.5 Hz
+(18.7 Hz after removing the seven frozen-sugar-overlap cells); adding the
+remaining 22 to sugar raises all four readouts in 10/10 trials. The model
+does not express high-salt aversion under this design, contrary to Tastekin's
+prediction for LB3d. Salt as a fifth axis is Closed; see OQ-10 below.
+
+### P2 dose curves and paired combination
+
+P2 uses PhG1 and PhG4 at 0/60/80/120/200 Hz, thirty trials each, and three
+paired conditions: (a) frozen labellar sugar high at 120 Hz, (b) PhG1 at
+100 Hz, (c) both. Every condition uses the same 151-unit stimulation layout;
+the paired conditions use identical thirty seeds. The thirteen conditions
+total 390 runs (330 distinct seed values), preserving both zero-dose rows.
+
+The new paired comparison **replaces P1's unpaired historical-reference ratio**;
+P1 raw results remain preserved. Ratios are the mean ± population SD of thirty
+trial-wise `c/a` values; a zero denominator makes the full ratio undefined.
+Additivity compares paired `c - (a+b)` values, not separately shuffled trials.
+The reported relation describes the observed mean, not statistical equivalence.
+
+<!-- BEGIN COMPUTED P2 OQ TABLES -->
+### PhG1_dose: MN rate (mean ± population SD, Hz; n = 30)
+
+| Condition | MN9_L | MN9_R | MN11D | MN11V |
+|---|---:|---:|---:|---:|
+| P2_PhG1_0 | 0.000 ± 0.000 | 0.000 ± 0.000 | 0.000 ± 0.000 | 0.000 ± 0.000 |
+| P2_PhG1_60 | 44.733 ± 4.211 | 38.133 ± 3.685 | 116.583 ± 9.037 | 56.083 ± 4.317 |
+| P2_PhG1_80 | 49.800 ± 4.400 | 43.400 ± 3.565 | 131.917 ± 7.729 | 64.817 ± 3.978 |
+| P2_PhG1_120 | 59.833 ± 3.716 | 52.900 ± 3.360 | 148.917 ± 7.055 | 75.283 ± 2.455 |
+| P2_PhG1_200 | 69.600 ± 4.152 | 62.500 ± 3.364 | 161.633 ± 6.099 | 84.250 ± 2.886 |
+
+### PhG4_dose: MN rate (mean ± population SD, Hz; n = 30)
+
+| Condition | MN9_L | MN9_R | MN11D | MN11V |
+|---|---:|---:|---:|---:|
+| P2_PhG4_0 | 0.000 ± 0.000 | 0.000 ± 0.000 | 0.000 ± 0.000 | 0.000 ± 0.000 |
+| P2_PhG4_60 | 27.767 ± 3.989 | 27.033 ± 4.750 | 92.517 ± 11.419 | 45.667 ± 5.122 |
+| P2_PhG4_80 | 32.933 ± 5.033 | 30.433 ± 4.104 | 109.450 ± 10.058 | 55.533 ± 4.465 |
+| P2_PhG4_120 | 38.800 ± 4.167 | 33.800 ± 4.254 | 117.917 ± 9.683 | 60.650 ± 3.878 |
+| P2_PhG4_200 | 40.867 ± 3.471 | 34.933 ± 3.660 | 123.950 ± 7.141 | 63.283 ± 3.822 |
+
+### Paired combination (trial-wise mean ± population SD)
+
+| Readout | a: sugar Hz | b: PhG1 Hz | c: both Hz | c/a | c-a-b Hz | Mean relation | Above/equal/below sum trials |
+|---|---:|---:|---:|---:|---:|---|---:|
+| MN9_L | 73.667 ± 5.088 | 53.867 ± 3.730 | 83.433 ± 4.544 | 1.138449 ± 0.104545 | -44.100 ± 8.467 | falls short | 0/0/30 |
+| MN9_R | 53.167 ± 3.908 | 48.167 ± 3.215 | 58.133 ± 4.145 | 1.099654 ± 0.114927 | -43.200 ± 7.591 | falls short | 0/0/30 |
+| MN11D | 95.250 ± 11.548 | 141.383 ± 5.255 | 152.367 ± 8.250 | 1.621558 ± 0.203065 | -84.267 ± 13.638 | falls short | 0/0/30 |
+| MN11V | 37.783 ± 4.387 | 71.183 ± 3.275 | 74.467 ± 3.568 | 1.994462 ± 0.224526 | -34.500 ± 6.445 | falls short | 0/0/30 |
+| CEM_L1 | 0.000 ± 0.000 | 0.000 ± 0.000 | 0.000 ± 0.000 | undefined (0/30 defined) | 0.000 ± 0.000 | equal | 0/30/0 |
+| CEM_L2 | 0.000 ± 0.000 | 0.000 ± 0.000 | 0.000 ± 0.000 | undefined (0/30 defined) | 0.000 ± 0.000 | equal | 0/30/0 |
+| CEM_L3 | 0.000 ± 0.000 | 0.000 ± 0.000 | 0.000 ± 0.000 | undefined (0/30 defined) | 0.000 ± 0.000 | equal | 0/30/0 |
+| CEM_R1 | 0.000 ± 0.000 | 0.000 ± 0.000 | 0.000 ± 0.000 | undefined (0/30 defined) | 0.000 ± 0.000 | equal | 0/30/0 |
+| CEM_R2 | 0.000 ± 0.000 | 0.000 ± 0.000 | 0.000 ± 0.000 | undefined (0/30 defined) | 0.000 ± 0.000 | equal | 0/30/0 |
+| CEM_R3 | 0.000 ± 0.000 | 0.000 ± 0.000 | 0.000 ± 0.000 | undefined (0/30 defined) | 0.000 ± 0.000 | equal | 0/30/0 |
+| CEM | 0.000 ± 0.000 | 0.000 ± 0.000 | 0.000 ± 0.000 | undefined (0/30 defined) | 0.000 ± 0.000 | equal | 0/30/0 |
+| monitored_pharyngeal | 0.000 ± 0.000 | 98.700 ± 3.573 | 98.700 ± 3.573 | undefined (0/30 defined) | 0.000 ± 0.000 | equal | 0/30/0 |
+| monitored_sugar | 118.519 ± 2.127 | 0.000 ± 0.000 | 118.499 ± 2.128 | 0.999829 ± 0.000208 | -0.020 ± 0.024 | falls short | 0/17/13 |
+
+Shared active-channel Poisson spike trains verified identical for every paired trial: sugar a/c and PhG1 b/c.
+<!-- END COMPUTED P2 OQ TABLES -->
+
+Every nonzero PhG1 and PhG4 dose activates MN9 L/R and MN11D/V in 30/30
+trials; both zero-dose conditions are silent. In the paired combination,
+all four MN readouts fall short of a+b in **every one of the thirty trials**.
+Mean deficits are 44.100/43.200/84.267/34.500 Hz (MN9 L/R, MN11D/V).
+Mean paired c/a ratios exceed one, but individual MN9 trials are not uniformly
+higher: L exceeds a in 28/30, R in 22/30 (two equal); MN11D/V exceed a in 30/30.
+All 930 shared input trains were verified identical: 690 sugar a/c and
+240 PhG1 b/c. All 3,300 genuinely driven-source-neuron-trials fired.
+
+In plain terms, combining pharyngeal and labellar sugar at the tested drives
+(PhG1 100 Hz; labellar sugar 120 Hz) produces a larger mean response than
+either input alone in all four readouts (MN9 L/R,
+MN11D/V), but falls short of their sum in 30/30 trials for each readout.
+This sublinear combination is consistent with saturation on shared downstream
+targets rather than two independent additive channels; shared-target saturation
+is an interpretation, not a mechanism established by these readout measurements.
+See the [paired P2 findings](pharyngeal_screen.md#p2-findings).
+
+### CEM outcome
+
+CEM is silent in all 390 P2 trials (2,340 individual CEM-neuron-trials),
+as in the 400-cell labellar C1 screen, thirteen-cell C2 and nineteen-condition
+P1 screen. Each CEM ratio is undefined, not zero; equality to a+b describes
+three silent conditions. These observations concern the unchanged frozen
+1-second, zero-basal-firing design and tested sets/drives, not an estimate
+of zero response probability under every possible state or input.
+
+no gustatory input class tested in this model (labellar, 400 cells; pharyngeal, 16 types, all 50 together, and combined with labellar sugar) drives CEM; the pharyngeal station of a checkpoint-chain readout cannot be built on CEM in this model.
+
+### Status
+
+P2 complete; no further simulation. The next task is a separately specified
+v2 decision memo. No frozen data, model/P1 code, `site/`, scoring, encoder
+or README honesty-table changes.
+
+## OQ-10: salt fifth axis Closed — LB3d aversion not expressed under S1 (2026-09-13)
+
+**Disagreement, without explanation:** in this model LB3d29 alone at 100 Hz
+drives left MN9 to 61.5 Hz (18.7 Hz with the seven frozen-sugar-overlap cells
+removed), and adding the 22 non-overlap cells at 100 Hz to frozen sugar23
+at 120 Hz raises MN9 L/R and MN11D/V in 10/10 paired trials. The model does
+not express high-salt aversion under this design, contrary to Tastekin's
+prediction for LB3d. This is a ten-trial screen, not behavioural calibration;
+the disagreement is also recorded next to the PhG4 line above.
+[S1 tables](salt_and_refreeze.md#s1-results--n--10-screen-only).
+
+**Output signs, no simulation:** every output edge was checked using the
+parquet's `Excitatory` and `Excitatory x Connectivity` columns. All 54 cells
+have outputs; each cell's sign is consistent across its edges.
+
+| Set | Positive cells | Negative cells | Disagree with local annotation-derived sign |
+|---|---:|---:|---:|
+| LB3d29 | 27 | 2 | 5 / 29 |
+| LB3b25 | 25 | 0 | 0 / 25 |
+
+Against **Tastekin's class-level glutamatergic LB3d label**, 27/29 have the
+opposite (positive) model sign. This is distinct from the local Schlegel
+per-cell `top_nt` comparison: LB3d has 18 acetylcholine, 4 serotonin and
+7 glutamate annotations, with five glutamate cells assigned positive
+outputs; LB3b has 21 acetylcholine and 4 serotonin annotations, all assigned
+positive outputs. The sign convention treats glutamate/GABA as negative
+and these other transmitters as positive; no transmitter labels or model
+signs are changed. [Source hashes, per-ID results and definitions](salt_and_refreeze.md#output-sign-check--connectivity-only).
+
+**Owner decision:** salt as a fifth axis is Closed. Reopen only with
+reproducible high-salt-associated aversion under a justified, versioned
+input/substrate design and an explicit product mapping. Female-brain
+simulation work is closed; no further simulation or product change is
+authorised. MaleCNS feasibility is a separate future specification.
+
+## OQ-11: MaleCNS substrate and reversed sugar-to-MN9 laterality (2026-09-14)
+
+**M0 accepted; unresolved laterality.** Under the same XLSX-L sugar-set
+convention, the dominant MN9 response is reversed between the two substrates.
+The female [Phase 0 report](phase0_report.md), sugar200 with the frozen23,
+has contralateral MN9 93.3 Hz versus ipsilateral 62.1 Hz (n=30; Shiu's
+historical L/R aliases respectively). The male [M0 benchmark](../data/malecns/benchmark_m0.json),
+sugar200 with typed17, has contralateral XLSX-R16949 35.8 Hz versus
+ipsilateral XLSX-L10331 133.4 Hz (n=5). Possible causes are the `Root_Side`
+convention, reconstruction, or a real difference; unresolved. These are
+different typed/frozen sets and substrates, not a controlled sex comparison.
+
+The [frozen male substrate record](../data/malecns/substrate_record.json)
+records whole CNS, consensus-derived signs and explicitly positive defaults
+for unclear/missing labels. Before M1, the owner required both MN9s in every
+run and separate bilateral gates. R16949 was not replaced on the basis of
+the M0 rates; the choice of primary male readout was deferred until after M1.
+
+**M1 complete; primary decision still deferred.** All 480 trials finished:
+420 A–D plus sugar17 versus LB3c12 at 120 Hz, 30 trials per condition, same
+seeds across conditions. At sugar200, contra R16949 is 34.367 ± 3.082 Hz
+and ipsi L10331 is 129.800 ± 5.243 Hz (population SD, n=30), preserving the
+M0 laterality observation. Possible causes remain unresolved; no readout
+switch or parameter tuning was made. [Full report and female comparison](malecns_phase0.md).
+
+| Gate | Male contra R16949 | Male ipsi L10331 |
+|---|---|---|
+| A: sugar rises | FAIL | FAIL |
+| B: bitter suppression | PASS | FAIL |
+| C: bitter-alone limit | PASS | FAIL |
+| D: historical completeness | PASS | PASS |
+| Additional literal baseline-zero check | PASS | PASS |
+| Overall A–D | FAIL | FAIL |
+
+Observed sugar means are nonmonotonic: R 10.400/8.867/8.067/34.367 Hz and
+L 43.033/42.333/58.567/129.800 Hz at 25/50/100/200 Hz. L fails B despite
+94.94% endpoint suppression because its bitter means rise from 1.300 to
+3.033 to 6.567 Hz at bitter50/100/200. L bitter-alone means are
+19.000/10.733/6.200/6.767 Hz, above the 1 Hz limit; R is zero. These are
+sample-mean gate outcomes, not claims that the population curve is known
+precisely. Historical D tests trial completeness; literal zero is separately
+confirmed, rather than silently changing the predicate.
+
+A′ paired LB3c12-minus-sugar17 differences at 120 Hz are R −2.767 ± 6.731 Hz
+and L −16.733 ± 32.179 Hz. The subset is lower/equal/higher in 19/2/9 R
+trials and 21/1/8 L trials. [A′ and the female typed33/20 reference](malecns_phase0.md#appendix-a--120-hz).
+
+Nine workers were selected from available RAM with headroom, not copied from
+the female run. All 960 MN9-neuron trials and 2,910 shared input-train
+comparisons were audited. [Audit record](../data/malecns/phase0_audit.json).
+M2 has not run. No female, product or README honesty-table change.
+
+**Pre-M1c tracing check:** [neuPrint male-cns:v1.0](https://neuprint.janelia.org/)
+and the frozen Berg annotation both mark R16949 `status=Traced`,
+`statusLabel=RT Hard to trace`, versus L10331 `Traced` / `Roughly traced`.
+No numerical completeness measure or cropped flag is supplied; absent is unknown.
+The [M1b density audit](malecns_m1b.md) finds **556 versus 6,012 incoming
+synapses** in the retained substrate (not neuPrint's broader post counts).
+Reconstruction incompleteness is therefore a likely cause of the reversal,
+not an established explanation; this remains tentative pending bilateral M1c.
+Tastekin's workbook (`MNs!A66:G67`), Berg's release and the live MN9 query
+name no other MN9-typed body on either side. [Source hashes and extracted
+fields](../data/malecns/rescale_preflight.json). No readout was substituted.
+
+**M1c complete, pre-declared rescaling only:** the two mean-derived weights
+0.1451040891 mV (`all`) and 0.1385035017 mV (`mn9`) each pass historical
+A–D on **L10331 only**; R16949 fails A/B and passes C/D for both.
+All 960 trials (including A′) use M1's seeds and fixed layout, with the
+external Poisson kick still tied to `w_syn*f_poi`. [Bilateral tables,
+network activity, protocols and audit](malecns_phase0.md#m1c--two-pre-declared-rescalings).
+
+The pass has a narrow meaning: L sugar means at 25/50/100/200 Hz are
+0/0/0/8.667 Hz (`all`) and 0/0/0/7.400 Hz (`mn9`); A permits adjacent
+zeros and requires the endpoint >5 Hz. Endpoint SDs are 2.948 and
+2.703 Hz (n=30). This does not establish a graded lower-dose response.
+R is silent throughout, so B's strict endpoint comparison fails (0 < 0
+is false), not a demonstrated reversal of suppression. Both A′ sets at
+120 Hz are silent on both sides, with paired differences 0 ± 0 Hz.
+Both literal baseline-zero and bitter-alone-zero checks pass.
+
+Sugar200 network spikes remain substantial: median [min–max] 299,441.5
+[232,765–333,567] (`all`) and 246,019 [20,982–292,980] (`mn9`), while
+the existing female grid replay has 17,150 (n=1, unpaired). Passing MN9
+gates is not a network-wide normality check. The 556-versus-6,012 input
+asymmetry and tracing labels remain a likely reconstruction explanation,
+**not proven by bilateral M1c**; rescaling does not control reconstruction
+completeness. No primary-readout or candidate selection has been made.
+Stop at M1c; no third weight, M2, female or product change.
+
+**Post-M1c owner decision — 2026-09-14:** the primary male readout is **L10331**, chosen on reconstruction-completeness grounds; **R16949 remains recorded as secondary**. R16949 has 556 retained incoming synapses versus 6,012 for L10331, with neuPrint status labels `RT Hard to trace` versus `Roughly traced`. GNG postsynaptic capture is approximately 35% (35.3665%), an **ROI-wide figure, not either neuron's completeness estimate**. The owner records reconstruction completeness as the most likely explanation for the laterality reversal, not a demonstrated causal result. The cross-brain mapping places both bodies with the female MN9s in CB0701; it does not indicate that Table S1 identified the wrong bodies.
+
+This decision was made **after M1c completed and its results were reported**.
+The completed runs, candidate protocols and original pre-declared stop rule
+remain unchanged: all four gates must pass on at least one side. **Both
+candidates passed under that original rule, on L10331.** This is not a
+retrospective amendment to the run design. Candidate selection is still
+pending; no rerun is performed or authorised by this record.
+[Mapping, tracing and ROI-capture evidence](malecns_m1b.md#additional-mapping-and-roi-capture-check);
+[dated report decision](malecns_phase0.md#post-m1c-decision--2026-09-14).

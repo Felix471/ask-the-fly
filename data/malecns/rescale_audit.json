@@ -1,0 +1,54 @@
+{
+  "candidates": {
+    "all": {
+      "raw_trials": 480,
+      "MN9_neuron_trials": 960,
+      "M1_full_Poisson_array_pairs_identical": 480,
+      "cross_candidate_Poisson_train_pairs_identical": 0,
+      "AP_shared_LB3c_trains_identical": 360,
+      "A200_B0_network_pairs_identical": 30,
+      "network_counts_rates_latencies_gates_AP": "PASS",
+      "sources": [
+        {
+          "path": "data/malecns/rescale_all_results.json",
+          "bytes": 13892,
+          "sha256": "aa3ff62d2c1a3ac25bfc549c07a6df9d69df76c1f832a0b8b508360fcdc8de95"
+        },
+        {
+          "path": "data/malecns/runs/m1c/all/full_results.json",
+          "bytes": 1008995,
+          "sha256": "8f0884beed3a6cb04d65a173d9a213900f57de8434298cd79b2a5338490cbdba"
+        }
+      ]
+    },
+    "mn9": {
+      "raw_trials": 480,
+      "MN9_neuron_trials": 960,
+      "M1_full_Poisson_array_pairs_identical": 480,
+      "cross_candidate_Poisson_train_pairs_identical": 43680,
+      "AP_shared_LB3c_trains_identical": 360,
+      "A200_B0_network_pairs_identical": 30,
+      "network_counts_rates_latencies_gates_AP": "PASS",
+      "sources": [
+        {
+          "path": "data/malecns/rescale_mn9_results.json",
+          "bytes": 13911,
+          "sha256": "b1b45f5e42c6b4f5e637a91c92517ec49f22b0af414edfd7e83de03f509c1977"
+        },
+        {
+          "path": "data/malecns/runs/m1c/mn9/full_results.json",
+          "bytes": 1008773,
+          "sha256": "1f36a12c76f172867f2f817c1ac38fe6e7087db0b96dec8e73cec3989abe26ab"
+        }
+      ]
+    }
+  },
+  "total_trials": 960,
+  "preflight_sources_and_three_female_replays": "PASS; two 25-Hz comparisons unavailable, no substitution",
+  "audit_source": {
+    "path": "sim/malecns/audit_rescale.py",
+    "bytes": 8358,
+    "sha256": "db28a0de059c220dfe875b36bd55cde1a5a3514cd1001d3cee883aee61755552"
+  },
+  "simulation": "none; saved-event reconstruction only"
+}

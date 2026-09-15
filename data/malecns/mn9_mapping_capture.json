@@ -1,0 +1,161 @@
+{
+  "scope": "Requested mapping/capture additions only; no simulation or conclusion",
+  "source_commit": "67767d2233657983993ff6c2be48e836a935863c",
+  "cross_matched_label": "CB0701",
+  "female_MN9_ids": [
+    "720575940660219265",
+    "720575940618238523"
+  ],
+  "all_label_members": {
+    "720575940618238523": "CB0701",
+    "720575940660219265": "CB0701",
+    "10331": "CB0701",
+    "16949": "CB0701"
+  },
+  "male_body_ids": [
+    10331,
+    16949
+  ],
+  "16949_in_mapping": true,
+  "mapping_semantics": "Neuron-to-cross-matched-group labels for the edge comparison; not one-to-one body pairing.",
+  "neuprint_retrieved_utc": "2026-09-14T08:23:39.950382+00:00",
+  "neuprint_dataset": "male-cns:v1.0",
+  "bodies": [
+    {
+      "body_id": 10331,
+      "side": "L",
+      "status": "Traced",
+      "statusLabel": "Roughly traced",
+      "flywireType": "CB0701",
+      "mapping_label": "CB0701",
+      "roiInfo": {
+        "CentralBrain": {
+          "post": 6358,
+          "pre": 172,
+          "downstream": 632,
+          "upstream": 6358,
+          "synweight": 6990
+        },
+        "CentralBrain-unspecified": {
+          "post": 1438,
+          "pre": 50,
+          "downstream": 191,
+          "upstream": 1438,
+          "synweight": 1629
+        },
+        "GNG": {
+          "post": 4920,
+          "pre": 122,
+          "downstream": 441,
+          "upstream": 4920,
+          "synweight": 5361
+        }
+      },
+      "total_post": 6358
+    },
+    {
+      "body_id": 16949,
+      "side": "R",
+      "status": "Traced",
+      "statusLabel": "RT Hard to trace",
+      "flywireType": "CB0701",
+      "mapping_label": "CB0701",
+      "roiInfo": {
+        "CentralBrain": {
+          "post": 633,
+          "pre": 244,
+          "downstream": 1145,
+          "upstream": 633,
+          "synweight": 1778
+        },
+        "CentralBrain-unspecified": {
+          "post": 200,
+          "pre": 82,
+          "downstream": 390,
+          "upstream": 200,
+          "synweight": 590
+        },
+        "GNG": {
+          "post": 433,
+          "pre": 162,
+          "downstream": 755,
+          "upstream": 433,
+          "synweight": 1188
+        }
+      },
+      "total_post": 633
+    }
+  ],
+  "roi_capture": [
+    {
+      "roi": "CentralBrain",
+      "csv_line": 3,
+      "capture": {
+        "compartment": "CNS Major Compartments",
+        "roi": "CentralBrain",
+        "roi_base": "CentralBrain",
+        "roi_side": "C",
+        "PreSyn": 20311220,
+        "PostSyn": 146214930,
+        "presyn_traced_frac": 0.9451066229265028,
+        "postsyn_traced_frac": 0.3684828438071236,
+        "conn_traced_frac": 0.3510271943406688,
+        "synweight_traced_frac": 0.6613760206937297
+      }
+    },
+    {
+      "roi": "CentralBrain-unspecified",
+      "capture": null,
+      "reason": "No row with this ROI in the requested CSV"
+    },
+    {
+      "roi": "GNG",
+      "csv_line": 31,
+      "capture": {
+        "compartment": "Central Brain",
+        "roi": "GNG",
+        "roi_base": "GNG",
+        "roi_side": "C",
+        "PreSyn": 2068906,
+        "PostSyn": 14620320,
+        "presyn_traced_frac": 0.9077091038142036,
+        "postsyn_traced_frac": 0.3536645229700866,
+        "conn_traced_frac": 0.3220257214734311,
+        "synweight_traced_frac": 0.6327009374604743
+      }
+    }
+  ],
+  "roi_limit": "Local body-annotation export has no dendrite ROI field. neuPrint roiInfo localizes postsynapses, not segmented dendritic arbors. GNG and CentralBrain-unspecified are disjoint here; CentralBrain is their parent and must not be added again.",
+  "capture_definitions": {
+    "presyn_traced_frac": "Fraction of ROI presynapses belonging to proofread neurons.",
+    "postsyn_traced_frac": "Fraction of ROI postsynapses belonging to proofread neurons.",
+    "conn_traced_frac": "Fraction of ROI synaptic connections with both endpoints proofread."
+  },
+  "capture_limit": "ROI-wide population fractions, not a completeness fraction for either MN9. No GNG side-specific rows; no CentralBrain-unspecified row; do not substitute the parent fraction.",
+  "sources": [
+    {
+      "path": "data/malecns/downloads/mcns_fw_edge_comp_mappings.json",
+      "bytes": 6723460,
+      "sha256": "94aaadbefedcc314c69fb8ad62a07361c1f78ee39424bad38ac1a6d7ca4d0a12",
+      "url": "https://github.com/flyconnectome/2025malecns/blob/67767d2233657983993ff6c2be48e836a935863c/supplemental_data/mcns_fw_edge_comp_mappings.json"
+    },
+    {
+      "path": "data/malecns/downloads/male-cns-v1.0-traced-synapse-capture-by-roi.csv",
+      "bytes": 12726,
+      "sha256": "b91253bcb26d3496b1ddcf17c05006384ee98bebb729ed7d62e3529131e28e64",
+      "url": "https://github.com/flyconnectome/2025malecns/blob/67767d2233657983993ff6c2be48e836a935863c/supplemental_data/male-cns-v1.0-traced-synapse-capture-by-roi.csv"
+    },
+    {
+      "path": "data/malecns/runs/m1c_preflight/neuprint.json",
+      "bytes": 4123,
+      "sha256": "4ec63c1ce94be541876e20856e1453ea883be1d4f0ee8498c05b2d76ea05608a",
+      "url": "https://neuprint.janelia.org/"
+    },
+    {
+      "path": "data/malecns/downloads/body-annotations-male-cns-v1.0-minconf-0.5.feather",
+      "bytes": 14483314,
+      "sha256": "2177e246113e4cfbf1e7772ec37c6da1955ff22e8063d0b1f833101f99a9a3b2"
+    }
+  ],
+  "definitions_source": "https://github.com/flyconnectome/2025malecns/blob/67767d2233657983993ff6c2be48e836a935863c/README.md#synapse-capture"
+}

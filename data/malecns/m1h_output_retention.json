@@ -1,0 +1,1055 @@
+{
+  "scope": "Read-only M1h outgoing audit before simulation; same brain endpoint roster.",
+  "partner_selection": "Top20 by baseline0.5 synapses directly into L10331, tie by ascending bodyId; fixed membership.",
+  "set_totals": [
+    {
+      "label": "sugar",
+      "outgoing_0_5": 6674,
+      "outgoing_c_star": 3111,
+      "retained_fraction": 0.46613724902607134,
+      "below_half": true,
+      "cells": 17
+    },
+    {
+      "label": "bitter",
+      "outgoing_0_5": 23430,
+      "outgoing_c_star": 10640,
+      "retained_fraction": 0.4541186513017499,
+      "below_half": true,
+      "cells": 38
+    },
+    {
+      "label": "water",
+      "outgoing_0_5": 4633,
+      "outgoing_c_star": 1994,
+      "retained_fraction": 0.4303906755881718,
+      "below_half": true,
+      "cells": 17
+    },
+    {
+      "label": "ir94e",
+      "outgoing_0_5": 7052,
+      "outgoing_c_star": 3375,
+      "retained_fraction": 0.4785876347135564,
+      "below_half": true,
+      "cells": 19
+    }
+  ],
+  "cells": [
+    {
+      "bodyId": 71254,
+      "label": "sugar",
+      "outgoing_0_5": 779,
+      "outgoing_c_star": 358,
+      "retained_fraction": 0.4595635430038511,
+      "below_half": true
+    },
+    {
+      "bodyId": 78240,
+      "label": "sugar",
+      "outgoing_0_5": 425,
+      "outgoing_c_star": 130,
+      "retained_fraction": 0.3058823529411765,
+      "below_half": true
+    },
+    {
+      "bodyId": 85806,
+      "label": "sugar",
+      "outgoing_0_5": 791,
+      "outgoing_c_star": 410,
+      "retained_fraction": 0.5183312262958281,
+      "below_half": false
+    },
+    {
+      "bodyId": 159772,
+      "label": "sugar",
+      "outgoing_0_5": 422,
+      "outgoing_c_star": 185,
+      "retained_fraction": 0.43838862559241704,
+      "below_half": true
+    },
+    {
+      "bodyId": 180314,
+      "label": "sugar",
+      "outgoing_0_5": 178,
+      "outgoing_c_star": 37,
+      "retained_fraction": 0.20786516853932585,
+      "below_half": true
+    },
+    {
+      "bodyId": 190769,
+      "label": "sugar",
+      "outgoing_0_5": 353,
+      "outgoing_c_star": 203,
+      "retained_fraction": 0.5750708215297451,
+      "below_half": false
+    },
+    {
+      "bodyId": 261450,
+      "label": "sugar",
+      "outgoing_0_5": 354,
+      "outgoing_c_star": 174,
+      "retained_fraction": 0.4915254237288136,
+      "below_half": true
+    },
+    {
+      "bodyId": 262567,
+      "label": "sugar",
+      "outgoing_0_5": 266,
+      "outgoing_c_star": 128,
+      "retained_fraction": 0.48120300751879697,
+      "below_half": true
+    },
+    {
+      "bodyId": 272263,
+      "label": "sugar",
+      "outgoing_0_5": 296,
+      "outgoing_c_star": 135,
+      "retained_fraction": 0.4560810810810811,
+      "below_half": true
+    },
+    {
+      "bodyId": 512551,
+      "label": "sugar",
+      "outgoing_0_5": 876,
+      "outgoing_c_star": 432,
+      "retained_fraction": 0.4931506849315068,
+      "below_half": true
+    },
+    {
+      "bodyId": 531237,
+      "label": "sugar",
+      "outgoing_0_5": 414,
+      "outgoing_c_star": 181,
+      "retained_fraction": 0.43719806763285024,
+      "below_half": true
+    },
+    {
+      "bodyId": 933317,
+      "label": "sugar",
+      "outgoing_0_5": 1024,
+      "outgoing_c_star": 515,
+      "retained_fraction": 0.5029296875,
+      "below_half": false
+    },
+    {
+      "bodyId": 158893964,
+      "label": "sugar",
+      "outgoing_0_5": 107,
+      "outgoing_c_star": 30,
+      "retained_fraction": 0.2803738317757009,
+      "below_half": true
+    },
+    {
+      "bodyId": 174444965,
+      "label": "sugar",
+      "outgoing_0_5": 42,
+      "outgoing_c_star": 18,
+      "retained_fraction": 0.42857142857142855,
+      "below_half": true
+    },
+    {
+      "bodyId": 349137284,
+      "label": "sugar",
+      "outgoing_0_5": 64,
+      "outgoing_c_star": 33,
+      "retained_fraction": 0.515625,
+      "below_half": false
+    },
+    {
+      "bodyId": 475202322,
+      "label": "sugar",
+      "outgoing_0_5": 149,
+      "outgoing_c_star": 75,
+      "retained_fraction": 0.5033557046979866,
+      "below_half": false
+    },
+    {
+      "bodyId": 766547228,
+      "label": "sugar",
+      "outgoing_0_5": 134,
+      "outgoing_c_star": 67,
+      "retained_fraction": 0.5,
+      "below_half": false
+    },
+    {
+      "bodyId": 54104,
+      "label": "bitter",
+      "outgoing_0_5": 416,
+      "outgoing_c_star": 193,
+      "retained_fraction": 0.4639423076923077,
+      "below_half": true
+    },
+    {
+      "bodyId": 81741,
+      "label": "bitter",
+      "outgoing_0_5": 738,
+      "outgoing_c_star": 363,
+      "retained_fraction": 0.491869918699187,
+      "below_half": true
+    },
+    {
+      "bodyId": 107241,
+      "label": "bitter",
+      "outgoing_0_5": 1127,
+      "outgoing_c_star": 546,
+      "retained_fraction": 0.484472049689441,
+      "below_half": true
+    },
+    {
+      "bodyId": 115666,
+      "label": "bitter",
+      "outgoing_0_5": 367,
+      "outgoing_c_star": 180,
+      "retained_fraction": 0.4904632152588556,
+      "below_half": true
+    },
+    {
+      "bodyId": 125111,
+      "label": "bitter",
+      "outgoing_0_5": 807,
+      "outgoing_c_star": 380,
+      "retained_fraction": 0.4708798017348203,
+      "below_half": true
+    },
+    {
+      "bodyId": 139178,
+      "label": "bitter",
+      "outgoing_0_5": 420,
+      "outgoing_c_star": 218,
+      "retained_fraction": 0.5190476190476191,
+      "below_half": false
+    },
+    {
+      "bodyId": 144334,
+      "label": "bitter",
+      "outgoing_0_5": 372,
+      "outgoing_c_star": 167,
+      "retained_fraction": 0.4489247311827957,
+      "below_half": true
+    },
+    {
+      "bodyId": 154544,
+      "label": "bitter",
+      "outgoing_0_5": 400,
+      "outgoing_c_star": 195,
+      "retained_fraction": 0.4875,
+      "below_half": true
+    },
+    {
+      "bodyId": 163395,
+      "label": "bitter",
+      "outgoing_0_5": 327,
+      "outgoing_c_star": 151,
+      "retained_fraction": 0.4617737003058104,
+      "below_half": true
+    },
+    {
+      "bodyId": 168492,
+      "label": "bitter",
+      "outgoing_0_5": 380,
+      "outgoing_c_star": 183,
+      "retained_fraction": 0.48157894736842105,
+      "below_half": true
+    },
+    {
+      "bodyId": 173462,
+      "label": "bitter",
+      "outgoing_0_5": 381,
+      "outgoing_c_star": 201,
+      "retained_fraction": 0.5275590551181102,
+      "below_half": false
+    },
+    {
+      "bodyId": 208885,
+      "label": "bitter",
+      "outgoing_0_5": 340,
+      "outgoing_c_star": 145,
+      "retained_fraction": 0.4264705882352941,
+      "below_half": true
+    },
+    {
+      "bodyId": 256844,
+      "label": "bitter",
+      "outgoing_0_5": 976,
+      "outgoing_c_star": 445,
+      "retained_fraction": 0.45594262295081966,
+      "below_half": true
+    },
+    {
+      "bodyId": 375038,
+      "label": "bitter",
+      "outgoing_0_5": 102,
+      "outgoing_c_star": 28,
+      "retained_fraction": 0.27450980392156865,
+      "below_half": true
+    },
+    {
+      "bodyId": 511882,
+      "label": "bitter",
+      "outgoing_0_5": 997,
+      "outgoing_c_star": 474,
+      "retained_fraction": 0.4754262788365095,
+      "below_half": true
+    },
+    {
+      "bodyId": 514546,
+      "label": "bitter",
+      "outgoing_0_5": 911,
+      "outgoing_c_star": 419,
+      "retained_fraction": 0.45993413830954993,
+      "below_half": true
+    },
+    {
+      "bodyId": 514547,
+      "label": "bitter",
+      "outgoing_0_5": 835,
+      "outgoing_c_star": 382,
+      "retained_fraction": 0.45748502994011975,
+      "below_half": true
+    },
+    {
+      "bodyId": 517255,
+      "label": "bitter",
+      "outgoing_0_5": 572,
+      "outgoing_c_star": 203,
+      "retained_fraction": 0.3548951048951049,
+      "below_half": true
+    },
+    {
+      "bodyId": 518112,
+      "label": "bitter",
+      "outgoing_0_5": 827,
+      "outgoing_c_star": 386,
+      "retained_fraction": 0.4667472793228537,
+      "below_half": true
+    },
+    {
+      "bodyId": 522746,
+      "label": "bitter",
+      "outgoing_0_5": 913,
+      "outgoing_c_star": 417,
+      "retained_fraction": 0.45673603504928806,
+      "below_half": true
+    },
+    {
+      "bodyId": 522752,
+      "label": "bitter",
+      "outgoing_0_5": 991,
+      "outgoing_c_star": 440,
+      "retained_fraction": 0.4439959636730575,
+      "below_half": true
+    },
+    {
+      "bodyId": 522753,
+      "label": "bitter",
+      "outgoing_0_5": 996,
+      "outgoing_c_star": 467,
+      "retained_fraction": 0.46887550200803213,
+      "below_half": true
+    },
+    {
+      "bodyId": 522754,
+      "label": "bitter",
+      "outgoing_0_5": 1007,
+      "outgoing_c_star": 477,
+      "retained_fraction": 0.47368421052631576,
+      "below_half": true
+    },
+    {
+      "bodyId": 522761,
+      "label": "bitter",
+      "outgoing_0_5": 985,
+      "outgoing_c_star": 380,
+      "retained_fraction": 0.38578680203045684,
+      "below_half": true
+    },
+    {
+      "bodyId": 522762,
+      "label": "bitter",
+      "outgoing_0_5": 889,
+      "outgoing_c_star": 394,
+      "retained_fraction": 0.4431946006749156,
+      "below_half": true
+    },
+    {
+      "bodyId": 522841,
+      "label": "bitter",
+      "outgoing_0_5": 1190,
+      "outgoing_c_star": 525,
+      "retained_fraction": 0.4411764705882353,
+      "below_half": true
+    },
+    {
+      "bodyId": 533618,
+      "label": "bitter",
+      "outgoing_0_5": 786,
+      "outgoing_c_star": 344,
+      "retained_fraction": 0.43765903307888043,
+      "below_half": true
+    },
+    {
+      "bodyId": 549024,
+      "label": "bitter",
+      "outgoing_0_5": 302,
+      "outgoing_c_star": 149,
+      "retained_fraction": 0.49337748344370863,
+      "below_half": true
+    },
+    {
+      "bodyId": 556797,
+      "label": "bitter",
+      "outgoing_0_5": 437,
+      "outgoing_c_star": 205,
+      "retained_fraction": 0.4691075514874142,
+      "below_half": true
+    },
+    {
+      "bodyId": 557937,
+      "label": "bitter",
+      "outgoing_0_5": 279,
+      "outgoing_c_star": 108,
+      "retained_fraction": 0.3870967741935484,
+      "below_half": true
+    },
+    {
+      "bodyId": 912379,
+      "label": "bitter",
+      "outgoing_0_5": 825,
+      "outgoing_c_star": 342,
+      "retained_fraction": 0.41454545454545455,
+      "below_half": true
+    },
+    {
+      "bodyId": 140334446,
+      "label": "bitter",
+      "outgoing_0_5": 334,
+      "outgoing_c_star": 163,
+      "retained_fraction": 0.4880239520958084,
+      "below_half": true
+    },
+    {
+      "bodyId": 144295263,
+      "label": "bitter",
+      "outgoing_0_5": 75,
+      "outgoing_c_star": 38,
+      "retained_fraction": 0.5066666666666667,
+      "below_half": false
+    },
+    {
+      "bodyId": 304136793,
+      "label": "bitter",
+      "outgoing_0_5": 625,
+      "outgoing_c_star": 300,
+      "retained_fraction": 0.48,
+      "below_half": true
+    },
+    {
+      "bodyId": 324178811,
+      "label": "bitter",
+      "outgoing_0_5": 740,
+      "outgoing_c_star": 315,
+      "retained_fraction": 0.42567567567567566,
+      "below_half": true
+    },
+    {
+      "bodyId": 602736959,
+      "label": "bitter",
+      "outgoing_0_5": 98,
+      "outgoing_c_star": 38,
+      "retained_fraction": 0.3877551020408163,
+      "below_half": true
+    },
+    {
+      "bodyId": 772366874,
+      "label": "bitter",
+      "outgoing_0_5": 436,
+      "outgoing_c_star": 184,
+      "retained_fraction": 0.42201834862385323,
+      "below_half": true
+    },
+    {
+      "bodyId": 911389008,
+      "label": "bitter",
+      "outgoing_0_5": 227,
+      "outgoing_c_star": 95,
+      "retained_fraction": 0.4185022026431718,
+      "below_half": true
+    },
+    {
+      "bodyId": 136183,
+      "label": "water",
+      "outgoing_0_5": 392,
+      "outgoing_c_star": 191,
+      "retained_fraction": 0.4872448979591837,
+      "below_half": true
+    },
+    {
+      "bodyId": 140619,
+      "label": "water",
+      "outgoing_0_5": 295,
+      "outgoing_c_star": 118,
+      "retained_fraction": 0.4,
+      "below_half": true
+    },
+    {
+      "bodyId": 141663,
+      "label": "water",
+      "outgoing_0_5": 324,
+      "outgoing_c_star": 119,
+      "retained_fraction": 0.36728395061728397,
+      "below_half": true
+    },
+    {
+      "bodyId": 160435,
+      "label": "water",
+      "outgoing_0_5": 485,
+      "outgoing_c_star": 205,
+      "retained_fraction": 0.422680412371134,
+      "below_half": true
+    },
+    {
+      "bodyId": 166190,
+      "label": "water",
+      "outgoing_0_5": 401,
+      "outgoing_c_star": 171,
+      "retained_fraction": 0.42643391521197005,
+      "below_half": true
+    },
+    {
+      "bodyId": 167663,
+      "label": "water",
+      "outgoing_0_5": 334,
+      "outgoing_c_star": 144,
+      "retained_fraction": 0.4311377245508982,
+      "below_half": true
+    },
+    {
+      "bodyId": 178913,
+      "label": "water",
+      "outgoing_0_5": 306,
+      "outgoing_c_star": 127,
+      "retained_fraction": 0.4150326797385621,
+      "below_half": true
+    },
+    {
+      "bodyId": 183061,
+      "label": "water",
+      "outgoing_0_5": 369,
+      "outgoing_c_star": 183,
+      "retained_fraction": 0.4959349593495935,
+      "below_half": true
+    },
+    {
+      "bodyId": 187776,
+      "label": "water",
+      "outgoing_0_5": 357,
+      "outgoing_c_star": 147,
+      "retained_fraction": 0.4117647058823529,
+      "below_half": true
+    },
+    {
+      "bodyId": 199308,
+      "label": "water",
+      "outgoing_0_5": 227,
+      "outgoing_c_star": 95,
+      "retained_fraction": 0.4185022026431718,
+      "below_half": true
+    },
+    {
+      "bodyId": 203234,
+      "label": "water",
+      "outgoing_0_5": 266,
+      "outgoing_c_star": 127,
+      "retained_fraction": 0.4774436090225564,
+      "below_half": true
+    },
+    {
+      "bodyId": 374701,
+      "label": "water",
+      "outgoing_0_5": 97,
+      "outgoing_c_star": 34,
+      "retained_fraction": 0.35051546391752575,
+      "below_half": true
+    },
+    {
+      "bodyId": 518542,
+      "label": "water",
+      "outgoing_0_5": 290,
+      "outgoing_c_star": 130,
+      "retained_fraction": 0.4482758620689655,
+      "below_half": true
+    },
+    {
+      "bodyId": 388541892,
+      "label": "water",
+      "outgoing_0_5": 239,
+      "outgoing_c_star": 101,
+      "retained_fraction": 0.4225941422594142,
+      "below_half": true
+    },
+    {
+      "bodyId": 456838775,
+      "label": "water",
+      "outgoing_0_5": 78,
+      "outgoing_c_star": 28,
+      "retained_fraction": 0.358974358974359,
+      "below_half": true
+    },
+    {
+      "bodyId": 553738738,
+      "label": "water",
+      "outgoing_0_5": 65,
+      "outgoing_c_star": 30,
+      "retained_fraction": 0.46153846153846156,
+      "below_half": true
+    },
+    {
+      "bodyId": 786482749,
+      "label": "water",
+      "outgoing_0_5": 108,
+      "outgoing_c_star": 44,
+      "retained_fraction": 0.4074074074074074,
+      "below_half": true
+    },
+    {
+      "bodyId": 44816,
+      "label": "ir94e",
+      "outgoing_0_5": 1097,
+      "outgoing_c_star": 579,
+      "retained_fraction": 0.5278030993618961,
+      "below_half": false
+    },
+    {
+      "bodyId": 111660,
+      "label": "ir94e",
+      "outgoing_0_5": 487,
+      "outgoing_c_star": 238,
+      "retained_fraction": 0.4887063655030801,
+      "below_half": true
+    },
+    {
+      "bodyId": 137497,
+      "label": "ir94e",
+      "outgoing_0_5": 635,
+      "outgoing_c_star": 321,
+      "retained_fraction": 0.5055118110236221,
+      "below_half": false
+    },
+    {
+      "bodyId": 154359,
+      "label": "ir94e",
+      "outgoing_0_5": 465,
+      "outgoing_c_star": 230,
+      "retained_fraction": 0.4946236559139785,
+      "below_half": true
+    },
+    {
+      "bodyId": 175572,
+      "label": "ir94e",
+      "outgoing_0_5": 390,
+      "outgoing_c_star": 175,
+      "retained_fraction": 0.44871794871794873,
+      "below_half": true
+    },
+    {
+      "bodyId": 200001,
+      "label": "ir94e",
+      "outgoing_0_5": 365,
+      "outgoing_c_star": 166,
+      "retained_fraction": 0.4547945205479452,
+      "below_half": true
+    },
+    {
+      "bodyId": 209688,
+      "label": "ir94e",
+      "outgoing_0_5": 560,
+      "outgoing_c_star": 262,
+      "retained_fraction": 0.46785714285714286,
+      "below_half": true
+    },
+    {
+      "bodyId": 232730,
+      "label": "ir94e",
+      "outgoing_0_5": 131,
+      "outgoing_c_star": 53,
+      "retained_fraction": 0.40458015267175573,
+      "below_half": true
+    },
+    {
+      "bodyId": 534361,
+      "label": "ir94e",
+      "outgoing_0_5": 594,
+      "outgoing_c_star": 293,
+      "retained_fraction": 0.49326599326599324,
+      "below_half": true
+    },
+    {
+      "bodyId": 908747,
+      "label": "ir94e",
+      "outgoing_0_5": 536,
+      "outgoing_c_star": 260,
+      "retained_fraction": 0.48507462686567165,
+      "below_half": true
+    },
+    {
+      "bodyId": 919429,
+      "label": "ir94e",
+      "outgoing_0_5": 110,
+      "outgoing_c_star": 54,
+      "retained_fraction": 0.4909090909090909,
+      "below_half": true
+    },
+    {
+      "bodyId": 214700177,
+      "label": "ir94e",
+      "outgoing_0_5": 446,
+      "outgoing_c_star": 220,
+      "retained_fraction": 0.49327354260089684,
+      "below_half": true
+    },
+    {
+      "bodyId": 418840426,
+      "label": "ir94e",
+      "outgoing_0_5": 163,
+      "outgoing_c_star": 45,
+      "retained_fraction": 0.27607361963190186,
+      "below_half": true
+    },
+    {
+      "bodyId": 491986845,
+      "label": "ir94e",
+      "outgoing_0_5": 233,
+      "outgoing_c_star": 105,
+      "retained_fraction": 0.45064377682403434,
+      "below_half": true
+    },
+    {
+      "bodyId": 551057545,
+      "label": "ir94e",
+      "outgoing_0_5": 163,
+      "outgoing_c_star": 79,
+      "retained_fraction": 0.48466257668711654,
+      "below_half": true
+    },
+    {
+      "bodyId": 633272971,
+      "label": "ir94e",
+      "outgoing_0_5": 149,
+      "outgoing_c_star": 53,
+      "retained_fraction": 0.35570469798657717,
+      "below_half": true
+    },
+    {
+      "bodyId": 792429427,
+      "label": "ir94e",
+      "outgoing_0_5": 160,
+      "outgoing_c_star": 82,
+      "retained_fraction": 0.5125,
+      "below_half": false
+    },
+    {
+      "bodyId": 912111327,
+      "label": "ir94e",
+      "outgoing_0_5": 262,
+      "outgoing_c_star": 133,
+      "retained_fraction": 0.5076335877862596,
+      "below_half": false
+    },
+    {
+      "bodyId": 947005552,
+      "label": "ir94e",
+      "outgoing_0_5": 106,
+      "outgoing_c_star": 27,
+      "retained_fraction": 0.25471698113207547,
+      "below_half": true
+    },
+    {
+      "bodyId": 10331,
+      "label": "MN9 L primary",
+      "outgoing_0_5": 280,
+      "outgoing_c_star": 27,
+      "retained_fraction": 0.09642857142857143,
+      "below_half": true
+    },
+    {
+      "bodyId": 16949,
+      "label": "MN9 R secondary",
+      "outgoing_0_5": 445,
+      "outgoing_c_star": 87,
+      "retained_fraction": 0.19550561797752808,
+      "below_half": true
+    }
+  ],
+  "partners": [
+    {
+      "bodyId": 10833,
+      "label": "L10331 baseline top20 presynaptic partner",
+      "outgoing_0_5": 2427,
+      "outgoing_c_star": 1261,
+      "retained_fraction": 0.5195714874330449,
+      "below_half": false,
+      "rank": 1,
+      "into_L10331_0_5": 464,
+      "into_L10331_c_star": 250,
+      "last_hop_retained_fraction": 0.5387931034482759
+    },
+    {
+      "bodyId": 10881,
+      "label": "L10331 baseline top20 presynaptic partner",
+      "outgoing_0_5": 2087,
+      "outgoing_c_star": 1252,
+      "retained_fraction": 0.5999041686631529,
+      "below_half": false,
+      "rank": 2,
+      "into_L10331_0_5": 359,
+      "into_L10331_c_star": 247,
+      "last_hop_retained_fraction": 0.6880222841225627
+    },
+    {
+      "bodyId": 13754,
+      "label": "L10331 baseline top20 presynaptic partner",
+      "outgoing_0_5": 1442,
+      "outgoing_c_star": 941,
+      "retained_fraction": 0.6525658807212206,
+      "below_half": false,
+      "rank": 3,
+      "into_L10331_0_5": 357,
+      "into_L10331_c_star": 275,
+      "last_hop_retained_fraction": 0.7703081232492998
+    },
+    {
+      "bodyId": 12851,
+      "label": "L10331 baseline top20 presynaptic partner",
+      "outgoing_0_5": 2850,
+      "outgoing_c_star": 1649,
+      "retained_fraction": 0.5785964912280702,
+      "below_half": false,
+      "rank": 4,
+      "into_L10331_0_5": 351,
+      "into_L10331_c_star": 199,
+      "last_hop_retained_fraction": 0.5669515669515669
+    },
+    {
+      "bodyId": 26764,
+      "label": "L10331 baseline top20 presynaptic partner",
+      "outgoing_0_5": 3970,
+      "outgoing_c_star": 2806,
+      "retained_fraction": 0.7068010075566751,
+      "below_half": false,
+      "rank": 5,
+      "into_L10331_0_5": 348,
+      "into_L10331_c_star": 273,
+      "last_hop_retained_fraction": 0.7844827586206896
+    },
+    {
+      "bodyId": 523590,
+      "label": "L10331 baseline top20 presynaptic partner",
+      "outgoing_0_5": 2548,
+      "outgoing_c_star": 1600,
+      "retained_fraction": 0.6279434850863422,
+      "below_half": false,
+      "rank": 6,
+      "into_L10331_0_5": 266,
+      "into_L10331_c_star": 219,
+      "last_hop_retained_fraction": 0.8233082706766918
+    },
+    {
+      "bodyId": 10849,
+      "label": "L10331 baseline top20 presynaptic partner",
+      "outgoing_0_5": 6418,
+      "outgoing_c_star": 3155,
+      "retained_fraction": 0.4915861639139919,
+      "below_half": true,
+      "rank": 7,
+      "into_L10331_0_5": 241,
+      "into_L10331_c_star": 130,
+      "last_hop_retained_fraction": 0.5394190871369294
+    },
+    {
+      "bodyId": 513655,
+      "label": "L10331 baseline top20 presynaptic partner",
+      "outgoing_0_5": 2040,
+      "outgoing_c_star": 1225,
+      "retained_fraction": 0.6004901960784313,
+      "below_half": false,
+      "rank": 8,
+      "into_L10331_0_5": 214,
+      "into_L10331_c_star": 141,
+      "last_hop_retained_fraction": 0.6588785046728972
+    },
+    {
+      "bodyId": 14891,
+      "label": "L10331 baseline top20 presynaptic partner",
+      "outgoing_0_5": 2278,
+      "outgoing_c_star": 1318,
+      "retained_fraction": 0.5785776997366111,
+      "below_half": false,
+      "rank": 9,
+      "into_L10331_0_5": 198,
+      "into_L10331_c_star": 119,
+      "last_hop_retained_fraction": 0.601010101010101
+    },
+    {
+      "bodyId": 17782,
+      "label": "L10331 baseline top20 presynaptic partner",
+      "outgoing_0_5": 1877,
+      "outgoing_c_star": 1063,
+      "retained_fraction": 0.5663292488012787,
+      "below_half": false,
+      "rank": 10,
+      "into_L10331_0_5": 187,
+      "into_L10331_c_star": 130,
+      "last_hop_retained_fraction": 0.6951871657754011
+    },
+    {
+      "bodyId": 28181,
+      "label": "L10331 baseline top20 presynaptic partner",
+      "outgoing_0_5": 1865,
+      "outgoing_c_star": 1296,
+      "retained_fraction": 0.6949061662198391,
+      "below_half": false,
+      "rank": 11,
+      "into_L10331_0_5": 177,
+      "into_L10331_c_star": 148,
+      "last_hop_retained_fraction": 0.8361581920903954
+    },
+    {
+      "bodyId": 11755,
+      "label": "L10331 baseline top20 presynaptic partner",
+      "outgoing_0_5": 6124,
+      "outgoing_c_star": 2958,
+      "retained_fraction": 0.4830176355323318,
+      "below_half": true,
+      "rank": 12,
+      "into_L10331_0_5": 160,
+      "into_L10331_c_star": 91,
+      "last_hop_retained_fraction": 0.56875
+    },
+    {
+      "bodyId": 523679,
+      "label": "L10331 baseline top20 presynaptic partner",
+      "outgoing_0_5": 2243,
+      "outgoing_c_star": 1445,
+      "retained_fraction": 0.6442264823896567,
+      "below_half": false,
+      "rank": 13,
+      "into_L10331_0_5": 142,
+      "into_L10331_c_star": 103,
+      "last_hop_retained_fraction": 0.7253521126760564
+    },
+    {
+      "bodyId": 16142,
+      "label": "L10331 baseline top20 presynaptic partner",
+      "outgoing_0_5": 2098,
+      "outgoing_c_star": 1233,
+      "retained_fraction": 0.5877025738798856,
+      "below_half": false,
+      "rank": 14,
+      "into_L10331_0_5": 136,
+      "into_L10331_c_star": 98,
+      "last_hop_retained_fraction": 0.7205882352941176
+    },
+    {
+      "bodyId": 12752,
+      "label": "L10331 baseline top20 presynaptic partner",
+      "outgoing_0_5": 3699,
+      "outgoing_c_star": 1974,
+      "retained_fraction": 0.5336577453365775,
+      "below_half": false,
+      "rank": 15,
+      "into_L10331_0_5": 101,
+      "into_L10331_c_star": 60,
+      "last_hop_retained_fraction": 0.594059405940594
+    },
+    {
+      "bodyId": 12364,
+      "label": "L10331 baseline top20 presynaptic partner",
+      "outgoing_0_5": 3623,
+      "outgoing_c_star": 1987,
+      "retained_fraction": 0.5484405189069832,
+      "below_half": false,
+      "rank": 16,
+      "into_L10331_0_5": 96,
+      "into_L10331_c_star": 59,
+      "last_hop_retained_fraction": 0.6145833333333334
+    },
+    {
+      "bodyId": 10673,
+      "label": "L10331 baseline top20 presynaptic partner",
+      "outgoing_0_5": 5602,
+      "outgoing_c_star": 2513,
+      "retained_fraction": 0.4485897893609425,
+      "below_half": true,
+      "rank": 17,
+      "into_L10331_0_5": 92,
+      "into_L10331_c_star": 54,
+      "last_hop_retained_fraction": 0.5869565217391305
+    },
+    {
+      "bodyId": 238142,
+      "label": "L10331 baseline top20 presynaptic partner",
+      "outgoing_0_5": 1116,
+      "outgoing_c_star": 598,
+      "retained_fraction": 0.53584229390681,
+      "below_half": false,
+      "rank": 18,
+      "into_L10331_0_5": 92,
+      "into_L10331_c_star": 60,
+      "last_hop_retained_fraction": 0.6521739130434783
+    },
+    {
+      "bodyId": 13402,
+      "label": "L10331 baseline top20 presynaptic partner",
+      "outgoing_0_5": 2156,
+      "outgoing_c_star": 1139,
+      "retained_fraction": 0.5282931354359925,
+      "below_half": false,
+      "rank": 19,
+      "into_L10331_0_5": 78,
+      "into_L10331_c_star": 54,
+      "last_hop_retained_fraction": 0.6923076923076923
+    },
+    {
+      "bodyId": 522702,
+      "label": "L10331 baseline top20 presynaptic partner",
+      "outgoing_0_5": 2490,
+      "outgoing_c_star": 1579,
+      "retained_fraction": 0.6341365461847389,
+      "below_half": false,
+      "rank": 20,
+      "into_L10331_0_5": 76,
+      "into_L10331_c_star": 50,
+      "last_hop_retained_fraction": 0.6578947368421053
+    }
+  ],
+  "stop_triggered": true,
+  "cost": "At c*=0.869 the graph keeps56.8% of brain contacts. Recall at this cutoff is unknown (0.81 at0.5 per Berg S8E). This is a heavily pruned graph, density-matched by construction.",
+  "sources": [
+    {
+      "path": "data/malecns/derived/brain/connectivity.parquet",
+      "bytes": 85739862,
+      "sha256": "7b59f3f015bbdb3e7ac08876a7e48ff17a31ba3f35c183fe12bc47ee6e850cb4"
+    },
+    {
+      "path": "data/malecns/derived/density_matched/connectivity.parquet",
+      "bytes": 55247331,
+      "sha256": "ae69a47a5c60581ccc1fe51454192b453fd481c367672f2d2bcbd5cd9af2b0fa"
+    },
+    {
+      "path": "data/malecns/cells.json",
+      "bytes": 20697,
+      "sha256": "f29dd1511e5484d70062cf44d448acfa63e8ef89b49ab7cc281108e5be234c99"
+    },
+    {
+      "path": "data/malecns/derived/brain/neuron_index.csv",
+      "bytes": 23842803,
+      "sha256": "704f99379279b1437bc90ca48a35d1a9a9c20edb1fb85a66ac837df007bf1e47"
+    }
+  ],
+  "builder": {
+    "path": "sim/malecns/output_retention.py",
+    "bytes": 6880,
+    "sha256": "ea096bdde85a6cdd0026993b21f90f2a5bb0ab5b542c439b29a1e17c033258fb"
+  }
+}

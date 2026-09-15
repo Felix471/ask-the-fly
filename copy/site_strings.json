@@ -718,8 +718,8 @@
     {
       "key": "releaseSummary",
       "context": "Footer 'what's new' line, one-line summary of the latest release; version and date come from site/data/release.json",
-      "en": "Long plate names stay separate; no scores changed",
-      "zh": "长菜名不再挤在一起；分数没有变",
+      "en": "Four response states and MN11 readouts; scores unchanged.",
+      "zh": "新增四状态、MN11 读数与果蝇反应；分数不变。",
       "max_length": 60
     },
     {
@@ -1015,6 +1015,114 @@
       "en": "{name}: median MN9 change {median} over {n} cells where baseline MN9 fired · {up}% up · {down}% down · {same}% unchanged · all {nAll} cells: median {medianAll}",
       "zh": "{name}：基线 MN9 有放电的 {n} 个格子里 MN9 中位变化 {median} · {up}% 上升 · {down}% 下降 · {same}% 不变 · 全部 {nAll} 个格子：中位 {medianAll}",
       "max_length": 180
+    },
+    {
+      "key": "stateV12.EatsLabel",
+      "context": "Designed state label, not observed behaviour.",
+      "en": "Eats",
+      "zh": "吃"
+    },
+    {
+      "key": "stateV12.EatsExplanation",
+      "context": "MN9 is frozen left readout; MN11D is two-cell mean; both averaged over 30 trials. Owner-designed 5 Hz threshold.",
+      "en": "Mean MN9 and MN11D readouts are both ≥ 5 Hz.",
+      "zh": "MN9 和 MN11D 的平均读数均 ≥ 5 Hz。"
+    },
+    {
+      "key": "stateV12.MouthMovesLabel",
+      "context": "Designed state label, not observed behaviour.",
+      "en": "Mouth moves",
+      "zh": "嘴动了"
+    },
+    {
+      "key": "stateV12.MouthMovesExplanation",
+      "context": "MN9 is frozen left readout; MN11D is two-cell mean; both averaged over 30 trials. Owner-designed 5 Hz threshold.",
+      "en": "Mean MN9 is < 5 Hz; mean MN11D is ≥ 5 Hz.",
+      "zh": "MN9 平均读数 < 5 Hz，MN11D 平均读数 ≥ 5 Hz。"
+    },
+    {
+      "key": "stateV12.ProboscisOnlyLabel",
+      "context": "Designed state label, not observed behaviour.",
+      "en": "Proboscis only",
+      "zh": "只伸了喙"
+    },
+    {
+      "key": "stateV12.ProboscisOnlyExplanation",
+      "context": "MN9 is frozen left readout; MN11D is two-cell mean; both averaged over 30 trials. Owner-designed 5 Hz threshold.",
+      "en": "Mean MN9 is ≥ 5 Hz; mean MN11D is < 5 Hz.",
+      "zh": "MN9 平均读数 ≥ 5 Hz，MN11D 平均读数 < 5 Hz。"
+    },
+    {
+      "key": "stateV12.NoResponseLabel",
+      "context": "Designed state label, not observed behaviour.",
+      "en": "No response",
+      "zh": "无明显反应"
+    },
+    {
+      "key": "stateV12.NoResponseExplanation",
+      "context": "MN9 is frozen left readout; MN11D is two-cell mean; both averaged over 30 trials. Owner-designed 5 Hz threshold.",
+      "en": "Mean MN9 and MN11D are both < 5 Hz; this does not mean zero firing.",
+      "zh": "MN9 和 MN11D 的平均读数均 < 5 Hz；不代表完全不放电。"
+    },
+    {
+      "key": "colMn9R",
+      "context": "v1.2 MN11 display; designed states and animation distinct from recorded rates.",
+      "en": "MN9 R (recorded)",
+      "zh": "MN9 右（记录）"
+    },
+    {
+      "key": "colMn11D",
+      "context": "v1.2 MN11 display; designed states and animation distinct from recorded rates.",
+      "en": "MN11D (two-cell mean)",
+      "zh": "MN11D（两细胞均值）"
+    },
+    {
+      "key": "colMn11V",
+      "context": "v1.2 MN11 display; designed states and animation distinct from recorded rates.",
+      "en": "MN11V (two-cell mean)",
+      "zh": "MN11V（两细胞均值）"
+    },
+    {
+      "key": "colResponse",
+      "context": "v1.2 MN11 display; designed states and animation distinct from recorded rates.",
+      "en": "Designed state",
+      "zh": "设计状态"
+    },
+    {
+      "key": "responseInset",
+      "context": "v1.2 MN11 display; designed states and animation distinct from recorded rates.",
+      "en": "Illustrative mouth-part animation",
+      "zh": "嘴部示意动画"
+    },
+    {
+      "key": "responseDesign",
+      "context": "v1.2 MN11 display; designed states and animation distinct from recorded rates.",
+      "en": "State: 30-trial means of left MN9 and two-cell MN11D, with our 5 Hz threshold. MN11V/right MN9 do not decide it. Movements, emotions and speech are designed, not observed feeding.",
+      "zh": "状态由左 MN9 与 MN11D 两细胞的 30 次均值及我们设定的 5 Hz 阈值决定。MN11V、右 MN9 不参与判定。动作、情绪和台词是设计，不是观测到的进食行为。"
+    },
+    {
+      "key": "mn11ReplayNote",
+      "context": "v1.2 MN11 display; designed states and animation distinct from recorded rates.",
+      "en": "Raster: one recorded trial, not the 30-trial state average. MN11D/V rows are individual cells; L/R follows the workbook.",
+      "zh": "光栅：一次记录试验，不是状态所用的 30 次均值。MN11D/V 每行是一个细胞，左右按工作簿标注。"
+    },
+    {
+      "key": "mn11VariantNote",
+      "context": "v1.2 MN11 display; designed states and animation distinct from recorded rates.",
+      "en": "MN11 rows were not packed for this silencing replay. The dish state remains the baseline 30-trial state; it is not recalculated here.",
+      "zh": "此静默回放未打包 MN11 行。菜品状态仍是基线 30 次均值的状态，此处不重新判定。"
+    },
+    {
+      "key": "sceneNoResponse",
+      "context": "v1.2 MN11 display; designed states and animation distinct from recorded rates.",
+      "en": "The fly leaves.",
+      "zh": "果蝇转身走了。"
+    },
+    {
+      "key": "cardReadouts",
+      "context": "v1.2 MN11 display; designed states and animation distinct from recorded rates.",
+      "en": "{state} (designed) · MN11D {d} · MN11V {v} Hz",
+      "zh": "{state}（设计标签）· MN11D {d} · MN11V {v} Hz"
     }
   ]
 }

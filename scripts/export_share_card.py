@@ -34,6 +34,17 @@ def render(args: argparse.Namespace) -> tuple[Path, Path]:
         browser = p.chromium.launch()
         context = browser.new_context(viewport={"width": args.width, "height": 844}, device_scale_factor=3)
         page = context.new_page()
+        page.add_init_script('''
+          window.__cardTextBounds=[];
+          const original=CanvasRenderingContext2D.prototype.fillText;
+          CanvasRenderingContext2D.prototype.fillText=function(text,x,y,...rest){
+            if(this.canvas.id==='share-card') {
+              const m=this.measureText(text);
+              window.__cardTextBounds.push({text,y,bottom:y+m.actualBoundingBoxDescent,height:this.canvas.height});
+            }
+            return original.call(this,text,x,y,...rest);
+          };
+        ''')
         page.goto(args.url.rstrip("/") + "/" + query, wait_until="networkidle")
         page.wait_for_selector("#scene-panel:not([hidden])", timeout=20000)
         page.wait_for_timeout(800)  # sprites are loaded by the scene before it starts
@@ -42,6 +53,8 @@ def render(args: argparse.Namespace) -> tuple[Path, Path]:
         page.click("#share-btn")
         page.wait_for_selector("#card-dialog[open]", timeout=20000)
         page.wait_for_timeout(500)
+        overflow=page.evaluate('window.__cardTextBounds.filter(b=>b.y<0 || b.bottom>b.height)')
+        assert not overflow, f'Share-card text outside canvas: {overflow}'
         data_url = page.evaluate("document.getElementById('share-card').toDataURL('image/png')")
         out.write_bytes(base64.b64decode(data_url.split(",", 1)[1]))
         page.screenshot(path=str(phone))  # the modal as the phone shows it
@@ -77,7 +90,8 @@ def main() -> int:
 
     out, phone = render(args)
     print(f"card: {out}\nphone view: {phone}")
-    expected = f"{SITE_URL}?v=2&d=" + ",".join("k." + d for d in args.dishes.split(",")) + f"&lang={args.lang}" + ("&m=opposite" if args.opposite else "")
+    # Legacy input links use the deterministic presentation seed 0 in v1.2.
+    expected = f"{SITE_URL}?v=2&d=" + ",".join("k." + d for d in args.dishes.split(",")) + f"&lang={args.lang}" + ("&m=opposite" if args.opposite else "") + "&seed=0"
     decoded = decode_qr(out)
     if decoded is None:
         print("QR not checked (pip install opencv-python-headless to decode)")
