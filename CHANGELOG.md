@@ -2,6 +2,12 @@
 
 What a visitor to askthefly.app would notice, newest first. One section per release; the heading is `## vX.Y.Z — YYYY-MM-DD` (the release tag on `main` and its date), and `scripts/validate_release.py` checks that `site/data/release.json` matches the top entry. Each entry ends with a line on whether the README honesty table changed.
 
+## v1.2.1 — 2026-09-15
+
+- Refreshed all 16 groups of Chinese and English fly speech with owner-supplied lines.
+- No scores, state rules, speech conditions, tie handling or allocation changed. A final no_response pick still leaves without ownership speech.
+- README honesty table: unchanged; speech remains a designed illustration.
+
 ## v1.2.0 — 2026-09-15
 
 - Four designed response states now give each plate a distinct fly reaction, mouth inset, emotion bubble and bilingual speech. Results and share cards include MN11 readouts; baseline rasters include individual MN11D/V cells.
