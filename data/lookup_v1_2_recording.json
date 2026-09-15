@@ -1,0 +1,82 @@
+{
+  "base_protocol": "data/stim_protocol.json",
+  "base_protocol_sha256": "9f9495033281bfcd6f3b373551817987deb2cc083ae94ab61fece9065102d82a",
+  "source_lookup_sha256": "bd7c6f61656dbb0ec3943d267bd24ed9c2e06d0f00075671b17094b7cfd7c51c",
+  "seed_scheme": "20260910 +1000*(canonical_grid_index%40)+trial; published v1 batch40, not current v2",
+  "trials_per_cell": 30,
+  "grid_cells": 400,
+  "readout_neurons": [
+    {
+      "Body_ID": "720575940660219265",
+      "Root_Side": "R",
+      "Type": "MN9",
+      "Target_Muscle": "9",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940618238523",
+      "Root_Side": "L",
+      "Type": "MN9",
+      "Target_Muscle": "9",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940630868793",
+      "Root_Side": "R",
+      "Type": "MN11D",
+      "Target_Muscle": "11D",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940618165019",
+      "Root_Side": "L",
+      "Type": "MN11D",
+      "Target_Muscle": "11D",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940635360924",
+      "Root_Side": "R",
+      "Type": "MN11V",
+      "Target_Muscle": "11V",
+      "in_v783": true
+    },
+    {
+      "Body_ID": "720575940636165624",
+      "Root_Side": "L",
+      "Type": "MN11V",
+      "Target_Muscle": "11V",
+      "in_v783": true
+    }
+  ],
+  "std_ddof": 0,
+  "state_rule": {
+    "mn9": {
+      "id": "720575940660219265",
+      "side": "left",
+      "statistic": "30-trial mean Hz"
+    },
+    "mn11": {
+      "type": "MN11D",
+      "statistic": "30-trial mean of per-trial two-cell mean Hz"
+    },
+    "threshold_hz": 5.0,
+    "active": "mean >= 5.0",
+    "silent": "mean < 5.0",
+    "states": {
+      "active_active": "eats",
+      "silent_active": "mouth_moves",
+      "active_silent": "proboscis_only",
+      "silent_silent": "no_response"
+    },
+    "not_deciding": [
+      "MN9 right",
+      "MN11V"
+    ],
+    "ties": "Not a state; existing MN9 tie handling unchanged.",
+    "meaning": "Owner-designed threshold categories of model outputs; wording approval and site integration deferred to Step2."
+  },
+  "output": "data/lookup_table_v1_2.json",
+  "replay_output": "data/replay_v1_2",
+  "site_changes": "None; Step2 separately gated."
+}
