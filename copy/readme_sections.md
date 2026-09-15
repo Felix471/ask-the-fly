@@ -11,7 +11,7 @@ Try it: https://askthefly.app/
 
 **What's new** (full list in [CHANGELOG.md](CHANGELOG.md))
 
-- v1.2.1 (2026-09-15): refreshed all 16 groups of bilingual fly speech; scores, states, allocation rules and the honesty table are unchanged.
+- v1.2.1 (2026-09-15): refreshed all 16 groups of bilingual fly speech, with pixel-art faces, bubbles and lettering; scores, states, allocation rules and the honesty table are unchanged.
 - v1.2.0 (2026-09-15): four designed response states, MN11 readouts and illustrated reactions. MN9 scores and rankings are unchanged; the honesty table distinguishes the state rule and animation from measured behaviour.
 - v1.1.3 (2026-09-13): long plate names stay separate on narrow screens, with ellipsis and full-name titles; row heights stay the same. No dish's score changed; the honesty table is unchanged.
 
@@ -159,7 +159,7 @@ English: [README.md](README.md)
 
 **最近更新**（完整列表见 [CHANGELOG.md](CHANGELOG.md)）
 
-- v1.2.1（2026-09-15）：更新果蝇全部 16 组中英文气泡台词；分数、状态和分配规则不变，诚实声明表不变。
+- v1.2.1（2026-09-15）：更新果蝇全部 16 组中英文台词，改用像素表情、气泡和字体；分数、状态和分配规则不变，诚实声明表不变。
 - v1.2.0（2026-09-15）：新增四种设计状态、MN11 读数与示意动作。MN9 分数和排序不变；诚实声明表区分状态规则、动画和实测行为。
 - v1.1.3（2026-09-13）：窄屏下盘子下方的长菜名不再挤在一起，超长部分显示省略号，title 提示保留完整菜名；行高不变。没有任何菜的分数变化；诚实声明表未改动。
 

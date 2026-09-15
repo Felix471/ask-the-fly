@@ -48,6 +48,9 @@ def glyph_list() -> str:
     entries = strings if isinstance(strings, list) else strings["strings"]
     for entry in entries:
         chars.update(ch for ch in entry["zh"] if not ch.isspace())
+    for bucket in json.loads((ROOT / 'copy/fly_lines.json').read_text(encoding='utf-8'))['buckets']:
+        for line in bucket['zh']:
+            chars.update(ch for ch in line if not ch.isspace())
     for section in json.loads((ROOT / "data" / "dish_sections.json").read_text(encoding="utf-8"))["sections"]:
         chars.update(section["zh"])
     chars.update(string.digits, string.ascii_letters, string.punctuation, CJK_PUNCT)

@@ -2,7 +2,7 @@
 // Designed presentation only. Ranking and allocation remain in decide().
 import { FLY_LINES } from './fly_lines.js';
 export const STATE_KEYS = { eats: 'Eats', mouth_moves: 'MouthMoves', proboscis_only: 'ProboscisOnly', no_response: 'NoResponse' };
-export const EMOTIONS = { eats: '❤️', mouth_moves: '🤔', proboscis_only: '···', no_response: '😒' };
+export const EMOTIONS = { eats: 'happy', mouth_moves: 'sweat', proboscis_only: 'deadpan', no_response: 'deadpan' };
 export const RESPONSE_SEQUENCE = {
   eats: [[0,250],[1,180],[2,220],[3,220],[2,220],[3,220],[2,220],[3,220],[0,500]],
   mouth_moves: [[0,250],[1,220],[2,250],[1,220],[0,380],[1,220],[2,250],[3,600]],
