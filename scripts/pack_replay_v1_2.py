@@ -1,11 +1,13 @@
 """Stage 400 baseline replays with explicit MN11D/V rows, outside site/."""
 from copy import deepcopy
 import argparse
+from datetime import datetime, timezone
 import hashlib
 import json
 from pathlib import Path
 import re
 import struct
+import subprocess
 import sys
 import numpy as np
 
@@ -100,16 +102,25 @@ def main():
     for c in conditions:
         name = c['cond_id'] + '.bin'
         raw_path = ROOT / 'results/replay' / (c['cond_id'] + '.npz')
+        original_blob = (source / name).read_bytes()
+        original_header, _, _ = unpack(original_blob)
+        if original_header['protocol_sha256'] != spec['base_protocol_sha256']:
+            raise ValueError('Source replay protocol differs')
         with np.load(raw_path, allow_pickle=False) as raw:
-            packed, rows, body_hash = expand((source / name).read_bytes(), raw, c, spec['readout_neurons'], index, protocol)
+            packed, rows, body_hash = expand(original_blob, raw, c, spec['readout_neurons'], index, protocol)
         outputs[name] = packed
         old_entry = source_manifest['cells'][c['cond_id']]
+        if any(old_entry[k] != original_header[k] for k in ['levels', 'n_spikes', 'mn9_left_count']):
+            raise ValueError('Source manifest differs from replay header')
         entries[c['cond_id']] = {k: old_entry[k] for k in ['levels', 'n_spikes', 'mn9_left_count']}
         entries[c['cond_id']].update(file=name, sha256=hashlib.sha256(packed).hexdigest(),
                                     source_packed_sha256=sha256(source / name), raw_replay_sha256=sha256(raw_path),
                                     unchanged_binary_body_sha256=body_hash,
                                     mn11d_mean=rows['MN11D']['two_cell_mean_hz'], mn11v_mean=rows['MN11V']['two_cell_mean_hz'])
     manifest = {'schema_version': 'replay_manifest_v2', 'replay_schema_version': 'replay_v3',
+                'packed_at': datetime.now(timezone.utc).isoformat(),
+                'packing_git_commit': subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip(),
+                'packer_sha256': sha256(Path(__file__)),
                 'n_cells': 400, 'variants': ['baseline'],
                 'scope': 'Staged baseline pack only; all live site files and existing silencing variants remain unchanged.',
                 'not_repacked_variants': [v for v in source_manifest['variants'] if v != 'baseline'],

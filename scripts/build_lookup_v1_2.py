@@ -78,6 +78,9 @@ def audit_cell(condition, spec, protocol, meta):
 
 
 def build():
+    for target in [ROOT / 'data/lookup_table_v1_2.json', ROOT / 'data/lookup_v1_2_audit.json', OUT / 'checkpoint.json']:
+        if target.exists():
+            raise FileExistsError('Refusing to overwrite an existing v1.2 artifact: ' + str(target))
     spec, protocol = design()
     if spec != load_json(SPEC):
         raise ValueError('Frozen recording design differs')
@@ -114,6 +117,9 @@ def build():
         if cell['mn9_r_mean'] != cell['mn9_right_mean'] or cell['mn9_r_sd'] != cell['mn9_right_std']:
             raise ValueError('STOP: right MN9 alias mismatch')
     new['cells_sha256'] = _cells_sha256(new['cells'])
+    # Keep provenance and the declared state rule in the header, ahead of the large cell array.
+    cells = new.pop('cells')
+    new['cells'] = cells
     encoded = (json.dumps(new, indent=2, ensure_ascii=False, allow_nan=False) + '\n').encode('utf-8')
     checks = verify_projection(old, new, old_bytes, encoded)
     table = LookupTable(new)
