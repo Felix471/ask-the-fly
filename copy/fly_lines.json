@@ -1,10 +1,10 @@
 {
   "schema": "fly_lines_v1",
-  "status": "draft_for_owner_review",
+  "status": "owner_supplied_lines",
   "selection": {
     "bucket": "first_match_within_state",
     "line_index": "share_seed % 3",
-    "share_seed": "non-negative safe integer, supplied by existing sharing flow; no new random seed",
+    "share_seed": "non-negative safe integer; fresh runs generate a presentation-only seed, shared links retain it, legacy links use 0; never used for scoring or persisted",
     "line_roles": [
       "direct",
       "emotional",

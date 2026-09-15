@@ -2,6 +2,9 @@
 data/lookup_table_v1_2.json -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 data/lookup_v1_2_audit.json -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 data/replay_v1_2/* -text
+site/data/lookup_table_v1_2.json -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+site/data/replay_v1_2/* -text
+site/data/replay_v1_2/*.json whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 data/replay_v1_2/*.json whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 # The predeclared recording specification was frozen with Windows line endings.
 data/lookup_v1_2_recording.json text eol=crlf

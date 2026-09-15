@@ -259,6 +259,56 @@ def check_release(root: Path) -> list[str]:
     return problems
 
 
+def check_v12(root: Path) -> list[str]:
+    """Additive v1.2 assets cannot silently fall back to v1-only validation."""
+    app = root / 'site/app.js'
+    active = app.exists() and 'data/lookup_table_v1_2.json' in app.read_text(encoding='utf-8')
+    if not active:
+        return []
+    problems = []
+    table_path = root / 'data/lookup_table_v1_2.json'
+    site_path = root / 'site/data/lookup_table_v1_2.json'
+    if not table_path.exists() or not site_path.exists():
+        return ['v1.2: active table missing']
+    if table_path.read_bytes() != site_path.read_bytes():
+        problems.append('v1.2: source/site table bytes differ')
+    table = load_json(site_path)
+    old = load_json(root / 'data/lookup_table.json')
+    if len(table['cells']) != 400 or table['cells_sha256'] != cells_sha256(table['cells']):
+        problems.append('v1.2: invalid cell count/hash')
+    old_by_id = {cell_id(c): c for c in old['cells']}
+    for cell in table['cells']:
+        legacy = old_by_id.get(cell_id(cell))
+        if not legacy or any(cell.get(k) != v for k, v in legacy.items()):
+            problems.append('v1.2: frozen cell projection changed')
+        for key in ['mn11d_mean','mn11d_sd','mn11v_mean','mn11v_sd','mn9_r_mean','mn9_r_sd']:
+            v = cell.get(key)
+            if isinstance(v, bool) or not isinstance(v, (int,float)) or not math.isfinite(v) or v < 0:
+                problems.append(f'v1.2: invalid {key}')
+        means = [cell.get('mn9_mean'), cell.get('mn11d_mean')]
+        if any(isinstance(v, bool) or not isinstance(v, (int, float)) or not math.isfinite(v) for v in means):
+            problems.append('v1.2: invalid state inputs')
+            continue
+        a, b = (v >= 5 for v in means)
+        expected = ('eats' if b else 'proboscis_only') if a else ('mouth_moves' if b else 'no_response')
+        if cell.get('state') != expected:
+            problems.append('v1.2: state rule mismatch')
+    source = root / 'data/replay_v1_2'
+    packed = root / 'site/data/replay_v1_2'
+    for path in source.glob('*'):
+        target = packed / path.name
+        if not target.exists() or target.read_bytes() != path.read_bytes():
+            problems.append(f'v1.2: replay sync {path.name}')
+    if len(list(packed.glob('*.bin'))) != 400:
+        problems.append('v1.2: expected 400 baseline packs')
+    for state in ('eats','mouth_moves','proboscis_only','no_response'):
+        for prefix in ('','inset_'):
+            for i in range(1,5):
+                if not (root / f'site/assets/response/{prefix}{state}_{i}.png').exists():
+                    problems.append('v1.2: response asset missing')
+    return problems
+
+
 def validate(root: Path) -> list[str]:
     problems, table = check_lookup(root)
     dict_problems, dishes = check_dictionary(root)
@@ -268,6 +318,7 @@ def validate(root: Path) -> list[str]:
     problems += check_replays(root, table, dishes)
     problems += check_site(root)
     problems += check_release(root)
+    problems += check_v12(root)
     return problems
 
 

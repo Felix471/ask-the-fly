@@ -515,3 +515,4 @@ test("opposite mode: the fly's own pick drives the fly; with three dishes the ot
   const two = decide(scoreOptions(["watermelon", "black coffee"], dictionary, lookup), "opposite");
   assert.equal(two.winner.entry.key, "black coffee", "two dishes: the remaining dish is the human's");
 });
+import './taste_states.test.mjs';
