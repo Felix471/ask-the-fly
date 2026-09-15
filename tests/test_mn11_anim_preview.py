@@ -1,7 +1,7 @@
 """Deterministic staging guardrails; generated art is local, not required in CI."""
 import unittest
 from PIL import Image, ImageDraw
-from scripts.mn11_anim_preview import OUT, ROOT, STATES, SEQUENCES, register
+from scripts.mn11_anim_preview import OUT, ROOT, STATES, SEQUENCES, register, body_motion, motion_tile
 
 
 class AnimationPreviewTests(unittest.TestCase):
@@ -32,6 +32,24 @@ class AnimationPreviewTests(unittest.TestCase):
                 self.assertIn(frame, range(4))
                 self.assertGreater(duration, 0)
         self.assertIn((2, 80), SEQUENCES['proboscis_only'])
+
+    def test_eats_repeats_contact_not_extension(self):
+        self.assertGreaterEqual(sum(i == 2 for i, _ in SEQUENCES['eats']), 3)
+        self.assertEqual(sum(i == 2 for i, _ in SEQUENCES['proboscis_only']), 1)
+
+    def test_rejection_turns_and_leaves_frame(self):
+        self.assertEqual(body_motion('no_response', 0), (0, False))
+        self.assertEqual(body_motion('no_response', 7), (0, True))
+        self.assertEqual(body_motion('no_response', 17), (-72, True))
+        self.assertIsNone(motion_tile(Image.new('RGBA', (48, 48), 'red'), 'no_response', 17).getbbox())
+
+    def test_orange_thorax_does_not_shift_eye(self):
+        source = Image.new('RGBA', (200, 180), 'white')
+        draw = ImageDraw.Draw(source)
+        draw.rectangle((20, 20, 120, 80), fill=(210, 90, 20, 255))
+        draw.rectangle((130, 45, 140, 55), fill=(240, 20, 10, 255))
+        _, eye = register(source)
+        self.assertEqual(eye, (135, 50))
 
 
 if __name__ == '__main__':

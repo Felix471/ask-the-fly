@@ -1,5 +1,20 @@
 # MN11 animation material checkpoint
 
+## Action revision v3 and emotion bubbles
+
+The owner rejected v2 motion as insufficiently distinct and the forefeet as resembling feeding. V3 redraws action keyframes using built-in imagegen, keeping the approved rounded pixel style. Source is now ignored `assets/raw/mn11_preview/mn11-actions-v3.png`; prompts remain beside it. Earlier images and GIFs are retained, not used by the revised page.
+
+- eats holds an extended proboscis while the red tip alternates open/closed three times.
+- mouth_moves keeps a short mouthpart, alternates its opening and adds a small approach/retreat. Its tight inset excludes the grounded legs.
+- proboscis_only extends once for an 80 ms contact, retracts and stays still for 1.6 seconds.
+- no_response uses low forefoot rubbing separated from the mouth, then turns and exits left. Departure is a mirrored slide, not completed wingbeat animation. Its inset uses the dedicated closed-mouth reference, with no legs that could be mistaken for a proboscis.
+
+At the owner's request, the review page adds optional emoji bubbles: eats ❤️, mouth_moves 🤔, proboscis_only ···, no_response 😒. These are designed character expression, not extra model readouts. Bubbles follow the enlarged body and disappear on departure. The local canvas preview uses staged PNGs, freezes on pause, starts static for reduced motion, and allows hiding bubbles to judge the action alone. V3 GIFs are separately saved without emoji. No product copy or site implementation changed.
+
+V3 checks: seven processing tests, exhaustive existing suite, release validator, Chromium loading/pause/bubble toggle, 360px no overflow and reduced-motion static start. Eye detection excludes orange thorax pixels; it does not bypass clipping checks. Residual generated body differences remain a visual-review limitation.
+
+## Original v2 checkpoint (superseded below where noted)
+
 The owner approved the slightly rounder pixel-fly direction after PR42. This checkpoint stages motion previews only: no site assets, scoring, scientific data or speech copy changes.
 
 ## Reproducible local processing
