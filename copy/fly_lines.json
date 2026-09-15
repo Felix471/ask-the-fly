@@ -1,0 +1,380 @@
+{
+  "schema": "fly_lines_v1",
+  "status": "draft_for_owner_review",
+  "selection": {
+    "bucket": "first_match_within_state",
+    "line_index": "share_seed % 3",
+    "share_seed": "non-negative safe integer, supplied by existing sharing flow; no new random seed",
+    "line_roles": [
+      "direct",
+      "emotional",
+      "action_or_image"
+    ],
+    "notes": [
+      "Predicates use only four ordinal input levels; state is supplied by the v1.2 table, not inferred here.",
+      "Canonicalise water medium to low: they share the frozen 60 Hz lookup cell.",
+      "Bucket 13 interprets other inputs low as <= low. Bucket 4 precedes 5, and 2 precedes 3.",
+      "tie and eats_first are presentation contexts, not scientific states; preserve existing tie handling.",
+      "Emotions and actions are designed anthropomorphic copy, not measured behaviour."
+    ]
+  },
+  "buckets": [
+    {
+      "id": 1,
+      "state": "eats",
+      "when": {
+        "sugar": [
+          "high",
+          "very_high"
+        ],
+        "bitter": [
+          "none"
+        ],
+        "ir94e": [
+          "none"
+        ]
+      },
+      "context": "Draft speech bubble; alternatives ordered direct, emotional, action/image.",
+      "zh": [
+        "就要这个。",
+        "甜得正好！",
+        "这口我先吃。"
+      ],
+      "en": [
+        "This one. Definitely.",
+        "Now that's sweet!",
+        "Out of my way. First bite's mine."
+      ]
+    },
+    {
+      "id": 2,
+      "state": "eats",
+      "when": {
+        "sugar": [
+          "high",
+          "very_high"
+        ],
+        "bitter": [
+          "low",
+          "medium",
+          "high",
+          "very_high"
+        ]
+      },
+      "context": "Draft speech bubble; alternatives ordered direct, emotional, action/image.",
+      "zh": [
+        "有点苦，也吃。",
+        "苦归苦，甜就行。",
+        "皱下脸，接着吃。"
+      ],
+      "en": [
+        "Bitter. Still having it.",
+        "Sweet enough to forgive.",
+        "A wince. Another bite."
+      ]
+    },
+    {
+      "id": 3,
+      "state": "eats",
+      "when": {
+        "sugar": [
+          "high",
+          "very_high"
+        ],
+        "ir94e": [
+          "low",
+          "medium",
+          "high"
+        ]
+      },
+      "context": "Draft speech bubble; alternatives ordered direct, emotional, action/image.",
+      "zh": [
+        "这鲜味，勉强吃。",
+        "算了，甜就放过。",
+        "躲一下，再吃口。"
+      ],
+      "en": [
+        "That taste. I'll allow it.",
+        "Saved by the sweet part.",
+        "Lean away. Sneak a bite."
+      ]
+    },
+    {
+      "id": 4,
+      "state": "eats",
+      "when": {
+        "sugar": [
+          "low",
+          "medium"
+        ],
+        "bitter": [
+          "none"
+        ],
+        "ir94e": [
+          "none"
+        ]
+      },
+      "context": "Draft speech bubble; alternatives ordered direct, emotional, action/image.",
+      "zh": [
+        "淡点也吃。",
+        "没惊喜，也行。",
+        "慢慢吃两口。"
+      ],
+      "en": [
+        "Bland. It'll do.",
+        "Nothing special. Fine.",
+        "A couple of quiet bites."
+      ]
+    },
+    {
+      "id": 5,
+      "state": "eats",
+      "when": {
+        "sugar": [
+          "none",
+          "low"
+        ],
+        "water": [
+          "high",
+          "very_high"
+        ]
+      },
+      "context": "Draft speech bubble; alternatives ordered direct, emotional, action/image.",
+      "zh": [
+        "先喝一口。",
+        "这口水来得好！",
+        "凑过去，喝个够。"
+      ],
+      "en": [
+        "A sip first.",
+        "Just the drink I wanted!",
+        "Scoot over. I'm drinking."
+      ]
+    },
+    {
+      "id": 6,
+      "state": "eats",
+      "when": {},
+      "context": "Draft speech bubble; alternatives ordered direct, emotional, action/image.",
+      "zh": [
+        "就吃这个。",
+        "行，还不错。",
+        "凑近吃一口。"
+      ],
+      "en": [
+        "This will do.",
+        "Yeah, I like it.",
+        "Closer. One bite."
+      ]
+    },
+    {
+      "id": 7,
+      "state": "mouth_moves",
+      "when": {
+        "bitter": [
+          "medium",
+          "high",
+          "very_high"
+        ]
+      },
+      "context": "Draft speech bubble; alternatives ordered direct, emotional, action/image.",
+      "zh": [
+        "想吃，又不敢吃。",
+        "真馋，可是好苦。",
+        "嘴都动了，还犹豫。"
+      ],
+      "en": [
+        "I want it. I don't dare.",
+        "So tempting. So bitter.",
+        "Mouth's ready. I'm not."
+      ]
+    },
+    {
+      "id": 8,
+      "state": "mouth_moves",
+      "when": {
+        "ir94e": [
+          "medium",
+          "high"
+        ],
+        "bitter": [
+          "none",
+          "low"
+        ]
+      },
+      "context": "Draft speech bubble; alternatives ordered direct, emotional, action/image.",
+      "zh": [
+        "这味儿，拿不准。",
+        "怪了，到底吃不吃？",
+        "凑近了，又退半步。"
+      ],
+      "en": [
+        "Can't quite place it.",
+        "What is that? Do I want it?",
+        "Closer… no, back a bit."
+      ]
+    },
+    {
+      "id": 9,
+      "state": "mouth_moves",
+      "when": {},
+      "context": "Draft speech bubble; alternatives ordered direct, emotional, action/image.",
+      "zh": [
+        "差点就吃了。",
+        "可惜，就差一点。",
+        "凑到嘴边，又停了。"
+      ],
+      "en": [
+        "Almost took a bite.",
+        "So close. What a shame.",
+        "Right at my mouth. Then I stop."
+      ]
+    },
+    {
+      "id": 10,
+      "state": "proboscis_only",
+      "when": {},
+      "context": "Draft speech bubble; alternatives ordered direct, emotional, action/image.",
+      "zh": [
+        "碰一下就好。",
+        "也就碰一下。",
+        "伸一下，收回来。"
+      ],
+      "en": [
+        "Just a touch.",
+        "Only a little tap.",
+        "Reach out. Pull back."
+      ]
+    },
+    {
+      "id": 11,
+      "state": "no_response",
+      "when": {
+        "bitter": [
+          "high",
+          "very_high"
+        ]
+      },
+      "context": "Draft speech bubble; alternatives ordered direct, emotional, action/image.",
+      "zh": [
+        "不吃。",
+        "呸。",
+        "扭头，离远点。"
+      ],
+      "en": [
+        "No.",
+        "Bleh.",
+        "Turn away. Keep it away."
+      ]
+    },
+    {
+      "id": 12,
+      "state": "no_response",
+      "when": {
+        "sugar": [
+          "none"
+        ],
+        "bitter": [
+          "none",
+          "low",
+          "medium"
+        ],
+        "ir94e": [
+          "medium",
+          "high"
+        ]
+      },
+      "context": "Draft speech bubble; alternatives ordered direct, emotional, action/image.",
+      "zh": [
+        "这不是我的饭。",
+        "光鲜不甜，不要。",
+        "推远点，不是我的。"
+      ],
+      "en": [
+        "That's not my food.",
+        "All that taste, no sweet? No.",
+        "Push it away. Not mine."
+      ]
+    },
+    {
+      "id": 13,
+      "state": "no_response",
+      "when": {
+        "sugar": [
+          "none"
+        ],
+        "bitter": [
+          "none",
+          "low"
+        ],
+        "water": [
+          "none",
+          "low"
+        ],
+        "ir94e": [
+          "none",
+          "low"
+        ]
+      },
+      "context": "Draft speech bubble; alternatives ordered direct, emotional, action/image.",
+      "zh": [
+        "没味儿，不吃。",
+        "白来一趟。",
+        "当没看见，飞走。"
+      ],
+      "en": [
+        "No taste. No bite.",
+        "Well, that was a wasted trip.",
+        "Didn't see a thing. Off I go."
+      ]
+    },
+    {
+      "id": 14,
+      "state": "no_response",
+      "when": {},
+      "context": "Draft speech bubble; alternatives ordered direct, emotional, action/image.",
+      "zh": [
+        "不太想吃。",
+        "提不起劲。",
+        "看一眼，走了。"
+      ],
+      "en": [
+        "Not interested.",
+        "Can't get excited about it.",
+        "One glance. Moving on."
+      ]
+    },
+    {
+      "id": "tie",
+      "state": "tie",
+      "when": {},
+      "context": "Draft speech bubble; alternatives ordered direct, emotional, action/image.",
+      "zh": [
+        "分不出，你挑。",
+        "都差不多，随你。",
+        "往旁边一让，你来。"
+      ],
+      "en": [
+        "Can't choose. Your call.",
+        "Either works. Suit yourself.",
+        "I'll step aside. You pick."
+      ]
+    },
+    {
+      "id": "eats_first",
+      "state": "eats_first",
+      "when": {},
+      "context": "Draft speech bubble; alternatives ordered direct, emotional, action/image.",
+      "zh": [
+        "这盘我的，剩下归你。",
+        "我挑好了，你吃剩下。",
+        "抱走这盘，你慢挑。"
+      ],
+      "en": [
+        "Mine. The rest are yours.",
+        "I've picked. Help yourself to the rest.",
+        "Taking this one. Take your time."
+      ]
+    }
+  ]
+}
