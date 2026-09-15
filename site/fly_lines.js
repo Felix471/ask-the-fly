@@ -37,14 +37,14 @@ export const FLY_LINES = {
       },
       "context": "Draft speech bubble; alternatives ordered direct, emotional, action/image.",
       "zh": [
-        "就这个。",
-        "对上了。",
-        "嘴已经贴上去了。"
+        "就它了。",
+        "对味。",
+        "一口闷。"
       ],
       "en": [
         "This one.",
-        "That's the one.",
-        "Mouth's already on it."
+        "Hits right.",
+        "Down in one."
       ]
     },
     {
@@ -64,14 +64,14 @@ export const FLY_LINES = {
       },
       "context": "Draft speech bubble; alternatives ordered direct, emotional, action/image.",
       "zh": [
-        "苦了一下，吃。",
-        "那一下就算了。",
-        "咽下去了。"
+        "冲一下，吃。",
+        "那一下过去了。",
+        "咽了。"
       ],
       "en": [
-        "A sting. Fine.",
-        "That flash can go.",
-        "Down it goes."
+        "A kick. Still eating.",
+        "That flash is gone.",
+        "Swallowed."
       ]
     },
     {
@@ -90,14 +90,14 @@ export const FLY_LINES = {
       },
       "context": "Draft speech bubble; alternatives ordered direct, emotional, action/image.",
       "zh": [
-        "那股味先放一边。",
-        "甜够了就过。",
-        "勉强进嘴。"
+        "那股鲜先不管。",
+        "甜够本。",
+        "勉强吃。"
       ],
       "en": [
-        "Ignore that other note.",
-        "Sweet's enough.",
-        "It goes in anyway."
+        "Skip that other note.",
+        "Sweet covers it.",
+        "Fine. I'll take it."
       ]
     },
     {
@@ -117,14 +117,14 @@ export const FLY_LINES = {
       },
       "context": "Draft speech bubble; alternatives ordered direct, emotional, action/image.",
       "zh": [
-        "淡是淡，吃吧。",
-        "也没什么不行。",
-        "慢慢抿着。"
+        "寡淡，吃着。",
+        "就这味儿。",
+        "慢慢磨。"
       ],
       "en": [
-        "Flat. I'll eat.",
-        "It'll do.",
-        "Just sipping along."
+        "Bland. Eating anyway.",
+        "That's all it is.",
+        "Working through it."
       ]
     },
     {
@@ -142,14 +142,14 @@ export const FLY_LINES = {
       },
       "context": "Draft speech bubble; alternatives ordered direct, emotional, action/image.",
       "zh": [
-        "先喝一口。",
-        "清得很。",
-        "顺着就下去了。"
+        "先润一口。",
+        "清。",
+        "喝进去了。"
       ],
       "en": [
-        "A sip first.",
+        "Sip first.",
         "Clean.",
-        "It slides right down."
+        "It goes down."
       ]
     },
     {
@@ -158,14 +158,14 @@ export const FLY_LINES = {
       "when": {},
       "context": "Draft speech bubble; alternatives ordered direct, emotional, action/image.",
       "zh": [
-        "可以。",
-        "吃着就吃着。",
-        "停在这儿了。"
+        "行。",
+        "吃就吃。",
+        "停这儿。"
       ],
       "en": [
-        "Fine.",
+        "Alright.",
         "Eating's eating.",
-        "I'll stay here."
+        "Staying put."
       ]
     },
     {
@@ -180,14 +180,14 @@ export const FLY_LINES = {
       },
       "context": "Draft speech bubble; alternatives ordered direct, emotional, action/image.",
       "zh": [
-        "再近一点……算了。",
-        "嘴到了，心没到。",
-        "伸出去又缩回来。"
+        "进不进啊。",
+        "伸了又缩。",
+        "嘴到边了。"
       ],
       "en": [
-        "Closer… no.",
-        "Mouth's there. I'm not.",
-        "Out, then back."
+        "In or not.",
+        "Out, then back.",
+        "Right at the edge."
       ]
     },
     {
@@ -205,14 +205,14 @@ export const FLY_LINES = {
       },
       "context": "Draft speech bubble; alternatives ordered direct, emotional, action/image.",
       "zh": [
-        "这是什么味。",
-        "再碰一下看看。",
-        "凑近了又停住。"
+        "什么味儿。",
+        "再碰一下。",
+        "靠近又停。"
       ],
       "en": [
-        "What is that.",
+        "What's that.",
         "One more tap.",
-        "In close, then halt."
+        "Close, then stop."
       ]
     },
     {
@@ -221,14 +221,14 @@ export const FLY_LINES = {
       "when": {},
       "context": "Draft speech bubble; alternatives ordered direct, emotional, action/image.",
       "zh": [
-        "差一点点。",
-        "本来要吃的。",
-        "嘴边转了一圈。"
+        "差点。",
+        "就差那一下。",
+        "绕一圈走了。"
       ],
       "en": [
         "Almost.",
-        "Was going to.",
-        "Circled the rim and left."
+        "One beat short.",
+        "Circled and left."
       ]
     },
     {
@@ -237,14 +237,14 @@ export const FLY_LINES = {
       "when": {},
       "context": "Draft speech bubble; alternatives ordered direct, emotional, action/image.",
       "zh": [
-        "碰一下就行。",
-        "点到为止。",
-        "嘴尖扫过就走。"
+        "点一下。",
+        "碰完撤。",
+        "嘴尖扫过。"
       ],
       "en": [
         "Just a tap.",
-        "That's enough.",
-        "Brush and gone."
+        "Touch and off.",
+        "Tip grazes, gone."
       ]
     },
     {
@@ -258,14 +258,14 @@ export const FLY_LINES = {
       },
       "context": "Draft speech bubble; alternatives ordered direct, emotional, action/image.",
       "zh": [
-        "滚。",
-        "离远点。",
-        "这盘别靠近。"
+        "呸。",
+        "走开。",
+        "别挨着我。"
       ],
       "en": [
-        "Out.",
-        "Stay back.",
-        "Not this plate."
+        "Pfft.",
+        "Back off.",
+        "Don't come near."
       ]
     },
     {
@@ -287,14 +287,14 @@ export const FLY_LINES = {
       },
       "context": "Draft speech bubble; alternatives ordered direct, emotional, action/image.",
       "zh": [
-        "这不是给我的。",
-        "认不出这盘。",
-        "我不过去。"
+        "不是我的菜。",
+        "这盘不认。",
+        "不吃这口。"
       ],
       "en": [
-        "Not for me.",
-        "Don't know this plate.",
-        "I'm not going over."
+        "Not my plate.",
+        "Don't claim this one.",
+        "Wrong bite for me."
       ]
     },
     {
@@ -319,14 +319,14 @@ export const FLY_LINES = {
       },
       "context": "Draft speech bubble; alternatives ordered direct, emotional, action/image.",
       "zh": [
-        "没东西。",
-        "不值得停。",
-        "飞过去了。"
+        "没味儿。",
+        "不耽误。",
+        "飞了。"
       ],
       "en": [
-        "Nothing here.",
-        "Not worth a stop.",
-        "Already past it."
+        "Nothing there.",
+        "Not worth the stop.",
+        "Already gone."
       ]
     },
     {
@@ -335,14 +335,14 @@ export const FLY_LINES = {
       "when": {},
       "context": "Draft speech bubble; alternatives ordered direct, emotional, action/image.",
       "zh": [
-        "算了。",
-        "没兴趣。",
-        "看一眼就过。"
+        "过。",
+        "没劲。",
+        "一眼带过。"
       ],
       "en": [
-        "Skip it.",
-        "No interest.",
-        "Glance and gone."
+        "Pass.",
+        "Meh.",
+        "Glance and on."
       ]
     },
     {
@@ -351,14 +351,14 @@ export const FLY_LINES = {
       "when": {},
       "context": "Draft speech bubble; alternatives ordered direct, emotional, action/image.",
       "zh": [
-        "你挑。",
-        "我分不出来。",
-        "两盘搁一块儿，你说。"
+        "你定。",
+        "分不出来。",
+        "随便，你说。"
       ],
       "en": [
-        "You pick.",
-        "Can't tell them apart.",
-        "Both sit there. You say."
+        "You call it.",
+        "Can't split them.",
+        "Either. You say."
       ]
     },
     {
@@ -367,14 +367,14 @@ export const FLY_LINES = {
       "when": {},
       "context": "Draft speech bubble; alternatives ordered direct, emotional, action/image.",
       "zh": [
-        "这盘归我了。",
-        "我拿走了，剩下给你。",
-        "先到先得。"
+        "这盘我的。",
+        "我先拿走了。",
+        "剩下给你。"
       ],
       "en": [
-        "This plate's mine.",
-        "I took mine. Rest is yours.",
-        "Got here first."
+        "This one's mine.",
+        "Took mine first.",
+        "Rest is yours."
       ]
     }
   ]

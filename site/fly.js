@@ -328,10 +328,13 @@ export class FlyScene {
     if (this.bubble) {
       const text = this.speech ? this.speech() : '';
       this.bubble.hidden = !text || f.hidden;
-      this.bubble.textContent = text ? `${EMOTIONS[f.responseState] || ''} ${text}` : '';
+      const label = this.bubble.querySelector('.bubble-text');
+      if (label.textContent !== text) label.textContent = text;
+      this.bubble.dataset.emotion = EMOTIONS[f.responseState] || 'deadpan';
       const width = this.canvas.clientWidth;
-      this.bubble.style.left = `${Math.max(8, Math.min(width - 188, f.x - 90))}px`;
-      this.bubble.style.top = `${Math.max(0, f.y - 88)}px`;
+      const bubbleWidth = this.bubble.offsetWidth || 208;
+      this.bubble.style.left = `${Math.max(8, Math.min(width - bubbleWidth - 8, f.x - bubbleWidth / 2))}px`;
+      this.bubble.style.top = `${Math.max(0, f.y - (this.bubble.offsetHeight || 60) - 36)}px`;
     }
   }
 

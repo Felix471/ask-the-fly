@@ -718,8 +718,8 @@
     {
       "key": "releaseSummary",
       "context": "Footer 'what's new' line, one-line summary of the latest release; version and date come from site/data/release.json",
-      "en": "Four response states and MN11 readouts; scores unchanged.",
-      "zh": "新增四状态、MN11 读数与果蝇反应；分数不变。",
+      "en": "New fly speech, pixel faces and bubbles; scores unchanged.",
+      "zh": "更新果蝇台词、像素表情和气泡；分数不变。",
       "max_length": 60
     },
     {
