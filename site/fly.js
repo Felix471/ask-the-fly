@@ -3,6 +3,7 @@
 // plate, and the winner sequence. Sprites from site/assets/ when present,
 // placeholder shapes otherwise. The scene never decides anything; it animates
 // the decision computed in app.js.
+import { RESPONSE_SEQUENCE, EMOTIONS } from './taste_states.js';
 
 // requestAnimationFrame pauses in background tabs; fall back to a timer so a
 // sequence started before the tab was hidden still completes.
@@ -87,7 +88,14 @@ export async function loadSprites(base = "assets/", loader = loadImage) {
     const loaded = list.filter(Boolean);
     fly[state] = loaded.length ? loaded : null;
   }));
-  return { fly, dishCache: new Map(), pending: new Map(), base };
+  const responses = {}, insets = {};
+  await Promise.all(Object.keys(RESPONSE_SEQUENCE).map(async state => {
+    const list = await Promise.all([1,2,3,4].map(i => loader(`${base}response/${state}_${i}.png`)));
+    responses[state] = list.every(Boolean) ? list : null;
+    const detail = await Promise.all([1,2,3,4].map(i => loader(`${base}response/inset_${state}_${i}.png`)));
+    insets[state] = detail.every(Boolean) ? detail : null;
+  }));
+  return { fly, responses, insets, dishCache: new Map(), pending: new Map(), base };
 }
 
 // The pixel frames to draw for a fly state: its own set, else another pixel
@@ -264,11 +272,16 @@ export class FlyScene {
 
   drawFly(ctx) {
     const f = this.fly;
+    if (f.hidden) return;
+    const response = f.responseState && this.sprites.responses?.[f.responseState];
     const frames = framesFor(this.sprites.fly, f.state);
     ctx.save();
     ctx.translate(f.x, f.y);
     ctx.scale(f.dir, 1);
-    if (frames) {
+    if (response) {
+      ctx.imageSmoothingEnabled = false;
+      ctx.drawImage(response[f.responseFrame || 0], -43, -37, 72, 72);
+    } else if (frames) {
       const frame = frames[Math.floor(f.t * (f.state === "fly" ? 16 : 3)) % frames.length];
       ctx.imageSmoothingEnabled = false;
       const size = 56;
@@ -312,6 +325,14 @@ export class FlyScene {
       }
     }
     ctx.restore();
+    if (this.bubble) {
+      const text = this.speech ? this.speech() : '';
+      this.bubble.hidden = !text || f.hidden;
+      this.bubble.textContent = text ? `${EMOTIONS[f.responseState] || ''} ${text}` : '';
+      const width = this.canvas.clientWidth;
+      this.bubble.style.left = `${Math.max(8, Math.min(width - 188, f.x - 90))}px`;
+      this.bubble.style.top = `${Math.max(0, f.y - 88)}px`;
+    }
   }
 
   draw() {
@@ -326,6 +347,10 @@ export class FlyScene {
 
   async moveTo(x, y, token, state = "fly") {
     const f = this.fly;
+    f.hidden = false;
+    f.responseState = null;
+    this.speech = null;
+    if (this.bubble) this.bubble.hidden = true;
     const dx = x - f.x;
     const dy = y - f.y;
     const dist = Math.hypot(dx, dy);
@@ -396,6 +421,31 @@ export class FlyScene {
     this.fly.state = "idle";
   }
 
+  async respond(state, token, speech) {
+    if (!RESPONSE_SEQUENCE[state]) return;
+    const f = this.fly;
+    const x = f.x, y = f.y;
+    f.responseState = state;
+    this.speech = speech;
+    const reduced = typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches;
+    for (const [step, [index, ms]] of RESPONSE_SEQUENCE[state].entries()) {
+      if (token.cancelled) break;
+      f.responseFrame = reduced ? 0 : index;
+      if (state === 'mouth_moves' && !reduced) f.x = x + ([0,2,2,1,0,2,2,-2][step] || 0) * f.dir;
+      if (this.onResponse) this.onResponse(state, f.responseFrame);
+      this.draw();
+      await sleep(reduced ? 0 : ms, token);
+    }
+    f.x = x;
+    if (state === 'no_response' && !token.cancelled) {
+      this.speech = null;
+      if (this.bubble) this.bubble.hidden = true;
+      if (!reduced) await this.moveTo(-60, y - 40, token);
+      f.hidden = true;
+      this.draw();
+    }
+  }
+
 
   // plan: { order: [plate indices to taste], winner: the fly's own pick, tie: [indices] }
   // The fly's behaviour never depends on the mode: in "Do the opposite" it still
@@ -406,6 +456,8 @@ export class FlyScene {
   async run(plan, hooks, token) {
     const f = this.fly;
     f.state = "idle";
+    f.hidden = false;
+    f.responseState = null;
     this.highlight = -1;
     await sleep(400, token);
     for (const i of plan.order) {
@@ -413,6 +465,7 @@ export class FlyScene {
       await this.visit(i, token);
       f.state = "taste";
       await hooks.onTaste(i, token);
+      if (!token.cancelled && hooks.onReact) await hooks.onReact(i, token, false);
       this.highlight = -1;
       if (token.cancelled) break;
     }
@@ -426,7 +479,8 @@ export class FlyScene {
       await this.visit(plan.winner, token);
       if (hooks.onLand && !token.cancelled) await hooks.onLand(plan.winner, token);
       if (token.cancelled) return;
-      await this.proboscis(token);
+      if (hooks.onReact) await hooks.onReact(plan.winner, token, true);
+      else await this.proboscis(token);
     }
   }
 }

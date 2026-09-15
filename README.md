@@ -7,9 +7,9 @@ Try it: https://askthefly.app/
 
 **What's new** (full list in [CHANGELOG.md](CHANGELOG.md))
 
+- v1.2.0 (2026-09-15): four designed response states, MN11 readouts and illustrated reactions. MN9 scores and rankings are unchanged; the honesty table distinguishes the state rule and animation from measured behaviour.
 - v1.1.3 (2026-09-13): long plate names stay separate on narrow screens, with ellipsis and full-name titles; row heights stay the same. No dish's score changed; the honesty table is unchanged.
 - v1.1.2 (2026-09-12): the site footer shows the latest release and links to the changelog; this "What's new" block; the honesty table gains a tonic-inhibition row (a designed experiment, not in the product). No dish's score changed.
-- v1.1.1 (2026-09-12): the brain view follows the fly to the dish it picks; the empty "Brain response:" line is gone.
 
 ![Three dishes go in, the fly picks one](docs/media/demo-en.gif)
 
@@ -64,7 +64,8 @@ Product copy for provenance: "Scores come from a published female-brain LIF mode
 | Uses the September 2026 complete gustatory wiring (MaleCNS) | **no** — a different animal, not part of this simulation | docs/open_questions.md, v3 note |
 | Tonic inhibition / disinhibition (Tastekin 2026, Fig S17) | not in the product; a designed condition (docs/tonic_inhibition.md). CB0806 or CB0862 driven at 100 Hz hold MN9 down against sugar; none of the three brakes is silenced by sugar, so disinhibition was not observed under this design. Sugar does recruit CB0465, a feed-forward brake already inside every product score. Brake choice and drive level are ours, uncalibrated. | docs/tonic_inhibition.md; OQ-3 |
 | The brain view shows a live simulation | **no** — it replays one recorded 1 s trial per grid cell (fixed seed) from the same model; positions are FlyWire soma coordinates, activity is the recorded spike times | docs/site.md, `site/data/replay/` headers |
-| The fly animation is measured behaviour | **no** — it is a scripted animation driven by the lookup table's MN9 means and the recorded replays; the model has no body, legs or proboscis, only MN9 firing | docs/site.md |
+| The fly animation is measured behaviour | **no** — actions, mouth close-ups, emotions and speech are our illustrations of the lookup-table state, not movements or feelings measured by the model | docs/site.md |
+| The four states establish whether a fly eats | **no** — MN9 and MN11 rates come from the model; we classify the 30-trial means of left MN9 and the MN11D two-cell mean at a designed 5 Hz threshold. Right MN9 and MN11V do not decide the state. The labels are not behaviourally calibrated; ranking still uses the unchanged left MN9 score | docs/grid_provenance.md, docs/feeding_mn_readouts.md |
 | The fly's ranking is a live computation | **no** — a 400-cell lookup table precomputed from 30 trials per cell (`data/lookup_table.json`); the page only reads it | docs/grid_provenance.md |
 
 In this model weak water is only visible as a helper to sugar; the fly notices water when the food is mostly water. The lookup grid therefore gives water "low" and "medium" the same cell (60 Hz): the fixed-path recheck (docs/fixed_path_recheck.md) could not separate them on any curve.

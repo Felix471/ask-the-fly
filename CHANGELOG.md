@@ -2,6 +2,12 @@
 
 What a visitor to askthefly.app would notice, newest first. One section per release; the heading is `## vX.Y.Z — YYYY-MM-DD` (the release tag on `main` and its date), and `scripts/validate_release.py` checks that `site/data/release.json` matches the top entry. Each entry ends with a line on whether the README honesty table changed.
 
+## v1.2.0 — 2026-09-15
+
+- Four designed response states now give each plate a distinct fly reaction, mouth inset, emotion bubble and bilingual speech. Results and share cards include MN11 readouts; baseline rasters include individual MN11D/V cells.
+- No dish's MN9 score, ranking, tie or allocation rule changed. State labels use the owner's 5 Hz threshold on left MN9 and the two-cell MN11D mean; animation and speech are designed, not measured feeding.
+- README honesty table: added state/readout row and revised animation row, pending owner sign-off before release.
+
 ## v1.1.3 — 2026-09-13
 
 - Long dish names under the plates no longer run together on narrow screens: they end in an ellipsis, with the full name available in the title tooltip. Plate rows keep the same height.

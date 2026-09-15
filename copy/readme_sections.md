@@ -11,9 +11,9 @@ Try it: https://askthefly.app/
 
 **What's new** (full list in [CHANGELOG.md](CHANGELOG.md))
 
+- v1.2.0 (2026-09-15): four designed response states, MN11 readouts and illustrated reactions. MN9 scores and rankings are unchanged; the honesty table distinguishes the state rule and animation from measured behaviour.
 - v1.1.3 (2026-09-13): long plate names stay separate on narrow screens, with ellipsis and full-name titles; row heights stay the same. No dish's score changed; the honesty table is unchanged.
 - v1.1.2 (2026-09-12): the site footer shows the latest release and links to the changelog; this "What's new" block; the honesty table gains a tonic-inhibition row (a designed experiment, not in the product). No dish's score changed.
-- v1.1.1 (2026-09-12): the brain view follows the fly to the dish it picks; the empty "Brain response:" line is gone.
 
 ![Three dishes go in, the fly picks one](docs/media/demo-en.gif)
 
@@ -73,7 +73,8 @@ Product copy for provenance: "Scores come from a published female-brain LIF mode
 | Uses the September 2026 complete gustatory wiring (MaleCNS) | **no** — a different animal, not part of this simulation | docs/open_questions.md, v3 note |
 | Tonic inhibition / disinhibition (Tastekin 2026, Fig S17) | not in the product; a designed condition (docs/tonic_inhibition.md). CB0806 or CB0862 driven at 100 Hz hold MN9 down against sugar; none of the three brakes is silenced by sugar, so disinhibition was not observed under this design. Sugar does recruit CB0465, a feed-forward brake already inside every product score. Brake choice and drive level are ours, uncalibrated. | docs/tonic_inhibition.md; OQ-3 |
 | The brain view shows a live simulation | **no** — it replays one recorded 1 s trial per grid cell (fixed seed) from the same model; positions are FlyWire soma coordinates, activity is the recorded spike times | docs/site.md, `site/data/replay/` headers |
-| The fly animation is measured behaviour | **no** — it is a scripted animation driven by the lookup table's MN9 means and the recorded replays; the model has no body, legs or proboscis, only MN9 firing | docs/site.md |
+| The fly animation is measured behaviour | **no** — actions, mouth close-ups, emotions and speech are our illustrations of the lookup-table state, not movements or feelings measured by the model | docs/site.md |
+| The four states establish whether a fly eats | **no** — MN9 and MN11 rates come from the model; we classify the 30-trial means of left MN9 and the MN11D two-cell mean at a designed 5 Hz threshold. Right MN9 and MN11V do not decide the state. The labels are not behaviourally calibrated; ranking still uses the unchanged left MN9 score | docs/grid_provenance.md, docs/feeding_mn_readouts.md |
 | The fly's ranking is a live computation | **no** — a 400-cell lookup table precomputed from 30 trials per cell (`data/lookup_table.json`); the page only reads it | docs/grid_provenance.md |
 
 In this model weak water is only visible as a helper to sugar; the fly notices water when the food is mostly water. The lookup grid therefore gives water "low" and "medium" the same cell (60 Hz): the fixed-path recheck (docs/fixed_path_recheck.md) could not separate them on any curve.
@@ -158,9 +159,9 @@ English: [README.md](README.md)
 
 **最近更新**（完整列表见 [CHANGELOG.md](CHANGELOG.md)）
 
+- v1.2.0（2026-09-15）：新增四种设计状态、MN11 读数与示意动作。MN9 分数和排序不变；诚实声明表区分状态规则、动画和实测行为。
 - v1.1.3（2026-09-13）：窄屏下盘子下方的长菜名不再挤在一起，超长部分显示省略号，title 提示保留完整菜名；行高不变。没有任何菜的分数变化；诚实声明表未改动。
 - v1.1.2（2026-09-12）：网站页脚会显示最新版本并链接到更新记录；README 多了这个"最近更新"；诚实声明表新增持续性抑制一行（一个设计出来的实验，不在产品内）。没有任何菜的分数变化。
-- v1.1.1（2026-09-12）：脑图会跟着果蝇落到它选的那道菜上；结果页里空着的"脑反应："一行去掉了。
 
 ![丢进三道菜，果蝇选一道](docs/media/demo-zh.gif)
 
@@ -220,7 +221,8 @@ English: [README.md](README.md)
 | 使用了 2026 年 9 月的完整味觉接线（MaleCNS） | **否** —— 另一只动物，不在本仿真内 | docs/open_questions.md，v3 note |
 | 持续性抑制 / 去抑制（Tastekin 2026，图 S17） | 不在产品内；是一个设计出来的实验条件（docs/tonic_inhibition.md）。以 100 Hz 驱动 CB0806 或 CB0862 能在糖刺激下压住 MN9；三个"刹车"神经元没有一个被糖压制，所以在这个设计下没有观察到去抑制。糖确实会激活 CB0465，这是一个前馈刹车，已经包含在产品的每个分数里。刹车的选择和驱动强度都是我们定的，未经校准。 | docs/tonic_inhibition.md；OQ-3 |
 | 脑图是实时仿真 | **否** —— 它回放每个格子一次记录好的 1 秒试验（固定种子），来自同一个模型；位置是 FlyWire 胞体坐标，活动是记录到的放电时刻 | docs/site.md，`site/data/replay/` 文件头 |
-| 果蝇动画是测得的行为 | **否** —— 它是由查找表的 MN9 均值和记录回放驱动的脚本动画；模型没有身体、腿或口器，只有 MN9 放电 | docs/site.md |
+| 果蝇动画是测得的行为 | **否** —— 动作、口器特写、情绪和台词是我们根据查找表状态设计的示意，不是模型测得的动作或感受 | docs/site.md |
+| 四种状态能确定果蝇是否进食 | **否** —— MN9、MN11 的速率来自模型；我们用左 MN9 和 MN11D 双细胞平均速率各自的 30 次试验均值，按设计的 5 Hz 阈值分类。右 MN9 和 MN11V 不决定状态。标签未经行为校准；排序仍用未改变的左 MN9 分数 | docs/grid_provenance.md, docs/feeding_mn_readouts.md |
 | 果蝇的排名是实时计算 | **否** —— 一张预先算好的 400 格查找表（每格 30 次试验，`data/lookup_table.json`）；页面只是读取它 | docs/grid_provenance.md |
 
 在这个模型里，微量的水只在帮糖时才被看见；只有食物基本是水时，果蝇才注意到水。因此查找网格把水的"低"和"中"放进同一个格子（60 Hz）：固定路径复核（docs/fixed_path_recheck.md）在任何一条曲线上都分不开它们。

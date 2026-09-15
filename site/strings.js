@@ -143,8 +143,28 @@ export const STRINGS = {
     "colIr94e": "Amino acids",
     "ir94eExplain": "Amino acids = the Ir94e channel: in this model free amino acids and glutamate put the fly off, so soy-, stock- and meat-heavy dishes score low. Which level a dish gets is our estimate; the suppression is the model's.",
     "lowInterest": "The fly didn't care much for any of these. This one was just the least uninteresting.",
-    "releaseSummary": "Long plate names stay separate; no scores changed",
-    "releaseLink": "what's new"
+    "releaseSummary": "Four response states and MN11 readouts; scores unchanged.",
+    "releaseLink": "what's new",
+    "stateV12": {
+      "EatsLabel": "Eats",
+      "EatsExplanation": "Mean MN9 and MN11D readouts are both ≥ 5 Hz.",
+      "MouthMovesLabel": "Mouth moves",
+      "MouthMovesExplanation": "Mean MN9 is < 5 Hz; mean MN11D is ≥ 5 Hz.",
+      "ProboscisOnlyLabel": "Proboscis only",
+      "ProboscisOnlyExplanation": "Mean MN9 is ≥ 5 Hz; mean MN11D is < 5 Hz.",
+      "NoResponseLabel": "No response",
+      "NoResponseExplanation": "Mean MN9 and MN11D are both < 5 Hz; this does not mean zero firing."
+    },
+    "colMn9R": "MN9 R (recorded)",
+    "colMn11D": "MN11D (two-cell mean)",
+    "colMn11V": "MN11V (two-cell mean)",
+    "colResponse": "Designed state",
+    "responseInset": "Illustrative mouth-part animation",
+    "responseDesign": "State: 30-trial means of left MN9 and two-cell MN11D, with our 5 Hz threshold. MN11V/right MN9 do not decide it. Movements, emotions and speech are designed, not observed feeding.",
+    "mn11ReplayNote": "Raster: one recorded trial, not the 30-trial state average. MN11D/V rows are individual cells; L/R follows the workbook.",
+    "mn11VariantNote": "MN11 rows were not packed for this silencing replay. The dish state remains the baseline 30-trial state; it is not recalculated here.",
+    "sceneNoResponse": "The fly leaves.",
+    "cardReadouts": "{state} (designed) · MN11D {d} · MN11V {v} Hz"
   },
   "zh": {
     "add": "添加",
@@ -288,7 +308,27 @@ export const STRINGS = {
     "colIr94e": "氨基酸",
     "ir94eExplain": "氨基酸一列是 Ir94e 通道：在这个模型里，游离氨基酸和谷氨酸（俗称的“鲜”）会让果蝇扫兴，所以酱油、高汤、肉多的菜得分很低。菜对应哪个等级是我们估的，抑制本身是模型的。",
     "lowInterest": "这几样果蝇都不太想吃，勉强挑了这个。",
-    "releaseSummary": "长菜名不再挤在一起；分数没有变",
-    "releaseLink": "更新记录"
+    "releaseSummary": "新增四状态、MN11 读数与果蝇反应；分数不变。",
+    "releaseLink": "更新记录",
+    "stateV12": {
+      "EatsLabel": "吃",
+      "EatsExplanation": "MN9 和 MN11D 的平均读数均 ≥ 5 Hz。",
+      "MouthMovesLabel": "嘴动了",
+      "MouthMovesExplanation": "MN9 平均读数 < 5 Hz，MN11D 平均读数 ≥ 5 Hz。",
+      "ProboscisOnlyLabel": "只伸了喙",
+      "ProboscisOnlyExplanation": "MN9 平均读数 ≥ 5 Hz，MN11D 平均读数 < 5 Hz。",
+      "NoResponseLabel": "无明显反应",
+      "NoResponseExplanation": "MN9 和 MN11D 的平均读数均 < 5 Hz；不代表完全不放电。"
+    },
+    "colMn9R": "MN9 右（记录）",
+    "colMn11D": "MN11D（两细胞均值）",
+    "colMn11V": "MN11V（两细胞均值）",
+    "colResponse": "设计状态",
+    "responseInset": "嘴部示意动画",
+    "responseDesign": "状态由左 MN9 与 MN11D 两细胞的 30 次均值及我们设定的 5 Hz 阈值决定。MN11V、右 MN9 不参与判定。动作、情绪和台词是设计，不是观测到的进食行为。",
+    "mn11ReplayNote": "光栅：一次记录试验，不是状态所用的 30 次均值。MN11D/V 每行是一个细胞，左右按工作簿标注。",
+    "mn11VariantNote": "此静默回放未打包 MN11 行。菜品状态仍是基线 30 次均值的状态，此处不重新判定。",
+    "sceneNoResponse": "果蝇转身走了。",
+    "cardReadouts": "{state}（设计标签）· MN11D {d} · MN11V {v} Hz"
   }
 };

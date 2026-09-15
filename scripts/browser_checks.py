@@ -69,7 +69,7 @@ def wait_result(page, timeout=90000):
 
 
 def replay_requests(requests):
-    return [u for u in requests if "/data/replay/" in u and u.endswith(".bin")]
+    return [u for u in requests if ("/data/replay/" in u or "/data/replay_v1_2/" in u) and u.endswith(".bin")]
 
 
 def finish(page, errors, problems):
@@ -168,7 +168,7 @@ def check_F05(browser):
     """Reset during a pending replay: the late response must not touch the new view or leave run state behind."""
     page, errors, requests = open_page(browser, "?d=hotpot,black-coffee&lang=en")
     problems = []
-    hold = Hold(page, "**/data/replay/G_*.bin")
+    hold = Hold(page, "**/data/replay_v1_2/G_*.bin")
     page.wait_for_selector("#scene-panel:not([hidden])", timeout=20000)
     page.wait_for_timeout(1500)  # the fly reaches the first plate and waits for its replay
     page.click("#skip-btn")
@@ -211,7 +211,7 @@ def check_F06(browser):
     """Switching language mid-animation must not reveal the result."""
     page, errors, requests = open_page(browser, "?d=hotpot,black-coffee,pho&lang=en")
     problems = []
-    hold = Hold(page, "**/data/replay/G_*.bin")
+    hold = Hold(page, "**/data/replay_v1_2/G_*.bin")
     page.wait_for_selector("#scene-panel:not([hidden])", timeout=20000)
     page.wait_for_timeout(1200)
     page.click("#lang-toggle")
@@ -237,7 +237,7 @@ def check_F08(browser):
     problems = []
     warnings = []
     page.on("console", lambda m: warnings.append(m.text) if m.type == "warning" else None)
-    hold = Hold(page, "**/data/replay/G_*.bin")
+    hold = Hold(page, "**/data/replay_v1_2/G_*.bin")
     page.wait_for_selector("#scene-panel:not([hidden])", timeout=20000)
     page.wait_for_timeout(300)
     page.click("#skip-btn")

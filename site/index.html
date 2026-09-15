@@ -90,6 +90,11 @@
       <div class="scene-stage">
         <canvas id="scene-canvas" class="scene-canvas" data-i18n-aria="ariaSceneCanvas"></canvas>
         <div id="plate-labels" class="plate-labels"></div>
+        <div id="fly-bubble" class="fly-bubble" aria-live="polite" hidden></div>
+      </div>
+      <div id="response-detail" class="response-detail" hidden>
+        <canvas id="mouth-inset" width="128" height="128" data-i18n-aria="responseInset"></canvas>
+        <div><p id="response-description"></p><p class="small" data-i18n="responseDesign"></p></div>
       </div>
       <div class="brain-wrap">
         <canvas id="brain-canvas" class="brain-canvas" data-i18n-aria="ariaBrainCanvas"></canvas>
@@ -112,6 +117,7 @@
         <summary data-i18n="brainDetails"></summary>
         <h3 class="sub-h" data-i18n="rasterTitle"></h3>
         <canvas id="raster-canvas" class="raster-canvas" data-i18n-aria="ariaRaster"></canvas>
+        <p id="mn11-replay-note" class="small"></p>
         <h3 class="sub-h" data-i18n="hudTitle"></h3>
         <p id="hud-idle" class="brain-caption" data-i18n="brainIdle"></p>
         <dl id="hud" class="hud">
@@ -154,6 +160,10 @@
             <th data-i18n="colWater"></th>
             <th data-i18n="colIr94e"></th>
             <th data-i18n="colMn9"></th>
+            <th data-i18n="colMn9R"></th>
+            <th data-i18n="colMn11D"></th>
+            <th data-i18n="colMn11V"></th>
+            <th data-i18n="colResponse"></th>
           </tr>
         </thead>
         <tbody id="results-body"></tbody>

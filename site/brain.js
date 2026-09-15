@@ -153,6 +153,11 @@ export function rasterRows(replay, neurons, labels) {
   }
   rows.push({ key: "mn9_left", label: labels.mn9_left || "MN9 L", colour: COLORS.mn9, times: Float32Array.from(buckets.get("mn9_left")) });
   rows.push({ key: "mn9_right", label: labels.mn9_right || "MN9 R", colour: COLORS.mn9, times: Float32Array.from(buckets.get("mn9_right")) });
+  for (const type of ['MN11D','MN11V']) {
+    for (const cell of replay.header.readout_rows?.[type]?.cells || []) {
+      rows.push({key:`${type}:${cell.root_id}`,label:`${type} ${cell.root_side}`,colour:'#e99ee6',times:Float32Array.from(cell.spike_ms)});
+    }
+  }
   return rows;
 }
 
