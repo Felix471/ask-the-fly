@@ -12,43 +12,43 @@ Ordinal order: none < low < medium < high < very_high where available. Canonical
 
 | 桶 | 状态 | 直接 | 情绪 | 动作或画面 |
 |---|---|---|---|---|
-| 1 | eats | 就要这个。 | 甜得正好！ | 这口我先吃。 |
-| 2 | eats | 有点苦，也吃。 | 苦归苦，甜就行。 | 皱下脸，接着吃。 |
-| 3 | eats | 这鲜味，勉强吃。 | 算了，甜就放过。 | 躲一下，再吃口。 |
-| 4 | eats | 淡点也吃。 | 没惊喜，也行。 | 慢慢吃两口。 |
-| 5 | eats | 先喝一口。 | 这口水来得好！ | 凑过去，喝个够。 |
-| 6 | eats | 就吃这个。 | 行，还不错。 | 凑近吃一口。 |
-| 7 | mouth_moves | 想吃，又不敢吃。 | 真馋，可是好苦。 | 嘴都动了，还犹豫。 |
-| 8 | mouth_moves | 这味儿，拿不准。 | 怪了，到底吃不吃？ | 凑近了，又退半步。 |
-| 9 | mouth_moves | 差点就吃了。 | 可惜，就差一点。 | 凑到嘴边，又停了。 |
-| 10 | proboscis_only | 碰一下就好。 | 也就碰一下。 | 伸一下，收回来。 |
-| 11 | no_response | 不吃。 | 呸。 | 扭头，离远点。 |
-| 12 | no_response | 这不是我的饭。 | 光鲜不甜，不要。 | 推远点，不是我的。 |
-| 13 | no_response | 没味儿，不吃。 | 白来一趟。 | 当没看见，飞走。 |
-| 14 | no_response | 不太想吃。 | 提不起劲。 | 看一眼，走了。 |
-| tie | tie | 分不出，你挑。 | 都差不多，随你。 | 往旁边一让，你来。 |
-| eats_first | eats_first | 这盘我的，剩下归你。 | 我挑好了，你吃剩下。 | 抱走这盘，你慢挑。 |
+| 1 | eats | 就这个。 | 对上了。 | 嘴已经贴上去了。 |
+| 2 | eats | 苦了一下，吃。 | 那一下就算了。 | 咽下去了。 |
+| 3 | eats | 那股味先放一边。 | 甜够了就过。 | 勉强进嘴。 |
+| 4 | eats | 淡是淡，吃吧。 | 也没什么不行。 | 慢慢抿着。 |
+| 5 | eats | 先喝一口。 | 清得很。 | 顺着就下去了。 |
+| 6 | eats | 可以。 | 吃着就吃着。 | 停在这儿了。 |
+| 7 | mouth_moves | 再近一点……算了。 | 嘴到了，心没到。 | 伸出去又缩回来。 |
+| 8 | mouth_moves | 这是什么味。 | 再碰一下看看。 | 凑近了又停住。 |
+| 9 | mouth_moves | 差一点点。 | 本来要吃的。 | 嘴边转了一圈。 |
+| 10 | proboscis_only | 碰一下就行。 | 点到为止。 | 嘴尖扫过就走。 |
+| 11 | no_response | 滚。 | 离远点。 | 这盘别靠近。 |
+| 12 | no_response | 这不是给我的。 | 认不出这盘。 | 我不过去。 |
+| 13 | no_response | 没东西。 | 不值得停。 | 飞过去了。 |
+| 14 | no_response | 算了。 | 没兴趣。 | 看一眼就过。 |
+| tie | tie | 你挑。 | 我分不出来。 | 两盘搁一块儿，你说。 |
+| eats_first | eats_first | 这盘归我了。 | 我拿走了，剩下给你。 | 先到先得。 |
 
 ## English
 
 | Bucket | State | Direct | Emotional | Action/image |
 |---|---|---|---|---|
-| 1 | eats | This one. Definitely. | Now that's sweet! | Out of my way. First bite's mine. |
-| 2 | eats | Bitter. Still having it. | Sweet enough to forgive. | A wince. Another bite. |
-| 3 | eats | That taste. I'll allow it. | Saved by the sweet part. | Lean away. Sneak a bite. |
-| 4 | eats | Bland. It'll do. | Nothing special. Fine. | A couple of quiet bites. |
-| 5 | eats | A sip first. | Just the drink I wanted! | Scoot over. I'm drinking. |
-| 6 | eats | This will do. | Yeah, I like it. | Closer. One bite. |
-| 7 | mouth_moves | I want it. I don't dare. | So tempting. So bitter. | Mouth's ready. I'm not. |
-| 8 | mouth_moves | Can't quite place it. | What is that? Do I want it? | Closer… no, back a bit. |
-| 9 | mouth_moves | Almost took a bite. | So close. What a shame. | Right at my mouth. Then I stop. |
-| 10 | proboscis_only | Just a touch. | Only a little tap. | Reach out. Pull back. |
-| 11 | no_response | No. | Bleh. | Turn away. Keep it away. |
-| 12 | no_response | That's not my food. | All that taste, no sweet? No. | Push it away. Not mine. |
-| 13 | no_response | No taste. No bite. | Well, that was a wasted trip. | Didn't see a thing. Off I go. |
-| 14 | no_response | Not interested. | Can't get excited about it. | One glance. Moving on. |
-| tie | tie | Can't choose. Your call. | Either works. Suit yourself. | I'll step aside. You pick. |
-| eats_first | eats_first | Mine. The rest are yours. | I've picked. Help yourself to the rest. | Taking this one. Take your time. |
+| 1 | eats | This one. | That's the one. | Mouth's already on it. |
+| 2 | eats | A sting. Fine. | That flash can go. | Down it goes. |
+| 3 | eats | Ignore that other note. | Sweet's enough. | It goes in anyway. |
+| 4 | eats | Flat. I'll eat. | It'll do. | Just sipping along. |
+| 5 | eats | A sip first. | Clean. | It slides right down. |
+| 6 | eats | Fine. | Eating's eating. | I'll stay here. |
+| 7 | mouth_moves | Closer… no. | Mouth's there. I'm not. | Out, then back. |
+| 8 | mouth_moves | What is that. | One more tap. | In close, then halt. |
+| 9 | mouth_moves | Almost. | Was going to. | Circled the rim and left. |
+| 10 | proboscis_only | Just a tap. | That's enough. | Brush and gone. |
+| 11 | no_response | Out. | Stay back. | Not this plate. |
+| 12 | no_response | Not for me. | Don't know this plate. | I'm not going over. |
+| 13 | no_response | Nothing here. | Not worth a stop. | Already past it. |
+| 14 | no_response | Skip it. | No interest. | Glance and gone. |
+| tie | tie | You pick. | Can't tell them apart. | Both sit there. You say. |
+| eats_first | eats_first | This plate's mine. | I took mine. Rest is yours. | Got here first. |
 
 ## Validation checkpoint
 
