@@ -2,6 +2,7 @@
 import unittest
 from unittest.mock import patch
 from copy import deepcopy
+import hashlib
 import json
 import struct
 import numpy as np
@@ -10,6 +11,22 @@ from sim.run_mn_readouts import published_grid_seed
 from sim.lookup import _cells_sha256
 from scripts.build_lookup_v1_2 import MN9_KEYS, verify_projection
 from scripts.pack_replay_v1_2 import expand, unpack
+from sim.lookup_v1_2 import ROOT, SPEC, RULE
+from sim.run_mn_readouts import load_json
+
+
+def original_text_bytes(path, expected_sha256):
+    """Recover recorded legacy LF/CRLF bytes; never normalize scientific values.
+
+    Legacy files were frozen on Windows but Git stores LF. New generated v1.2
+    artifacts are -text and must pass direct byte checks instead.
+    """
+    raw = path.read_bytes()
+    lf = raw.replace(b'\r\n', b'\n')
+    for candidate in [raw, lf, lf.replace(b'\n', b'\r\n')]:
+        if hashlib.sha256(candidate).hexdigest() == expected_sha256:
+            return candidate
+    raise AssertionError('Legacy source differs beyond checkout line endings: ' + str(path))
 
 
 class LookupV12Tests(unittest.TestCase):
@@ -24,7 +41,13 @@ class LookupV12Tests(unittest.TestCase):
                 state_for(value, 5)
 
     def test_frozen_design(self):
-        spec, protocol = design()
+        # Static artifact check also runs on Linux checkouts. The actual WSL
+        # runner's stricter runtime byte-hash guards are left untouched.
+        spec, protocol = load_json(SPEC), load_json(ROOT / 'data/stim_protocol.json')
+        original_text_bytes(ROOT / 'data/stim_protocol.json', spec['base_protocol_sha256'])
+        original_text_bytes(ROOT / 'data/lookup_table.json', spec['source_lookup_sha256'])
+        self.assertEqual(spec['state_rule'], RULE)
+        self.assertEqual(len({n['Body_ID'] for n in spec['readout_neurons']}), 6)
         self.assertEqual(spec['state_rule']['mn9']['id'], '720575940660219265')
         self.assertEqual([len(v) for v in groups_for(spec, protocol).values()], [1, 1, 2, 2])
         self.assertEqual(spec['trials_per_cell'] * spec['grid_cells'], 12000)
