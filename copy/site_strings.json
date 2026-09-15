@@ -718,8 +718,8 @@
     {
       "key": "releaseSummary",
       "context": "Footer 'what's new' line, one-line summary of the latest release; version and date come from site/data/release.json",
-      "en": "New Chinese and English fly speech; scores unchanged.",
-      "zh": "更新果蝇中英文气泡台词；分数不变。",
+      "en": "New fly speech, pixel faces and bubbles; scores unchanged.",
+      "zh": "更新果蝇台词、像素表情和气泡；分数不变。",
       "max_length": 60
     },
     {

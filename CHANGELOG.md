@@ -5,6 +5,7 @@ What a visitor to askthefly.app would notice, newest first. One section per rele
 ## v1.2.1 — 2026-09-15
 
 - Refreshed all 16 groups of Chinese and English fly speech with owner-supplied lines.
+- Pixel-art happy, sweating and deadpan faces replace system emoji; speech bubbles and bilingual lettering now match the pixel style.
 - No scores, state rules, speech conditions, tie handling or allocation changed. A final no_response pick still leaves without ownership speech.
 - README honesty table: unchanged; speech remains a designed illustration.
 

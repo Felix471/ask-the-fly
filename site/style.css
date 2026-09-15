@@ -356,7 +356,14 @@ body { padding: 0 16px 32px; max-width: 640px; margin: 0 auto; }
 .silence-summary { flex-basis: 100%; color: var(--muted); font-size: 0.8rem; font-variant-numeric: tabular-nums; }
 
 /* v1.2: captions stay separate from plate labels; no visitor data is transmitted. */
-.fly-bubble { position:absolute; width:180px; box-sizing:border-box; padding:7px 10px; border:1px solid #b6a68f; border-radius:14px; background:#fffaf1; color:#302819; font:14px/1.4 system-ui; text-align:center; pointer-events:none; z-index:2; overflow-wrap:anywhere; }
+.fly-bubble { position:absolute; width:208px; max-width:calc(100% - 16px); box-sizing:border-box; padding:8px 10px 16px; background:#302819; color:#302819; font:18px/24px var(--font-display); font-synthesis:none; text-align:center; pointer-events:none; z-index:2; overflow-wrap:anywhere; display:flex; align-items:center; gap:6px; clip-path:polygon(0 6px,6px 6px,6px 0,calc(100% - 6px) 0,calc(100% - 6px) 6px,100% 6px,100% calc(100% - 14px),calc(100% - 6px) calc(100% - 14px),calc(100% - 6px) calc(100% - 8px),calc(50% + 6px) calc(100% - 8px),calc(50% + 6px) calc(100% - 4px),50% calc(100% - 4px),50% 100%,calc(50% - 6px) 100%,calc(50% - 6px) calc(100% - 8px),6px calc(100% - 8px),6px calc(100% - 14px),0 calc(100% - 14px)); }
+.fly-bubble::before { content:""; position:absolute; inset:2px; background:#fff4d6; clip-path:inherit; }
+.fly-bubble[hidden] { display:none; }
+.bubble-text { position:relative; flex:1; min-width:0; }
+:lang(zh) .bubble-text { font-family:"Fusion Pixel",var(--font-display); font-size:24px; line-height:28px; }
+.bubble-emotion { position:relative; flex:0 0 40px; width:40px; height:40px; background-image:url("assets/response/emotions-v1.png"); background-size:120px 40px; background-repeat:no-repeat; image-rendering:pixelated; }
+.fly-bubble[data-emotion="sweat"] .bubble-emotion { background-position:center; }
+.fly-bubble[data-emotion="deadpan"] .bubble-emotion { background-position:right; }
 .response-detail { display:flex; gap:16px; align-items:center; margin:10px 0; }
 .response-detail[hidden] { display:none; }
 .response-detail canvas { width:96px; height:96px; image-rendering:pixelated; flex-shrink:0; }

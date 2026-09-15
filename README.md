@@ -7,7 +7,7 @@ Try it: https://askthefly.app/
 
 **What's new** (full list in [CHANGELOG.md](CHANGELOG.md))
 
-- v1.2.1 (2026-09-15): refreshed all 16 groups of bilingual fly speech; scores, states, allocation rules and the honesty table are unchanged.
+- v1.2.1 (2026-09-15): refreshed all 16 groups of bilingual fly speech, with pixel-art faces, bubbles and lettering; scores, states, allocation rules and the honesty table are unchanged.
 - v1.2.0 (2026-09-15): four designed response states, MN11 readouts and illustrated reactions. MN9 scores and rankings are unchanged; the honesty table distinguishes the state rule and animation from measured behaviour.
 - v1.1.3 (2026-09-13): long plate names stay separate on narrow screens, with ellipsis and full-name titles; row heights stay the same. No dish's score changed; the honesty table is unchanged.
 
