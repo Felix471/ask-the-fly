@@ -5,6 +5,8 @@ from copy import deepcopy
 import hashlib
 import json
 import struct
+import tempfile
+from pathlib import Path
 import numpy as np
 from sim.lookup_v1_2 import design, groups_for, state_for, verify_mn9
 from sim.run_mn_readouts import published_grid_seed
@@ -68,7 +70,7 @@ class LookupV12Tests(unittest.TestCase):
                 verify_mn9(grouped, condition)
 
     def test_cell_and_literal_mn9_identity(self):
-        old = {'cells': [{k: 0.0 for k in MN9_KEYS} for _ in range(400)]}
+        old = {'cells': [{**{k: 0.0 for k in MN9_KEYS}, 'n_trials': 30} for _ in range(400)]}
         old['cells_sha256'] = _cells_sha256(old['cells'])
         new = deepcopy(old)
         for cell in new['cells']:
@@ -78,9 +80,22 @@ class LookupV12Tests(unittest.TestCase):
         self.assertEqual(verify_projection(old, new, before, after)['literal_mn9_fields_byte_identical'], 2400)
         with self.assertRaisesRegex(ValueError, 'literal'):
             verify_projection(old, new, before, after.replace(b'"mn9_mean": 0.0', b'"mn9_mean": 0.000'))
+        with self.assertRaisesRegex(ValueError, 'literal'):
+            verify_projection(old, new, before, after.replace(b'\n', b'\r\n'))
         new['cells'][0]['mn9_mean'] = 1
         with self.assertRaisesRegex(ValueError, 'projection'):
             verify_projection(old, new, before, json.dumps(new).encode())
+
+    def test_legacy_checkout_recovery_rejects_content_changes(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / 'legacy.json'
+            recorded = b'{\r\n  "mean": 5.0\r\n}\r\n'
+            digest = hashlib.sha256(recorded).hexdigest()
+            path.write_bytes(recorded.replace(b'\r\n', b'\n'))
+            self.assertEqual(original_text_bytes(path, digest), recorded)
+            path.write_bytes(recorded.replace(b'5.0', b'5.1'))
+            with self.assertRaisesRegex(AssertionError, 'beyond checkout'):
+                original_text_bytes(path, digest)
 
 
 def replay_fixture():

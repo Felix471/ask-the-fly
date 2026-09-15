@@ -22,8 +22,10 @@ STATES = ('eats', 'mouth_moves', 'proboscis_only', 'no_response')
 
 
 def mn9_tokens(blob):
-    pattern = rb'"(?:' + b'|'.join(k.encode() for k in MN9_KEYS) + rb')"\s*:\s*[-+0-9.eE]+'
-    return re.findall(pattern, blob)
+    """Complete field lines, including indentation, delimiters and line endings."""
+    pattern = (rb'^[ \t]*"(?:' + b'|'.join(k.encode() for k in MN9_KEYS)
+               + rb')"[ \t]*:[ \t]*[-+0-9.eE]+,?(?:\r?\n|$)')
+    return re.findall(pattern, blob, flags=re.MULTILINE)
 
 
 def verify_projection(old, new, old_bytes, new_bytes):
@@ -121,6 +123,8 @@ def build():
     cells = new.pop('cells')
     new['cells'] = cells
     encoded = (json.dumps(new, indent=2, ensure_ascii=False, allow_nan=False) + '\n').encode('utf-8')
+    if b'\r\n' in old_bytes:
+        encoded = encoded.replace(b'\n', b'\r\n')
     checks = verify_projection(old, new, old_bytes, encoded)
     table = LookupTable(new)
     dishes = load_json(ROOT / 'data/dishes.json')
