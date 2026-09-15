@@ -1015,6 +1015,54 @@
       "en": "{name}: median MN9 change {median} over {n} cells where baseline MN9 fired · {up}% up · {down}% down · {same}% unchanged · all {nAll} cells: median {medianAll}",
       "zh": "{name}：基线 MN9 有放电的 {n} 个格子里 MN9 中位变化 {median} · {up}% 上升 · {down}% 下降 · {same}% 不变 · 全部 {nAll} 个格子：中位 {medianAll}",
       "max_length": 180
+    },
+    {
+      "key": "stateV12.EatsLabel",
+      "context": "DRAFT for owner review, not imported. Designed state label, not observed behaviour.",
+      "en": "Eats",
+      "zh": "吃"
+    },
+    {
+      "key": "stateV12.EatsExplanation",
+      "context": "DRAFT for owner review, not imported. MN9 is frozen left readout; MN11D is two-cell mean; both averaged over 30 trials. Owner-designed 5 Hz threshold.",
+      "en": "Mean MN9 and MN11D readouts are both ≥ 5 Hz.",
+      "zh": "MN9 和 MN11D 的平均读数均 ≥ 5 Hz。"
+    },
+    {
+      "key": "stateV12.MouthMovesLabel",
+      "context": "DRAFT for owner review, not imported. Designed state label, not observed behaviour.",
+      "en": "Mouth moves",
+      "zh": "嘴动了"
+    },
+    {
+      "key": "stateV12.MouthMovesExplanation",
+      "context": "DRAFT for owner review, not imported. MN9 is frozen left readout; MN11D is two-cell mean; both averaged over 30 trials. Owner-designed 5 Hz threshold.",
+      "en": "Mean MN9 is < 5 Hz; mean MN11D is ≥ 5 Hz.",
+      "zh": "MN9 平均读数 < 5 Hz，MN11D 平均读数 ≥ 5 Hz。"
+    },
+    {
+      "key": "stateV12.ProboscisOnlyLabel",
+      "context": "DRAFT for owner review, not imported. Designed state label, not observed behaviour.",
+      "en": "Proboscis only",
+      "zh": "只伸了喙"
+    },
+    {
+      "key": "stateV12.ProboscisOnlyExplanation",
+      "context": "DRAFT for owner review, not imported. MN9 is frozen left readout; MN11D is two-cell mean; both averaged over 30 trials. Owner-designed 5 Hz threshold.",
+      "en": "Mean MN9 is ≥ 5 Hz; mean MN11D is < 5 Hz.",
+      "zh": "MN9 平均读数 ≥ 5 Hz，MN11D 平均读数 < 5 Hz。"
+    },
+    {
+      "key": "stateV12.NoResponseLabel",
+      "context": "DRAFT for owner review, not imported. Designed state label, not observed behaviour.",
+      "en": "No response",
+      "zh": "无明显反应"
+    },
+    {
+      "key": "stateV12.NoResponseExplanation",
+      "context": "DRAFT for owner review, not imported. MN9 is frozen left readout; MN11D is two-cell mean; both averaged over 30 trials. Owner-designed 5 Hz threshold.",
+      "en": "Mean MN9 and MN11D are both < 5 Hz; this does not mean zero firing.",
+      "zh": "MN9 和 MN11D 的平均读数均 < 5 Hz；不代表完全不放电。"
     }
   ]
 }
