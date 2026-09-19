@@ -93,7 +93,7 @@ Channel-alone nonzero conditions already appear at sugar 0 in each pair block. T
 
 ## Phase 1
 
-not started
+Completed and independently audited 35 conditions × 30 = 1,050 trials; see the [Phase 1 characterisation report](malecns_phase1.md). Water is not observed as an appetitive driver under this design; ir94e suppresses.
 
 ## Phase 2
 
