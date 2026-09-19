@@ -1,0 +1,426 @@
+{
+  "verdict": "IDENTICAL",
+  "compared_utc": "2026-09-19T01:59:20.462842+00:00",
+  "trials": [
+    {
+      "identical": true,
+      "key_sets_identical": true,
+      "neurons_compared": 0,
+      "spikes_compared": 0,
+      "original_neurons": 0,
+      "recheck_neurons": 0,
+      "original_spikes": 0,
+      "recheck_spikes": 0,
+      "first_differing_key": null,
+      "differing_arrays": 0,
+      "missing_keys": [],
+      "extra_keys": [],
+      "condition": "baseline",
+      "trial": 0,
+      "row_differences": [],
+      "original": {
+        "path": "data/malecns/runs/m0/baseline/trial_00.npz",
+        "bytes": 22,
+        "sha256": "8739c76e681f900923b900c9df0ef75cf421d39cabb54650c4b9ad19b6a76d85"
+      },
+      "recheck": {
+        "path": "data/malecns/runs/m0_recheck/baseline/trial_00.npz",
+        "bytes": 22,
+        "sha256": "8739c76e681f900923b900c9df0ef75cf421d39cabb54650c4b9ad19b6a76d85"
+      },
+      "archive_records_match": true
+    },
+    {
+      "identical": true,
+      "key_sets_identical": true,
+      "neurons_compared": 0,
+      "spikes_compared": 0,
+      "original_neurons": 0,
+      "recheck_neurons": 0,
+      "original_spikes": 0,
+      "recheck_spikes": 0,
+      "first_differing_key": null,
+      "differing_arrays": 0,
+      "missing_keys": [],
+      "extra_keys": [],
+      "condition": "baseline",
+      "trial": 1,
+      "row_differences": [],
+      "original": {
+        "path": "data/malecns/runs/m0/baseline/trial_01.npz",
+        "bytes": 22,
+        "sha256": "8739c76e681f900923b900c9df0ef75cf421d39cabb54650c4b9ad19b6a76d85"
+      },
+      "recheck": {
+        "path": "data/malecns/runs/m0_recheck/baseline/trial_01.npz",
+        "bytes": 22,
+        "sha256": "8739c76e681f900923b900c9df0ef75cf421d39cabb54650c4b9ad19b6a76d85"
+      },
+      "archive_records_match": true
+    },
+    {
+      "identical": true,
+      "key_sets_identical": true,
+      "neurons_compared": 0,
+      "spikes_compared": 0,
+      "original_neurons": 0,
+      "recheck_neurons": 0,
+      "original_spikes": 0,
+      "recheck_spikes": 0,
+      "first_differing_key": null,
+      "differing_arrays": 0,
+      "missing_keys": [],
+      "extra_keys": [],
+      "condition": "baseline",
+      "trial": 2,
+      "row_differences": [],
+      "original": {
+        "path": "data/malecns/runs/m0/baseline/trial_02.npz",
+        "bytes": 22,
+        "sha256": "8739c76e681f900923b900c9df0ef75cf421d39cabb54650c4b9ad19b6a76d85"
+      },
+      "recheck": {
+        "path": "data/malecns/runs/m0_recheck/baseline/trial_02.npz",
+        "bytes": 22,
+        "sha256": "8739c76e681f900923b900c9df0ef75cf421d39cabb54650c4b9ad19b6a76d85"
+      },
+      "archive_records_match": true
+    },
+    {
+      "identical": true,
+      "key_sets_identical": true,
+      "neurons_compared": 0,
+      "spikes_compared": 0,
+      "original_neurons": 0,
+      "recheck_neurons": 0,
+      "original_spikes": 0,
+      "recheck_spikes": 0,
+      "first_differing_key": null,
+      "differing_arrays": 0,
+      "missing_keys": [],
+      "extra_keys": [],
+      "condition": "baseline",
+      "trial": 3,
+      "row_differences": [],
+      "original": {
+        "path": "data/malecns/runs/m0/baseline/trial_03.npz",
+        "bytes": 22,
+        "sha256": "8739c76e681f900923b900c9df0ef75cf421d39cabb54650c4b9ad19b6a76d85"
+      },
+      "recheck": {
+        "path": "data/malecns/runs/m0_recheck/baseline/trial_03.npz",
+        "bytes": 22,
+        "sha256": "8739c76e681f900923b900c9df0ef75cf421d39cabb54650c4b9ad19b6a76d85"
+      },
+      "archive_records_match": true
+    },
+    {
+      "identical": true,
+      "key_sets_identical": true,
+      "neurons_compared": 0,
+      "spikes_compared": 0,
+      "original_neurons": 0,
+      "recheck_neurons": 0,
+      "original_spikes": 0,
+      "recheck_spikes": 0,
+      "first_differing_key": null,
+      "differing_arrays": 0,
+      "missing_keys": [],
+      "extra_keys": [],
+      "condition": "baseline",
+      "trial": 4,
+      "row_differences": [],
+      "original": {
+        "path": "data/malecns/runs/m0/baseline/trial_04.npz",
+        "bytes": 22,
+        "sha256": "8739c76e681f900923b900c9df0ef75cf421d39cabb54650c4b9ad19b6a76d85"
+      },
+      "recheck": {
+        "path": "data/malecns/runs/m0_recheck/baseline/trial_04.npz",
+        "bytes": 22,
+        "sha256": "8739c76e681f900923b900c9df0ef75cf421d39cabb54650c4b9ad19b6a76d85"
+      },
+      "archive_records_match": true
+    },
+    {
+      "identical": true,
+      "key_sets_identical": true,
+      "neurons_compared": 17790,
+      "spikes_compared": 1162668,
+      "original_neurons": 17790,
+      "recheck_neurons": 17790,
+      "original_spikes": 1162668,
+      "recheck_spikes": 1162668,
+      "first_differing_key": null,
+      "differing_arrays": 0,
+      "missing_keys": [],
+      "extra_keys": [],
+      "condition": "sugar200",
+      "trial": 0,
+      "row_differences": [],
+      "original": {
+        "path": "data/malecns/runs/m0/sugar200/trial_00.npz",
+        "bytes": 11819190,
+        "sha256": "eab2ec92e7f67818adcfdd0f2f874214b8b15f764cacad9a53b914391bc517eb"
+      },
+      "recheck": {
+        "path": "data/malecns/runs/m0_recheck/sugar200/trial_00.npz",
+        "bytes": 11819190,
+        "sha256": "eab2ec92e7f67818adcfdd0f2f874214b8b15f764cacad9a53b914391bc517eb"
+      },
+      "archive_records_match": true
+    },
+    {
+      "identical": true,
+      "key_sets_identical": true,
+      "neurons_compared": 17604,
+      "spikes_compared": 1163678,
+      "original_neurons": 17604,
+      "recheck_neurons": 17604,
+      "original_spikes": 1163678,
+      "recheck_spikes": 1163678,
+      "first_differing_key": null,
+      "differing_arrays": 0,
+      "missing_keys": [],
+      "extra_keys": [],
+      "condition": "sugar200",
+      "trial": 1,
+      "row_differences": [],
+      "original": {
+        "path": "data/malecns/runs/m0/sugar200/trial_01.npz",
+        "bytes": 11788690,
+        "sha256": "9db1125fdd78b5dbb6cbcdeb23a7377d51c5afd60fb64210c52ee6f9fb4a6230"
+      },
+      "recheck": {
+        "path": "data/malecns/runs/m0_recheck/sugar200/trial_01.npz",
+        "bytes": 11788690,
+        "sha256": "9db1125fdd78b5dbb6cbcdeb23a7377d51c5afd60fb64210c52ee6f9fb4a6230"
+      },
+      "archive_records_match": true
+    },
+    {
+      "identical": true,
+      "key_sets_identical": true,
+      "neurons_compared": 17777,
+      "spikes_compared": 1158368,
+      "original_neurons": 17777,
+      "recheck_neurons": 17777,
+      "original_spikes": 1158368,
+      "recheck_spikes": 1158368,
+      "first_differing_key": null,
+      "differing_arrays": 0,
+      "missing_keys": [],
+      "extra_keys": [],
+      "condition": "sugar200",
+      "trial": 2,
+      "row_differences": [],
+      "original": {
+        "path": "data/malecns/runs/m0/sugar200/trial_02.npz",
+        "bytes": 11788229,
+        "sha256": "8aa67e37ab39e6fd19f992e12092029686fe28e7e0669ff761e43f0976bd4058"
+      },
+      "recheck": {
+        "path": "data/malecns/runs/m0_recheck/sugar200/trial_02.npz",
+        "bytes": 11788229,
+        "sha256": "8aa67e37ab39e6fd19f992e12092029686fe28e7e0669ff761e43f0976bd4058"
+      },
+      "archive_records_match": true
+    },
+    {
+      "identical": true,
+      "key_sets_identical": true,
+      "neurons_compared": 17632,
+      "spikes_compared": 1157781,
+      "original_neurons": 17632,
+      "recheck_neurons": 17632,
+      "original_spikes": 1157781,
+      "recheck_spikes": 1157781,
+      "first_differing_key": null,
+      "differing_arrays": 0,
+      "missing_keys": [],
+      "extra_keys": [],
+      "condition": "sugar200",
+      "trial": 3,
+      "row_differences": [],
+      "original": {
+        "path": "data/malecns/runs/m0/sugar200/trial_03.npz",
+        "bytes": 11753443,
+        "sha256": "5a1f5e3bebd7ddeb39bd4161204ba3dd3b49e30be7b87e11331bdcd6b1b948f5"
+      },
+      "recheck": {
+        "path": "data/malecns/runs/m0_recheck/sugar200/trial_03.npz",
+        "bytes": 11753443,
+        "sha256": "5a1f5e3bebd7ddeb39bd4161204ba3dd3b49e30be7b87e11331bdcd6b1b948f5"
+      },
+      "archive_records_match": true
+    },
+    {
+      "identical": true,
+      "key_sets_identical": true,
+      "neurons_compared": 17543,
+      "spikes_compared": 1149970,
+      "original_neurons": 17543,
+      "recheck_neurons": 17543,
+      "original_spikes": 1149970,
+      "recheck_spikes": 1149970,
+      "first_differing_key": null,
+      "differing_arrays": 0,
+      "missing_keys": [],
+      "extra_keys": [],
+      "condition": "sugar200",
+      "trial": 4,
+      "row_differences": [],
+      "original": {
+        "path": "data/malecns/runs/m0/sugar200/trial_04.npz",
+        "bytes": 11687982,
+        "sha256": "a3002a33302475d7e870aa53f95d53f46227e3fe3341aa064b3da992d473b61c"
+      },
+      "recheck": {
+        "path": "data/malecns/runs/m0_recheck/sugar200/trial_04.npz",
+        "bytes": 11687982,
+        "sha256": "a3002a33302475d7e870aa53f95d53f46227e3fe3341aa064b3da992d473b61c"
+      },
+      "archive_records_match": true
+    }
+  ],
+  "neurons_compared": 88346,
+  "spikes_compared": 5792465,
+  "sources": [
+    {
+      "path": "sim/malecns/adapter.py",
+      "stored_m0": {
+        "path": "sim/malecns/adapter.py",
+        "bytes": 2112,
+        "sha256": "e438f86a33d1dab4290333cd3e5e13f77d5dc8344d10726bda4cbb0cea6b0d7a"
+      },
+      "current": {
+        "path": "sim/malecns/adapter.py",
+        "bytes": 2112,
+        "sha256": "e438f86a33d1dab4290333cd3e5e13f77d5dc8344d10726bda4cbb0cea6b0d7a"
+      },
+      "differs": false
+    },
+    {
+      "path": "sim/malecns/benchmark.py",
+      "stored_m0": {
+        "path": "sim/malecns/benchmark.py",
+        "bytes": 8130,
+        "sha256": "9346288833e19428bf84b51a0b1a0d09fee43a44cf25f9ff0f022917f7015c69"
+      },
+      "current": {
+        "path": "sim/malecns/benchmark.py",
+        "bytes": 8130,
+        "sha256": "9346288833e19428bf84b51a0b1a0d09fee43a44cf25f9ff0f022917f7015c69"
+      },
+      "differs": false
+    },
+    {
+      "path": "sim/malecns/substrate.py",
+      "stored_m0": {
+        "path": "sim/malecns/substrate.py",
+        "bytes": 16531,
+        "sha256": "1b6c7bd7122f9ad8a3d43aa87365c5b147d55d66067abcc4e7dce6fdcc63cac6"
+      },
+      "current": {
+        "path": "sim/malecns/substrate.py",
+        "bytes": 16531,
+        "sha256": "1b6c7bd7122f9ad8a3d43aa87365c5b147d55d66067abcc4e7dce6fdcc63cac6"
+      },
+      "differs": false
+    },
+    {
+      "path": "sim/network.py",
+      "stored_m0": {
+        "path": "sim/network.py",
+        "bytes": 9535,
+        "sha256": "eee33ef855203a47e03920b56b4aba98551cc400ab22107ebb91edc385475ae7"
+      },
+      "current": {
+        "path": "sim/network.py",
+        "bytes": 9535,
+        "sha256": "eee33ef855203a47e03920b56b4aba98551cc400ab22107ebb91edc385475ae7"
+      },
+      "differs": false
+    },
+    {
+      "path": "data/malecns/substrate_record.json",
+      "stored_m0": {
+        "path": "data/malecns/substrate_record.json",
+        "bytes": 6763,
+        "sha256": "95c6a973217ac793fe5d3d02b813d890f0ba7620d123c647587518d40868582f"
+      },
+      "current": {
+        "path": "data/malecns/substrate_record.json",
+        "bytes": 6763,
+        "sha256": "95c6a973217ac793fe5d3d02b813d890f0ba7620d123c647587518d40868582f"
+      },
+      "differs": false
+    },
+    {
+      "path": "data/stim_protocol.json",
+      "stored_m0": {
+        "path": "data/stim_protocol.json",
+        "bytes": 3484,
+        "sha256": "9f9495033281bfcd6f3b373551817987deb2cc083ae94ab61fece9065102d82a"
+      },
+      "current": {
+        "path": "data/stim_protocol.json",
+        "bytes": 3484,
+        "sha256": "9f9495033281bfcd6f3b373551817987deb2cc083ae94ab61fece9065102d82a"
+      },
+      "differs": false
+    }
+  ],
+  "source_note": "Historical source-hash differences are expected and reported; arrays decide equivalence.",
+  "brian2": [
+    "2.9.0"
+  ],
+  "platform": "Linux-6.18.33.2-microsoft-standard-WSL2-x86_64-with-glibc2.35",
+  "execution": {
+    "sources": [
+      {
+        "path": "sim/malecns/adapter.py",
+        "bytes": 2112,
+        "sha256": "e438f86a33d1dab4290333cd3e5e13f77d5dc8344d10726bda4cbb0cea6b0d7a"
+      },
+      {
+        "path": "sim/malecns/benchmark.py",
+        "bytes": 8130,
+        "sha256": "9346288833e19428bf84b51a0b1a0d09fee43a44cf25f9ff0f022917f7015c69"
+      },
+      {
+        "path": "sim/malecns/substrate.py",
+        "bytes": 16531,
+        "sha256": "1b6c7bd7122f9ad8a3d43aa87365c5b147d55d66067abcc4e7dce6fdcc63cac6"
+      },
+      {
+        "path": "sim/network.py",
+        "bytes": 9535,
+        "sha256": "eee33ef855203a47e03920b56b4aba98551cc400ab22107ebb91edc385475ae7"
+      },
+      {
+        "path": "data/malecns/substrate_record.json",
+        "bytes": 6763,
+        "sha256": "95c6a973217ac793fe5d3d02b813d890f0ba7620d123c647587518d40868582f"
+      },
+      {
+        "path": "data/stim_protocol.json",
+        "bytes": 3484,
+        "sha256": "9f9495033281bfcd6f3b373551817987deb2cc083ae94ab61fece9065102d82a"
+      },
+      {
+        "path": "sim/malecns/m0_recheck.py",
+        "bytes": 9793,
+        "sha256": "a7aeab1a32111678d59e67bf30e0877745516218d0bea3d544b136e4bfd33b79"
+      }
+    ],
+    "platform": "Linux-6.18.33.2-microsoft-standard-WSL2-x86_64-with-glibc2.35",
+    "python": "3.10.21 | packaged by conda-forge | (main, Aug 21 2026, 22:42:31) [GCC 14.4.0]",
+    "started_utc": "2026-09-19T01:54:31.452738+00:00"
+  },
+  "comparison_source": {
+    "path": "sim/malecns/m0_recheck.py",
+    "bytes": 9793,
+    "sha256": "a7aeab1a32111678d59e67bf30e0877745516218d0bea3d544b136e4bfd33b79"
+  }
+}
