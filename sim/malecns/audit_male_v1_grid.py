@@ -24,7 +24,7 @@ AUDIT = DATA / 'male_v1_grid_audit.json'
 LOOKUP = ROOT / 'data/lookup_table_male.json'
 COMPARISON = DATA / 'male_female_comparison.json'
 INDEX = ROOT / 'data/replay_neurons_male.json'
-REPLAYS = ROOT / 'site/data/replay_male'
+REPLAYS = ROOT / 'data/replay_male'
 STATES = ('eats', 'mouth_moves', 'proboscis_only', 'no_response')
 
 

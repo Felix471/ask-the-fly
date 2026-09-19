@@ -17,7 +17,7 @@ from sim.malecns.build_lookup_male import checked_results, current_commit
 from sim.malecns.substrate import ROOT, file_record, write_json
 
 INDEX = ROOT / 'data/replay_neurons_male.json'
-OUTPUT = ROOT / 'site/data/replay_male'
+OUTPUT = ROOT / 'data/replay_male'
 NOTE = ('recorded output of grid trial 0 of the male model; one of the 30 trials behind the score; '
         'not a live simulation')
 
