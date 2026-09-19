@@ -1275,3 +1275,117 @@ Run (b) channel order is labellar, pharyngeal, tarsal, bitter, with ascending bo
 | AP_sugar_lb3c_120 | sugar_lb3c | 120 | 0 | 30 |
 
 Verification: 15 new M1i tests and all 83 male tests pass; all 348 main Python tests pass; release validation passes. The substrate/retention hash verification and both Windows dry checks pass. No result claim or gate outcome is assigned. Stop at the substrate checkpoint before trial execution.
+## M1i results checkpoint — 2026-09-18
+
+**Run (a): FAIL on primary L10331; failing gates: S1.** PASS requires A, B, C, D, S1, S2 and S3 all to pass on L10331. R16949 is recorded, not deciding.
+
+### Run metadata
+
+| Run | Completed UTC | Simulation commit in run_meta | Brian2 / backend | Workers used (budget) | Trials | Seeds | Wall seconds | Peak worker RSS GiB |
+|---|---|---|---|---:|---:|---|---:|---:|
+| b | 2026-09-19T00:55:44.057942+00:00 | Not recorded | 2.9.0 / cython | 4 (8) | 95 | 20260910–20260939; KC first five | 135.793 | 0.980125 |
+| a | 2026-09-19T01:03:24.753353+00:00 | Not recorded | 2.9.0 / cython | 8 (8) | 480 | 20260910–20260939 | 405.418 | 0.981274 |
+
+The launch was reported at `18698a39a7a3c6faa13a19e153c054b26f2ede62`. The run_meta files omit a git commit; the audit verifies every executed source-file hash exactly against metadata and compares its text to that commit with only LF/CRLF normalization. Workers used are the distinct PIDs in the condition ledgers; the replication pool caps the memory budget at four workers. The checkpoint date is 2026-09-18 local; completion timestamps above are 2026-09-19 UTC.
+
+Whole CNS: **166,700 neurons / 6,242,085 edges / 89,859,938 synapses**, edges >=5 after autapse removal; w_syn 0.17875 mV per signed synapse. KC input gain 0.25 changes the declared KC-target signed weights only. [Outgoing retention and fixed top-20 last-hop table](#m1i-substrate-checkpoint--2026-09-18) remain recorded, not stop conditions.
+
+### Run (b): replication
+
+Rates are mean ± population SD across n=30 trials per main condition and n=5 for KC. Bin min/median/max pool all 20 two-cell 50 ms bins per trial; positive trials refer to the two-cell mean.
+
+| Condition | L10331 Hz | R16949 Hz | Two-cell mean Hz | Bin min / median / max Hz | Positive trials | Network spikes median [min–max] | Their reported Hz | Criterion |
+|---|---:|---:|---:|---:|---:|---:|---|---|
+| fbm_sugar | 104.733 ± 4.449 | 0.000 ± 0.000 | 52.367 ± 2.225 | 10 / 50 / 90 | 30/30 | 296,472.0 [127,140–342,083] | 30–90 | MATCH |
+| fbm_bitter | 0.000 ± 0.000 | 0.000 ± 0.000 | 0.000 ± 0.000 | 0 / 0 / 0 | 0/30 | 314,397.0 [297,157–322,332] | 0 | MATCH |
+| fbm_both | 0.000 ± 0.000 | 0.000 ± 0.000 | 0.000 ± 0.000 | 0 / 0 / 0 | 0/30 | 335,922.5 [312,456–346,537] | 0 | MATCH |
+| fbm_sugar_kc | 96.400 ± 3.072 | 0.000 ± 0.000 | 48.200 ± 1.536 | 10 / 50 / 80 | 5/5 | 228,439.0 [197,059–236,252] | not reported | KC−base -3.800 ± 1.691 Hz; no criterion |
+
+Their number is a per-tick two-cell mean from one 600 ms run at dt 0.5 ms; ours is thirty 1 s trials at dt 0.1 ms on a 166,700-neuron roster (the KC check has five trials). MATCH denotes only the declared replication criteria.
+
+Declared confound: their sugar drive is 204 cells including pharyngeal and tarsal GRNs, ours 17 labellar cells; (b) versus (a) separates the configuration from the input size.
+
+KC−base paired differences use the first five fbm_sugar trials with identical Poisson events, not the thirty-trial sugar mean. L10331: -7.600 ± 3.382 Hz; R16949: 0.000 ± 0.000 Hz; two-cell mean: -3.800 ± 1.691 Hz. No criterion.
+
+### Run (a): declared gates
+
+| Gate | L10331 primary | R16949 secondary |
+|---|---|---|
+| A | PASS | FAIL |
+| B | PASS | FAIL |
+| C | PASS | PASS |
+| D | PASS | PASS |
+| C_literal_zero | FAIL | PASS |
+| D_literal_zero | PASS | PASS |
+| S1 | FAIL (3/5 positive levels; requires >=4) | Not evaluated; non-deciding |
+| S2 | PASS | Not evaluated; non-deciding |
+| S3 | PASS (network max/min=1.232990; requires <3) | Not evaluated; non-deciding |
+| S | FAIL | Not evaluated; non-deciding |
+| Overall A–D + S | FAIL | Non-deciding |
+
+Historical D is completeness, not literal baseline zero. C allows the declared baseline mean + 2 SD + 1 Hz; its literal-zero addition is reported separately and does not change acceptance. S3 applies only to sugar200 network counts. R16949 is silent throughout run (a).
+
+### Run (a): five-level sugar curve
+
+Mean ± population SD in Hz, n=30 at every level.
+
+| Sugar Hz | L10331 | R16949 |
+|---|---:|---:|
+| 25 | 0.000 ± 0.000 | 0.000 ± 0.000 |
+| 50 | 0.000 ± 0.000 | 0.000 ± 0.000 |
+| 100 | 0.800 ± 1.013 | 0.000 ± 0.000 |
+| 120 | 6.300 ± 3.874 | 0.000 ± 0.000 |
+| 200 | 37.067 ± 4.494 | 0.000 ± 0.000 |
+
+### Run (a): every condition
+
+Mean ± population SD, Hz; n=30 per condition.
+
+| Condition | L10331 Hz | R16949 Hz | Network spikes median [min–max] | Neurons fired median [min–max] |
+|---|---:|---:|---:|---:|
+| A_s25_b0 | 0.000 ± 0.000 | 0.000 ± 0.000 | 510.5 [469–587] | 28.5 [23–53] |
+| A_s50_b0 | 0.000 ± 0.000 | 0.000 ± 0.000 | 1,536.0 [1,272–1,812] | 147.5 [56–250] |
+| A_s100_b0 | 0.800 ± 1.013 | 0.000 ± 0.000 | 3,890.0 [3,041–5,484] | 197.0 [119–747] |
+| A_s200_b0 | 37.067 ± 4.494 | 0.000 ± 0.000 | 305,694.0 [259,827–320,364] | 7,976.5 [7,700–8,200] |
+| B_s200_b0 | 37.067 ± 4.494 | 0.000 ± 0.000 | 305,694.0 [259,827–320,364] | 7,976.5 [7,700–8,200] |
+| B_s200_b25 | 0.033 ± 0.180 | 0.000 ± 0.000 | 300,033.0 [281,918–328,744] | 7,936.5 [7,588–8,226] |
+| B_s200_b50 | 0.000 ± 0.000 | 0.000 ± 0.000 | 307,669.5 [286,481–317,577] | 8,052.5 [7,721–8,372] |
+| B_s200_b100 | 0.000 ± 0.000 | 0.000 ± 0.000 | 314,773.5 [293,074–324,729] | 8,184.0 [7,476–8,351] |
+| B_s200_b200 | 0.000 ± 0.000 | 0.000 ± 0.000 | 321,222.5 [294,262–332,164] | 8,148.5 [7,949–8,445] |
+| C_s0_b25 | 0.800 ± 0.833 | 0.000 ± 0.000 | 295,348.0 [275,168–306,627] | 7,886.5 [7,224–8,084] |
+| C_s0_b50 | 0.067 ± 0.359 | 0.000 ± 0.000 | 304,356.0 [288,559–313,766] | 8,034.5 [7,251–8,319] |
+| C_s0_b100 | 0.000 ± 0.000 | 0.000 ± 0.000 | 312,298.5 [297,194–320,395] | 8,148.0 [7,972–8,259] |
+| C_s0_b200 | 0.000 ± 0.000 | 0.000 ± 0.000 | 316,152.0 [277,504–328,558] | 8,099.5 [7,375–8,222] |
+| D_s0_b0 | 0.000 ± 0.000 | 0.000 ± 0.000 | 0.0 [0–0] | 0.0 [0–0] |
+| AP_sugar_120 | 6.300 ± 3.874 | 0.000 ± 0.000 | 6,360.0 [4,044–305,941] | 598.5 [167–7,941] |
+| AP_sugar_lb3c_120 | 1.833 ± 1.827 | 0.000 ± 0.000 | 4,555.0 [3,745–7,013] | 287.0 [156–644] |
+
+### Run (a): A′ sugar17 versus LB3c12 at 120 Hz
+
+Mean ± population SD, n=30 paired seeds; difference is LB3c12 minus sugar17.
+
+| Side | Sugar17 Hz | LB3c12 Hz | Paired subset−union Hz | Lower/equal/higher trials |
+|---|---:|---:|---:|---:|
+| L | 6.300 ± 3.874 | 1.833 ± 1.827 | -4.467 ± 3.931 | 25/4/1 |
+| R | 0.000 ± 0.000 | 0.000 ± 0.000 | 0.000 ± 0.000 | 0/30/0 |
+
+### Execution and verification
+
+The [independent raw audit](../data/malecns/m1i_runs_audit.json) passes 575 raw trial JSON/NPZ pairs (95 b + 480 a), 1150 MN9-neuron trials, 1900 bilateral bin rows and 66,670 Poisson-unit trials. It reconstructs counts, rates, first-spike latencies, network counts and every scientific summary field, including the unchanged A–D/S predicates and both paired comparisons. Every Poisson event index/time is reproduced from the declared seed, rates, dt and physical layout without running a network. The 5 KC pairs (1210 unit trains), 360 A′ shared trains and 30 A200/B0 whole-network pairs match exactly. Repeated seeds are not independent extra replicates.
+
+[Run b summary](../data/malecns/m1i_b_results.json), [run a summary](../data/malecns/m1i_a_results.json), [audit implementation](../sim/malecns/audit_fbm.py), [report and corruption tests](../sim/malecns/test_fbm_report.py). Verification covers audit structure, deliberately corrupted trial data, input reconstruction, report regeneration, the male and main Python suites, and release validation. No new simulation, rerun, M2, alternative gain/threshold, product or frozen-data change is part of this results checkpoint.
+
+## Male line closing ledger — eight variants (2026-09-18)
+
+| Variant | Structural rationale / design | Recorded result under its declared rule |
+|---|---|---|
+| [M1](#hard-gates) | Whole CNS, original Shiu weights, typed male inputs | Neither side passes A–D. L fails A/B/C; R fails A. S not yet declared. |
+| [M1c all](../data/malecns/rescale_all_results.json) | Scale recurrent and tied external weights by whole-network mean density ratio | Passes original A–D-on-at-least-one-side rule on L; R fails A/B. Only200 Hz activates L among A levels; S not yet declared. |
+| [M1c mn9](../data/malecns/rescale_mn9_results.json) | Scale by equal-side mean density of strongest MN9 input partners, with the declared137-partner exception | Passes original A–D rule on L; R fails A/B. Only200 Hz activates L among A levels; S not yet declared. |
+| [M1d](../data/malecns/split_results.json) | Keep female external kick; scale recurrent weights by whole-network density | FAIL: A–D pass on L, S1 fails (1/5). Saved activity identical to M1c all. |
+| [M1f unscaled](../data/malecns/brain_unscaled_results.json) | Brain endpoint cut, original recurrent weight, female kick | FAIL: L B/C fail; graded sugar and S pass. |
+| [M1f density](../data/malecns/brain_density_results.json) | Same brain cut; recurrent weight scaled by its density | FAIL: L A–D pass; S1 fails (2/5). |
+| [M1h](#m1h-results-checkpoint--2026-09-14) | Confidence-pruned brain graph matched to female density; original weight/kick; outgoing flag explicitly waived | FAIL under A–D + S on L10331; full gate breakdown above. |
+| [M1i](#m1i-results-checkpoint--2026-09-18) | Whole CNS, edges >=5, gain 0.65; replication inputs and sugar17 gates declared separately | b fbm_sugar: MATCH; b fbm_bitter: MATCH; b fbm_both: MATCH. a: FAIL under A–D + S on L10331; failing gates: S1. |
+
+Per the declared stop rule, the male line stops after M1i whatever the result. Run (a) fails; the male line is Closed after eight variants. No further variant, gain, threshold change or M2 follows. Historical M1c passes retain their original rules; S is not applied retroactively. No product, frozen-data, copy or honesty-table changes.
