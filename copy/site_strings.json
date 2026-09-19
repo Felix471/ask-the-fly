@@ -1152,7 +1152,7 @@
       "key": "flySelector.hint",
       "context": "One-line scientific distinction under the selector; commitment 1 and 2.",
       "en": "Two independent experiments, not one calibrated model: the male uses a different brain reconstruction, synaptic weight and stimulus set.",
-      "zh": "这是两套独立实验，没有校准成同一个模型：雄蝇用的是另一份脑重建、突触权重和刺激细胞集。"
+      "zh": "两只果蝇是两套独立的实验，不是同一个模型的两个版本：雄蝇用的脑重建、突触权重和刺激细胞集都不一样。"
     },
     {
       "key": "flyName.female",
@@ -1206,13 +1206,13 @@
       "key": "verdictBoth.tieNote",
       "context": "One or both flies tie; keep per-fly ties, do not force a unique combined pick.",
       "en": "At least one fly has a tie; see each fly’s result.",
-      "zh": "有果蝇没分出高下，请看各自的结果。"
+      "zh": "有一只果蝇没分出高下，看各自的结果。"
     },
     {
       "key": "disagreement.sentence",
       "context": "Fixed sentence directly under every disagreeing verdict, including share cards; owner commitment 4 verbatim, without its implementation sentence. Never replace with randomized speech.",
       "en": "When the two flies disagree, the cause may be sex, reconstruction, cell typing, sign assignment, weight, or stimulus protocol; this pipeline cannot separate them.",
-      "zh": "两只果蝇意见不同时，原因可能是性别、重建、细胞分型、兴奋或抑制符号的赋值、权重或刺激协议；这套流程无法区分这些因素。"
+      "zh": "两只果蝇选得不一样，原因可能是性别，也可能是脑重建、细胞分型、突触正负、权重或刺激方式的差别；我们分不出是哪一个。"
     },
     {
       "key": "disagreement.label",
@@ -1266,7 +1266,7 @@
       "key": "card.disagree",
       "context": "Short card caption; limits en 90 / zh 45. The full fixed disagreement sentence must also remain on a disagreeing card as required by the UI design.",
       "en": "Different picks; this pipeline cannot separate sex from other model differences.",
-      "zh": "选择不同；这套流程无法区分性别与其他模型差异的影响。",
+      "zh": "两只选得不一样；分不出是性别还是模型的差别。",
       "max_length": {
         "en": 90,
         "zh": 45
@@ -1282,7 +1282,7 @@
       "key": "maleNote.state",
       "context": "Shown under the male fly's state explanation; designed depiction, not observed feeding. Usual state refers to these 174 dishes (90 proboscis_only), not a majority of all 400 grid cells.",
       "en": "In our designed depiction, this brain usually extends the proboscis without the mouth following for these dishes (the three-cell MN11D mean reaches our designed 5 Hz threshold in 9 of 400 cells), so “proboscis only” is its usual state here, not an oddity.",
-      "zh": "按我们的示意状态，这只脑面对这些菜时通常只伸喙、嘴却没跟上（三细胞 MN11D 均值仅在 400 格中的 9 格达到设计的 5 Hz 阈值），所以“只伸了喙”是它在这份菜单上的常态，不是偶发现象。"
+      "zh": "这只果蝇面对这份菜单，多数时候只伸喙、嘴不跟上（MN11D 三个细胞的均值在 400 格里只有 9 格过 5 Hz），所以“只伸了喙”是它的常态，不是异常。"
     },
     {
       "key": "maleNote.responseDesign",
