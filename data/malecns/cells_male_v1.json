@@ -1077,8 +1077,12 @@
   },
   "cross_checks": {
     "sugar_m1j": {
-      "status": "skipped",
-      "reason": "data/malecns/cells_m1j.json is absent on this branch"
+      "status": "matched",
+      "source": {
+        "path": "data/malecns/cells_m1j.json",
+        "bytes": 28928,
+        "sha256": "53dc5157132d61b05010c74b97350eed270298ddf240d3406764d2a2cf12f603"
+      }
     },
     "bitter_water_ir94e": {
       "status": "matched",

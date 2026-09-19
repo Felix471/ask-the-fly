@@ -13,11 +13,11 @@ These four owner commitments are recorded verbatim for Phase 3 honesty rows and 
 
 ## Phase 0 protocol freeze
 
-Files: [male cells](../data/malecns/cells_male_v1.json), [male protocol](../data/malecns/stim_protocol_male_v1.json), [resolver](../sim/malecns/male_v1_cells.py), and [file-only tests](../sim/malecns/test_male_v1.py). The decision point is the owner's go: `frozen_after_owner_go` is true and `owner_go` remains null pending that decision point. No later phase is authorized by these files.
+Files: [male cells](../data/malecns/cells_male_v1.json), [male protocol](../data/malecns/stim_protocol_male_v1.json), [resolver](../sim/malecns/male_v1_cells.py), and [file-only tests](../sim/malecns/test_male_v1.py). The decision point is the owner's go: `frozen_after_owner_go` is true and `owner_go` records the go of 2026-09-19 (local 2026-09-18 evening); the two files are frozen from that commit. No later phase is authorized by these files.
 
 Sources: local Tastekin Table S1 (SHA256 `7b28d5f3ae45d68c510b8a3616700f0df2a5a6f2e2d2dba490d172939f2b64c9`), maleCNS rows on both Root_Side values, and the unchanged M1i roster. All 108 stimulus IDs and all 13 readout IDs are in the roster. Source file sizes and hashes are in the cells file.
 
-Historical context: [M1i results](malecns_phase0.md#m1i-results-checkpoint--2026-09-18), [post-M1c primary-readout decision](malecns_phase0.md), and [M1j policy report](bilateral_sugar_policy.md). The M1j report is absent on this base (`2ed0e84`); its reference is retained for integration; the M1j facts cited here are the owner's recorded decision. The optional `data/malecns/cells_m1j.json` is also absent: the sugar-bilateral cross-check is explicitly skipped. Bitter, water and ir94e exactly match the existing male cells file.
+Historical context: [M1i results](malecns_phase0.md#m1i-results-checkpoint--2026-09-18), [post-M1c primary-readout decision](malecns_phase0.md), and [M1j policy report](bilateral_sugar_policy.md). The sugar set equals M1j's `sugar_bilateral` in `data/malecns/cells_m1j.json` (cross-checked); bitter, water and ir94e exactly match the existing male cells file.
 
 ### Stimulus sets
 
@@ -52,8 +52,8 @@ The reference mechanics are [stim_protocol.json](../data/stim_protocol.json); th
 | Connectivity / completeness files | vendor/fly-brain/data/2025_Connectivity_783.parquet; 2025_Completeness_783.csv | data/malecns/derived/fbm/connectivity.parquet; completeness.csv |
 | Connection threshold | All connections (minimum 1 synapse) | >=5 synapses; 33 autapses removed |
 | Substrate record | Existing frozen v783 inputs | substrate_record_fbm.json: 166,700 neurons, 6,242,085 edges, 89,859,938 synapses |
-| Synaptic weight | 0.275 mV | 0.65 * 0.275 = 0.17875000000000002 mV |
-| External kick (same formula) | 68.75 mV | 44.68750000000001 mV; w_syn*f_poi |
+| Synaptic weight | 0.275 mV | 0.65 * 0.275 = 0.17875 mV (exact decimal in the frozen file) |
+| External kick (same formula) | 68.75 mV | 44.6875 mV; w_syn*f_poi |
 | Stimulus policy | Shiu frozen sets; unilateral protocol | Bilateral Tastekin typing |
 | Sugar / bitter / water / ir94e counts | 23 / 42 / 18 / 18 | 34 / 38 / 17 / 19 |
 | Physical input units | 101 | 108; fixed channel order and ascending Body_ID |

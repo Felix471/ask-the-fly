@@ -60,8 +60,8 @@ class MaleV1Tests(unittest.TestCase):
 
     def test_model_trial_and_substrate(self):
         male = copy.deepcopy(self.protocol['model'])
-        self.assertEqual(male.pop('w_syn_expression'), '0.65 * 0.275')
-        self.assertEqual(male['w_syn_mV'], 0.65 * 0.275)
+        self.assertTrue(male.pop('w_syn_expression').startswith('0.65 * 0.275 = 0.17875 exactly'))
+        self.assertEqual(male['w_syn_mV'], 0.17875)
         male['w_syn_mV'] = self.female['model']['w_syn_mV']
         self.assertEqual(male, self.female['model'])
         self.assertEqual(self.protocol['trial'], self.female['trial'])
@@ -119,7 +119,7 @@ class MaleV1Tests(unittest.TestCase):
         self.assertEqual(provenance['reference_protocol'], subject.file_record(subject.ROOT / 'data/stim_protocol.json'))
         self.assertEqual(provenance['cells'], subject.file_record(subject.OUT))
         self.assertTrue(provenance['frozen_after_owner_go'])
-        self.assertIsNone(provenance['owner_go'])
+        self.assertTrue(str(provenance['owner_go']).startswith('2026-09-19'))
         self.assertEqual(self.protocol['notes'][:-1], self.female['notes'])
 
 

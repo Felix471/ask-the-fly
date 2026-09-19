@@ -25,11 +25,11 @@
     "tau_ms": 5,
     "t_rfc_ms": 2.2,
     "t_dly_ms": 1.8,
-    "w_syn_mV": 0.17875000000000002,
+    "w_syn_mV": 0.17875,
     "f_poi": 250,
     "integration": "linear",
     "dt_ms": 0.1,
-    "w_syn_expression": "0.65 * 0.275"
+    "w_syn_expression": "0.65 * 0.275 = 0.17875 exactly (frozen decimal; M1i/M1j ran the binary float product 0.17875000000000002, a 2.8e-17 mV difference)"
   },
   "trial": {
     "duration_ms": 1000,
@@ -73,7 +73,7 @@
       "driven_refractory_ms": 0,
       "inactive_refractory": "ordinary model.t_rfc_ms"
     },
-    "external_kick": "w_syn*f_poi (unchanged coupling; 0.17875000000000002 * 250 mV per event)"
+    "external_kick": "w_syn*f_poi (unchanged coupling; 0.17875 * 250 = 44.6875 mV per event)"
   },
   "readout": {
     "neuron": "MN9",
@@ -457,20 +457,20 @@
     },
     "cells": {
       "path": "data/malecns/cells_male_v1.json",
-      "bytes": 24264,
-      "sha256": "65ddae706c07f33621469bb80d49b93bbb55191b9288e78855307a2e5158efee"
+      "bytes": 24375,
+      "sha256": "fd346d848776155604786fcffa034476ef59970d52edf89fd7e9df0c8f057597"
     },
     "reports": [
       "docs/malecns_phase0.md#m1i-results-checkpoint--2026-09-18",
       "docs/bilateral_sugar_policy.md"
     ],
-    "m1j_report_availability": "docs/bilateral_sugar_policy.md (M1j) is on PR #51, not yet merged into this branch's base 2ed0e84; the M1j facts cited here are the owner's recorded decision. No report is recreated in Phase 0.",
+    "m1j_report_availability": "docs/bilateral_sugar_policy.md (M1j) is merged into the base of this branch (PR #51); the sugar set is cross-checked against data/malecns/cells_m1j.json sugar_bilateral.",
     "configuration_sources": [
       "https://github.com/blendi-remade/fly-brain-minecraft/blob/main/docs/VALIDATION.md",
       "https://github.com/blendi-remade/fly-brain-minecraft/blob/main/PROVENANCE.md"
     ],
     "frozen_after_owner_go": true,
-    "owner_go": null,
+    "owner_go": "2026-09-19 (local 2026-09-18 evening); w_syn stored as the exact decimal 0.17875 at the owner's instruction; Phase 1 water pairing 5 x 3 confirmed",
     "differences_from_female": [
       "substrate",
       "threshold",
