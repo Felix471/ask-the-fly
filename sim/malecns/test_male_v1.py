@@ -88,6 +88,7 @@ class MaleV1Tests(unittest.TestCase):
         rule = copy.deepcopy(self.lookup['state_rule'])
         rule['mn9'].update(id='10331', side='XLSX L (primary)')
         rule['mn11']['statistic'] = '30-trial mean of per-trial mean over the male MN11D cells (count 3 from the cells file)'
+        rule['meaning'] = 'Owner-designed threshold categories of model outputs; product wording and site integration are Phase 3 decisions.'
         self.assertEqual(self.protocol['state_rule'], rule)
         self.assertEqual(rule['threshold_hz'], 5.0)
         readout = self.protocol['readout']
