@@ -473,3 +473,6 @@ retrospective amendment to the run design. Candidate selection is still
 pending; no rerun is performed or authorised by this record.
 [Mapping, tracing and ROI-capture evidence](malecns_m1b.md#additional-mapping-and-roi-capture-check);
 [dated report decision](malecns_phase0.md#post-m1c-decision--2026-09-14).
+
+
+**2026-09-18 — M1i reopening:** The owner reopened the male line for the single pre-declared M1i replication of the externally calibrated fly-brain-minecraft configuration. See the [M1i pre-declaration](malecns_phase0.md#m1i-pre-declaration--2026-09-18) for the signed-off design, gates, checkpoints and stop rule.

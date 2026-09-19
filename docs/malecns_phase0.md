@@ -939,3 +939,94 @@ Per the owner’s instruction before M1h results, **the male line is closed pend
 | [M1h](#m1h-results-checkpoint--2026-09-14) | Confidence-pruned brain graph matched to female density; original weight/kick; outgoing flag explicitly waived | FAIL under A–D + S on L10331; full gate breakdown above. |
 
 This closure is an owner decision about further work pending external information, not a claim that every possible male model fails. Historical M1c passes retain their original rule; the later S gate is not applied retroactively. Female pipeline, frozen scores, site and README honesty table remain unchanged.
+
+
+## M1i pre-declaration — 2026-09-18
+
+The owner reopened the male line for exactly one variant, M1i, on 2026-09-18.
+This is the signed-off declaration only; no substrate build or simulation has run.
+The historical closing decision and seven-variant ledger above remain unchanged;
+the eight-variant closing ledger and decision memo follow the results checkpoint.
+
+Configuration sources: [fly-brain-minecraft VALIDATION.md §2, §3, §9](https://github.com/blendi-remade/fly-brain-minecraft/blob/main/docs/VALIDATION.md)
+and [PROVENANCE.md](https://github.com/blendi-remade/fly-brain-minecraft/blob/main/PROVENANCE.md).
+The source facts were verified against that repository before this declaration.
+
+1. Rationale: replication of an externally calibrated configuration; the >= 5 threshold and gain 0.65 are
+   theirs, cited as such, not values we chose. Their gain was selected by their own sweep on this feeding
+   stimulus, so run (b) is partly circular as a test of their gain; run (a) with our sugar17 is the
+   independent test. External contacts (Tastekin email 2026-09-14; fly-brain-minecraft GitHub issue) had no
+   reply; the replication proceeds without them.
+2. Substrate `male-cns-v1.0-fbm-ge5-1`: whole CNS; our proofread roster (superclass non-null, 166,700,
+   the existing data/malecns/derived/neuron_index.csv and indices reused); edges with >= 5 synapses from the
+   same minconf-0.5 weight file; autapses dropped as they do; Tastekin signs unchanged (consensusNt only;
+   GABA/glutamate negative; everything else, including histamine, unclear and missing, positive). Every
+   difference from their roster/graph is recorded in data/malecns/substrate_record_fbm.json with counts
+   against their 176,422 neurons / 6,287,749 connections / 90,296,905 synapses: roster rule and count
+   difference, raw >= 5 edges touching non-roster endpoints, autapses dropped, sign-rule differences with
+   affected neuron counts (histamine sign, predictedNt fallback not used), dt 0.1 ms versus their 0.5 ms,
+   readout definition.
+3. Model: w_syn = 0.65 x 0.275 = 0.17875 mV; every other Shiu parameter unchanged; external kick stays
+   w_syn x f_poi = 44.6875 mV per event (every event still spikes, as in M1c). KC check uses a second
+   connectivity file with `Excitatory x Connectivity` multiplied by 0.25 on every edge whose postsynaptic
+   neuron is class Kenyon_Cell; sim/network.py is not modified (it multiplies that column by w_syn as float).
+4. Run (b), replication, 95 trials, seeds 20260910 + trial, 1,000 ms each, dt 0.1 ms, Poisson layout of
+   242 physical cells: their sugar 204 (LB3b+LB3c both sides 120 Hz; PhG1a-c 100 Hz; LgLG3 80 Hz) and
+   bitter 38 (LB1a-d 120 Hz):
+   - fbm_sugar (30), fbm_bitter (30), fbm_both (30);
+   - fbm_sugar_kc: sugar condition on the KC-scaled file, 5 trials, seeds 20260910-20260914, paired with
+     the first five fbm_sugar trials; paired difference reported, no criterion.
+   Readouts: per-cell 1 s rates of L10331 and R16949, the 2-cell mean, and the 2-cell mean per 50 ms bin
+   (20 bins per trial; report min/median/max across bins and trials), next to their 30-90 / 0 / 0.
+   Replication criteria: fbm_sugar: 2-cell 1 s mean within [30, 90] Hz over 30 trials and > 0 Hz in 30/30;
+   fbm_bitter: both MN9 cells 0 spikes in 30/30; fbm_both: both MN9 cells 0 spikes in 30/30.
+   Run (a) proceeds whatever (b) shows; (b) is an internal checkpoint only for implementation defects,
+   which are fixed before (a) without touching any rule.
+5. Run (a), our gates, 480 trials, M1 seeds 20260910-20260939, same 91-cell layout as M1 (sugar17 XLSX-L
+   LB3b u LB3c, bitter38, water17, ir94e19): A sugar 25/50/100/200; B sugar 200 with bitter 0/25/50/100/200;
+   C bitter 25/50/100/200; D baseline; 30 each = 420; A' sugar17 versus sugar_lb3c12 at 120 Hz, 30 each = 60.
+   Gates A-D and S1-S3 exactly as M1d-M1h (reuse sim.malecns.phase0.evaluate_gates and the split shape_gate
+   definition), decided on L10331; R16949 recorded, not deciding. Pass rule: A, B, C, D, S1, S2, S3 all pass
+   on L10331. Confound to be stated in the report: their sugar drive is 204 cells including pharyngeal and
+   tarsal GRNs, ours 17 labellar cells; (b) versus (a) separates the configuration from the input size.
+6. Owner additions (2026-09-18, no rule change): (i) report whole-network spike count median and range for
+   every condition in (b) and (a), as in earlier male reports; (ii) before running, record outgoing-synapse
+   retention on the >= 5 substrate for the 91 input cells by set and for both MN9s, in the same table form
+   as M1h (data/malecns/m1h_output_retention.json, including the fixed top-20 direct L10331 presynaptic
+   partners last-hop block); recorded, not a stop condition.
+7. Stop rule: after (a), stop whatever the result. No second gain, no threshold change, no isolated gate
+   repair, no M2. If (a) passes, report and stop; product work is a separate decision. Whatever the outcome:
+   M1i section in docs/malecns_phase0.md, the closing ledger becomes eight variants, docs/v2_decision_memo.md
+   updated to match. No honesty-table row.
+8. Sequence: declaration commit -> substrate build, KC file, retention table, runners, tests
+   (internal checkpoint) -> run (b) (internal checkpoint) -> run (a) -> audits, reports, memo, PR
+   into dev. Results under data/malecns/runs/m1i (ignored); versioned JSON summaries under data/malecns/.
+
+### Declaration artifacts
+
+| Artifact | Declared scope |
+|---|---|
+| [Run (b) protocol](../data/malecns/stim_protocol_malecns_fbm_replication.json) | 90 replication trials plus 5 paired KC trials; 242 physical inputs |
+| [Run (a) protocol](../data/malecns/stim_protocol_malecns_fbm.json) | 420 A–D plus 60 A′ trials; original 91 physical inputs |
+| [Stimulus cells](../data/malecns/cells_fbm.json) and [resolver](../sim/malecns/fbm_cells.py) | Local annotation-derived sets; bitter IDs and historical readout keys preserved |
+
+The protocols record `0.65 * 0.275` as Python float `0.17875000000000002`;
+its tied external kick is `44.68750000000001` mV/event. These are the float
+representations of the declared 0.17875 and 44.6875 values, not another gain.
+All other model and trial fields retain their original values. Run (a) copies
+the existing split shape-gate declaration and reuses the historical gate functions.
+Run (b)'s KC condition uses five trials while the common trial defaults remain unchanged.
+
+| Input set | Count | rootSide L | rootSide R |
+|---|---:|---:|---:|
+| Labellar LB3b + LB3c | 34 | 17 | 17 |
+| Pharyngeal PhG1a + PhG1b + PhG1c | 8 | 4 | 4 |
+| Tarsal LgLG3 | 162 | 78 | 84 |
+| Bitter LB1a–d | 38 | 19 | 19 |
+
+The four sets are disjoint: 242 physical inputs, including 204 sugar-drive cells.
+The bitter IDs equal the existing 38-cell set. The copied readout dictionary retains
+its historical key names; both M1i protocols explicitly declare L10331 primary and
+R16949 secondary. Substrate differences and retention counts follow at the substrate checkpoint,
+including autapse removal; the existing roster's 6,242,118 ≥5 edges is a prior
+audit count, not a newly built M1i graph count.
