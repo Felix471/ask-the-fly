@@ -156,6 +156,15 @@ on-page disagreement sentence remain fixed. Decision points 4 (sprite preview) a
 The Phase 2 audit, lookup builder, comparison code, replay pack and report generator
 follow separately; this declaration and the runner do not implement them.
 
+### Results
+
+<!-- male-v1-phase2:begin -->
+Completed and independently audited 400 × 30 = 12,000 trials; see the [Phase 2 grid and comparison report](malecns_phase2.md).
+The flies agree on 71.244% of the 15051 dish pairs.
+The male fly's primary MN9 is below 5 Hz for 72 of 174 dishes (female 76).
+Water removes 862 and Ir94e removes 1459 of the 4328 disagreeing pairs; 2664 are removed by neither.
+<!-- male-v1-phase2:end -->
+
 ## Phase 3
 
 not started
