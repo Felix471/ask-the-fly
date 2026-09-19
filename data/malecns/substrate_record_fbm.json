@@ -1,0 +1,4136 @@
+{
+  "substrate_version": "male-cns-v1.0-fbm-ge5-1",
+  "declaration_commit": "db7ae6e8e249a3bda7722da1b15a4dd67a6fc2ef",
+  "built_utc": "2026-09-19T00:39:27.876602+00:00",
+  "stage": "M1i substrate only; no trials",
+  "scope": "whole CNS; unchanged M0 roster and consensus signs",
+  "counts": {
+    "neurons": 166700,
+    "ge5_before_autapse_removal": 6242118,
+    "autapses_removed": 33,
+    "edges": 6242085,
+    "synapses": 89859938
+  },
+  "synapses_per_edge_histogram": [
+    {
+      "synapses_per_edge": 1,
+      "edges": 10299701,
+      "threshold_action": "removed"
+    },
+    {
+      "synapses_per_edge": 2,
+      "edges": 4762806,
+      "threshold_action": "removed"
+    },
+    {
+      "synapses_per_edge": 3,
+      "edges": 2621228,
+      "threshold_action": "removed"
+    },
+    {
+      "synapses_per_edge": 4,
+      "edges": 1657085,
+      "threshold_action": "removed"
+    },
+    {
+      "synapses_per_edge": 5,
+      "edges": 1143689,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 6,
+      "edges": 832174,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 7,
+      "edges": 630920,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 8,
+      "edges": 489881,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 9,
+      "edges": 391479,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 10,
+      "edges": 318429,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 11,
+      "edges": 263123,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 12,
+      "edges": 220212,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 13,
+      "edges": 186682,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 14,
+      "edges": 159556,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 15,
+      "edges": 138429,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 16,
+      "edges": 120762,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 17,
+      "edges": 105682,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 18,
+      "edges": 93864,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 19,
+      "edges": 83365,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 20,
+      "edges": 74424,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 21,
+      "edges": 67144,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 22,
+      "edges": 60907,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 23,
+      "edges": 55090,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 24,
+      "edges": 49985,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 25,
+      "edges": 45746,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 26,
+      "edges": 41627,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 27,
+      "edges": 38595,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 28,
+      "edges": 35563,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 29,
+      "edges": 32874,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 30,
+      "edges": 30174,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 31,
+      "edges": 27918,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 32,
+      "edges": 26084,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 33,
+      "edges": 24163,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 34,
+      "edges": 22112,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 35,
+      "edges": 20764,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 36,
+      "edges": 19143,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 37,
+      "edges": 17810,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 38,
+      "edges": 16992,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 39,
+      "edges": 15817,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 40,
+      "edges": 14515,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 41,
+      "edges": 13820,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 42,
+      "edges": 12985,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 43,
+      "edges": 12039,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 44,
+      "edges": 11544,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 45,
+      "edges": 10700,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 46,
+      "edges": 10152,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 47,
+      "edges": 9735,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 48,
+      "edges": 8972,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 49,
+      "edges": 8497,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 50,
+      "edges": 8267,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 51,
+      "edges": 7733,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 52,
+      "edges": 7375,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 53,
+      "edges": 7075,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 54,
+      "edges": 6615,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 55,
+      "edges": 6415,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 56,
+      "edges": 6253,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 57,
+      "edges": 5913,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 58,
+      "edges": 5676,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 59,
+      "edges": 5473,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 60,
+      "edges": 5226,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 61,
+      "edges": 4872,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 62,
+      "edges": 4604,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 63,
+      "edges": 4441,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 64,
+      "edges": 4237,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 65,
+      "edges": 4158,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 66,
+      "edges": 3986,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 67,
+      "edges": 3858,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 68,
+      "edges": 3625,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 69,
+      "edges": 3480,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 70,
+      "edges": 3309,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 71,
+      "edges": 3298,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 72,
+      "edges": 3251,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 73,
+      "edges": 2999,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 74,
+      "edges": 2968,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 75,
+      "edges": 2767,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 76,
+      "edges": 2672,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 77,
+      "edges": 2495,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 78,
+      "edges": 2538,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 79,
+      "edges": 2351,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 80,
+      "edges": 2318,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 81,
+      "edges": 2322,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 82,
+      "edges": 2080,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 83,
+      "edges": 2076,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 84,
+      "edges": 2063,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 85,
+      "edges": 1930,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 86,
+      "edges": 1916,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 87,
+      "edges": 1836,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 88,
+      "edges": 1760,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 89,
+      "edges": 1709,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 90,
+      "edges": 1657,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 91,
+      "edges": 1609,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 92,
+      "edges": 1571,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 93,
+      "edges": 1534,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 94,
+      "edges": 1468,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 95,
+      "edges": 1378,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 96,
+      "edges": 1383,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 97,
+      "edges": 1383,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 98,
+      "edges": 1280,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 99,
+      "edges": 1277,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 100,
+      "edges": 1196,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 101,
+      "edges": 1156,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 102,
+      "edges": 1132,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 103,
+      "edges": 1076,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 104,
+      "edges": 1077,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 105,
+      "edges": 1047,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 106,
+      "edges": 988,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 107,
+      "edges": 997,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 108,
+      "edges": 901,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 109,
+      "edges": 892,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 110,
+      "edges": 954,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 111,
+      "edges": 878,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 112,
+      "edges": 873,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 113,
+      "edges": 844,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 114,
+      "edges": 863,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 115,
+      "edges": 790,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 116,
+      "edges": 796,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 117,
+      "edges": 740,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 118,
+      "edges": 726,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 119,
+      "edges": 757,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 120,
+      "edges": 713,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 121,
+      "edges": 688,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 122,
+      "edges": 701,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 123,
+      "edges": 671,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 124,
+      "edges": 687,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 125,
+      "edges": 642,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 126,
+      "edges": 607,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 127,
+      "edges": 627,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 128,
+      "edges": 612,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 129,
+      "edges": 604,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 130,
+      "edges": 563,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 131,
+      "edges": 592,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 132,
+      "edges": 536,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 133,
+      "edges": 558,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 134,
+      "edges": 487,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 135,
+      "edges": 488,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 136,
+      "edges": 500,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 137,
+      "edges": 450,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 138,
+      "edges": 475,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 139,
+      "edges": 471,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 140,
+      "edges": 427,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 141,
+      "edges": 435,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 142,
+      "edges": 445,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 143,
+      "edges": 428,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 144,
+      "edges": 421,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 145,
+      "edges": 402,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 146,
+      "edges": 390,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 147,
+      "edges": 379,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 148,
+      "edges": 411,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 149,
+      "edges": 388,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 150,
+      "edges": 379,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 151,
+      "edges": 354,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 152,
+      "edges": 366,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 153,
+      "edges": 353,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 154,
+      "edges": 379,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 155,
+      "edges": 330,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 156,
+      "edges": 330,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 157,
+      "edges": 298,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 158,
+      "edges": 303,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 159,
+      "edges": 308,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 160,
+      "edges": 282,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 161,
+      "edges": 278,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 162,
+      "edges": 254,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 163,
+      "edges": 258,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 164,
+      "edges": 241,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 165,
+      "edges": 254,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 166,
+      "edges": 233,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 167,
+      "edges": 241,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 168,
+      "edges": 223,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 169,
+      "edges": 209,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 170,
+      "edges": 261,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 171,
+      "edges": 236,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 172,
+      "edges": 210,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 173,
+      "edges": 225,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 174,
+      "edges": 233,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 175,
+      "edges": 206,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 176,
+      "edges": 193,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 177,
+      "edges": 201,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 178,
+      "edges": 189,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 179,
+      "edges": 171,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 180,
+      "edges": 165,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 181,
+      "edges": 202,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 182,
+      "edges": 178,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 183,
+      "edges": 171,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 184,
+      "edges": 163,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 185,
+      "edges": 159,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 186,
+      "edges": 173,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 187,
+      "edges": 177,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 188,
+      "edges": 169,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 189,
+      "edges": 177,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 190,
+      "edges": 164,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 191,
+      "edges": 150,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 192,
+      "edges": 145,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 193,
+      "edges": 155,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 194,
+      "edges": 137,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 195,
+      "edges": 151,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 196,
+      "edges": 147,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 197,
+      "edges": 137,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 198,
+      "edges": 141,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 199,
+      "edges": 138,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 200,
+      "edges": 113,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 201,
+      "edges": 123,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 202,
+      "edges": 120,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 203,
+      "edges": 131,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 204,
+      "edges": 137,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 205,
+      "edges": 122,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 206,
+      "edges": 124,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 207,
+      "edges": 126,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 208,
+      "edges": 111,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 209,
+      "edges": 125,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 210,
+      "edges": 119,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 211,
+      "edges": 106,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 212,
+      "edges": 109,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 213,
+      "edges": 126,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 214,
+      "edges": 106,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 215,
+      "edges": 93,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 216,
+      "edges": 94,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 217,
+      "edges": 102,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 218,
+      "edges": 104,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 219,
+      "edges": 107,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 220,
+      "edges": 103,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 221,
+      "edges": 104,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 222,
+      "edges": 94,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 223,
+      "edges": 103,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 224,
+      "edges": 88,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 225,
+      "edges": 75,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 226,
+      "edges": 86,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 227,
+      "edges": 90,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 228,
+      "edges": 105,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 229,
+      "edges": 92,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 230,
+      "edges": 84,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 231,
+      "edges": 92,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 232,
+      "edges": 84,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 233,
+      "edges": 74,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 234,
+      "edges": 82,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 235,
+      "edges": 84,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 236,
+      "edges": 70,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 237,
+      "edges": 71,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 238,
+      "edges": 71,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 239,
+      "edges": 75,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 240,
+      "edges": 61,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 241,
+      "edges": 71,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 242,
+      "edges": 71,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 243,
+      "edges": 59,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 244,
+      "edges": 62,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 245,
+      "edges": 65,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 246,
+      "edges": 55,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 247,
+      "edges": 62,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 248,
+      "edges": 70,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 249,
+      "edges": 73,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 250,
+      "edges": 57,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 251,
+      "edges": 54,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 252,
+      "edges": 71,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 253,
+      "edges": 52,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 254,
+      "edges": 72,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 255,
+      "edges": 52,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 256,
+      "edges": 50,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 257,
+      "edges": 50,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 258,
+      "edges": 65,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 259,
+      "edges": 58,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 260,
+      "edges": 48,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 261,
+      "edges": 58,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 262,
+      "edges": 60,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 263,
+      "edges": 56,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 264,
+      "edges": 53,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 265,
+      "edges": 40,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 266,
+      "edges": 50,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 267,
+      "edges": 47,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 268,
+      "edges": 56,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 269,
+      "edges": 57,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 270,
+      "edges": 49,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 271,
+      "edges": 39,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 272,
+      "edges": 39,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 273,
+      "edges": 31,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 274,
+      "edges": 52,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 275,
+      "edges": 42,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 276,
+      "edges": 57,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 277,
+      "edges": 46,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 278,
+      "edges": 41,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 279,
+      "edges": 32,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 280,
+      "edges": 34,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 281,
+      "edges": 43,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 282,
+      "edges": 37,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 283,
+      "edges": 31,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 284,
+      "edges": 36,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 285,
+      "edges": 38,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 286,
+      "edges": 24,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 287,
+      "edges": 38,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 288,
+      "edges": 42,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 289,
+      "edges": 28,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 290,
+      "edges": 43,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 291,
+      "edges": 36,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 292,
+      "edges": 35,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 293,
+      "edges": 30,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 294,
+      "edges": 23,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 295,
+      "edges": 31,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 296,
+      "edges": 28,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 297,
+      "edges": 24,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 298,
+      "edges": 17,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 299,
+      "edges": 21,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 300,
+      "edges": 29,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 301,
+      "edges": 33,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 302,
+      "edges": 31,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 303,
+      "edges": 22,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 304,
+      "edges": 22,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 305,
+      "edges": 31,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 306,
+      "edges": 31,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 307,
+      "edges": 29,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 308,
+      "edges": 23,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 309,
+      "edges": 36,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 310,
+      "edges": 31,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 311,
+      "edges": 34,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 312,
+      "edges": 28,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 313,
+      "edges": 28,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 314,
+      "edges": 30,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 315,
+      "edges": 30,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 316,
+      "edges": 18,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 317,
+      "edges": 30,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 318,
+      "edges": 28,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 319,
+      "edges": 25,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 320,
+      "edges": 22,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 321,
+      "edges": 23,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 322,
+      "edges": 21,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 323,
+      "edges": 17,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 324,
+      "edges": 24,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 325,
+      "edges": 22,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 326,
+      "edges": 22,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 327,
+      "edges": 33,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 328,
+      "edges": 24,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 329,
+      "edges": 20,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 330,
+      "edges": 20,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 331,
+      "edges": 18,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 332,
+      "edges": 19,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 333,
+      "edges": 16,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 334,
+      "edges": 20,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 335,
+      "edges": 17,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 336,
+      "edges": 31,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 337,
+      "edges": 21,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 338,
+      "edges": 16,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 339,
+      "edges": 17,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 340,
+      "edges": 24,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 341,
+      "edges": 18,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 342,
+      "edges": 14,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 343,
+      "edges": 17,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 344,
+      "edges": 24,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 345,
+      "edges": 16,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 346,
+      "edges": 16,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 347,
+      "edges": 16,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 348,
+      "edges": 20,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 349,
+      "edges": 14,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 350,
+      "edges": 13,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 351,
+      "edges": 11,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 352,
+      "edges": 13,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 353,
+      "edges": 24,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 354,
+      "edges": 18,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 355,
+      "edges": 13,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 356,
+      "edges": 15,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 357,
+      "edges": 20,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 358,
+      "edges": 11,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 359,
+      "edges": 16,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 360,
+      "edges": 13,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 361,
+      "edges": 17,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 362,
+      "edges": 12,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 363,
+      "edges": 18,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 364,
+      "edges": 22,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 365,
+      "edges": 15,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 366,
+      "edges": 4,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 367,
+      "edges": 16,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 368,
+      "edges": 17,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 369,
+      "edges": 17,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 370,
+      "edges": 12,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 371,
+      "edges": 16,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 372,
+      "edges": 17,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 373,
+      "edges": 11,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 374,
+      "edges": 11,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 375,
+      "edges": 8,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 376,
+      "edges": 15,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 377,
+      "edges": 6,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 378,
+      "edges": 12,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 379,
+      "edges": 13,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 380,
+      "edges": 17,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 381,
+      "edges": 14,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 382,
+      "edges": 10,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 383,
+      "edges": 12,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 384,
+      "edges": 9,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 385,
+      "edges": 19,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 386,
+      "edges": 6,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 387,
+      "edges": 10,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 388,
+      "edges": 8,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 389,
+      "edges": 12,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 390,
+      "edges": 12,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 391,
+      "edges": 11,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 392,
+      "edges": 6,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 393,
+      "edges": 14,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 394,
+      "edges": 8,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 395,
+      "edges": 8,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 396,
+      "edges": 16,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 397,
+      "edges": 6,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 398,
+      "edges": 13,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 399,
+      "edges": 11,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 400,
+      "edges": 7,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 401,
+      "edges": 12,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 402,
+      "edges": 8,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 403,
+      "edges": 15,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 404,
+      "edges": 12,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 405,
+      "edges": 10,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 406,
+      "edges": 8,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 407,
+      "edges": 8,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 408,
+      "edges": 6,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 409,
+      "edges": 11,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 410,
+      "edges": 12,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 411,
+      "edges": 10,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 412,
+      "edges": 5,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 413,
+      "edges": 7,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 414,
+      "edges": 11,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 415,
+      "edges": 8,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 416,
+      "edges": 5,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 417,
+      "edges": 11,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 418,
+      "edges": 5,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 419,
+      "edges": 4,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 420,
+      "edges": 5,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 421,
+      "edges": 3,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 422,
+      "edges": 5,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 423,
+      "edges": 16,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 424,
+      "edges": 7,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 425,
+      "edges": 2,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 426,
+      "edges": 9,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 427,
+      "edges": 8,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 428,
+      "edges": 6,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 429,
+      "edges": 8,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 430,
+      "edges": 5,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 431,
+      "edges": 5,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 432,
+      "edges": 6,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 433,
+      "edges": 5,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 434,
+      "edges": 6,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 435,
+      "edges": 7,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 436,
+      "edges": 3,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 437,
+      "edges": 4,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 438,
+      "edges": 5,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 439,
+      "edges": 11,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 440,
+      "edges": 8,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 441,
+      "edges": 6,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 442,
+      "edges": 7,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 443,
+      "edges": 5,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 444,
+      "edges": 4,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 445,
+      "edges": 6,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 446,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 447,
+      "edges": 10,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 448,
+      "edges": 3,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 449,
+      "edges": 7,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 450,
+      "edges": 5,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 451,
+      "edges": 7,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 452,
+      "edges": 10,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 453,
+      "edges": 9,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 454,
+      "edges": 6,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 455,
+      "edges": 6,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 456,
+      "edges": 6,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 457,
+      "edges": 8,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 458,
+      "edges": 4,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 459,
+      "edges": 10,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 460,
+      "edges": 6,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 461,
+      "edges": 5,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 462,
+      "edges": 4,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 463,
+      "edges": 5,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 464,
+      "edges": 7,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 465,
+      "edges": 7,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 466,
+      "edges": 3,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 467,
+      "edges": 7,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 468,
+      "edges": 10,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 469,
+      "edges": 9,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 470,
+      "edges": 4,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 471,
+      "edges": 3,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 472,
+      "edges": 6,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 473,
+      "edges": 4,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 474,
+      "edges": 5,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 475,
+      "edges": 5,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 476,
+      "edges": 7,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 477,
+      "edges": 4,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 478,
+      "edges": 9,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 479,
+      "edges": 4,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 480,
+      "edges": 3,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 481,
+      "edges": 5,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 482,
+      "edges": 4,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 483,
+      "edges": 6,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 484,
+      "edges": 5,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 485,
+      "edges": 5,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 486,
+      "edges": 6,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 487,
+      "edges": 13,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 488,
+      "edges": 6,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 489,
+      "edges": 4,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 490,
+      "edges": 4,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 491,
+      "edges": 3,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 492,
+      "edges": 5,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 493,
+      "edges": 7,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 494,
+      "edges": 4,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 495,
+      "edges": 4,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 496,
+      "edges": 4,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 497,
+      "edges": 5,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 498,
+      "edges": 3,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 499,
+      "edges": 2,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 500,
+      "edges": 7,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 501,
+      "edges": 5,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 502,
+      "edges": 4,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 503,
+      "edges": 3,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 504,
+      "edges": 5,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 505,
+      "edges": 5,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 506,
+      "edges": 3,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 507,
+      "edges": 3,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 508,
+      "edges": 4,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 509,
+      "edges": 3,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 510,
+      "edges": 5,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 511,
+      "edges": 4,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 512,
+      "edges": 4,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 513,
+      "edges": 7,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 514,
+      "edges": 5,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 515,
+      "edges": 2,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 516,
+      "edges": 4,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 517,
+      "edges": 3,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 518,
+      "edges": 7,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 519,
+      "edges": 4,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 520,
+      "edges": 3,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 521,
+      "edges": 2,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 522,
+      "edges": 3,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 523,
+      "edges": 3,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 524,
+      "edges": 2,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 525,
+      "edges": 2,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 526,
+      "edges": 2,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 527,
+      "edges": 3,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 528,
+      "edges": 6,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 530,
+      "edges": 2,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 531,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 532,
+      "edges": 2,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 533,
+      "edges": 4,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 534,
+      "edges": 2,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 535,
+      "edges": 4,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 537,
+      "edges": 3,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 538,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 539,
+      "edges": 4,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 540,
+      "edges": 4,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 541,
+      "edges": 3,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 542,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 543,
+      "edges": 2,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 544,
+      "edges": 4,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 545,
+      "edges": 6,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 546,
+      "edges": 3,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 547,
+      "edges": 2,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 548,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 550,
+      "edges": 3,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 551,
+      "edges": 2,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 552,
+      "edges": 2,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 553,
+      "edges": 3,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 554,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 555,
+      "edges": 3,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 556,
+      "edges": 2,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 557,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 558,
+      "edges": 4,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 559,
+      "edges": 2,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 560,
+      "edges": 3,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 561,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 562,
+      "edges": 2,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 563,
+      "edges": 2,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 564,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 565,
+      "edges": 4,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 566,
+      "edges": 3,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 568,
+      "edges": 3,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 571,
+      "edges": 2,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 572,
+      "edges": 2,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 573,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 574,
+      "edges": 3,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 575,
+      "edges": 4,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 576,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 577,
+      "edges": 2,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 578,
+      "edges": 3,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 579,
+      "edges": 5,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 580,
+      "edges": 3,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 582,
+      "edges": 3,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 583,
+      "edges": 2,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 584,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 585,
+      "edges": 5,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 587,
+      "edges": 3,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 588,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 589,
+      "edges": 2,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 590,
+      "edges": 3,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 591,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 592,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 593,
+      "edges": 3,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 594,
+      "edges": 5,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 595,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 596,
+      "edges": 2,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 597,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 598,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 599,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 600,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 601,
+      "edges": 2,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 603,
+      "edges": 4,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 604,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 605,
+      "edges": 5,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 606,
+      "edges": 2,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 607,
+      "edges": 2,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 608,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 609,
+      "edges": 2,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 610,
+      "edges": 2,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 612,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 614,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 616,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 620,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 621,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 623,
+      "edges": 2,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 624,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 628,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 630,
+      "edges": 2,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 631,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 632,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 633,
+      "edges": 2,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 635,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 636,
+      "edges": 2,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 638,
+      "edges": 3,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 639,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 640,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 641,
+      "edges": 2,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 642,
+      "edges": 4,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 643,
+      "edges": 2,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 644,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 645,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 646,
+      "edges": 2,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 648,
+      "edges": 2,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 650,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 651,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 653,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 654,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 655,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 656,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 657,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 658,
+      "edges": 2,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 660,
+      "edges": 2,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 662,
+      "edges": 3,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 663,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 664,
+      "edges": 2,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 665,
+      "edges": 2,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 669,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 673,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 674,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 675,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 676,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 685,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 690,
+      "edges": 2,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 691,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 692,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 694,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 697,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 698,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 699,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 701,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 703,
+      "edges": 2,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 707,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 709,
+      "edges": 2,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 710,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 711,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 713,
+      "edges": 2,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 717,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 718,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 719,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 723,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 725,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 727,
+      "edges": 2,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 729,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 731,
+      "edges": 2,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 732,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 733,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 737,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 739,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 741,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 743,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 745,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 748,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 749,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 750,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 751,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 752,
+      "edges": 3,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 756,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 767,
+      "edges": 2,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 768,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 773,
+      "edges": 2,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 774,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 775,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 779,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 781,
+      "edges": 2,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 788,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 789,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 790,
+      "edges": 2,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 791,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 802,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 806,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 808,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 810,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 813,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 816,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 817,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 819,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 831,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 833,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 836,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 847,
+      "edges": 2,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 849,
+      "edges": 2,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 852,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 853,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 855,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 864,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 867,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 868,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 869,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 871,
+      "edges": 2,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 873,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 878,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 879,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 895,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 897,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 914,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 918,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 920,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 921,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 927,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 928,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 930,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 934,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 942,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 951,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 953,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 959,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 969,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 973,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 975,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 977,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 978,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 981,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 1004,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 1005,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 1009,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 1010,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 1026,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 1032,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 1033,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 1048,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 1055,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 1056,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 1060,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 1061,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 1078,
+      "edges": 3,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 1086,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 1096,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 1097,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 1111,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 1118,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 1154,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 1156,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 1174,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 1186,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 1193,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 1203,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 1215,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 1228,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 1231,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 1249,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 1250,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 1260,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 1281,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 1286,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 1293,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 1318,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 1352,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 1367,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 1371,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 1373,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 1383,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 1386,
+      "edges": 2,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 1430,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 1439,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 1497,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 1543,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 1554,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 1557,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 1562,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 1601,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 1611,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 1747,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 1766,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 1878,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 1929,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 2230,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 2248,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 2443,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    },
+    {
+      "synapses_per_edge": 2591,
+      "edges": 1,
+      "threshold_action": "kept before autapse removal"
+    }
+  ],
+  "their_graph_comparison": {
+    "their_neurons": 176422,
+    "our_neurons": 166700,
+    "roster_difference_theirs_minus_ours": 9722,
+    "their_edges": 6287749,
+    "their_synapses": 90296905,
+    "raw_ge5_edges": 7622864,
+    "raw_ge5_synapses": 97991093,
+    "raw_ge5_outside_roster_edges": 1380746,
+    "raw_ge5_autapses_all": 40,
+    "raw_ge5_on_roster_autapses": 33,
+    "raw_ge5_on_roster_non_autapse_edges": 6242085,
+    "raw_ge5_on_roster_non_autapse_synapses": 89859938,
+    "reconciliation": "Exact retained endpoints, order and weights equal our graph.",
+    "residual_theirs_minus_raw_ge5_non_autapse_edges": -1335075,
+    "residual_theirs_minus_raw_ge5_non_autapse_synapses": -7693794,
+    "final_difference_theirs_minus_ours_edges": 45664,
+    "final_difference_theirs_minus_ours_synapses": 436967,
+    "residual_label": "Their neuPrint fetch versus the GCS flat file; no explanation assigned.",
+    "superclass_null_by_status": {
+      "Orphan": 15893,
+      "Glia": 11864,
+      "Unimportant": 10751,
+      "(missing)": 3470,
+      "Assign": 1832,
+      "Anchor": 551,
+      "Traced": 516
+    }
+  },
+  "sign_rule_comparison": {
+    "histamine_sign_differences": 7891,
+    "consensus_unclear_or_missing": 3177,
+    "predicted_fallback_labels": {
+      "acetylcholine": 329,
+      "serotonin": 327,
+      "glutamate": 320,
+      "gaba": 53,
+      "octopamine": 31,
+      "histamine": 14,
+      "dopamine": 3
+    },
+    "celltype_fallback_labels": {
+      "serotonin": 22,
+      "octopamine": 8
+    },
+    "fallback_sign_differences": 387,
+    "total_sign_differences": 8278,
+    "applied": false,
+    "our_rule": {
+      "column": "consensus_nt (neuPrint consensusNt)",
+      "join": "bodyId = body",
+      "negative": [
+        "gaba",
+        "glutamate"
+      ],
+      "positive": "all other consensus labels",
+      "default_positive": [
+        "unclear",
+        "missing"
+      ],
+      "authority": "Owner decision; Tastekin GABA/glutamate negative, otherwise positive"
+    }
+  },
+  "w_syn_mV": 0.17875000000000002,
+  "w_syn_expression": "0.65 * 0.275",
+  "external_kick_mV": 44.68750000000001,
+  "kc": {
+    "bodies": 4064,
+    "affected_edges": 70931,
+    "affected_synapses": 906584,
+    "gain": 0.25,
+    "column": "Excitatory x Connectivity",
+    "dtype": "float64"
+  },
+  "dt_ms": {
+    "ours": 0.1,
+    "theirs": 0.5
+  },
+  "readouts": {
+    "ours": "L10331 and R16949 over 1 s; b also two-cell mean and 20 x 50 ms bin means; a gates on L10331.",
+    "theirs": "MN9 two-cell population mean per 50 ms tick, one 600 ms run; 30-90 / 0 / 0 Hz."
+  },
+  "licence": {
+    "data": "CC BY 4.0",
+    "url": "https://creativecommons.org/licenses/by/4.0/",
+    "attribution": "Berg et al. 2026 / MaleCNS collaboration",
+    "paper": "https://doi.org/10.1016/j.cell.2026.08.015",
+    "adaptation": "Proofread endpoint filtering; contiguous indices; model sign assignment."
+  },
+  "configuration_source": [
+    "https://github.com/blendi-remade/fly-brain-minecraft/blob/main/docs/VALIDATION.md",
+    "https://github.com/blendi-remade/fly-brain-minecraft/blob/main/PROVENANCE.md"
+  ],
+  "sources": [
+    {
+      "path": "data/malecns/downloads/connectome-weights-male-cns-v1.0-minconf-0.5.feather",
+      "bytes": 1051241946,
+      "sha256": "e35da783d1c686b2b58b3b87cd6a403ae43bfcfba8bff28e08ef752c1a56afc1",
+      "url": "https://storage.googleapis.com/flyem-male-cns/v1.0/connectome-data/flat-connectome/connectome-weights-male-cns-v1.0-minconf-0.5.feather"
+    },
+    {
+      "path": "data/malecns/downloads/body-annotations-male-cns-v1.0-minconf-0.5.feather",
+      "bytes": 14483314,
+      "sha256": "2177e246113e4cfbf1e7772ec37c6da1955ff22e8063d0b1f833101f99a9a3b2",
+      "url": "https://storage.googleapis.com/flyem-male-cns/v1.0/connectome-data/flat-connectome/body-annotations-male-cns-v1.0-minconf-0.5.feather"
+    },
+    {
+      "path": "data/malecns/downloads/body-neurotransmitters-male-cns-v1.0.feather",
+      "bytes": 43282834,
+      "sha256": "95c9289220663abeb3409f3ad9e5a7f8a53f8093f5139d15502cd08da8879621",
+      "url": "https://storage.googleapis.com/flyem-male-cns/v1.0/connectome-data/flat-connectome/body-neurotransmitters-male-cns-v1.0.feather"
+    },
+    {
+      "path": "data/malecns/derived/connectivity.parquet",
+      "bytes": 136299562,
+      "sha256": "b31ae9884cba41fedac392e4c80bada5c0c8a33efb9258b0e7308a1bbcbfa6f3"
+    },
+    {
+      "path": "data/malecns/derived/neuron_index.csv",
+      "bytes": 27521575,
+      "sha256": "a5727228e839339f8045f8a431f02b4900aed40109684fa7e6ed2f21a620cbe9"
+    },
+    {
+      "path": "data/malecns/derived/completeness.csv",
+      "bytes": 1097049,
+      "sha256": "b023fed77421d5606fe156d0e9408765b1233180406d5e2ca331cf37c1b5c00f"
+    },
+    {
+      "path": "data/malecns/substrate_record.json",
+      "bytes": 6763,
+      "sha256": "95c6a973217ac793fe5d3d02b813d890f0ba7620d123c647587518d40868582f"
+    }
+  ],
+  "builder": {
+    "path": "sim/malecns/fbm_substrate.py",
+    "bytes": 9121,
+    "sha256": "025065ae778101c8d33c423f80fa7248402898708452c7b6304ae44f273393db"
+  },
+  "artifacts": {
+    "neuron_index": {
+      "path": "data/malecns/derived/neuron_index.csv",
+      "bytes": 27521575,
+      "sha256": "a5727228e839339f8045f8a431f02b4900aed40109684fa7e6ed2f21a620cbe9"
+    },
+    "fbm/connectivity.parquet": {
+      "path": "data/malecns/derived/fbm/connectivity.parquet",
+      "bytes": 32686742,
+      "sha256": "240976c11b7f6121c7da4319e6a502f255b33f04d6f4cfbc8aa3b99ecd0d01c8"
+    },
+    "fbm/completeness.csv": {
+      "path": "data/malecns/derived/fbm/completeness.csv",
+      "bytes": 1097049,
+      "sha256": "b023fed77421d5606fe156d0e9408765b1233180406d5e2ca331cf37c1b5c00f"
+    },
+    "fbm_kc/connectivity.parquet": {
+      "path": "data/malecns/derived/fbm_kc/connectivity.parquet",
+      "bytes": 32874113,
+      "sha256": "28a8a8a9c839bad45bfa76aab0dc969af8da19a48afa85af4b3aa7800fda7dd9"
+    },
+    "fbm_kc/completeness.csv": {
+      "path": "data/malecns/derived/fbm_kc/completeness.csv",
+      "bytes": 1097049,
+      "sha256": "b023fed77421d5606fe156d0e9408765b1233180406d5e2ca331cf37c1b5c00f"
+    }
+  }
+}

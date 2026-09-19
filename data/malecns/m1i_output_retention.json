@@ -1,0 +1,3038 @@
+{
+  "scope": "M1i whole-CNS >=1 to >=5 outgoing retention; autapses removed in retained graph.",
+  "field_meanings": "Legacy *_0_5 fields mean baseline >=1; *_c_star fields mean >=5 without autapses. No confidence cutoff changed.",
+  "interpretation": "recorded, not a stop condition; no flag stops anything.",
+  "partner_selection": "Top20 by baseline >=1 synapses directly into L10331, ties by ascending bodyId; fixed membership.",
+  "cells": [
+    {
+      "bodyId": 71254,
+      "label": "sugar",
+      "outgoing_0_5": 779,
+      "outgoing_c_star": 668,
+      "retained_fraction": 0.8575096277278562,
+      "below_half": false
+    },
+    {
+      "bodyId": 78240,
+      "label": "sugar",
+      "outgoing_0_5": 425,
+      "outgoing_c_star": 343,
+      "retained_fraction": 0.8070588235294117,
+      "below_half": false
+    },
+    {
+      "bodyId": 85806,
+      "label": "sugar",
+      "outgoing_0_5": 791,
+      "outgoing_c_star": 674,
+      "retained_fraction": 0.8520859671302149,
+      "below_half": false
+    },
+    {
+      "bodyId": 159772,
+      "label": "sugar",
+      "outgoing_0_5": 422,
+      "outgoing_c_star": 344,
+      "retained_fraction": 0.8151658767772512,
+      "below_half": false
+    },
+    {
+      "bodyId": 180314,
+      "label": "sugar",
+      "outgoing_0_5": 178,
+      "outgoing_c_star": 88,
+      "retained_fraction": 0.4943820224719101,
+      "below_half": true
+    },
+    {
+      "bodyId": 190769,
+      "label": "sugar",
+      "outgoing_0_5": 353,
+      "outgoing_c_star": 240,
+      "retained_fraction": 0.6798866855524079,
+      "below_half": false
+    },
+    {
+      "bodyId": 261450,
+      "label": "sugar",
+      "outgoing_0_5": 354,
+      "outgoing_c_star": 261,
+      "retained_fraction": 0.7372881355932204,
+      "below_half": false
+    },
+    {
+      "bodyId": 262567,
+      "label": "sugar",
+      "outgoing_0_5": 266,
+      "outgoing_c_star": 134,
+      "retained_fraction": 0.5037593984962406,
+      "below_half": false
+    },
+    {
+      "bodyId": 272263,
+      "label": "sugar",
+      "outgoing_0_5": 296,
+      "outgoing_c_star": 209,
+      "retained_fraction": 0.706081081081081,
+      "below_half": false
+    },
+    {
+      "bodyId": 512551,
+      "label": "sugar",
+      "outgoing_0_5": 876,
+      "outgoing_c_star": 799,
+      "retained_fraction": 0.9121004566210046,
+      "below_half": false
+    },
+    {
+      "bodyId": 531237,
+      "label": "sugar",
+      "outgoing_0_5": 414,
+      "outgoing_c_star": 316,
+      "retained_fraction": 0.7632850241545893,
+      "below_half": false
+    },
+    {
+      "bodyId": 933317,
+      "label": "sugar",
+      "outgoing_0_5": 1024,
+      "outgoing_c_star": 946,
+      "retained_fraction": 0.923828125,
+      "below_half": false
+    },
+    {
+      "bodyId": 158893964,
+      "label": "sugar",
+      "outgoing_0_5": 107,
+      "outgoing_c_star": 35,
+      "retained_fraction": 0.32710280373831774,
+      "below_half": true
+    },
+    {
+      "bodyId": 174444965,
+      "label": "sugar",
+      "outgoing_0_5": 42,
+      "outgoing_c_star": 13,
+      "retained_fraction": 0.30952380952380953,
+      "below_half": true
+    },
+    {
+      "bodyId": 349137284,
+      "label": "sugar",
+      "outgoing_0_5": 64,
+      "outgoing_c_star": 5,
+      "retained_fraction": 0.078125,
+      "below_half": true
+    },
+    {
+      "bodyId": 475202322,
+      "label": "sugar",
+      "outgoing_0_5": 149,
+      "outgoing_c_star": 43,
+      "retained_fraction": 0.28859060402684567,
+      "below_half": true
+    },
+    {
+      "bodyId": 766547228,
+      "label": "sugar",
+      "outgoing_0_5": 134,
+      "outgoing_c_star": 58,
+      "retained_fraction": 0.43283582089552236,
+      "below_half": true
+    },
+    {
+      "bodyId": 54104,
+      "label": "bitter",
+      "outgoing_0_5": 416,
+      "outgoing_c_star": 231,
+      "retained_fraction": 0.5552884615384616,
+      "below_half": false
+    },
+    {
+      "bodyId": 81741,
+      "label": "bitter",
+      "outgoing_0_5": 738,
+      "outgoing_c_star": 573,
+      "retained_fraction": 0.7764227642276422,
+      "below_half": false
+    },
+    {
+      "bodyId": 107241,
+      "label": "bitter",
+      "outgoing_0_5": 1127,
+      "outgoing_c_star": 980,
+      "retained_fraction": 0.8695652173913043,
+      "below_half": false
+    },
+    {
+      "bodyId": 115666,
+      "label": "bitter",
+      "outgoing_0_5": 367,
+      "outgoing_c_star": 221,
+      "retained_fraction": 0.6021798365122616,
+      "below_half": false
+    },
+    {
+      "bodyId": 125111,
+      "label": "bitter",
+      "outgoing_0_5": 807,
+      "outgoing_c_star": 652,
+      "retained_fraction": 0.8079306071871127,
+      "below_half": false
+    },
+    {
+      "bodyId": 139178,
+      "label": "bitter",
+      "outgoing_0_5": 420,
+      "outgoing_c_star": 259,
+      "retained_fraction": 0.6166666666666667,
+      "below_half": false
+    },
+    {
+      "bodyId": 144334,
+      "label": "bitter",
+      "outgoing_0_5": 372,
+      "outgoing_c_star": 239,
+      "retained_fraction": 0.6424731182795699,
+      "below_half": false
+    },
+    {
+      "bodyId": 154544,
+      "label": "bitter",
+      "outgoing_0_5": 400,
+      "outgoing_c_star": 244,
+      "retained_fraction": 0.61,
+      "below_half": false
+    },
+    {
+      "bodyId": 163395,
+      "label": "bitter",
+      "outgoing_0_5": 327,
+      "outgoing_c_star": 178,
+      "retained_fraction": 0.5443425076452599,
+      "below_half": false
+    },
+    {
+      "bodyId": 168492,
+      "label": "bitter",
+      "outgoing_0_5": 380,
+      "outgoing_c_star": 203,
+      "retained_fraction": 0.5342105263157895,
+      "below_half": false
+    },
+    {
+      "bodyId": 173462,
+      "label": "bitter",
+      "outgoing_0_5": 381,
+      "outgoing_c_star": 246,
+      "retained_fraction": 0.6456692913385826,
+      "below_half": false
+    },
+    {
+      "bodyId": 208885,
+      "label": "bitter",
+      "outgoing_0_5": 340,
+      "outgoing_c_star": 180,
+      "retained_fraction": 0.5294117647058824,
+      "below_half": false
+    },
+    {
+      "bodyId": 256844,
+      "label": "bitter",
+      "outgoing_0_5": 976,
+      "outgoing_c_star": 814,
+      "retained_fraction": 0.8340163934426229,
+      "below_half": false
+    },
+    {
+      "bodyId": 375038,
+      "label": "bitter",
+      "outgoing_0_5": 102,
+      "outgoing_c_star": 14,
+      "retained_fraction": 0.13725490196078433,
+      "below_half": true
+    },
+    {
+      "bodyId": 511882,
+      "label": "bitter",
+      "outgoing_0_5": 997,
+      "outgoing_c_star": 882,
+      "retained_fraction": 0.8846539618856569,
+      "below_half": false
+    },
+    {
+      "bodyId": 514546,
+      "label": "bitter",
+      "outgoing_0_5": 911,
+      "outgoing_c_star": 797,
+      "retained_fraction": 0.8748627881448957,
+      "below_half": false
+    },
+    {
+      "bodyId": 514547,
+      "label": "bitter",
+      "outgoing_0_5": 835,
+      "outgoing_c_star": 709,
+      "retained_fraction": 0.8491017964071856,
+      "below_half": false
+    },
+    {
+      "bodyId": 517255,
+      "label": "bitter",
+      "outgoing_0_5": 572,
+      "outgoing_c_star": 429,
+      "retained_fraction": 0.75,
+      "below_half": false
+    },
+    {
+      "bodyId": 518112,
+      "label": "bitter",
+      "outgoing_0_5": 827,
+      "outgoing_c_star": 678,
+      "retained_fraction": 0.8198307134220073,
+      "below_half": false
+    },
+    {
+      "bodyId": 522746,
+      "label": "bitter",
+      "outgoing_0_5": 913,
+      "outgoing_c_star": 772,
+      "retained_fraction": 0.8455640744797371,
+      "below_half": false
+    },
+    {
+      "bodyId": 522752,
+      "label": "bitter",
+      "outgoing_0_5": 991,
+      "outgoing_c_star": 853,
+      "retained_fraction": 0.8607467204843592,
+      "below_half": false
+    },
+    {
+      "bodyId": 522753,
+      "label": "bitter",
+      "outgoing_0_5": 996,
+      "outgoing_c_star": 837,
+      "retained_fraction": 0.8403614457831325,
+      "below_half": false
+    },
+    {
+      "bodyId": 522754,
+      "label": "bitter",
+      "outgoing_0_5": 1007,
+      "outgoing_c_star": 850,
+      "retained_fraction": 0.8440913604766633,
+      "below_half": false
+    },
+    {
+      "bodyId": 522761,
+      "label": "bitter",
+      "outgoing_0_5": 985,
+      "outgoing_c_star": 797,
+      "retained_fraction": 0.8091370558375635,
+      "below_half": false
+    },
+    {
+      "bodyId": 522762,
+      "label": "bitter",
+      "outgoing_0_5": 889,
+      "outgoing_c_star": 780,
+      "retained_fraction": 0.8773903262092239,
+      "below_half": false
+    },
+    {
+      "bodyId": 522841,
+      "label": "bitter",
+      "outgoing_0_5": 1190,
+      "outgoing_c_star": 1009,
+      "retained_fraction": 0.8478991596638655,
+      "below_half": false
+    },
+    {
+      "bodyId": 533618,
+      "label": "bitter",
+      "outgoing_0_5": 786,
+      "outgoing_c_star": 630,
+      "retained_fraction": 0.8015267175572519,
+      "below_half": false
+    },
+    {
+      "bodyId": 549024,
+      "label": "bitter",
+      "outgoing_0_5": 302,
+      "outgoing_c_star": 136,
+      "retained_fraction": 0.4503311258278146,
+      "below_half": true
+    },
+    {
+      "bodyId": 556797,
+      "label": "bitter",
+      "outgoing_0_5": 437,
+      "outgoing_c_star": 309,
+      "retained_fraction": 0.7070938215102975,
+      "below_half": false
+    },
+    {
+      "bodyId": 557937,
+      "label": "bitter",
+      "outgoing_0_5": 279,
+      "outgoing_c_star": 166,
+      "retained_fraction": 0.5949820788530465,
+      "below_half": false
+    },
+    {
+      "bodyId": 912379,
+      "label": "bitter",
+      "outgoing_0_5": 825,
+      "outgoing_c_star": 647,
+      "retained_fraction": 0.7842424242424243,
+      "below_half": false
+    },
+    {
+      "bodyId": 140334446,
+      "label": "bitter",
+      "outgoing_0_5": 334,
+      "outgoing_c_star": 200,
+      "retained_fraction": 0.5988023952095808,
+      "below_half": false
+    },
+    {
+      "bodyId": 144295263,
+      "label": "bitter",
+      "outgoing_0_5": 75,
+      "outgoing_c_star": 23,
+      "retained_fraction": 0.30666666666666664,
+      "below_half": true
+    },
+    {
+      "bodyId": 304136793,
+      "label": "bitter",
+      "outgoing_0_5": 625,
+      "outgoing_c_star": 484,
+      "retained_fraction": 0.7744,
+      "below_half": false
+    },
+    {
+      "bodyId": 324178811,
+      "label": "bitter",
+      "outgoing_0_5": 740,
+      "outgoing_c_star": 533,
+      "retained_fraction": 0.7202702702702702,
+      "below_half": false
+    },
+    {
+      "bodyId": 602736959,
+      "label": "bitter",
+      "outgoing_0_5": 98,
+      "outgoing_c_star": 15,
+      "retained_fraction": 0.15306122448979592,
+      "below_half": true
+    },
+    {
+      "bodyId": 772366874,
+      "label": "bitter",
+      "outgoing_0_5": 436,
+      "outgoing_c_star": 246,
+      "retained_fraction": 0.5642201834862385,
+      "below_half": false
+    },
+    {
+      "bodyId": 911389008,
+      "label": "bitter",
+      "outgoing_0_5": 227,
+      "outgoing_c_star": 84,
+      "retained_fraction": 0.3700440528634361,
+      "below_half": true
+    },
+    {
+      "bodyId": 136183,
+      "label": "water",
+      "outgoing_0_5": 392,
+      "outgoing_c_star": 329,
+      "retained_fraction": 0.8392857142857143,
+      "below_half": false
+    },
+    {
+      "bodyId": 140619,
+      "label": "water",
+      "outgoing_0_5": 295,
+      "outgoing_c_star": 214,
+      "retained_fraction": 0.7254237288135593,
+      "below_half": false
+    },
+    {
+      "bodyId": 141663,
+      "label": "water",
+      "outgoing_0_5": 324,
+      "outgoing_c_star": 254,
+      "retained_fraction": 0.7839506172839507,
+      "below_half": false
+    },
+    {
+      "bodyId": 160435,
+      "label": "water",
+      "outgoing_0_5": 485,
+      "outgoing_c_star": 389,
+      "retained_fraction": 0.8020618556701031,
+      "below_half": false
+    },
+    {
+      "bodyId": 166190,
+      "label": "water",
+      "outgoing_0_5": 401,
+      "outgoing_c_star": 319,
+      "retained_fraction": 0.7955112219451371,
+      "below_half": false
+    },
+    {
+      "bodyId": 167663,
+      "label": "water",
+      "outgoing_0_5": 334,
+      "outgoing_c_star": 258,
+      "retained_fraction": 0.7724550898203593,
+      "below_half": false
+    },
+    {
+      "bodyId": 178913,
+      "label": "water",
+      "outgoing_0_5": 306,
+      "outgoing_c_star": 230,
+      "retained_fraction": 0.7516339869281046,
+      "below_half": false
+    },
+    {
+      "bodyId": 183061,
+      "label": "water",
+      "outgoing_0_5": 369,
+      "outgoing_c_star": 296,
+      "retained_fraction": 0.8021680216802168,
+      "below_half": false
+    },
+    {
+      "bodyId": 187776,
+      "label": "water",
+      "outgoing_0_5": 357,
+      "outgoing_c_star": 271,
+      "retained_fraction": 0.7591036414565826,
+      "below_half": false
+    },
+    {
+      "bodyId": 199308,
+      "label": "water",
+      "outgoing_0_5": 227,
+      "outgoing_c_star": 141,
+      "retained_fraction": 0.6211453744493393,
+      "below_half": false
+    },
+    {
+      "bodyId": 203234,
+      "label": "water",
+      "outgoing_0_5": 266,
+      "outgoing_c_star": 206,
+      "retained_fraction": 0.7744360902255639,
+      "below_half": false
+    },
+    {
+      "bodyId": 374701,
+      "label": "water",
+      "outgoing_0_5": 97,
+      "outgoing_c_star": 31,
+      "retained_fraction": 0.31958762886597936,
+      "below_half": true
+    },
+    {
+      "bodyId": 518542,
+      "label": "water",
+      "outgoing_0_5": 290,
+      "outgoing_c_star": 235,
+      "retained_fraction": 0.8103448275862069,
+      "below_half": false
+    },
+    {
+      "bodyId": 388541892,
+      "label": "water",
+      "outgoing_0_5": 239,
+      "outgoing_c_star": 162,
+      "retained_fraction": 0.6778242677824268,
+      "below_half": false
+    },
+    {
+      "bodyId": 456838775,
+      "label": "water",
+      "outgoing_0_5": 78,
+      "outgoing_c_star": 21,
+      "retained_fraction": 0.2692307692307692,
+      "below_half": true
+    },
+    {
+      "bodyId": 553738738,
+      "label": "water",
+      "outgoing_0_5": 65,
+      "outgoing_c_star": 35,
+      "retained_fraction": 0.5384615384615384,
+      "below_half": false
+    },
+    {
+      "bodyId": 786482749,
+      "label": "water",
+      "outgoing_0_5": 108,
+      "outgoing_c_star": 43,
+      "retained_fraction": 0.39814814814814814,
+      "below_half": true
+    },
+    {
+      "bodyId": 44816,
+      "label": "ir94e",
+      "outgoing_0_5": 1097,
+      "outgoing_c_star": 922,
+      "retained_fraction": 0.8404740200546946,
+      "below_half": false
+    },
+    {
+      "bodyId": 111660,
+      "label": "ir94e",
+      "outgoing_0_5": 487,
+      "outgoing_c_star": 401,
+      "retained_fraction": 0.8234086242299795,
+      "below_half": false
+    },
+    {
+      "bodyId": 137497,
+      "label": "ir94e",
+      "outgoing_0_5": 635,
+      "outgoing_c_star": 549,
+      "retained_fraction": 0.8645669291338582,
+      "below_half": false
+    },
+    {
+      "bodyId": 154359,
+      "label": "ir94e",
+      "outgoing_0_5": 465,
+      "outgoing_c_star": 396,
+      "retained_fraction": 0.8516129032258064,
+      "below_half": false
+    },
+    {
+      "bodyId": 175572,
+      "label": "ir94e",
+      "outgoing_0_5": 390,
+      "outgoing_c_star": 321,
+      "retained_fraction": 0.823076923076923,
+      "below_half": false
+    },
+    {
+      "bodyId": 200001,
+      "label": "ir94e",
+      "outgoing_0_5": 365,
+      "outgoing_c_star": 299,
+      "retained_fraction": 0.8191780821917808,
+      "below_half": false
+    },
+    {
+      "bodyId": 209688,
+      "label": "ir94e",
+      "outgoing_0_5": 560,
+      "outgoing_c_star": 464,
+      "retained_fraction": 0.8285714285714286,
+      "below_half": false
+    },
+    {
+      "bodyId": 232730,
+      "label": "ir94e",
+      "outgoing_0_5": 131,
+      "outgoing_c_star": 82,
+      "retained_fraction": 0.6259541984732825,
+      "below_half": false
+    },
+    {
+      "bodyId": 534361,
+      "label": "ir94e",
+      "outgoing_0_5": 594,
+      "outgoing_c_star": 503,
+      "retained_fraction": 0.8468013468013468,
+      "below_half": false
+    },
+    {
+      "bodyId": 908747,
+      "label": "ir94e",
+      "outgoing_0_5": 536,
+      "outgoing_c_star": 468,
+      "retained_fraction": 0.8731343283582089,
+      "below_half": false
+    },
+    {
+      "bodyId": 919429,
+      "label": "ir94e",
+      "outgoing_0_5": 110,
+      "outgoing_c_star": 57,
+      "retained_fraction": 0.5181818181818182,
+      "below_half": false
+    },
+    {
+      "bodyId": 214700177,
+      "label": "ir94e",
+      "outgoing_0_5": 446,
+      "outgoing_c_star": 346,
+      "retained_fraction": 0.7757847533632287,
+      "below_half": false
+    },
+    {
+      "bodyId": 418840426,
+      "label": "ir94e",
+      "outgoing_0_5": 163,
+      "outgoing_c_star": 119,
+      "retained_fraction": 0.7300613496932515,
+      "below_half": false
+    },
+    {
+      "bodyId": 491986845,
+      "label": "ir94e",
+      "outgoing_0_5": 233,
+      "outgoing_c_star": 167,
+      "retained_fraction": 0.7167381974248928,
+      "below_half": false
+    },
+    {
+      "bodyId": 551057545,
+      "label": "ir94e",
+      "outgoing_0_5": 163,
+      "outgoing_c_star": 105,
+      "retained_fraction": 0.6441717791411042,
+      "below_half": false
+    },
+    {
+      "bodyId": 633272971,
+      "label": "ir94e",
+      "outgoing_0_5": 149,
+      "outgoing_c_star": 76,
+      "retained_fraction": 0.5100671140939598,
+      "below_half": false
+    },
+    {
+      "bodyId": 792429427,
+      "label": "ir94e",
+      "outgoing_0_5": 160,
+      "outgoing_c_star": 95,
+      "retained_fraction": 0.59375,
+      "below_half": false
+    },
+    {
+      "bodyId": 912111327,
+      "label": "ir94e",
+      "outgoing_0_5": 262,
+      "outgoing_c_star": 177,
+      "retained_fraction": 0.6755725190839694,
+      "below_half": false
+    },
+    {
+      "bodyId": 947005552,
+      "label": "ir94e",
+      "outgoing_0_5": 106,
+      "outgoing_c_star": 50,
+      "retained_fraction": 0.4716981132075472,
+      "below_half": true
+    },
+    {
+      "bodyId": 10331,
+      "label": "MN9_L_primary",
+      "outgoing_0_5": 280,
+      "outgoing_c_star": 51,
+      "retained_fraction": 0.18214285714285713,
+      "below_half": true
+    },
+    {
+      "bodyId": 16949,
+      "label": "MN9_R_secondary",
+      "outgoing_0_5": 445,
+      "outgoing_c_star": 203,
+      "retained_fraction": 0.45617977528089887,
+      "below_half": true
+    }
+  ],
+  "set_totals": [
+    {
+      "label": "sugar",
+      "outgoing_0_5": 6674,
+      "outgoing_c_star": 5176,
+      "retained_fraction": 0.7755468984117471,
+      "below_half": false,
+      "cells": 17
+    },
+    {
+      "label": "bitter",
+      "outgoing_0_5": 23430,
+      "outgoing_c_star": 17900,
+      "retained_fraction": 0.7639778062313274,
+      "below_half": false,
+      "cells": 38
+    },
+    {
+      "label": "water",
+      "outgoing_0_5": 4633,
+      "outgoing_c_star": 3434,
+      "retained_fraction": 0.7412044031944744,
+      "below_half": false,
+      "cells": 17
+    },
+    {
+      "label": "ir94e",
+      "outgoing_0_5": 7052,
+      "outgoing_c_star": 5597,
+      "retained_fraction": 0.7936755530346001,
+      "below_half": false,
+      "cells": 19
+    }
+  ],
+  "partners": [
+    {
+      "bodyId": 10833,
+      "label": "L10331 baseline top20 presynaptic partner",
+      "outgoing_0_5": 3054,
+      "outgoing_c_star": 2691,
+      "retained_fraction": 0.881139489194499,
+      "below_half": false,
+      "rank": 1,
+      "into_L10331_0_5": 464,
+      "into_L10331_c_star": 464,
+      "last_hop_retained_fraction": 1.0
+    },
+    {
+      "bodyId": 10881,
+      "label": "L10331 baseline top20 presynaptic partner",
+      "outgoing_0_5": 2087,
+      "outgoing_c_star": 1854,
+      "retained_fraction": 0.8883564925730714,
+      "below_half": false,
+      "rank": 2,
+      "into_L10331_0_5": 359,
+      "into_L10331_c_star": 359,
+      "last_hop_retained_fraction": 1.0
+    },
+    {
+      "bodyId": 13754,
+      "label": "L10331 baseline top20 presynaptic partner",
+      "outgoing_0_5": 1442,
+      "outgoing_c_star": 1290,
+      "retained_fraction": 0.8945908460471568,
+      "below_half": false,
+      "rank": 3,
+      "into_L10331_0_5": 357,
+      "into_L10331_c_star": 357,
+      "last_hop_retained_fraction": 1.0
+    },
+    {
+      "bodyId": 12851,
+      "label": "L10331 baseline top20 presynaptic partner",
+      "outgoing_0_5": 2850,
+      "outgoing_c_star": 2655,
+      "retained_fraction": 0.9315789473684211,
+      "below_half": false,
+      "rank": 4,
+      "into_L10331_0_5": 351,
+      "into_L10331_c_star": 351,
+      "last_hop_retained_fraction": 1.0
+    },
+    {
+      "bodyId": 26764,
+      "label": "L10331 baseline top20 presynaptic partner",
+      "outgoing_0_5": 3970,
+      "outgoing_c_star": 3688,
+      "retained_fraction": 0.9289672544080605,
+      "below_half": false,
+      "rank": 5,
+      "into_L10331_0_5": 348,
+      "into_L10331_c_star": 348,
+      "last_hop_retained_fraction": 1.0
+    },
+    {
+      "bodyId": 523590,
+      "label": "L10331 baseline top20 presynaptic partner",
+      "outgoing_0_5": 2548,
+      "outgoing_c_star": 2193,
+      "retained_fraction": 0.8606750392464678,
+      "below_half": false,
+      "rank": 6,
+      "into_L10331_0_5": 266,
+      "into_L10331_c_star": 266,
+      "last_hop_retained_fraction": 1.0
+    },
+    {
+      "bodyId": 10849,
+      "label": "L10331 baseline top20 presynaptic partner",
+      "outgoing_0_5": 6418,
+      "outgoing_c_star": 5969,
+      "retained_fraction": 0.9300405110626363,
+      "below_half": false,
+      "rank": 7,
+      "into_L10331_0_5": 241,
+      "into_L10331_c_star": 241,
+      "last_hop_retained_fraction": 1.0
+    },
+    {
+      "bodyId": 513655,
+      "label": "L10331 baseline top20 presynaptic partner",
+      "outgoing_0_5": 2040,
+      "outgoing_c_star": 1905,
+      "retained_fraction": 0.9338235294117647,
+      "below_half": false,
+      "rank": 8,
+      "into_L10331_0_5": 214,
+      "into_L10331_c_star": 214,
+      "last_hop_retained_fraction": 1.0
+    },
+    {
+      "bodyId": 14891,
+      "label": "L10331 baseline top20 presynaptic partner",
+      "outgoing_0_5": 2278,
+      "outgoing_c_star": 2123,
+      "retained_fraction": 0.9319578577699736,
+      "below_half": false,
+      "rank": 9,
+      "into_L10331_0_5": 198,
+      "into_L10331_c_star": 198,
+      "last_hop_retained_fraction": 1.0
+    },
+    {
+      "bodyId": 17782,
+      "label": "L10331 baseline top20 presynaptic partner",
+      "outgoing_0_5": 1877,
+      "outgoing_c_star": 1718,
+      "retained_fraction": 0.9152903569525839,
+      "below_half": false,
+      "rank": 10,
+      "into_L10331_0_5": 187,
+      "into_L10331_c_star": 187,
+      "last_hop_retained_fraction": 1.0
+    },
+    {
+      "bodyId": 28181,
+      "label": "L10331 baseline top20 presynaptic partner",
+      "outgoing_0_5": 1865,
+      "outgoing_c_star": 1639,
+      "retained_fraction": 0.8788203753351207,
+      "below_half": false,
+      "rank": 11,
+      "into_L10331_0_5": 177,
+      "into_L10331_c_star": 177,
+      "last_hop_retained_fraction": 1.0
+    },
+    {
+      "bodyId": 11755,
+      "label": "L10331 baseline top20 presynaptic partner",
+      "outgoing_0_5": 6124,
+      "outgoing_c_star": 5719,
+      "retained_fraction": 0.9338667537557153,
+      "below_half": false,
+      "rank": 12,
+      "into_L10331_0_5": 160,
+      "into_L10331_c_star": 160,
+      "last_hop_retained_fraction": 1.0
+    },
+    {
+      "bodyId": 523679,
+      "label": "L10331 baseline top20 presynaptic partner",
+      "outgoing_0_5": 2450,
+      "outgoing_c_star": 2127,
+      "retained_fraction": 0.8681632653061224,
+      "below_half": false,
+      "rank": 13,
+      "into_L10331_0_5": 142,
+      "into_L10331_c_star": 142,
+      "last_hop_retained_fraction": 1.0
+    },
+    {
+      "bodyId": 16142,
+      "label": "L10331 baseline top20 presynaptic partner",
+      "outgoing_0_5": 2098,
+      "outgoing_c_star": 1932,
+      "retained_fraction": 0.9208770257387988,
+      "below_half": false,
+      "rank": 14,
+      "into_L10331_0_5": 136,
+      "into_L10331_c_star": 136,
+      "last_hop_retained_fraction": 1.0
+    },
+    {
+      "bodyId": 12752,
+      "label": "L10331 baseline top20 presynaptic partner",
+      "outgoing_0_5": 4754,
+      "outgoing_c_star": 4308,
+      "retained_fraction": 0.906184265881363,
+      "below_half": false,
+      "rank": 15,
+      "into_L10331_0_5": 101,
+      "into_L10331_c_star": 101,
+      "last_hop_retained_fraction": 1.0
+    },
+    {
+      "bodyId": 12364,
+      "label": "L10331 baseline top20 presynaptic partner",
+      "outgoing_0_5": 5088,
+      "outgoing_c_star": 4615,
+      "retained_fraction": 0.9070361635220126,
+      "below_half": false,
+      "rank": 16,
+      "into_L10331_0_5": 96,
+      "into_L10331_c_star": 96,
+      "last_hop_retained_fraction": 1.0
+    },
+    {
+      "bodyId": 10673,
+      "label": "L10331 baseline top20 presynaptic partner",
+      "outgoing_0_5": 5602,
+      "outgoing_c_star": 4442,
+      "retained_fraction": 0.7929310960371296,
+      "below_half": false,
+      "rank": 17,
+      "into_L10331_0_5": 92,
+      "into_L10331_c_star": 92,
+      "last_hop_retained_fraction": 1.0
+    },
+    {
+      "bodyId": 238142,
+      "label": "L10331 baseline top20 presynaptic partner",
+      "outgoing_0_5": 1116,
+      "outgoing_c_star": 996,
+      "retained_fraction": 0.8924731182795699,
+      "below_half": false,
+      "rank": 18,
+      "into_L10331_0_5": 92,
+      "into_L10331_c_star": 92,
+      "last_hop_retained_fraction": 1.0
+    },
+    {
+      "bodyId": 13402,
+      "label": "L10331 baseline top20 presynaptic partner",
+      "outgoing_0_5": 2156,
+      "outgoing_c_star": 1972,
+      "retained_fraction": 0.9146567717996289,
+      "below_half": false,
+      "rank": 19,
+      "into_L10331_0_5": 78,
+      "into_L10331_c_star": 78,
+      "last_hop_retained_fraction": 1.0
+    },
+    {
+      "bodyId": 522702,
+      "label": "L10331 baseline top20 presynaptic partner",
+      "outgoing_0_5": 2490,
+      "outgoing_c_star": 2257,
+      "retained_fraction": 0.906425702811245,
+      "below_half": false,
+      "rank": 20,
+      "into_L10331_0_5": 76,
+      "into_L10331_c_star": 76,
+      "last_hop_retained_fraction": 1.0
+    }
+  ],
+  "fbm_cells": [
+    {
+      "bodyId": 71254,
+      "label": "fbm_sugar_labellar",
+      "outgoing_0_5": 779,
+      "outgoing_c_star": 668,
+      "retained_fraction": 0.8575096277278562,
+      "below_half": false
+    },
+    {
+      "bodyId": 72059,
+      "label": "fbm_sugar_labellar",
+      "outgoing_0_5": 1175,
+      "outgoing_c_star": 1099,
+      "retained_fraction": 0.9353191489361702,
+      "below_half": false
+    },
+    {
+      "bodyId": 78240,
+      "label": "fbm_sugar_labellar",
+      "outgoing_0_5": 425,
+      "outgoing_c_star": 343,
+      "retained_fraction": 0.8070588235294117,
+      "below_half": false
+    },
+    {
+      "bodyId": 85806,
+      "label": "fbm_sugar_labellar",
+      "outgoing_0_5": 791,
+      "outgoing_c_star": 674,
+      "retained_fraction": 0.8520859671302149,
+      "below_half": false
+    },
+    {
+      "bodyId": 92440,
+      "label": "fbm_sugar_labellar",
+      "outgoing_0_5": 957,
+      "outgoing_c_star": 876,
+      "retained_fraction": 0.9153605015673981,
+      "below_half": false
+    },
+    {
+      "bodyId": 101087,
+      "label": "fbm_sugar_labellar",
+      "outgoing_0_5": 603,
+      "outgoing_c_star": 479,
+      "retained_fraction": 0.7943615257048093,
+      "below_half": false
+    },
+    {
+      "bodyId": 120303,
+      "label": "fbm_sugar_labellar",
+      "outgoing_0_5": 588,
+      "outgoing_c_star": 486,
+      "retained_fraction": 0.826530612244898,
+      "below_half": false
+    },
+    {
+      "bodyId": 140015,
+      "label": "fbm_sugar_labellar",
+      "outgoing_0_5": 508,
+      "outgoing_c_star": 401,
+      "retained_fraction": 0.7893700787401575,
+      "below_half": false
+    },
+    {
+      "bodyId": 142827,
+      "label": "fbm_sugar_labellar",
+      "outgoing_0_5": 460,
+      "outgoing_c_star": 364,
+      "retained_fraction": 0.7913043478260869,
+      "below_half": false
+    },
+    {
+      "bodyId": 159772,
+      "label": "fbm_sugar_labellar",
+      "outgoing_0_5": 422,
+      "outgoing_c_star": 344,
+      "retained_fraction": 0.8151658767772512,
+      "below_half": false
+    },
+    {
+      "bodyId": 163597,
+      "label": "fbm_sugar_labellar",
+      "outgoing_0_5": 347,
+      "outgoing_c_star": 228,
+      "retained_fraction": 0.6570605187319885,
+      "below_half": false
+    },
+    {
+      "bodyId": 180314,
+      "label": "fbm_sugar_labellar",
+      "outgoing_0_5": 178,
+      "outgoing_c_star": 88,
+      "retained_fraction": 0.4943820224719101,
+      "below_half": true
+    },
+    {
+      "bodyId": 183084,
+      "label": "fbm_sugar_labellar",
+      "outgoing_0_5": 332,
+      "outgoing_c_star": 251,
+      "retained_fraction": 0.7560240963855421,
+      "below_half": false
+    },
+    {
+      "bodyId": 187492,
+      "label": "fbm_sugar_labellar",
+      "outgoing_0_5": 334,
+      "outgoing_c_star": 226,
+      "retained_fraction": 0.6766467065868264,
+      "below_half": false
+    },
+    {
+      "bodyId": 190769,
+      "label": "fbm_sugar_labellar",
+      "outgoing_0_5": 353,
+      "outgoing_c_star": 240,
+      "retained_fraction": 0.6798866855524079,
+      "below_half": false
+    },
+    {
+      "bodyId": 202888,
+      "label": "fbm_sugar_labellar",
+      "outgoing_0_5": 511,
+      "outgoing_c_star": 405,
+      "retained_fraction": 0.7925636007827789,
+      "below_half": false
+    },
+    {
+      "bodyId": 209155,
+      "label": "fbm_sugar_labellar",
+      "outgoing_0_5": 289,
+      "outgoing_c_star": 193,
+      "retained_fraction": 0.6678200692041523,
+      "below_half": false
+    },
+    {
+      "bodyId": 215556,
+      "label": "fbm_sugar_labellar",
+      "outgoing_0_5": 609,
+      "outgoing_c_star": 499,
+      "retained_fraction": 0.819376026272578,
+      "below_half": false
+    },
+    {
+      "bodyId": 261450,
+      "label": "fbm_sugar_labellar",
+      "outgoing_0_5": 354,
+      "outgoing_c_star": 261,
+      "retained_fraction": 0.7372881355932204,
+      "below_half": false
+    },
+    {
+      "bodyId": 262567,
+      "label": "fbm_sugar_labellar",
+      "outgoing_0_5": 266,
+      "outgoing_c_star": 134,
+      "retained_fraction": 0.5037593984962406,
+      "below_half": false
+    },
+    {
+      "bodyId": 272263,
+      "label": "fbm_sugar_labellar",
+      "outgoing_0_5": 296,
+      "outgoing_c_star": 209,
+      "retained_fraction": 0.706081081081081,
+      "below_half": false
+    },
+    {
+      "bodyId": 512551,
+      "label": "fbm_sugar_labellar",
+      "outgoing_0_5": 876,
+      "outgoing_c_star": 799,
+      "retained_fraction": 0.9121004566210046,
+      "below_half": false
+    },
+    {
+      "bodyId": 516217,
+      "label": "fbm_sugar_labellar",
+      "outgoing_0_5": 453,
+      "outgoing_c_star": 328,
+      "retained_fraction": 0.7240618101545254,
+      "below_half": false
+    },
+    {
+      "bodyId": 531237,
+      "label": "fbm_sugar_labellar",
+      "outgoing_0_5": 414,
+      "outgoing_c_star": 316,
+      "retained_fraction": 0.7632850241545893,
+      "below_half": false
+    },
+    {
+      "bodyId": 557646,
+      "label": "fbm_sugar_labellar",
+      "outgoing_0_5": 431,
+      "outgoing_c_star": 337,
+      "retained_fraction": 0.7819025522041764,
+      "below_half": false
+    },
+    {
+      "bodyId": 933317,
+      "label": "fbm_sugar_labellar",
+      "outgoing_0_5": 1024,
+      "outgoing_c_star": 946,
+      "retained_fraction": 0.923828125,
+      "below_half": false
+    },
+    {
+      "bodyId": 942168,
+      "label": "fbm_sugar_labellar",
+      "outgoing_0_5": 106,
+      "outgoing_c_star": 36,
+      "retained_fraction": 0.33962264150943394,
+      "below_half": true
+    },
+    {
+      "bodyId": 957530,
+      "label": "fbm_sugar_labellar",
+      "outgoing_0_5": 61,
+      "outgoing_c_star": 7,
+      "retained_fraction": 0.11475409836065574,
+      "below_half": true
+    },
+    {
+      "bodyId": 158893964,
+      "label": "fbm_sugar_labellar",
+      "outgoing_0_5": 107,
+      "outgoing_c_star": 35,
+      "retained_fraction": 0.32710280373831774,
+      "below_half": true
+    },
+    {
+      "bodyId": 174444965,
+      "label": "fbm_sugar_labellar",
+      "outgoing_0_5": 42,
+      "outgoing_c_star": 13,
+      "retained_fraction": 0.30952380952380953,
+      "below_half": true
+    },
+    {
+      "bodyId": 213650853,
+      "label": "fbm_sugar_labellar",
+      "outgoing_0_5": 512,
+      "outgoing_c_star": 348,
+      "retained_fraction": 0.6796875,
+      "below_half": false
+    },
+    {
+      "bodyId": 349137284,
+      "label": "fbm_sugar_labellar",
+      "outgoing_0_5": 64,
+      "outgoing_c_star": 5,
+      "retained_fraction": 0.078125,
+      "below_half": true
+    },
+    {
+      "bodyId": 475202322,
+      "label": "fbm_sugar_labellar",
+      "outgoing_0_5": 149,
+      "outgoing_c_star": 43,
+      "retained_fraction": 0.28859060402684567,
+      "below_half": true
+    },
+    {
+      "bodyId": 766547228,
+      "label": "fbm_sugar_labellar",
+      "outgoing_0_5": 134,
+      "outgoing_c_star": 58,
+      "retained_fraction": 0.43283582089552236,
+      "below_half": true
+    },
+    {
+      "bodyId": 15695,
+      "label": "fbm_sugar_pharyngeal",
+      "outgoing_0_5": 2610,
+      "outgoing_c_star": 2376,
+      "retained_fraction": 0.9103448275862069,
+      "below_half": false
+    },
+    {
+      "bodyId": 21105,
+      "label": "fbm_sugar_pharyngeal",
+      "outgoing_0_5": 2307,
+      "outgoing_c_star": 2112,
+      "retained_fraction": 0.9154746423927178,
+      "below_half": false
+    },
+    {
+      "bodyId": 86931,
+      "label": "fbm_sugar_pharyngeal",
+      "outgoing_0_5": 3015,
+      "outgoing_c_star": 2801,
+      "retained_fraction": 0.9290215588723051,
+      "below_half": false
+    },
+    {
+      "bodyId": 132583,
+      "label": "fbm_sugar_pharyngeal",
+      "outgoing_0_5": 2748,
+      "outgoing_c_star": 2489,
+      "retained_fraction": 0.9057496360989811,
+      "below_half": false
+    },
+    {
+      "bodyId": 451940,
+      "label": "fbm_sugar_pharyngeal",
+      "outgoing_0_5": 2433,
+      "outgoing_c_star": 2205,
+      "retained_fraction": 0.906288532675709,
+      "below_half": false
+    },
+    {
+      "bodyId": 522756,
+      "label": "fbm_sugar_pharyngeal",
+      "outgoing_0_5": 2461,
+      "outgoing_c_star": 2191,
+      "retained_fraction": 0.8902885006095084,
+      "below_half": false
+    },
+    {
+      "bodyId": 557092,
+      "label": "fbm_sugar_pharyngeal",
+      "outgoing_0_5": 2249,
+      "outgoing_c_star": 2027,
+      "retained_fraction": 0.9012894619831036,
+      "below_half": false
+    },
+    {
+      "bodyId": 917934,
+      "label": "fbm_sugar_pharyngeal",
+      "outgoing_0_5": 1838,
+      "outgoing_c_star": 1591,
+      "retained_fraction": 0.8656147986942329,
+      "below_half": false
+    },
+    {
+      "bodyId": 806127,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 638,
+      "outgoing_c_star": 542,
+      "retained_fraction": 0.8495297805642633,
+      "below_half": false
+    },
+    {
+      "bodyId": 807019,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 753,
+      "outgoing_c_star": 635,
+      "retained_fraction": 0.8432934926958832,
+      "below_half": false
+    },
+    {
+      "bodyId": 807656,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 458,
+      "outgoing_c_star": 343,
+      "retained_fraction": 0.7489082969432315,
+      "below_half": false
+    },
+    {
+      "bodyId": 809711,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 357,
+      "outgoing_c_star": 220,
+      "retained_fraction": 0.6162464985994398,
+      "below_half": false
+    },
+    {
+      "bodyId": 810082,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 386,
+      "outgoing_c_star": 269,
+      "retained_fraction": 0.6968911917098446,
+      "below_half": false
+    },
+    {
+      "bodyId": 810965,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 830,
+      "outgoing_c_star": 727,
+      "retained_fraction": 0.8759036144578313,
+      "below_half": false
+    },
+    {
+      "bodyId": 811089,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 255,
+      "outgoing_c_star": 168,
+      "retained_fraction": 0.6588235294117647,
+      "below_half": false
+    },
+    {
+      "bodyId": 811599,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 738,
+      "outgoing_c_star": 627,
+      "retained_fraction": 0.8495934959349594,
+      "below_half": false
+    },
+    {
+      "bodyId": 811604,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 814,
+      "outgoing_c_star": 675,
+      "retained_fraction": 0.8292383292383292,
+      "below_half": false
+    },
+    {
+      "bodyId": 812149,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 717,
+      "outgoing_c_star": 571,
+      "retained_fraction": 0.796373779637378,
+      "below_half": false
+    },
+    {
+      "bodyId": 812388,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 772,
+      "outgoing_c_star": 685,
+      "retained_fraction": 0.8873056994818653,
+      "below_half": false
+    },
+    {
+      "bodyId": 812617,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 537,
+      "outgoing_c_star": 420,
+      "retained_fraction": 0.7821229050279329,
+      "below_half": false
+    },
+    {
+      "bodyId": 812719,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 723,
+      "outgoing_c_star": 634,
+      "retained_fraction": 0.8769017980636238,
+      "below_half": false
+    },
+    {
+      "bodyId": 812879,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 698,
+      "outgoing_c_star": 577,
+      "retained_fraction": 0.826647564469914,
+      "below_half": false
+    },
+    {
+      "bodyId": 812893,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 697,
+      "outgoing_c_star": 614,
+      "retained_fraction": 0.8809182209469153,
+      "below_half": false
+    },
+    {
+      "bodyId": 813068,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 732,
+      "outgoing_c_star": 620,
+      "retained_fraction": 0.8469945355191257,
+      "below_half": false
+    },
+    {
+      "bodyId": 813158,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 690,
+      "outgoing_c_star": 605,
+      "retained_fraction": 0.8768115942028986,
+      "below_half": false
+    },
+    {
+      "bodyId": 813296,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 635,
+      "outgoing_c_star": 506,
+      "retained_fraction": 0.7968503937007874,
+      "below_half": false
+    },
+    {
+      "bodyId": 813668,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 596,
+      "outgoing_c_star": 491,
+      "retained_fraction": 0.8238255033557047,
+      "below_half": false
+    },
+    {
+      "bodyId": 813711,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 559,
+      "outgoing_c_star": 467,
+      "retained_fraction": 0.8354203935599285,
+      "below_half": false
+    },
+    {
+      "bodyId": 813912,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 433,
+      "outgoing_c_star": 321,
+      "retained_fraction": 0.7413394919168591,
+      "below_half": false
+    },
+    {
+      "bodyId": 813963,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 653,
+      "outgoing_c_star": 528,
+      "retained_fraction": 0.8085758039816233,
+      "below_half": false
+    },
+    {
+      "bodyId": 814055,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 527,
+      "outgoing_c_star": 406,
+      "retained_fraction": 0.7703984819734345,
+      "below_half": false
+    },
+    {
+      "bodyId": 814088,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 635,
+      "outgoing_c_star": 531,
+      "retained_fraction": 0.8362204724409449,
+      "below_half": false
+    },
+    {
+      "bodyId": 814189,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 457,
+      "outgoing_c_star": 318,
+      "retained_fraction": 0.6958424507658644,
+      "below_half": false
+    },
+    {
+      "bodyId": 814285,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 616,
+      "outgoing_c_star": 502,
+      "retained_fraction": 0.814935064935065,
+      "below_half": false
+    },
+    {
+      "bodyId": 814304,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 470,
+      "outgoing_c_star": 396,
+      "retained_fraction": 0.8425531914893617,
+      "below_half": false
+    },
+    {
+      "bodyId": 814525,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 579,
+      "outgoing_c_star": 462,
+      "retained_fraction": 0.7979274611398963,
+      "below_half": false
+    },
+    {
+      "bodyId": 814547,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 469,
+      "outgoing_c_star": 351,
+      "retained_fraction": 0.7484008528784648,
+      "below_half": false
+    },
+    {
+      "bodyId": 814639,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 386,
+      "outgoing_c_star": 251,
+      "retained_fraction": 0.6502590673575129,
+      "below_half": false
+    },
+    {
+      "bodyId": 814670,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 569,
+      "outgoing_c_star": 470,
+      "retained_fraction": 0.8260105448154658,
+      "below_half": false
+    },
+    {
+      "bodyId": 814736,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 483,
+      "outgoing_c_star": 368,
+      "retained_fraction": 0.7619047619047619,
+      "below_half": false
+    },
+    {
+      "bodyId": 814793,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 507,
+      "outgoing_c_star": 392,
+      "retained_fraction": 0.7731755424063116,
+      "below_half": false
+    },
+    {
+      "bodyId": 814882,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 345,
+      "outgoing_c_star": 218,
+      "retained_fraction": 0.6318840579710145,
+      "below_half": false
+    },
+    {
+      "bodyId": 814891,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 734,
+      "outgoing_c_star": 595,
+      "retained_fraction": 0.8106267029972752,
+      "below_half": false
+    },
+    {
+      "bodyId": 814991,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 299,
+      "outgoing_c_star": 206,
+      "retained_fraction": 0.6889632107023411,
+      "below_half": false
+    },
+    {
+      "bodyId": 815071,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 208,
+      "outgoing_c_star": 132,
+      "retained_fraction": 0.6346153846153846,
+      "below_half": false
+    },
+    {
+      "bodyId": 815131,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 463,
+      "outgoing_c_star": 350,
+      "retained_fraction": 0.755939524838013,
+      "below_half": false
+    },
+    {
+      "bodyId": 815145,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 361,
+      "outgoing_c_star": 243,
+      "retained_fraction": 0.6731301939058172,
+      "below_half": false
+    },
+    {
+      "bodyId": 815188,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 498,
+      "outgoing_c_star": 400,
+      "retained_fraction": 0.8032128514056225,
+      "below_half": false
+    },
+    {
+      "bodyId": 815236,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 864,
+      "outgoing_c_star": 690,
+      "retained_fraction": 0.7986111111111112,
+      "below_half": false
+    },
+    {
+      "bodyId": 815466,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 526,
+      "outgoing_c_star": 396,
+      "retained_fraction": 0.752851711026616,
+      "below_half": false
+    },
+    {
+      "bodyId": 815566,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 479,
+      "outgoing_c_star": 355,
+      "retained_fraction": 0.7411273486430062,
+      "below_half": false
+    },
+    {
+      "bodyId": 815586,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 492,
+      "outgoing_c_star": 411,
+      "retained_fraction": 0.8353658536585366,
+      "below_half": false
+    },
+    {
+      "bodyId": 815728,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 665,
+      "outgoing_c_star": 546,
+      "retained_fraction": 0.8210526315789474,
+      "below_half": false
+    },
+    {
+      "bodyId": 815748,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 304,
+      "outgoing_c_star": 197,
+      "retained_fraction": 0.6480263157894737,
+      "below_half": false
+    },
+    {
+      "bodyId": 815832,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 409,
+      "outgoing_c_star": 318,
+      "retained_fraction": 0.7775061124694377,
+      "below_half": false
+    },
+    {
+      "bodyId": 815877,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 634,
+      "outgoing_c_star": 527,
+      "retained_fraction": 0.831230283911672,
+      "below_half": false
+    },
+    {
+      "bodyId": 815927,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 311,
+      "outgoing_c_star": 238,
+      "retained_fraction": 0.7652733118971061,
+      "below_half": false
+    },
+    {
+      "bodyId": 815934,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 451,
+      "outgoing_c_star": 334,
+      "retained_fraction": 0.7405764966740577,
+      "below_half": false
+    },
+    {
+      "bodyId": 816019,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 360,
+      "outgoing_c_star": 230,
+      "retained_fraction": 0.6388888888888888,
+      "below_half": false
+    },
+    {
+      "bodyId": 816109,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 362,
+      "outgoing_c_star": 265,
+      "retained_fraction": 0.7320441988950276,
+      "below_half": false
+    },
+    {
+      "bodyId": 816118,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 389,
+      "outgoing_c_star": 298,
+      "retained_fraction": 0.7660668380462725,
+      "below_half": false
+    },
+    {
+      "bodyId": 816163,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 319,
+      "outgoing_c_star": 242,
+      "retained_fraction": 0.7586206896551724,
+      "below_half": false
+    },
+    {
+      "bodyId": 816279,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 359,
+      "outgoing_c_star": 241,
+      "retained_fraction": 0.6713091922005571,
+      "below_half": false
+    },
+    {
+      "bodyId": 816287,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 342,
+      "outgoing_c_star": 253,
+      "retained_fraction": 0.7397660818713451,
+      "below_half": false
+    },
+    {
+      "bodyId": 816377,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 394,
+      "outgoing_c_star": 286,
+      "retained_fraction": 0.7258883248730964,
+      "below_half": false
+    },
+    {
+      "bodyId": 816382,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 407,
+      "outgoing_c_star": 317,
+      "retained_fraction": 0.7788697788697788,
+      "below_half": false
+    },
+    {
+      "bodyId": 816421,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 438,
+      "outgoing_c_star": 328,
+      "retained_fraction": 0.7488584474885844,
+      "below_half": false
+    },
+    {
+      "bodyId": 816426,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 312,
+      "outgoing_c_star": 190,
+      "retained_fraction": 0.6089743589743589,
+      "below_half": false
+    },
+    {
+      "bodyId": 816626,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 198,
+      "outgoing_c_star": 103,
+      "retained_fraction": 0.5202020202020202,
+      "below_half": false
+    },
+    {
+      "bodyId": 816754,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 359,
+      "outgoing_c_star": 254,
+      "retained_fraction": 0.7075208913649025,
+      "below_half": false
+    },
+    {
+      "bodyId": 816809,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 335,
+      "outgoing_c_star": 236,
+      "retained_fraction": 0.7044776119402985,
+      "below_half": false
+    },
+    {
+      "bodyId": 816820,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 233,
+      "outgoing_c_star": 163,
+      "retained_fraction": 0.6995708154506438,
+      "below_half": false
+    },
+    {
+      "bodyId": 816834,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 339,
+      "outgoing_c_star": 229,
+      "retained_fraction": 0.6755162241887905,
+      "below_half": false
+    },
+    {
+      "bodyId": 816869,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 273,
+      "outgoing_c_star": 181,
+      "retained_fraction": 0.663003663003663,
+      "below_half": false
+    },
+    {
+      "bodyId": 816917,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 351,
+      "outgoing_c_star": 241,
+      "retained_fraction": 0.6866096866096866,
+      "below_half": false
+    },
+    {
+      "bodyId": 816950,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 383,
+      "outgoing_c_star": 287,
+      "retained_fraction": 0.7493472584856397,
+      "below_half": false
+    },
+    {
+      "bodyId": 816993,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 167,
+      "outgoing_c_star": 83,
+      "retained_fraction": 0.49700598802395207,
+      "below_half": true
+    },
+    {
+      "bodyId": 817018,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 270,
+      "outgoing_c_star": 153,
+      "retained_fraction": 0.5666666666666667,
+      "below_half": false
+    },
+    {
+      "bodyId": 817048,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 249,
+      "outgoing_c_star": 173,
+      "retained_fraction": 0.6947791164658634,
+      "below_half": false
+    },
+    {
+      "bodyId": 817128,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 361,
+      "outgoing_c_star": 292,
+      "retained_fraction": 0.8088642659279779,
+      "below_half": false
+    },
+    {
+      "bodyId": 817186,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 353,
+      "outgoing_c_star": 248,
+      "retained_fraction": 0.7025495750708215,
+      "below_half": false
+    },
+    {
+      "bodyId": 817251,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 335,
+      "outgoing_c_star": 240,
+      "retained_fraction": 0.7164179104477612,
+      "below_half": false
+    },
+    {
+      "bodyId": 817292,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 301,
+      "outgoing_c_star": 190,
+      "retained_fraction": 0.6312292358803987,
+      "below_half": false
+    },
+    {
+      "bodyId": 817311,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 322,
+      "outgoing_c_star": 238,
+      "retained_fraction": 0.7391304347826086,
+      "below_half": false
+    },
+    {
+      "bodyId": 817358,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 297,
+      "outgoing_c_star": 171,
+      "retained_fraction": 0.5757575757575758,
+      "below_half": false
+    },
+    {
+      "bodyId": 817384,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 190,
+      "outgoing_c_star": 119,
+      "retained_fraction": 0.6263157894736842,
+      "below_half": false
+    },
+    {
+      "bodyId": 817399,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 285,
+      "outgoing_c_star": 176,
+      "retained_fraction": 0.6175438596491228,
+      "below_half": false
+    },
+    {
+      "bodyId": 817447,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 381,
+      "outgoing_c_star": 257,
+      "retained_fraction": 0.6745406824146981,
+      "below_half": false
+    },
+    {
+      "bodyId": 817503,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 392,
+      "outgoing_c_star": 310,
+      "retained_fraction": 0.7908163265306123,
+      "below_half": false
+    },
+    {
+      "bodyId": 817580,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 211,
+      "outgoing_c_star": 124,
+      "retained_fraction": 0.5876777251184834,
+      "below_half": false
+    },
+    {
+      "bodyId": 817773,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 233,
+      "outgoing_c_star": 164,
+      "retained_fraction": 0.703862660944206,
+      "below_half": false
+    },
+    {
+      "bodyId": 817934,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 309,
+      "outgoing_c_star": 225,
+      "retained_fraction": 0.7281553398058253,
+      "below_half": false
+    },
+    {
+      "bodyId": 818082,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 182,
+      "outgoing_c_star": 113,
+      "retained_fraction": 0.6208791208791209,
+      "below_half": false
+    },
+    {
+      "bodyId": 818139,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 211,
+      "outgoing_c_star": 117,
+      "retained_fraction": 0.5545023696682464,
+      "below_half": false
+    },
+    {
+      "bodyId": 818208,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 377,
+      "outgoing_c_star": 309,
+      "retained_fraction": 0.8196286472148541,
+      "below_half": false
+    },
+    {
+      "bodyId": 818210,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 275,
+      "outgoing_c_star": 188,
+      "retained_fraction": 0.6836363636363636,
+      "below_half": false
+    },
+    {
+      "bodyId": 818636,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 268,
+      "outgoing_c_star": 166,
+      "retained_fraction": 0.6194029850746269,
+      "below_half": false
+    },
+    {
+      "bodyId": 818677,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 334,
+      "outgoing_c_star": 226,
+      "retained_fraction": 0.6766467065868264,
+      "below_half": false
+    },
+    {
+      "bodyId": 818687,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 283,
+      "outgoing_c_star": 212,
+      "retained_fraction": 0.7491166077738516,
+      "below_half": false
+    },
+    {
+      "bodyId": 818870,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 168,
+      "outgoing_c_star": 88,
+      "retained_fraction": 0.5238095238095238,
+      "below_half": false
+    },
+    {
+      "bodyId": 818878,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 217,
+      "outgoing_c_star": 130,
+      "retained_fraction": 0.5990783410138248,
+      "below_half": false
+    },
+    {
+      "bodyId": 818934,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 208,
+      "outgoing_c_star": 115,
+      "retained_fraction": 0.5528846153846154,
+      "below_half": false
+    },
+    {
+      "bodyId": 819039,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 200,
+      "outgoing_c_star": 121,
+      "retained_fraction": 0.605,
+      "below_half": false
+    },
+    {
+      "bodyId": 819263,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 163,
+      "outgoing_c_star": 102,
+      "retained_fraction": 0.6257668711656442,
+      "below_half": false
+    },
+    {
+      "bodyId": 819316,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 150,
+      "outgoing_c_star": 84,
+      "retained_fraction": 0.56,
+      "below_half": false
+    },
+    {
+      "bodyId": 819356,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 278,
+      "outgoing_c_star": 215,
+      "retained_fraction": 0.7733812949640287,
+      "below_half": false
+    },
+    {
+      "bodyId": 819439,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 128,
+      "outgoing_c_star": 71,
+      "retained_fraction": 0.5546875,
+      "below_half": false
+    },
+    {
+      "bodyId": 819466,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 132,
+      "outgoing_c_star": 86,
+      "retained_fraction": 0.6515151515151515,
+      "below_half": false
+    },
+    {
+      "bodyId": 819573,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 261,
+      "outgoing_c_star": 179,
+      "retained_fraction": 0.685823754789272,
+      "below_half": false
+    },
+    {
+      "bodyId": 819594,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 144,
+      "outgoing_c_star": 53,
+      "retained_fraction": 0.3680555555555556,
+      "below_half": true
+    },
+    {
+      "bodyId": 820024,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 105,
+      "outgoing_c_star": 50,
+      "retained_fraction": 0.47619047619047616,
+      "below_half": true
+    },
+    {
+      "bodyId": 820215,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 256,
+      "outgoing_c_star": 176,
+      "retained_fraction": 0.6875,
+      "below_half": false
+    },
+    {
+      "bodyId": 820291,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 139,
+      "outgoing_c_star": 68,
+      "retained_fraction": 0.4892086330935252,
+      "below_half": true
+    },
+    {
+      "bodyId": 820620,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 101,
+      "outgoing_c_star": 54,
+      "retained_fraction": 0.5346534653465347,
+      "below_half": false
+    },
+    {
+      "bodyId": 820827,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 408,
+      "outgoing_c_star": 281,
+      "retained_fraction": 0.6887254901960784,
+      "below_half": false
+    },
+    {
+      "bodyId": 820877,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 527,
+      "outgoing_c_star": 440,
+      "retained_fraction": 0.8349146110056926,
+      "below_half": false
+    },
+    {
+      "bodyId": 820921,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 263,
+      "outgoing_c_star": 165,
+      "retained_fraction": 0.6273764258555133,
+      "below_half": false
+    },
+    {
+      "bodyId": 821000,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 136,
+      "outgoing_c_star": 81,
+      "retained_fraction": 0.5955882352941176,
+      "below_half": false
+    },
+    {
+      "bodyId": 821029,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 194,
+      "outgoing_c_star": 123,
+      "retained_fraction": 0.634020618556701,
+      "below_half": false
+    },
+    {
+      "bodyId": 821365,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 111,
+      "outgoing_c_star": 48,
+      "retained_fraction": 0.43243243243243246,
+      "below_half": true
+    },
+    {
+      "bodyId": 821817,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 74,
+      "outgoing_c_star": 29,
+      "retained_fraction": 0.3918918918918919,
+      "below_half": true
+    },
+    {
+      "bodyId": 822812,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 82,
+      "outgoing_c_star": 49,
+      "retained_fraction": 0.5975609756097561,
+      "below_half": false
+    },
+    {
+      "bodyId": 823088,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 133,
+      "outgoing_c_star": 71,
+      "retained_fraction": 0.5338345864661654,
+      "below_half": false
+    },
+    {
+      "bodyId": 824616,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 185,
+      "outgoing_c_star": 100,
+      "retained_fraction": 0.5405405405405406,
+      "below_half": false
+    },
+    {
+      "bodyId": 824864,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 137,
+      "outgoing_c_star": 68,
+      "retained_fraction": 0.49635036496350365,
+      "below_half": true
+    },
+    {
+      "bodyId": 826233,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 53,
+      "outgoing_c_star": 24,
+      "retained_fraction": 0.4528301886792453,
+      "below_half": true
+    },
+    {
+      "bodyId": 826550,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 88,
+      "outgoing_c_star": 38,
+      "retained_fraction": 0.4318181818181818,
+      "below_half": true
+    },
+    {
+      "bodyId": 827446,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 133,
+      "outgoing_c_star": 81,
+      "retained_fraction": 0.6090225563909775,
+      "below_half": false
+    },
+    {
+      "bodyId": 828090,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 194,
+      "outgoing_c_star": 130,
+      "retained_fraction": 0.6701030927835051,
+      "below_half": false
+    },
+    {
+      "bodyId": 829673,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 102,
+      "outgoing_c_star": 48,
+      "retained_fraction": 0.47058823529411764,
+      "below_half": true
+    },
+    {
+      "bodyId": 832667,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 377,
+      "outgoing_c_star": 285,
+      "retained_fraction": 0.7559681697612732,
+      "below_half": false
+    },
+    {
+      "bodyId": 833974,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 44,
+      "outgoing_c_star": 10,
+      "retained_fraction": 0.22727272727272727,
+      "below_half": true
+    },
+    {
+      "bodyId": 834294,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 160,
+      "outgoing_c_star": 109,
+      "retained_fraction": 0.68125,
+      "below_half": false
+    },
+    {
+      "bodyId": 839186,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 153,
+      "outgoing_c_star": 74,
+      "retained_fraction": 0.48366013071895425,
+      "below_half": true
+    },
+    {
+      "bodyId": 843507,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 200,
+      "outgoing_c_star": 138,
+      "retained_fraction": 0.69,
+      "below_half": false
+    },
+    {
+      "bodyId": 856983,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 172,
+      "outgoing_c_star": 119,
+      "retained_fraction": 0.6918604651162791,
+      "below_half": false
+    },
+    {
+      "bodyId": 861448,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 47,
+      "outgoing_c_star": 25,
+      "retained_fraction": 0.5319148936170213,
+      "below_half": false
+    },
+    {
+      "bodyId": 864071,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 177,
+      "outgoing_c_star": 117,
+      "retained_fraction": 0.6610169491525424,
+      "below_half": false
+    },
+    {
+      "bodyId": 894474,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 140,
+      "outgoing_c_star": 73,
+      "retained_fraction": 0.5214285714285715,
+      "below_half": false
+    },
+    {
+      "bodyId": 902898,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 141,
+      "outgoing_c_star": 84,
+      "retained_fraction": 0.5957446808510638,
+      "below_half": false
+    },
+    {
+      "bodyId": 903476,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 330,
+      "outgoing_c_star": 238,
+      "retained_fraction": 0.7212121212121212,
+      "below_half": false
+    },
+    {
+      "bodyId": 903737,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 641,
+      "outgoing_c_star": 542,
+      "retained_fraction": 0.8455538221528861,
+      "below_half": false
+    },
+    {
+      "bodyId": 905549,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 363,
+      "outgoing_c_star": 287,
+      "retained_fraction": 0.790633608815427,
+      "below_half": false
+    },
+    {
+      "bodyId": 906212,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 274,
+      "outgoing_c_star": 173,
+      "retained_fraction": 0.6313868613138686,
+      "below_half": false
+    },
+    {
+      "bodyId": 906510,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 711,
+      "outgoing_c_star": 605,
+      "retained_fraction": 0.8509142053445851,
+      "below_half": false
+    },
+    {
+      "bodyId": 906511,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 471,
+      "outgoing_c_star": 366,
+      "retained_fraction": 0.7770700636942676,
+      "below_half": false
+    },
+    {
+      "bodyId": 906619,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 267,
+      "outgoing_c_star": 182,
+      "retained_fraction": 0.6816479400749064,
+      "below_half": false
+    },
+    {
+      "bodyId": 909026,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 742,
+      "outgoing_c_star": 640,
+      "retained_fraction": 0.862533692722372,
+      "below_half": false
+    },
+    {
+      "bodyId": 909562,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 418,
+      "outgoing_c_star": 318,
+      "retained_fraction": 0.7607655502392344,
+      "below_half": false
+    },
+    {
+      "bodyId": 909640,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 378,
+      "outgoing_c_star": 238,
+      "retained_fraction": 0.6296296296296297,
+      "below_half": false
+    },
+    {
+      "bodyId": 909642,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 390,
+      "outgoing_c_star": 294,
+      "retained_fraction": 0.7538461538461538,
+      "below_half": false
+    },
+    {
+      "bodyId": 911140,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 528,
+      "outgoing_c_star": 410,
+      "retained_fraction": 0.7765151515151515,
+      "below_half": false
+    },
+    {
+      "bodyId": 911311,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 655,
+      "outgoing_c_star": 542,
+      "retained_fraction": 0.8274809160305343,
+      "below_half": false
+    },
+    {
+      "bodyId": 911912,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 810,
+      "outgoing_c_star": 669,
+      "retained_fraction": 0.825925925925926,
+      "below_half": false
+    },
+    {
+      "bodyId": 912208,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 240,
+      "outgoing_c_star": 167,
+      "retained_fraction": 0.6958333333333333,
+      "below_half": false
+    },
+    {
+      "bodyId": 912279,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 496,
+      "outgoing_c_star": 417,
+      "retained_fraction": 0.8407258064516129,
+      "below_half": false
+    },
+    {
+      "bodyId": 912374,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 563,
+      "outgoing_c_star": 480,
+      "retained_fraction": 0.8525754884547069,
+      "below_half": false
+    },
+    {
+      "bodyId": 912626,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 338,
+      "outgoing_c_star": 246,
+      "retained_fraction": 0.727810650887574,
+      "below_half": false
+    },
+    {
+      "bodyId": 912749,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 402,
+      "outgoing_c_star": 286,
+      "retained_fraction": 0.7114427860696517,
+      "below_half": false
+    },
+    {
+      "bodyId": 912917,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 390,
+      "outgoing_c_star": 312,
+      "retained_fraction": 0.8,
+      "below_half": false
+    },
+    {
+      "bodyId": 913245,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 203,
+      "outgoing_c_star": 116,
+      "retained_fraction": 0.5714285714285714,
+      "below_half": false
+    },
+    {
+      "bodyId": 914268,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 355,
+      "outgoing_c_star": 274,
+      "retained_fraction": 0.7718309859154929,
+      "below_half": false
+    },
+    {
+      "bodyId": 936595,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 246,
+      "outgoing_c_star": 148,
+      "retained_fraction": 0.6016260162601627,
+      "below_half": false
+    },
+    {
+      "bodyId": 1050515057,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 78,
+      "outgoing_c_star": 32,
+      "retained_fraction": 0.41025641025641024,
+      "below_half": true
+    },
+    {
+      "bodyId": 1054086974,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 330,
+      "outgoing_c_star": 227,
+      "retained_fraction": 0.6878787878787879,
+      "below_half": false
+    },
+    {
+      "bodyId": 1058082355,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 94,
+      "outgoing_c_star": 23,
+      "retained_fraction": 0.24468085106382978,
+      "below_half": true
+    },
+    {
+      "bodyId": 1061606088,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 141,
+      "outgoing_c_star": 65,
+      "retained_fraction": 0.46099290780141844,
+      "below_half": true
+    },
+    {
+      "bodyId": 1066208706,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 138,
+      "outgoing_c_star": 50,
+      "retained_fraction": 0.36231884057971014,
+      "below_half": true
+    },
+    {
+      "bodyId": 1115836524,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 130,
+      "outgoing_c_star": 69,
+      "retained_fraction": 0.5307692307692308,
+      "below_half": false
+    },
+    {
+      "bodyId": 1210579126,
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 110,
+      "outgoing_c_star": 52,
+      "retained_fraction": 0.4727272727272727,
+      "below_half": true
+    },
+    {
+      "bodyId": 54104,
+      "label": "bitter",
+      "outgoing_0_5": 416,
+      "outgoing_c_star": 231,
+      "retained_fraction": 0.5552884615384616,
+      "below_half": false
+    },
+    {
+      "bodyId": 81741,
+      "label": "bitter",
+      "outgoing_0_5": 738,
+      "outgoing_c_star": 573,
+      "retained_fraction": 0.7764227642276422,
+      "below_half": false
+    },
+    {
+      "bodyId": 107241,
+      "label": "bitter",
+      "outgoing_0_5": 1127,
+      "outgoing_c_star": 980,
+      "retained_fraction": 0.8695652173913043,
+      "below_half": false
+    },
+    {
+      "bodyId": 115666,
+      "label": "bitter",
+      "outgoing_0_5": 367,
+      "outgoing_c_star": 221,
+      "retained_fraction": 0.6021798365122616,
+      "below_half": false
+    },
+    {
+      "bodyId": 125111,
+      "label": "bitter",
+      "outgoing_0_5": 807,
+      "outgoing_c_star": 652,
+      "retained_fraction": 0.8079306071871127,
+      "below_half": false
+    },
+    {
+      "bodyId": 139178,
+      "label": "bitter",
+      "outgoing_0_5": 420,
+      "outgoing_c_star": 259,
+      "retained_fraction": 0.6166666666666667,
+      "below_half": false
+    },
+    {
+      "bodyId": 144334,
+      "label": "bitter",
+      "outgoing_0_5": 372,
+      "outgoing_c_star": 239,
+      "retained_fraction": 0.6424731182795699,
+      "below_half": false
+    },
+    {
+      "bodyId": 154544,
+      "label": "bitter",
+      "outgoing_0_5": 400,
+      "outgoing_c_star": 244,
+      "retained_fraction": 0.61,
+      "below_half": false
+    },
+    {
+      "bodyId": 163395,
+      "label": "bitter",
+      "outgoing_0_5": 327,
+      "outgoing_c_star": 178,
+      "retained_fraction": 0.5443425076452599,
+      "below_half": false
+    },
+    {
+      "bodyId": 168492,
+      "label": "bitter",
+      "outgoing_0_5": 380,
+      "outgoing_c_star": 203,
+      "retained_fraction": 0.5342105263157895,
+      "below_half": false
+    },
+    {
+      "bodyId": 173462,
+      "label": "bitter",
+      "outgoing_0_5": 381,
+      "outgoing_c_star": 246,
+      "retained_fraction": 0.6456692913385826,
+      "below_half": false
+    },
+    {
+      "bodyId": 208885,
+      "label": "bitter",
+      "outgoing_0_5": 340,
+      "outgoing_c_star": 180,
+      "retained_fraction": 0.5294117647058824,
+      "below_half": false
+    },
+    {
+      "bodyId": 256844,
+      "label": "bitter",
+      "outgoing_0_5": 976,
+      "outgoing_c_star": 814,
+      "retained_fraction": 0.8340163934426229,
+      "below_half": false
+    },
+    {
+      "bodyId": 375038,
+      "label": "bitter",
+      "outgoing_0_5": 102,
+      "outgoing_c_star": 14,
+      "retained_fraction": 0.13725490196078433,
+      "below_half": true
+    },
+    {
+      "bodyId": 511882,
+      "label": "bitter",
+      "outgoing_0_5": 997,
+      "outgoing_c_star": 882,
+      "retained_fraction": 0.8846539618856569,
+      "below_half": false
+    },
+    {
+      "bodyId": 514546,
+      "label": "bitter",
+      "outgoing_0_5": 911,
+      "outgoing_c_star": 797,
+      "retained_fraction": 0.8748627881448957,
+      "below_half": false
+    },
+    {
+      "bodyId": 514547,
+      "label": "bitter",
+      "outgoing_0_5": 835,
+      "outgoing_c_star": 709,
+      "retained_fraction": 0.8491017964071856,
+      "below_half": false
+    },
+    {
+      "bodyId": 517255,
+      "label": "bitter",
+      "outgoing_0_5": 572,
+      "outgoing_c_star": 429,
+      "retained_fraction": 0.75,
+      "below_half": false
+    },
+    {
+      "bodyId": 518112,
+      "label": "bitter",
+      "outgoing_0_5": 827,
+      "outgoing_c_star": 678,
+      "retained_fraction": 0.8198307134220073,
+      "below_half": false
+    },
+    {
+      "bodyId": 522746,
+      "label": "bitter",
+      "outgoing_0_5": 913,
+      "outgoing_c_star": 772,
+      "retained_fraction": 0.8455640744797371,
+      "below_half": false
+    },
+    {
+      "bodyId": 522752,
+      "label": "bitter",
+      "outgoing_0_5": 991,
+      "outgoing_c_star": 853,
+      "retained_fraction": 0.8607467204843592,
+      "below_half": false
+    },
+    {
+      "bodyId": 522753,
+      "label": "bitter",
+      "outgoing_0_5": 996,
+      "outgoing_c_star": 837,
+      "retained_fraction": 0.8403614457831325,
+      "below_half": false
+    },
+    {
+      "bodyId": 522754,
+      "label": "bitter",
+      "outgoing_0_5": 1007,
+      "outgoing_c_star": 850,
+      "retained_fraction": 0.8440913604766633,
+      "below_half": false
+    },
+    {
+      "bodyId": 522761,
+      "label": "bitter",
+      "outgoing_0_5": 985,
+      "outgoing_c_star": 797,
+      "retained_fraction": 0.8091370558375635,
+      "below_half": false
+    },
+    {
+      "bodyId": 522762,
+      "label": "bitter",
+      "outgoing_0_5": 889,
+      "outgoing_c_star": 780,
+      "retained_fraction": 0.8773903262092239,
+      "below_half": false
+    },
+    {
+      "bodyId": 522841,
+      "label": "bitter",
+      "outgoing_0_5": 1190,
+      "outgoing_c_star": 1009,
+      "retained_fraction": 0.8478991596638655,
+      "below_half": false
+    },
+    {
+      "bodyId": 533618,
+      "label": "bitter",
+      "outgoing_0_5": 786,
+      "outgoing_c_star": 630,
+      "retained_fraction": 0.8015267175572519,
+      "below_half": false
+    },
+    {
+      "bodyId": 549024,
+      "label": "bitter",
+      "outgoing_0_5": 302,
+      "outgoing_c_star": 136,
+      "retained_fraction": 0.4503311258278146,
+      "below_half": true
+    },
+    {
+      "bodyId": 556797,
+      "label": "bitter",
+      "outgoing_0_5": 437,
+      "outgoing_c_star": 309,
+      "retained_fraction": 0.7070938215102975,
+      "below_half": false
+    },
+    {
+      "bodyId": 557937,
+      "label": "bitter",
+      "outgoing_0_5": 279,
+      "outgoing_c_star": 166,
+      "retained_fraction": 0.5949820788530465,
+      "below_half": false
+    },
+    {
+      "bodyId": 912379,
+      "label": "bitter",
+      "outgoing_0_5": 825,
+      "outgoing_c_star": 647,
+      "retained_fraction": 0.7842424242424243,
+      "below_half": false
+    },
+    {
+      "bodyId": 140334446,
+      "label": "bitter",
+      "outgoing_0_5": 334,
+      "outgoing_c_star": 200,
+      "retained_fraction": 0.5988023952095808,
+      "below_half": false
+    },
+    {
+      "bodyId": 144295263,
+      "label": "bitter",
+      "outgoing_0_5": 75,
+      "outgoing_c_star": 23,
+      "retained_fraction": 0.30666666666666664,
+      "below_half": true
+    },
+    {
+      "bodyId": 304136793,
+      "label": "bitter",
+      "outgoing_0_5": 625,
+      "outgoing_c_star": 484,
+      "retained_fraction": 0.7744,
+      "below_half": false
+    },
+    {
+      "bodyId": 324178811,
+      "label": "bitter",
+      "outgoing_0_5": 740,
+      "outgoing_c_star": 533,
+      "retained_fraction": 0.7202702702702702,
+      "below_half": false
+    },
+    {
+      "bodyId": 602736959,
+      "label": "bitter",
+      "outgoing_0_5": 98,
+      "outgoing_c_star": 15,
+      "retained_fraction": 0.15306122448979592,
+      "below_half": true
+    },
+    {
+      "bodyId": 772366874,
+      "label": "bitter",
+      "outgoing_0_5": 436,
+      "outgoing_c_star": 246,
+      "retained_fraction": 0.5642201834862385,
+      "below_half": false
+    },
+    {
+      "bodyId": 911389008,
+      "label": "bitter",
+      "outgoing_0_5": 227,
+      "outgoing_c_star": 84,
+      "retained_fraction": 0.3700440528634361,
+      "below_half": true
+    }
+  ],
+  "fbm_set_totals": [
+    {
+      "label": "fbm_sugar_labellar",
+      "outgoing_0_5": 14950,
+      "outgoing_c_star": 11739,
+      "retained_fraction": 0.7852173913043479,
+      "below_half": false,
+      "cells": 34
+    },
+    {
+      "label": "fbm_sugar_pharyngeal",
+      "outgoing_0_5": 19661,
+      "outgoing_c_star": 17792,
+      "retained_fraction": 0.9049387111540613,
+      "below_half": false,
+      "cells": 8
+    },
+    {
+      "label": "fbm_sugar_tarsal",
+      "outgoing_0_5": 58464,
+      "outgoing_c_star": 43556,
+      "retained_fraction": 0.7450054734537493,
+      "below_half": false,
+      "cells": 162
+    },
+    {
+      "label": "bitter",
+      "outgoing_0_5": 23430,
+      "outgoing_c_star": 17900,
+      "retained_fraction": 0.7639778062313274,
+      "below_half": false,
+      "cells": 38
+    }
+  ],
+  "stop_triggered": false,
+  "sources": [
+    {
+      "path": "data/malecns/derived/connectivity.parquet",
+      "bytes": 136299562,
+      "sha256": "b31ae9884cba41fedac392e4c80bada5c0c8a33efb9258b0e7308a1bbcbfa6f3"
+    },
+    {
+      "path": "data/malecns/derived/fbm/connectivity.parquet",
+      "bytes": 32686742,
+      "sha256": "240976c11b7f6121c7da4319e6a502f255b33f04d6f4cfbc8aa3b99ecd0d01c8"
+    },
+    {
+      "path": "data/malecns/cells.json",
+      "bytes": 20697,
+      "sha256": "f29dd1511e5484d70062cf44d448acfa63e8ef89b49ab7cc281108e5be234c99"
+    },
+    {
+      "path": "data/malecns/cells_fbm.json",
+      "bytes": 11785,
+      "sha256": "544af50ab88f27ba880182a710105051c82995e957c39c584e0e994b86b07297"
+    },
+    {
+      "path": "data/malecns/derived/neuron_index.csv",
+      "bytes": 27521575,
+      "sha256": "a5727228e839339f8045f8a431f02b4900aed40109684fa7e6ed2f21a620cbe9"
+    },
+    {
+      "path": "data/malecns/substrate_record_fbm.json",
+      "bytes": 101399,
+      "sha256": "245be88e4c434964fd6f4dd80c89fc6a876a09498bad6aa0210241d3668b3130"
+    }
+  ],
+  "builder": {
+    "path": "sim/malecns/fbm_output_retention.py",
+    "bytes": 4483,
+    "sha256": "75dc7f8410134f21acb94290d3485c1c6b80dedaff3dea26fa082765a29411bd"
+  }
+}

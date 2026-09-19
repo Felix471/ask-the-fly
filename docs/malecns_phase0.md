@@ -1030,3 +1030,248 @@ its historical key names; both M1i protocols explicitly declare L10331 primary a
 R16949 secondary. Substrate differences and retention counts follow at the substrate checkpoint,
 including autapse removal; the existing roster's 6,242,118 ≥5 edges is a prior
 audit count, not a newly built M1i graph count.
+
+### M1i substrate checkpoint — 2026-09-18
+
+Built against declaration commit `db7ae6e`; the two protocols, `cells_fbm.json`, and the preceding pre-declaration remain unchanged. No simulation trial has run. The substrate and retention artifacts are complete; Windows checks pass. Both compile-only plans were then built in WSL (Brian2 2.9.0): one network each, zero simulated seconds, zero spikes. The plans are recorded in [fbm_replication_plan.json](../data/malecns/fbm_replication_plan.json) and [fbm_phase0_plan.json](../data/malecns/fbm_phase0_plan.json): 8 workers from WSL 60.0 / 59.6 GiB available and 95.1 GiB host free, 5.4 GiB budget per worker (over 1.5x the M1 peak).
+
+[Substrate record](../data/malecns/substrate_record_fbm.json) and [outgoing retention](../data/malecns/m1i_output_retention.json) contain file hashes, source records, and per-cell values. Large derived graphs stay ignored. Both builders refuse to overwrite existing outputs; their `--verify` modes re-hash the recorded files without rebuilding the graphs.
+
+#### Counts and configuration comparison
+
+| Quantity | This substrate | Their reported configuration |
+|---|---:|---:|
+| Neurons | 166,700 | 176,422 |
+| Directed edges | 6,242,085 | 6,287,749 |
+| Synapses | 89,859,938 | 90,296,905 |
+| Integration dt (ms) | 0.1 | 0.5 |
+
+The roster and indices are the unchanged M0 superclass-non-null whole-CNS roster. The roster difference (theirs minus ours) is 9,722 bodies. Our final edge/synapse differences (theirs minus ours) are 45,664 / 436,967. No explanation is assigned to the neuPrint-fetch versus GCS-flat-file residual.
+
+| Raw GCS reconciliation at >=5 | Edges |
+|---|---:|
+| All raw rows at >=5 | 7,622,864 |
+| At least one endpoint outside our roster | 1,380,746 |
+| On-roster before autapse removal | 6,242,118 |
+| On-roster autapses removed | 33 |
+| On-roster non-autapses retained | 6,242,085 |
+| Autapses across all raw >=5 rows (includes 7 outside roster) | 40 |
+
+Raw >=5 rows contain 97,991,093 synapses before autapse removal. Relative to all raw >=5 non-autapse rows, their reported counts minus the flat-file counts are -1,335,075 edges and -7,693,794 synapses. The retained raw endpoints, order and weights reconcile exactly to every row in the new graph.
+
+| Superclass-null annotation status | Bodies |
+|---|---:|
+| Orphan | 15,893 |
+| Glia | 11,864 |
+| Unimportant | 10,751 |
+| (missing) | 3,470 |
+| Assign | 1,832 |
+| Anchor | 551 |
+| Traced | 516 |
+
+The source synapse-per-edge histogram is recorded in full in the substrate record; threshold actions below precede the separate autapse removal.
+
+| Synapses per edge | Edges | Action |
+|---|---:|---|
+| 1 | 10,299,701 | Removed |
+| 2 | 4,762,806 | Removed |
+| 3 | 2,621,228 | Removed |
+| 4 | 1,657,085 | Removed |
+| >=5 | 6,242,118 | Kept before removing 33 autapses |
+
+The recurrent weight is `0.65 * 0.275` mV (Python representation `0.17875000000000002`); the external event kick remains that value times 250 (`44.68750000000001` mV). All other frozen Shiu parameters remain unchanged. Run (b) records each MN9 over 1 s, their two-cell mean, and 20 x 50 ms two-cell mean bins; their reported readout is the two-cell mean per 50 ms tick in one 600 ms run (30-90 / 0 / 0 Hz). Run (a) evaluates the frozen gates on L10331, with R16949 recorded.
+
+#### Sign-rule differences and KC file
+
+Their sign rule would change 8,278 roster-neuron signs: 7,891 consensus-histamine neurons plus 387 unresolved-consensus neurons receiving negative fallback labels. Our consensus-only signs are unchanged. Of 3,177 unclear/missing consensus labels, the counterfactual fallback assignments are:
+
+| Resulting label | predictedNt confidence >=0.5 fallback | Subsequent celltypePredictedNt fallback |
+|---|---:|---:|
+| acetylcholine | 329 | 0 |
+| dopamine | 3 | 0 |
+| gaba | 53 | 0 |
+| glutamate | 320 | 0 |
+| histamine | 14 | 0 |
+| octopamine | 31 | 8 |
+| serotonin | 327 | 22 |
+
+The KC file preserves every edge, `Connectivity`, and `Excitatory` value. Only `Excitatory x Connectivity` becomes float64, with a 0.25 multiplier on the 70,931 edges / 906,584 synapses targeting the 4,064 roster bodies annotated `class == Kenyon_Cell`. Both completeness copies are byte-identical to M0; the shared neuron index is reused.
+
+#### Outgoing retention
+
+**Recorded, not a stop condition; no flag stops anything.** Counts are unsigned synapse totals on the same whole-CNS roster. Fractions are ratios of totals. The JSON retains the M1h field names: `*_0_5` means the >=1 baseline and `*_c_star` means >=5 without autapses here; no synapse-confidence threshold has changed.
+
+| Set | Cells | Outgoing >=1 | Outgoing >=5 | Retained | Below half |
+|---|---:|---:|---:|---:|---|
+| sugar | 17 | 6,674 | 5,176 | 77.55% | No |
+| bitter | 38 | 23,430 | 17,900 | 76.40% | No |
+| water | 17 | 4,633 | 3,434 | 74.12% | No |
+| ir94e | 19 | 7,052 | 5,597 | 79.37% | No |
+| fbm_sugar_labellar | 34 | 14,950 | 11,739 | 78.52% | No |
+| fbm_sugar_pharyngeal | 8 | 19,661 | 17,792 | 90.49% | No |
+| fbm_sugar_tarsal | 162 | 58,464 | 43,556 | 74.50% | No |
+| bitter | 38 | 23,430 | 17,900 | 76.40% | No |
+
+Both MN9s and all 91 M1 input cells:
+
+| Cell / set | Body ID | Outgoing >=1 | Outgoing >=5 | Retained |
+|---|---:|---:|---:|---:|
+| MN9_L_primary | 10331 | 280 | 51 | 18.21% |
+| MN9_R_secondary | 16949 | 445 | 203 | 45.62% |
+| sugar | 71254 | 779 | 668 | 85.75% |
+| sugar | 78240 | 425 | 343 | 80.71% |
+| sugar | 85806 | 791 | 674 | 85.21% |
+| sugar | 159772 | 422 | 344 | 81.52% |
+| sugar | 180314 | 178 | 88 | 49.44% |
+| sugar | 190769 | 353 | 240 | 67.99% |
+| sugar | 261450 | 354 | 261 | 73.73% |
+| sugar | 262567 | 266 | 134 | 50.38% |
+| sugar | 272263 | 296 | 209 | 70.61% |
+| sugar | 512551 | 876 | 799 | 91.21% |
+| sugar | 531237 | 414 | 316 | 76.33% |
+| sugar | 933317 | 1,024 | 946 | 92.38% |
+| sugar | 158893964 | 107 | 35 | 32.71% |
+| sugar | 174444965 | 42 | 13 | 30.95% |
+| sugar | 349137284 | 64 | 5 | 7.81% |
+| sugar | 475202322 | 149 | 43 | 28.86% |
+| sugar | 766547228 | 134 | 58 | 43.28% |
+| bitter | 54104 | 416 | 231 | 55.53% |
+| bitter | 81741 | 738 | 573 | 77.64% |
+| bitter | 107241 | 1,127 | 980 | 86.96% |
+| bitter | 115666 | 367 | 221 | 60.22% |
+| bitter | 125111 | 807 | 652 | 80.79% |
+| bitter | 139178 | 420 | 259 | 61.67% |
+| bitter | 144334 | 372 | 239 | 64.25% |
+| bitter | 154544 | 400 | 244 | 61.00% |
+| bitter | 163395 | 327 | 178 | 54.43% |
+| bitter | 168492 | 380 | 203 | 53.42% |
+| bitter | 173462 | 381 | 246 | 64.57% |
+| bitter | 208885 | 340 | 180 | 52.94% |
+| bitter | 256844 | 976 | 814 | 83.40% |
+| bitter | 375038 | 102 | 14 | 13.73% |
+| bitter | 511882 | 997 | 882 | 88.47% |
+| bitter | 514546 | 911 | 797 | 87.49% |
+| bitter | 514547 | 835 | 709 | 84.91% |
+| bitter | 517255 | 572 | 429 | 75.00% |
+| bitter | 518112 | 827 | 678 | 81.98% |
+| bitter | 522746 | 913 | 772 | 84.56% |
+| bitter | 522752 | 991 | 853 | 86.07% |
+| bitter | 522753 | 996 | 837 | 84.04% |
+| bitter | 522754 | 1,007 | 850 | 84.41% |
+| bitter | 522761 | 985 | 797 | 80.91% |
+| bitter | 522762 | 889 | 780 | 87.74% |
+| bitter | 522841 | 1,190 | 1,009 | 84.79% |
+| bitter | 533618 | 786 | 630 | 80.15% |
+| bitter | 549024 | 302 | 136 | 45.03% |
+| bitter | 556797 | 437 | 309 | 70.71% |
+| bitter | 557937 | 279 | 166 | 59.50% |
+| bitter | 912379 | 825 | 647 | 78.42% |
+| bitter | 140334446 | 334 | 200 | 59.88% |
+| bitter | 144295263 | 75 | 23 | 30.67% |
+| bitter | 304136793 | 625 | 484 | 77.44% |
+| bitter | 324178811 | 740 | 533 | 72.03% |
+| bitter | 602736959 | 98 | 15 | 15.31% |
+| bitter | 772366874 | 436 | 246 | 56.42% |
+| bitter | 911389008 | 227 | 84 | 37.00% |
+| water | 136183 | 392 | 329 | 83.93% |
+| water | 140619 | 295 | 214 | 72.54% |
+| water | 141663 | 324 | 254 | 78.40% |
+| water | 160435 | 485 | 389 | 80.21% |
+| water | 166190 | 401 | 319 | 79.55% |
+| water | 167663 | 334 | 258 | 77.25% |
+| water | 178913 | 306 | 230 | 75.16% |
+| water | 183061 | 369 | 296 | 80.22% |
+| water | 187776 | 357 | 271 | 75.91% |
+| water | 199308 | 227 | 141 | 62.11% |
+| water | 203234 | 266 | 206 | 77.44% |
+| water | 374701 | 97 | 31 | 31.96% |
+| water | 518542 | 290 | 235 | 81.03% |
+| water | 388541892 | 239 | 162 | 67.78% |
+| water | 456838775 | 78 | 21 | 26.92% |
+| water | 553738738 | 65 | 35 | 53.85% |
+| water | 786482749 | 108 | 43 | 39.81% |
+| ir94e | 44816 | 1,097 | 922 | 84.05% |
+| ir94e | 111660 | 487 | 401 | 82.34% |
+| ir94e | 137497 | 635 | 549 | 86.46% |
+| ir94e | 154359 | 465 | 396 | 85.16% |
+| ir94e | 175572 | 390 | 321 | 82.31% |
+| ir94e | 200001 | 365 | 299 | 81.92% |
+| ir94e | 209688 | 560 | 464 | 82.86% |
+| ir94e | 232730 | 131 | 82 | 62.60% |
+| ir94e | 534361 | 594 | 503 | 84.68% |
+| ir94e | 908747 | 536 | 468 | 87.31% |
+| ir94e | 919429 | 110 | 57 | 51.82% |
+| ir94e | 214700177 | 446 | 346 | 77.58% |
+| ir94e | 418840426 | 163 | 119 | 73.01% |
+| ir94e | 491986845 | 233 | 167 | 71.67% |
+| ir94e | 551057545 | 163 | 105 | 64.42% |
+| ir94e | 633272971 | 149 | 76 | 51.01% |
+| ir94e | 792429427 | 160 | 95 | 59.38% |
+| ir94e | 912111327 | 262 | 177 | 67.56% |
+| ir94e | 947005552 | 106 | 50 | 47.17% |
+
+The JSON additionally records all 242 replication input cells individually. The following 20 partners are fixed by largest direct input into L10331 in the >=1 graph, ties by ascending body ID; there is no reranking after filtering.
+
+| Rank | Partner body | All outputs >=1 | All outputs >=5 | Retained | Into L10331 >=1 | Into L10331 >=5 | Last-hop retained |
+|---:|---:|---:|---:|---:|---:|---:|---:|
+| 1 | 10833 | 3,054 | 2,691 | 88.11% | 464 | 464 | 100.00% |
+| 2 | 10881 | 2,087 | 1,854 | 88.84% | 359 | 359 | 100.00% |
+| 3 | 13754 | 1,442 | 1,290 | 89.46% | 357 | 357 | 100.00% |
+| 4 | 12851 | 2,850 | 2,655 | 93.16% | 351 | 351 | 100.00% |
+| 5 | 26764 | 3,970 | 3,688 | 92.90% | 348 | 348 | 100.00% |
+| 6 | 523590 | 2,548 | 2,193 | 86.07% | 266 | 266 | 100.00% |
+| 7 | 10849 | 6,418 | 5,969 | 93.00% | 241 | 241 | 100.00% |
+| 8 | 513655 | 2,040 | 1,905 | 93.38% | 214 | 214 | 100.00% |
+| 9 | 14891 | 2,278 | 2,123 | 93.20% | 198 | 198 | 100.00% |
+| 10 | 17782 | 1,877 | 1,718 | 91.53% | 187 | 187 | 100.00% |
+| 11 | 28181 | 1,865 | 1,639 | 87.88% | 177 | 177 | 100.00% |
+| 12 | 11755 | 6,124 | 5,719 | 93.39% | 160 | 160 | 100.00% |
+| 13 | 523679 | 2,450 | 2,127 | 86.82% | 142 | 142 | 100.00% |
+| 14 | 16142 | 2,098 | 1,932 | 92.09% | 136 | 136 | 100.00% |
+| 15 | 12752 | 4,754 | 4,308 | 90.62% | 101 | 101 | 100.00% |
+| 16 | 12364 | 5,088 | 4,615 | 90.70% | 96 | 96 | 100.00% |
+| 17 | 10673 | 5,602 | 4,442 | 79.29% | 92 | 92 | 100.00% |
+| 18 | 238142 | 1,116 | 996 | 89.25% | 92 | 92 | 100.00% |
+| 19 | 13402 | 2,156 | 1,972 | 91.47% | 78 | 78 | 100.00% |
+| 20 | 522702 | 2,490 | 2,257 | 90.64% | 76 | 76 | 100.00% |
+
+These fixed partners retain 4,135/4,135 last-hop synapses (100.00%). This remains recorded, not a stop condition.
+
+#### Runner plans and verification
+
+Both `--check` modes validate the entire protocol against the frozen declaration commit, cells/layouts, seeds, condition lists and substrate/retention hashes without importing Brian2. Both `--plan` modes are implemented to build exactly one network, call only `net.run(0*second)`, assert zero elapsed simulated time and zero spikes, then write a source-hashed plan with live host/WSL RAM and `phase0.choose_workers` output. The launch path chooses workers again from live RAM and refuses existing run directories. Both plans compiled in WSL with a Windows-measured `--host-free-kib` value; each plan records the source-file hashes that the launch re-checks, and the launch measures memory again.
+
+| Run | Poisson units | Conditions | Planned trials | Seeds | Windows check | WSL compile |
+|---|---:|---:|---:|---|---|---|
+| b | 242 | 4 | 95 | 20260910-20260939; KC first five only | PASS | PASS (compiled, 8 workers) |
+| a | 91 | 16 | 480 | 20260910-20260939 | PASS | PASS (compiled, 8 workers) |
+
+Run (b) channel order is labellar, pharyngeal, tarsal, bitter, with ascending body IDs in each channel. Run (a) preserves sugar, bitter, water, ir94e order. The replication runner stores per-cell rates/latencies, bilateral 1 s and 50 ms rates, whole-network counts, source spike counts, raw network/Poisson events and peak RSS. The run-a runner imports the existing trial routine and A-D/S evaluators; both summaries include whole-network median/range by condition.
+
+| Run b condition | Labellar Hz | Pharyngeal Hz | Tarsal Hz | Bitter Hz | Trials | Graph |
+|---|---:|---:|---:|---:|---:|---|
+| fbm_sugar | 120 | 100 | 80 | 0 | 30 | >=5 |
+| fbm_bitter | 0 | 0 | 0 | 120 | 30 | >=5 |
+| fbm_both | 120 | 100 | 80 | 120 | 30 | >=5 |
+| fbm_sugar_kc | 120 | 100 | 80 | 0 | 5 | KC gain 0.25 |
+
+| Run a condition | Sugar set | Sugar Hz | Bitter Hz | Trials |
+|---|---|---:|---:|---:|
+| A_s25_b0 | sugar | 25 | 0 | 30 |
+| A_s50_b0 | sugar | 50 | 0 | 30 |
+| A_s100_b0 | sugar | 100 | 0 | 30 |
+| A_s200_b0 | sugar | 200 | 0 | 30 |
+| B_s200_b0 | sugar | 200 | 0 | 30 |
+| B_s200_b25 | sugar | 200 | 25 | 30 |
+| B_s200_b50 | sugar | 200 | 50 | 30 |
+| B_s200_b100 | sugar | 200 | 100 | 30 |
+| B_s200_b200 | sugar | 200 | 200 | 30 |
+| C_s0_b25 | sugar | 0 | 25 | 30 |
+| C_s0_b50 | sugar | 0 | 50 | 30 |
+| C_s0_b100 | sugar | 0 | 100 | 30 |
+| C_s0_b200 | sugar | 0 | 200 | 30 |
+| D_s0_b0 | sugar | 0 | 0 | 30 |
+| AP_sugar_120 | sugar | 120 | 0 | 30 |
+| AP_sugar_lb3c_120 | sugar_lb3c | 120 | 0 | 30 |
+
+Verification: 15 new M1i tests and all 83 male tests pass; all 348 main Python tests pass; release validation passes. The substrate/retention hash verification and both Windows dry checks pass. No result claim or gate outcome is assigned. Stop at the substrate checkpoint before trial execution.
