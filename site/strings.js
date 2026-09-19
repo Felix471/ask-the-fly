@@ -192,14 +192,15 @@ export const STRINGS = {
       "label": "Why they may differ"
     },
     "maleNote": {
-      "brain": "MaleCNS v1.0 soma positions, anterior view; no neuropil outlines. {n} indexed neurons without a recorded soma or entry point are drawn below the brain; these positions are not anatomical.",
+      "brain": "MaleCNS v1.0 soma positions, anterior view. {n} neurons without a recorded soma or entry point are placed at their synapse centroid.",
       "replay": "This replay is grid trial 0, one of the 30 trials behind the male score; not a live simulation.",
       "weight": "Male synaptic weight: 0.17875 mV = 0.65 × Shiu’s, a calibration from the independent fly-brain-minecraft project, replicated by us.",
       "bitterGate": "One of our four gates fails: bitter alone at 25 Hz gives 1.07 Hz MN9, above our 1.0 Hz limit but below our 5 Hz display threshold.",
       "state": "In our designed depiction, this brain usually extends the proboscis without the mouth following for these dishes (the three-cell MN11D mean reaches our designed 5 Hz threshold in 9 of 400 cells), so “proboscis only” is its usual state here, not an oddity.",
       "responseDesign": "State: 30-trial means of primary MN9 and three-cell MN11D, with our 5 Hz threshold. MN11V/right MN9 do not decide it. Movements, emotions and speech are designed, not observed feeding.",
       "colMn11D": "MN11D (three-cell mean)",
-      "legendNamed": "named readout"
+      "legendNamed": "named readout",
+      "outlines": "Outlines: MaleCNS v1.0 brain ROI meshes (fullbrain-roi-v4, Janelia FlyEM, CC BY 4.0), anterior projection"
     },
     "tableFly": {
       "female": "Female fly · dish scores",
@@ -209,7 +210,27 @@ export const STRINGS = {
       "flyLine": "{fly}: {dish}",
       "disagree": "Different picks; this pipeline cannot separate sex from other model differences."
     },
-    "howMale": "You can also ask a second, independently computed male fly. Its brain reconstruction, synaptic weight and stimulus sets differ from the female’s. Each fly reads its own table and chooses independently; their scores and choices are never pooled. The dish taste levels are our shared estimates, and the female results stay unchanged."
+    "howMale": "You can also ask a second, independently computed male fly. Its brain reconstruction, synaptic weight and stimulus sets differ from the female’s. Each fly reads its own table and chooses independently; their scores and choices are never pooled. The dish taste levels are our shared estimates, and the female results stay unchanged.",
+    "panelStatus": {
+      "sceneIdle": "The {fly} is deciding…",
+      "sceneNone": "The {fly} hasn't tried any of these",
+      "sceneTasting": "The {fly} is trying {dish}…",
+      "sceneTie": "The {fly} can't decide between these",
+      "sceneWinner": "The {fly} picks {pick}",
+      "sceneNoResponse": "The {fly} leaves.",
+      "sceneOpposite": "The {fly} took {fly_pick}. {human_pick} is yours!",
+      "sceneOppositeMany": "The {fly} took {fly_pick}. The rest is yours.",
+      "stateSceneError": "The {fly} animation could not finish. The scores are ready below."
+    },
+    "panelVerdict": {
+      "verdictAsk": "The {fly} picks",
+      "verdictNone": "The {fly} hasn't tried any of these yet.",
+      "verdictTie": "The {fly} calls it a tie:",
+      "verdictOpposite": "The {fly} took {fly_pick}. {human_pick} is yours!",
+      "verdictOppositeMany": "The {fly} took {fly_pick}. The rest is yours.",
+      "oppositeLeast": "The {fly}'s least favorite: {lowest}",
+      "lowInterest": "The {fly} didn't care for much of any of these. This one was just the least uninteresting."
+    }
   },
   "zh": {
     "add": "添加",
@@ -402,14 +423,15 @@ export const STRINGS = {
       "label": "为什么会选得不一样"
     },
     "maleNote": {
-      "brain": "MaleCNS v1.0 胞体位置，前视图；不显示神经髓轮廓。{n} 个回放索引内的神经元没有记录胞体或入脑点，画在脑下方；这些位置不代表真实解剖位置。",
+      "brain": "MaleCNS v1.0 胞体位置，前视图。{n} 个未记录胞体或入脑点的神经元放在其突触位点的中位数位置。",
       "replay": "这段回放是网格试验 0，属于雄蝇分数所依据的 30 次试验之一；不是实时仿真。",
       "weight": "雄蝇突触权重：0.17875 mV，即 Shiu 的 0.65 倍；这套标定来自独立项目 fly-brain-minecraft，我们做了复现。",
       "bitterGate": "四项门槛有一项未通过：单独以 25 Hz 刺激苦味，MN9 为 1.07 Hz，高于我们设定的 1.0 Hz 上限，但低于 5 Hz 显示阈值。",
       "state": "这只果蝇面对这份菜单，多数时候只伸喙、嘴不跟上（MN11D 三个细胞的均值在 400 格里只有 9 格过 5 Hz），所以“只伸了喙”是它的常态，不是异常。",
       "responseDesign": "状态由主读出 MN9 与 MN11D 三细胞的 30 次均值及我们设定的 5 Hz 阈值决定。MN11V、右 MN9 不参与判定。动作、情绪和台词是设计，不是观测到的进食行为。",
       "colMn11D": "MN11D（三细胞均值）",
-      "legendNamed": "已标注读出"
+      "legendNamed": "已标注读出",
+      "outlines": "轮廓：MaleCNS v1.0 脑区 ROI 网格（fullbrain-roi-v4，Janelia FlyEM，CC BY 4.0），前视投影"
     },
     "tableFly": {
       "female": "雌蝇 · 每道菜的分数",
@@ -419,6 +441,26 @@ export const STRINGS = {
       "flyLine": "{fly}：{dish}",
       "disagree": "两只选得不一样；分不出是性别还是模型的差别。"
     },
-    "howMale": "也可以问问另一只独立计算的雄蝇。它和雌蝇使用不同的脑重建、突触权重和刺激细胞集，各查各的表、各选各的菜，不合并分数或选择。菜品口味等级沿用我们同一套估算，雌蝇结果保持不变。"
+    "howMale": "也可以问问另一只独立计算的雄蝇。它和雌蝇使用不同的脑重建、突触权重和刺激细胞集，各查各的表、各选各的菜，不合并分数或选择。菜品口味等级沿用我们同一套估算，雌蝇结果保持不变。",
+    "panelStatus": {
+      "sceneIdle": "{fly}还在选……",
+      "sceneNone": "这些菜{fly}都还没吃过",
+      "sceneTasting": "{fly}正在尝{dish}……",
+      "sceneTie": "{fly}也分不出这几道哪个好",
+      "sceneWinner": "{fly}选了{pick}",
+      "sceneNoResponse": "{fly}转身走了。",
+      "sceneOpposite": "{fly}选了{fly_pick}，{human_pick}归你了！",
+      "sceneOppositeMany": "{fly}选了{fly_pick}，剩下的都归你。",
+      "stateSceneError": "{fly}的动画未能完成，分数已在下方显示。"
+    },
+    "panelVerdict": {
+      "verdictAsk": "{fly}选了",
+      "verdictNone": "这些菜{fly}都还没吃过。",
+      "verdictTie": "{fly}觉得这几道都差不多：",
+      "verdictOpposite": "{fly}选了{fly_pick}，{human_pick}归你了！",
+      "verdictOppositeMany": "{fly}选了{fly_pick}，剩下的都归你。",
+      "oppositeLeast": "{fly}最不想吃的是{lowest}",
+      "lowInterest": "{fly}对这几道都不太感兴趣，这道只是相对没那么无聊。"
+    }
   }
 };

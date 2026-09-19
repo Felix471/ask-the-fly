@@ -99,7 +99,12 @@ class MalePositions(unittest.TestCase):
         xyz, sources = neurons.positions(table)
         np.testing.assert_array_equal(xyz[:2], [[1, 2, 3], [3, 4, 5]])
         self.assertTrue(np.isnan(xyz[2:]).all())
-        self.assertEqual(sources.tolist(), ['soma', 'tosoma', 'placeholder', 'placeholder'])
+        self.assertEqual(sources.tolist(), ['soma', 'tosoma', 'synapse_centroid', 'synapse_centroid'])
+        cache = {'0': dict(x=99, y=99, z=99, n_all=2),
+                 '1': dict(x=99, y=99, z=99, n_all=2),
+                 '2': dict(x=6, y=7, z=8, n_all=2)}
+        filled, _ = neurons.positions(table, cache)
+        np.testing.assert_array_equal(filled[:3], [[1, 2, 3], [3, 4, 5], [6, 7, 8]])
         with self.assertRaisesRegex(ValueError, 'Malformed'):
             neurons.position('[1 2]')
 
@@ -141,14 +146,17 @@ class MalePositions(unittest.TestCase):
         ).set_index('bodyId')
         index = dict(root_ids=list(map(str, ids[:-1])), flags=[0] * (len(ids)-1),
                      n_neurons=len(ids)-1, flag_bits={'mn9_left': 16})
-        # Both an indexed neuron and the appended readout need placeholders.
+        # Both an indexed neuron and the appended readout need synapse centroids.
         table.loc[[ids[0], ids[-1]], 'somaLocation'] = ''
         table.loc[ids[0], 'somaNeuromere'] = 'T1'
         # An unpositioned brain candidate is ineligible for the background.
         table.loc[9993] = dict(somaLocation='', tosomaLocation='', somaSide='L',
                               somaNeuromere='', superclass='brain', **{'class': 'motor'})
-        a = neurons.build(index, table, cells, 'a' * 40, background=0)
-        b = neurons.build(index, table, cells, 'a' * 40, background=0)
+        cache = {str(body): dict(x=11, y=.5, z=0, n_all=3) for body in (ids[0], ids[-1])}
+        with self.assertRaisesRegex(ValueError, 'no soma, entry point or synaptic sites'):
+            neurons.build(index, table, cells, 'a' * 40, background=0)
+        a = neurons.build(index, table, cells, 'a' * 40, background=0, centroids=cache)
+        b = neurons.build(index, table, cells, 'a' * 40, background=0, centroids=cache)
         self.assertEqual(json.dumps(a), json.dumps(b))
         self.assertEqual(a['n_indexed'], 12)
         self.assertEqual(a['n'], 13)
@@ -157,24 +165,31 @@ class MalePositions(unittest.TestCase):
         entries = [c for group in a['named'] for c in group['cells']]
         self.assertEqual(len(entries), 13)
         self.assertEqual(next(c for c in entries if c['root_id'] == str(ids[-1]))['index'], 12)
-        self.assertEqual(a['position_sources'], dict(soma=11, tosoma=0, placeholder=1))
-        self.assertEqual(a['placeholder_indexed'], 1)
-        self.assertEqual(a['position_sources_all']['placeholder'], 2)
+        self.assertEqual(a['position_sources'], dict(soma=11, tosoma=0, synapse_centroid=1))
+        self.assertEqual(a['synapse_centroid_indexed'], 1)
+        self.assertEqual(a['position_sources_all']['synapse_centroid'], 2)
+        self.assertEqual([(g['key'], g['label'], g['code']) for g in a['named']],
+                         [('mn9', 'MN9', None), ('mn11d', 'MN11D', None),
+                          ('mn11v', 'MN11V', None), ('cem', 'CEM', None)])
+        self.assertEqual(len(a['named'][0]['cells']), 2)
+        for entry in entries:
+            self.assertEqual(entry['side'], table.loc[int(entry['root_id']), 'somaSide'])
         xy = np.frombuffer(base64.b64decode(a['xy_b64']), dtype='<u2').reshape(-1, 2) / 65535
-        for i in (0, 12):
-            self.assertTrue(.15 <= xy[i, 0] <= .85)
-            self.assertTrue(.90 - 1/65535 <= xy[i, 1] <= .95 + 1/65535)
+        self.assertTrue(.96 - 1/65535 <= xy[0, 1] <= 1)
+        self.assertTrue(0 <= xy[12, 1] <= .88)
+        self.assertNotIn('placeholder_y', a['frame'])
         with self.assertRaisesRegex(ValueError, 'background sample'):
             neurons.build(index, table, cells, 'a' * 40, background=1)
 
-    def test_placeholder_spread_is_stable_per_id_and_nonanatomical(self):
-        ids = list(range(1, 10001))
-        xy = neurons.placeholder_xy(ids)
-        np.testing.assert_array_equal(xy[[500, 0]], neurons.placeholder_xy([501, 1]))
-        self.assertTrue(((xy[:, 0] >= .15) & (xy[:, 0] <= .85)).all())
-        self.assertTrue(((xy[:, 1] >= .90) & (xy[:, 1] <= .95)).all())
-        self.assertAlmostEqual(float(xy[:, 0].mean()), .5, delta=.003)
-        self.assertAlmostEqual(float(xy[:, 0].std()), .08, delta=.003)
+    def test_centroid_does_not_expand_brain_frame_or_change_recorded_soma(self):
+        table = pd.DataFrame(dict(somaSide=['L', 'L', 'R', 'R', ''], somaNeuromere=['']*5))
+        xyz = np.array([[9, 10, 0], [11, 11, 1], [-9, 10, 1], [-11, 11, 0], [0, 12, 0.]])
+        sources = np.array(['soma']*4+['synapse_centroid'])
+        xy, frame, _ = neurons.project(table, xyz, sources, np.arange(5))
+        baseline, original, _ = neurons.project(table.iloc[:4], xyz[:4], sources[:4], np.arange(4))
+        self.assertEqual(frame, original)
+        np.testing.assert_array_equal(xy[:4], baseline)
+        self.assertGreater(xy[4, 1], xy[0, 1])
 
 
 if __name__ == '__main__':

@@ -8,6 +8,24 @@ import {loadSprites, loadMaleSprites} from '../fly.js';
 const item = (name, hz) => ({name, entry:{key:name,display:{en:name,zh:name},sugar:'none',bitter:'none',water:'none'}, cell:{mn9_mean:hz}, sugarOnly:{mn9_mean:hz}});
 const decision = (a=10,b=0,mode='ask') => decide([item('bread',a),item('steak',b)],mode);
 
+test('every both-mode panel status/headline names its fly; single modes preserve exact copy', () => {
+  const status=['sceneIdle','sceneNone','sceneTasting','sceneTie','sceneWinner','sceneNoResponse','sceneOpposite','sceneOppositeMany','stateSceneError'];
+  const verdict=['verdictAsk','verdictNone','verdictTie','verdictOpposite','verdictOppositeMany','oppositeLeast','lowInterest'];
+  const values={dish:'bread',pick:'bread',fly_pick:'bread',human_pick:'steak',lowest:'steak'};
+  for(const lang of ['en','zh']) for(const fly of ['female','male']) for(const selection of [fly,'both']) {
+    const panel=new FlyPanel(null,{flyKey:fly},{lang:()=>lang,selection:()=>selection});
+    for(const [keys,method] of [[status,'statusText'],[verdict,'verdictText']]) for(const key of keys) {
+      const text=panel[method](key,values);
+      if(selection==='both') {
+        assert.ok(text.includes(STRINGS[lang].flyName[fly]),`${lang} ${fly} ${key}`);
+        assert.ok(!text.includes('{'),`${key}: unresolved placeholder`);
+      } else assert.equal(text,fmt(STRINGS[lang][key],values));
+    }
+    if(selection==='both') assert.equal(panel.statusText('sceneWinner',values),
+      lang==='en'?`The ${STRINGS.en.flyName[fly]} picks bread`:`${STRINGS.zh.flyName[fly]}选了bread`);
+  }
+});
+
 test('female share query stays byte-identical, including opposite and seed ordering', () => {
   const d = decision(10,0,'opposite'); d.shareSeed=42;
   assert.equal(shareParams(d,'en'), '?v=2&d=k.bread,k.steak&lang=en&m=opposite&seed=42');

@@ -372,6 +372,26 @@ def check_male(root: Path) -> list[str]:
             problems.append('male: neurons size must be under 300 KB')
     except (OSError, ValueError, KeyError, TypeError) as exc:
         problems.append(f'male: neurons missing or invalid: {exc}')
+    try:
+        outlines = load_json(root / 'site/data/neuropils_male.json')
+        groups = outlines['groups']
+        if outlines.get('schema_version') != 'neuropils_v1' or not outlines.get('source') or len(groups) < 5:
+            problems.append('male: neuropils need source and at least 5 groups in neuropils_v1 schema')
+        keys = [g['key'] for g in groups]
+        if len(keys) != len(set(keys)):
+            problems.append('male: duplicate neuropil groups')
+        for group in groups:
+            points = group['polygon']
+            if len(points) < 3 or any(len(p) != 2 or any(type(v) not in (int, float) or not math.isfinite(v)
+                    or not 0 <= v <= 1 for v in p) for p in points):
+                problems.append(f"male: invalid neuropil polygon: {group['key']}")
+            label = group['label_at']
+            if len(label) != 2 or any(type(v) not in (int, float) or not math.isfinite(v) or not 0 <= v <= 1 for v in label):
+                problems.append(f"male: invalid neuropil label position: {group['key']}")
+            if not group['label_en'] or not group['label_zh']:
+                problems.append(f"male: missing neuropil label: {group['key']}")
+    except (OSError, ValueError, KeyError, TypeError) as exc:
+        problems.append(f'male: neuropils missing or invalid: {exc}')
     return problems
 
 

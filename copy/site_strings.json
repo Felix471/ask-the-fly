@@ -1222,9 +1222,9 @@
     },
     {
       "key": "maleNote.brain",
-      "context": "Male brain note; {n}=neurons_male.json placeholder_indexed (228), not a sensory-neuron count. P3-1 layout includes sensory and other neurons; an additional unpositioned readout is outside this indexed count.",
-      "en": "MaleCNS v1.0 soma positions, anterior view; no neuropil outlines. {n} indexed neurons without a recorded soma or entry point are drawn below the brain; these positions are not anatomical.",
-      "zh": "MaleCNS v1.0 胞体位置，前视图；不显示神经髓轮廓。{n} 个回放索引内的神经元没有记录胞体或入脑点，画在脑下方；这些位置不代表真实解剖位置。"
+      "context": "Male anterior view; {n}=neurons_male.json position_sources.synapse_centroid for indexed neurons; one appended readout is outside this count.",
+      "en": "MaleCNS v1.0 soma positions, anterior view. {n} neurons without a recorded soma or entry point are placed at their synapse centroid.",
+      "zh": "MaleCNS v1.0 胞体位置，前视图。{n} 个未记录胞体或入脑点的神经元放在其突触位点的中位数位置。"
     },
     {
       "key": "maleNote.replay",
@@ -1301,6 +1301,108 @@
       "context": "Male brain legend for named readouts; these include VNC neurons, so the female named SEZ-neuron label does not apply.",
       "en": "named readout",
       "zh": "已标注读出"
+    },
+    {
+      "key": "maleNote.outlines",
+      "context": "Attribution below the male brain; downloaded at build time, never requested from a third party at runtime.",
+      "en": "Outlines: MaleCNS v1.0 brain ROI meshes (fullbrain-roi-v4, Janelia FlyEM, CC BY 4.0), anterior projection",
+      "zh": "轮廓：MaleCNS v1.0 脑区 ROI 网格（fullbrain-roi-v4，Janelia FlyEM，CC BY 4.0），前视投影"
+    },
+    {
+      "key": "panelStatus.sceneIdle",
+      "context": "Both-mode per-fly variant of sceneIdle; {fly} uses flyName.female/male. Single-fly copy is unchanged.",
+      "en": "The {fly} is deciding…",
+      "zh": "{fly}还在选……"
+    },
+    {
+      "key": "panelStatus.sceneNone",
+      "context": "Both-mode per-fly variant of sceneNone; {fly} uses flyName.female/male. Single-fly copy is unchanged.",
+      "en": "The {fly} hasn't tried any of these",
+      "zh": "这些菜{fly}都还没吃过"
+    },
+    {
+      "key": "panelStatus.sceneTasting",
+      "context": "Both-mode per-fly variant of sceneTasting; {fly} uses flyName.female/male. Single-fly copy is unchanged.",
+      "en": "The {fly} is trying {dish}…",
+      "zh": "{fly}正在尝{dish}……"
+    },
+    {
+      "key": "panelStatus.sceneTie",
+      "context": "Both-mode per-fly variant of sceneTie; {fly} uses flyName.female/male. Single-fly copy is unchanged.",
+      "en": "The {fly} can't decide between these",
+      "zh": "{fly}也分不出这几道哪个好"
+    },
+    {
+      "key": "panelStatus.sceneWinner",
+      "context": "Both-mode per-fly variant of sceneWinner; {fly} uses flyName.female/male. Single-fly copy is unchanged.",
+      "en": "The {fly} picks {pick}",
+      "zh": "{fly}选了{pick}"
+    },
+    {
+      "key": "panelStatus.sceneNoResponse",
+      "context": "Both-mode per-fly variant of sceneNoResponse; {fly} uses flyName.female/male. Single-fly copy is unchanged.",
+      "en": "The {fly} leaves.",
+      "zh": "{fly}转身走了。"
+    },
+    {
+      "key": "panelStatus.sceneOpposite",
+      "context": "Both-mode per-fly variant of sceneOpposite; {fly} uses flyName.female/male. Single-fly copy is unchanged.",
+      "en": "The {fly} took {fly_pick}. {human_pick} is yours!",
+      "zh": "{fly}选了{fly_pick}，{human_pick}归你了！"
+    },
+    {
+      "key": "panelStatus.sceneOppositeMany",
+      "context": "Both-mode per-fly variant of sceneOppositeMany; {fly} uses flyName.female/male. Single-fly copy is unchanged.",
+      "en": "The {fly} took {fly_pick}. The rest is yours.",
+      "zh": "{fly}选了{fly_pick}，剩下的都归你。"
+    },
+    {
+      "key": "panelStatus.stateSceneError",
+      "context": "Both-mode per-fly variant of stateSceneError; {fly} uses flyName.female/male. Single-fly copy is unchanged.",
+      "en": "The {fly} animation could not finish. The scores are ready below.",
+      "zh": "{fly}的动画未能完成，分数已在下方显示。"
+    },
+    {
+      "key": "panelVerdict.verdictAsk",
+      "context": "Both-mode per-fly variant of verdictAsk; {fly} uses flyName.female/male. Single-fly copy is unchanged.",
+      "en": "The {fly} picks",
+      "zh": "{fly}选了"
+    },
+    {
+      "key": "panelVerdict.verdictNone",
+      "context": "Both-mode per-fly variant of verdictNone; {fly} uses flyName.female/male. Single-fly copy is unchanged.",
+      "en": "The {fly} hasn't tried any of these yet.",
+      "zh": "这些菜{fly}都还没吃过。"
+    },
+    {
+      "key": "panelVerdict.verdictTie",
+      "context": "Both-mode per-fly variant of verdictTie; {fly} uses flyName.female/male. Single-fly copy is unchanged.",
+      "en": "The {fly} calls it a tie:",
+      "zh": "{fly}觉得这几道都差不多："
+    },
+    {
+      "key": "panelVerdict.verdictOpposite",
+      "context": "Both-mode per-fly variant of verdictOpposite; {fly} uses flyName.female/male. Single-fly copy is unchanged.",
+      "en": "The {fly} took {fly_pick}. {human_pick} is yours!",
+      "zh": "{fly}选了{fly_pick}，{human_pick}归你了！"
+    },
+    {
+      "key": "panelVerdict.verdictOppositeMany",
+      "context": "Both-mode per-fly variant of verdictOppositeMany; {fly} uses flyName.female/male. Single-fly copy is unchanged.",
+      "en": "The {fly} took {fly_pick}. The rest is yours.",
+      "zh": "{fly}选了{fly_pick}，剩下的都归你。"
+    },
+    {
+      "key": "panelVerdict.oppositeLeast",
+      "context": "Both-mode per-fly variant of oppositeLeast; {fly} uses flyName.female/male. Single-fly copy is unchanged.",
+      "en": "The {fly}'s least favorite: {lowest}",
+      "zh": "{fly}最不想吃的是{lowest}"
+    },
+    {
+      "key": "panelVerdict.lowInterest",
+      "context": "Both-mode per-fly variant of lowInterest; {fly} uses flyName.female/male. Single-fly copy is unchanged.",
+      "en": "The {fly} didn't care for much of any of these. This one was just the least uninteresting.",
+      "zh": "{fly}对这几道都不太感兴趣，这道只是相对没那么无聊。"
     }
   ]
 }
