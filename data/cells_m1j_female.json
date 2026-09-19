@@ -1,0 +1,1099 @@
+{
+  "data_version": "flywire_v783",
+  "source": {
+    "path": "docs/papers/Tastekin_2025_bioRxiv_v2_SupplTable2_GRN_MN_body_IDs.xlsx",
+    "bytes": 186967,
+    "sha256": "7b28d5f3ae45d68c510b8a3616700f0df2a5a6f2e2d2dba490d172939f2b64c9",
+    "sheet": "GRNs",
+    "connectome": "FAFB – Flywire",
+    "selection": "Subtype LB3b or LB3c; both Root_Side L and R; labellar only."
+  },
+  "original_cells": {
+    "path": "data/cells.json",
+    "bytes": 11737,
+    "sha256": "f78f5071af3bf0984e2e71326f715777c567794e03c0e6369846a147015b395a"
+  },
+  "reference_protocol": {
+    "path": "data/stim_protocol.json",
+    "bytes": 3484,
+    "sha256": "9f9495033281bfcd6f3b373551817987deb2cc083ae94ab61fece9065102d82a"
+  },
+  "completeness": {
+    "path": "vendor/fly-brain/data/2025_Completeness_783.csv",
+    "bytes": 3465987,
+    "sha256": "52b0ac6094cd32c546f8d4c341e094376f48f4e791f8db9b166de5dff8199ea4",
+    "all_ids_present": true,
+    "checked_count": 130
+  },
+  "sets": {
+    "sugar_bilateral": {
+      "ids": [
+        720575940606002609,
+        720575940607347634,
+        720575940607737099,
+        720575940608305161,
+        720575940609919897,
+        720575940610296622,
+        720575940612010137,
+        720575940612445938,
+        720575940612579053,
+        720575940612612581,
+        720575940612670570,
+        720575940612950568,
+        720575940613601698,
+        720575940614302370,
+        720575940616742657,
+        720575940616851286,
+        720575940616885538,
+        720575940617000768,
+        720575940617181725,
+        720575940617801499,
+        720575940617937543,
+        720575940620296641,
+        720575940620589838,
+        720575940621502051,
+        720575940621508479,
+        720575940621754367,
+        720575940622200233,
+        720575940622413508,
+        720575940622486922,
+        720575940622731229,
+        720575940622825736,
+        720575940623629292,
+        720575940625861168,
+        720575940627490663,
+        720575940627907883,
+        720575940628853239,
+        720575940629025324,
+        720575940629176663,
+        720575940629388135,
+        720575940629510338,
+        720575940629852866,
+        720575940629884119,
+        720575940631147148,
+        720575940631393484,
+        720575940631656504,
+        720575940632510479,
+        720575940632627660,
+        720575940632880173,
+        720575940634023961,
+        720575940635172191,
+        720575940639043280,
+        720575940639198653,
+        720575940639259967,
+        720575940639332736,
+        720575940640649691,
+        720575940641339611,
+        720575940645332259
+      ],
+      "count": 57,
+      "subtypes": [
+        "LB3b",
+        "LB3c"
+      ],
+      "xlsx_sides": [
+        "L",
+        "R"
+      ],
+      "sides": {
+        "L": 33,
+        "R": 24
+      },
+      "source_rows": [
+        {
+          "Body_ID": "720575940606002609",
+          "Root_Side": "L",
+          "Type": "LB3",
+          "Subtype": "LB3c",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "720575940607347634",
+          "Root_Side": "L",
+          "Type": "LB3",
+          "Subtype": "LB3b",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "720575940607737099",
+          "Root_Side": "L",
+          "Type": "LB3",
+          "Subtype": "LB3b",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "720575940608305161",
+          "Root_Side": "R",
+          "Type": "LB3",
+          "Subtype": "LB3c",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "720575940609919897",
+          "Root_Side": "L",
+          "Type": "LB3",
+          "Subtype": "LB3b",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "720575940610296622",
+          "Root_Side": "R",
+          "Type": "LB3",
+          "Subtype": "LB3b",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "720575940612010137",
+          "Root_Side": "R",
+          "Type": "LB3",
+          "Subtype": "LB3c",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "720575940612445938",
+          "Root_Side": "R",
+          "Type": "LB3",
+          "Subtype": "LB3c",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "720575940612579053",
+          "Root_Side": "L",
+          "Type": "LB3",
+          "Subtype": "LB3c",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "720575940612612581",
+          "Root_Side": "R",
+          "Type": "LB3",
+          "Subtype": "LB3c",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "720575940612670570",
+          "Root_Side": "L",
+          "Type": "LB3",
+          "Subtype": "LB3c",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "720575940612950568",
+          "Root_Side": "L",
+          "Type": "LB3",
+          "Subtype": "LB3c",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "720575940613601698",
+          "Root_Side": "L",
+          "Type": "LB3",
+          "Subtype": "LB3c",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "720575940614302370",
+          "Root_Side": "R",
+          "Type": "LB3",
+          "Subtype": "LB3b",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "720575940616742657",
+          "Root_Side": "R",
+          "Type": "LB3",
+          "Subtype": "LB3c",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "720575940616851286",
+          "Root_Side": "R",
+          "Type": "LB3",
+          "Subtype": "LB3b",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "720575940616885538",
+          "Root_Side": "L",
+          "Type": "LB3",
+          "Subtype": "LB3c",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "720575940617000768",
+          "Root_Side": "L",
+          "Type": "LB3",
+          "Subtype": "LB3c",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "720575940617181725",
+          "Root_Side": "L",
+          "Type": "LB3",
+          "Subtype": "LB3b",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "720575940617801499",
+          "Root_Side": "R",
+          "Type": "LB3",
+          "Subtype": "LB3b",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "720575940617937543",
+          "Root_Side": "L",
+          "Type": "LB3",
+          "Subtype": "LB3b",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "720575940620296641",
+          "Root_Side": "R",
+          "Type": "LB3",
+          "Subtype": "LB3c",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "720575940620589838",
+          "Root_Side": "R",
+          "Type": "LB3",
+          "Subtype": "LB3c",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "720575940621502051",
+          "Root_Side": "L",
+          "Type": "LB3",
+          "Subtype": "LB3c",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "720575940621508479",
+          "Root_Side": "R",
+          "Type": "LB3",
+          "Subtype": "LB3b",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "720575940621754367",
+          "Root_Side": "L",
+          "Type": "LB3",
+          "Subtype": "LB3c",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "720575940622200233",
+          "Root_Side": "R",
+          "Type": "LB3",
+          "Subtype": "LB3b",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "720575940622413508",
+          "Root_Side": "L",
+          "Type": "LB3",
+          "Subtype": "LB3b",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "720575940622486922",
+          "Root_Side": "L",
+          "Type": "LB3",
+          "Subtype": "LB3c",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "720575940622731229",
+          "Root_Side": "R",
+          "Type": "LB3",
+          "Subtype": "LB3c",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "720575940622825736",
+          "Root_Side": "L",
+          "Type": "LB3",
+          "Subtype": "LB3b",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "720575940623629292",
+          "Root_Side": "L",
+          "Type": "LB3",
+          "Subtype": "LB3c",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "720575940625861168",
+          "Root_Side": "L",
+          "Type": "LB3",
+          "Subtype": "LB3c",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "720575940627490663",
+          "Root_Side": "L",
+          "Type": "LB3",
+          "Subtype": "LB3b",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "720575940627907883",
+          "Root_Side": "R",
+          "Type": "LB3",
+          "Subtype": "LB3c",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "720575940628853239",
+          "Root_Side": "L",
+          "Type": "LB3",
+          "Subtype": "LB3c",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "720575940629025324",
+          "Root_Side": "L",
+          "Type": "LB3",
+          "Subtype": "LB3b",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "720575940629176663",
+          "Root_Side": "L",
+          "Type": "LB3",
+          "Subtype": "LB3b",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "720575940629388135",
+          "Root_Side": "R",
+          "Type": "LB3",
+          "Subtype": "LB3c",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "720575940629510338",
+          "Root_Side": "R",
+          "Type": "LB3",
+          "Subtype": "LB3b",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "720575940629852866",
+          "Root_Side": "L",
+          "Type": "LB3",
+          "Subtype": "LB3c",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "720575940629884119",
+          "Root_Side": "R",
+          "Type": "LB3",
+          "Subtype": "LB3b",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "720575940631147148",
+          "Root_Side": "R",
+          "Type": "LB3",
+          "Subtype": "LB3c",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "720575940631393484",
+          "Root_Side": "L",
+          "Type": "LB3",
+          "Subtype": "LB3b",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "720575940631656504",
+          "Root_Side": "R",
+          "Type": "LB3",
+          "Subtype": "LB3b",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "720575940632510479",
+          "Root_Side": "L",
+          "Type": "LB3",
+          "Subtype": "LB3b",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "720575940632627660",
+          "Root_Side": "R",
+          "Type": "LB3",
+          "Subtype": "LB3c",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "720575940632880173",
+          "Root_Side": "R",
+          "Type": "LB3",
+          "Subtype": "LB3b",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "720575940634023961",
+          "Root_Side": "R",
+          "Type": "LB3",
+          "Subtype": "LB3b",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "720575940635172191",
+          "Root_Side": "L",
+          "Type": "LB3",
+          "Subtype": "LB3c",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "720575940639043280",
+          "Root_Side": "L",
+          "Type": "LB3",
+          "Subtype": "LB3b",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "720575940639198653",
+          "Root_Side": "L",
+          "Type": "LB3",
+          "Subtype": "LB3c",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "720575940639259967",
+          "Root_Side": "L",
+          "Type": "LB3",
+          "Subtype": "LB3c",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "720575940639332736",
+          "Root_Side": "L",
+          "Type": "LB3",
+          "Subtype": "LB3c",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "720575940640649691",
+          "Root_Side": "L",
+          "Type": "LB3",
+          "Subtype": "LB3c",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "720575940641339611",
+          "Root_Side": "R",
+          "Type": "LB3",
+          "Subtype": "LB3b",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "720575940645332259",
+          "Root_Side": "L",
+          "Type": "LB3",
+          "Subtype": "LB3c",
+          "Entry_Nerve": "MxLbN"
+        }
+      ]
+    },
+    "sugar_lb3c_bilateral": {
+      "ids": [
+        720575940606002609,
+        720575940608305161,
+        720575940612010137,
+        720575940612445938,
+        720575940612579053,
+        720575940612612581,
+        720575940612670570,
+        720575940612950568,
+        720575940613601698,
+        720575940616742657,
+        720575940616885538,
+        720575940617000768,
+        720575940620296641,
+        720575940620589838,
+        720575940621502051,
+        720575940621754367,
+        720575940622486922,
+        720575940622731229,
+        720575940623629292,
+        720575940625861168,
+        720575940627907883,
+        720575940628853239,
+        720575940629388135,
+        720575940629852866,
+        720575940631147148,
+        720575940632627660,
+        720575940635172191,
+        720575940639198653,
+        720575940639259967,
+        720575940639332736,
+        720575940640649691,
+        720575940645332259
+      ],
+      "count": 32,
+      "subtypes": [
+        "LB3c"
+      ],
+      "xlsx_sides": [
+        "L",
+        "R"
+      ],
+      "sides": {
+        "L": 20,
+        "R": 12
+      },
+      "source_rows": [
+        {
+          "Body_ID": "720575940606002609",
+          "Root_Side": "L",
+          "Type": "LB3",
+          "Subtype": "LB3c",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "720575940608305161",
+          "Root_Side": "R",
+          "Type": "LB3",
+          "Subtype": "LB3c",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "720575940612010137",
+          "Root_Side": "R",
+          "Type": "LB3",
+          "Subtype": "LB3c",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "720575940612445938",
+          "Root_Side": "R",
+          "Type": "LB3",
+          "Subtype": "LB3c",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "720575940612579053",
+          "Root_Side": "L",
+          "Type": "LB3",
+          "Subtype": "LB3c",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "720575940612612581",
+          "Root_Side": "R",
+          "Type": "LB3",
+          "Subtype": "LB3c",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "720575940612670570",
+          "Root_Side": "L",
+          "Type": "LB3",
+          "Subtype": "LB3c",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "720575940612950568",
+          "Root_Side": "L",
+          "Type": "LB3",
+          "Subtype": "LB3c",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "720575940613601698",
+          "Root_Side": "L",
+          "Type": "LB3",
+          "Subtype": "LB3c",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "720575940616742657",
+          "Root_Side": "R",
+          "Type": "LB3",
+          "Subtype": "LB3c",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "720575940616885538",
+          "Root_Side": "L",
+          "Type": "LB3",
+          "Subtype": "LB3c",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "720575940617000768",
+          "Root_Side": "L",
+          "Type": "LB3",
+          "Subtype": "LB3c",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "720575940620296641",
+          "Root_Side": "R",
+          "Type": "LB3",
+          "Subtype": "LB3c",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "720575940620589838",
+          "Root_Side": "R",
+          "Type": "LB3",
+          "Subtype": "LB3c",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "720575940621502051",
+          "Root_Side": "L",
+          "Type": "LB3",
+          "Subtype": "LB3c",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "720575940621754367",
+          "Root_Side": "L",
+          "Type": "LB3",
+          "Subtype": "LB3c",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "720575940622486922",
+          "Root_Side": "L",
+          "Type": "LB3",
+          "Subtype": "LB3c",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "720575940622731229",
+          "Root_Side": "R",
+          "Type": "LB3",
+          "Subtype": "LB3c",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "720575940623629292",
+          "Root_Side": "L",
+          "Type": "LB3",
+          "Subtype": "LB3c",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "720575940625861168",
+          "Root_Side": "L",
+          "Type": "LB3",
+          "Subtype": "LB3c",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "720575940627907883",
+          "Root_Side": "R",
+          "Type": "LB3",
+          "Subtype": "LB3c",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "720575940628853239",
+          "Root_Side": "L",
+          "Type": "LB3",
+          "Subtype": "LB3c",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "720575940629388135",
+          "Root_Side": "R",
+          "Type": "LB3",
+          "Subtype": "LB3c",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "720575940629852866",
+          "Root_Side": "L",
+          "Type": "LB3",
+          "Subtype": "LB3c",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "720575940631147148",
+          "Root_Side": "R",
+          "Type": "LB3",
+          "Subtype": "LB3c",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "720575940632627660",
+          "Root_Side": "R",
+          "Type": "LB3",
+          "Subtype": "LB3c",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "720575940635172191",
+          "Root_Side": "L",
+          "Type": "LB3",
+          "Subtype": "LB3c",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "720575940639198653",
+          "Root_Side": "L",
+          "Type": "LB3",
+          "Subtype": "LB3c",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "720575940639259967",
+          "Root_Side": "L",
+          "Type": "LB3",
+          "Subtype": "LB3c",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "720575940639332736",
+          "Root_Side": "L",
+          "Type": "LB3",
+          "Subtype": "LB3c",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "720575940640649691",
+          "Root_Side": "L",
+          "Type": "LB3",
+          "Subtype": "LB3c",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "720575940645332259",
+          "Root_Side": "L",
+          "Type": "LB3",
+          "Subtype": "LB3c",
+          "Entry_Nerve": "MxLbN"
+        }
+      ]
+    },
+    "bitter": {
+      "ids": [
+        720575940602353632,
+        720575940603266592,
+        720575940604027168,
+        720575940604714528,
+        720575940610259370,
+        720575940610481370,
+        720575940610483162,
+        720575940610773090,
+        720575940613061118,
+        720575940614281266,
+        720575940615641798,
+        720575940617094208,
+        720575940617239197,
+        720575940617433830,
+        720575940618025199,
+        720575940618682526,
+        720575940618887217,
+        720575940619028208,
+        720575940619072513,
+        720575940619197093,
+        720575940619659861,
+        720575940621008895,
+        720575940621778381,
+        720575940621864060,
+        720575940622298631,
+        720575940623183083,
+        720575940624310345,
+        720575940625750105,
+        720575940626287336,
+        720575940627578156,
+        720575940627692048,
+        720575940628962407,
+        720575940629146711,
+        720575940629416318,
+        720575940629481516,
+        720575940630195909,
+        720575940634859188,
+        720575940637742911,
+        720575940638312262,
+        720575940642088333,
+        720575940645743412,
+        720575940646212996
+      ],
+      "count": 42,
+      "source": "example.ipynb::bitter_GRNs",
+      "role": "primary bitter set"
+    },
+    "water": {
+      "ids": [
+        720575940606002609,
+        720575940612579053,
+        720575940612950568,
+        720575940613786774,
+        720575940613996959,
+        720575940616177458,
+        720575940617857694,
+        720575940622486922,
+        720575940622902535,
+        720575940625203504,
+        720575940625861168,
+        720575940629852866,
+        720575940630553415,
+        720575940631898285,
+        720575940634796536,
+        720575940635172191,
+        720575940644965399,
+        720575940660292225
+      ],
+      "count": 18,
+      "source": "figures.ipynb::neu_water",
+      "role": "Phase 1 only"
+    },
+    "ir94e": {
+      "ids": [
+        720575940610683315,
+        720575940612920386,
+        720575940614211295,
+        720575940614273292,
+        720575940615089369,
+        720575940615274425,
+        720575940619387814,
+        720575940621375231,
+        720575940624079544,
+        720575940624604560,
+        720575940626016017,
+        720575940626241636,
+        720575940627265265,
+        720575940628198503,
+        720575940628832256,
+        720575940629211607,
+        720575940631082124,
+        720575940638218173
+      ],
+      "count": 18,
+      "source": "figures.ipynb::neu_ir94e",
+      "role": "Phase 1 only"
+    }
+  },
+  "readout": {
+    "neuron": "MN9",
+    "left": 720575940660219265,
+    "right": 720575940618238523,
+    "aggregation": "left_only",
+    "aggregation_rationale": "Paper (Shiu 2024) stimulates right-hemisphere sugar GRNs and reads the contralateral LEFT MN9 (figures.ipynb id_mn9 = 720575940660219265). We follow the paper. Right MN9 is recorded and reported but not used for gates. FROZEN for the whole project.",
+    "rate_definition": "spikes in [0, duration] / duration, mean over trials; also report std over trials"
+  },
+  "overlaps": {
+    "sugar": {
+      "count": 12,
+      "ids": [
+        720575940612670570,
+        720575940613601698,
+        720575940616885538,
+        720575940617000768,
+        720575940621502051,
+        720575940621754367,
+        720575940628853239,
+        720575940629176663,
+        720575940639198653,
+        720575940639259967,
+        720575940639332736,
+        720575940640649691
+      ]
+    },
+    "water": {
+      "count": 7,
+      "ids": [
+        720575940606002609,
+        720575940612579053,
+        720575940612950568,
+        720575940622486922,
+        720575940625861168,
+        720575940629852866,
+        720575940635172191
+      ]
+    },
+    "bitter": {
+      "count": 0,
+      "ids": []
+    },
+    "ir94e": {
+      "count": 0,
+      "ids": []
+    }
+  },
+  "layout": {
+    "channel_order": [
+      "sugar",
+      "bitter",
+      "water",
+      "ir94e"
+    ],
+    "within_channel_order": "ascending numeric Body_ID",
+    "poisson_units": 128,
+    "channels": {
+      "sugar": {
+        "cell_set": "sugar_bilateral",
+        "logical_count": 57,
+        "physical_count": 57,
+        "ids": [
+          720575940606002609,
+          720575940607347634,
+          720575940607737099,
+          720575940608305161,
+          720575940609919897,
+          720575940610296622,
+          720575940612010137,
+          720575940612445938,
+          720575940612579053,
+          720575940612612581,
+          720575940612670570,
+          720575940612950568,
+          720575940613601698,
+          720575940614302370,
+          720575940616742657,
+          720575940616851286,
+          720575940616885538,
+          720575940617000768,
+          720575940617181725,
+          720575940617801499,
+          720575940617937543,
+          720575940620296641,
+          720575940620589838,
+          720575940621502051,
+          720575940621508479,
+          720575940621754367,
+          720575940622200233,
+          720575940622413508,
+          720575940622486922,
+          720575940622731229,
+          720575940622825736,
+          720575940623629292,
+          720575940625861168,
+          720575940627490663,
+          720575940627907883,
+          720575940628853239,
+          720575940629025324,
+          720575940629176663,
+          720575940629388135,
+          720575940629510338,
+          720575940629852866,
+          720575940629884119,
+          720575940631147148,
+          720575940631393484,
+          720575940631656504,
+          720575940632510479,
+          720575940632627660,
+          720575940632880173,
+          720575940634023961,
+          720575940635172191,
+          720575940639043280,
+          720575940639198653,
+          720575940639259967,
+          720575940639332736,
+          720575940640649691,
+          720575940641339611,
+          720575940645332259
+        ]
+      },
+      "bitter": {
+        "cell_set": "bitter",
+        "logical_count": 42,
+        "physical_count": 42,
+        "ids": [
+          720575940602353632,
+          720575940603266592,
+          720575940604027168,
+          720575940604714528,
+          720575940610259370,
+          720575940610481370,
+          720575940610483162,
+          720575940610773090,
+          720575940613061118,
+          720575940614281266,
+          720575940615641798,
+          720575940617094208,
+          720575940617239197,
+          720575940617433830,
+          720575940618025199,
+          720575940618682526,
+          720575940618887217,
+          720575940619028208,
+          720575940619072513,
+          720575940619197093,
+          720575940619659861,
+          720575940621008895,
+          720575940621778381,
+          720575940621864060,
+          720575940622298631,
+          720575940623183083,
+          720575940624310345,
+          720575940625750105,
+          720575940626287336,
+          720575940627578156,
+          720575940627692048,
+          720575940628962407,
+          720575940629146711,
+          720575940629416318,
+          720575940629481516,
+          720575940630195909,
+          720575940634859188,
+          720575940637742911,
+          720575940638312262,
+          720575940642088333,
+          720575940645743412,
+          720575940646212996
+        ]
+      },
+      "water": {
+        "cell_set": "water",
+        "logical_count": 18,
+        "physical_count": 11,
+        "ids": [
+          720575940613786774,
+          720575940613996959,
+          720575940616177458,
+          720575940617857694,
+          720575940622902535,
+          720575940625203504,
+          720575940630553415,
+          720575940631898285,
+          720575940634796536,
+          720575940644965399,
+          720575940660292225
+        ]
+      },
+      "ir94e": {
+        "cell_set": "ir94e",
+        "logical_count": 18,
+        "physical_count": 18,
+        "ids": [
+          720575940610683315,
+          720575940612920386,
+          720575940614211295,
+          720575940614273292,
+          720575940615089369,
+          720575940615274425,
+          720575940619387814,
+          720575940621375231,
+          720575940624079544,
+          720575940624604560,
+          720575940626016017,
+          720575940626241636,
+          720575940627265265,
+          720575940628198503,
+          720575940628832256,
+          720575940629211607,
+          720575940631082124,
+          720575940638218173
+        ]
+      }
+    },
+    "dedup_rule": "Each physical root appears once. A root in sugar_bilateral and water is assigned to sugar.",
+    "refractory_rule": "Inactive units retain ordinary model refractory; driven units have refractory 0.",
+    "inactive_channels_hz": {
+      "water": 0,
+      "ir94e": 0
+    }
+  }
+}

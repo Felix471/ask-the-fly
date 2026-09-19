@@ -100,6 +100,14 @@ Thus LB3b contributes about 10 Hz to left MN9 under this design, not a
 universal additive contribution. Historical A-prime (21 versus 23) had
 left-MN9 differences <0.5 Hz. [A-prime comparison](salt_and_refreeze.md#adapted-a-prime-lb3c-only-l-subset-20-cells).
 
+**2026-09-19 (local 2026-09-18 evening):** The owner declares the
+[M1j bilateral sugar policy test](bilateral_sugar_policy.md) on both brains,
+using Table S1 LB3b ∪ LB3c with unchanged bitter, water and Ir94e sets.
+Female sugar57 overlaps seven frozen water cells, assigned once to sugar
+in the 128-unit layout. The owner records that v2 re-typing must also
+redefine water as LB3a; this is a follow-up, not an M1j gate or water-set
+change. Declaration only; no M1j simulation or product change.
+
 ## OQ-8: MN9/MN11 bitter separation replicated; CEM input audit (2026-09-13)
 
 The [feeding-MN report](feeding_mn_readouts.md) contains C1 (400 existing
@@ -478,3 +486,13 @@ pending; no rerun is performed or authorised by this record.
 **2026-09-18 — M1i reopening:** The owner reopened the male line for the single pre-declared M1i replication of the externally calibrated fly-brain-minecraft configuration. See the [M1i pre-declaration](malecns_phase0.md#m1i-pre-declaration--2026-09-18) for the signed-off design, gates, checkpoints and stop rule.
 
 **2026-09-18 — M1i results and closure:** Run (b) meets all three declared replication criteria: fbm_sugar MATCH (two-cell mean 52.367 ± 2.225 Hz, positive in 30/30 trials), fbm_bitter MATCH and fbm_both MATCH (both MN9s zero in 30/30 each). The five paired KC trials give a two-cell KC-minus-base difference of -3.800 ± 1.691 Hz, with no criterion; all SDs are population SDs. Their sugar drive is 204 cells including pharyngeal and tarsal GRNs, ours 17 labellar cells. Run (a), n=30 per condition, passes A, B, C, D, S2 and S3 on L10331 but fails S1 (3/5 positive sugar levels), hence overall FAIL under the declared rule; R16949 is silent throughout. The male line stops after this eighth variant; no further gain, threshold change, variant or M2 follows. [Results checkpoint and eight-variant ledger](malecns_phase0.md#m1i-results-checkpoint--2026-09-18).
+
+**2026-09-19 (local 2026-09-18 evening):** The owner declares
+[M1j](bilateral_sugar_policy.md) as a bilateral typed-sugar v2 policy test
+on both brains, with primary male L10331 and frozen female left MN9;
+secondary MN9s remain recorded. Adoption requires both brains to pass
+A–D and S1–S3; either failure rejects the policy and closes the male line
+at nine variants. The ledger becomes nine variants after M1j whatever
+the result, with no further variant, set, gain or threshold change under
+this authorization. Exact ten-trial M0 spike-array reproduction is
+required before any M1j trial. Declaration only; no new result.

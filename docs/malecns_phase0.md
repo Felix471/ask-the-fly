@@ -1389,3 +1389,24 @@ The [independent raw audit](../data/malecns/m1i_runs_audit.json) passes 575 raw 
 | [M1i](#m1i-results-checkpoint--2026-09-18) | Whole CNS, edges >=5, gain 0.65; replication inputs and sugar17 gates declared separately | b fbm_sugar: MATCH; b fbm_bitter: MATCH; b fbm_both: MATCH. a: FAIL under A–D + S on L10331; failing gates: S1. |
 
 Per the declared stop rule, the male line stops after M1i whatever the result. Run (a) fails; the male line is Closed after eight variants. No further variant, gain, threshold change or M2 follows. Historical M1c passes retain their original rules; S is not applied retroactively. No product, frozen-data, copy or honesty-table changes.
+
+## M1j pre-declaration — 2026-09-19
+
+The owner declares [M1j bilateral typed sugar on both brains](bilateral_sugar_policy.md)
+(local 2026-09-18 evening) as a v2 stimulus policy test. The male half uses
+M1i's whole-CNS ≥5 substrate without autapses, w_syn 0.17875 mV, bilateral
+LB3b ∪ LB3c sugar34 (L17/R17), and bilateral LB3c-only A′23 (L12/R11).
+Bitter38, water17 and Ir94e19 remain unchanged; 108 physical units, primary
+L10331 and recorded R16949. The same A–D plus A′ design totals 480 trials,
+seeds 20260910+trial, n=30, 1,000 ms, dt 0.1 ms. Before any M1j trial,
+the declared ten-trial M0 recheck must reproduce every stored neuron
+spike-time array exactly; any difference stops the task.
+
+Each brain must pass historical A–D and S1–S3 on its primary MN9; adoption
+requires both brains to pass. If either fails, reject the policy and close
+the male line at nine variants. The ledger becomes nine variants after
+M1j whatever the result; no further variant, set, gain or threshold change
+is authorized. The linked declaration fixes the female design, overlap
+handling, retention reporting, M0 comparison and sequence. This is a
+declaration-only internal checkpoint: no substrate build, M0 recheck or
+simulation, and no product, frozen-data or honesty-table change.

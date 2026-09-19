@@ -1,0 +1,573 @@
+{
+  "protocol_version": "m1j-bilateral-sugar-female-1.0",
+  "data_version": "flywire_v783",
+  "connectivity_file": "vendor/fly-brain/data/2025_Connectivity_783.parquet",
+  "completeness_file": "vendor/fly-brain/data/2025_Completeness_783.csv",
+  "model": {
+    "source": "vendor/fly-brain/code/paper-phil-drosophila/model.py (MIT, Shiu et al. 2024)",
+    "v_0_mV": -52,
+    "v_rst_mV": -52,
+    "v_th_mV": -45,
+    "t_mbr_ms": 20,
+    "tau_ms": 5,
+    "t_rfc_ms": 2.2,
+    "t_dly_ms": 1.8,
+    "w_syn_mV": 0.275,
+    "f_poi": 250,
+    "integration": "linear",
+    "dt_ms": 0.1
+  },
+  "trial": {
+    "duration_ms": 1000,
+    "n_trials": 30,
+    "sanity_n_trials": 5,
+    "seed_rule": "trial i uses seed base_seed+i; base_seed=20260910"
+  },
+  "stimulus": {
+    "type": "PoissonInput per GRN, N=1, weight=w_syn*f_poi, refractory of stimulated GRNs set to 0",
+    "channels": {
+      "sugar": {
+        "cell_set": "sugar_bilateral",
+        "count": 57,
+        "physical_count": 57
+      },
+      "bitter": {
+        "cell_set": "bitter",
+        "count": 42,
+        "physical_count": 42
+      },
+      "water": {
+        "cell_set": "water",
+        "count": 18,
+        "phase": "1",
+        "physical_count": 11
+      },
+      "ir94e": {
+        "cell_set": "ir94e",
+        "count": 18,
+        "phase": "1",
+        "physical_count": 18
+      }
+    },
+    "inactive_channels_hz": {
+      "water": 0,
+      "ir94e": 0
+    }
+  },
+  "readout": {
+    "neuron": "MN9",
+    "left": 720575940660219265,
+    "right": 720575940618238523,
+    "aggregation": "left_only",
+    "aggregation_rationale": "Paper (Shiu 2024) stimulates right-hemisphere sugar GRNs and reads the contralateral LEFT MN9 (figures.ipynb id_mn9 = 720575940660219265). We follow the paper. Right MN9 is recorded and reported but not used for gates. FROZEN for the whole project.",
+    "rate_definition": "spikes in [0, duration] / duration, mean over trials; also report std over trials",
+    "primary": 720575940660219265,
+    "secondary": 720575940618238523
+  },
+  "phase0_conditions": {
+    "A_sugar_dose": {
+      "sugar_hz": [
+        25,
+        50,
+        100,
+        200
+      ],
+      "bitter_hz": 0
+    },
+    "B_bitter_suppression": {
+      "sugar_hz": 200,
+      "bitter_hz": [
+        0,
+        25,
+        50,
+        100,
+        200
+      ]
+    },
+    "C_bitter_alone": {
+      "sugar_hz": 0,
+      "bitter_hz": [
+        25,
+        50,
+        100,
+        200
+      ]
+    },
+    "D_baseline": {
+      "sugar_hz": 0,
+      "bitter_hz": 0
+    },
+    "A_prime_sugar_lb3c_bilateral": {
+      "reference_cell_set": "sugar_bilateral",
+      "cell_set": "sugar_lb3c_bilateral",
+      "sugar_hz": [
+        120
+      ],
+      "bitter_hz": 0,
+      "trials_each": 30,
+      "paired_seeds": true
+    }
+  },
+  "notes": [
+    "Paper calibrated w_syn on FlyWire v630; we run v783 only, absolute Hz may differ.",
+    "Model baseline firing is 0 Hz by construction (no intrinsic activity); condition D measures it anyway."
+  ],
+  "cells_file": "data/cells_m1j_female.json",
+  "stimulation_layout": {
+    "channel_order": [
+      "sugar",
+      "bitter",
+      "water",
+      "ir94e"
+    ],
+    "within_channel_order": "ascending numeric Body_ID",
+    "poisson_units": 128,
+    "channels": {
+      "sugar": {
+        "cell_set": "sugar_bilateral",
+        "logical_count": 57,
+        "physical_count": 57,
+        "ids": [
+          720575940606002609,
+          720575940607347634,
+          720575940607737099,
+          720575940608305161,
+          720575940609919897,
+          720575940610296622,
+          720575940612010137,
+          720575940612445938,
+          720575940612579053,
+          720575940612612581,
+          720575940612670570,
+          720575940612950568,
+          720575940613601698,
+          720575940614302370,
+          720575940616742657,
+          720575940616851286,
+          720575940616885538,
+          720575940617000768,
+          720575940617181725,
+          720575940617801499,
+          720575940617937543,
+          720575940620296641,
+          720575940620589838,
+          720575940621502051,
+          720575940621508479,
+          720575940621754367,
+          720575940622200233,
+          720575940622413508,
+          720575940622486922,
+          720575940622731229,
+          720575940622825736,
+          720575940623629292,
+          720575940625861168,
+          720575940627490663,
+          720575940627907883,
+          720575940628853239,
+          720575940629025324,
+          720575940629176663,
+          720575940629388135,
+          720575940629510338,
+          720575940629852866,
+          720575940629884119,
+          720575940631147148,
+          720575940631393484,
+          720575940631656504,
+          720575940632510479,
+          720575940632627660,
+          720575940632880173,
+          720575940634023961,
+          720575940635172191,
+          720575940639043280,
+          720575940639198653,
+          720575940639259967,
+          720575940639332736,
+          720575940640649691,
+          720575940641339611,
+          720575940645332259
+        ]
+      },
+      "bitter": {
+        "cell_set": "bitter",
+        "logical_count": 42,
+        "physical_count": 42,
+        "ids": [
+          720575940602353632,
+          720575940603266592,
+          720575940604027168,
+          720575940604714528,
+          720575940610259370,
+          720575940610481370,
+          720575940610483162,
+          720575940610773090,
+          720575940613061118,
+          720575940614281266,
+          720575940615641798,
+          720575940617094208,
+          720575940617239197,
+          720575940617433830,
+          720575940618025199,
+          720575940618682526,
+          720575940618887217,
+          720575940619028208,
+          720575940619072513,
+          720575940619197093,
+          720575940619659861,
+          720575940621008895,
+          720575940621778381,
+          720575940621864060,
+          720575940622298631,
+          720575940623183083,
+          720575940624310345,
+          720575940625750105,
+          720575940626287336,
+          720575940627578156,
+          720575940627692048,
+          720575940628962407,
+          720575940629146711,
+          720575940629416318,
+          720575940629481516,
+          720575940630195909,
+          720575940634859188,
+          720575940637742911,
+          720575940638312262,
+          720575940642088333,
+          720575940645743412,
+          720575940646212996
+        ]
+      },
+      "water": {
+        "cell_set": "water",
+        "logical_count": 18,
+        "physical_count": 11,
+        "ids": [
+          720575940613786774,
+          720575940613996959,
+          720575940616177458,
+          720575940617857694,
+          720575940622902535,
+          720575940625203504,
+          720575940630553415,
+          720575940631898285,
+          720575940634796536,
+          720575940644965399,
+          720575940660292225
+        ]
+      },
+      "ir94e": {
+        "cell_set": "ir94e",
+        "logical_count": 18,
+        "physical_count": 18,
+        "ids": [
+          720575940610683315,
+          720575940612920386,
+          720575940614211295,
+          720575940614273292,
+          720575940615089369,
+          720575940615274425,
+          720575940619387814,
+          720575940621375231,
+          720575940624079544,
+          720575940624604560,
+          720575940626016017,
+          720575940626241636,
+          720575940627265265,
+          720575940628198503,
+          720575940628832256,
+          720575940629211607,
+          720575940631082124,
+          720575940638218173
+        ]
+      }
+    },
+    "dedup_rule": "Each physical root appears once. A root in sugar_bilateral and water is assigned to sugar.",
+    "refractory_rule": "Inactive units retain ordinary model refractory; driven units have refractory 0.",
+    "inactive_channels_hz": {
+      "water": 0,
+      "ir94e": 0
+    }
+  },
+  "conditions": [
+    {
+      "id": "A_s25_b0",
+      "gate": "A",
+      "sugar_hz": 25,
+      "bitter_hz": 0,
+      "sugar_set": "sugar_bilateral",
+      "n_trials": 30
+    },
+    {
+      "id": "A_s50_b0",
+      "gate": "A",
+      "sugar_hz": 50,
+      "bitter_hz": 0,
+      "sugar_set": "sugar_bilateral",
+      "n_trials": 30
+    },
+    {
+      "id": "A_s100_b0",
+      "gate": "A",
+      "sugar_hz": 100,
+      "bitter_hz": 0,
+      "sugar_set": "sugar_bilateral",
+      "n_trials": 30
+    },
+    {
+      "id": "A_s200_b0",
+      "gate": "A",
+      "sugar_hz": 200,
+      "bitter_hz": 0,
+      "sugar_set": "sugar_bilateral",
+      "n_trials": 30
+    },
+    {
+      "id": "B_s200_b0",
+      "gate": "B",
+      "sugar_hz": 200,
+      "bitter_hz": 0,
+      "sugar_set": "sugar_bilateral",
+      "n_trials": 30
+    },
+    {
+      "id": "B_s200_b25",
+      "gate": "B",
+      "sugar_hz": 200,
+      "bitter_hz": 25,
+      "sugar_set": "sugar_bilateral",
+      "n_trials": 30
+    },
+    {
+      "id": "B_s200_b50",
+      "gate": "B",
+      "sugar_hz": 200,
+      "bitter_hz": 50,
+      "sugar_set": "sugar_bilateral",
+      "n_trials": 30
+    },
+    {
+      "id": "B_s200_b100",
+      "gate": "B",
+      "sugar_hz": 200,
+      "bitter_hz": 100,
+      "sugar_set": "sugar_bilateral",
+      "n_trials": 30
+    },
+    {
+      "id": "B_s200_b200",
+      "gate": "B",
+      "sugar_hz": 200,
+      "bitter_hz": 200,
+      "sugar_set": "sugar_bilateral",
+      "n_trials": 30
+    },
+    {
+      "id": "C_s0_b25",
+      "gate": "C",
+      "sugar_hz": 0,
+      "bitter_hz": 25,
+      "sugar_set": "sugar_bilateral",
+      "n_trials": 30
+    },
+    {
+      "id": "C_s0_b50",
+      "gate": "C",
+      "sugar_hz": 0,
+      "bitter_hz": 50,
+      "sugar_set": "sugar_bilateral",
+      "n_trials": 30
+    },
+    {
+      "id": "C_s0_b100",
+      "gate": "C",
+      "sugar_hz": 0,
+      "bitter_hz": 100,
+      "sugar_set": "sugar_bilateral",
+      "n_trials": 30
+    },
+    {
+      "id": "C_s0_b200",
+      "gate": "C",
+      "sugar_hz": 0,
+      "bitter_hz": 200,
+      "sugar_set": "sugar_bilateral",
+      "n_trials": 30
+    },
+    {
+      "id": "D_s0_b0",
+      "gate": "D",
+      "sugar_hz": 0,
+      "bitter_hz": 0,
+      "sugar_set": "sugar_bilateral",
+      "n_trials": 30
+    },
+    {
+      "id": "AP_sugar_120",
+      "gate": "AP",
+      "sugar_hz": 120,
+      "bitter_hz": 0,
+      "sugar_set": "sugar_bilateral",
+      "n_trials": 30
+    },
+    {
+      "id": "AP_sugar_lb3c_120",
+      "gate": "AP",
+      "sugar_hz": 120,
+      "bitter_hz": 0,
+      "sugar_set": "sugar_lb3c_bilateral",
+      "n_trials": 30
+    }
+  ],
+  "shape_gate": {
+    "side": "frozen left MN9 720575940660219265",
+    "sugar_hz": [
+      25,
+      50,
+      100,
+      120,
+      200
+    ],
+    "other_inputs_hz": 0,
+    "n": 30,
+    "seeds": [
+      20260910,
+      20260911,
+      20260912,
+      20260913,
+      20260914,
+      20260915,
+      20260916,
+      20260917,
+      20260918,
+      20260919,
+      20260920,
+      20260921,
+      20260922,
+      20260923,
+      20260924,
+      20260925,
+      20260926,
+      20260927,
+      20260928,
+      20260929,
+      20260930,
+      20260931,
+      20260932,
+      20260933,
+      20260934,
+      20260935,
+      20260936,
+      20260937,
+      20260938,
+      20260939
+    ],
+    "S1": "At least four of five mean MN9 rates > 0 Hz.",
+    "S2": "Every adjacent decrease <= sqrt((population_SD_before^2 + population_SD_after^2)/2).",
+    "S3": "Sugar200 whole-network spike max/min < 3; zero minimum fails (undefined or infinite ratio).",
+    "reuse": "A provides 25/50/100/200; AP_sugar_120 provides 120. No added S runs."
+  },
+  "total_trials": 480,
+  "seeds": [
+    20260910,
+    20260911,
+    20260912,
+    20260913,
+    20260914,
+    20260915,
+    20260916,
+    20260917,
+    20260918,
+    20260919,
+    20260920,
+    20260921,
+    20260922,
+    20260923,
+    20260924,
+    20260925,
+    20260926,
+    20260927,
+    20260928,
+    20260929,
+    20260930,
+    20260931,
+    20260932,
+    20260933,
+    20260934,
+    20260935,
+    20260936,
+    20260937,
+    20260938,
+    20260939
+  ],
+  "gate_evaluators": {
+    "A-D": "sim.malecns.phase0.evaluate_gates",
+    "S1-S3": "sim.malecns.split.shape_gate"
+  },
+  "pass_rule": "A, B, C, D, S1, S2, S3 must all pass on this brain's primary MN9; secondary MN9 recorded, not deciding.",
+  "adoption_rule": "Adopt the policy for v2 only if both brains pass. If either fails, reject the policy and close the male line at nine variants.",
+  "stop_rule": "No further variant, set, gain or threshold change after M1j under this authorization. The ledger becomes nine variants after M1j whatever the result.",
+  "m1j_provenance": {
+    "declaration_date": "2026-09-19",
+    "local_date": "2026-09-18 evening (America/New_York)",
+    "scope": "Declaration only; no substrate build, M0 recheck or simulation performed.",
+    "declaration_points": {
+      "1": "**Policy under test, framed as a v2 stimulus policy, not a male-only fix:** bilateral typed sugar sets on both brains, LB3b ∪ LB3c both sides from Tastekin Table S1, no pharyngeal or tarsal GRNs. Rationale: the one-sided 23-cell female set is Shiu's benchmark convention, not biology; a fly tasting food uses both labellar palps; docs/v2_decision_memo.md already fixes v2 cell sets to Tastekin typing on both brains. Bitter, water and ir94e sets unchanged for this test. No product, frozen-file or honesty change.",
+      "2": "**Substrates and sets:** - Male: the M1i ≥5 substrate without autapses (data/malecns/derived/fbm, record substrate_record_fbm.json), w_syn 0.17875 mV; bilateral sugar LB3b ∪ LB3c = 34 (L17/R17), A′ subset LB3c-only bilateral = 23 (L12/R11); bitter 38 / water 17 / ir94e 19 unchanged (data/malecns/cells.json); primary L10331, R16949 recorded. - Female: frozen FlyWire v783 substrate and model (data/stim_protocol.json, w_syn 0.275 mV, all model and trial fields unchanged); bilateral sugar LB3b ∪ LB3c = 57 (LB3b 25: L13/R12; LB3c 32: L20/R12) from the workbook's FlyWire rows (Connectome value 'FAFB – Flywire', Subtype in {LB3b, LB3c}, both Root_Side), A′ subset LB3c-only bilateral = 32; bitter 42 / water 18 / ir94e 18 unchanged (data/cells.json); primary frozen left MN9 720575940660219265, frozen right 720575940618238523 recorded. - Female overlaps, recorded: the 57 keep 12 of the frozen 23 sugar cells and include 7 frozen water cells; 0 overlap with bitter and ir94e. Each physical root appears once, assigned to the sugar channel; water and ir94e channels are 0 Hz in every condition, so no conflict arises. Male typed sets are disjoint. - Physical layouts: male 34+38+17+19 = 108 units; female 57+42+11+18 = 128 units (the 7 water cells that are in the sugar set are counted once, in sugar). Channel order sugar, bitter, water, ir94e; ascending numeric body ID within a channel. Inactive units keep the ordinary refractory period; driven units get refractory 0, exactly as the M1/M1i runners do.",
+      "3": "**Runs, identical design per brain, seeds 20260910+trial (trial 0..29) for every condition, 1,000 ms, dt 0.1 ms:** A sugar 25/50/100/200 with bitter 0 (120 trials); B sugar 200 with bitter 0/25/50/100/200 (150); C bitter 25/50/100/200 alone (120); D baseline (30); A′ bilateral union versus bilateral LB3c-only at 120 Hz, 30 each, paired seeds (60). 480 per brain, 960 total. Per trial record: both MN9 rates and first-spike latencies, whole-network spike count, neurons fired, source spike counts, Poisson event trains, worker peak RSS, as M1i did.",
+      "4": "**Gates, unchanged:** A–D historical predicates (sim.malecns.phase0.evaluate_gates, which implements the female Phase 0 predicates of scripts/phase0_report.py; a test must assert the two agree on the female summaries), S1 (≥4 of the 5 sugar levels 25/50/100/120/200 positive), S2 (each adjacent decrease ≤ pooled population SD), S3 (sugar 200 whole-network spike count max/min < 3; zero minimum fails), from sim.malecns.split.shape_gate, on each brain's primary MN9. **Pass rule per brain:** A, B, C, D, S1, S2, S3. **Adoption rule:** the policy is adopted for v2 only if both brains pass. If either fails, the policy is rejected and the male line closes at nine variants. **Stop rule:** no further variant, set, gain or threshold change after M1j under this authorization.",
+      "5": "**Retention table:** male, outgoing synapses of the 34 bilateral sugar cells (and the 23-cell A′ subset) at ≥1 versus ≥5, same layout as M1i's table, recorded not deciding. Female frozen graph has no cut: its table records outgoing synapse totals of the 57 cells only, no retention fraction, and says so.",
+      "6": "**Environment check before any M1j trial:** rerun the M0 benchmark, baseline and sugar 200, 5 trials each, seeds 20260910–20260914, whole-CNS all-edge male substrate (data/malecns/derived/connectivity.parquet) at 0.275 mV with the 91-unit M0 layout, from the committed code via the same trial routine (SimNet.run_trial as sim/malecns/benchmark.py uses), into a separate write-once directory data/malecns/runs/m0_recheck. Compare every neuron's spike-time array in each of the 10 trials with the stored data/malecns/runs/m0 files exactly (same neuron keys, arrays equal). Identical: recorded in the M1j section and M1j proceeds. Any difference: stop, no M1j trial, report to the owner. The stored M0 provenance names older versions of some source files; this check is what tells whether later edits changed the numbers.",
+      "7": "**Owner addition, recorded (not a rule):** because the female bilateral sugar set includes 7 frozen water cells, a v2 re-typing must redefine the water set as LB3a as well, not only sugar. Add this as a follow-up line in docs/v2_decision_memo.md (in the v2 cell-set / policy area; keep the memo's style and word budget).",
+      "8": "**Sequence:** declaration commit → cell files, protocols, retention tables, runners with compile-only plans (internal checkpoint) → M0 recheck (stop if not identical) → male run → female run → independent audit → results section with both gate tables and both sugar curves side by side → memo and OQ updates → PR into dev. One report to the owner at the end."
+    },
+    "m0_recheck": {
+      "conditions": {
+        "baseline": 5,
+        "sugar200": 5
+      },
+      "seeds": [
+        20260910,
+        20260911,
+        20260912,
+        20260913,
+        20260914
+      ],
+      "connectivity_file": "data/malecns/derived/connectivity.parquet",
+      "w_syn_mV": 0.275,
+      "poisson_units": 91,
+      "trial_routine": "SimNet.run_trial as sim/malecns/benchmark.py uses, from committed code",
+      "output_directory": "data/malecns/runs/m0_recheck",
+      "write_once": true,
+      "reference_directory": "data/malecns/runs/m0",
+      "comparison": "Every neuron in every one of the 10 trials: identical neuron keys and exactly equal spike-time arrays.",
+      "on_match": "Record in M1j section; M1j may proceed.",
+      "on_difference": "Stop; no M1j trial; report to owner.",
+      "reason": "Stored M0 provenance names older source versions; exact comparison checks whether later edits changed numbers."
+    },
+    "seed_scheme": {
+      "base_seed": 20260910,
+      "formula": "20260910 + trial",
+      "trial_range": [
+        0,
+        29
+      ],
+      "same_seeds_across_conditions": true,
+      "R1_difference": "R1 used the published grid formula 20260910+1000*(seed_index%40)+trial; M1j uses M1 seeds."
+    },
+    "gate_agreement_test_required": "Assert sim.malecns.phase0.evaluate_gates agrees with scripts/phase0_report.py on female summaries before running.",
+    "per_trial_records": [
+      "both MN9 rates",
+      "both MN9 first-spike latencies",
+      "whole-network spike count",
+      "neurons fired",
+      "source spike counts",
+      "Poisson event trains",
+      "worker peak RSS"
+    ],
+    "total_trials_both_brains": 960
+  },
+  "reference_protocol": {
+    "path": "data/stim_protocol.json",
+    "bytes": 3484,
+    "sha256": "9f9495033281bfcd6f3b373551817987deb2cc083ae94ab61fece9065102d82a"
+  }
+}

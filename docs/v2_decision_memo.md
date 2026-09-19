@@ -115,6 +115,10 @@ the v2 sugar set. This records policy, not a re-freeze or male-substrate
 validation. No further female-brain runs; male validation is separate.
 [Owner decision and A-prime](open_questions.md#r1-checkpoint-decision-v1-retained-v2-typed-not-executed-2026-09-13).
 
+Owner follow-up (2026-09-19): because bilateral sugar includes seven frozen
+water cells, v2 re-typing must also redefine water as LB3a; M1j keeps water
+unchanged. [Bilateral policy declaration](bilateral_sugar_policy.md).
+
 ### MaleCNS as the substrate — Closed after eight variants
 
 M1i's declared whole-CNS >=5 graph at gain 0.65 matches all three
@@ -148,7 +152,7 @@ leg/labellar stations form a sequence rather than concurrent outputs. [Current e
 
 Pharyngeal product axis: unblock with a dish-to-pharyngeal-drive mapping that cites its source or states an explicitly designed rule, plus a user-facing meaning signed off by the owner. [Mapping basis](phase1_5_plan.md#task-c-v2-encoder-schema-proposal-design-only-no-implementation), [Pharyngeal evidence](pharyngeal_screen.md).
 
-MaleCNS: Closed after eight variants; M1i matches the replication criteria but fails our declared gates. Its stop rule authorises no further variant, gain, threshold change or M2. Any future reopening or product integration requires a separate owner decision. [M1i results](malecns_phase0.md#m1i-results-checkpoint--2026-09-18), [eight-variant closing ledger](malecns_phase0.md#male-line-closing-ledger--eight-variants-2026-09-18).
+MaleCNS: Closed after eight variants; M1i matches the replication criteria but fails our declared gates. Its stop rule authorises no further variant, gain, threshold change or M2. Any future reopening or product integration requires a separate owner decision; the owner has declared [M1j as a v2 bilateral-sugar policy test](bilateral_sugar_policy.md). [M1i results](malecns_phase0.md#m1i-results-checkpoint--2026-09-18), [eight-variant closing ledger](malecns_phase0.md#male-line-closing-ledger--eight-variants-2026-09-18).
 
 ## Standing caveats
 
