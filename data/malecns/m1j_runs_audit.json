@@ -237344,8 +237344,8 @@
   "poisson_unit_trials": 113280,
   "auditor": {
     "path": "sim/malecns/audit_m1j.py",
-    "bytes": 14388,
-    "sha256": "bf7c83270b3a1448fdba688d9e08285f6c6592a18dc05beeb1a520a5e4086712"
+    "bytes": 14309,
+    "sha256": "2b9ae064a7f7354f0dc1457a607240b74b207c92a9afffa54a27b3b8be8fa75f"
   },
   "dependencies": [
     {
