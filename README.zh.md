@@ -8,6 +8,7 @@ English: [README.md](README.md)
 
 **最近更新**（完整列表见 [CHANGELOG.md](CHANGELOG.md)）
 
+- v2.0.0（草案）：加入第二只独立计算的雄蝇，分别展示结果和回放；可以比较两只果蝇的选择，不合并结果。雌蝇结果保持不变。
 - v1.2.1（2026-09-15）：更新果蝇全部 16 组中英文台词，改用像素表情、气泡和字体；分数、状态和分配规则不变，诚实声明表不变。
 - v1.2.0（2026-09-15）：新增四种设计状态、MN11 读数与示意动作。MN9 分数和排序不变；诚实声明表区分状态规则、动画和实测行为。
 - v1.1.3（2026-09-13）：窄屏下盘子下方的长菜名不再挤在一起，超长部分显示省略号，title 提示保留完整菜名；行高不变。没有任何菜的分数变化；诚实声明表未改动。
@@ -23,6 +24,9 @@ English: [README.md](README.md)
 - `vendor/` — 已 gitignore，只读的上游参考数据与代码
 
 ## 署名与数据来源
+- [MaleCNS v1.0](https://male-cns.janelia.org/release/)，Janelia FlyEM 雄性中枢神经系统连接组（Berg 等 2026）：[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)。我们的派生数据只保留至少 5 个突触的连接、移除自突触、赋予模型符号与权重、模拟反应，并投影坐标用于展示；查找表和回放是仿真输出，不是原始测量。
+- Tastekin 等（2026），*Cell*：雄蝇 GRN 分型来自 Table S1（完整引文见下）；雌蝇保留 Shiu 的冻结细胞集。
+- [blendi-remade/fly-brain-minecraft](https://github.com/blendi-remade/fly-brain-minecraft/blob/main/docs/VALIDATION.md)：采用这个独立项目中 Shiu 突触权重的 0.65 倍标定，并在本项目复现（M1i）；不是与动物行为数据的校准。
 - FlyWire v783 连接组数据：CC BY-NC 4.0。
 - Shiu 等（2024），*Nature*，模型代码：MIT。
 - Eon fly-brain 基准仓库：GPL-2.0；仅作只读参考/数据使用，未复制任何代码。
@@ -39,11 +43,11 @@ English: [README.md](README.md)
 - FlyWire v783 连接组（Dorkenwald et al. 2024；Schlegel et al. 2024），CC BY-NC 4.0。
 - Schlegel, P., Yin, Y., Bates, A.S., et al. (2024). Whole-brain annotation and multi-connectome cell typing of Drosophila. *Nature* 634, 139–152. 注释表（细胞核位置、细胞类型）：CC BY 4.0。
 
-相关工作，不属于本仿真（见 docs/open_questions.md，OQ-2）：
+第二套实验使用的雄蝇重建与 GRN 分型：
 - Berg, S., Beckett, I.R., Costa, M., … Hess, H.F., Rubin, G.M., Jefferis, G.S.X.E. (2026). Sexual dimorphism in the complete Drosophila male central nervous system connectome. *Cell* 189(18), 5504–5526.e15. https://doi.org/10.1016/j.cell.2026.08.015（MaleCNS；雄性脑 + 腹神经索）。
 - Tastekin, I., de Haan Vicente, I., Beresford, R.J., Morris, B.J., Beckett, I., Schlegel, P., Gkantia, M., Marin, E.C., Costa, M., Jefferis, G.S.X.E., Ribeiro, C. (2026). The complete gustatory connectome of adult Drosophila reveals how taste guides feeding, foraging, and social behavior. *Cell* 189(18), 5527–5551.e5. https://doi.org/10.1016/j.cell.2026.08.016。
 
-产品页的来源说明："分数来自已发表的雌性果蝇脑 LIF 模型（Shiu 2024 / FlyWire v783）。2026 年 9 月的两篇论文描述了更完整的味觉接线图，但不在本仿真之内。"
+产品页的来源说明："雌蝇分数保留已发表的 LIF 模型在 FlyWire v783 上的结果（Shiu 2024）。第二只果蝇使用 MaleCNS v1.0 和 Tastekin 的 GRN 分型，另行规定刺激协议和权重标定。这是两套独立实验。"
 
 ## 屏幕上看到的是什么
 
@@ -53,6 +57,9 @@ English: [README.md](README.md)
 - **这些结果都可以复现。** 每个回放文件里都会保存对应的条件、刺激等级、随机种子、commit 和协议哈希，并由 `scripts/run_replay.py` 统一生成。
 
 ## 这个模型能说明什么，又不能说明什么
+
+下表原有的雌蝇声明仍只针对雌蝇；明确写出雄蝇或两只果蝇的行，说明第二套实验及两者的比较。
+
 | 说法 | 状态 | 依据 |
 |---|---|---|
 | 分数来自已发表的雌性果蝇脑 LIF 模型，运行在 FlyWire v783 上 | 是 | Shiu et al. 2024；docs/phase0_report.md |
@@ -62,7 +69,14 @@ English: [README.md](README.md)
 | 覆盖完整的进食序列 | **否** —— 真实进食是一串检查点：足部刚毛 → 唇瓣刚毛 → 味觉钉 → 咽。本仿真只覆盖唇瓣刚毛这一站。 | Tastekin et al. 2026，讨论部分 "Sequential checkpoints and action control" |
 | 水在模型里是独立的味觉品质 | **否** —— 在这个模型里水是第二种食欲驱动，主要帮弱糖加分（糖 40 Hz + 水 40 Hz 得到 24 Hz MN9，单独糖只有 4 Hz；糖 200 Hz 时只多 7%）。所以湿的咸菜会赢过干的。这是连接组模型的性质，不是我们写的规则。 | docs/phase1_characterization.md，糖 × 水 |
 | Ir94e 是氨基酸厌恶通道（Tastekin et al. 2026，LB1e）。每道菜对应哪个 Ir94e 等级是我们定的（编码器 v2.3）。它对 MN9 的作用是模型的：在糖低 / 水低时，MN9 沿 无 / 低 / 中 / 高 从 61.8 → 9.3 → 1.6 → 0.5 Hz。在这个模型里，果蝇把清淡的主食排在所有肉类或酱油调味的菜之上。这种抑制的强度没有和行为数据校准过（docs/open_questions.md OQ-6）。 | 方向已复现，映射是设计的 | docs/phase1_characterization.md，糖 × ir94e；docs/encoder_stability_v2_3_batch2.md |
-| 使用了 2026 年 9 月的完整味觉接线（MaleCNS） | **否** —— 另一只动物，不在本仿真内 | docs/open_questions.md，v3 note |
+| 使用了 2026 年 9 月的完整味觉接线（MaleCNS） | **是** —— 产品中加入了第二只独立计算的雄蝇，使用 MaleCNS v1.0 和 Tastekin 的 GRN 分型；冻结的雌蝇实验保持不变。两只果蝇各用各的查找表，不合并分数或选择。 | [雄蝇项目记录](docs/male_fly_v2.md) |
+| 雄蝇脑使用 MaleCNS v1.0，只保留至少 5 个突触的连接，突触权重为 Shiu 的 0.65 倍（0.17875 mV）；这套标定取自独立项目 blendi-remade/fly-brain-minecraft，并由我们复现。雌蝇使用 FlyWire v783、全部连接和 Shiu 的 0.275 mV。 | **模型** —— 速率来自连接组 LIF 模型；连接截断门槛和采用的权重标定是设计选择，并非与动物行为数据的校准。 | [雄蝇项目记录](docs/male_fly_v2.md)；[M1i 复现](docs/malecns_phase0.md) |
+| 雄蝇接受双侧刺激，使用 Tastekin 分型的 GRN 细胞集；雌蝇接受单侧刺激，使用 Shiu 的细胞集。两只果蝇并不共用一套刺激协议。 | **模型** —— 反应分别在各自协议下计算；细胞集、刺激侧和驱动强度由我们选择。共用的菜品等级是编码器估算，不是实测味觉输入。 | [雄蝇协议与细胞集](docs/male_fly_v2.md) |
+| 雄蝇脑未通过我们四项行为门槛中的一项：单独以 25 Hz 刺激苦味时，MN9 为 1.07 Hz，超过我们设定的 1.0 Hz 上限（docs/malecns_phase0.md，M1j）；它低于产品的 5 Hz 活动阈值，在显示中看不出来，但仍如实记录。 | **否** —— 雄蝇没有通过全部四项门槛。MN9 速率是模型输出；1.0 Hz 门槛上限和 5 Hz 显示阈值是我们定的。 | [M1j 记录](docs/malecns_phase0.md)；[承诺](docs/male_fly_v2.md) |
+| 两只果蝇意见不同时，原因可能是性别、重建、细胞分型、兴奋或抑制符号的赋值、权重或刺激协议；这套流程无法区分这些因素。只要选择不同，这句话就会出现在结果页上，而不只放在 README 里。 | **否** —— 选择不同不能单独归因于性别。不同选择来自模型结果；固定展示这段解释是我们的产品规则。 | [雄蝇项目记录](docs/male_fly_v2.md) |
+| 两只果蝇在 71% 的菜品配对上意见一致；雄蝇拒绝所有带苦味的菜，很少激活 MN11 | **模型** —— 本设计下的测量：15,051 对中有 10,723 对一致（71.2%，包括平局）。174 道菜的雄蝇状态为 12 / 0 / 90 / 72（吃 / 嘴动了 / 只伸了喙 / 无明显反应）；72 道的主 MN9 低于我们设定的 5 Hz 阈值。这里的“拒绝”仅指带苦味的菜都未达到设计的“吃”状态：66 道中有 56 道 MN9 低于 5 Hz，另 10 道为“只伸了喙”。“很少激活 MN11”指 MN11D 三细胞均值仅在 12 道菜中达到我们设定的 5 Hz 状态阈值，不代表没有 MN11 放电，也不是实测的拒食行为。 | [Phase 2 比较](docs/malecns_phase2.md) |
+| 雄蝇分数和四种状态标签是测得的进食行为 | **否** —— 模型速率按我们的规则分类：只用主 MN9 L10331 给菜排序；状态使用它的 30 次试验均值，以及每次试验中三个 MN11D 细胞平均速率的 30 次均值，以我们设定的 >=5 Hz 为活跃阈值。次 MN9 R16949 和 MN11V 不参与判定。标签、动作和台词是设计，未声称经过行为校准。 按我们的示意状态，这只脑面对这些菜时通常只伸喙、嘴却没跟上（三细胞 MN11D 均值仅在 400 格中的 9 格达到设计的 5 Hz 阈值），所以“只伸了喙”是它在这份菜单上的常态，不是偶发现象。 | [雄蝇读数与状态规则](docs/male_fly_v2.md) |
+| 雄蝇脑图展示实时活动，且每个神经元都在真实解剖位置上 | **否** —— 活动来自网格试验 0，是该格分数所依据的 30 次试验之一，不是实时仿真，也不是均值。前视图使用 MaleCNS v1.0 胞体或入脑点坐标，不画神经髓轮廓。228 个回放索引内的神经元缺少这两种坐标，被画在脑下方的非解剖位置带中，另有一个追加的读出细胞；它们不全是感觉神经元。腹神经索胞体放在底部条带。布局由我们设计。 | [Phase 2 回放规则](docs/malecns_phase2.md)；`site/data/neurons_male.json` |
 | 持续性抑制 / 去抑制（Tastekin 2026，图 S17） | 不在产品内；是一个设计出来的实验条件（docs/tonic_inhibition.md）。以 100 Hz 驱动 CB0806 或 CB0862 能在糖刺激下压住 MN9；三个"刹车"神经元没有一个被糖压制，所以在这个设计下没有观察到去抑制。糖确实会激活 CB0465，这是一个前馈刹车，已经包含在产品的每个分数里。刹车的选择和驱动强度都是我们定的，未经校准。 | docs/tonic_inhibition.md；OQ-3 |
 | 脑图是实时仿真 | **否** —— 它回放每个格子一次记录好的 1 秒试验（固定种子），来自同一个模型；位置是 FlyWire 胞体坐标，活动是记录到的放电时刻 | docs/site.md，`site/data/replay/` 文件头 |
 | 果蝇动画是测得的行为 | **否** —— 动作、口器特写、情绪和台词是我们根据查找表状态设计的示意，不是模型测得的动作或感受 | docs/site.md |
