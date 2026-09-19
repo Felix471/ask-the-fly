@@ -1,0 +1,483 @@
+{
+  "protocol_version": "male-v1.0",
+  "data_version": "male-cns:v1.0-fbm-ge5-1",
+  "connectivity_file": "data/malecns/derived/fbm/connectivity.parquet",
+  "completeness_file": "data/malecns/derived/fbm/completeness.csv",
+  "substrate_record": {
+    "path": "data/malecns/substrate_record_fbm.json",
+    "bytes": 101399,
+    "sha256": "245be88e4c434964fd6f4dd80c89fc6a876a09498bad6aa0210241d3668b3130",
+    "counts": {
+      "neurons": 166700,
+      "ge5_before_autapse_removal": 6242118,
+      "autapses_removed": 33,
+      "edges": 6242085,
+      "synapses": 89859938
+    },
+    "autapses": "Autapses were removed: 33 edges; counts copied from substrate_record_fbm.json."
+  },
+  "model": {
+    "source": "vendor/fly-brain/code/paper-phil-drosophila/model.py (MIT, Shiu et al. 2024)",
+    "v_0_mV": -52,
+    "v_rst_mV": -52,
+    "v_th_mV": -45,
+    "t_mbr_ms": 20,
+    "tau_ms": 5,
+    "t_rfc_ms": 2.2,
+    "t_dly_ms": 1.8,
+    "w_syn_mV": 0.17875000000000002,
+    "f_poi": 250,
+    "integration": "linear",
+    "dt_ms": 0.1,
+    "w_syn_expression": "0.65 * 0.275"
+  },
+  "trial": {
+    "duration_ms": 1000,
+    "n_trials": 30,
+    "sanity_n_trials": 5,
+    "seed_rule": "trial i uses seed base_seed+i; base_seed=20260910"
+  },
+  "stimulus": {
+    "type": "PoissonInput per GRN, N=1, weight=w_syn*f_poi, refractory of stimulated GRNs set to 0",
+    "channels": {
+      "sugar": {
+        "cell_set": "sugar",
+        "count": 34,
+        "sides": "both"
+      },
+      "bitter": {
+        "cell_set": "bitter",
+        "count": 38,
+        "sides": "both"
+      },
+      "water": {
+        "cell_set": "water",
+        "count": 17,
+        "sides": "both"
+      },
+      "ir94e": {
+        "cell_set": "ir94e",
+        "count": 19,
+        "sides": "both"
+      }
+    },
+    "layout": {
+      "channel_order": [
+        "sugar",
+        "bitter",
+        "water",
+        "ir94e"
+      ],
+      "within_channel_order": "ascending numeric Body_ID",
+      "physical_units": 108,
+      "driven_refractory_ms": 0,
+      "inactive_refractory": "ordinary model.t_rfc_ms"
+    },
+    "external_kick": "w_syn*f_poi (unchanged coupling; 0.17875000000000002 * 250 mV per event)"
+  },
+  "readout": {
+    "neuron": "MN9",
+    "primary": 10331,
+    "primary_side": "XLSX L",
+    "secondary": 16949,
+    "secondary_side": "XLSX R",
+    "aggregation": "primary_only",
+    "aggregation_rationale": "Post-M1c owner decision on reconstruction completeness (docs/malecns_phase0.md); L10331 is primary, R16949 is recorded secondary.",
+    "rate_definition": "spikes in [0, duration] / duration, mean over trials; also report std over trials",
+    "extra_readouts": {
+      "mn11d": [
+        11269,
+        11393,
+        551398
+      ],
+      "mn11v": [
+        49829,
+        492462351
+      ],
+      "cem": [
+        19823,
+        20518,
+        23511,
+        32852,
+        34597,
+        482595
+      ]
+    },
+    "extra_readouts_note": "recorded for the product's four-state rule and the replay pack; not deciding"
+  },
+  "state_rule": {
+    "mn9": {
+      "id": "10331",
+      "side": "XLSX L (primary)",
+      "statistic": "30-trial mean Hz"
+    },
+    "mn11": {
+      "type": "MN11D",
+      "statistic": "30-trial mean of per-trial mean over the male MN11D cells (count 3 from the cells file)"
+    },
+    "threshold_hz": 5.0,
+    "active": "mean >= 5.0",
+    "silent": "mean < 5.0",
+    "states": {
+      "active_active": "eats",
+      "silent_active": "mouth_moves",
+      "active_silent": "proboscis_only",
+      "silent_silent": "no_response"
+    },
+    "not_deciding": [
+      "MN9 right",
+      "MN11V"
+    ],
+    "ties": "Not a state; existing MN9 tie handling unchanged.",
+    "meaning": "Owner-designed threshold categories of model outputs; product wording and site integration are Phase 3 decisions."
+  },
+  "grid": {
+    "grid_levels_file": "data/grid_levels.json",
+    "grid_levels_record": {
+      "path": "data/grid_levels.json",
+      "bytes": 1997,
+      "sha256": "33a1dab4a03a440298d12c7ba2365e88457268b4ee3a220f15981b2702350780"
+    },
+    "levels": {
+      "sugar": {
+        "none": 0,
+        "low": 60,
+        "medium": 80,
+        "high": 120,
+        "very_high": 200
+      },
+      "bitter": {
+        "none": 0,
+        "low": 30,
+        "medium": 60,
+        "high": 100,
+        "very_high": 160
+      },
+      "water": {
+        "none": 0,
+        "low": 60,
+        "medium": 60,
+        "high": 180,
+        "very_high": 240
+      },
+      "ir94e": {
+        "none": 0,
+        "low": 60,
+        "medium": 120,
+        "high": 200
+      }
+    },
+    "n_unique_cells": 400,
+    "seed_rule": "20260910 + 1000 * (cell_index % 40) + trial, trial 0..29, cell_index in the female grid's cell order",
+    "coordinates_and_order": "Cell coordinates and order are the female grid's so dish encodings map unchanged."
+  },
+  "phase1_characterization": {
+    "status": "plan only; not started",
+    "water_alone_hz": [
+      0,
+      60,
+      180,
+      240
+    ],
+    "water_x_sugar": {
+      "sugar_hz": [
+        0,
+        60,
+        80,
+        120,
+        200
+      ],
+      "water_hz": [
+        60,
+        180,
+        240
+      ]
+    },
+    "ir94e_alone_hz": [
+      0,
+      60,
+      120,
+      200
+    ],
+    "ir94e_x_sugar": {
+      "sugar_hz": [
+        0,
+        60,
+        80,
+        120,
+        200
+      ],
+      "ir94e_hz": [
+        60,
+        120,
+        200
+      ]
+    },
+    "shared_sugar_alone_hz": [
+      60,
+      80,
+      120,
+      200
+    ],
+    "deduplication": "Each block has 20 unique conditions: 15 nonzero-channel x sugar conditions (including channel-alone at sugar 0), baseline, and four nonzero sugar-alone conditions. Both blocks share the baseline and the sugar-alone row at 60/80/120/200, run once; water-0 and ir94e-0 columns are this shared row.",
+    "n_unique_conditions": 35,
+    "n_trials_per_condition": 30,
+    "total_trials": 1050,
+    "seed_rule": "20260910 + trial, trial 0..29, shared across conditions (M1 seeds)",
+    "record_whole_network_counts": true,
+    "conditions": [
+      {
+        "sugar_hz": 0,
+        "bitter_hz": 0,
+        "water_hz": 0,
+        "ir94e_hz": 0
+      },
+      {
+        "sugar_hz": 60,
+        "bitter_hz": 0,
+        "water_hz": 0,
+        "ir94e_hz": 0
+      },
+      {
+        "sugar_hz": 80,
+        "bitter_hz": 0,
+        "water_hz": 0,
+        "ir94e_hz": 0
+      },
+      {
+        "sugar_hz": 120,
+        "bitter_hz": 0,
+        "water_hz": 0,
+        "ir94e_hz": 0
+      },
+      {
+        "sugar_hz": 200,
+        "bitter_hz": 0,
+        "water_hz": 0,
+        "ir94e_hz": 0
+      },
+      {
+        "sugar_hz": 0,
+        "bitter_hz": 0,
+        "water_hz": 60,
+        "ir94e_hz": 0
+      },
+      {
+        "sugar_hz": 0,
+        "bitter_hz": 0,
+        "water_hz": 180,
+        "ir94e_hz": 0
+      },
+      {
+        "sugar_hz": 0,
+        "bitter_hz": 0,
+        "water_hz": 240,
+        "ir94e_hz": 0
+      },
+      {
+        "sugar_hz": 60,
+        "bitter_hz": 0,
+        "water_hz": 60,
+        "ir94e_hz": 0
+      },
+      {
+        "sugar_hz": 60,
+        "bitter_hz": 0,
+        "water_hz": 180,
+        "ir94e_hz": 0
+      },
+      {
+        "sugar_hz": 60,
+        "bitter_hz": 0,
+        "water_hz": 240,
+        "ir94e_hz": 0
+      },
+      {
+        "sugar_hz": 80,
+        "bitter_hz": 0,
+        "water_hz": 60,
+        "ir94e_hz": 0
+      },
+      {
+        "sugar_hz": 80,
+        "bitter_hz": 0,
+        "water_hz": 180,
+        "ir94e_hz": 0
+      },
+      {
+        "sugar_hz": 80,
+        "bitter_hz": 0,
+        "water_hz": 240,
+        "ir94e_hz": 0
+      },
+      {
+        "sugar_hz": 120,
+        "bitter_hz": 0,
+        "water_hz": 60,
+        "ir94e_hz": 0
+      },
+      {
+        "sugar_hz": 120,
+        "bitter_hz": 0,
+        "water_hz": 180,
+        "ir94e_hz": 0
+      },
+      {
+        "sugar_hz": 120,
+        "bitter_hz": 0,
+        "water_hz": 240,
+        "ir94e_hz": 0
+      },
+      {
+        "sugar_hz": 200,
+        "bitter_hz": 0,
+        "water_hz": 60,
+        "ir94e_hz": 0
+      },
+      {
+        "sugar_hz": 200,
+        "bitter_hz": 0,
+        "water_hz": 180,
+        "ir94e_hz": 0
+      },
+      {
+        "sugar_hz": 200,
+        "bitter_hz": 0,
+        "water_hz": 240,
+        "ir94e_hz": 0
+      },
+      {
+        "sugar_hz": 0,
+        "bitter_hz": 0,
+        "water_hz": 0,
+        "ir94e_hz": 60
+      },
+      {
+        "sugar_hz": 0,
+        "bitter_hz": 0,
+        "water_hz": 0,
+        "ir94e_hz": 120
+      },
+      {
+        "sugar_hz": 0,
+        "bitter_hz": 0,
+        "water_hz": 0,
+        "ir94e_hz": 200
+      },
+      {
+        "sugar_hz": 60,
+        "bitter_hz": 0,
+        "water_hz": 0,
+        "ir94e_hz": 60
+      },
+      {
+        "sugar_hz": 60,
+        "bitter_hz": 0,
+        "water_hz": 0,
+        "ir94e_hz": 120
+      },
+      {
+        "sugar_hz": 60,
+        "bitter_hz": 0,
+        "water_hz": 0,
+        "ir94e_hz": 200
+      },
+      {
+        "sugar_hz": 80,
+        "bitter_hz": 0,
+        "water_hz": 0,
+        "ir94e_hz": 60
+      },
+      {
+        "sugar_hz": 80,
+        "bitter_hz": 0,
+        "water_hz": 0,
+        "ir94e_hz": 120
+      },
+      {
+        "sugar_hz": 80,
+        "bitter_hz": 0,
+        "water_hz": 0,
+        "ir94e_hz": 200
+      },
+      {
+        "sugar_hz": 120,
+        "bitter_hz": 0,
+        "water_hz": 0,
+        "ir94e_hz": 60
+      },
+      {
+        "sugar_hz": 120,
+        "bitter_hz": 0,
+        "water_hz": 0,
+        "ir94e_hz": 120
+      },
+      {
+        "sugar_hz": 120,
+        "bitter_hz": 0,
+        "water_hz": 0,
+        "ir94e_hz": 200
+      },
+      {
+        "sugar_hz": 200,
+        "bitter_hz": 0,
+        "water_hz": 0,
+        "ir94e_hz": 60
+      },
+      {
+        "sugar_hz": 200,
+        "bitter_hz": 0,
+        "water_hz": 0,
+        "ir94e_hz": 120
+      },
+      {
+        "sugar_hz": 200,
+        "bitter_hz": 0,
+        "water_hz": 0,
+        "ir94e_hz": 200
+      }
+    ]
+  },
+  "product_commitments": [
+    "The male brain uses MaleCNS v1.0 with connections of >= 5 synapses and a synaptic weight of 0.65 x Shiu's (0.17875 mV), a calibration taken from an independent project (blendi-remade/fly-brain-minecraft) and replicated by us; the female uses FlyWire v783, all connections, Shiu's 0.275 mV.",
+    "The male is stimulated bilaterally with Tastekin-typed GRN sets; the female unilaterally with Shiu's sets. The two flies do not share one stimulus protocol.",
+    "The male brain misses one of our four behavioural gates: bitter alone at 25 Hz gives 1.07 Hz on MN9 against our 1.0 Hz limit (docs/malecns_phase0.md, M1j); invisible in the product below the 5 Hz activity threshold, but recorded.",
+    "When the two flies disagree, the cause may be sex, reconstruction, cell typing, sign assignment, weight, or stimulus protocol; this pipeline cannot separate them. This sentence appears on the result page whenever they disagree, not only in the README."
+  ],
+  "notes": [
+    "Paper calibrated w_syn on FlyWire v630; we run v783 only, absolute Hz may differ.",
+    "Model baseline firing is 0 Hz by construction (no intrinsic activity); condition D measures it anyway.",
+    "Male absolute Hz are on a different graph and weight; comparisons with the female are two experiments side by side, not one calibrated model."
+  ],
+  "provenance": {
+    "reference_protocol": {
+      "path": "data/stim_protocol.json",
+      "bytes": 3484,
+      "sha256": "9f9495033281bfcd6f3b373551817987deb2cc083ae94ab61fece9065102d82a"
+    },
+    "cells": {
+      "path": "data/malecns/cells_male_v1.json",
+      "bytes": 24264,
+      "sha256": "65ddae706c07f33621469bb80d49b93bbb55191b9288e78855307a2e5158efee"
+    },
+    "reports": [
+      "docs/malecns_phase0.md#m1i-results-checkpoint--2026-09-18",
+      "docs/bilateral_sugar_policy.md"
+    ],
+    "m1j_report_availability": "docs/bilateral_sugar_policy.md (M1j) is on PR #51, not yet merged into this branch's base 2ed0e84; the M1j facts cited here are the owner's recorded decision. No report is recreated in Phase 0.",
+    "configuration_sources": [
+      "https://github.com/blendi-remade/fly-brain-minecraft/blob/main/docs/VALIDATION.md",
+      "https://github.com/blendi-remade/fly-brain-minecraft/blob/main/PROVENANCE.md"
+    ],
+    "frozen_after_owner_go": true,
+    "owner_go": null,
+    "differences_from_female": [
+      "substrate",
+      "threshold",
+      "weight",
+      "bilateral typed sets",
+      "readout IDs",
+      "MN11D cell count"
+    ]
+  }
+}
