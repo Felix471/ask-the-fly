@@ -1,0 +1,433 @@
+{
+  "conditions": [
+    {
+      "id": "fbm_sugar",
+      "rates_hz": {
+        "fbm_sugar_labellar": 120,
+        "fbm_sugar_pharyngeal": 100,
+        "fbm_sugar_tarsal": 80,
+        "bitter": 0
+      },
+      "n_trials": 30,
+      "seeds": [
+        20260910,
+        20260911,
+        20260912,
+        20260913,
+        20260914,
+        20260915,
+        20260916,
+        20260917,
+        20260918,
+        20260919,
+        20260920,
+        20260921,
+        20260922,
+        20260923,
+        20260924,
+        20260925,
+        20260926,
+        20260927,
+        20260928,
+        20260929,
+        20260930,
+        20260931,
+        20260932,
+        20260933,
+        20260934,
+        20260935,
+        20260936,
+        20260937,
+        20260938,
+        20260939
+      ],
+      "connectivity_file": "data/malecns/derived/fbm/connectivity.parquet",
+      "L_hz": {
+        "mean": 104.73333333333333,
+        "sd": 4.449219656923622,
+        "positive_trials": 30
+      },
+      "R_hz": {
+        "mean": 0.0,
+        "sd": 0.0,
+        "positive_trials": 0
+      },
+      "bilateral_mean_hz": {
+        "mean": 52.36666666666667,
+        "sd": 2.224609828461811,
+        "positive_trials": 30
+      },
+      "R_latency_median_ms": null,
+      "L_latency_median_ms": 39.45,
+      "bilateral_bin_hz": {
+        "min": 10.0,
+        "median": 50.0,
+        "max": 90.0
+      },
+      "whole_network_spikes": {
+        "min": 127140.0,
+        "median": 296472.0,
+        "max": 342083.0
+      }
+    },
+    {
+      "id": "fbm_bitter",
+      "rates_hz": {
+        "fbm_sugar_labellar": 0,
+        "fbm_sugar_pharyngeal": 0,
+        "fbm_sugar_tarsal": 0,
+        "bitter": 120
+      },
+      "n_trials": 30,
+      "seeds": [
+        20260910,
+        20260911,
+        20260912,
+        20260913,
+        20260914,
+        20260915,
+        20260916,
+        20260917,
+        20260918,
+        20260919,
+        20260920,
+        20260921,
+        20260922,
+        20260923,
+        20260924,
+        20260925,
+        20260926,
+        20260927,
+        20260928,
+        20260929,
+        20260930,
+        20260931,
+        20260932,
+        20260933,
+        20260934,
+        20260935,
+        20260936,
+        20260937,
+        20260938,
+        20260939
+      ],
+      "connectivity_file": "data/malecns/derived/fbm/connectivity.parquet",
+      "L_hz": {
+        "mean": 0.0,
+        "sd": 0.0,
+        "positive_trials": 0
+      },
+      "R_hz": {
+        "mean": 0.0,
+        "sd": 0.0,
+        "positive_trials": 0
+      },
+      "bilateral_mean_hz": {
+        "mean": 0.0,
+        "sd": 0.0,
+        "positive_trials": 0
+      },
+      "R_latency_median_ms": null,
+      "L_latency_median_ms": null,
+      "bilateral_bin_hz": {
+        "min": 0.0,
+        "median": 0.0,
+        "max": 0.0
+      },
+      "whole_network_spikes": {
+        "min": 297157.0,
+        "median": 314397.0,
+        "max": 322332.0
+      }
+    },
+    {
+      "id": "fbm_both",
+      "rates_hz": {
+        "fbm_sugar_labellar": 120,
+        "fbm_sugar_pharyngeal": 100,
+        "fbm_sugar_tarsal": 80,
+        "bitter": 120
+      },
+      "n_trials": 30,
+      "seeds": [
+        20260910,
+        20260911,
+        20260912,
+        20260913,
+        20260914,
+        20260915,
+        20260916,
+        20260917,
+        20260918,
+        20260919,
+        20260920,
+        20260921,
+        20260922,
+        20260923,
+        20260924,
+        20260925,
+        20260926,
+        20260927,
+        20260928,
+        20260929,
+        20260930,
+        20260931,
+        20260932,
+        20260933,
+        20260934,
+        20260935,
+        20260936,
+        20260937,
+        20260938,
+        20260939
+      ],
+      "connectivity_file": "data/malecns/derived/fbm/connectivity.parquet",
+      "L_hz": {
+        "mean": 0.0,
+        "sd": 0.0,
+        "positive_trials": 0
+      },
+      "R_hz": {
+        "mean": 0.0,
+        "sd": 0.0,
+        "positive_trials": 0
+      },
+      "bilateral_mean_hz": {
+        "mean": 0.0,
+        "sd": 0.0,
+        "positive_trials": 0
+      },
+      "R_latency_median_ms": null,
+      "L_latency_median_ms": null,
+      "bilateral_bin_hz": {
+        "min": 0.0,
+        "median": 0.0,
+        "max": 0.0
+      },
+      "whole_network_spikes": {
+        "min": 312456.0,
+        "median": 335922.5,
+        "max": 346537.0
+      }
+    },
+    {
+      "id": "fbm_sugar_kc",
+      "rates_hz": {
+        "fbm_sugar_labellar": 120,
+        "fbm_sugar_pharyngeal": 100,
+        "fbm_sugar_tarsal": 80,
+        "bitter": 0
+      },
+      "n_trials": 5,
+      "seeds": [
+        20260910,
+        20260911,
+        20260912,
+        20260913,
+        20260914
+      ],
+      "connectivity_file": "data/malecns/derived/fbm_kc/connectivity.parquet",
+      "paired_with": "fbm_sugar",
+      "paired_trial_indices": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "kc_input_gain": 0.25,
+      "criterion": null,
+      "report": "Paired difference reported, no criterion.",
+      "L_hz": {
+        "mean": 96.4,
+        "sd": 3.0724582991474434,
+        "positive_trials": 5
+      },
+      "R_hz": {
+        "mean": 0.0,
+        "sd": 0.0,
+        "positive_trials": 0
+      },
+      "bilateral_mean_hz": {
+        "mean": 48.2,
+        "sd": 1.5362291495737217,
+        "positive_trials": 5
+      },
+      "R_latency_median_ms": null,
+      "L_latency_median_ms": 38.800000000000004,
+      "bilateral_bin_hz": {
+        "min": 10.0,
+        "median": 50.0,
+        "max": 80.0
+      },
+      "whole_network_spikes": {
+        "min": 197059.0,
+        "median": 228439.0,
+        "max": 236252.0
+      }
+    }
+  ],
+  "replication_criteria": {
+    "fbm_sugar": true,
+    "fbm_bitter": true,
+    "fbm_both": true
+  },
+  "kc_paired_difference": {
+    "definition": "KC minus unscaled, seeds 20260910-20260914",
+    "criterion": null,
+    "metrics": {
+      "L_hz": {
+        "differences": [
+          -4.0,
+          -13.0,
+          -9.0,
+          -8.0,
+          -4.0
+        ],
+        "mean": -7.6,
+        "sd": 3.3823069050575527
+      },
+      "R_hz": {
+        "differences": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "mean": 0.0,
+        "sd": 0.0
+      },
+      "bilateral_mean_hz": {
+        "differences": [
+          -2.0,
+          -6.5,
+          -4.5,
+          -4.0,
+          -2.0
+        ],
+        "mean": -3.8,
+        "sd": 1.6911534525287764
+      }
+    }
+  },
+  "metadata": {
+    "stage": "M1i b",
+    "started_utc": "2026-09-19T00:53:28.269509+00:00",
+    "sources": [
+      {
+        "path": "sim/network.py",
+        "bytes": 9535,
+        "sha256": "eee33ef855203a47e03920b56b4aba98551cc400ab22107ebb91edc385475ae7"
+      },
+      {
+        "path": "sim/malecns/adapter.py",
+        "bytes": 2112,
+        "sha256": "e438f86a33d1dab4290333cd3e5e13f77d5dc8344d10726bda4cbb0cea6b0d7a"
+      },
+      {
+        "path": "sim/malecns/phase0.py",
+        "bytes": 13472,
+        "sha256": "f6342a04adec37ed011d6aa9481ae7d044509fa33761ad23dfa92acfe4c43267"
+      },
+      {
+        "path": "sim/malecns/split.py",
+        "bytes": 9337,
+        "sha256": "e48b8c6bccecf4e3877b4318eb983d1630494a9fa3a75516a2a77bf05d488223"
+      },
+      {
+        "path": "sim/malecns/rescale.py",
+        "bytes": 10826,
+        "sha256": "f07a7ffd4bc4cda53653b943e68ec00dc86247e29e5abf77dce663bc95c2f24f"
+      },
+      {
+        "path": "sim/malecns/substrate.py",
+        "bytes": 16531,
+        "sha256": "1b6c7bd7122f9ad8a3d43aa87365c5b147d55d66067abcc4e7dce6fdcc63cac6"
+      },
+      {
+        "path": "sim/malecns/fbm_adapter.py",
+        "bytes": 7196,
+        "sha256": "104ee61dfbdf6c24578175b338626d382cc68c6fc0128ef8d0bc6d10c74c139a"
+      },
+      {
+        "path": "sim/malecns/fbm_substrate.py",
+        "bytes": 9121,
+        "sha256": "025065ae778101c8d33c423f80fa7248402898708452c7b6304ae44f273393db"
+      },
+      {
+        "path": "sim/malecns/fbm_output_retention.py",
+        "bytes": 4483,
+        "sha256": "75dc7f8410134f21acb94290d3485c1c6b80dedaff3dea26fa082765a29411bd"
+      },
+      {
+        "path": "sim/malecns/fbm_replication.py",
+        "bytes": 7929,
+        "sha256": "f6af504cb37b7769b46436bcd73d0fac23428aee412cd15bbec0d14196567deb"
+      },
+      {
+        "path": "sim/malecns/fbm_phase0.py",
+        "bytes": 3697,
+        "sha256": "bb3dfecbaef778a8b770cbeda5da45c601d050405ab988d79c7120125895026c"
+      },
+      {
+        "path": "data/malecns/substrate_record_fbm.json",
+        "bytes": 101399,
+        "sha256": "245be88e4c434964fd6f4dd80c89fc6a876a09498bad6aa0210241d3668b3130"
+      },
+      {
+        "path": "data/malecns/m1i_output_retention.json",
+        "bytes": 76563,
+        "sha256": "2815e7401b619b977b5db9dd0df469857f9aca8cf0c0fca733aab60433024270"
+      },
+      {
+        "path": "data/malecns/cells.json",
+        "bytes": 20697,
+        "sha256": "f29dd1511e5484d70062cf44d448acfa63e8ef89b49ab7cc281108e5be234c99"
+      },
+      {
+        "path": "data/malecns/cells_fbm.json",
+        "bytes": 11785,
+        "sha256": "544af50ab88f27ba880182a710105051c82995e957c39c584e0e994b86b07297"
+      },
+      {
+        "path": "data/malecns/stim_protocol_malecns_fbm.json",
+        "bytes": 18834,
+        "sha256": "752d640f0110bf90bf1050f9a1b152699526b10e0469ba5bcff11a0e8703bd81"
+      },
+      {
+        "path": "data/malecns/stim_protocol_malecns_fbm_replication.json",
+        "bytes": 18905,
+        "sha256": "0c003839126b094c6dc0848baf4916d082ddd0911920e2b2de91eb69fda38682"
+      }
+    ],
+    "plan": {
+      "path": "data/malecns/fbm_replication_plan.json",
+      "bytes": 7552,
+      "sha256": "71c0a076669f7ade0aa24f3a30fc68142d4c4cb49ac1ab65efbc8e1337cdd857"
+    },
+    "memory": {
+      "workers": 8,
+      "wsl_available_gib": 59.493038177490234,
+      "host_free_gib": 93.29819107055664,
+      "limiting_available_gib": 59.493038177490234,
+      "reserve_gib": 14.873259544372559,
+      "worker_budget_gib": 5.4,
+      "cpus": 32,
+      "rule": "min(16 conditions, logical_cpus//2, floor((min(WSL available, host free)-max(8GiB,25%))/ceil(1.5*M1 peak to 0.1GiB)))",
+      "measured_m1_peak_gib": 3.5776214599609375
+    },
+    "python": "3.10.21 | packaged by conda-forge | (main, Aug 21 2026, 22:42:31) [GCC 14.4.0]",
+    "brian2": "2.9.0",
+    "codegen": "cython",
+    "completed_utc": "2026-09-19T00:55:44.057942+00:00",
+    "walltime_s": 135.79291998000008,
+    "total_trials": 95,
+    "peak_worker_rss_gib": 0.9801254272460938
+  },
+  "raw_ledger": {
+    "path": "data/malecns/runs/m1i/b/full_results.json",
+    "bytes": 479094,
+    "sha256": "c2a544743f7f60588b483e41c6d2d5d3c159146cfca5a16abaafd664fc8677bd"
+  }
+}

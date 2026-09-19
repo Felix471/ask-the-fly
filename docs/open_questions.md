@@ -473,3 +473,8 @@ retrospective amendment to the run design. Candidate selection is still
 pending; no rerun is performed or authorised by this record.
 [Mapping, tracing and ROI-capture evidence](malecns_m1b.md#additional-mapping-and-roi-capture-check);
 [dated report decision](malecns_phase0.md#post-m1c-decision--2026-09-14).
+
+
+**2026-09-18 — M1i reopening:** The owner reopened the male line for the single pre-declared M1i replication of the externally calibrated fly-brain-minecraft configuration. See the [M1i pre-declaration](malecns_phase0.md#m1i-pre-declaration--2026-09-18) for the signed-off design, gates, checkpoints and stop rule.
+
+**2026-09-18 — M1i results and closure:** Run (b) meets all three declared replication criteria: fbm_sugar MATCH (two-cell mean 52.367 ± 2.225 Hz, positive in 30/30 trials), fbm_bitter MATCH and fbm_both MATCH (both MN9s zero in 30/30 each). The five paired KC trials give a two-cell KC-minus-base difference of -3.800 ± 1.691 Hz, with no criterion; all SDs are population SDs. Their sugar drive is 204 cells including pharyngeal and tarsal GRNs, ours 17 labellar cells. Run (a), n=30 per condition, passes A, B, C, D, S2 and S3 on L10331 but fails S1 (3/5 positive sugar levels), hence overall FAIL under the declared rule; R16949 is silent throughout. The male line stops after this eighth variant; no further gain, threshold change, variant or M2 follows. [Results checkpoint and eight-variant ledger](malecns_phase0.md#m1i-results-checkpoint--2026-09-18).

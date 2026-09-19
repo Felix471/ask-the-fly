@@ -1,0 +1,314 @@
+{
+  "stage": "M1i",
+  "run": "b",
+  "declaration_commit": "db7ae6e8e249a3bda7722da1b15a4dd67a6fc2ef",
+  "poisson_units": 242,
+  "channel_order": [
+    "fbm_sugar_labellar",
+    "fbm_sugar_pharyngeal",
+    "fbm_sugar_tarsal",
+    "bitter"
+  ],
+  "conditions": [
+    {
+      "id": "fbm_sugar",
+      "rates_hz": {
+        "fbm_sugar_labellar": 120,
+        "fbm_sugar_pharyngeal": 100,
+        "fbm_sugar_tarsal": 80,
+        "bitter": 0
+      },
+      "n_trials": 30,
+      "seeds": [
+        20260910,
+        20260911,
+        20260912,
+        20260913,
+        20260914,
+        20260915,
+        20260916,
+        20260917,
+        20260918,
+        20260919,
+        20260920,
+        20260921,
+        20260922,
+        20260923,
+        20260924,
+        20260925,
+        20260926,
+        20260927,
+        20260928,
+        20260929,
+        20260930,
+        20260931,
+        20260932,
+        20260933,
+        20260934,
+        20260935,
+        20260936,
+        20260937,
+        20260938,
+        20260939
+      ],
+      "connectivity_file": "data/malecns/derived/fbm/connectivity.parquet"
+    },
+    {
+      "id": "fbm_bitter",
+      "rates_hz": {
+        "fbm_sugar_labellar": 0,
+        "fbm_sugar_pharyngeal": 0,
+        "fbm_sugar_tarsal": 0,
+        "bitter": 120
+      },
+      "n_trials": 30,
+      "seeds": [
+        20260910,
+        20260911,
+        20260912,
+        20260913,
+        20260914,
+        20260915,
+        20260916,
+        20260917,
+        20260918,
+        20260919,
+        20260920,
+        20260921,
+        20260922,
+        20260923,
+        20260924,
+        20260925,
+        20260926,
+        20260927,
+        20260928,
+        20260929,
+        20260930,
+        20260931,
+        20260932,
+        20260933,
+        20260934,
+        20260935,
+        20260936,
+        20260937,
+        20260938,
+        20260939
+      ],
+      "connectivity_file": "data/malecns/derived/fbm/connectivity.parquet"
+    },
+    {
+      "id": "fbm_both",
+      "rates_hz": {
+        "fbm_sugar_labellar": 120,
+        "fbm_sugar_pharyngeal": 100,
+        "fbm_sugar_tarsal": 80,
+        "bitter": 120
+      },
+      "n_trials": 30,
+      "seeds": [
+        20260910,
+        20260911,
+        20260912,
+        20260913,
+        20260914,
+        20260915,
+        20260916,
+        20260917,
+        20260918,
+        20260919,
+        20260920,
+        20260921,
+        20260922,
+        20260923,
+        20260924,
+        20260925,
+        20260926,
+        20260927,
+        20260928,
+        20260929,
+        20260930,
+        20260931,
+        20260932,
+        20260933,
+        20260934,
+        20260935,
+        20260936,
+        20260937,
+        20260938,
+        20260939
+      ],
+      "connectivity_file": "data/malecns/derived/fbm/connectivity.parquet"
+    },
+    {
+      "id": "fbm_sugar_kc",
+      "rates_hz": {
+        "fbm_sugar_labellar": 120,
+        "fbm_sugar_pharyngeal": 100,
+        "fbm_sugar_tarsal": 80,
+        "bitter": 0
+      },
+      "n_trials": 5,
+      "seeds": [
+        20260910,
+        20260911,
+        20260912,
+        20260913,
+        20260914
+      ],
+      "connectivity_file": "data/malecns/derived/fbm_kc/connectivity.parquet",
+      "paired_with": "fbm_sugar",
+      "paired_trial_indices": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "kc_input_gain": 0.25,
+      "criterion": null,
+      "report": "Paired difference reported, no criterion."
+    }
+  ],
+  "seeds": [
+    20260910,
+    20260911,
+    20260912,
+    20260913,
+    20260914,
+    20260915,
+    20260916,
+    20260917,
+    20260918,
+    20260919,
+    20260920,
+    20260921,
+    20260922,
+    20260923,
+    20260924,
+    20260925,
+    20260926,
+    20260927,
+    20260928,
+    20260929,
+    20260930,
+    20260931,
+    20260932,
+    20260933,
+    20260934,
+    20260935,
+    20260936,
+    20260937,
+    20260938,
+    20260939
+  ],
+  "total_trials": 95,
+  "duration_ms": 1000,
+  "dt_ms": 0.1,
+  "w_syn_mV": 0.17875000000000002,
+  "execution": "No automatic retry/resume; separate b checkpoint before a. No trials in --check or --plan.",
+  "memory": {
+    "workers": 8,
+    "wsl_available_gib": 60.03956985473633,
+    "host_free_gib": 95.11612701416016,
+    "limiting_available_gib": 60.03956985473633,
+    "reserve_gib": 15.009892463684082,
+    "worker_budget_gib": 5.4,
+    "cpus": 32,
+    "rule": "min(16 conditions, logical_cpus//2, floor((min(WSL available, host free)-max(8GiB,25%))/ceil(1.5*M1 peak to 0.1GiB)))",
+    "measured_m1_peak_gib": 3.5776214599609375
+  },
+  "planned_utc": "2026-09-19T00:52:31.600114+00:00",
+  "sources": [
+    {
+      "path": "sim/network.py",
+      "bytes": 9535,
+      "sha256": "eee33ef855203a47e03920b56b4aba98551cc400ab22107ebb91edc385475ae7"
+    },
+    {
+      "path": "sim/malecns/adapter.py",
+      "bytes": 2112,
+      "sha256": "e438f86a33d1dab4290333cd3e5e13f77d5dc8344d10726bda4cbb0cea6b0d7a"
+    },
+    {
+      "path": "sim/malecns/phase0.py",
+      "bytes": 13472,
+      "sha256": "f6342a04adec37ed011d6aa9481ae7d044509fa33761ad23dfa92acfe4c43267"
+    },
+    {
+      "path": "sim/malecns/split.py",
+      "bytes": 9337,
+      "sha256": "e48b8c6bccecf4e3877b4318eb983d1630494a9fa3a75516a2a77bf05d488223"
+    },
+    {
+      "path": "sim/malecns/rescale.py",
+      "bytes": 10826,
+      "sha256": "f07a7ffd4bc4cda53653b943e68ec00dc86247e29e5abf77dce663bc95c2f24f"
+    },
+    {
+      "path": "sim/malecns/substrate.py",
+      "bytes": 16531,
+      "sha256": "1b6c7bd7122f9ad8a3d43aa87365c5b147d55d66067abcc4e7dce6fdcc63cac6"
+    },
+    {
+      "path": "sim/malecns/fbm_adapter.py",
+      "bytes": 7196,
+      "sha256": "104ee61dfbdf6c24578175b338626d382cc68c6fc0128ef8d0bc6d10c74c139a"
+    },
+    {
+      "path": "sim/malecns/fbm_substrate.py",
+      "bytes": 9121,
+      "sha256": "025065ae778101c8d33c423f80fa7248402898708452c7b6304ae44f273393db"
+    },
+    {
+      "path": "sim/malecns/fbm_output_retention.py",
+      "bytes": 4483,
+      "sha256": "75dc7f8410134f21acb94290d3485c1c6b80dedaff3dea26fa082765a29411bd"
+    },
+    {
+      "path": "sim/malecns/fbm_replication.py",
+      "bytes": 7929,
+      "sha256": "f6af504cb37b7769b46436bcd73d0fac23428aee412cd15bbec0d14196567deb"
+    },
+    {
+      "path": "sim/malecns/fbm_phase0.py",
+      "bytes": 3697,
+      "sha256": "bb3dfecbaef778a8b770cbeda5da45c601d050405ab988d79c7120125895026c"
+    },
+    {
+      "path": "data/malecns/substrate_record_fbm.json",
+      "bytes": 101399,
+      "sha256": "245be88e4c434964fd6f4dd80c89fc6a876a09498bad6aa0210241d3668b3130"
+    },
+    {
+      "path": "data/malecns/m1i_output_retention.json",
+      "bytes": 76563,
+      "sha256": "2815e7401b619b977b5db9dd0df469857f9aca8cf0c0fca733aab60433024270"
+    },
+    {
+      "path": "data/malecns/cells.json",
+      "bytes": 20697,
+      "sha256": "f29dd1511e5484d70062cf44d448acfa63e8ef89b49ab7cc281108e5be234c99"
+    },
+    {
+      "path": "data/malecns/cells_fbm.json",
+      "bytes": 11785,
+      "sha256": "544af50ab88f27ba880182a710105051c82995e957c39c584e0e994b86b07297"
+    },
+    {
+      "path": "data/malecns/stim_protocol_malecns_fbm.json",
+      "bytes": 18834,
+      "sha256": "752d640f0110bf90bf1050f9a1b152699526b10e0469ba5bcff11a0e8703bd81"
+    },
+    {
+      "path": "data/malecns/stim_protocol_malecns_fbm_replication.json",
+      "bytes": 18905,
+      "sha256": "0c003839126b094c6dc0848baf4916d082ddd0911920e2b2de91eb69fda38682"
+    }
+  ],
+  "compile_only": {
+    "network_builds": 1,
+    "elapsed_simulated_seconds": 0,
+    "spikes": 0
+  },
+  "brian2_version": "2.9.0"
+}
