@@ -5,6 +5,7 @@ __pycache__/
 .venv/
 .env
 results/
+/data/replay_male/
 docs/papers/
 assets/raw/
 data/external/

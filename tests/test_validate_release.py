@@ -2,6 +2,7 @@
 """Q06: every bad production bundle fails with its own reason; a good one passes."""
 
 import json
+import hashlib
 import sys
 import tempfile
 import unittest
@@ -158,6 +159,78 @@ class ValidateRelease(unittest.TestCase):
     def test_placeholder_layout_fails(self):
         (self.b.root / "site" / "data" / "neurons.json").write_text(json.dumps({"layout": "placeholder"}), encoding="utf-8")
         self.assertTrue(any("placeholder layout" in p for p in self.b.problems()))
+
+
+class ValidateMale(unittest.TestCase):
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(self.tmp.cleanup)
+        self.root = Path(self.tmp.name)
+        repo = Path(__file__).resolve().parents[1]
+        self.table = json.loads((repo / 'data/lookup_table_male.json').read_text())
+        self.write('data/lookup_table_male.json', self.table)
+        self.write('site/data/lookup_table_male.json', self.table)
+        self.write('data/lookup_table_v1_2.json', json.loads((repo / 'data/lookup_table_v1_2.json').read_text()))
+        dishes = json.loads((repo / 'data/dishes.json').read_text(encoding='utf-8'))
+        self.write('data/dishes.json', dishes)
+        self.write('data/malecns/male_female_comparison.json', {'n_distinct_male_cells': 55})
+        self.write('data/replay_neurons_male.json', {'n_neurons': 11271})
+        self.write('site/data/neurons_male.json', {'schema_version': 'neurons_v1',
+                   'layout': 'malecns_v1_soma', 'n_indexed': 11271})
+        from sim.grid import resolve_levels
+        self.ids = sorted({vr.cell_id(resolve_levels(self.table, d)) for d in dishes})
+        cells = {}
+        for cid in self.ids:
+            payload = b'AFR1' + cid.encode()
+            (self.root / 'site/data/replay_male').mkdir(parents=True, exist_ok=True)
+            (self.root / f'site/data/replay_male/{cid}.bin').write_bytes(payload)
+            cells[cid] = {'bytes': len(payload), 'sha256': hashlib.sha256(payload).hexdigest()}
+        self.write('site/data/replay_male/manifest.json', {
+            'schema_version': 'replay_manifest_v1', 'fly': 'male', 'git_commit': 'a' * 40,
+            'n_cells': len(cells), 'n_cells_recorded': 400, 'variants': ['baseline'],
+            'shipping_rule': 'cells occupied by the 174 dishes; the other recorded cells stay in the research pack',
+            'source_manifest_sha256': 'b' * 64, 'cells': cells})
+
+    def write(self, rel, value):
+        path = self.root / rel
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(json.dumps(value), encoding='utf-8')
+
+    def test_male_data_checked_before_ui_activation(self):
+        self.assertEqual(vr.check_male(self.root), [])
+
+    def test_tampered_male_cell(self):
+        self.table['cells'][0]['mn9_mean'] = 42
+        self.write('site/data/lookup_table_male.json', self.table)
+        errors = vr.check_male(self.root)
+        self.assertTrue(any('hash' in p for p in errors), errors)
+        self.assertTrue(any('bytes differ' in p for p in errors), errors)
+        self.assertTrue(any('state rule' in p for p in errors), errors)
+
+    def test_missing_dish_replay(self):
+        (self.root / f'site/data/replay_male/{self.ids[0]}.bin').unlink()
+        self.assertTrue(any('missing' in p for p in vr.check_male(self.root)))
+
+    def test_orphan_male_replay(self):
+        (self.root / 'site/data/replay_male/orphan.bin').write_bytes(b'AFR1')
+        self.assertTrue(any('orphan' in p for p in vr.check_male(self.root)))
+
+    def test_wrong_male_neurons_layout(self):
+        self.write('site/data/neurons_male.json', {'layout': 'flywire_v783_soma', 'n_indexed': 11271})
+        self.assertTrue(any('layout' in p for p in vr.check_male(self.root)))
+
+    def test_tampered_replay_bytes(self):
+        (self.root / f'site/data/replay_male/{self.ids[0]}.bin').write_bytes(b'corrupt')
+        self.assertTrue(any('sha256' in p for p in vr.check_male(self.root)))
+
+    def test_invalid_statistics_and_coordinates_even_with_matching_hash(self):
+        self.table['cells'][0].update(cem_sd=-1, mn11v_mean=float('nan'), water='low')
+        self.table['cells_sha256'] = vr.cells_sha256(self.table['cells'])
+        for rel in ('data/lookup_table_male.json', 'site/data/lookup_table_male.json'):
+            self.write(rel, self.table)
+        errors = vr.check_male(self.root)
+        for text in ('cem_sd', 'mn11v_mean', 'coordinates'):
+            self.assertTrue(any(text in p for p in errors), errors)
 
 
 if __name__ == "__main__":

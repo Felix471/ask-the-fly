@@ -2,6 +2,13 @@
 
 What a visitor to askthefly.app would notice, newest first. One section per release; the heading is `## vX.Y.Z — YYYY-MM-DD` (the release tag on `main` and its date), and `scripts/validate_release.py` checks that `site/data/release.json` matches the top entry. Each entry ends with a line on whether the README honesty table changed.
 
+## v2.0.0 — 2026-09-19
+
+- Adds a second, independently computed male fly using MaleCNS v1.0, connections with at least 5 synapses, 0.17875 mV synaptic weight and bilateral Tastekin-typed taste-cell sets. Select female, male or both; results and share cards keep their choices separate and show the disagreement sentence whenever they disagree.
+- Adds male brain views and recorded replays from grid trial 0 for the 55 cells occupied by the menu. Replays illustrate one trial; scores and designed response states use 30-trial means. Proboscis-only speech now has sweet, savoury, watery and remainder groups.
+- Female scores, states, ties and allocations are unchanged and fixed by a v1.2.1 regression fixture covering all 174 dishes and all 15,051 pairs in both modes, plus the legacy female share query.
+- README honesty table: changed, with the four commitments on independent calibration, different stimulus protocols, the missed bitter-alone gate and inseparable causes of disagreement; the Phase 2 comparison and male readout/replay provenance are recorded. Phase 2 pair agreement is 71.2%; male dish states are 12 eats / 0 mouth_moves / 90 proboscis_only / 72 no_response, with 72 dishes below our designed 5 Hz MN9 threshold.
+
 ## v1.2.1 — 2026-09-15
 
 - Refreshed all 16 groups of Chinese and English fly speech with owner-supplied lines.

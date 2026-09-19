@@ -27,6 +27,8 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
 DIMENSIONS = ("sugar", "bitter", "water", "ir94e")
 REVIEW_PUBLISHABLE = {"llm_v1", "human_checked", "proxy"}
 REVIEW_BLOCKED = {"needs_review", "draft"}
@@ -309,6 +311,70 @@ def check_v12(root: Path) -> list[str]:
     return problems
 
 
+def check_male(root: Path) -> list[str]:
+    """Validate additive male data before activation; require it once the app uses it.
+
+    Unlike check_sync's unconditional legacy whitelist, this bundle is optional in
+    older releases. The app marker gates missing assets, never checks of present data.
+    """
+    from scripts.export_male_site import check_export
+
+    app = root / 'site/app.js'
+    active = app.exists() and 'lookup_table_male.json' in app.read_text(encoding='utf-8')
+    site_path = root / 'site/data/lookup_table_male.json'
+    if not active and not site_path.exists():
+        return []
+    problems = []
+    try:
+        table = load_json(site_path)
+        female = load_json(root / 'data/lookup_table_v1_2.json')
+        if table.get('schema_version') != 'lookup_male_v1':
+            problems.append('male: invalid lookup schema')
+        cells = table.get('cells', [])
+        if len(cells) != 400 or table.get('cells_sha256') != cells_sha256(cells):
+            problems.append('male: invalid cell count/hash')
+        if table.get('levels') != female.get('levels'):
+            problems.append('male: level mapping differs from female grid')
+        for i, cell in enumerate(cells):
+            old = female['cells'][i] if i < len(female['cells']) else {}
+            if any(cell.get(k) != old.get(k) for k in (*DIMENSIONS, 'hz')):
+                problems.append(f'male: cell {i} coordinates differ from female grid')
+            fields = ['mn9_mean', 'mn9_std', 'mn9_left_mean', 'mn9_left_std',
+                      'mn9_right_mean', 'mn9_right_std', 'mn11d_mean', 'mn11d_sd',
+                      'mn11v_mean', 'mn11v_sd', 'mn9_r_mean', 'mn9_r_sd', 'cem_mean', 'cem_sd']
+            for key in fields:
+                v = cell.get(key)
+                if isinstance(v, bool) or not isinstance(v, (int, float)) or not math.isfinite(v) or v < 0:
+                    problems.append(f'male: cell {i} invalid {key}')
+            means = [cell.get('mn9_mean'), cell.get('mn11d_mean')]
+            if all(type(v) in (float, int) and math.isfinite(v) for v in means):
+                a, b = (v >= 5 for v in means)
+                state = ('eats' if b else 'proboscis_only') if a else ('mouth_moves' if b else 'no_response')
+                if cell.get('state') != state:
+                    problems.append(f'male: cell {i} state rule mismatch')
+        if not isinstance(table.get('product_commitments'), list) or len(table['product_commitments']) != 4:
+            problems.append('male: expected four product commitments')
+    except (OSError, ValueError, KeyError, TypeError) as exc:
+        problems.append(f'male: lookup missing or invalid: {exc}')
+    try:
+        problems += check_export(root, research_optional=True)
+    except (OSError, ValueError, KeyError, TypeError) as exc:
+        problems.append(f'male: replay export missing or invalid: {exc}')
+    try:
+        path = root / 'site/data/neurons_male.json'
+        neurons = load_json(path)
+        index = load_json(root / 'data/replay_neurons_male.json')
+        if neurons.get('schema_version') != 'neurons_v1' or neurons.get('layout') != 'malecns_v1_soma':
+            problems.append('male: invalid neurons schema/layout')
+        if neurons.get('n_indexed') != index['n_neurons']:
+            problems.append('male: neurons n_indexed differs from replay index')
+        if path.stat().st_size >= 300000:
+            problems.append('male: neurons size must be under 300 KB')
+    except (OSError, ValueError, KeyError, TypeError) as exc:
+        problems.append(f'male: neurons missing or invalid: {exc}')
+    return problems
+
+
 def validate(root: Path) -> list[str]:
     problems, table = check_lookup(root)
     dict_problems, dishes = check_dictionary(root)
@@ -319,6 +385,7 @@ def validate(root: Path) -> list[str]:
     problems += check_site(root)
     problems += check_release(root)
     problems += check_v12(root)
+    problems += check_male(root)
     return problems
 
 

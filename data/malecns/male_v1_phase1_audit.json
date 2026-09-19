@@ -1,0 +1,37 @@
+{
+  "status": "PASS",
+  "conditions": 35,
+  "raw_trials": 1050,
+  "readout_neuron_trials": 13650,
+  "poisson_unit_trials": 113400,
+  "summary_fields": "All fields and all four derived tables exactly recomputed",
+  "sources": [
+    {
+      "path": "data/malecns/male_v1_phase1_results.json",
+      "bytes": 115272,
+      "sha256": "d780d6a78cf08921236c155a5e2838d5bf4e1db70884fc28b5de8277692c0e10"
+    },
+    {
+      "path": "data/malecns/runs/male_v1/phase1/full_results.json",
+      "bytes": 3669422,
+      "sha256": "fac2951b1f7039e0fdffe2148658eb1468da16a49f73bc06f84bdbbedb6f2fb1"
+    },
+    {
+      "path": "data/malecns/runs/male_v1/phase1/run_meta_start.json",
+      "bytes": 3116,
+      "sha256": "6de9bc719b0fee21d1693156cc12614babe53802b2022dda78a6ad2408e59528"
+    }
+  ],
+  "auditor": {
+    "path": "sim/malecns/audit_male_v1_phase1.py",
+    "bytes": 8796,
+    "sha256": "054b75512973d6cefe202d9c5c94786b7233d0468ff2dc5288b552eb8fbdd47b"
+  },
+  "dependencies": [
+    {
+      "path": "sim/malecns/male_v1_adapter.py",
+      "bytes": 7011,
+      "sha256": "69b26f0dc354602cde9b1eab4c32c42effdf7b999a2c9e168dffa805490d69eb"
+    }
+  ]
+}

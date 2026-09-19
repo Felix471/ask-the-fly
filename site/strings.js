@@ -143,7 +143,7 @@ export const STRINGS = {
     "colIr94e": "Amino acids",
     "ir94eExplain": "Amino acids = the Ir94e channel: in this model free amino acids and glutamate put the fly off, so soy-, stock- and meat-heavy dishes score low. Which level a dish gets is our estimate; the suppression is the model's.",
     "lowInterest": "The fly didn't care much for any of these. This one was just the least uninteresting.",
-    "releaseSummary": "New fly speech, pixel faces and bubbles; scores unchanged.",
+    "releaseSummary": "Independent male fly added; female results unchanged.",
     "releaseLink": "what's new",
     "stateV12": {
       "EatsLabel": "Eats",
@@ -164,7 +164,52 @@ export const STRINGS = {
     "mn11ReplayNote": "Raster: one recorded trial, not the 30-trial state average. MN11D/V rows are individual cells; L/R follows the workbook.",
     "mn11VariantNote": "MN11 rows were not packed for this silencing replay. The dish state remains the baseline 30-trial state; it is not recalculated here.",
     "sceneNoResponse": "The fly leaves.",
-    "cardReadouts": "{state} (designed) · MN11D {d} · MN11V {v} Hz"
+    "cardReadouts": "{state} (designed) · MN11D {d} · MN11V {v} Hz",
+    "flySelector": {
+      "label": "Choose a fly",
+      "female": "Female fly",
+      "male": "Male fly",
+      "both": "Both flies",
+      "hint": "Two independent experiments, not one calibrated model: the male uses a different brain reconstruction, synaptic weight and stimulus set."
+    },
+    "flyName": {
+      "female": "female fly",
+      "male": "male fly"
+    },
+    "flySource": {
+      "female": "FlyWire v783",
+      "male": "MaleCNS v1.0"
+    },
+    "verdictBoth": {
+      "agree": "Both flies pick {dish}.",
+      "disagree": "The female fly picks {female}. The male fly picks {male}.",
+      "agreeOpposite": "Both flies leave you: {dish}.",
+      "disagreeOpposite": "The female fly leaves you: {female}. The male fly leaves you: {male}.",
+      "tieNote": "At least one fly has a tie; see each fly’s result."
+    },
+    "disagreement": {
+      "sentence": "When the two flies disagree, the cause may be sex, reconstruction, cell typing, sign assignment, weight, or stimulus protocol; this pipeline cannot separate them.",
+      "label": "Why they may differ"
+    },
+    "maleNote": {
+      "brain": "MaleCNS v1.0 soma positions, anterior view; no neuropil outlines. {n} indexed neurons without a recorded soma or entry point are drawn below the brain; these positions are not anatomical.",
+      "replay": "This replay is grid trial 0, one of the 30 trials behind the male score; not a live simulation.",
+      "weight": "Male synaptic weight: 0.17875 mV = 0.65 × Shiu’s, a calibration from the independent fly-brain-minecraft project, replicated by us.",
+      "bitterGate": "One of our four gates fails: bitter alone at 25 Hz gives 1.07 Hz MN9, above our 1.0 Hz limit but below our 5 Hz display threshold.",
+      "state": "In our designed depiction, this brain usually extends the proboscis without the mouth following for these dishes (the three-cell MN11D mean reaches our designed 5 Hz threshold in 9 of 400 cells), so “proboscis only” is its usual state here, not an oddity.",
+      "responseDesign": "State: 30-trial means of primary MN9 and three-cell MN11D, with our 5 Hz threshold. MN11V/right MN9 do not decide it. Movements, emotions and speech are designed, not observed feeding.",
+      "colMn11D": "MN11D (three-cell mean)",
+      "legendNamed": "named readout"
+    },
+    "tableFly": {
+      "female": "Female fly · dish scores",
+      "male": "Male fly · dish scores"
+    },
+    "card": {
+      "flyLine": "{fly}: {dish}",
+      "disagree": "Different picks; this pipeline cannot separate sex from other model differences."
+    },
+    "howMale": "You can also ask a second, independently computed male fly. Its brain reconstruction, synaptic weight and stimulus sets differ from the female’s. Each fly reads its own table and chooses independently; their scores and choices are never pooled. The dish taste levels are our shared estimates, and the female results stay unchanged."
   },
   "zh": {
     "add": "添加",
@@ -308,7 +353,7 @@ export const STRINGS = {
     "colIr94e": "氨基酸",
     "ir94eExplain": "氨基酸一列是 Ir94e 通道：在这个模型里，游离氨基酸和谷氨酸（俗称的“鲜”）会让果蝇扫兴，所以酱油、高汤、肉多的菜得分很低。菜对应哪个等级是我们估的，抑制本身是模型的。",
     "lowInterest": "这几样果蝇都不太想吃，勉强挑了这个。",
-    "releaseSummary": "更新果蝇台词、像素表情和气泡；分数不变。",
+    "releaseSummary": "新增独立计算的雄蝇；雌蝇结果不变。",
     "releaseLink": "更新记录",
     "stateV12": {
       "EatsLabel": "吃",
@@ -329,6 +374,51 @@ export const STRINGS = {
     "mn11ReplayNote": "光栅：一次记录试验，不是状态所用的 30 次均值。MN11D/V 每行是一个细胞，左右按工作簿标注。",
     "mn11VariantNote": "此静默回放未打包 MN11 行。菜品状态仍是基线 30 次均值的状态，此处不重新判定。",
     "sceneNoResponse": "果蝇转身走了。",
-    "cardReadouts": "{state}（设计标签）· MN11D {d} · MN11V {v} Hz"
+    "cardReadouts": "{state}（设计标签）· MN11D {d} · MN11V {v} Hz",
+    "flySelector": {
+      "label": "选哪只果蝇",
+      "female": "雌蝇",
+      "male": "雄蝇",
+      "both": "两只都问",
+      "hint": "两只果蝇是两套独立的实验，不是同一个模型的两个版本：雄蝇用的脑重建、突触权重和刺激细胞集都不一样。"
+    },
+    "flyName": {
+      "female": "雌蝇",
+      "male": "雄蝇"
+    },
+    "flySource": {
+      "female": "FlyWire v783",
+      "male": "MaleCNS v1.0"
+    },
+    "verdictBoth": {
+      "agree": "两只果蝇都选了{dish}。",
+      "disagree": "雌蝇选了{female}，雄蝇选了{male}。",
+      "agreeOpposite": "两只果蝇留给你的都是：{dish}。",
+      "disagreeOpposite": "雌蝇留给你：{female}；雄蝇留给你：{male}。",
+      "tieNote": "有一只果蝇没分出高下，看各自的结果。"
+    },
+    "disagreement": {
+      "sentence": "两只果蝇选得不一样，原因可能是性别，也可能是脑重建、细胞分型、突触正负、权重或刺激方式的差别；我们分不出是哪一个。",
+      "label": "为什么会选得不一样"
+    },
+    "maleNote": {
+      "brain": "MaleCNS v1.0 胞体位置，前视图；不显示神经髓轮廓。{n} 个回放索引内的神经元没有记录胞体或入脑点，画在脑下方；这些位置不代表真实解剖位置。",
+      "replay": "这段回放是网格试验 0，属于雄蝇分数所依据的 30 次试验之一；不是实时仿真。",
+      "weight": "雄蝇突触权重：0.17875 mV，即 Shiu 的 0.65 倍；这套标定来自独立项目 fly-brain-minecraft，我们做了复现。",
+      "bitterGate": "四项门槛有一项未通过：单独以 25 Hz 刺激苦味，MN9 为 1.07 Hz，高于我们设定的 1.0 Hz 上限，但低于 5 Hz 显示阈值。",
+      "state": "这只果蝇面对这份菜单，多数时候只伸喙、嘴不跟上（MN11D 三个细胞的均值在 400 格里只有 9 格过 5 Hz），所以“只伸了喙”是它的常态，不是异常。",
+      "responseDesign": "状态由主读出 MN9 与 MN11D 三细胞的 30 次均值及我们设定的 5 Hz 阈值决定。MN11V、右 MN9 不参与判定。动作、情绪和台词是设计，不是观测到的进食行为。",
+      "colMn11D": "MN11D（三细胞均值）",
+      "legendNamed": "已标注读出"
+    },
+    "tableFly": {
+      "female": "雌蝇 · 每道菜的分数",
+      "male": "雄蝇 · 每道菜的分数"
+    },
+    "card": {
+      "flyLine": "{fly}：{dish}",
+      "disagree": "两只选得不一样；分不出是性别还是模型的差别。"
+    },
+    "howMale": "也可以问问另一只独立计算的雄蝇。它和雌蝇使用不同的脑重建、突触权重和刺激细胞集，各查各的表、各选各的菜，不合并分数或选择。菜品口味等级沿用我们同一套估算，雌蝇结果保持不变。"
   }
 };

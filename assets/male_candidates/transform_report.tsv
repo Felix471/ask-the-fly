@@ -1,0 +1,127 @@
+file	variant	changed_pixels	head_end	reason
+idle_1.png	tip	104	right (red eye; PCA)	
+idle_1.png	tip_small	633	right (red eye; PCA)	
+idle_1.png	cool	473	right (red eye; PCA)	
+idle_2.png	tip	108	right (red eye; PCA)	
+idle_2.png	tip_small	662	right (red eye; PCA)	
+idle_2.png	cool	496	right (red eye; PCA)	
+fly_1.png	tip	99	right (red eye; PCA)	
+fly_1.png	tip_small	822	right (red eye; PCA)	
+fly_1.png	cool	480	right (red eye; PCA)	
+fly_2.png	tip	135	right (red eye; PCA)	
+fly_2.png	tip_small	870	right (red eye; PCA)	
+fly_2.png	cool	473	right (red eye; PCA)	
+fly_3.png	tip	135	right (red eye; PCA)	
+fly_3.png	tip_small	655	right (red eye; PCA)	
+fly_3.png	cool	482	right (red eye; PCA)	
+fly_4.png	tip	65	right (red eye; PCA)	
+fly_4.png	tip_small	609	right (red eye; PCA)	
+fly_4.png	cool	440	right (red eye; PCA)	
+land_1.png	tip	124	right (red eye; PCA)	
+land_1.png	tip_small	663	right (red eye; PCA)	
+land_1.png	cool	519	right (red eye; PCA)	
+proboscis_1.png	tip	116	right (red eye; PCA)	
+proboscis_1.png	tip_small	664	right (red eye; PCA)	
+proboscis_1.png	cool	535	right (red eye; PCA)	
+proboscis_2.png	tip	93	right (red eye; PCA)	
+proboscis_2.png	tip_small	677	right (red eye; PCA)	
+proboscis_2.png	cool	520	right (red eye; PCA)	
+proboscis_3.png	tip	124	right (red eye; PCA)	
+proboscis_3.png	tip_small	663	right (red eye; PCA)	
+proboscis_3.png	cool	519	right (red eye; PCA)	
+eats_1.png	tip	43	right (red eye; PCA)	
+eats_1.png	tip_small	312	right (red eye; PCA)	
+eats_1.png	cool	260	right (red eye; PCA)	
+eats_2.png	tip	46	right (red eye; PCA)	
+eats_2.png	tip_small	323	right (red eye; PCA)	
+eats_2.png	cool	253	right (red eye; PCA)	
+eats_3.png	tip	43	right (red eye; PCA)	
+eats_3.png	tip_small	328	right (red eye; PCA)	
+eats_3.png	cool	263	right (red eye; PCA)	
+eats_4.png	tip	46	right (red eye; PCA)	
+eats_4.png	tip_small	334	right (red eye; PCA)	
+eats_4.png	cool	254	right (red eye; PCA)	
+mouth_moves_1.png	tip	55	right (red eye; PCA)	
+mouth_moves_1.png	tip_small	327	right (red eye; PCA)	
+mouth_moves_1.png	cool	259	right (red eye; PCA)	
+mouth_moves_2.png	tip	56	right (red eye; PCA)	
+mouth_moves_2.png	tip_small	331	right (red eye; PCA)	
+mouth_moves_2.png	cool	267	right (red eye; PCA)	
+mouth_moves_3.png	tip	59	right (red eye; PCA)	
+mouth_moves_3.png	tip_small	342	right (red eye; PCA)	
+mouth_moves_3.png	cool	275	right (red eye; PCA)	
+mouth_moves_4.png	tip	58	right (red eye; PCA)	
+mouth_moves_4.png	tip_small	334	right (red eye; PCA)	
+mouth_moves_4.png	cool	275	right (red eye; PCA)	
+proboscis_only_1.png	tip	35	right (red eye; PCA)	
+proboscis_only_1.png	tip_small	305	right (red eye; PCA)	
+proboscis_only_1.png	cool	230	right (red eye; PCA)	
+proboscis_only_2.png	tip	39	right (red eye; PCA)	
+proboscis_only_2.png	tip_small	306	right (red eye; PCA)	
+proboscis_only_2.png	cool	238	right (red eye; PCA)	
+proboscis_only_3.png	tip	57	right (red eye; PCA)	
+proboscis_only_3.png	tip_small	339	right (red eye; PCA)	
+proboscis_only_3.png	cool	267	right (red eye; PCA)	
+proboscis_only_4.png	tip	39	right (red eye; PCA)	
+proboscis_only_4.png	tip_small	305	right (red eye; PCA)	
+proboscis_only_4.png	cool	244	right (red eye; PCA)	
+no_response_1.png	tip	54	right (red eye; PCA)	
+no_response_1.png	tip_small	321	right (red eye; PCA)	
+no_response_1.png	cool	248	right (red eye; PCA)	
+no_response_2.png	tip	45	right (red eye; PCA)	
+no_response_2.png	tip_small	319	right (red eye; PCA)	
+no_response_2.png	cool	256	right (red eye; PCA)	
+no_response_3.png	tip	56	right (red eye; PCA)	
+no_response_3.png	tip_small	340	right (red eye; PCA)	
+no_response_3.png	cool	258	right (red eye; PCA)	
+no_response_4.png	tip	54	right (red eye; PCA)	
+no_response_4.png	tip_small	332	right (red eye; PCA)	
+no_response_4.png	cool	266	right (red eye; PCA)	
+inset_eats_1.png	tip	0	manual review	cropped head/mouth; abdomen and whole-body axis absent; tip omitted
+inset_eats_1.png	tip_small	926	manual review	cropped head/mouth; abdomen and whole-body axis absent; tip omitted
+inset_eats_1.png	cool	866	manual review	cropped head/mouth; abdomen and whole-body axis absent; tip omitted
+inset_eats_2.png	tip	0	manual review	cropped head/mouth; abdomen and whole-body axis absent; tip omitted
+inset_eats_2.png	tip_small	955	manual review	cropped head/mouth; abdomen and whole-body axis absent; tip omitted
+inset_eats_2.png	cool	966	manual review	cropped head/mouth; abdomen and whole-body axis absent; tip omitted
+inset_eats_3.png	tip	0	manual review	cropped head/mouth; abdomen and whole-body axis absent; tip omitted
+inset_eats_3.png	tip_small	1062	manual review	cropped head/mouth; abdomen and whole-body axis absent; tip omitted
+inset_eats_3.png	cool	1035	manual review	cropped head/mouth; abdomen and whole-body axis absent; tip omitted
+inset_eats_4.png	tip	0	manual review	cropped head/mouth; abdomen and whole-body axis absent; tip omitted
+inset_eats_4.png	tip_small	992	manual review	cropped head/mouth; abdomen and whole-body axis absent; tip omitted
+inset_eats_4.png	cool	940	manual review	cropped head/mouth; abdomen and whole-body axis absent; tip omitted
+inset_mouth_moves_1.png	tip	0	manual review	cropped head/mouth; abdomen and whole-body axis absent; tip omitted
+inset_mouth_moves_1.png	tip_small	1336	manual review	cropped head/mouth; abdomen and whole-body axis absent; tip omitted
+inset_mouth_moves_1.png	cool	1298	manual review	cropped head/mouth; abdomen and whole-body axis absent; tip omitted
+inset_mouth_moves_2.png	tip	0	manual review	cropped head/mouth; abdomen and whole-body axis absent; tip omitted
+inset_mouth_moves_2.png	tip_small	1409	manual review	cropped head/mouth; abdomen and whole-body axis absent; tip omitted
+inset_mouth_moves_2.png	cool	1336	manual review	cropped head/mouth; abdomen and whole-body axis absent; tip omitted
+inset_mouth_moves_3.png	tip	0	manual review	cropped head/mouth; abdomen and whole-body axis absent; tip omitted
+inset_mouth_moves_3.png	tip_small	1352	manual review	cropped head/mouth; abdomen and whole-body axis absent; tip omitted
+inset_mouth_moves_3.png	cool	1408	manual review	cropped head/mouth; abdomen and whole-body axis absent; tip omitted
+inset_mouth_moves_4.png	tip	0	manual review	cropped head/mouth; abdomen and whole-body axis absent; tip omitted
+inset_mouth_moves_4.png	tip_small	1195	manual review	cropped head/mouth; abdomen and whole-body axis absent; tip omitted
+inset_mouth_moves_4.png	cool	1188	manual review	cropped head/mouth; abdomen and whole-body axis absent; tip omitted
+inset_proboscis_only_1.png	tip	0	manual review	cropped head/mouth; abdomen and whole-body axis absent; tip omitted
+inset_proboscis_only_1.png	tip_small	960	manual review	cropped head/mouth; abdomen and whole-body axis absent; tip omitted
+inset_proboscis_only_1.png	cool	909	manual review	cropped head/mouth; abdomen and whole-body axis absent; tip omitted
+inset_proboscis_only_2.png	tip	0	manual review	cropped head/mouth; abdomen and whole-body axis absent; tip omitted
+inset_proboscis_only_2.png	tip_small	911	manual review	cropped head/mouth; abdomen and whole-body axis absent; tip omitted
+inset_proboscis_only_2.png	cool	852	manual review	cropped head/mouth; abdomen and whole-body axis absent; tip omitted
+inset_proboscis_only_3.png	tip	0	manual review	cropped head/mouth; abdomen and whole-body axis absent; tip omitted
+inset_proboscis_only_3.png	tip_small	1001	manual review	cropped head/mouth; abdomen and whole-body axis absent; tip omitted
+inset_proboscis_only_3.png	cool	922	manual review	cropped head/mouth; abdomen and whole-body axis absent; tip omitted
+inset_proboscis_only_4.png	tip	0	manual review	cropped head/mouth; abdomen and whole-body axis absent; tip omitted
+inset_proboscis_only_4.png	tip_small	963	manual review	cropped head/mouth; abdomen and whole-body axis absent; tip omitted
+inset_proboscis_only_4.png	cool	883	manual review	cropped head/mouth; abdomen and whole-body axis absent; tip omitted
+inset_no_response_1.png	tip	0	manual review	cropped head/mouth; abdomen and whole-body axis absent; tip omitted
+inset_no_response_1.png	tip_small	1375	manual review	cropped head/mouth; abdomen and whole-body axis absent; tip omitted
+inset_no_response_1.png	cool	1762	manual review	cropped head/mouth; abdomen and whole-body axis absent; tip omitted
+inset_no_response_2.png	tip	0	manual review	cropped head/mouth; abdomen and whole-body axis absent; tip omitted
+inset_no_response_2.png	tip_small	1375	manual review	cropped head/mouth; abdomen and whole-body axis absent; tip omitted
+inset_no_response_2.png	cool	1762	manual review	cropped head/mouth; abdomen and whole-body axis absent; tip omitted
+inset_no_response_3.png	tip	0	manual review	cropped head/mouth; abdomen and whole-body axis absent; tip omitted
+inset_no_response_3.png	tip_small	1375	manual review	cropped head/mouth; abdomen and whole-body axis absent; tip omitted
+inset_no_response_3.png	cool	1762	manual review	cropped head/mouth; abdomen and whole-body axis absent; tip omitted
+inset_no_response_4.png	tip	0	manual review	cropped head/mouth; abdomen and whole-body axis absent; tip omitted
+inset_no_response_4.png	tip_small	1375	manual review	cropped head/mouth; abdomen and whole-body axis absent; tip omitted
+inset_no_response_4.png	cool	1762	manual review	cropped head/mouth; abdomen and whole-body axis absent; tip omitted
