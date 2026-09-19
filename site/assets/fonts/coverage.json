@@ -1,11 +1,11 @@
 {
-  "glyphs_requested": 869,
-  "cjk_covered": 866,
+  "glyphs_requested": 906,
+  "cjk_covered": 903,
   "fallback_to_system": [
     "≈",
     "≥",
     "餈"
   ],
-  "pixelify_sans_woff2_bytes": 9672,
-  "fusion_pixel_zh_woff2_bytes": 32532
+  "pixelify_sans_woff2_bytes": 9712,
+  "fusion_pixel_zh_woff2_bytes": 33780
 }

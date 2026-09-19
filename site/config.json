@@ -1,4 +1,5 @@
 {
   "site_url": "https://askthefly.app/",
-  "note": "Canonical public URL. Read by site/app.js (share links, QR), scripts/import_copy.py (og:url, og:image, twitter:image, canonical link) and scripts/export_share_card.py. GitHub Pages at https://felix471.github.io/ask-the-fly/ is the backup deploy."
+  "note": "Canonical public URL. Read by site/app.js (share links, QR), scripts/import_copy.py (og:url, og:image, twitter:image, canonical link) and scripts/export_share_card.py. GitHub Pages at https://felix471.github.io/ask-the-fly/ is the backup deploy.",
+  "male_sprite_variant": "tip"
 }

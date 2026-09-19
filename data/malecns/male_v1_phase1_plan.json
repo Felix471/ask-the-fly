@@ -1,0 +1,446 @@
+{
+  "stage": "male-v1 Phase 1",
+  "declaration_commit": "df508aa",
+  "poisson_units": 108,
+  "channel_order": [
+    "sugar",
+    "bitter",
+    "water",
+    "ir94e"
+  ],
+  "conditions": [
+    {
+      "sugar_hz": 0,
+      "bitter_hz": 0,
+      "water_hz": 0,
+      "ir94e_hz": 0,
+      "id": "s0_b0_w0_i0",
+      "n_trials": 30
+    },
+    {
+      "sugar_hz": 60,
+      "bitter_hz": 0,
+      "water_hz": 0,
+      "ir94e_hz": 0,
+      "id": "s60_b0_w0_i0",
+      "n_trials": 30
+    },
+    {
+      "sugar_hz": 80,
+      "bitter_hz": 0,
+      "water_hz": 0,
+      "ir94e_hz": 0,
+      "id": "s80_b0_w0_i0",
+      "n_trials": 30
+    },
+    {
+      "sugar_hz": 120,
+      "bitter_hz": 0,
+      "water_hz": 0,
+      "ir94e_hz": 0,
+      "id": "s120_b0_w0_i0",
+      "n_trials": 30
+    },
+    {
+      "sugar_hz": 200,
+      "bitter_hz": 0,
+      "water_hz": 0,
+      "ir94e_hz": 0,
+      "id": "s200_b0_w0_i0",
+      "n_trials": 30
+    },
+    {
+      "sugar_hz": 0,
+      "bitter_hz": 0,
+      "water_hz": 60,
+      "ir94e_hz": 0,
+      "id": "s0_b0_w60_i0",
+      "n_trials": 30
+    },
+    {
+      "sugar_hz": 0,
+      "bitter_hz": 0,
+      "water_hz": 180,
+      "ir94e_hz": 0,
+      "id": "s0_b0_w180_i0",
+      "n_trials": 30
+    },
+    {
+      "sugar_hz": 0,
+      "bitter_hz": 0,
+      "water_hz": 240,
+      "ir94e_hz": 0,
+      "id": "s0_b0_w240_i0",
+      "n_trials": 30
+    },
+    {
+      "sugar_hz": 60,
+      "bitter_hz": 0,
+      "water_hz": 60,
+      "ir94e_hz": 0,
+      "id": "s60_b0_w60_i0",
+      "n_trials": 30
+    },
+    {
+      "sugar_hz": 60,
+      "bitter_hz": 0,
+      "water_hz": 180,
+      "ir94e_hz": 0,
+      "id": "s60_b0_w180_i0",
+      "n_trials": 30
+    },
+    {
+      "sugar_hz": 60,
+      "bitter_hz": 0,
+      "water_hz": 240,
+      "ir94e_hz": 0,
+      "id": "s60_b0_w240_i0",
+      "n_trials": 30
+    },
+    {
+      "sugar_hz": 80,
+      "bitter_hz": 0,
+      "water_hz": 60,
+      "ir94e_hz": 0,
+      "id": "s80_b0_w60_i0",
+      "n_trials": 30
+    },
+    {
+      "sugar_hz": 80,
+      "bitter_hz": 0,
+      "water_hz": 180,
+      "ir94e_hz": 0,
+      "id": "s80_b0_w180_i0",
+      "n_trials": 30
+    },
+    {
+      "sugar_hz": 80,
+      "bitter_hz": 0,
+      "water_hz": 240,
+      "ir94e_hz": 0,
+      "id": "s80_b0_w240_i0",
+      "n_trials": 30
+    },
+    {
+      "sugar_hz": 120,
+      "bitter_hz": 0,
+      "water_hz": 60,
+      "ir94e_hz": 0,
+      "id": "s120_b0_w60_i0",
+      "n_trials": 30
+    },
+    {
+      "sugar_hz": 120,
+      "bitter_hz": 0,
+      "water_hz": 180,
+      "ir94e_hz": 0,
+      "id": "s120_b0_w180_i0",
+      "n_trials": 30
+    },
+    {
+      "sugar_hz": 120,
+      "bitter_hz": 0,
+      "water_hz": 240,
+      "ir94e_hz": 0,
+      "id": "s120_b0_w240_i0",
+      "n_trials": 30
+    },
+    {
+      "sugar_hz": 200,
+      "bitter_hz": 0,
+      "water_hz": 60,
+      "ir94e_hz": 0,
+      "id": "s200_b0_w60_i0",
+      "n_trials": 30
+    },
+    {
+      "sugar_hz": 200,
+      "bitter_hz": 0,
+      "water_hz": 180,
+      "ir94e_hz": 0,
+      "id": "s200_b0_w180_i0",
+      "n_trials": 30
+    },
+    {
+      "sugar_hz": 200,
+      "bitter_hz": 0,
+      "water_hz": 240,
+      "ir94e_hz": 0,
+      "id": "s200_b0_w240_i0",
+      "n_trials": 30
+    },
+    {
+      "sugar_hz": 0,
+      "bitter_hz": 0,
+      "water_hz": 0,
+      "ir94e_hz": 60,
+      "id": "s0_b0_w0_i60",
+      "n_trials": 30
+    },
+    {
+      "sugar_hz": 0,
+      "bitter_hz": 0,
+      "water_hz": 0,
+      "ir94e_hz": 120,
+      "id": "s0_b0_w0_i120",
+      "n_trials": 30
+    },
+    {
+      "sugar_hz": 0,
+      "bitter_hz": 0,
+      "water_hz": 0,
+      "ir94e_hz": 200,
+      "id": "s0_b0_w0_i200",
+      "n_trials": 30
+    },
+    {
+      "sugar_hz": 60,
+      "bitter_hz": 0,
+      "water_hz": 0,
+      "ir94e_hz": 60,
+      "id": "s60_b0_w0_i60",
+      "n_trials": 30
+    },
+    {
+      "sugar_hz": 60,
+      "bitter_hz": 0,
+      "water_hz": 0,
+      "ir94e_hz": 120,
+      "id": "s60_b0_w0_i120",
+      "n_trials": 30
+    },
+    {
+      "sugar_hz": 60,
+      "bitter_hz": 0,
+      "water_hz": 0,
+      "ir94e_hz": 200,
+      "id": "s60_b0_w0_i200",
+      "n_trials": 30
+    },
+    {
+      "sugar_hz": 80,
+      "bitter_hz": 0,
+      "water_hz": 0,
+      "ir94e_hz": 60,
+      "id": "s80_b0_w0_i60",
+      "n_trials": 30
+    },
+    {
+      "sugar_hz": 80,
+      "bitter_hz": 0,
+      "water_hz": 0,
+      "ir94e_hz": 120,
+      "id": "s80_b0_w0_i120",
+      "n_trials": 30
+    },
+    {
+      "sugar_hz": 80,
+      "bitter_hz": 0,
+      "water_hz": 0,
+      "ir94e_hz": 200,
+      "id": "s80_b0_w0_i200",
+      "n_trials": 30
+    },
+    {
+      "sugar_hz": 120,
+      "bitter_hz": 0,
+      "water_hz": 0,
+      "ir94e_hz": 60,
+      "id": "s120_b0_w0_i60",
+      "n_trials": 30
+    },
+    {
+      "sugar_hz": 120,
+      "bitter_hz": 0,
+      "water_hz": 0,
+      "ir94e_hz": 120,
+      "id": "s120_b0_w0_i120",
+      "n_trials": 30
+    },
+    {
+      "sugar_hz": 120,
+      "bitter_hz": 0,
+      "water_hz": 0,
+      "ir94e_hz": 200,
+      "id": "s120_b0_w0_i200",
+      "n_trials": 30
+    },
+    {
+      "sugar_hz": 200,
+      "bitter_hz": 0,
+      "water_hz": 0,
+      "ir94e_hz": 60,
+      "id": "s200_b0_w0_i60",
+      "n_trials": 30
+    },
+    {
+      "sugar_hz": 200,
+      "bitter_hz": 0,
+      "water_hz": 0,
+      "ir94e_hz": 120,
+      "id": "s200_b0_w0_i120",
+      "n_trials": 30
+    },
+    {
+      "sugar_hz": 200,
+      "bitter_hz": 0,
+      "water_hz": 0,
+      "ir94e_hz": 200,
+      "id": "s200_b0_w0_i200",
+      "n_trials": 30
+    }
+  ],
+  "seeds": [
+    20260910,
+    20260911,
+    20260912,
+    20260913,
+    20260914,
+    20260915,
+    20260916,
+    20260917,
+    20260918,
+    20260919,
+    20260920,
+    20260921,
+    20260922,
+    20260923,
+    20260924,
+    20260925,
+    20260926,
+    20260927,
+    20260928,
+    20260929,
+    20260930,
+    20260931,
+    20260932,
+    20260933,
+    20260934,
+    20260935,
+    20260936,
+    20260937,
+    20260938,
+    20260939
+  ],
+  "total_trials": 1050,
+  "duration_ms": 1000,
+  "dt_ms": 0.1,
+  "w_syn_mV": 0.17875,
+  "readouts": {
+    "neuron": "MN9",
+    "primary": 10331,
+    "primary_side": "XLSX L",
+    "secondary": 16949,
+    "secondary_side": "XLSX R",
+    "aggregation": "primary_only",
+    "aggregation_rationale": "Post-M1c owner decision on reconstruction completeness (docs/malecns_phase0.md); L10331 is primary, R16949 is recorded secondary.",
+    "rate_definition": "spikes in [0, duration] / duration, mean over trials; also report std over trials",
+    "extra_readouts": {
+      "mn11d": [
+        11269,
+        11393,
+        551398
+      ],
+      "mn11v": [
+        49829,
+        492462351
+      ],
+      "cem": [
+        19823,
+        20518,
+        23511,
+        32852,
+        34597,
+        482595
+      ]
+    },
+    "extra_readouts_note": "recorded for the product's four-state rule and the replay pack; not deciding"
+  },
+  "execution": "No retry/resume. No trials in --check or --plan.",
+  "memory": {
+    "workers": 16,
+    "wsl_available_gib": 59.66734313964844,
+    "host_free_gib": 86.47359466552734,
+    "limiting_available_gib": 59.66734313964844,
+    "reserve_gib": 14.91683578491211,
+    "worker_budget_gib": 1.5,
+    "cpus": 32,
+    "rule": "min(16 conditions, logical_cpus//2, floor((min(WSL available, host free)-max(8GiB,25%))/ceil(1.5*reference peak to 0.1GiB)))",
+    "reference_peak_gib": 0.9786567687988281,
+    "peak_source": "data/malecns/m1j_male_results.json metadata.peak_worker_rss_gib"
+  },
+  "planned_utc": "2026-09-19T04:06:11.842710+00:00",
+  "sources": [
+    {
+      "path": "sim/network.py",
+      "bytes": 9535,
+      "sha256": "eee33ef855203a47e03920b56b4aba98551cc400ab22107ebb91edc385475ae7"
+    },
+    {
+      "path": "sim/malecns/phase0.py",
+      "bytes": 13472,
+      "sha256": "f6342a04adec37ed011d6aa9481ae7d044509fa33761ad23dfa92acfe4c43267"
+    },
+    {
+      "path": "sim/malecns/substrate.py",
+      "bytes": 16531,
+      "sha256": "1b6c7bd7122f9ad8a3d43aa87365c5b147d55d66067abcc4e7dce6fdcc63cac6"
+    },
+    {
+      "path": "sim/malecns/male_v1_adapter.py",
+      "bytes": 7011,
+      "sha256": "69b26f0dc354602cde9b1eab4c32c42effdf7b999a2c9e168dffa805490d69eb"
+    },
+    {
+      "path": "sim/malecns/male_v1_phase1.py",
+      "bytes": 8317,
+      "sha256": "4143746647d830e7fc816c305039d3b6298f07519bd6fd3173e1b20b64702384"
+    },
+    {
+      "path": "data/malecns/m1j_male_results.json",
+      "bytes": 15835,
+      "sha256": "12cfbb04ef3b56ca245f55ebf7582c1f9f3e16a29766542e94c12393223c04b3"
+    },
+    {
+      "path": "data/malecns/derived/fbm/connectivity.parquet",
+      "bytes": 32686742,
+      "sha256": "240976c11b7f6121c7da4319e6a502f255b33f04d6f4cfbc8aa3b99ecd0d01c8"
+    },
+    {
+      "path": "data/malecns/derived/fbm/completeness.csv",
+      "bytes": 1097049,
+      "sha256": "b023fed77421d5606fe156d0e9408765b1233180406d5e2ca331cf37c1b5c00f"
+    },
+    {
+      "path": "data/malecns/substrate_record_fbm.json",
+      "bytes": 101399,
+      "sha256": "245be88e4c434964fd6f4dd80c89fc6a876a09498bad6aa0210241d3668b3130"
+    },
+    {
+      "path": "data/lookup_table_v1_2.json",
+      "bytes": 248560,
+      "sha256": "2659a18e4cd759364983f2f46a801aa275fd46ccaf92c9757c845bcd64fcbe0d"
+    },
+    {
+      "path": "docs/phase1_characterization.md",
+      "bytes": 16704,
+      "sha256": "9db708cc3b8955c27acc2ed69f3b67a2411340779daf8a2aeff99ecbdae605aa"
+    },
+    {
+      "path": "data/malecns/stim_protocol_male_v1.json",
+      "bytes": 12729,
+      "sha256": "b9a8a62f178cb722223e5b6c3e230a05d88fbe153eafd63aae288ea107fe7f87"
+    },
+    {
+      "path": "data/malecns/cells_male_v1.json",
+      "bytes": 24375,
+      "sha256": "fd346d848776155604786fcffa034476ef59970d52edf89fd7e9df0c8f057597"
+    }
+  ],
+  "compile_only": {
+    "network_builds": 1,
+    "elapsed_simulated_seconds": 0,
+    "spikes": 0
+  },
+  "brian2_version": "2.9.0"
+}

@@ -1,0 +1,674 @@
+{
+  "schema_version": "replay_manifest_v1",
+  "fly": "male",
+  "n_cells": 55,
+  "n_cells_recorded": 400,
+  "shipping_rule": "cells occupied by the 174 dishes; the other recorded cells stay in the research pack",
+  "variants": [
+    "baseline"
+  ],
+  "source_manifest_sha256": "b4371add9d8733885521aaa7cbf771731f2bec4b6fc3d326b489e806be0da20a",
+  "cells": {
+    "G_shigh_blow_wlow_inone": {
+      "levels": {
+        "sugar": "high",
+        "bitter": "low",
+        "water": "low",
+        "ir94e": "none"
+      },
+      "n_spikes": 309773,
+      "mn9_left_count": 1,
+      "sha256": "0f7e3eae23209b71c9f54c5d9bfa16e8d06848707f018975c34ea4369d07b462",
+      "bytes": 1240150
+    },
+    "G_shigh_bmedium_whigh_inone": {
+      "levels": {
+        "sugar": "high",
+        "bitter": "medium",
+        "water": "high",
+        "ir94e": "none"
+      },
+      "n_spikes": 315778,
+      "mn9_left_count": 0,
+      "sha256": "dddd20850506691f377218d4f01582f77e726c3c00366d0d47ca73ee872ada72",
+      "bytes": 1264175
+    },
+    "G_shigh_bmedium_wlow_ilow": {
+      "levels": {
+        "sugar": "high",
+        "bitter": "medium",
+        "water": "low",
+        "ir94e": "low"
+      },
+      "n_spikes": 306780,
+      "mn9_left_count": 0,
+      "sha256": "e61bdaf61572c8e88cab0039e98e567e4fc569218de2f54f1f38daee13f1b1e4",
+      "bytes": 1228179
+    },
+    "G_shigh_bnone_wlow_ilow": {
+      "levels": {
+        "sugar": "high",
+        "bitter": "none",
+        "water": "low",
+        "ir94e": "low"
+      },
+      "n_spikes": 306165,
+      "mn9_left_count": 3,
+      "sha256": "ebbd1e543afaba4588d27f7c410c71f2f5751c23145ca961db3d64c4c98a071a",
+      "bytes": 1225732
+    },
+    "G_shigh_bnone_wlow_inone": {
+      "levels": {
+        "sugar": "high",
+        "bitter": "none",
+        "water": "low",
+        "ir94e": "none"
+      },
+      "n_spikes": 220838,
+      "mn9_left_count": 72,
+      "sha256": "c8b2e3adb91e1fe3bba975d1f624de56a1f0e15a55fb98243583d2f25dcef8be",
+      "bytes": 884834
+    },
+    "G_shigh_bvery_high_wlow_inone": {
+      "levels": {
+        "sugar": "high",
+        "bitter": "very_high",
+        "water": "low",
+        "ir94e": "none"
+      },
+      "n_spikes": 326323,
+      "mn9_left_count": 0,
+      "sha256": "d4707051c706cf36339873f24c01974b6e54c8cf1c0efcbd28e7af547cf8dcbc",
+      "bytes": 1306359
+    },
+    "G_slow_bhigh_whigh_inone": {
+      "levels": {
+        "sugar": "low",
+        "bitter": "high",
+        "water": "high",
+        "ir94e": "none"
+      },
+      "n_spikes": 303230,
+      "mn9_left_count": 0,
+      "sha256": "0851a9755979628859cb87e94da699adc0fd27f9712bf2a1c1a9bfdd5daa74e4",
+      "bytes": 1213977
+    },
+    "G_slow_bhigh_wlow_inone": {
+      "levels": {
+        "sugar": "low",
+        "bitter": "high",
+        "water": "low",
+        "ir94e": "none"
+      },
+      "n_spikes": 297532,
+      "mn9_left_count": 0,
+      "sha256": "2c792377684098541665e272ff26f6e13ff1f516b925f86efdeb31adf452f249",
+      "bytes": 1191182
+    },
+    "G_slow_bhigh_wnone_inone": {
+      "levels": {
+        "sugar": "low",
+        "bitter": "high",
+        "water": "none",
+        "ir94e": "none"
+      },
+      "n_spikes": 316430,
+      "mn9_left_count": 0,
+      "sha256": "93c62ebbaa32b3ae9c7b862618ca3ccf0e989692be2af11564815e3efdd6a0f1",
+      "bytes": 1266775
+    },
+    "G_slow_blow_whigh_imedium": {
+      "levels": {
+        "sugar": "low",
+        "bitter": "low",
+        "water": "high",
+        "ir94e": "medium"
+      },
+      "n_spikes": 302686,
+      "mn9_left_count": 7,
+      "sha256": "e2d15485ac9d2251c6c2a024941089f7cfaed21f5614fca16050dd15097d7e84",
+      "bytes": 1211846
+    },
+    "G_slow_blow_wlow_ilow": {
+      "levels": {
+        "sugar": "low",
+        "bitter": "low",
+        "water": "low",
+        "ir94e": "low"
+      },
+      "n_spikes": 309925,
+      "mn9_left_count": 2,
+      "sha256": "f016a51ddbddf0835c2927d52d597ce0578d63a6767dc670e01332bfd3c33adb",
+      "bytes": 1240762
+    },
+    "G_slow_blow_wlow_imedium": {
+      "levels": {
+        "sugar": "low",
+        "bitter": "low",
+        "water": "low",
+        "ir94e": "medium"
+      },
+      "n_spikes": 304370,
+      "mn9_left_count": 4,
+      "sha256": "149ca4f5178157f584929f594e0cc44ce38ff258f47daaa051eca5ef12b31479",
+      "bytes": 1218561
+    },
+    "G_slow_blow_wlow_inone": {
+      "levels": {
+        "sugar": "low",
+        "bitter": "low",
+        "water": "low",
+        "ir94e": "none"
+      },
+      "n_spikes": 293623,
+      "mn9_left_count": 7,
+      "sha256": "320770c1c10f7226a2691f6a7750f2d9dcab348d6d13c51b6be7509e6f24f42f",
+      "bytes": 1175585
+    },
+    "G_slow_bnone_whigh_ilow": {
+      "levels": {
+        "sugar": "low",
+        "bitter": "none",
+        "water": "high",
+        "ir94e": "low"
+      },
+      "n_spikes": 298461,
+      "mn9_left_count": 20,
+      "sha256": "9a8be226a6d2b06e1d4fa9d12cbd0c7b064853ec2f1ef2ecc3208d71f3816d75",
+      "bytes": 1195019
+    },
+    "G_slow_bnone_whigh_imedium": {
+      "levels": {
+        "sugar": "low",
+        "bitter": "none",
+        "water": "high",
+        "ir94e": "medium"
+      },
+      "n_spikes": 307267,
+      "mn9_left_count": 17,
+      "sha256": "c1b71ad55e33b4601f3f47864c642d4ba480b1a20c6057cf54fdfef679401419",
+      "bytes": 1230232
+    },
+    "G_slow_bnone_wlow_ilow": {
+      "levels": {
+        "sugar": "low",
+        "bitter": "none",
+        "water": "low",
+        "ir94e": "low"
+      },
+      "n_spikes": 307438,
+      "mn9_left_count": 11,
+      "sha256": "10f2b07ac808ef239946fd53ba09655d85bf34e31e49c1acd619ca8e865494cc",
+      "bytes": 1230870
+    },
+    "G_slow_bnone_wlow_imedium": {
+      "levels": {
+        "sugar": "low",
+        "bitter": "none",
+        "water": "low",
+        "ir94e": "medium"
+      },
+      "n_spikes": 296970,
+      "mn9_left_count": 8,
+      "sha256": "61ea72a58959ff30eec385e8c92e673e09aa31258cb4d60fad7c27c051bc4ffd",
+      "bytes": 1188986
+    },
+    "G_slow_bnone_wlow_inone": {
+      "levels": {
+        "sugar": "low",
+        "bitter": "none",
+        "water": "low",
+        "ir94e": "none"
+      },
+      "n_spikes": 7103,
+      "mn9_left_count": 10,
+      "sha256": "58329c7d4ae6e4c243e8aae784408dda411a85bdabbe50b017281360d2e5523f",
+      "bytes": 29522
+    },
+    "G_slow_bnone_wnone_imedium": {
+      "levels": {
+        "sugar": "low",
+        "bitter": "none",
+        "water": "none",
+        "ir94e": "medium"
+      },
+      "n_spikes": 300796,
+      "mn9_left_count": 3,
+      "sha256": "cf468ee6faf8722c1b66691c5182c64bdbbe8cc0460271215e3c46b641fa2579",
+      "bytes": 1204261
+    },
+    "G_slow_bnone_wnone_inone": {
+      "levels": {
+        "sugar": "low",
+        "bitter": "none",
+        "water": "none",
+        "ir94e": "none"
+      },
+      "n_spikes": 8397,
+      "mn9_left_count": 25,
+      "sha256": "ef1c5f678df5393dd3d23a90a3f9ffe1de6406f2290247a3173466f53f7a46d8",
+      "bytes": 34787
+    },
+    "G_slow_bnone_wvery_high_inone": {
+      "levels": {
+        "sugar": "low",
+        "bitter": "none",
+        "water": "very_high",
+        "ir94e": "none"
+      },
+      "n_spikes": 10987,
+      "mn9_left_count": 6,
+      "sha256": "e89842177b083df1f3975714f21e2171b7aafff61d3ee33ab41d9b96b58cd326",
+      "bytes": 45047
+    },
+    "G_smedium_blow_wlow_inone": {
+      "levels": {
+        "sugar": "medium",
+        "bitter": "low",
+        "water": "low",
+        "ir94e": "none"
+      },
+      "n_spikes": 307510,
+      "mn9_left_count": 2,
+      "sha256": "58034887c7518efb98adab8fc4315896a5dd8436f892685581ef592a70e6c532",
+      "bytes": 1231109
+    },
+    "G_smedium_bmedium_whigh_inone": {
+      "levels": {
+        "sugar": "medium",
+        "bitter": "medium",
+        "water": "high",
+        "ir94e": "none"
+      },
+      "n_spikes": 314343,
+      "mn9_left_count": 0,
+      "sha256": "3ba0bbbd91208973668f8ed2cd3f539dffc8a150db11ee858e87a3027694ab7d",
+      "bytes": 1258438
+    },
+    "G_smedium_bnone_whigh_imedium": {
+      "levels": {
+        "sugar": "medium",
+        "bitter": "none",
+        "water": "high",
+        "ir94e": "medium"
+      },
+      "n_spikes": 308822,
+      "mn9_left_count": 17,
+      "sha256": "9b74827cbd6f1980af0d90c9062e5370221bd9913837b913ea154a2b16c1054b",
+      "bytes": 1236458
+    },
+    "G_smedium_bnone_wlow_ilow": {
+      "levels": {
+        "sugar": "medium",
+        "bitter": "none",
+        "water": "low",
+        "ir94e": "low"
+      },
+      "n_spikes": 284640,
+      "mn9_left_count": 2,
+      "sha256": "f844275d78fa38152bb847e1c133fe95a01d6d60e8a762c39b737a799f89dcc6",
+      "bytes": 1139629
+    },
+    "G_smedium_bnone_wlow_imedium": {
+      "levels": {
+        "sugar": "medium",
+        "bitter": "none",
+        "water": "low",
+        "ir94e": "medium"
+      },
+      "n_spikes": 290657,
+      "mn9_left_count": 3,
+      "sha256": "6f4c80641061f53bec7dae3ee5d64da84929a31e66730bcf62800979f8181a77",
+      "bytes": 1163710
+    },
+    "G_smedium_bnone_wlow_inone": {
+      "levels": {
+        "sugar": "medium",
+        "bitter": "none",
+        "water": "low",
+        "ir94e": "none"
+      },
+      "n_spikes": 11597,
+      "mn9_left_count": 34,
+      "sha256": "0e9303e4272a1918c29ed6cabafd97208f5b447182b244365b73074a9da2eda3",
+      "bytes": 47645
+    },
+    "G_snone_bhigh_whigh_inone": {
+      "levels": {
+        "sugar": "none",
+        "bitter": "high",
+        "water": "high",
+        "ir94e": "none"
+      },
+      "n_spikes": 311184,
+      "mn9_left_count": 0,
+      "sha256": "1da18aa658f2c461b7c8284ed6e644b03b471d44b74fc556c4914dc3d3821788",
+      "bytes": 1245794
+    },
+    "G_snone_bhigh_wlow_inone": {
+      "levels": {
+        "sugar": "none",
+        "bitter": "high",
+        "water": "low",
+        "ir94e": "none"
+      },
+      "n_spikes": 294648,
+      "mn9_left_count": 0,
+      "sha256": "09b7c3cc3d406235f4953727a232e38a1085d5bf5d685e9b5dee5476b6520f80",
+      "bytes": 1179647
+    },
+    "G_snone_bhigh_wnone_inone": {
+      "levels": {
+        "sugar": "none",
+        "bitter": "high",
+        "water": "none",
+        "ir94e": "none"
+      },
+      "n_spikes": 311327,
+      "mn9_left_count": 0,
+      "sha256": "4856ce9b6281297063d30a00ea0c53a0398e5e9271932717beea3f704b1d3ba8",
+      "bytes": 1246364
+    },
+    "G_snone_blow_whigh_ilow": {
+      "levels": {
+        "sugar": "none",
+        "bitter": "low",
+        "water": "high",
+        "ir94e": "low"
+      },
+      "n_spikes": 286528,
+      "mn9_left_count": 2,
+      "sha256": "a50b57362c80d342594542de9e5f73e1fa375791da243edd520bb2ae438d7953",
+      "bytes": 1147178
+    },
+    "G_snone_blow_whigh_inone": {
+      "levels": {
+        "sugar": "none",
+        "bitter": "low",
+        "water": "high",
+        "ir94e": "none"
+      },
+      "n_spikes": 297216,
+      "mn9_left_count": 7,
+      "sha256": "125797bfecadb50bf5c483d5ff7f20262e9048414bf9774501edc6b2f9d445b8",
+      "bytes": 1189961
+    },
+    "G_snone_blow_wlow_ihigh": {
+      "levels": {
+        "sugar": "none",
+        "bitter": "low",
+        "water": "low",
+        "ir94e": "high"
+      },
+      "n_spikes": 305969,
+      "mn9_left_count": 2,
+      "sha256": "3ff065e29e82e063f6400798cfde3b275a212fe0e2d6f16aaa6b7b6a6c456b13",
+      "bytes": 1224942
+    },
+    "G_snone_blow_wlow_ilow": {
+      "levels": {
+        "sugar": "none",
+        "bitter": "low",
+        "water": "low",
+        "ir94e": "low"
+      },
+      "n_spikes": 297398,
+      "mn9_left_count": 3,
+      "sha256": "0c9bc59d51f0efcd81a71906d05ab0eb837696ef262b13cd0c6a7857c15ba44a",
+      "bytes": 1190661
+    },
+    "G_snone_blow_wlow_imedium": {
+      "levels": {
+        "sugar": "none",
+        "bitter": "low",
+        "water": "low",
+        "ir94e": "medium"
+      },
+      "n_spikes": 309377,
+      "mn9_left_count": 1,
+      "sha256": "503ab8c7115d3d8db68e2f4ad8abe9a5e0bf0dd5df9105c52501be0a7ffe4389",
+      "bytes": 1238572
+    },
+    "G_snone_blow_wlow_inone": {
+      "levels": {
+        "sugar": "none",
+        "bitter": "low",
+        "water": "low",
+        "ir94e": "none"
+      },
+      "n_spikes": 303324,
+      "mn9_left_count": 2,
+      "sha256": "a5d82f4e62c0a6942ed1cb8d41d9653f1a1fe52313140d2c8022ee91ae7ce26f",
+      "bytes": 1214360
+    },
+    "G_snone_blow_wnone_inone": {
+      "levels": {
+        "sugar": "none",
+        "bitter": "low",
+        "water": "none",
+        "ir94e": "none"
+      },
+      "n_spikes": 297109,
+      "mn9_left_count": 1,
+      "sha256": "662db2783faa19bda2ea6f8c88cda26f51ad4f67f6ad5bbc983d9e3848a50420",
+      "bytes": 1189495
+    },
+    "G_snone_bmedium_whigh_ilow": {
+      "levels": {
+        "sugar": "none",
+        "bitter": "medium",
+        "water": "high",
+        "ir94e": "low"
+      },
+      "n_spikes": 294203,
+      "mn9_left_count": 2,
+      "sha256": "2b0515bc00db14f90ae49314455fc12a8463526e1d0d7ee4c5974dd93e9bd3ea",
+      "bytes": 1177884
+    },
+    "G_snone_bmedium_whigh_inone": {
+      "levels": {
+        "sugar": "none",
+        "bitter": "medium",
+        "water": "high",
+        "ir94e": "none"
+      },
+      "n_spikes": 304638,
+      "mn9_left_count": 1,
+      "sha256": "32724698d984a82fb93071c4e6f6492a5085df5bf9132b835175136b82927ee5",
+      "bytes": 1219619
+    },
+    "G_snone_bmedium_wlow_ilow": {
+      "levels": {
+        "sugar": "none",
+        "bitter": "medium",
+        "water": "low",
+        "ir94e": "low"
+      },
+      "n_spikes": 289573,
+      "mn9_left_count": 0,
+      "sha256": "1cb78d4649d6bca93f9886d00e14f0091df7f517017b3f51dcf2ee87b26a25b9",
+      "bytes": 1159349
+    },
+    "G_snone_bmedium_wlow_inone": {
+      "levels": {
+        "sugar": "none",
+        "bitter": "medium",
+        "water": "low",
+        "ir94e": "none"
+      },
+      "n_spikes": 303193,
+      "mn9_left_count": 0,
+      "sha256": "f9bfd965b78635c792e47377f3a3191b317d2099fe5157ee14a112195cc39d3e",
+      "bytes": 1213830
+    },
+    "G_snone_bmedium_wvery_high_inone": {
+      "levels": {
+        "sugar": "none",
+        "bitter": "medium",
+        "water": "very_high",
+        "ir94e": "none"
+      },
+      "n_spikes": 301942,
+      "mn9_left_count": 4,
+      "sha256": "e84df2cf7a004af2043a13cd8f957445ebf0abe647bbf9eab97c85e1bd1f169c",
+      "bytes": 1208863
+    },
+    "G_snone_bnone_whigh_imedium": {
+      "levels": {
+        "sugar": "none",
+        "bitter": "none",
+        "water": "high",
+        "ir94e": "medium"
+      },
+      "n_spikes": 305810,
+      "mn9_left_count": 13,
+      "sha256": "b4f3590120a2ae9f4097482c613f90df098c1739fd26200d5bab7be0d2826b23",
+      "bytes": 1224381
+    },
+    "G_snone_bnone_whigh_inone": {
+      "levels": {
+        "sugar": "none",
+        "bitter": "none",
+        "water": "high",
+        "ir94e": "none"
+      },
+      "n_spikes": 4558,
+      "mn9_left_count": 0,
+      "sha256": "a403a2a5e9f378b873b6b0ef427e00978b640d143c28701a540114b4e514e1d8",
+      "bytes": 19284
+    },
+    "G_snone_bnone_wlow_ilow": {
+      "levels": {
+        "sugar": "none",
+        "bitter": "none",
+        "water": "low",
+        "ir94e": "low"
+      },
+      "n_spikes": 297732,
+      "mn9_left_count": 14,
+      "sha256": "66c3e384b9defb7124fca86253e3df3981eda843e56516700015e02286f33b1b",
+      "bytes": 1192065
+    },
+    "G_snone_bnone_wlow_imedium": {
+      "levels": {
+        "sugar": "none",
+        "bitter": "none",
+        "water": "low",
+        "ir94e": "medium"
+      },
+      "n_spikes": 310825,
+      "mn9_left_count": 7,
+      "sha256": "f298202214a2a7d48b336c5fb26b5f0a0fb9e474ddd46ec12de2f71ebc0ae690",
+      "bytes": 1244401
+    },
+    "G_snone_bnone_wlow_inone": {
+      "levels": {
+        "sugar": "none",
+        "bitter": "none",
+        "water": "low",
+        "ir94e": "none"
+      },
+      "n_spikes": 1292,
+      "mn9_left_count": 0,
+      "sha256": "c65be8a50d3cfaa30d9cccfc206125be5a0563881b563b19c7caac8e8e5fe4ea",
+      "bytes": 6217
+    },
+    "G_snone_bnone_wnone_ilow": {
+      "levels": {
+        "sugar": "none",
+        "bitter": "none",
+        "water": "none",
+        "ir94e": "low"
+      },
+      "n_spikes": 296807,
+      "mn9_left_count": 0,
+      "sha256": "0fed55d78f500d9462b5fa8a7214b72a7d224f66221f4e4ac818d1a37da7e875",
+      "bytes": 1188281
+    },
+    "G_snone_bnone_wnone_inone": {
+      "levels": {
+        "sugar": "none",
+        "bitter": "none",
+        "water": "none",
+        "ir94e": "none"
+      },
+      "n_spikes": 0,
+      "mn9_left_count": 0,
+      "sha256": "0389596855c85869cc14991964e29877bcfa5c6ad6308a494d20a64a17f1db26",
+      "bytes": 1046
+    },
+    "G_snone_bnone_wvery_high_ilow": {
+      "levels": {
+        "sugar": "none",
+        "bitter": "none",
+        "water": "very_high",
+        "ir94e": "low"
+      },
+      "n_spikes": 296456,
+      "mn9_left_count": 18,
+      "sha256": "9ca10f6ef77e7e0b7837c0d5d233a7d46b07d2223d8734fb1faa3b9b5b09b214",
+      "bytes": 1186998
+    },
+    "G_snone_bnone_wvery_high_inone": {
+      "levels": {
+        "sugar": "none",
+        "bitter": "none",
+        "water": "very_high",
+        "ir94e": "none"
+      },
+      "n_spikes": 5962,
+      "mn9_left_count": 0,
+      "sha256": "318babb8c0191063984e7887c910b8d9b4ca5b714efb75fd152a92624a3437e6",
+      "bytes": 24911
+    },
+    "G_snone_bvery_high_whigh_inone": {
+      "levels": {
+        "sugar": "none",
+        "bitter": "very_high",
+        "water": "high",
+        "ir94e": "none"
+      },
+      "n_spikes": 316953,
+      "mn9_left_count": 0,
+      "sha256": "3090d7af75c9d90aceded8d4977567e06cc41aa2d00cfd10eb919abf49f5f6db",
+      "bytes": 1268880
+    },
+    "G_snone_bvery_high_wlow_inone": {
+      "levels": {
+        "sugar": "none",
+        "bitter": "very_high",
+        "water": "low",
+        "ir94e": "none"
+      },
+      "n_spikes": 325839,
+      "mn9_left_count": 0,
+      "sha256": "23d3c0939cbb0014737e9c7424830894f54a50ff2779f2a4d7fa967a86855b5f",
+      "bytes": 1304421
+    },
+    "G_svery_high_bnone_wlow_inone": {
+      "levels": {
+        "sugar": "very_high",
+        "bitter": "none",
+        "water": "low",
+        "ir94e": "none"
+      },
+      "n_spikes": 331212,
+      "mn9_left_count": 101,
+      "sha256": "a8e644a5d7613c8cecb9a32ec70a74d5c96fd53b6cf1f3160772ade43a316a98",
+      "bytes": 1326513
+    },
+    "G_svery_high_bnone_wnone_inone": {
+      "levels": {
+        "sugar": "very_high",
+        "bitter": "none",
+        "water": "none",
+        "ir94e": "none"
+      },
+      "n_spikes": 313431,
+      "mn9_left_count": 111,
+      "sha256": "221277e50335c7816d8dfc8ce806651813998f5c2ec173118434d3aa7fb0f688",
+      "bytes": 1255450
+    }
+  },
+  "git_commit": "4a419bcd246bcbb20e0f308e8fb0c3d245ef0199"
+}

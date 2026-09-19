@@ -2,10 +2,11 @@
 // Ask the Fly — static front end. No LLM calls: dictionary lookup + lookup-table read.
 // Pure functions are exported so they can be unit-tested with node (see test/).
 
-import { BrainView, RasterView, SpikeClick, cellIdFor, decodeNeurons, makeReplayLoader, rasterRows, renderSnapshot, replayStats } from "./brain.js";
-import { FlyScene, IdleFly, loadDishSprite, loadSprites, makeToken } from "./fly.js";
+import { cellIdFor, decodeNeurons, makeReplayLoader } from "./brain.js";
+import { IdleFly, loadDishSprite, loadSprites, loadMaleSprites } from "./fly.js";
+import { FlyPanel } from './panel.js';
 import { qrcode } from "./vendor/qrcode-generator/qrcode.mjs";
-import { readoutState, stateLabel, stateExplanation, speechLine, finalSpeechContext, validSeed } from './taste_states.js';
+import { readoutState, stateLabel, stateExplanation, validSeed } from './taste_states.js';
 
 export const LEVELS = ["none", "low", "medium", "high", "very_high"];
 export const DIMENSIONS = ["sugar", "bitter", "water", "ir94e"];
@@ -273,7 +274,7 @@ export function displayName(item, lang) {
 // The four fixed lines and the front-bottom line, filled for a decision.
 // Ties are exact (same grid cell): the pick shows every tied name and the
 // shared cell's numbers. With no known option every placeholder is "—".
-export function cardLines(decision, lang) {
+export function cardLines(decision, lang, fly = decision.fly || 'female') {
   const t = STRINGS[lang];
   const names = t.levelNames;
   const picked = decision.tie.length ? decision.tie : decision.many ? [decision.flyPick] : decision.winner ? [decision.winner] : [];
@@ -289,7 +290,32 @@ export function cardLines(decision, lang) {
         ir94e: names[ir94eLevel(lead.entry)] ?? ir94eLevel(lead.entry),
       }
     : Object.fromEntries(["dish", "hz", "hz_sugar_only", "sugar", "bitter", "water", "ir94e"].map((k) => [k, t.cardEmptyValue]));
-  return { fixed: t.fixedLines.map((line) => fmt(line, values)), bottom: t.cardHonesty };
+  return { fixed: t.fixedLines.map((line) => fmt(line, values)), bottom: t.cardHonesty,
+    ...(fly === 'male' ? {fly: fmt(t.card.flyLine, {fly:t.flyName.male,dish:values.dish})} : {}) };
+}
+
+export function flySelection(value) {
+  return ['female', 'male', 'both'].includes(value) ? value : 'female';
+}
+
+function outcomeItems(decision) {
+  if (decision.tie.length) return decision.tie;
+  if (decision.mode === 'opposite') return decision.humanSet || [];
+  return decision.winner ? [decision.winner] : [];
+}
+
+export function fliesDisagree(female, male) {
+  const signature = d => JSON.stringify([Boolean(d.tie.length), outcomeItems(d).map(i => i.entry?.key || i.name).sort()]);
+  return signature(female) !== signature(male);
+}
+
+export function bothVerdict(female, male, lang) {
+  const t = STRINGS[lang];
+  if (!female.flyPick && !male.flyPick) return t.verdictNone;
+  const label = d => outcomeItems(d).map(i => displayName(i, lang)).join(' / ') || t.cardEmptyValue;
+  const key = (fliesDisagree(female, male) ? 'disagree' : 'agree') + (female.mode === 'opposite' ? 'Opposite' : '');
+  const text = fmt(t.verdictBoth[key], {dish:label(female),female:label(female),male:label(male)});
+  return text + ((female.tie.length || male.tie.length || female.flyTies.length || male.flyTies.length) ? ' ' + t.verdictBoth.tieNote : '');
 }
 
 // Footer "what's new" line from site/data/release.json: `v1.1.1 · 2026-09-12 · summary`,
@@ -346,11 +372,12 @@ function shareItemsFor(decision) {
   ));
 }
 
-export function shareParams(decision, lang) {
+export function shareParams(decision, lang, fly = decision.fly || 'female') {
   const parts = shareItemsFor(decision).map((item) => (item.kind === "key" ? `k.${item.value}` : `t.${encodeURIComponent(item.value)}`));
   let query = `?v=2&d=${parts.join(",")}&lang=${lang === "zh" ? "zh" : "en"}`;
   if (decision.mode === "opposite") query += "&m=opposite";
   if (validSeed(decision.shareSeed)) query += `&seed=${decision.shareSeed}`;
+  if (flySelection(fly) !== 'female') query += `&f=${flySelection(fly)}`;
   return query;
 }
 
@@ -402,6 +429,7 @@ export function parseShareParams(search) {
     items,
     lang: lang === "zh" || lang === "en" ? lang : null,
     mode: fields.m === "opposite" ? "opposite" : "ask",
+    ...(fields.f === 'male' || fields.f === 'both' ? {fly:fields.f} : {}),
     ...(fields.seed !== undefined && /^\d+$/.test(fields.seed) && validSeed(Number(fields.seed)) ? { seed: Number(fields.seed) } : {}),
   };
 }
@@ -710,6 +738,16 @@ export function drawResultHero(canvas, decision, lang, options = {}) {
 // other fixed lines live in the page's details, not on the card.
 export function drawShareCard(canvas, decision, lang, options = {}) {
   const t = STRINGS[lang];
+  const both = Boolean(options.maleDecision);
+  if (both && options.contentScale === undefined) {
+    // Measure the two blocks before painting. Long names and opposite-mode
+    // allocations need variable space; the QR keeps its full size and quiet zone.
+    const measure = document.createElement('canvas');
+    measure.width=canvas.width; measure.height=canvas.height;
+    const bottom = drawShareCard(measure,decision,lang,{...options,contentScale:1,measureOnly:true});
+    const contentScale = Math.min(1,(canvas.height-374-120)/Math.max(1,bottom-120));
+    return drawShareCard(canvas,decision,lang,{...options,contentScale});
+  }
   const ctx = canvas.getContext("2d");
   const W = canvas.width;
   const H = canvas.height;
@@ -734,7 +772,18 @@ export function drawShareCard(canvas, decision, lang, options = {}) {
   ctx.font = display(50, 700);
   ctx.textAlign = "left";
   ctx.fillText(t.cardTitle, pad, 108);
-  let y = 172;
+  if (both) {
+    ctx.save();
+    ctx.translate(W/2,120);
+    ctx.scale(options.contentScale,options.contentScale);
+    ctx.translate(-W/2,-120);
+  }
+  let y = both ? 142 : 172;
+  if (both) {
+    ctx.font = font(22, 600);
+    ctx.fillText(t.flyName.female, pad, y);
+    y += 30;
+  }
   ctx.font = font(27);
   ctx.fillStyle = "#6b625b";
   let headline;
@@ -745,7 +794,8 @@ export function drawShareCard(canvas, decision, lang, options = {}) {
   else if (many) headline = "";
   else if (decision.mode === "opposite") headline = fmt(t.cardOppositePicked, { fly_pick: displayName(decision.flyPick, lang), human_pick: displayName(decision.winner, lang) });
   else headline = t.cardPicked;
-  for (const line of wrapLines(ctx, headline, W - 2 * pad)) {
+  if (decision.fly === 'male') headline = cardLines(decision, lang, 'male').fly;
+  for (const line of wrapLines(ctx, headline, W - 2 * pad - (both ? 108 : 0))) {
     ctx.fillText(line, pad, y);
     y += 36;
   }
@@ -754,7 +804,7 @@ export function drawShareCard(canvas, decision, lang, options = {}) {
     // The sentence is the title; a small second line names the fly's least favourite.
     ctx.fillStyle = "#1f1a17";
     ctx.font = display(40, 700);
-    for (const line of wrapLines(ctx, readoutState(decision.flyPick.cell) === 'no_response' ? stateLabel(decision.flyPick.cell, t) : fmt(t.cardOppositeMany, { fly_pick: displayName(decision.flyPick, lang) }), W - 2 * pad)) {
+    for (const line of wrapLines(ctx, readoutState(decision.flyPick.cell) === 'no_response' ? stateLabel(decision.flyPick.cell, t) : fmt(t.cardOppositeMany, { fly_pick: displayName(decision.flyPick, lang) }), W - 2 * pad - (both ? 108 : 0))) {
       y += 48;
       ctx.fillText(line, pad, y);
     }
@@ -764,10 +814,10 @@ export function drawShareCard(canvas, decision, lang, options = {}) {
     ctx.fillText(fmt(t.oppositeLeast, { lowest: decision.lowest.map((i) => displayName(i, lang)).join(" / ") }), pad, y);
   } else if (chosen.length) {
     ctx.fillStyle = "#1f1a17";
-    ctx.font = display(chosen.length > 1 ? 44 : 56, 700);
+    ctx.font = display(both ? 38 : chosen.length > 1 ? 44 : 56, 700);
     const names = chosen.map((i) => displayName(i, lang)).join(" / ");
-    for (const line of wrapLines(ctx, names, W - 2 * pad)) {
-      y += chosen.length > 1 ? 50 : 62;
+    for (const line of wrapLines(ctx, names, W - 2 * pad - (both ? 108 : 0))) {
+      y += both ? 44 : chosen.length > 1 ? 50 : 62;
       ctx.fillText(line, pad, y);
     }
   }
@@ -782,7 +832,8 @@ export function drawShareCard(canvas, decision, lang, options = {}) {
   // The chosen dish with the fly on it (ties: every tied dish, fly hovering above).
   const ranked = [...decision.known].sort((a, b) => b.cell.mn9_mean - a.cell.mn9_mean);
   const barRows = Math.min(ranked.length, 4);
-  const barsHeight = ranked.length ? 16 + barRows * 66 + (ranked.length > barRows ? 28 : 0) : 0;
+  const rowHeight = 66;
+  const barsHeight = ranked.length ? 16 + barRows * rowHeight + (ranked.length > barRows ? 28 : 0) : 0;
   const lines = cardLines(decision, lang);
   ctx.font = font(21);
   const mn9TextHeight = wrapLines(ctx, lines.fixed[1], W - 2 * pad).length * 28;
@@ -791,7 +842,16 @@ export function drawShareCard(canvas, decision, lang, options = {}) {
   const opposite = decision.mode === "opposite" && decision.flyPick && !chosen.includes(decision.flyPick);
   const spriteTop = chosen.length > 1 && !many ? 30 : 0; // only ties need hover room
   const spriteTail = opposite ? (options.tablecloth ? 78 : 44) : (options.tablecloth ? 30 : 16);
-  const spriteRoom = Math.max(0, bottomEstimate - 44 - textBlock - barsHeight - y - spriteTop - spriteTail);
+  const maleHeight = both ? 68 + Math.min(options.maleDecision.known.length, 4) * 38 + (options.maleDecision.known.length > 4 ? 24 : 0) + (fliesDisagree(decision, options.maleDecision) ? 30 : 0) : 0;
+  const spriteRoom = Math.max(0, bottomEstimate - 44 - textBlock - barsHeight - y - spriteTop - spriteTail - maleHeight);
+  if (both && chosen.length && spriteRoom < 64) {
+    // A small header sprite retains the female depiction when both tables use
+    // the vertical space normally available for its large dish illustration.
+    const size = 78;
+    const x = W - pad - size;
+    drawDish(ctx, spriteFor(opposite ? decision.flyPick : chosen[0]), x, 174, size, false);
+    drawResponseFly(ctx, options.sprites, decision.flyPick, x, 174, size);
+  }
   if (chosen.length && spriteRoom >= 64) {
     const gap = 24;
     // Everything on one row: the human's dishes, plus the fly's pick at 0.56x when
@@ -871,13 +931,40 @@ export function drawShareCard(canvas, decision, lang, options = {}) {
       ctx.fillStyle = '#51463e';
       ctx.fillText(fmt(t.cardReadouts, {state:stateLabel(item.cell,t),d:item.cell.mn11d_mean.toFixed(1),v:item.cell.mn11v_mean.toFixed(1)}),pad,y+40);
     }
-    y += 66;
+    y += rowHeight;
   }
   if (ranked.length > shown.length) {
     ctx.font = font(20);
     ctx.fillStyle = "#6b625b";
     ctx.fillText(fmt(t.cardMore, { n: ranked.length - shown.length }), pad, y);
     y += 28;
+  }
+
+  if (both) {
+    const male = options.maleDecision;
+    const items = [...male.known].sort((a,b)=>b.cell.mn9_mean-a.cell.mn9_mean);
+    const maleChosen = outcomeItems(male);
+    const pick = maleChosen.map(i=>displayName(i,lang)).join(' / ') || t.cardEmptyValue;
+    y += 16;
+    ctx.font = font(22, 700);
+    ctx.fillStyle = '#1f1a17';
+    const title = fmt(t.card.flyLine,{fly:t.flyName.male,dish:pick});
+    for (const line of wrapLines(ctx,title,W-2*pad-80)) {ctx.fillText(line,pad,y);y+=28;}
+    if(male.flyPick) drawResponseFly(ctx,options.maleSprites,male.flyPick,W-pad-65,y-40,60);
+    y += 8;
+    const maleScale = Math.max(100,...items.map(i=>i.cell.mn9_mean));
+    for(const item of items.slice(0,4)) {
+      ctx.font=font(18,maleChosen.includes(item)?700:400);
+      ctx.fillStyle=maleChosen.includes(item)?'#b5471f':'#1f1a17';
+      ctx.fillText(displayName(item,lang),pad,y);
+      ctx.textAlign='right';ctx.fillText(fmt(t.hzValue,{hz:item.cell.mn9_mean.toFixed(1)}),W-pad,y);ctx.textAlign='left';
+      ctx.fillStyle='#e2dbd0';ctx.fillRect(pad,y+7,trackWidth,6);
+      ctx.fillStyle=maleChosen.includes(item)?'#b5471f':'#1f1a17';
+      ctx.fillRect(pad,y+7,item.cell.mn9_mean/maleScale*trackWidth,6);
+      y+=38;
+    }
+    if(items.length>4){ctx.font=font(18);ctx.fillText(fmt(t.cardMore,{n:items.length-4}),pad,y);y+=24;}
+    y+=8;
   }
 
   // The MN9 line and the one honesty sentence.
@@ -889,11 +976,22 @@ export function drawShareCard(canvas, decision, lang, options = {}) {
     y += 28;
   }
   y += 6;
+  if (both && fliesDisagree(decision,options.maleDecision)) {
+    ctx.font=font(17,600);ctx.fillStyle='#b5471f';
+    // The approved short disagreement copy fits on one line in both languages.
+    ctx.fillText(t.card.disagree,pad,y,W-2*pad);
+    y+=30;
+  }
   ctx.font = font(19, 600);
   ctx.fillStyle = "#b5471f";
   for (const part of wrapLines(ctx, lines.bottom, W - 2 * pad).slice(0, 3)) {
     ctx.fillText(part, pad, y);
     y += 26;
+  }
+  if (both) {
+    ctx.restore();
+    if (options.measureOnly) return y;
+    y = 120 + (y-120)*options.contentScale;
   }
 
   // Bottom block: brain snapshot with its caption, QR code with its URL. It
@@ -969,38 +1067,25 @@ if (isBrowser) {
     })(),
     options: [], // [{ key } | { text }], see optionFromText
     dictionary: null,
-    lookup: null,
-    decision: null,
-    brain: null,
-    scene: null,
-    raster: null,
-    sound: new SpikeClick(),
-    manifest: null,
-    spriteFallbacks: {},
-    sections: null,
-    siteUrl: SITE_URL,
-    currentCell: null,
-    currentItem: null,
-    currentCellLevels: null,
-    variant: "", // requested variant (button state)
-    appliedVariant: "", // variant whose replay is on screen
-    variantRequest: 0, // id of the latest silencing request; older responses are dropped (F03)
-    session: 0, // run session; reset() and run() start a new one, older async work is dropped (F05)
-    shareRequest: 0, // id of the latest share request; close/reset/newer request cancel older ones (F08)
-    phase: "input", // input | tasting | result; only setPhase() changes it, never a text re-render (F06)
-    loadReplay: (() => {
-      const baseline = makeReplayLoader('data/replay_v1_2/');
-      const variants = makeReplayLoader('data/replay/');
-      return (id, variant) => variant && variant !== 'baseline' ? variants(id, variant) : baseline(id);
-    })(),
-    token: null,
-    sceneStatus: null, // { key, item?, fly?, dish? } re-rendered on language switch
-    brainCaption: null, // { cell, variant, n } re-rendered on language switch
-    scenePlates: null, // scored items behind the plates, for relabelling
+    panels: {female:null,male:null},
+    fly: (() => {try {return flySelection(localStorage.getItem('askfly.fly'));} catch (_) {return 'female';}})(),
+    spriteFallbacks: {}, sections:null, siteUrl:SITE_URL,
+    session:0, shareRequest:0, phase:'input', selectionRequest:0,
     idleFly: null,
   };
 
   const $ = (id) => document.getElementById(id);
+  const primaryRoot = $('scene-panel');
+  let secondaryRoot = null;
+  const primaryPanel = () => state.fly === 'male' ? state.panels.male : state.panels.female;
+  const activePanels = () => (state.fly === 'both' ? [state.panels.female,state.panels.male] : [primaryPanel()]).filter(Boolean);
+  const panelHost = {lang:()=>state.lang,selection:()=>state.fly,notice, spriteSlug,skip:skipAll,
+    get scrollBehavior(){return scrollBehavior;}};
+  state.panels.female = new FlyPanel(primaryRoot, {flyKey:'female', loadReplay:(()=>{
+    const baseline=makeReplayLoader('data/replay_v1_2/'),variants=makeReplayLoader('data/replay/');
+    return (id,variant)=>variant && variant!=='baseline'?variants(id,variant):baseline(id);
+  })()}, panelHost);
+  const stringAt = (strings,key) => key.split('.').reduce((value,part)=>value?.[part],strings);
   const reducedMotion = typeof matchMedia === "function" && matchMedia("(prefers-reduced-motion: reduce)").matches;
   const scrollBehavior = reducedMotion ? "auto" : "smooth";
   const tr = (key, values) => fmt(STRINGS[state.lang][key], values || {});
@@ -1011,16 +1096,107 @@ if (isBrowser) {
     el.hidden = false;
   }
 
+  let maleLoading = null;
+  async function loadMale() {
+    if (state.panels.male?.lookup) return state.panels.male;
+    if (maleLoading) return maleLoading;
+    maleLoading = (async () => {
+      const json = async path => {
+        const response = await fetch(path);
+        if (!response.ok) throw new Error(`${path}: HTTP ${response.status}`);
+        return response.json();
+      };
+      const [table, raw, manifest, config] = await Promise.all([
+        json('data/lookup_table_male.json'), json('data/neurons_male.json'), json('data/replay_male/manifest.json'),
+        json('config.json'),
+      ]);
+      const sprites = await loadMaleSprites(config);
+      if (!secondaryRoot) {
+        secondaryRoot = $('fly-panel-template').content.firstElementChild.cloneNode(true);
+        $('fly-panels').append(secondaryRoot);
+      }
+      const panel = new FlyPanel(secondaryRoot, {
+        flyKey:'male', lookup:buildLookup(table), loadReplay:makeReplayLoader('data/replay_male/'),
+        neurons:decodeNeurons(raw), placeholderIndexed:raw.placeholder_indexed,
+        neuropils:null, manifest, sprites,
+      }, panelHost);
+      panel.mount();
+      state.panels.male = panel;
+      const results = $('male-results');
+      for (const id of ['table-fly','verdict','result-hero','results-table','card-lines','misses']) {
+        const clone = $(id).cloneNode(true);
+        clone.id = id+'-male';
+        for (const el of clone.querySelectorAll('[id]')) el.id += '-male';
+        results.append(clone);
+      }
+      return panel;
+    })();
+    try { return await maleLoading; }
+    finally { maleLoading = null; }
+  }
+
+  function renderFlySelection() {
+    for (const radio of document.querySelectorAll('input[name="fly"]')) radio.checked=radio.value===state.fly;
+    document.body.classList.toggle('with-both',state.fly==='both');
+    $('fly-panels').classList.toggle('panels-both',state.fly==='both');
+    for (const el of document.querySelectorAll('.male-how')) el.hidden=state.fly==='female';
+    // These existing descriptions explicitly describe the frozen female setup.
+    for (const key of ['howP1','howP2','howExtra','ir94eExplain','honesty','provenance']) {
+      for (const el of document.querySelectorAll(`[data-i18n="${key}"]`)) el.hidden=state.fly==='male';
+    }
+    for (const key of ['honesty','provenance']) document.querySelector(`.foot [data-i18n="${key}"]`).hidden=state.fly!=='female';
+    for (const key of ['howExtra','ir94eExplain']) document.querySelector(`[data-i18n="${key}"]`).hidden=state.fly!=='female';
+    if (primaryPanel()?.lookup) {
+      const meta=panel=>{
+        const table=panel.lookup.table;
+        return fmt(STRINGS[state.lang].tableMeta,{version:table.stub?'stub':currentCommit(table.git_commit).slice(0,7),cells:table.cells.length,trials:table.n_trials_per_cell});
+      };
+      $('table-meta').textContent=state.fly==='female'?meta(primaryPanel()):activePanels().filter(p=>p.lookup).map(p=>STRINGS[state.lang].flyName[p.flyKey]+' · '+meta(p)).join(' / ');
+    }
+  }
+
+  async function selectFly(value, persist = true) {
+    const request=++state.selectionRequest;
+    state.fly=flySelection(value);
+    if(persist) {try {localStorage.setItem('askfly.fly',state.fly);} catch (_) { /* storage may be unavailable */ }}
+    renderFlySelection();
+    if(state.fly!=='female') {
+      try {await loadMale();}
+      catch(error) {
+        console.warn('scene disabled:',error);
+        if(request===state.selectionRequest) notice('stateDataFailed');
+        return false;
+      }
+    }
+    if(request!==state.selectionRequest) return false;
+    // Male-only uses the original DOM block. Switching back restores its female
+    // sources; the secondary block is used only for the second fly in both mode.
+    const femaleRoot=state.fly==='male'?secondaryRoot:primaryRoot;
+    const maleRoot=state.fly==='male'?primaryRoot:secondaryRoot;
+    for(const [key,root] of [['female',femaleRoot],['male',maleRoot]]) {
+      const panel=state.panels[key];
+      if(panel && root && panel.root!==root) {panel.reset();panel.mount(root);}
+    }
+    for(const panel of Object.values(state.panels).filter(Boolean)) if(panel.neurons) panel.renderStrings();
+    renderFlySelection();
+    setPhase(state.phase);
+    return true;
+  }
+
+  for (const radio of document.querySelectorAll('input[name="fly"]')) {
+    radio.addEventListener('change',()=>{selectFly(radio.value).catch(error=>{console.warn('fly selection failed:',error);notice('stateDataFailed');});});
+  }
+
   function applyStrings() {
     const t = STRINGS[state.lang];
     document.documentElement.lang = state.lang === "zh" ? "zh-CN" : "en";
     document.title = t.pageTitle;
-    for (const el of document.querySelectorAll("[data-i18n]")) el.textContent = t[el.dataset.i18n] ?? "";
+    for (const el of document.querySelectorAll("[data-i18n]")) el.textContent = stringAt(t,el.dataset.i18n) ?? "";
     for (const el of document.querySelectorAll("[data-i18n-placeholder]")) el.placeholder = t[el.dataset.i18nPlaceholder] ?? "";
     for (const el of document.querySelectorAll("[data-i18n-aria]")) el.setAttribute("aria-label", t[el.dataset.i18nAria] ?? "");
     $("lang-toggle").textContent = state.lang === "zh" ? "EN" : "中文";
-    if (state.lookup) {
-      const table = state.lookup.table;
+    if (primaryPanel()?.lookup) {
+      const table = primaryPanel().lookup.table;
       $("table-meta").textContent = fmt(t.tableMeta, {
         version: table.stub ? "stub" : currentCommit(table.git_commit).slice(0, 7),
         cells: table.cells.length,
@@ -1030,15 +1206,10 @@ if (isBrowser) {
     renderReleaseLine();
     renderOptions();
     renderTasted();
-    if (state.brain) state.brain.setLang(state.lang);
-    renderSilenceControls();
-    renderSceneStatus();
-    renderBrainCaption();
-    relabelPlates();
-    if (state.responseItem) $('response-description').textContent = stateLabel(state.responseItem.cell,t) + ' — ' + stateExplanation(state.responseItem.cell,t);
-    if (state.brain?.replay) $('mn11-replay-note').textContent = state.brain.replay.header.readout_rows ? t.mn11ReplayNote : t.mn11VariantNote;
-    if (state.decision) renderDecision(); // text only; the phase is untouched
-    if (state.decision && $("card-dialog").open) showCard().catch((error) => console.warn("share card redraw failed:", error));
+    for (const panel of Object.values(state.panels).filter(Boolean)) if(panel.root && panel.neurons) panel.renderStrings();
+    renderFlySelection();
+    if (primaryPanel()?.decision) renderDecision(); // text only; the phase is untouched
+    if (primaryPanel()?.decision && $('card-dialog').open) showCard().catch(error=>console.warn('share card redraw failed:',error));
   }
 
   // Footer: latest release only (site/data/release.json), version linked to the changelog.
@@ -1061,184 +1232,6 @@ if (isBrowser) {
     more.rel = "noopener";
     more.textContent = t.releaseLink;
     box.append(more);
-  }
-
-  function renderBrainCaption() {
-    const c = state.brainCaption;
-    if (!c) return;
-    const cell = levelsText(c.cell, state.lang) + (c.variant ? ` (${c.variant})` : "");
-    $("brain-caption").textContent = tr("brainCaption", { cell, n: c.n });
-  }
-
-  function renderSceneStatus() {
-    const st = state.sceneStatus;
-    if (!st) return;
-    const values = {};
-    for (const k of ["dish", "fly", "pick", "fly_pick", "human_pick"]) if (st[k]) values[k] = displayName(st[k], state.lang);
-    $("scene-status").textContent = tr(st.key, values);
-  }
-
-  // Plate captions follow the language; a plate says "loading…" only while its
-  // replay is being fetched, and shows its Hz once the fly has tasted it.
-  function plateSub(item) {
-    if (!item.cell) return STRINGS[state.lang].plateUnknown;
-    if (item.loading) return STRINGS[state.lang].plateLoading;
-    if (item.tasted) return tr("hzValue", { hz: item.cell.mn9_mean.toFixed(1) });
-    return "";
-  }
-
-  function relabelPlates() {
-    if (!state.scene || !state.scenePlates) return;
-    state.scenePlates.forEach((item, i) => state.scene.relabel(i, displayName(item, state.lang), plateSub(item)));
-  }
-
-  // ---- details: raster, HUD, silencing ----
-  function rasterLabels() {
-    const t = STRINGS[state.lang];
-    return { sugar: t.rasterSugar, bitter: t.rasterBitter, water: t.rasterWater, mn9_left: t.rasterMn9L, mn9_right: t.rasterMn9R };
-  }
-
-  function showReplayDetails(replay) {
-    if (!state.raster) return;
-    state.raster.setRows(rasterRows(replay, state.brain.neurons, rasterLabels()), replay.header.duration_ms);
-    state.raster.draw(0);
-    const st = replayStats(replay);
-    const t = STRINGS[state.lang];
-    $('mn11-replay-note').textContent = replay.header.readout_rows ? t.mn11ReplayNote : t.mn11VariantNote;
-    $("hud-total").textContent = st.totalNeurons != null ? st.totalNeurons.toLocaleString() : "–";
-    $("hud-active").textContent = st.activeNeurons.toLocaleString();
-    $("hud-mn9").textContent = `${st.mn9Left} / ${st.mn9Right}`;
-    $("hud-cell").textContent = replay.header.cell_id || state.currentCell || "–";
-    $("hud-latency").textContent = st.mn9FirstMs == null ? t.hudNone : fmt(t.hudMs, { ms: st.mn9FirstMs });
-    $("hud-inputs").textContent = fmt(t.hudRates, { sugar: st.hz.sugar, bitter: st.hz.bitter, water: st.hz.water, ir94e: st.hz.ir94e });
-  }
-
-  // Silencing buttons: Clavicle plus the two neurons with the clearest, most
-  // consistent MN9 effect (by |median change| and share of cells moving the same
-  // way) are shown; the rest sit behind "More neurons". Order comes from the
-  // manifest's recorded statistics, never from a guess.
-  const silenceUi = { expanded: false };
-
-  function silenceRanking() {
-    const stats = state.manifest.variant_stats || {};
-    const rows = (state.manifest.named_neurons || [])
-      .filter((entry) => state.manifest.variants.includes(`silence_${entry.key}`))
-      .map((entry) => {
-        const st = stats[`silence_${entry.key}`] || {};
-        const consistency = Math.max(st.frac_down || 0, st.frac_up || 0);
-        return { ...entry, stats: st, score: Math.abs(st.median_delta || 0) * consistency };
-      });
-    const clavicle = rows.filter((r) => r.key === "clavicle");
-    const others = rows.filter((r) => r.key !== "clavicle").sort((a, b) => b.score - a.score);
-    return { primary: [...clavicle, ...others.slice(0, 2)], more: others.slice(2) };
-  }
-
-  // The auto-taste sequence owns the brain player while its token is live;
-  // manual silencing is disabled until it ends (F04).
-  function sequenceRunning() {
-    return Boolean(state.token && !state.token.cancelled);
-  }
-
-  function renderSilenceControls() {
-    const box = $("silence-controls");
-    if (!box || !state.manifest) return;
-    const t = STRINGS[state.lang];
-    const locked = sequenceRunning();
-    box.innerHTML = "";
-    box.setAttribute("aria-busy", locked ? "true" : "false");
-    // The button factory only builds the element; each button gets exactly one
-    // handler, passed in explicitly (F02).
-    const button = (label, onClick) => {
-      const b = document.createElement("button");
-      b.type = "button";
-      b.className = "btn btn-secondary btn-small";
-      b.textContent = label;
-      b.disabled = locked;
-      b.addEventListener("click", onClick);
-      return b;
-    };
-    const variantButton = (label, variant) => {
-      const b = button(label, () => playVariant(variant));
-      b.setAttribute("aria-pressed", state.variant === variant ? "true" : "false");
-      return b;
-    };
-    const { primary, more } = silenceRanking();
-    box.append(variantButton(t.silenceBaseline, ""));
-    for (const entry of primary) box.append(variantButton(fmt(t.silenceButton, { name: entry.label }), entry.key));
-    if (more.length) {
-      // Expander: changes only the list, never the experiment condition.
-      const toggle = button(silenceUi.expanded ? t.silenceLess : t.silenceMore, () => {
-        silenceUi.expanded = !silenceUi.expanded;
-        renderSilenceControls();
-      });
-      toggle.setAttribute("aria-expanded", silenceUi.expanded ? "true" : "false");
-      toggle.setAttribute("aria-controls", "silence-controls");
-      box.append(toggle);
-      if (silenceUi.expanded) for (const entry of more) box.append(variantButton(fmt(t.silenceButton, { name: entry.label }), entry.key));
-    }
-    const summary = document.createElement("div");
-    summary.className = "silence-summary";
-    for (const entry of [...primary, ...(silenceUi.expanded ? more : [])]) {
-      const st = entry.stats;
-      if (st.median_delta == null) continue;
-      const active = silenceStats(st);
-      const all = silenceStatsFrom(state.manifest, `silence_${entry.key}`, "all");
-      const line = document.createElement("div");
-      line.textContent = fmt(t.silenceEffectSummary, { name: entry.label, ...active, nAll: all.n, medianAll: all.median });
-      summary.append(line);
-    }
-    box.append(summary);
-    for (const entry of state.manifest.unmatched || []) {
-      const span = document.createElement("span");
-      span.className = "unavailable";
-      span.textContent = fmt(t.silenceUnavailable, { name: entry.label });
-      box.append(span);
-    }
-  }
-
-  async function playVariant(variant) {
-    if (!state.currentCell || !state.brain) return;
-    // Identity of this request: only the latest request of the current session
-    // for the cell that is still current may touch the UI (F03).
-    const request = { id: ++state.variantRequest, session: state.session, cell: state.currentCell, levels: state.currentCellLevels };
-    const current = () => request.id === state.variantRequest && request.session === state.session && state.currentCell === request.cell;
-    state.variant = variant;
-    renderSilenceControls();
-    const t = STRINGS[state.lang];
-    let replay;
-    try {
-      replay = await state.loadReplay(request.cell, variant);
-    } catch (error) {
-      console.warn("variant load failed:", error);
-      if (!current()) return;
-      state.variant = state.appliedVariant; // the buttons go back to what is actually shown
-      renderSilenceControls();
-      $("silence-caption").textContent = t.stateReplayFailed;
-      return;
-    }
-    if (!current()) return;
-    state.appliedVariant = variant;
-    const cellInfo = state.manifest.cells[request.cell];
-    if (variant) {
-      const before = cellInfo.mn9_left_count;
-      const after = replay.header.mn9_left_count;
-      const delta = after - before;
-      const name = (state.manifest.named_neurons.find((n) => n.key === variant) || {}).label || variant;
-      const st = (state.manifest.variant_stats || {})[`silence_${variant}`] || {};
-      // Only what was measured: this cell's counts, then the median and the
-      // up/down/unchanged shares over the cells where the baseline MN9 fired.
-      $("silence-caption").textContent = fmt(t.silenceCaption, { name, after, before, delta: (delta >= 0 ? "+" : "") + delta, ...silenceStats(st) });
-    } else {
-      $("silence-caption").textContent = "";
-    }
-    state.brainCaption = { cell: request.levels, variant: variant ? replay.header.variant : "", n: replay.header.n_spikes };
-    renderBrainCaption();
-    $("mn9-count").textContent = "0";
-    state.brain.onMn9 = (count) => { $("mn9-count").textContent = String(count); state.sound.click(); };
-    state.brain.onTime = (ms) => { if (state.raster && !$("brain-details").hidden) state.raster.draw(ms); };
-    state.brain.setReplay(replay);
-    showReplayDetails(replay);
-    await state.brain.play(speed());
   }
 
   // ---- dish library: a picture menu ----
@@ -1445,7 +1438,7 @@ if (isBrowser) {
       list.append(li);
     });
     renderLibrarySelection();
-    const ready = Boolean(state.lookup && state.dictionary);
+    const ready = Boolean(state.panels.female.lookup && state.dictionary);
     $("ask-btn").disabled = !ready;
     $("opposite-btn").disabled = !ready;
     if (state.options.length >= 2) notice(null);
@@ -1460,8 +1453,24 @@ if (isBrowser) {
   }
 
   function renderDecision() {
+    const primary=primaryPanel();
+    if(!primary?.decision) return;
+    renderPanelDecision(primary);
+    $('result-fly').hidden=state.fly==='female';
+    $('result-fly').textContent=STRINGS[state.lang].flyName[primary.flyKey]+' · '+STRINGS[state.lang].flySource[primary.flyKey];
+    $('disagreement').hidden=true;
+    $('male-results').hidden=state.fly!=='both' || !state.panels.male?.decision;
+    if(state.fly==='both' && state.panels.male?.decision) {
+      renderPanelDecision(state.panels.male, true);
+      $('verdict').textContent=bothVerdict(primary.decision,state.panels.male.decision,state.lang);
+      $('disagreement').hidden=!fliesDisagree(primary.decision,state.panels.male.decision);
+    }
+  }
+
+  function renderPanelDecision(panel, secondary = false) {
+    const $ = id => document.getElementById(secondary && ['verdict','result-hero','results-body','card-lines','misses','table-fly','results-table'].includes(id) ? id+'-male' : id);
     const t = STRINGS[state.lang];
-    const d = state.decision;
+    const d = panel.decision;
     const verdict = $("verdict");
     verdict.innerHTML = "";
     const lead = document.createElement("span");
@@ -1495,7 +1504,10 @@ if (isBrowser) {
       sub.textContent = t.lowInterest;
       verdict.append(sub);
     }
-    renderHero().catch((error) => console.warn("hero failed:", error));
+    $("table-fly").hidden = state.fly === 'female';
+    $("table-fly").textContent = t.tableFly[panel.flyKey];
+    $("results-table").querySelector('[data-i18n="colMn11D"]').textContent = panel.flyKey === 'male' ? t.maleNote.colMn11D : t.colMn11D;
+    renderHero(panel, $("result-hero")).catch((error) => console.warn("hero failed:", error));
 
     const body = $("results-body");
     body.innerHTML = "";
@@ -1578,24 +1590,25 @@ if (isBrowser) {
   function setPhase(phase) {
     state.phase = phase;
     $("input-panel").hidden = phase !== "input";
-    $("scene-panel").hidden = phase === "input";
+    for(const panel of Object.values(state.panels).filter(Boolean)) panel.root.hidden=phase==='input' || !activePanels().includes(panel);
+    $('fly-panels').hidden=phase==='input';
     $("result-panel").hidden = phase !== "result";
   }
 
   function showResult() {
+    for (const panel of activePanels()) panel.showFinalResponse();
     renderDecision();
     setPhase("result");
   }
 
   // The winner sprite with the fly is the result's main image, drawn as soon
   // as the sprites are in the cache (the scene loaded them; the card reuses them).
-  async function renderHero() {
-    const canvas = $("result-hero");
-    const decision = state.decision;
-    const sprites = state.scene ? state.scene.sprites : null;
+  async function renderHero(panel, canvas) {
+    const decision = panel.decision;
+    const sprites = panel.sprites;
     if (!decision || !decision.flyPick || !sprites) { canvas.hidden = true; return; }
     await Promise.all(decision.known.map((item) => loadDishSprite(sprites, spriteSlug(item)).catch(() => null)));
-    if (state.decision !== decision) return;
+    if (panel.decision !== decision) return;
     canvas.hidden = false;
     const width = Math.min(420, canvas.parentElement.clientWidth || 360);
     canvas.style.width = `${width}px`;
@@ -1607,198 +1620,45 @@ if (isBrowser) {
     });
   }
 
-  function speed() {
-    return Number($("speed").value) || 1;
-  }
-
-  // Plays the fly + brain sequence for a decision, then reveals the result view.
-  async function runScene(decision, session) {
-    if (state.token) state.token.cancel();
-    const token = makeToken();
-    state.token = token;
-    renderSilenceControls(); // the sequence now owns the player: manual experiments disabled (F04)
-    // Live while this session is current and the sequence has not been skipped.
-    const live = () => state.session === session && !token.cancelled;
-    const scored = [...decision.known, ...decision.misses];
-    for (const item of scored) { item.loading = false; item.tasted = false; }
-    state.scenePlates = scored;
-    const plates = scored.map((item) => ({
-      key: item.entry ? item.entry.key : item.name,
-      label: displayName(item, state.lang),
-      sub: plateSub(item),
-      slug: spriteSlug(item),
-    }));
-    // Replays are fetched up front so the fly rarely waits at a plate.
-    for (const item of decision.known) state.loadReplay(cellIdFor(item.cell)).catch(() => {});
-    const plan = scenePlan(decision, scored);
-    setPhase("tasting");
-    state.sceneStatus = { key: "sceneIdle" };
-    renderSceneStatus();
-    state.brainCaption = null;
-    $("brain-caption").textContent = "";
-    $("mn9-count").textContent = "0";
-    $("mn9-pill").hidden = true;
-    $("hud-idle").hidden = false;
-    state.brain.resize();
-    await state.scene.setPlates(plates);
-    if (!live()) return;
-    window.scrollTo({ top: 0, behavior: scrollBehavior });
-
-    const hooks = {
-      onReact: async (index, reactionToken, final) => {
-        if (!live()) return;
-        const item = scored[index], response = readoutState(item.cell);
-        if (!response) return;
-        state.responseItem = item;
-        const context = final ? finalSpeechContext(decision) : response;
-        await state.scene.respond(response, reactionToken, context ? () => speechLine(context, item.cell, decision.shareSeed, state.lang) : null);
-      },
-      onTaste: async (index) => {
-        const item = scored[index];
-        if (!item.cell || !live()) return;
-        state.sceneStatus = { key: "sceneTasting", dish: item };
-        renderSceneStatus();
-        state.brain.setReplay(null); // blank brain while the replay is fetched
-        $("mn9-count").textContent = "0";
-        const cellId = cellIdFor(item.cell);
-        item.loading = true;
-        state.scene.relabel(index, null, plateSub(item));
-        let replay;
-        try {
-          replay = await state.loadReplay(cellId);
-        } catch (error) {
-          console.warn("replay load failed:", error);
-          if (state.session !== session) return; // reset while loading: nothing to show
-          item.loading = false;
-          state.scene.relabel(index, null, plateSub(item));
-          $("brain-caption").textContent = navigator.onLine === false ? tr("stateOffline") : tr("stateReplayFailed");
-          notice(navigator.onLine === false ? "stateOffline" : "stateReplayFailed");
-          return;
-        }
-        if (state.session !== session) return; // reset while loading (F05)
-        item.loading = false;
-        item.tasted = true;
-        state.scene.relabel(index, null, plateSub(item));
-        if (token.cancelled) return; // skipped: the result view shows the numbers
-        await present(item, cellId, replay);
-      },
-      // Final landing: the brain switches to the run of the plate the fly lands
-      // on (its own pick), unless that run is already showing because the pick
-      // was the last plate tasted; then nothing restarts.
-      onLand: async (index) => {
-        if (!live()) return;
-        const landing = finalLanding(plan, scored, state.currentCell);
-        if (!landing || landing.index !== index) return;
-        const item = scored[index];
-        // The stage caption names the plate the fly is on ("Trying {dish}…",
-        // the tasting string); untouched when no landing replay plays.
-        state.sceneStatus = { key: "sceneTasting", dish: item };
-        renderSceneStatus();
-        let replay;
-        try {
-          replay = await state.loadReplay(landing.cellId);
-        } catch (error) {
-          console.warn("replay load failed:", error);
-          return; // the last tasted run stays on screen
-        }
-        if (!live()) return;
-        await present(item, landing.cellId, replay);
-      },
-    };
-
-    // Show one recorded run: caption, HUD, raster, silencing state, then play it.
-    async function present(item, cellId, replay) {
-      state.currentCellLevels = item.cell;
-      state.brainCaption = { cell: item.cell, variant: "", n: replay.header.n_spikes };
-      renderBrainCaption();
-      $("mn9-count").textContent = "0";
-      $("mn9-pill").hidden = false;
-      $("hud-idle").hidden = true;
-      state.currentCell = cellId;
-      state.currentItem = item;
-      state.variant = "";
-      state.appliedVariant = "";
-      state.variantRequest += 1; // pending silencing requests for the previous dish are stale
-      $("silence-caption").textContent = "";
-      renderSilenceControls();
-      state.brain.onMn9 = (count) => { $("mn9-count").textContent = String(count); state.sound.click(); };
-      state.brain.onTime = (ms) => { if (state.raster) state.raster.draw(ms); };
-      state.brain.setReplay(replay);
-      showReplayDetails(replay);
-      const stopOnCancel = () => state.brain.stop();
-      token.onCancel.push(stopOnCancel);
-      await state.brain.play(speed());
-    }
-    await state.scene.run(plan, hooks, token);
-    if (state.session !== session || state.token !== token) return;
-    if (decision.flyTies.length > 1) state.scene.speech = () => speechLine('tie', decision.flyPick.cell, decision.shareSeed, state.lang);
-    token.cancel(); // the sequence is over: the player is free for manual experiments
-    renderSilenceControls();
-    for (const item of decision.known) item.tasted = true; // skipped plates still show their Hz
-    relabelPlates();
-    state.sceneStatus = finalSceneStatus(decision);
-    renderSceneStatus();
-    showResult();
-  }
-
-  // The stage caption once the outcome is known (end of the sequence, or skip).
-  function finalSceneStatus(decision) {
-    if (!decision.flyPick) return { key: "sceneNone" };
-    if (decision.tie.length) return { key: "sceneTie" };
-    if (readoutState(decision.flyPick.cell) === 'no_response') return { key: 'sceneNoResponse' };
-    if (decision.mode === "opposite" && decision.many) return { key: "sceneOppositeMany", fly_pick: decision.flyPick };
-    if (decision.mode === "opposite") return { key: "sceneOpposite", fly_pick: decision.flyPick, human_pick: decision.winner };
-    return { key: "sceneWinner", pick: decision.winner };
-  }
-
-  function run(mode, shareSeed = null) {
-    if (!state.lookup || !state.dictionary) { notice("stateDataFailed"); return; }
-    if (state.options.length < 2) { notice("stateNoOptions"); return; }
+  // Score each experiment separately, then run the active panels concurrently.
+  async function run(mode, shareSeed = null) {
+    if (!state.panels.female.lookup || !state.dictionary) {notice('stateDataFailed');return;}
+    if(state.options.length<2){notice('stateNoOptions');return;}
     notice(null);
-    state.responseItem = null;
-    $('response-detail').hidden = true;
-    $('fly-bubble').hidden = true;
-    state.session += 1;
-    const session = state.session;
-    const scored = scoreOptions(state.options.map(optionQuery), state.dictionary, state.lookup);
-    state.decision = decide(scored, mode);
-    state.decision.shareSeed = validSeed(shareSeed) ? shareSeed : crypto.getRandomValues(new Uint32Array(1))[0];
-    if (state.decision.known.length === 0) {
-      notice("stateAllUnknown");
-      showResult();
-      return;
+    state.session+=1;
+    const session=state.session;
+    cancelShare();
+    const ready=await selectFly(state.fly,false);
+    if(session!==state.session || !ready) return;
+    const seed=validSeed(shareSeed)?shareSeed:crypto.getRandomValues(new Uint32Array(1))[0];
+    for(const panel of activePanels()) {
+      panel.reset();
+      panel.score(state.options.map(optionQuery),state.dictionary,mode,seed,state.fly);
     }
-    if (state.brain && state.scene) {
-      runScene(state.decision, session).catch((error) => {
-        console.warn("scene error:", error);
-        if (state.session !== session) return;
-        $("scene-status").textContent = tr("stateSceneError");
-        showResult();
-      });
-      return;
-    }
+    if(!primaryPanel().decision.known.length){notice('stateAllUnknown');showResult();return;}
+    setPhase('tasting');
+    await Promise.all(activePanels().map(async panel=>{
+      if(!panel.brain || !panel.scene) return;
+      const panelSession=panel.session;
+      try {await panel.runScene(panel.decision,panelSession);}
+      catch(error){
+        console.warn('scene error:',error);
+        if(state.session!==session) return;
+        panel.el('scene-status').textContent=tr('stateSceneError');
+        notice('stateSceneError');
+      }
+    }));
+    if(state.session!==session) return;
     showResult();
-    window.scrollTo({ top: 0, behavior: scrollBehavior });
+  }
+
+  function skipAll() {
+    for(const panel of activePanels()) panel.skip();
+    if(primaryPanel()?.decision) showResult();
   }
 
   function spriteSlug(item) {
     return item.entry ? (state.spriteFallbacks[slugFor(item.entry.key)] || slugFor(item.entry.key)) : null;
-  }
-
-  // The brain snapshot shows the response being reported: the winner's recorded
-  // run; in "opposite" the fly's own pick; in a tie the tied dish with the most
-  // MN9 spikes. Null when the brain view or the replay is unavailable.
-  async function snapshotFor(decision) {
-    if (!state.brain || !decision.flyPick) return null;
-    const candidates = decision.mode === "opposite" ? [decision.flyPick] : (decision.tie.length ? decision.tie : [decision.winner]);
-    const loaded = await Promise.all(candidates.map(async (item) => {
-      try { return { item, replay: await state.loadReplay(cellIdFor(item.cell)) }; } catch (_) { return null; }
-    }));
-    const best = loaded.filter(Boolean).sort((a, b) => (b.replay.header.mn9_left_count || 0) - (a.replay.header.mn9_left_count || 0))[0];
-    if (!best) return null;
-    const snap = renderSnapshot(state.brain.neurons, state.brain.neuropils, best.replay, 340, 2);
-    const stats = replayStats(best.replay);
-    return { canvas: snap.canvas, mn9: stats.mn9Left ?? snap.count, neurons: stats.totalNeurons };
   }
 
   // One share request = one immutable (decision, lang, siteUrl) captured up front
@@ -1841,16 +1701,16 @@ if (isBrowser) {
   }
 
   async function showCard() {
-    const request = { id: ++state.shareRequest, session: state.session, decision: state.decision, lang: state.lang, siteUrl: state.siteUrl };
-    const current = () => request.id === state.shareRequest && request.session === state.session && state.decision === request.decision;
+    const request = { id: ++state.shareRequest, session: state.session, decision: primaryPanel()?.decision, panel: primaryPanel(), maleDecision: state.fly === 'both' ? state.panels.male?.decision : null, lang: state.lang, siteUrl: state.siteUrl };
+    const current = () => request.id === state.shareRequest && request.session === state.session && primaryPanel()?.decision === request.decision;
     if (!request.decision) return;
     const canvas = $("share-card");
     $("download-link").removeAttribute("href"); // no stale PNG while this request runs
-    const sprites = state.scene ? state.scene.sprites : null;
+    const sprites = request.panel.sprites;
     let snapshot = null;
     try {
       const [snap] = await Promise.all([
-        snapshotFor(request.decision),
+        request.panel.snapshotFor(request.decision),
         sprites ? Promise.all(request.decision.known.map((item) => loadDishSprite(sprites, spriteSlug(item)).catch(() => null))) : null,
       ]);
       snapshot = snap;
@@ -1864,7 +1724,9 @@ if (isBrowser) {
     if (!current()) return;
     try {
       drawShareCard(canvas, request.decision, request.lang, {
-        stub: Boolean(state.lookup.table.stub),
+        stub: Boolean(request.panel.lookup.table.stub),
+        maleDecision: request.maleDecision,
+        maleSprites: state.panels.male?.sprites,
         sprites,
         snapshot,
         tablecloth,
@@ -1961,7 +1823,7 @@ if (isBrowser) {
       fetch("data/lookup_table_v1_2.json").then((r) => { if (!r.ok) throw new Error('v1.2 table missing'); return r.json(); }),
     ]);
     state.dictionary = buildDictionary(dishes);
-    state.lookup = buildLookup(table);
+    state.panels.female.bindSources({lookup:buildLookup(table)});
     $("stub-banner").hidden = !table.stub;
     const [fallbacks, sections, config, release] = await Promise.all([
       fetch("assets/dishes/fallbacks.json").then((r) => (r.ok ? r.json() : null)).catch(() => null),
@@ -1983,31 +1845,17 @@ if (isBrowser) {
         fetch("data/neuropils.json").then((r) => (r.ok ? r.json() : null)).catch(() => null),
         fetch("data/replay/manifest.json").then((r) => (r.ok ? r.json() : null)).catch(() => null),
       ]);
-      const neurons = decodeNeurons(neuronsJson);
-      state.brain = new BrainView($("brain-canvas"), neurons, { neuropils, lang: state.lang });
-      state.raster = new RasterView($("raster-canvas"));
-      state.manifest = manifest;
-      if (manifest) {
-        // Named neurons without a v783 match are listed so the site can say they were skipped.
+      const panel=state.panels.female;
+      panel.bindSources({neurons:decodeNeurons(neuronsJson),sprites,neuropils,manifest});
+      if(manifest) {
         try {
-          const named = await fetch("data/named_neurons.json").then((r) => (r.ok ? r.json() : null));
-          manifest.unmatched = named ? named.neurons.filter((n) => !n.root_ids.length).map((n) => ({ key: n.key, label: n.label })) : [];
-        } catch (_) { manifest.unmatched = []; }
+          const named=await fetch('data/named_neurons.json').then(r=>r.ok?r.json():null);
+          manifest.unmatched=named?named.neurons.filter(n=>!n.root_ids.length).map(n=>({key:n.key,label:n.label})):[];
+        } catch (_) {manifest.unmatched=[];}
       }
-      renderSilenceControls();
-      state.scene = new FlyScene($("scene-canvas"), sprites, $("plate-labels"));
-      state.scene.bubble = $('fly-bubble');
-      state.scene.onResponse = (response, index) => {
-        const canvas = $('mouth-inset'), ctx = canvas.getContext('2d');
-        ctx.clearRect(0,0,canvas.width,canvas.height);
-        const image = sprites.insets?.[response]?.[index];
-        if (image) { ctx.imageSmoothingEnabled = false; ctx.drawImage(image,0,0,128,128); }
-        $('response-detail').hidden = false;
-        if (state.responseItem) $('response-description').textContent = stateLabel(state.responseItem.cell, STRINGS[state.lang]) + ' — ' + stateExplanation(state.responseItem.cell, STRINGS[state.lang]);
-      };
-      state.idleFly = new IdleFly($("idle-fly"), sprites);
+      panel.mount();
+      state.idleFly=new IdleFly($('idle-fly'),sprites);
       renderOptions();
-      $("layout-note").hidden = neurons.layout !== "placeholder";
     } catch (error) {
       console.warn("scene disabled:", error);
     }
@@ -2017,32 +1865,11 @@ if (isBrowser) {
   // of the old run a no-op, and the run-time fields are cleared (F05). Skip is
   // different: it keeps the session and shows this run's result.
   function reset() {
-    state.responseItem = null;
-    $('response-detail').hidden = true;
-    $('fly-bubble').hidden = true;
-    state.session += 1;
-    if (state.token) state.token.cancel();
-    state.token = null;
-    if (state.brain) { state.brain.stop(); state.brain.setReplay(null); }
-    if (state.scene) state.scene.stop();
-    state.decision = null;
-    state.sceneStatus = null;
-    state.brainCaption = null;
-    state.scenePlates = null;
-    state.currentCell = null;
-    state.currentItem = null;
-    state.currentCellLevels = null;
-    state.variant = "";
-    state.appliedVariant = "";
-    state.variantRequest += 1;
-    $("brain-caption").textContent = "";
-    $("silence-caption").textContent = "";
-    $("mn9-pill").hidden = true;
-    $("mn9-count").textContent = "0";
-    renderSilenceControls();
+    state.session+=1;
+    for(const panel of Object.values(state.panels).filter(Boolean)) panel.reset();
     cancelShare();
-    if ($("card-dialog").open) $("card-dialog").close();
-    setPhase("input");
+    if($('card-dialog').open) $('card-dialog').close();
+    setPhase('input');
   }
 
   $("lang-toggle").addEventListener("click", () => {
@@ -2107,56 +1934,31 @@ if (isBrowser) {
     reset();
     $("option-input").focus();
   });
-  $("skip-btn").addEventListener("click", () => {
-    if (state.token) state.token.cancel();
-    if (state.brain) state.brain.stop();
-    if (state.scene) { state.scene.speech = null; state.scene.fly.hidden = true; state.scene.draw(); }
-    $('fly-bubble').hidden = true;
-    $('response-detail').hidden = true;
-    renderSilenceControls();
-    if (state.scenePlates) { for (const item of state.scenePlates) { item.loading = false; item.tasted = Boolean(item.cell); } relabelPlates(); }
-    if (state.decision) { state.sceneStatus = finalSceneStatus(state.decision); renderSceneStatus(); showResult(); }
-  });
-  $("speed").addEventListener("change", () => {
-    if (state.brain) state.brain.speed = speed();
-  });
-  $("sound-toggle").addEventListener("change", (event) => state.sound.enable(event.target.checked));
-  $("brain-details").addEventListener("toggle", () => {
-    if ($("brain-details").open && state.raster && state.raster.rows.length) state.raster.setRows(state.raster.rows, state.raster.duration);
-  });
-  window.addEventListener("resize", () => {
-    if (state.brain && !$("scene-panel").hidden) state.brain.resize();
+  window.addEventListener('resize',()=>{
+    for(const panel of activePanels()) if(panel.brain && !panel.root.hidden) panel.brain.resize();
   });
 
   // Read-only view of the run state for browser regression checks (scripts/browser_checks.py).
   window.__askfly = {
-    snapshot: () => ({
-      phase: state.phase ?? null,
-      session: state.session ?? null,
-      currentCell: state.currentCell,
-      variant: state.variant,
-      options: state.options.map((o) => o.key || o.text),
-      sceneRunning: Boolean(state.scene && state.scene.raf),
-      brainPlaying: Boolean(state.brain && state.brain.raf),
-      idleRunning: Boolean(state.idleFly && state.idleFly.raf),
-      dialogOpen: $("card-dialog").open,
-      responseState: state.scene?.fly.responseState ?? null,
-      flyHidden: Boolean(state.scene?.fly.hidden),
-      rasterKeys: state.raster?.rows.map(r => r.key) || [],
-    }),
+    snapshot:()=>{
+      const common={phase:state.phase,options:state.options.map(o=>o.key||o.text),idleRunning:Boolean(state.idleFly?.raf),dialogOpen:$('card-dialog').open};
+      return {...state.panels.female.snapshot(common),fly:state.fly,
+        panels:Object.fromEntries(Object.entries(state.panels).filter(([,p])=>p).map(([key,p])=>[key,p.snapshot(common)]))};
+    },
   };
 
   applyStrings();
-  loadData().then(() => {
+  loadData().then(async () => {
     // A shared link (?d=…&lang=…) fills the options and runs the sequence.
     const shared = parseShareParams(window.location.search);
-    if (!shared || !state.dictionary) return;
+    if (!shared || !state.dictionary) {await selectFly(state.fly,false);return;}
+    state.fly=flySelection(shared.fly); // Old shared links always select the female.
     if (shared.lang && shared.lang !== state.lang) {
       state.lang = shared.lang; // for this view only; the saved preference is untouched
       applyStrings();
     }
     for (const option of resolveShared(shared.items, state.dictionary)) addSelection(option);
-    if (state.options.length >= 2) run(shared.mode, shared.seed ?? 0);
+    if (state.options.length >= 2) await run(shared.mode, shared.seed ?? 0);
   }).catch((error) => {
     console.warn("data load failed:", error);
     notice("stateDataFailed");

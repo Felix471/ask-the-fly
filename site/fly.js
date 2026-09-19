@@ -80,22 +80,37 @@ export async function loadDishSprite(sprites, slug, loader = loadImage) {
 }
 
 // Fly frame sets: a set keeps the frames that loaded; a set with none is null.
-export async function loadSprites(base = "assets/", loader = loadImage) {
+export async function loadSprites(base = "assets/", loader = loadImage, flyBase = base) {
+  const flyPath = typeof flyBase === 'string' ? `${flyBase}fly/` : flyBase.fly;
+  const responsePath = typeof flyBase === 'string' ? `${flyBase}response/` : flyBase.response;
   const fly = {};
   const frames = { idle: 2, fly: 4, land: 1, proboscis: 3 };
   await Promise.all(Object.entries(frames).map(async ([state, n]) => {
-    const list = await Promise.all(Array.from({ length: n }, (_, i) => loader(`${base}fly/${state}_${i + 1}.png`)));
+    const list = await Promise.all(Array.from({ length: n }, (_, i) => loader(`${flyPath}${state}_${i + 1}.png`)));
     const loaded = list.filter(Boolean);
     fly[state] = loaded.length ? loaded : null;
   }));
   const responses = {}, insets = {};
   await Promise.all(Object.keys(RESPONSE_SEQUENCE).map(async state => {
-    const list = await Promise.all([1,2,3,4].map(i => loader(`${base}response/${state}_${i}.png`)));
+    const list = await Promise.all([1,2,3,4].map(i => loader(`${responsePath}${state}_${i}.png`)));
     responses[state] = list.every(Boolean) ? list : null;
-    const detail = await Promise.all([1,2,3,4].map(i => loader(`${base}response/inset_${state}_${i}.png`)));
+    const detail = await Promise.all([1,2,3,4].map(i => loader(`${responsePath}inset_${state}_${i}.png`)));
     insets[state] = detail.every(Boolean) ? detail : null;
   }));
   return { fly, responses, insets, dishCache: new Map(), pending: new Map(), base };
+}
+
+// prep_male_sprites --promote writes this marker only after copying all 42 PNGs.
+// Until approval/promotion, use the existing art without requesting absent files.
+export async function loadMaleSprites(config = {}, base = 'assets/', loader = loadImage) {
+  const variant = config.male_sprite_variant;
+  if (variant == null) return loadSprites(base, loader);
+  if (!['tip', 'tip_small', 'cool'].includes(variant)) throw new Error('Unknown male sprite variant');
+  return loadSprites(base, async path => {
+    const image = await loader(path);
+    if (!image) throw new Error(`Promoted male sprite set incomplete: ${path}`);
+    return image;
+  }, {fly: `${base}fly_male/`, response: `${base}response_male/`});
 }
 
 // The pixel frames to draw for a fly state: its own set, else another pixel

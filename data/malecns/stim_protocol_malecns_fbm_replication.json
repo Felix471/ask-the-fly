@@ -1,0 +1,427 @@
+{
+  "protocol_version": "malecns-m1i-fbm-replication-1.0",
+  "data_version": "male-cns-v1.0-fbm-ge5-1",
+  "connectivity_file": "data/malecns/derived/fbm/connectivity.parquet",
+  "completeness_file": "data/malecns/derived/fbm/completeness.csv",
+  "model": {
+    "source": "vendor/fly-brain/code/paper-phil-drosophila/model.py (MIT, Shiu et al. 2024)",
+    "v_0_mV": -52,
+    "v_rst_mV": -52,
+    "v_th_mV": -45,
+    "t_mbr_ms": 20,
+    "tau_ms": 5,
+    "t_rfc_ms": 2.2,
+    "t_dly_ms": 1.8,
+    "w_syn_mV": 0.17875000000000002,
+    "f_poi": 250,
+    "integration": "linear",
+    "dt_ms": 0.1
+  },
+  "trial": {
+    "duration_ms": 1000,
+    "n_trials": 30,
+    "sanity_n_trials": 5,
+    "seed_rule": "trial i uses seed base_seed+i; base_seed=20260910"
+  },
+  "stimulus": {
+    "type": "PoissonInput per GRN, N=1, weight=w_syn*f_poi, refractory of stimulated GRNs set to 0",
+    "channels": {
+      "fbm_sugar_labellar": {
+        "cell_set": "fbm_sugar_labellar",
+        "count": 34,
+        "rates_hz_by_condition": {
+          "fbm_sugar": 120,
+          "fbm_bitter": 0,
+          "fbm_both": 120,
+          "fbm_sugar_kc": 120
+        }
+      },
+      "fbm_sugar_pharyngeal": {
+        "cell_set": "fbm_sugar_pharyngeal",
+        "count": 8,
+        "rates_hz_by_condition": {
+          "fbm_sugar": 100,
+          "fbm_bitter": 0,
+          "fbm_both": 100,
+          "fbm_sugar_kc": 100
+        }
+      },
+      "fbm_sugar_tarsal": {
+        "cell_set": "fbm_sugar_tarsal",
+        "count": 162,
+        "rates_hz_by_condition": {
+          "fbm_sugar": 80,
+          "fbm_bitter": 0,
+          "fbm_both": 80,
+          "fbm_sugar_kc": 80
+        }
+      },
+      "bitter": {
+        "cell_set": "bitter",
+        "count": 38,
+        "rates_hz_by_condition": {
+          "fbm_sugar": 0,
+          "fbm_bitter": 120,
+          "fbm_both": 120,
+          "fbm_sugar_kc": 0
+        }
+      }
+    }
+  },
+  "readout": {
+    "neuron": "MN9",
+    "primary": 10331,
+    "secondary": 16949,
+    "primary_xlsx_side": "L",
+    "secondary_xlsx_side": "R",
+    "aggregation": "bilateral_mean",
+    "aggregation_rationale": "Run (b) replication criteria use the two-cell mean and both cells; the post-M1c primary/secondary identifiers are retained.",
+    "rate_definition": "spikes in [0, duration] / duration, mean over trials; also report std over trials",
+    "metrics": "per-cell 1 s rates of L10331 and R16949, the 2-cell mean, and the 2-cell mean per 50 ms bin (20 bins per trial; report min/median/max across bins and trials), next to their 30-90 / 0 / 0.",
+    "bin_ms": 50,
+    "bins_per_trial": 20
+  },
+  "notes": [
+    "Paper calibrated w_syn on FlyWire v630; we run v783 only, absolute Hz may differ.",
+    "Model baseline firing is 0 Hz by construction (no intrinsic activity); condition D measures it anyway."
+  ],
+  "fbm_provenance": {
+    "reference_protocol": {
+      "path": "data/malecns/stim_protocol_malecns.json",
+      "bytes": 5142,
+      "sha256": "88a36bb624b4c304759f5178826248b92a699fcb56751b894b347e21ce673173"
+    },
+    "configuration": {
+      "configuration_source": [
+        "https://github.com/blendi-remade/fly-brain-minecraft/blob/main/docs/VALIDATION.md",
+        "https://github.com/blendi-remade/fly-brain-minecraft/blob/main/PROVENANCE.md"
+      ],
+      "validation_sections": [
+        2,
+        3,
+        9
+      ],
+      "evidence": "Facts verified against the cited repository at declaration; no refetch.",
+      "substrate": "MaleCNS v1.0 via neuPrint; all :Neuron nodes",
+      "neurons": 176422,
+      "minimum_synapses": 5,
+      "connections": 6287749,
+      "synapses": 90296905,
+      "autapses_dropped": 40,
+      "autapse_synapses_dropped": 394,
+      "model": {
+        "gain": 0.65,
+        "base_w_syn_mV": 0.275,
+        "w_syn_mV": 0.17875000000000002,
+        "synaptic_variable": "exponential",
+        "tau_ms": 5,
+        "t_mbr_ms": 20,
+        "v_th_mV": -45,
+        "v_0_mV": -52,
+        "v_rst_mV": -52,
+        "t_rfc_ms": 2.2,
+        "t_dly_ms": 1.8,
+        "dt_ms": 0.5
+      },
+      "stimulus": "Stimulated neurons are forced Poisson spike generators.",
+      "seed": 20260903,
+      "kc_input_gain": 0.25,
+      "kc_class": "Kenyon_Cell",
+      "kc_count": 4064,
+      "kc_application": "In-game postsynaptic scaling of every input onto class Kenyon_Cell.",
+      "sign_rule": "consensusNt, else predictedNt with confidence >= 0.5, else celltypePredictedNt, else unclear; ACh/DA/OA/5-HT and unclear +1; glutamate, GABA and histamine -1.",
+      "feeding_types": {
+        "LB3b": {
+          "count": 11,
+          "hz": 120
+        },
+        "LB3c": {
+          "count": 23,
+          "hz": 120
+        },
+        "PhG1a": {
+          "count": 2,
+          "hz": 100
+        },
+        "PhG1b": {
+          "count": 2,
+          "hz": 100
+        },
+        "PhG1c": {
+          "count": 4,
+          "hz": 100
+        },
+        "LgLG3": {
+          "count": 162,
+          "hz": 80
+        }
+      },
+      "feeding_count": 204,
+      "bitter_types": {
+        "LB1a": 11,
+        "LB1b": 6,
+        "LB1c": 16,
+        "LB1d": 5
+      },
+      "bitter_count": 38,
+      "bitter_hz": 120,
+      "sides": "both",
+      "readout": "MN9 (2-cell population mean per 50 ms tick, one 600 ms run) 30-90 Hz with sugar, 0 with bitter alone, 0 with bitter + sugar.",
+      "gain_sweep": [
+        0.55,
+        0.65,
+        0.75
+      ],
+      "sugar_rate_sweep": false
+    },
+    "rationale": "replication of an externally calibrated configuration; the >= 5 threshold and gain 0.65 are theirs, cited as such, not values we chose. Their gain was selected by their own sweep on this feeding stimulus, so run (b) is partly circular as a test of their gain; run (a) with our sugar17 is the independent test. External contacts (Tastekin email 2026-09-14; fly-brain-minecraft GitHub issue) had no reply; the replication proceeds without them.",
+    "substrate_declaration": "Substrate `male-cns-v1.0-fbm-ge5-1`: whole CNS; our proofread roster (superclass non-null, 166,700, the existing data/malecns/derived/neuron_index.csv and indices reused); edges with >= 5 synapses from the same minconf-0.5 weight file; autapses dropped as they do; Tastekin signs unchanged (consensusNt only; GABA/glutamate negative; everything else, including histamine, unclear and missing, positive). Every difference from their roster/graph is recorded in data/malecns/substrate_record_fbm.json with counts against their 176,422 neurons / 6,287,749 connections / 90,296,905 synapses: roster rule and count difference, raw >= 5 edges touching non-roster endpoints, autapses dropped, sign-rule differences with affected neuron counts (histamine sign, predictedNt fallback not used), dt 0.1 ms versus their 0.5 ms, readout definition.",
+    "model_declaration": "Model: w_syn = 0.65 x 0.275 = 0.17875 mV; every other Shiu parameter unchanged; external kick stays w_syn x f_poi = 44.6875 mV per event (every event still spikes, as in M1c). KC check uses a second connectivity file with `Excitatory x Connectivity` multiplied by 0.25 on every edge whose postsynaptic neuron is class Kenyon_Cell; sim/network.py is not modified (it multiplies that column by w_syn as float).",
+    "substrate_record": "data/malecns/substrate_record_fbm.json",
+    "substrate_status": "To be built and audited before any run; not built at declaration.",
+    "known_roster_ge5_edges_before_autapse_removal": 6242118,
+    "known_roster_ge5_edges_source": "data/malecns/edge_threshold_audit.json",
+    "w_syn_expression": "0.65 * 0.275",
+    "w_syn_repr": "0.17875000000000002",
+    "w_syn_mV": 0.17875000000000002,
+    "external_kick_expression": "(0.65 * 0.275) * 250",
+    "external_kick_repr": "44.68750000000001",
+    "external_kick_mV": 44.68750000000001,
+    "owner_additions": "Owner additions (2026-09-18, no rule change): (i) report whole-network spike count median and range for every condition in (b) and (a), as in earlier male reports; (ii) before running, record outgoing-synapse retention on the >= 5 substrate for the 91 input cells by set and for both MN9s, in the same table form as M1h (data/malecns/m1h_output_retention.json, including the fixed top-20 direct L10331 presynaptic partners last-hop block); recorded, not a stop condition.",
+    "sequence": "declaration commit -> substrate build, KC file, retention table, runners, tests (internal checkpoint) -> run (b) (internal checkpoint) -> run (a) -> audits, reports, memo, PR into dev. Results under data/malecns/runs/m1i (ignored); versioned JSON summaries under data/malecns/.",
+    "declaration_points": {
+      "1": "Rationale: replication of an externally calibrated configuration; the >= 5 threshold and gain 0.65 are theirs, cited as such, not values we chose. Their gain was selected by their own sweep on this feeding stimulus, so run (b) is partly circular as a test of their gain; run (a) with our sugar17 is the independent test. External contacts (Tastekin email 2026-09-14; fly-brain-minecraft GitHub issue) had no reply; the replication proceeds without them.",
+      "2": "Substrate `male-cns-v1.0-fbm-ge5-1`: whole CNS; our proofread roster (superclass non-null, 166,700, the existing data/malecns/derived/neuron_index.csv and indices reused); edges with >= 5 synapses from the same minconf-0.5 weight file; autapses dropped as they do; Tastekin signs unchanged (consensusNt only; GABA/glutamate negative; everything else, including histamine, unclear and missing, positive). Every difference from their roster/graph is recorded in data/malecns/substrate_record_fbm.json with counts against their 176,422 neurons / 6,287,749 connections / 90,296,905 synapses: roster rule and count difference, raw >= 5 edges touching non-roster endpoints, autapses dropped, sign-rule differences with affected neuron counts (histamine sign, predictedNt fallback not used), dt 0.1 ms versus their 0.5 ms, readout definition.",
+      "3": "Model: w_syn = 0.65 x 0.275 = 0.17875 mV; every other Shiu parameter unchanged; external kick stays w_syn x f_poi = 44.6875 mV per event (every event still spikes, as in M1c). KC check uses a second connectivity file with `Excitatory x Connectivity` multiplied by 0.25 on every edge whose postsynaptic neuron is class Kenyon_Cell; sim/network.py is not modified (it multiplies that column by w_syn as float).",
+      "4": "Run (b), replication, 95 trials, seeds 20260910 + trial, 1,000 ms each, dt 0.1 ms, Poisson layout of 242 physical cells: their sugar 204 (LB3b+LB3c both sides 120 Hz; PhG1a-c 100 Hz; LgLG3 80 Hz) and bitter 38 (LB1a-d 120 Hz): - fbm_sugar (30), fbm_bitter (30), fbm_both (30); - fbm_sugar_kc: sugar condition on the KC-scaled file, 5 trials, seeds 20260910-20260914, paired with the first five fbm_sugar trials; paired difference reported, no criterion. Readouts: per-cell 1 s rates of L10331 and R16949, the 2-cell mean, and the 2-cell mean per 50 ms bin (20 bins per trial; report min/median/max across bins and trials), next to their 30-90 / 0 / 0. Replication criteria: fbm_sugar: 2-cell 1 s mean within [30, 90] Hz over 30 trials and > 0 Hz in 30/30; fbm_bitter: both MN9 cells 0 spikes in 30/30; fbm_both: both MN9 cells 0 spikes in 30/30. Run (a) proceeds whatever (b) shows; (b) is an internal checkpoint only for implementation defects, which are fixed before (a) without touching any rule.",
+      "5": "Run (a), our gates, 480 trials, M1 seeds 20260910-20260939, same 91-cell layout as M1 (sugar17 XLSX-L LB3b u LB3c, bitter38, water17, ir94e19): A sugar 25/50/100/200; B sugar 200 with bitter 0/25/50/100/200; C bitter 25/50/100/200; D baseline; 30 each = 420; A' sugar17 versus sugar_lb3c12 at 120 Hz, 30 each = 60. Gates A-D and S1-S3 exactly as M1d-M1h (reuse sim.malecns.phase0.evaluate_gates and the split shape_gate definition), decided on L10331; R16949 recorded, not deciding. Pass rule: A, B, C, D, S1, S2, S3 all pass on L10331. Confound to be stated in the report: their sugar drive is 204 cells including pharyngeal and tarsal GRNs, ours 17 labellar cells; (b) versus (a) separates the configuration from the input size.",
+      "6": "Owner additions (2026-09-18, no rule change): (i) report whole-network spike count median and range for every condition in (b) and (a), as in earlier male reports; (ii) before running, record outgoing-synapse retention on the >= 5 substrate for the 91 input cells by set and for both MN9s, in the same table form as M1h (data/malecns/m1h_output_retention.json, including the fixed top-20 direct L10331 presynaptic partners last-hop block); recorded, not a stop condition.",
+      "7": "Stop rule: after (a), stop whatever the result. No second gain, no threshold change, no isolated gate repair, no M2. If (a) passes, report and stop; product work is a separate decision. Whatever the outcome: M1i section in docs/malecns_phase0.md, the closing ledger becomes eight variants, docs/v2_decision_memo.md updated to match. No honesty-table row.",
+      "8": "Sequence: declaration commit -> substrate build, KC file, retention table, runners, tests (internal checkpoint) -> run (b) (internal checkpoint) -> run (a) -> audits, reports, memo, PR into dev. Results under data/malecns/runs/m1i (ignored); versioned JSON summaries under data/malecns/."
+    },
+    "seed_scheme": {
+      "base_seed": 20260910,
+      "formula": "20260910 + trial_index",
+      "same_seeds_across_conditions": true,
+      "trial_index_base": 0
+    },
+    "results_directory": "data/malecns/runs/m1i",
+    "summary_directory": "data/malecns/",
+    "readout_decision": "Post-M1c owner decision: primary L10331; R16949 recorded, not deciding run (a). cells.json readout key labels are historical and preserved verbatim in cells_fbm.json.",
+    "unchanged_fields": [
+      "model except w_syn_mV",
+      "trial",
+      "stimulus.type"
+    ],
+    "inherited_notes": "The base protocol notes are historical reference context; this M1i declaration specifies the male substrate and scope.",
+    "stimulation_layout": {
+      "channel_order": [
+        "fbm_sugar_labellar",
+        "fbm_sugar_pharyngeal",
+        "fbm_sugar_tarsal",
+        "bitter"
+      ],
+      "within_channel_order": "ascending numeric Body_ID",
+      "poisson_units": 242
+    }
+  },
+  "stop_rule": "after (a), stop whatever the result. No second gain, no threshold change, no isolated gate repair, no M2. If (a) passes, report and stop; product work is a separate decision. Whatever the outcome: M1i section in docs/malecns_phase0.md, the closing ledger becomes eight variants, docs/v2_decision_memo.md updated to match. No honesty-table row.",
+  "confound": "their sugar drive is 204 cells including pharyngeal and tarsal GRNs, ours 17 labellar cells; (b) versus (a) separates the configuration from the input size.",
+  "seeds": [
+    20260910,
+    20260911,
+    20260912,
+    20260913,
+    20260914,
+    20260915,
+    20260916,
+    20260917,
+    20260918,
+    20260919,
+    20260920,
+    20260921,
+    20260922,
+    20260923,
+    20260924,
+    20260925,
+    20260926,
+    20260927,
+    20260928,
+    20260929,
+    20260930,
+    20260931,
+    20260932,
+    20260933,
+    20260934,
+    20260935,
+    20260936,
+    20260937,
+    20260938,
+    20260939
+  ],
+  "run": "b",
+  "cells_file": "data/malecns/cells_fbm.json",
+  "total_trials": 95,
+  "conditions": [
+    {
+      "id": "fbm_sugar",
+      "rates_hz": {
+        "fbm_sugar_labellar": 120,
+        "fbm_sugar_pharyngeal": 100,
+        "fbm_sugar_tarsal": 80,
+        "bitter": 0
+      },
+      "n_trials": 30,
+      "seeds": [
+        20260910,
+        20260911,
+        20260912,
+        20260913,
+        20260914,
+        20260915,
+        20260916,
+        20260917,
+        20260918,
+        20260919,
+        20260920,
+        20260921,
+        20260922,
+        20260923,
+        20260924,
+        20260925,
+        20260926,
+        20260927,
+        20260928,
+        20260929,
+        20260930,
+        20260931,
+        20260932,
+        20260933,
+        20260934,
+        20260935,
+        20260936,
+        20260937,
+        20260938,
+        20260939
+      ],
+      "connectivity_file": "data/malecns/derived/fbm/connectivity.parquet"
+    },
+    {
+      "id": "fbm_bitter",
+      "rates_hz": {
+        "fbm_sugar_labellar": 0,
+        "fbm_sugar_pharyngeal": 0,
+        "fbm_sugar_tarsal": 0,
+        "bitter": 120
+      },
+      "n_trials": 30,
+      "seeds": [
+        20260910,
+        20260911,
+        20260912,
+        20260913,
+        20260914,
+        20260915,
+        20260916,
+        20260917,
+        20260918,
+        20260919,
+        20260920,
+        20260921,
+        20260922,
+        20260923,
+        20260924,
+        20260925,
+        20260926,
+        20260927,
+        20260928,
+        20260929,
+        20260930,
+        20260931,
+        20260932,
+        20260933,
+        20260934,
+        20260935,
+        20260936,
+        20260937,
+        20260938,
+        20260939
+      ],
+      "connectivity_file": "data/malecns/derived/fbm/connectivity.parquet"
+    },
+    {
+      "id": "fbm_both",
+      "rates_hz": {
+        "fbm_sugar_labellar": 120,
+        "fbm_sugar_pharyngeal": 100,
+        "fbm_sugar_tarsal": 80,
+        "bitter": 120
+      },
+      "n_trials": 30,
+      "seeds": [
+        20260910,
+        20260911,
+        20260912,
+        20260913,
+        20260914,
+        20260915,
+        20260916,
+        20260917,
+        20260918,
+        20260919,
+        20260920,
+        20260921,
+        20260922,
+        20260923,
+        20260924,
+        20260925,
+        20260926,
+        20260927,
+        20260928,
+        20260929,
+        20260930,
+        20260931,
+        20260932,
+        20260933,
+        20260934,
+        20260935,
+        20260936,
+        20260937,
+        20260938,
+        20260939
+      ],
+      "connectivity_file": "data/malecns/derived/fbm/connectivity.parquet"
+    },
+    {
+      "id": "fbm_sugar_kc",
+      "rates_hz": {
+        "fbm_sugar_labellar": 120,
+        "fbm_sugar_pharyngeal": 100,
+        "fbm_sugar_tarsal": 80,
+        "bitter": 0
+      },
+      "n_trials": 5,
+      "seeds": [
+        20260910,
+        20260911,
+        20260912,
+        20260913,
+        20260914
+      ],
+      "connectivity_file": "data/malecns/derived/fbm_kc/connectivity.parquet",
+      "paired_with": "fbm_sugar",
+      "paired_trial_indices": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "kc_input_gain": 0.25,
+      "criterion": null,
+      "report": "Paired difference reported, no criterion."
+    }
+  ],
+  "replication_criteria": "fbm_sugar: 2-cell 1 s mean within [30, 90] Hz over 30 trials and > 0 Hz in 30/30; fbm_bitter: both MN9 cells 0 spikes in 30/30; fbm_both: both MN9 cells 0 spikes in 30/30.",
+  "internal_checkpoint": "Run (a) proceeds whatever (b) shows; (b) is an internal checkpoint only for implementation defects, which are fixed before (a) without touching any rule."
+}

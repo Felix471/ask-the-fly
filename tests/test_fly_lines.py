@@ -13,7 +13,7 @@ class FlyLinesTests(unittest.TestCase):
         cls.cells = json.loads((ROOT / 'data/lookup_table_v1_2.json').read_text())['cells']
 
     def test_schema_and_three_distinct_short_lines(self):
-        self.assertEqual([b['id'] for b in self.data['buckets']], list(range(1, 15)) + ['tie', 'eats_first'])
+        self.assertEqual([b['id'] for b in self.data['buckets']], list(range(1, 11)) + [15, 16, 17] + list(range(11, 15)) + ['tie', 'eats_first'])
         for bucket in self.data['buckets']:
             self.assertTrue(bucket['context'])
             for axis, allowed in bucket['when'].items():

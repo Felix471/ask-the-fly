@@ -9,6 +9,7 @@ copy/readme_sections.md -> README.md and README.zh.md (with --readme).
 Keys are stable: only `en` and `zh` are read from the JSON. A key missing from the
 JSON keeps its previous value and is reported; an unknown key is reported and
 ignored; a value longer than `max_length` is reported (and still applied).
+`max_length` may be one integer or a mapping of language codes to limits.
 
   .venv\\Scripts\\python scripts/import_copy.py            # strings + meta
   .venv\\Scripts\\python scripts/import_copy.py --readme   # also rebuild the READMEs
@@ -158,6 +159,8 @@ def apply_strings(entries: list[dict], check: bool, allow_new: bool = False) -> 
             meta[key] = entry["en"] if entry["en"] == entry["zh"] else f"{entry['en']} {entry['zh']}".strip()
             for lang in LANGS:
                 limit = entry.get("max_length")
+                if isinstance(limit, dict):
+                    limit = limit.get(lang)
                 if limit and len(entry[lang]) > limit:
                     print(f"warning: {key}.{lang} is {len(entry[lang])} chars, max_length {limit}")
                     problems += 1
@@ -172,6 +175,8 @@ def apply_strings(entries: list[dict], check: bool, allow_new: bool = False) -> 
         for lang in LANGS:
             value = entry[lang]
             limit = entry.get("max_length")
+            if isinstance(limit, dict):
+                limit = limit.get(lang)
             if limit and len(value) > limit:
                 print(f"warning: {key}.{lang} is {len(value)} chars, max_length {limit}")
                 problems += 1

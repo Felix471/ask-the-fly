@@ -1,10 +1,24 @@
+# Source and research JSON are LF everywhere so recorded file hashes survive checkout on Windows;
+# the files below were recorded with CRLF and keep it.
+*.py text eol=lf
+*.json text eol=lf
+data/grid_levels.json text eol=crlf
+data/stim_protocol.json text eol=crlf
+sim/network.py text eol=crlf
 # New v1.2 generated artifacts carry literal byte hashes; never translate them.
-data/lookup_table_v1_2.json -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
-data/lookup_v1_2_audit.json -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+data/lookup_table_v1_2.json -text -eol whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+data/lookup_v1_2_audit.json -text -eol whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 data/replay_v1_2/* -text
-site/data/lookup_table_v1_2.json -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+site/data/lookup_table_v1_2.json -text -eol -eol whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 site/data/replay_v1_2/* -text
 site/data/replay_v1_2/*.json whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 data/replay_v1_2/*.json whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 # The predeclared recording specification was frozen with Windows line endings.
 data/lookup_v1_2_recording.json text eol=crlf
+# Frozen research JSON whose hashes are recorded in plans and provenance: always LF, never converted on checkout.
+data/cells_m1j_female.json text eol=lf
+data/stim_protocol_m1j_female.json text eol=lf
+data/m1j_female_plan.json text eol=lf
+data/m1j_female_results.json text eol=lf
+data/malecns/cells_male_v1.json text eol=lf
+data/malecns/stim_protocol_male_v1.json text eol=lf

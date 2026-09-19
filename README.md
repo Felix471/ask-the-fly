@@ -7,6 +7,7 @@ Try it: https://askthefly.app/
 
 **What's new** (full list in [CHANGELOG.md](CHANGELOG.md))
 
+- v2.0.0 (draft): a second, independently computed male fly, with separate results and replays; compare both flies without pooling their choices. Female results are unchanged.
 - v1.2.1 (2026-09-15): refreshed all 16 groups of bilingual fly speech, with pixel-art faces, bubbles and lettering; scores, states, allocation rules and the honesty table are unchanged.
 - v1.2.0 (2026-09-15): four designed response states, MN11 readouts and illustrated reactions. MN9 scores and rankings are unchanged; the honesty table distinguishes the state rule and animation from measured behaviour.
 - v1.1.3 (2026-09-13): long plate names stay separate on narrow screens, with ellipsis and full-name titles; row heights stay the same. No dish's score changed; the honesty table is unchanged.
@@ -22,6 +23,9 @@ Try it: https://askthefly.app/
 - `vendor/` — gitignored, read-only upstream reference data and code
 
 ## Attribution and data provenance
+- [MaleCNS v1.0](https://male-cns.janelia.org/release/), Janelia FlyEM male CNS connectome (Berg et al. 2026): [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Our derivatives filter connections to >=5 synapses, remove autapses, assign model signs and weights, simulate responses and project positions for display; lookup tables and replays are simulation outputs, not original measurements.
+- Tastekin et al. (2026), *Cell*: male GRN typing from Table S1 (full citation below); the female retains Shiu’s frozen sets.
+- [blendi-remade/fly-brain-minecraft](https://github.com/blendi-remade/fly-brain-minecraft/blob/main/docs/VALIDATION.md): independent-project calibration of 0.65 × Shiu’s synaptic weight, replicated here (M1i); not calibration against animal behaviour.
 - FlyWire v783 connectome data: CC BY-NC 4.0.
 - Shiu et al. (2024), *Nature*, model code: MIT.
 - Eon fly-brain benchmark repository: GPL-2.0; used as read-only reference/data, with no code copied.
@@ -38,11 +42,11 @@ Simulation basis (what the scores come from):
 - FlyWire v783 connectome (Dorkenwald et al. 2024; Schlegel et al. 2024), CC BY-NC 4.0.
 - Schlegel, P., Yin, Y., Bates, A.S., et al. (2024). Whole-brain annotation and multi-connectome cell typing of Drosophila. *Nature* 634, 139–152. Annotation table (nucleus positions, cell types): CC BY 4.0.
 
-Related work, not part of this simulation (see docs/open_questions.md, OQ-2):
+Male reconstruction and GRN typing used by the second experiment:
 - Berg, S., Beckett, I.R., Costa, M., … Hess, H.F., Rubin, G.M., Jefferis, G.S.X.E. (2026). Sexual dimorphism in the complete Drosophila male central nervous system connectome. *Cell* 189(18), 5504–5526.e15. https://doi.org/10.1016/j.cell.2026.08.015 (MaleCNS; male brain + VNC).
 - Tastekin, I., de Haan Vicente, I., Beresford, R.J., Morris, B.J., Beckett, I., Schlegel, P., Gkantia, M., Marin, E.C., Costa, M., Jefferis, G.S.X.E., Ribeiro, C. (2026). The complete gustatory connectome of adult Drosophila reveals how taste guides feeding, foraging, and social behavior. *Cell* 189(18), 5527–5551.e5. https://doi.org/10.1016/j.cell.2026.08.016.
 
-Product copy for provenance: "Scores come from a published female-brain LIF model (Shiu 2024 / FlyWire v783). The September 2026 papers describe a more complete taste wiring diagram that is not part of this simulation."
+Product copy for provenance: "The female scores retain the published LIF model on FlyWire v783 (Shiu 2024). The second fly uses MaleCNS v1.0 and Tastekin GRN typing under a separately specified stimulus protocol and weight calibration. These are two independent experiments."
 
 ## What you see on screen
 
@@ -52,6 +56,9 @@ Product copy for provenance: "Scores come from a published female-brain LIF mode
 - **Everything is reproducible.** The replay files store the condition, firing levels, seed, commit, and protocol hash. `scripts/run_replay.py` generates them.
 
 ## What the model does — and what it doesn't
+
+The existing female claims below retain their female scope. Rows explicitly naming the male fly or both flies describe the second experiment and comparison.
+
 | Claim | Status | Source |
 |---|---|---|
 | Scores come from a published female-brain LIF model on FlyWire v783 | yes | Shiu et al. 2024; docs/phase0_report.md |
@@ -61,7 +68,14 @@ Product copy for provenance: "Scores come from a published female-brain LIF mode
 | Covers the whole feeding sequence | **no** — real feeding is a chain of checkpoints: leg bristles → labellar bristles → taste pegs → pharynx. This simulation covers the labellar-bristle checkpoint only. | Tastekin et al. 2026, Discussion, "Sequential checkpoints and action control" |
 | Water is a separate taste quality in the model | **no** — in this model water acts as a second appetitive drive that mainly boosts weak sugar (sugar 40 Hz + water 40 Hz gives 24 Hz MN9 vs 4 Hz alone; at sugar 200 Hz it adds 7%). That is why a wet savory dish outranks a dry one. This is a property of the connectome model, not a rule we wrote. | docs/phase1_characterization.md, sugar × water |
 | Ir94e is the amino-acid-aversion channel (Tastekin et al. 2026, LB1e). The assignment of each dish to an Ir94e level is ours (encoder v2.3). Its effect on MN9 is the model's: at sugar low / water low, MN9 goes 61.8 → 9.3 → 1.6 → 0.5 Hz across none / low / medium / high. In this model a fly ranks plain starches above every meat or soy-seasoned dish. The strength of this suppression is uncalibrated against behaviour (docs/open_questions.md OQ-6). | direction reproduced, mapping designed | docs/phase1_characterization.md, sugar × ir94e; docs/encoder_stability_v2_3_batch2.md |
-| Uses the September 2026 complete gustatory wiring (MaleCNS) | **no** — a different animal, not part of this simulation | docs/open_questions.md, v3 note |
+| Uses the September 2026 complete gustatory wiring (MaleCNS) | **yes** — the male fly is in the product as a second, independently computed fly using MaleCNS v1.0 and Tastekin GRN typing; the male graph keeps only connections of >= 5 synapses, so “complete” is qualified. The frozen female experiment is unchanged. Each fly uses its own lookup table; scores and choices are not pooled. | [Male fly program](docs/male_fly_v2.md) |
+| The male brain uses MaleCNS v1.0 with connections of >= 5 synapses and a synaptic weight of 0.65 x Shiu's (0.17875 mV), a calibration taken from an independent project (blendi-remade/fly-brain-minecraft) and replicated by us; the female uses FlyWire v783, all connections, Shiu's 0.275 mV. | **model** — rates come from the connectome LIF model; the connection cutoff and adopted weight calibration are design choices, not calibration against animal behaviour. | [Male fly program](docs/male_fly_v2.md); [M1i replication](docs/malecns_phase0.md) |
+| The male is stimulated bilaterally with Tastekin-typed GRN sets; the female unilaterally with Shiu's sets. The two flies do not share one stimulus protocol. | **model** — each response is computed under its own protocol; choice of cell sets, sides and stimulus drive levels is ours. Shared dish levels are encoder estimates, not measured taste inputs. | [Male protocol and sets](docs/male_fly_v2.md) |
+| The male brain misses one of our four behavioural gates: bitter alone at 25 Hz gives 1.07 Hz on MN9 against our 1.0 Hz limit (docs/malecns_phase0.md, M1j); invisible in the product below the 5 Hz activity threshold, but recorded. | **no** — the male did not pass all four gates. The MN9 rate is model output; the 1.0 Hz gate limit and 5 Hz display threshold are ours. | [M1j record](docs/malecns_phase0.md); [commitment](docs/male_fly_v2.md) |
+| When the two flies disagree, the cause may be sex, reconstruction, cell typing, sign assignment, weight, or stimulus protocol; this pipeline cannot separate them. This sentence appears on the result page whenever they disagree, not only in the README. | **no** — disagreement does not isolate a sex effect. The differing outcomes are model results; displaying the fixed explanation is our product rule. | [Male fly program](docs/male_fly_v2.md) |
+| The two flies agree on 71% of dish pairs; no bitter dish reaches the male’s eats state, and MN11 rarely activates | **model** — measured under this design: 10,723 / 15,051 pairs agree (71.2%, including ties). Male states over 174 dishes are 12 / 0 / 90 / 72 (eats / mouth_moves / proboscis_only / no_response); 72 have primary MN9 below our 5 Hz threshold. “Refuses” here means no bitter dish reaches our designed eats state: 56 of 66 bitter dishes are below 5 Hz MN9, while 10 are proboscis_only. “Rarely activates MN11” refers to the three-cell MN11D mean reaching our 5 Hz state threshold for 12 dishes, not absence of MN11 spikes or measured refusal. | [Phase 2 comparison](docs/malecns_phase2.md) |
+| Male scores and four-state labels are measured feeding behaviour | **no** — model rates are classified by our rule: primary MN9 L10331 alone ranks dishes; state uses its 30-trial mean and the 30-trial mean of the per-trial three-cell MN11D average, active at our >=5 Hz threshold. Secondary MN9 R16949 and MN11V do not decide. Labels, actions and speech are designed; no behavioural calibration is claimed. In our designed depiction, this brain usually extends the proboscis without the mouth following for these dishes (the three-cell MN11D mean reaches our designed 5 Hz threshold in 9 of 400 cells), so “proboscis only” is its usual state here, not an oddity. | [Male readouts and state rule](docs/male_fly_v2.md) |
+| The male brain view is live activity with anatomical positions for every neuron | **no** — activity is grid trial 0, one of the 30 trials behind that cell’s score, not a live simulation or the mean. The anterior view uses MaleCNS v1.0 soma or entry-point coordinates without neuropil outlines. We draw 228 indexed neurons lacking both coordinates in a non-anatomical band below the brain (plus one appended readout); they are not all sensory neurons. VNC somas occupy a bottom strip. Layout choices are ours. | [Phase 2 replay rule](docs/malecns_phase2.md); `site/data/neurons_male.json` |
 | Tonic inhibition / disinhibition (Tastekin 2026, Fig S17) | not in the product; a designed condition (docs/tonic_inhibition.md). CB0806 or CB0862 driven at 100 Hz hold MN9 down against sugar; none of the three brakes is silenced by sugar, so disinhibition was not observed under this design. Sugar does recruit CB0465, a feed-forward brake already inside every product score. Brake choice and drive level are ours, uncalibrated. | docs/tonic_inhibition.md; OQ-3 |
 | The brain view shows a live simulation | **no** — it replays one recorded 1 s trial per grid cell (fixed seed) from the same model; positions are FlyWire soma coordinates, activity is the recorded spike times | docs/site.md, `site/data/replay/` headers |
 | The fly animation is measured behaviour | **no** — actions, mouth close-ups, emotions and speech are our illustrations of the lookup-table state, not movements or feelings measured by the model | docs/site.md |

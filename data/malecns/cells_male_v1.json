@@ -1,0 +1,1096 @@
+{
+  "source": {
+    "path": "docs/papers/Tastekin_2025_bioRxiv_v2_SupplTable2_GRN_MN_body_IDs.xlsx",
+    "bytes": 186967,
+    "sha256": "7b28d5f3ae45d68c510b8a3616700f0df2a5a6f2e2d2dba490d172939f2b64c9"
+  },
+  "roster": {
+    "path": "data/malecns/derived/neuron_index.csv",
+    "bytes": 27521575,
+    "sha256": "a5727228e839339f8045f8a431f02b4900aed40109684fa7e6ed2f21a620cbe9"
+  },
+  "sets": {
+    "sugar": {
+      "ids": [
+        71254,
+        72059,
+        78240,
+        85806,
+        92440,
+        101087,
+        120303,
+        140015,
+        142827,
+        159772,
+        163597,
+        180314,
+        183084,
+        187492,
+        190769,
+        202888,
+        209155,
+        215556,
+        261450,
+        262567,
+        272263,
+        512551,
+        516217,
+        531237,
+        557646,
+        933317,
+        942168,
+        957530,
+        158893964,
+        174444965,
+        213650853,
+        349137284,
+        475202322,
+        766547228
+      ],
+      "sides": {
+        "L": 17,
+        "R": 17
+      },
+      "count": 34,
+      "source_rows": [
+        {
+          "Body_ID": "71254",
+          "Root_Side": "L",
+          "Type": "LB3",
+          "Subtype": "LB3b",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "72059",
+          "Root_Side": "R",
+          "Type": "LB3",
+          "Subtype": "LB3c",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "78240",
+          "Root_Side": "L",
+          "Type": "LB3",
+          "Subtype": "LB3c",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "85806",
+          "Root_Side": "L",
+          "Type": "LB3",
+          "Subtype": "LB3c",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "92440",
+          "Root_Side": "R",
+          "Type": "LB3",
+          "Subtype": "LB3c",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "101087",
+          "Root_Side": "R",
+          "Type": "LB3",
+          "Subtype": "LB3c",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "120303",
+          "Root_Side": "R",
+          "Type": "LB3",
+          "Subtype": "LB3c",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "140015",
+          "Root_Side": "R",
+          "Type": "LB3",
+          "Subtype": "LB3c",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "142827",
+          "Root_Side": "R",
+          "Type": "LB3",
+          "Subtype": "LB3c",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "159772",
+          "Root_Side": "L",
+          "Type": "LB3",
+          "Subtype": "LB3b",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "163597",
+          "Root_Side": "R",
+          "Type": "LB3",
+          "Subtype": "LB3b",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "180314",
+          "Root_Side": "L",
+          "Type": "LB3",
+          "Subtype": "LB3c",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "183084",
+          "Root_Side": "R",
+          "Type": "LB3",
+          "Subtype": "LB3b",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "187492",
+          "Root_Side": "R",
+          "Type": "LB3",
+          "Subtype": "LB3b",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "190769",
+          "Root_Side": "L",
+          "Type": "LB3",
+          "Subtype": "LB3c",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "202888",
+          "Root_Side": "R",
+          "Type": "LB3",
+          "Subtype": "LB3c",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "209155",
+          "Root_Side": "R",
+          "Type": "LB3",
+          "Subtype": "LB3b",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "215556",
+          "Root_Side": "R",
+          "Type": "LB3",
+          "Subtype": "LB3c",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "261450",
+          "Root_Side": "L",
+          "Type": "LB3",
+          "Subtype": "LB3c",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "262567",
+          "Root_Side": "L",
+          "Type": "LB3",
+          "Subtype": "LB3c",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "272263",
+          "Root_Side": "L",
+          "Type": "LB3",
+          "Subtype": "LB3b",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "512551",
+          "Root_Side": "L",
+          "Type": "LB3",
+          "Subtype": "LB3c",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "516217",
+          "Root_Side": "R",
+          "Type": "LB3",
+          "Subtype": "LB3c",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "531237",
+          "Root_Side": "L",
+          "Type": "LB3",
+          "Subtype": "LB3c",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "557646",
+          "Root_Side": "R",
+          "Type": "LB3",
+          "Subtype": "LB3b",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "933317",
+          "Root_Side": "L",
+          "Type": "LB3",
+          "Subtype": "LB3c",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "942168",
+          "Root_Side": "R",
+          "Type": "LB3",
+          "Subtype": "LB3c",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "957530",
+          "Root_Side": "R",
+          "Type": "LB3",
+          "Subtype": "LB3c",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "158893964",
+          "Root_Side": "L",
+          "Type": "LB3",
+          "Subtype": "LB3c",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "174444965",
+          "Root_Side": "L",
+          "Type": "LB3",
+          "Subtype": "LB3b",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "213650853",
+          "Root_Side": "R",
+          "Type": "LB3",
+          "Subtype": "LB3b",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "349137284",
+          "Root_Side": "L",
+          "Type": "LB3",
+          "Subtype": "LB3c",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "475202322",
+          "Root_Side": "L",
+          "Type": "LB3",
+          "Subtype": "LB3c",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "766547228",
+          "Root_Side": "L",
+          "Type": "LB3",
+          "Subtype": "LB3b",
+          "Entry_Nerve": "MxLbN"
+        }
+      ],
+      "subtypes": [
+        "LB3b",
+        "LB3c"
+      ]
+    },
+    "bitter": {
+      "ids": [
+        54104,
+        81741,
+        107241,
+        115666,
+        125111,
+        139178,
+        144334,
+        154544,
+        163395,
+        168492,
+        173462,
+        208885,
+        256844,
+        375038,
+        511882,
+        514546,
+        514547,
+        517255,
+        518112,
+        522746,
+        522752,
+        522753,
+        522754,
+        522761,
+        522762,
+        522841,
+        533618,
+        549024,
+        556797,
+        557937,
+        912379,
+        140334446,
+        144295263,
+        304136793,
+        324178811,
+        602736959,
+        772366874,
+        911389008
+      ],
+      "sides": {
+        "L": 19,
+        "R": 19
+      },
+      "count": 38,
+      "source_rows": [
+        {
+          "Body_ID": "54104",
+          "Root_Side": "L",
+          "Type": "LB1",
+          "Subtype": "LB1d",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "81741",
+          "Root_Side": "L",
+          "Type": "LB1",
+          "Subtype": "LB1c",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "107241",
+          "Root_Side": "R",
+          "Type": "LB1",
+          "Subtype": "LB1c",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "115666",
+          "Root_Side": "R",
+          "Type": "LB1",
+          "Subtype": "LB1a",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "125111",
+          "Root_Side": "L",
+          "Type": "LB1",
+          "Subtype": "LB1c",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "139178",
+          "Root_Side": "R",
+          "Type": "LB1",
+          "Subtype": "LB1d",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "144334",
+          "Root_Side": "L",
+          "Type": "LB1",
+          "Subtype": "LB1a",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "154544",
+          "Root_Side": "R",
+          "Type": "LB1",
+          "Subtype": "LB1a",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "163395",
+          "Root_Side": "R",
+          "Type": "LB1",
+          "Subtype": "LB1a",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "168492",
+          "Root_Side": "L",
+          "Type": "LB1",
+          "Subtype": "LB1a",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "173462",
+          "Root_Side": "L",
+          "Type": "LB1",
+          "Subtype": "LB1a",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "208885",
+          "Root_Side": "R",
+          "Type": "LB1",
+          "Subtype": "LB1c",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "256844",
+          "Root_Side": "R",
+          "Type": "LB1",
+          "Subtype": "LB1c",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "375038",
+          "Root_Side": "R",
+          "Type": "LB1",
+          "Subtype": "LB1a",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "511882",
+          "Root_Side": "L",
+          "Type": "LB1",
+          "Subtype": "LB1b",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "514546",
+          "Root_Side": "R",
+          "Type": "LB1",
+          "Subtype": "LB1b",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "514547",
+          "Root_Side": "L",
+          "Type": "LB1",
+          "Subtype": "LB1b",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "517255",
+          "Root_Side": "L",
+          "Type": "LB1",
+          "Subtype": "LB1c",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "518112",
+          "Root_Side": "L",
+          "Type": "LB1",
+          "Subtype": "LB1c",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "522746",
+          "Root_Side": "R",
+          "Type": "LB1",
+          "Subtype": "LB1c",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "522752",
+          "Root_Side": "R",
+          "Type": "LB1",
+          "Subtype": "LB1b",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "522753",
+          "Root_Side": "L",
+          "Type": "LB1",
+          "Subtype": "LB1c",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "522754",
+          "Root_Side": "L",
+          "Type": "LB1",
+          "Subtype": "LB1c",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "522761",
+          "Root_Side": "R",
+          "Type": "LB1",
+          "Subtype": "LB1c",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "522762",
+          "Root_Side": "R",
+          "Type": "LB1",
+          "Subtype": "LB1b",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "522841",
+          "Root_Side": "R",
+          "Type": "LB1",
+          "Subtype": "LB1c",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "533618",
+          "Root_Side": "L",
+          "Type": "LB1",
+          "Subtype": "LB1c",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "549024",
+          "Root_Side": "R",
+          "Type": "LB1",
+          "Subtype": "LB1d",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "556797",
+          "Root_Side": "R",
+          "Type": "LB1",
+          "Subtype": "LB1a",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "557937",
+          "Root_Side": "L",
+          "Type": "LB1",
+          "Subtype": "LB1a",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "912379",
+          "Root_Side": "L",
+          "Type": "LB1",
+          "Subtype": "LB1b",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "140334446",
+          "Root_Side": "L",
+          "Type": "LB1",
+          "Subtype": "LB1a",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "144295263",
+          "Root_Side": "L",
+          "Type": "LB1",
+          "Subtype": "LB1a",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "304136793",
+          "Root_Side": "R",
+          "Type": "LB1",
+          "Subtype": "LB1c",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "324178811",
+          "Root_Side": "L",
+          "Type": "LB1",
+          "Subtype": "LB1c",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "602736959",
+          "Root_Side": "R",
+          "Type": "LB1",
+          "Subtype": "LB1d",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "772366874",
+          "Root_Side": "L",
+          "Type": "LB1",
+          "Subtype": "LB1c",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "911389008",
+          "Root_Side": "R",
+          "Type": "LB1",
+          "Subtype": "LB1d",
+          "Entry_Nerve": "MxLbN"
+        }
+      ],
+      "subtypes": [
+        "LB1a",
+        "LB1b",
+        "LB1c",
+        "LB1d"
+      ]
+    },
+    "water": {
+      "ids": [
+        136183,
+        140619,
+        141663,
+        160435,
+        166190,
+        167663,
+        178913,
+        183061,
+        187776,
+        199308,
+        203234,
+        374701,
+        518542,
+        388541892,
+        456838775,
+        553738738,
+        786482749
+      ],
+      "sides": {
+        "L": 9,
+        "R": 8
+      },
+      "count": 17,
+      "source_rows": [
+        {
+          "Body_ID": "136183",
+          "Root_Side": "L",
+          "Type": "LB3",
+          "Subtype": "LB3a",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "140619",
+          "Root_Side": "R",
+          "Type": "LB3",
+          "Subtype": "LB3a",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "141663",
+          "Root_Side": "R",
+          "Type": "LB3",
+          "Subtype": "LB3a",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "160435",
+          "Root_Side": "L",
+          "Type": "LB3",
+          "Subtype": "LB3a",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "166190",
+          "Root_Side": "R",
+          "Type": "LB3",
+          "Subtype": "LB3a",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "167663",
+          "Root_Side": "L",
+          "Type": "LB3",
+          "Subtype": "LB3a",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "178913",
+          "Root_Side": "L",
+          "Type": "LB3",
+          "Subtype": "LB3a",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "183061",
+          "Root_Side": "R",
+          "Type": "LB3",
+          "Subtype": "LB3a",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "187776",
+          "Root_Side": "L",
+          "Type": "LB3",
+          "Subtype": "LB3a",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "199308",
+          "Root_Side": "R",
+          "Type": "LB3",
+          "Subtype": "LB3a",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "203234",
+          "Root_Side": "L",
+          "Type": "LB3",
+          "Subtype": "LB3a",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "374701",
+          "Root_Side": "R",
+          "Type": "LB3",
+          "Subtype": "LB3a",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "518542",
+          "Root_Side": "R",
+          "Type": "LB3",
+          "Subtype": "LB3a",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "388541892",
+          "Root_Side": "R",
+          "Type": "LB3",
+          "Subtype": "LB3a",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "456838775",
+          "Root_Side": "L",
+          "Type": "LB3",
+          "Subtype": "LB3a",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "553738738",
+          "Root_Side": "L",
+          "Type": "LB3",
+          "Subtype": "LB3a",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "786482749",
+          "Root_Side": "L",
+          "Type": "LB3",
+          "Subtype": "LB3a",
+          "Entry_Nerve": "MxLbN"
+        }
+      ],
+      "subtypes": [
+        "LB3a"
+      ]
+    },
+    "ir94e": {
+      "ids": [
+        44816,
+        111660,
+        137497,
+        154359,
+        175572,
+        200001,
+        209688,
+        232730,
+        534361,
+        908747,
+        919429,
+        214700177,
+        418840426,
+        491986845,
+        551057545,
+        633272971,
+        792429427,
+        912111327,
+        947005552
+      ],
+      "sides": {
+        "L": 11,
+        "R": 8
+      },
+      "count": 19,
+      "source_rows": [
+        {
+          "Body_ID": "44816",
+          "Root_Side": "R",
+          "Type": "LB1",
+          "Subtype": "LB1e",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "111660",
+          "Root_Side": "R",
+          "Type": "LB1",
+          "Subtype": "LB1e",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "137497",
+          "Root_Side": "L",
+          "Type": "LB1",
+          "Subtype": "LB1e",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "154359",
+          "Root_Side": "L",
+          "Type": "LB1",
+          "Subtype": "LB1e",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "175572",
+          "Root_Side": "L",
+          "Type": "LB1",
+          "Subtype": "LB1e",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "200001",
+          "Root_Side": "L",
+          "Type": "LB1",
+          "Subtype": "LB1e",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "209688",
+          "Root_Side": "R",
+          "Type": "LB1",
+          "Subtype": "LB1e",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "232730",
+          "Root_Side": "L",
+          "Type": "LB1",
+          "Subtype": "LB1e",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "534361",
+          "Root_Side": "R",
+          "Type": "LB1",
+          "Subtype": "LB1e",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "908747",
+          "Root_Side": "L",
+          "Type": "LB1",
+          "Subtype": "LB1e",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "919429",
+          "Root_Side": "L",
+          "Type": "LB1",
+          "Subtype": "LB1e",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "214700177",
+          "Root_Side": "L",
+          "Type": "LB1",
+          "Subtype": "LB1e",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "418840426",
+          "Root_Side": "L",
+          "Type": "LB1",
+          "Subtype": "LB1e",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "491986845",
+          "Root_Side": "L",
+          "Type": "LB1",
+          "Subtype": "LB1e",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "551057545",
+          "Root_Side": "R",
+          "Type": "LB1",
+          "Subtype": "LB1e",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "633272971",
+          "Root_Side": "L",
+          "Type": "LB1",
+          "Subtype": "LB1e",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "792429427",
+          "Root_Side": "R",
+          "Type": "LB1",
+          "Subtype": "LB1e",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "912111327",
+          "Root_Side": "R",
+          "Type": "LB1",
+          "Subtype": "LB1e",
+          "Entry_Nerve": "MxLbN"
+        },
+        {
+          "Body_ID": "947005552",
+          "Root_Side": "R",
+          "Type": "LB1",
+          "Subtype": "LB1e",
+          "Entry_Nerve": "MxLbN"
+        }
+      ],
+      "subtypes": [
+        "LB1e"
+      ]
+    }
+  },
+  "physical_units": 108,
+  "readouts": {
+    "mn9": {
+      "ids": [
+        10331,
+        16949
+      ],
+      "sides": {
+        "L": 1,
+        "R": 1
+      },
+      "count": 2,
+      "source_rows": [
+        {
+          "Body_ID": "10331",
+          "Root_Side": "L",
+          "Type": "MN9",
+          "Target_Muscle": "9"
+        },
+        {
+          "Body_ID": "16949",
+          "Root_Side": "R",
+          "Type": "MN9",
+          "Target_Muscle": "9"
+        }
+      ],
+      "primary": 10331,
+      "secondary": 16949
+    },
+    "mn11d": {
+      "ids": [
+        11269,
+        11393,
+        551398
+      ],
+      "sides": {
+        "L": 1,
+        "R": 2
+      },
+      "count": 3,
+      "source_rows": [
+        {
+          "Body_ID": "11269",
+          "Root_Side": "R",
+          "Type": "MN11D",
+          "Target_Muscle": "11D"
+        },
+        {
+          "Body_ID": "11393",
+          "Root_Side": "R",
+          "Type": "MN11D",
+          "Target_Muscle": "11D"
+        },
+        {
+          "Body_ID": "551398",
+          "Root_Side": "L",
+          "Type": "MN11D",
+          "Target_Muscle": "11D"
+        }
+      ]
+    },
+    "mn11v": {
+      "ids": [
+        49829,
+        492462351
+      ],
+      "sides": {
+        "L": 1,
+        "R": 1
+      },
+      "count": 2,
+      "source_rows": [
+        {
+          "Body_ID": "49829",
+          "Root_Side": "L",
+          "Type": "MN11V",
+          "Target_Muscle": "11V"
+        },
+        {
+          "Body_ID": "492462351",
+          "Root_Side": "R",
+          "Type": "MN11V",
+          "Target_Muscle": "11V"
+        }
+      ]
+    },
+    "cem": {
+      "ids": [
+        19823,
+        20518,
+        23511,
+        32852,
+        34597,
+        482595
+      ],
+      "sides": {
+        "L": 4,
+        "R": 2
+      },
+      "count": 6,
+      "source_rows": [
+        {
+          "Body_ID": "19823",
+          "Root_Side": "L",
+          "Type": "CEM",
+          "Target_Muscle": "Crop Entry"
+        },
+        {
+          "Body_ID": "20518",
+          "Root_Side": "L",
+          "Type": "CEM",
+          "Target_Muscle": "Crop Entry"
+        },
+        {
+          "Body_ID": "23511",
+          "Root_Side": "R",
+          "Type": "CEM",
+          "Target_Muscle": "Crop Entry"
+        },
+        {
+          "Body_ID": "32852",
+          "Root_Side": "L",
+          "Type": "CEM",
+          "Target_Muscle": "Crop Entry"
+        },
+        {
+          "Body_ID": "34597",
+          "Root_Side": "R",
+          "Type": "CEM",
+          "Target_Muscle": "Crop Entry"
+        },
+        {
+          "Body_ID": "482595",
+          "Root_Side": "L",
+          "Type": "CEM",
+          "Target_Muscle": "Crop Entry"
+        }
+      ]
+    }
+  },
+  "cross_checks": {
+    "sugar_m1j": {
+      "status": "matched",
+      "source": {
+        "path": "data/malecns/cells_m1j.json",
+        "bytes": 28928,
+        "sha256": "53dc5157132d61b05010c74b97350eed270298ddf240d3406764d2a2cf12f603"
+      }
+    },
+    "bitter_water_ir94e": {
+      "status": "matched",
+      "source": {
+        "path": "data/malecns/cells.json",
+        "bytes": 20697,
+        "sha256": "f29dd1511e5484d70062cf44d448acfa63e8ef89b49ab7cc281108e5be234c99"
+      }
+    }
+  }
+}

@@ -233,8 +233,81 @@
     {
       "id": 10,
       "state": "proboscis_only",
+      "when": {
+        "sugar": [
+          "medium",
+          "high",
+          "very_high"
+        ]
+      },
+      "context": "proboscis_only split for v2.0.0 (male 90 dishes)",
+      "zh": [
+        "甜的，碰一下。",
+        "馋了，又算了。",
+        "喙尖一碰。"
+      ],
+      "en": [
+        "Sweet. Just a touch.",
+        "Tempting. That's enough.",
+        "Tip in, then out."
+      ]
+    },
+    {
+      "id": 15,
+      "state": "proboscis_only",
+      "when": {
+        "ir94e": [
+          "low",
+          "medium",
+          "high"
+        ],
+        "sugar": [
+          "none",
+          "low"
+        ]
+      },
+      "context": "proboscis_only split for v2.0.0 (male 90 dishes)",
+      "zh": [
+        "有点味道，尝一下。",
+        "尝到这儿吧。",
+        "碰完就收。"
+      ],
+      "en": [
+        "A taste. That's all.",
+        "Enough for now.",
+        "Touch, then back."
+      ]
+    },
+    {
+      "id": 16,
+      "state": "proboscis_only",
+      "when": {
+        "water": [
+          "high",
+          "very_high"
+        ],
+        "sugar": [
+          "none",
+          "low"
+        ]
+      },
+      "context": "proboscis_only split for v2.0.0 (male 90 dishes)",
+      "zh": [
+        "润一下就好。",
+        "清清淡淡的。",
+        "沾一下就走。"
+      ],
+      "en": [
+        "Just a wet touch.",
+        "That's plenty.",
+        "A dip, then off."
+      ]
+    },
+    {
+      "id": 17,
+      "state": "proboscis_only",
       "when": {},
-      "context": "Draft speech bubble; alternatives ordered direct, emotional, action/image.",
+      "context": "proboscis_only split for v2.0.0 (male 90 dishes)",
       "zh": [
         "点一下。",
         "碰完撤。",
