@@ -1,0 +1,1114 @@
+{
+  "scope": "M1j bilateral labellar sugar and its overlapping LB3c subset; subsets are not added to union totals.",
+  "field_meanings": "Legacy *_0_5 is baseline >=1; *_c_star is >=5 without autapses.",
+  "interpretation": "recorded, not a stop condition; no flag stops anything.",
+  "cells": [
+    {
+      "bodyId": 71254,
+      "label": "sugar_bilateral",
+      "outgoing_0_5": 779,
+      "outgoing_c_star": 668,
+      "retained_fraction": 0.8575096277278562,
+      "below_half": false
+    },
+    {
+      "bodyId": 72059,
+      "label": "sugar_bilateral",
+      "outgoing_0_5": 1175,
+      "outgoing_c_star": 1099,
+      "retained_fraction": 0.9353191489361702,
+      "below_half": false
+    },
+    {
+      "bodyId": 78240,
+      "label": "sugar_bilateral",
+      "outgoing_0_5": 425,
+      "outgoing_c_star": 343,
+      "retained_fraction": 0.8070588235294117,
+      "below_half": false
+    },
+    {
+      "bodyId": 85806,
+      "label": "sugar_bilateral",
+      "outgoing_0_5": 791,
+      "outgoing_c_star": 674,
+      "retained_fraction": 0.8520859671302149,
+      "below_half": false
+    },
+    {
+      "bodyId": 92440,
+      "label": "sugar_bilateral",
+      "outgoing_0_5": 957,
+      "outgoing_c_star": 876,
+      "retained_fraction": 0.9153605015673981,
+      "below_half": false
+    },
+    {
+      "bodyId": 101087,
+      "label": "sugar_bilateral",
+      "outgoing_0_5": 603,
+      "outgoing_c_star": 479,
+      "retained_fraction": 0.7943615257048093,
+      "below_half": false
+    },
+    {
+      "bodyId": 120303,
+      "label": "sugar_bilateral",
+      "outgoing_0_5": 588,
+      "outgoing_c_star": 486,
+      "retained_fraction": 0.826530612244898,
+      "below_half": false
+    },
+    {
+      "bodyId": 140015,
+      "label": "sugar_bilateral",
+      "outgoing_0_5": 508,
+      "outgoing_c_star": 401,
+      "retained_fraction": 0.7893700787401575,
+      "below_half": false
+    },
+    {
+      "bodyId": 142827,
+      "label": "sugar_bilateral",
+      "outgoing_0_5": 460,
+      "outgoing_c_star": 364,
+      "retained_fraction": 0.7913043478260869,
+      "below_half": false
+    },
+    {
+      "bodyId": 159772,
+      "label": "sugar_bilateral",
+      "outgoing_0_5": 422,
+      "outgoing_c_star": 344,
+      "retained_fraction": 0.8151658767772512,
+      "below_half": false
+    },
+    {
+      "bodyId": 163597,
+      "label": "sugar_bilateral",
+      "outgoing_0_5": 347,
+      "outgoing_c_star": 228,
+      "retained_fraction": 0.6570605187319885,
+      "below_half": false
+    },
+    {
+      "bodyId": 180314,
+      "label": "sugar_bilateral",
+      "outgoing_0_5": 178,
+      "outgoing_c_star": 88,
+      "retained_fraction": 0.4943820224719101,
+      "below_half": true
+    },
+    {
+      "bodyId": 183084,
+      "label": "sugar_bilateral",
+      "outgoing_0_5": 332,
+      "outgoing_c_star": 251,
+      "retained_fraction": 0.7560240963855421,
+      "below_half": false
+    },
+    {
+      "bodyId": 187492,
+      "label": "sugar_bilateral",
+      "outgoing_0_5": 334,
+      "outgoing_c_star": 226,
+      "retained_fraction": 0.6766467065868264,
+      "below_half": false
+    },
+    {
+      "bodyId": 190769,
+      "label": "sugar_bilateral",
+      "outgoing_0_5": 353,
+      "outgoing_c_star": 240,
+      "retained_fraction": 0.6798866855524079,
+      "below_half": false
+    },
+    {
+      "bodyId": 202888,
+      "label": "sugar_bilateral",
+      "outgoing_0_5": 511,
+      "outgoing_c_star": 405,
+      "retained_fraction": 0.7925636007827789,
+      "below_half": false
+    },
+    {
+      "bodyId": 209155,
+      "label": "sugar_bilateral",
+      "outgoing_0_5": 289,
+      "outgoing_c_star": 193,
+      "retained_fraction": 0.6678200692041523,
+      "below_half": false
+    },
+    {
+      "bodyId": 215556,
+      "label": "sugar_bilateral",
+      "outgoing_0_5": 609,
+      "outgoing_c_star": 499,
+      "retained_fraction": 0.819376026272578,
+      "below_half": false
+    },
+    {
+      "bodyId": 261450,
+      "label": "sugar_bilateral",
+      "outgoing_0_5": 354,
+      "outgoing_c_star": 261,
+      "retained_fraction": 0.7372881355932204,
+      "below_half": false
+    },
+    {
+      "bodyId": 262567,
+      "label": "sugar_bilateral",
+      "outgoing_0_5": 266,
+      "outgoing_c_star": 134,
+      "retained_fraction": 0.5037593984962406,
+      "below_half": false
+    },
+    {
+      "bodyId": 272263,
+      "label": "sugar_bilateral",
+      "outgoing_0_5": 296,
+      "outgoing_c_star": 209,
+      "retained_fraction": 0.706081081081081,
+      "below_half": false
+    },
+    {
+      "bodyId": 512551,
+      "label": "sugar_bilateral",
+      "outgoing_0_5": 876,
+      "outgoing_c_star": 799,
+      "retained_fraction": 0.9121004566210046,
+      "below_half": false
+    },
+    {
+      "bodyId": 516217,
+      "label": "sugar_bilateral",
+      "outgoing_0_5": 453,
+      "outgoing_c_star": 328,
+      "retained_fraction": 0.7240618101545254,
+      "below_half": false
+    },
+    {
+      "bodyId": 531237,
+      "label": "sugar_bilateral",
+      "outgoing_0_5": 414,
+      "outgoing_c_star": 316,
+      "retained_fraction": 0.7632850241545893,
+      "below_half": false
+    },
+    {
+      "bodyId": 557646,
+      "label": "sugar_bilateral",
+      "outgoing_0_5": 431,
+      "outgoing_c_star": 337,
+      "retained_fraction": 0.7819025522041764,
+      "below_half": false
+    },
+    {
+      "bodyId": 933317,
+      "label": "sugar_bilateral",
+      "outgoing_0_5": 1024,
+      "outgoing_c_star": 946,
+      "retained_fraction": 0.923828125,
+      "below_half": false
+    },
+    {
+      "bodyId": 942168,
+      "label": "sugar_bilateral",
+      "outgoing_0_5": 106,
+      "outgoing_c_star": 36,
+      "retained_fraction": 0.33962264150943394,
+      "below_half": true
+    },
+    {
+      "bodyId": 957530,
+      "label": "sugar_bilateral",
+      "outgoing_0_5": 61,
+      "outgoing_c_star": 7,
+      "retained_fraction": 0.11475409836065574,
+      "below_half": true
+    },
+    {
+      "bodyId": 158893964,
+      "label": "sugar_bilateral",
+      "outgoing_0_5": 107,
+      "outgoing_c_star": 35,
+      "retained_fraction": 0.32710280373831774,
+      "below_half": true
+    },
+    {
+      "bodyId": 174444965,
+      "label": "sugar_bilateral",
+      "outgoing_0_5": 42,
+      "outgoing_c_star": 13,
+      "retained_fraction": 0.30952380952380953,
+      "below_half": true
+    },
+    {
+      "bodyId": 213650853,
+      "label": "sugar_bilateral",
+      "outgoing_0_5": 512,
+      "outgoing_c_star": 348,
+      "retained_fraction": 0.6796875,
+      "below_half": false
+    },
+    {
+      "bodyId": 349137284,
+      "label": "sugar_bilateral",
+      "outgoing_0_5": 64,
+      "outgoing_c_star": 5,
+      "retained_fraction": 0.078125,
+      "below_half": true
+    },
+    {
+      "bodyId": 475202322,
+      "label": "sugar_bilateral",
+      "outgoing_0_5": 149,
+      "outgoing_c_star": 43,
+      "retained_fraction": 0.28859060402684567,
+      "below_half": true
+    },
+    {
+      "bodyId": 766547228,
+      "label": "sugar_bilateral",
+      "outgoing_0_5": 134,
+      "outgoing_c_star": 58,
+      "retained_fraction": 0.43283582089552236,
+      "below_half": true
+    },
+    {
+      "bodyId": 72059,
+      "label": "sugar_lb3c_bilateral",
+      "outgoing_0_5": 1175,
+      "outgoing_c_star": 1099,
+      "retained_fraction": 0.9353191489361702,
+      "below_half": false
+    },
+    {
+      "bodyId": 78240,
+      "label": "sugar_lb3c_bilateral",
+      "outgoing_0_5": 425,
+      "outgoing_c_star": 343,
+      "retained_fraction": 0.8070588235294117,
+      "below_half": false
+    },
+    {
+      "bodyId": 85806,
+      "label": "sugar_lb3c_bilateral",
+      "outgoing_0_5": 791,
+      "outgoing_c_star": 674,
+      "retained_fraction": 0.8520859671302149,
+      "below_half": false
+    },
+    {
+      "bodyId": 92440,
+      "label": "sugar_lb3c_bilateral",
+      "outgoing_0_5": 957,
+      "outgoing_c_star": 876,
+      "retained_fraction": 0.9153605015673981,
+      "below_half": false
+    },
+    {
+      "bodyId": 101087,
+      "label": "sugar_lb3c_bilateral",
+      "outgoing_0_5": 603,
+      "outgoing_c_star": 479,
+      "retained_fraction": 0.7943615257048093,
+      "below_half": false
+    },
+    {
+      "bodyId": 120303,
+      "label": "sugar_lb3c_bilateral",
+      "outgoing_0_5": 588,
+      "outgoing_c_star": 486,
+      "retained_fraction": 0.826530612244898,
+      "below_half": false
+    },
+    {
+      "bodyId": 140015,
+      "label": "sugar_lb3c_bilateral",
+      "outgoing_0_5": 508,
+      "outgoing_c_star": 401,
+      "retained_fraction": 0.7893700787401575,
+      "below_half": false
+    },
+    {
+      "bodyId": 142827,
+      "label": "sugar_lb3c_bilateral",
+      "outgoing_0_5": 460,
+      "outgoing_c_star": 364,
+      "retained_fraction": 0.7913043478260869,
+      "below_half": false
+    },
+    {
+      "bodyId": 180314,
+      "label": "sugar_lb3c_bilateral",
+      "outgoing_0_5": 178,
+      "outgoing_c_star": 88,
+      "retained_fraction": 0.4943820224719101,
+      "below_half": true
+    },
+    {
+      "bodyId": 190769,
+      "label": "sugar_lb3c_bilateral",
+      "outgoing_0_5": 353,
+      "outgoing_c_star": 240,
+      "retained_fraction": 0.6798866855524079,
+      "below_half": false
+    },
+    {
+      "bodyId": 202888,
+      "label": "sugar_lb3c_bilateral",
+      "outgoing_0_5": 511,
+      "outgoing_c_star": 405,
+      "retained_fraction": 0.7925636007827789,
+      "below_half": false
+    },
+    {
+      "bodyId": 215556,
+      "label": "sugar_lb3c_bilateral",
+      "outgoing_0_5": 609,
+      "outgoing_c_star": 499,
+      "retained_fraction": 0.819376026272578,
+      "below_half": false
+    },
+    {
+      "bodyId": 261450,
+      "label": "sugar_lb3c_bilateral",
+      "outgoing_0_5": 354,
+      "outgoing_c_star": 261,
+      "retained_fraction": 0.7372881355932204,
+      "below_half": false
+    },
+    {
+      "bodyId": 262567,
+      "label": "sugar_lb3c_bilateral",
+      "outgoing_0_5": 266,
+      "outgoing_c_star": 134,
+      "retained_fraction": 0.5037593984962406,
+      "below_half": false
+    },
+    {
+      "bodyId": 512551,
+      "label": "sugar_lb3c_bilateral",
+      "outgoing_0_5": 876,
+      "outgoing_c_star": 799,
+      "retained_fraction": 0.9121004566210046,
+      "below_half": false
+    },
+    {
+      "bodyId": 516217,
+      "label": "sugar_lb3c_bilateral",
+      "outgoing_0_5": 453,
+      "outgoing_c_star": 328,
+      "retained_fraction": 0.7240618101545254,
+      "below_half": false
+    },
+    {
+      "bodyId": 531237,
+      "label": "sugar_lb3c_bilateral",
+      "outgoing_0_5": 414,
+      "outgoing_c_star": 316,
+      "retained_fraction": 0.7632850241545893,
+      "below_half": false
+    },
+    {
+      "bodyId": 933317,
+      "label": "sugar_lb3c_bilateral",
+      "outgoing_0_5": 1024,
+      "outgoing_c_star": 946,
+      "retained_fraction": 0.923828125,
+      "below_half": false
+    },
+    {
+      "bodyId": 942168,
+      "label": "sugar_lb3c_bilateral",
+      "outgoing_0_5": 106,
+      "outgoing_c_star": 36,
+      "retained_fraction": 0.33962264150943394,
+      "below_half": true
+    },
+    {
+      "bodyId": 957530,
+      "label": "sugar_lb3c_bilateral",
+      "outgoing_0_5": 61,
+      "outgoing_c_star": 7,
+      "retained_fraction": 0.11475409836065574,
+      "below_half": true
+    },
+    {
+      "bodyId": 158893964,
+      "label": "sugar_lb3c_bilateral",
+      "outgoing_0_5": 107,
+      "outgoing_c_star": 35,
+      "retained_fraction": 0.32710280373831774,
+      "below_half": true
+    },
+    {
+      "bodyId": 349137284,
+      "label": "sugar_lb3c_bilateral",
+      "outgoing_0_5": 64,
+      "outgoing_c_star": 5,
+      "retained_fraction": 0.078125,
+      "below_half": true
+    },
+    {
+      "bodyId": 475202322,
+      "label": "sugar_lb3c_bilateral",
+      "outgoing_0_5": 149,
+      "outgoing_c_star": 43,
+      "retained_fraction": 0.28859060402684567,
+      "below_half": true
+    },
+    {
+      "bodyId": 10331,
+      "label": "MN9_L_primary",
+      "outgoing_0_5": 280,
+      "outgoing_c_star": 51,
+      "retained_fraction": 0.18214285714285713,
+      "below_half": true
+    },
+    {
+      "bodyId": 16949,
+      "label": "MN9_R_secondary",
+      "outgoing_0_5": 445,
+      "outgoing_c_star": 203,
+      "retained_fraction": 0.45617977528089887,
+      "below_half": true
+    }
+  ],
+  "set_totals": [
+    {
+      "label": "sugar_bilateral",
+      "outgoing_0_5": 14950,
+      "outgoing_c_star": 11739,
+      "retained_fraction": 0.7852173913043479,
+      "below_half": false,
+      "cells": 34
+    },
+    {
+      "label": "sugar_lb3c_bilateral",
+      "outgoing_0_5": 11032,
+      "outgoing_c_star": 8864,
+      "retained_fraction": 0.8034807831762146,
+      "below_half": false,
+      "cells": 23
+    }
+  ],
+  "stop_triggered": false,
+  "female": {
+    "cells": [
+      {
+        "bodyId": 720575940606002609,
+        "label": "sugar_bilateral",
+        "outgoing_synapses": 197,
+        "retention_fraction": null
+      },
+      {
+        "bodyId": 720575940607347634,
+        "label": "sugar_bilateral",
+        "outgoing_synapses": 151,
+        "retention_fraction": null
+      },
+      {
+        "bodyId": 720575940607737099,
+        "label": "sugar_bilateral",
+        "outgoing_synapses": 121,
+        "retention_fraction": null
+      },
+      {
+        "bodyId": 720575940608305161,
+        "label": "sugar_bilateral",
+        "outgoing_synapses": 226,
+        "retention_fraction": null
+      },
+      {
+        "bodyId": 720575940609919897,
+        "label": "sugar_bilateral",
+        "outgoing_synapses": 185,
+        "retention_fraction": null
+      },
+      {
+        "bodyId": 720575940610296622,
+        "label": "sugar_bilateral",
+        "outgoing_synapses": 103,
+        "retention_fraction": null
+      },
+      {
+        "bodyId": 720575940612010137,
+        "label": "sugar_bilateral",
+        "outgoing_synapses": 169,
+        "retention_fraction": null
+      },
+      {
+        "bodyId": 720575940612445938,
+        "label": "sugar_bilateral",
+        "outgoing_synapses": 69,
+        "retention_fraction": null
+      },
+      {
+        "bodyId": 720575940612579053,
+        "label": "sugar_bilateral",
+        "outgoing_synapses": 290,
+        "retention_fraction": null
+      },
+      {
+        "bodyId": 720575940612612581,
+        "label": "sugar_bilateral",
+        "outgoing_synapses": 82,
+        "retention_fraction": null
+      },
+      {
+        "bodyId": 720575940612670570,
+        "label": "sugar_bilateral",
+        "outgoing_synapses": 451,
+        "retention_fraction": null
+      },
+      {
+        "bodyId": 720575940612950568,
+        "label": "sugar_bilateral",
+        "outgoing_synapses": 297,
+        "retention_fraction": null
+      },
+      {
+        "bodyId": 720575940613601698,
+        "label": "sugar_bilateral",
+        "outgoing_synapses": 170,
+        "retention_fraction": null
+      },
+      {
+        "bodyId": 720575940614302370,
+        "label": "sugar_bilateral",
+        "outgoing_synapses": 67,
+        "retention_fraction": null
+      },
+      {
+        "bodyId": 720575940616742657,
+        "label": "sugar_bilateral",
+        "outgoing_synapses": 239,
+        "retention_fraction": null
+      },
+      {
+        "bodyId": 720575940616851286,
+        "label": "sugar_bilateral",
+        "outgoing_synapses": 37,
+        "retention_fraction": null
+      },
+      {
+        "bodyId": 720575940616885538,
+        "label": "sugar_bilateral",
+        "outgoing_synapses": 261,
+        "retention_fraction": null
+      },
+      {
+        "bodyId": 720575940617000768,
+        "label": "sugar_bilateral",
+        "outgoing_synapses": 302,
+        "retention_fraction": null
+      },
+      {
+        "bodyId": 720575940617181725,
+        "label": "sugar_bilateral",
+        "outgoing_synapses": 134,
+        "retention_fraction": null
+      },
+      {
+        "bodyId": 720575940617801499,
+        "label": "sugar_bilateral",
+        "outgoing_synapses": 63,
+        "retention_fraction": null
+      },
+      {
+        "bodyId": 720575940617937543,
+        "label": "sugar_bilateral",
+        "outgoing_synapses": 416,
+        "retention_fraction": null
+      },
+      {
+        "bodyId": 720575940620296641,
+        "label": "sugar_bilateral",
+        "outgoing_synapses": 93,
+        "retention_fraction": null
+      },
+      {
+        "bodyId": 720575940620589838,
+        "label": "sugar_bilateral",
+        "outgoing_synapses": 346,
+        "retention_fraction": null
+      },
+      {
+        "bodyId": 720575940621502051,
+        "label": "sugar_bilateral",
+        "outgoing_synapses": 240,
+        "retention_fraction": null
+      },
+      {
+        "bodyId": 720575940621508479,
+        "label": "sugar_bilateral",
+        "outgoing_synapses": 17,
+        "retention_fraction": null
+      },
+      {
+        "bodyId": 720575940621754367,
+        "label": "sugar_bilateral",
+        "outgoing_synapses": 171,
+        "retention_fraction": null
+      },
+      {
+        "bodyId": 720575940622200233,
+        "label": "sugar_bilateral",
+        "outgoing_synapses": 68,
+        "retention_fraction": null
+      },
+      {
+        "bodyId": 720575940622413508,
+        "label": "sugar_bilateral",
+        "outgoing_synapses": 133,
+        "retention_fraction": null
+      },
+      {
+        "bodyId": 720575940622486922,
+        "label": "sugar_bilateral",
+        "outgoing_synapses": 294,
+        "retention_fraction": null
+      },
+      {
+        "bodyId": 720575940622731229,
+        "label": "sugar_bilateral",
+        "outgoing_synapses": 234,
+        "retention_fraction": null
+      },
+      {
+        "bodyId": 720575940622825736,
+        "label": "sugar_bilateral",
+        "outgoing_synapses": 233,
+        "retention_fraction": null
+      },
+      {
+        "bodyId": 720575940623629292,
+        "label": "sugar_bilateral",
+        "outgoing_synapses": 181,
+        "retention_fraction": null
+      },
+      {
+        "bodyId": 720575940625861168,
+        "label": "sugar_bilateral",
+        "outgoing_synapses": 219,
+        "retention_fraction": null
+      },
+      {
+        "bodyId": 720575940627490663,
+        "label": "sugar_bilateral",
+        "outgoing_synapses": 170,
+        "retention_fraction": null
+      },
+      {
+        "bodyId": 720575940627907883,
+        "label": "sugar_bilateral",
+        "outgoing_synapses": 77,
+        "retention_fraction": null
+      },
+      {
+        "bodyId": 720575940628853239,
+        "label": "sugar_bilateral",
+        "outgoing_synapses": 495,
+        "retention_fraction": null
+      },
+      {
+        "bodyId": 720575940629025324,
+        "label": "sugar_bilateral",
+        "outgoing_synapses": 128,
+        "retention_fraction": null
+      },
+      {
+        "bodyId": 720575940629176663,
+        "label": "sugar_bilateral",
+        "outgoing_synapses": 240,
+        "retention_fraction": null
+      },
+      {
+        "bodyId": 720575940629388135,
+        "label": "sugar_bilateral",
+        "outgoing_synapses": 452,
+        "retention_fraction": null
+      },
+      {
+        "bodyId": 720575940629510338,
+        "label": "sugar_bilateral",
+        "outgoing_synapses": 154,
+        "retention_fraction": null
+      },
+      {
+        "bodyId": 720575940629852866,
+        "label": "sugar_bilateral",
+        "outgoing_synapses": 172,
+        "retention_fraction": null
+      },
+      {
+        "bodyId": 720575940629884119,
+        "label": "sugar_bilateral",
+        "outgoing_synapses": 154,
+        "retention_fraction": null
+      },
+      {
+        "bodyId": 720575940631147148,
+        "label": "sugar_bilateral",
+        "outgoing_synapses": 169,
+        "retention_fraction": null
+      },
+      {
+        "bodyId": 720575940631393484,
+        "label": "sugar_bilateral",
+        "outgoing_synapses": 158,
+        "retention_fraction": null
+      },
+      {
+        "bodyId": 720575940631656504,
+        "label": "sugar_bilateral",
+        "outgoing_synapses": 9,
+        "retention_fraction": null
+      },
+      {
+        "bodyId": 720575940632510479,
+        "label": "sugar_bilateral",
+        "outgoing_synapses": 241,
+        "retention_fraction": null
+      },
+      {
+        "bodyId": 720575940632627660,
+        "label": "sugar_bilateral",
+        "outgoing_synapses": 14,
+        "retention_fraction": null
+      },
+      {
+        "bodyId": 720575940632880173,
+        "label": "sugar_bilateral",
+        "outgoing_synapses": 54,
+        "retention_fraction": null
+      },
+      {
+        "bodyId": 720575940634023961,
+        "label": "sugar_bilateral",
+        "outgoing_synapses": 57,
+        "retention_fraction": null
+      },
+      {
+        "bodyId": 720575940635172191,
+        "label": "sugar_bilateral",
+        "outgoing_synapses": 301,
+        "retention_fraction": null
+      },
+      {
+        "bodyId": 720575940639043280,
+        "label": "sugar_bilateral",
+        "outgoing_synapses": 549,
+        "retention_fraction": null
+      },
+      {
+        "bodyId": 720575940639198653,
+        "label": "sugar_bilateral",
+        "outgoing_synapses": 719,
+        "retention_fraction": null
+      },
+      {
+        "bodyId": 720575940639259967,
+        "label": "sugar_bilateral",
+        "outgoing_synapses": 557,
+        "retention_fraction": null
+      },
+      {
+        "bodyId": 720575940639332736,
+        "label": "sugar_bilateral",
+        "outgoing_synapses": 206,
+        "retention_fraction": null
+      },
+      {
+        "bodyId": 720575940640649691,
+        "label": "sugar_bilateral",
+        "outgoing_synapses": 188,
+        "retention_fraction": null
+      },
+      {
+        "bodyId": 720575940641339611,
+        "label": "sugar_bilateral",
+        "outgoing_synapses": 52,
+        "retention_fraction": null
+      },
+      {
+        "bodyId": 720575940645332259,
+        "label": "sugar_bilateral",
+        "outgoing_synapses": 189,
+        "retention_fraction": null
+      },
+      {
+        "bodyId": 720575940606002609,
+        "label": "sugar_lb3c_bilateral",
+        "outgoing_synapses": 197,
+        "retention_fraction": null
+      },
+      {
+        "bodyId": 720575940608305161,
+        "label": "sugar_lb3c_bilateral",
+        "outgoing_synapses": 226,
+        "retention_fraction": null
+      },
+      {
+        "bodyId": 720575940612010137,
+        "label": "sugar_lb3c_bilateral",
+        "outgoing_synapses": 169,
+        "retention_fraction": null
+      },
+      {
+        "bodyId": 720575940612445938,
+        "label": "sugar_lb3c_bilateral",
+        "outgoing_synapses": 69,
+        "retention_fraction": null
+      },
+      {
+        "bodyId": 720575940612579053,
+        "label": "sugar_lb3c_bilateral",
+        "outgoing_synapses": 290,
+        "retention_fraction": null
+      },
+      {
+        "bodyId": 720575940612612581,
+        "label": "sugar_lb3c_bilateral",
+        "outgoing_synapses": 82,
+        "retention_fraction": null
+      },
+      {
+        "bodyId": 720575940612670570,
+        "label": "sugar_lb3c_bilateral",
+        "outgoing_synapses": 451,
+        "retention_fraction": null
+      },
+      {
+        "bodyId": 720575940612950568,
+        "label": "sugar_lb3c_bilateral",
+        "outgoing_synapses": 297,
+        "retention_fraction": null
+      },
+      {
+        "bodyId": 720575940613601698,
+        "label": "sugar_lb3c_bilateral",
+        "outgoing_synapses": 170,
+        "retention_fraction": null
+      },
+      {
+        "bodyId": 720575940616742657,
+        "label": "sugar_lb3c_bilateral",
+        "outgoing_synapses": 239,
+        "retention_fraction": null
+      },
+      {
+        "bodyId": 720575940616885538,
+        "label": "sugar_lb3c_bilateral",
+        "outgoing_synapses": 261,
+        "retention_fraction": null
+      },
+      {
+        "bodyId": 720575940617000768,
+        "label": "sugar_lb3c_bilateral",
+        "outgoing_synapses": 302,
+        "retention_fraction": null
+      },
+      {
+        "bodyId": 720575940620296641,
+        "label": "sugar_lb3c_bilateral",
+        "outgoing_synapses": 93,
+        "retention_fraction": null
+      },
+      {
+        "bodyId": 720575940620589838,
+        "label": "sugar_lb3c_bilateral",
+        "outgoing_synapses": 346,
+        "retention_fraction": null
+      },
+      {
+        "bodyId": 720575940621502051,
+        "label": "sugar_lb3c_bilateral",
+        "outgoing_synapses": 240,
+        "retention_fraction": null
+      },
+      {
+        "bodyId": 720575940621754367,
+        "label": "sugar_lb3c_bilateral",
+        "outgoing_synapses": 171,
+        "retention_fraction": null
+      },
+      {
+        "bodyId": 720575940622486922,
+        "label": "sugar_lb3c_bilateral",
+        "outgoing_synapses": 294,
+        "retention_fraction": null
+      },
+      {
+        "bodyId": 720575940622731229,
+        "label": "sugar_lb3c_bilateral",
+        "outgoing_synapses": 234,
+        "retention_fraction": null
+      },
+      {
+        "bodyId": 720575940623629292,
+        "label": "sugar_lb3c_bilateral",
+        "outgoing_synapses": 181,
+        "retention_fraction": null
+      },
+      {
+        "bodyId": 720575940625861168,
+        "label": "sugar_lb3c_bilateral",
+        "outgoing_synapses": 219,
+        "retention_fraction": null
+      },
+      {
+        "bodyId": 720575940627907883,
+        "label": "sugar_lb3c_bilateral",
+        "outgoing_synapses": 77,
+        "retention_fraction": null
+      },
+      {
+        "bodyId": 720575940628853239,
+        "label": "sugar_lb3c_bilateral",
+        "outgoing_synapses": 495,
+        "retention_fraction": null
+      },
+      {
+        "bodyId": 720575940629388135,
+        "label": "sugar_lb3c_bilateral",
+        "outgoing_synapses": 452,
+        "retention_fraction": null
+      },
+      {
+        "bodyId": 720575940629852866,
+        "label": "sugar_lb3c_bilateral",
+        "outgoing_synapses": 172,
+        "retention_fraction": null
+      },
+      {
+        "bodyId": 720575940631147148,
+        "label": "sugar_lb3c_bilateral",
+        "outgoing_synapses": 169,
+        "retention_fraction": null
+      },
+      {
+        "bodyId": 720575940632627660,
+        "label": "sugar_lb3c_bilateral",
+        "outgoing_synapses": 14,
+        "retention_fraction": null
+      },
+      {
+        "bodyId": 720575940635172191,
+        "label": "sugar_lb3c_bilateral",
+        "outgoing_synapses": 301,
+        "retention_fraction": null
+      },
+      {
+        "bodyId": 720575940639198653,
+        "label": "sugar_lb3c_bilateral",
+        "outgoing_synapses": 719,
+        "retention_fraction": null
+      },
+      {
+        "bodyId": 720575940639259967,
+        "label": "sugar_lb3c_bilateral",
+        "outgoing_synapses": 557,
+        "retention_fraction": null
+      },
+      {
+        "bodyId": 720575940639332736,
+        "label": "sugar_lb3c_bilateral",
+        "outgoing_synapses": 206,
+        "retention_fraction": null
+      },
+      {
+        "bodyId": 720575940640649691,
+        "label": "sugar_lb3c_bilateral",
+        "outgoing_synapses": 188,
+        "retention_fraction": null
+      },
+      {
+        "bodyId": 720575940645332259,
+        "label": "sugar_lb3c_bilateral",
+        "outgoing_synapses": 189,
+        "retention_fraction": null
+      }
+    ],
+    "set_totals": [
+      {
+        "label": "sugar_bilateral",
+        "cells": 57,
+        "outgoing_synapses": 11764,
+        "retention_fraction": null
+      },
+      {
+        "label": "sugar_lb3c_bilateral",
+        "cells": 32,
+        "outgoing_synapses": 8070,
+        "retention_fraction": null
+      }
+    ],
+    "retention_fraction": null,
+    "note": "Frozen v783 graph has no cut; outgoing synapse totals only, no retention fraction."
+  },
+  "sources": [
+    {
+      "path": "data/malecns/derived/connectivity.parquet",
+      "bytes": 136299562,
+      "sha256": "b31ae9884cba41fedac392e4c80bada5c0c8a33efb9258b0e7308a1bbcbfa6f3"
+    },
+    {
+      "path": "data/malecns/derived/fbm/connectivity.parquet",
+      "bytes": 32686742,
+      "sha256": "240976c11b7f6121c7da4319e6a502f255b33f04d6f4cfbc8aa3b99ecd0d01c8"
+    },
+    {
+      "path": "vendor/fly-brain/data/2025_Connectivity_783.parquet",
+      "bytes": 100804642,
+      "sha256": "efeb23fb99098e9c390f6869969b2a121a2ee92c833cfc45ecb2c1d8e1af0347"
+    },
+    {
+      "path": "vendor/fly-brain/data/2025_Completeness_783.csv",
+      "bytes": 3465987,
+      "sha256": "52b0ac6094cd32c546f8d4c341e094376f48f4e791f8db9b166de5dff8199ea4"
+    },
+    {
+      "path": "data/malecns/derived/neuron_index.csv",
+      "bytes": 27521575,
+      "sha256": "a5727228e839339f8045f8a431f02b4900aed40109684fa7e6ed2f21a620cbe9"
+    },
+    {
+      "path": "data/malecns/substrate_record_fbm.json",
+      "bytes": 101399,
+      "sha256": "245be88e4c434964fd6f4dd80c89fc6a876a09498bad6aa0210241d3668b3130"
+    },
+    {
+      "path": "data/malecns/cells_m1j.json",
+      "bytes": 28928,
+      "sha256": "53dc5157132d61b05010c74b97350eed270298ddf240d3406764d2a2cf12f603"
+    },
+    {
+      "path": "data/cells_m1j_female.json",
+      "bytes": 28782,
+      "sha256": "e930b41f2127e31aa2f11204aa96dca01c6985052eb8fe571a15b3d456dd3ab3"
+    },
+    {
+      "path": "data/malecns/stim_protocol_malecns_m1j.json",
+      "bytes": 18105,
+      "sha256": "02642cc8e9c6fef4a83842837fb3c0c86157026f496effddd98d752b35293a78"
+    },
+    {
+      "path": "data/stim_protocol_m1j_female.json",
+      "bytes": 20066,
+      "sha256": "7063d8b02dd9add2d2f989a86a5f925f628f89daf108c3a9a75d1f9484cb8a79"
+    },
+    {
+      "path": "sim/malecns/output_retention.py",
+      "bytes": 6880,
+      "sha256": "ea096bdde85a6cdd0026993b21f90f2a5bb0ab5b542c439b29a1e17c033258fb"
+    }
+  ],
+  "builder": {
+    "path": "sim/malecns/m1j_retention.py",
+    "bytes": 4241,
+    "sha256": "56cb829ef1be2f14a6e6599241e2aa552347a71b8467e9995749d727cd45f7f8"
+  }
+}

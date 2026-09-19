@@ -1,6 +1,6 @@
 # v2 decision memo
 
-2026-09-13, updated 2026-09-14 after M1h and male-line closure. Records the owner's salt and
+2026-09-13, updated 2026-09-19 after M1j and male-line closure. Records the owner's salt and
 cell-set decisions; other candidates remain unranked proposals, not a roadmap
 or an authorisation to run experiments. Findings are taken from linked reports.
 
@@ -115,21 +115,28 @@ the v2 sugar set. This records policy, not a re-freeze or male-substrate
 validation. No further female-brain runs; male validation is separate.
 [Owner decision and A-prime](open_questions.md#r1-checkpoint-decision-v1-retained-v2-typed-not-executed-2026-09-13).
 
-### MaleCNS as the substrate — Closed after eight variants
+M1j outcome (2026-09-19): the bilateral-sugar v2 policy is **REJECTED** under
+the declared both-brains rule: female frozen left passes A–D/S, but male
+L10331 fails C (bitter25 alone 1.067 ± 0.772 Hz, limit 1.0 Hz).
+Female sugar100 network counts span 14,226–453,947 and sugar200 median is
+473,902.5; A′ LB3c-only exceeds union (64.667 versus 44.733 Hz): recorded
+observations without a mechanism claim. [M1j results](bilateral_sugar_policy.md#m1j-results-checkpoint--2026-09-19).
 
-M1i's declared whole-CNS >=5 graph at gain 0.65 matches all three
-replication criteria: sugar two-cell mean 52.367 ± 2.225 Hz, bitter and
-combined inputs zero, n=30 each. Their sugar drive uses 204 cells including
-pharyngeal and tarsal GRNs; ours uses 17 labellar cells. With our inputs,
-L10331 passes A–D, S2 and S3 but fails S1 (3/5 positive levels); overall
-FAIL under the unchanged rule. R16949 remains silent. The five-trial KC
-check has no criterion. [M1i results](malecns_phase0.md#m1i-results-checkpoint--2026-09-18).
+Owner follow-up (2026-09-19): because bilateral sugar includes seven frozen
+water cells, v2 re-typing must also redefine water as LB3a; M1j keeps water
+unchanged. [Bilateral policy declaration](bilateral_sugar_policy.md).
 
-The declared stop rule closes the line after M1i whatever its result.
+### MaleCNS as the substrate — Closed after nine variants
+
+M1j bilateral sugar34 passes A/B/D and S1–S3 on L10331 but fails C;
+overall FAIL, while female bilateral sugar57 passes all required gates.
+Adoption is REJECTED. Male R16949 remains silent. [M1j results](bilateral_sugar_policy.md#m1j-results-checkpoint--2026-09-19).
+
+The declared stop rule closes the line after M1j whatever its result.
 M1c's two candidates retain their original A–D passes; S is not applied
 retroactively. L10331's post-M1c selection and secondary R16949 remain
 recorded. No further variant, gain, threshold change, M2 or product
-integration follows. [Eight variants and original rules](malecns_phase0.md#male-line-closing-ledger--eight-variants-2026-09-18), [readout decision](open_questions.md#oq-11-malecns-substrate-and-reversed-sugar-to-mn9-laterality-2026-09-14).
+integration follows. [Nine variants and original rules](malecns_phase0.md#male-line-closing-ledger--nine-variants-2026-09-19), [readout decision](open_questions.md#oq-11-malecns-substrate-and-reversed-sugar-to-mn9-laterality-2026-09-14).
 
 ### Salt (LB3b/LB3d) as a fifth axis — Closed
 
@@ -148,7 +155,7 @@ leg/labellar stations form a sequence rather than concurrent outputs. [Current e
 
 Pharyngeal product axis: unblock with a dish-to-pharyngeal-drive mapping that cites its source or states an explicitly designed rule, plus a user-facing meaning signed off by the owner. [Mapping basis](phase1_5_plan.md#task-c-v2-encoder-schema-proposal-design-only-no-implementation), [Pharyngeal evidence](pharyngeal_screen.md).
 
-MaleCNS: Closed after eight variants; M1i matches the replication criteria but fails our declared gates. Its stop rule authorises no further variant, gain, threshold change or M2. Any future reopening or product integration requires a separate owner decision. [M1i results](malecns_phase0.md#m1i-results-checkpoint--2026-09-18), [eight-variant closing ledger](malecns_phase0.md#male-line-closing-ledger--eight-variants-2026-09-18).
+MaleCNS: Closed after nine variants; M1j fails C and the bilateral-sugar policy is rejected despite the female pass. Its stop rule authorises no further variant, gain, threshold change or M2. Any future reopening or product integration requires a separate owner decision. [M1j results](bilateral_sugar_policy.md#m1j-results-checkpoint--2026-09-19), [nine-variant closing ledger](malecns_phase0.md#male-line-closing-ledger--nine-variants-2026-09-19).
 
 ## Standing caveats
 

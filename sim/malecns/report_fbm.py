@@ -149,7 +149,10 @@ def check_or_append(path=DOCUMENT):
             stream.write('\n' + block)
         text = path.read_text(encoding='utf-8')
     equal(text.count(MARKER), 1, 'Unique M1i checkpoint')
-    equal(MARKER + text.split(MARKER, 1)[1], block, 'M1i report regeneration')
+    tail = MARKER + text.split(MARKER, 1)[1]
+    equal(tail.startswith(block), True, 'M1i report regeneration')
+    following = tail[len(block):]
+    equal(not following or following.startswith('\n## '), True, 'M1i report section boundary')
     print('M1i report regeneration PASS')
 
 
