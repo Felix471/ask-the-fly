@@ -97,7 +97,64 @@ Completed and independently audited 35 conditions × 30 = 1,050 trials; see the 
 
 ## Phase 2
 
-not started
+### Pre-run declaration — 2026-09-19
+
+The owner's go for Phase 2 was recorded on 2026-09-19 with the pre-declared rules unchanged.
+No Phase 2 trial has run at the time of this declaration.
+
+The grid uses the 400 canonical cells of `sim.grid.expand_grid_conditions(sim.grid.load_grid_levels())`
+in the female grid's order, with 30 trials per cell (12,000 trials). Cell IDs, global indices,
+levels, aliases and all four drive rates are retained. The frozen grid levels and their file
+record, the seed-rule text and every cell's Hz coordinates are checked against the frozen
+male protocol and the female lookup table. Trial t of global index g uses
+`20260910 + 1000 * (g % 40) + t`, t = 0..29, for 1,000 ms after restoring the initial network.
+This gives 12,000 cell/trial assignments and 1,200 unique seed values, reused only across
+cells with the same g % 40 and the same trial index.
+
+The runner records primary MN9 L10331, secondary R16949, each MN11D/MN11V/CEM cell and
+their group means, latencies, whole-network spike counts and neurons fired. Whole-network
+body IDs and times and all Poisson-monitor events are saved for every trial, with seeds,
+source hashes and condition ledgers. Summaries use population SD (ddof 0), firing-trial
+counts and median latencies, plus network-count and neurons-fired median/min/max.
+There is no retry, resume or overwrite. Plan and run use WSL; check is file-only and needs
+no Brian2. The plan records a single compile-only build (0 simulated seconds, 0 spikes),
+source hashes, the comparison and replay rules, and a memory budget based on the larger
+of the measured M1j and Phase 1 worker peaks.
+
+### Comparison and replay rules
+
+- R1 Dish set: the 174 dishes of data/dishes.json (sha256 recorded in the comparison file), each mapped to its canonical grid cell with sim.grid.resolve_levels; water medium maps to the 60 Hz cell as in the female table.
+
+- R2 Scores and states: the female score is mn9_left_mean of data/lookup_table_v1_2.json (equal to the site's mn9_mean) and the female state is that table's state field; the male score is the 30-trial mean L10331 rate rounded to 3 decimals as stored in data/lookup_table_male.json, and the male state follows the frozen male state rule (L10331 mean and the three-cell MN11D mean at the 5.0 Hz threshold, applied to unrounded means).
+
+- R3 Distributions: counts of the four states over the 174 dishes and over the 400 cells for each fly; the number of dishes with score below 5.0 Hz for each fly; the 4x4 cross-table of female state by male state over the dishes.
+
+- R4 Pairwise outcome: for every unordered pair of distinct dishes (15,051 pairs) each fly's outcome is the first dish, the second dish, or tie, with tie when the absolute score difference is below 1e-9 (the site rule) and otherwise the higher score winning. The flies agree on a pair when their outcomes are equal. Agreement rate = agreeing pairs / 15,051. Also reported: the 3x3 cross-table of female outcome by male outcome, the agreement rate over pairs where neither fly ties, and the number of pairs where both flies tie.
+
+- R5 Pair-level attribution: for a disagreeing pair, the male outcome is recomputed from the male table with the water level of both dishes set to none and every other level unchanged; if that outcome equals the female outcome the disagreement is removed by water. Likewise with ir94e set to none, and with both set to none. Reported: disagreements removed by water alone, by ir94e alone, by either, only by both together, and by neither. The female table is never modified.
+
+- R6 Dish-level attribution: for dish d, lower(d) is the number of other dishes x for which the female outcome of the pair is d and the male outcome is not d. lower_water(d) and lower_ir94e(d) are the same counts with the male outcome recomputed as in R5. Reported: the number of dishes with lower(d) > 0; the number with lower_water(d) < lower(d) (partly due to water) and with lower_water(d) = 0 < lower(d) (fully due to water); the same two counts for ir94e; the sums of lower, lower_water and lower_ir94e over all dishes; and a per-dish table of all 174 dishes with levels, female score, rank and state, male score, rank and state, lower, lower_water and lower_ir94e. Rank is 1 plus the number of dishes with a strictly higher score within the same fly.
+
+- R7 Sign of each channel over dishes: for every dish whose water level is not none, the sign of (score of the dish) minus (score of the same dish with water set to none), for each fly, counted as lower, equal or higher; the same for ir94e. Counterfactual cells always exist because the grid is complete.
+
+- R8 Replay rule: the whole-network replay of a cell is trial 0 of that cell's 30 grid trials (seed 20260910 + 1000 * (global_index % 40)); no extra trial is simulated. The packed site replay records the same body ids and times, and its MN9 spike counts equal trial 0's rates.
+
+### Report additions and decision point 3
+
+The report will place the male four-state distribution and below-5 Hz dish count next to
+the female's 96 / 26 / 2 / 50 dishes (eats / mouth_moves / proboscis_only / no_response)
+and 76 dishes below 5 Hz. It will quantify water and Ir94e effects over dishes according
+to R5–R7, as well as reporting the distributions and pairwise comparison above.
+
+The owner's amendment makes decision point 3 a report, not a go/no-go: when the grid,
+lookup and comparison are built and audited, the numbers are reported and Phase 3 starts
+unless the audit finds a technical defect. A male fly that refuses most of the menu is
+a product outcome to show, not a reason to stop. The four honesty commitments and the
+on-page disagreement sentence remain fixed. Decision points 4 (sprite preview) and
+5 (copy) still need the owner.
+
+The Phase 2 audit, lookup builder, comparison code, replay pack and report generator
+follow separately; this declaration and the runner do not implement them.
 
 ## Phase 3
 
