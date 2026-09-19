@@ -13,7 +13,7 @@ What a visitor to askthefly.app would notice, newest first. One section per rele
 
 - Four designed response states now give each plate a distinct fly reaction, mouth inset, emotion bubble and bilingual speech. Results and share cards include MN11 readouts; baseline rasters include individual MN11D/V cells.
 - No dish's MN9 score, ranking, tie or allocation rule changed. State labels use the owner's 5 Hz threshold on left MN9 and the two-cell MN11D mean; animation and speech are designed, not measured feeding.
-- README honesty table: added state/readout row and revised animation row, pending owner sign-off before release.
+- README honesty table: added state/readout row and revised animation row, owner-approved before release.
 
 ## v1.1.3 — 2026-09-13
 
