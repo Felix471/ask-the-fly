@@ -43,6 +43,7 @@
         <summary data-i18n="howTitle"></summary>
         <p data-i18n="howP1"></p>
         <p data-i18n="howP2"></p>
+        <p data-i18n="howMale" class="male-how" hidden></p>
       </details>
       <form id="option-form" class="option-form" autocomplete="off">
         <div class="input-wrap">
@@ -60,6 +61,15 @@
         <ul id="option-list" class="option-list" aria-live="polite"></ul>
         <p id="table-empty" class="hint" data-i18n="hint"></p>
       </div>
+      <fieldset class="fly-selector" aria-describedby="fly-selector-hint">
+        <legend data-i18n="flySelector.label"></legend>
+        <div class="fly-segments">
+          <label><input type="radio" name="fly" value="female" checked><span data-i18n="flySelector.female"></span></label>
+          <label><input type="radio" name="fly" value="male"><span data-i18n="flySelector.male"></span></label>
+          <label><input type="radio" name="fly" value="both"><span data-i18n="flySelector.both"></span></label>
+        </div>
+        <p id="fly-selector-hint" class="small" data-i18n="flySelector.hint"></p>
+      </fieldset>
       <div class="actions">
         <button id="ask-btn" class="btn btn-primary" type="button" data-i18n="ask" disabled></button>
         <button id="opposite-btn" class="btn btn-secondary" type="button" data-i18n="opposite" disabled></button>
@@ -79,28 +89,30 @@
       </section>
     </section>
 
-    <section class="panel scene-panel" id="scene-panel" hidden>
+    <div id="fly-panels">
+    <section class="panel scene-panel" id="scene-panel" data-panel="scene-panel" hidden>
+      <h2 data-panel="fly-name" class="fly-name" hidden></h2>
       <div class="scene-head">
-        <span id="scene-status" class="scene-status"></span>
+        <span id="scene-status" data-panel="scene-status" class="scene-status"></span>
         <label class="speed"><span data-i18n="speed"></span>
-          <select id="speed"><option value="0.5">0.5×</option><option value="1" selected>1×</option><option value="2">2×</option></select>
+          <select id="speed" data-panel="speed"><option value="0.5">0.5×</option><option value="1" selected>1×</option><option value="2">2×</option></select>
         </label>
-        <button id="skip-btn" class="btn btn-secondary btn-small" type="button" data-i18n="skip"></button>
+        <button id="skip-btn" data-panel="skip-btn" class="btn btn-secondary btn-small" type="button" data-i18n="skip"></button>
       </div>
       <div class="scene-stage">
-        <canvas id="scene-canvas" class="scene-canvas" data-i18n-aria="ariaSceneCanvas"></canvas>
-        <div id="plate-labels" class="plate-labels"></div>
-        <div id="fly-bubble" class="fly-bubble" aria-live="polite" hidden><span class="bubble-emotion" aria-hidden="true"></span><span class="bubble-text"></span></div>
+        <canvas id="scene-canvas" data-panel="scene-canvas" class="scene-canvas" data-i18n-aria="ariaSceneCanvas"></canvas>
+        <div id="plate-labels" data-panel="plate-labels" class="plate-labels"></div>
+        <div id="fly-bubble" data-panel="fly-bubble" class="fly-bubble" aria-live="polite" hidden><span class="bubble-emotion" aria-hidden="true"></span><span class="bubble-text"></span></div>
       </div>
-      <div id="response-detail" class="response-detail" hidden>
-        <canvas id="mouth-inset" width="128" height="128" data-i18n-aria="responseInset"></canvas>
-        <div><p id="response-description"></p><p class="small" data-i18n="responseDesign"></p></div>
+      <div id="response-detail" data-panel="response-detail" class="response-detail" hidden>
+        <canvas id="mouth-inset" data-panel="mouth-inset" width="128" height="128" data-i18n-aria="responseInset"></canvas>
+        <div><p id="response-description" data-panel="response-description"></p><p data-panel="male-state-note" class="small" hidden></p><p class="small" data-i18n="responseDesign"></p></div>
       </div>
       <div class="brain-wrap">
-        <canvas id="brain-canvas" class="brain-canvas" data-i18n-aria="ariaBrainCanvas"></canvas>
-        <div id="mn9-pill" class="mn9-counter" hidden><span data-i18n="mn9Label"></span> <strong id="mn9-count">0</strong></div>
+        <canvas id="brain-canvas" data-panel="brain-canvas" class="brain-canvas" data-i18n-aria="ariaBrainCanvas"></canvas>
+        <div id="mn9-pill" data-panel="mn9-pill" class="mn9-counter" hidden><span data-i18n="mn9Label"></span> <strong id="mn9-count" data-panel="mn9-count">0</strong></div>
       </div>
-      <p id="brain-caption" class="brain-caption"></p>
+      <p id="brain-caption" data-panel="brain-caption" class="brain-caption"></p>
       <div class="legend">
         <span class="chip"><i class="sw-sugar"></i><span data-i18n="legendSugar"></span></span>
         <span class="chip"><i class="sw-bitter"></i><span data-i18n="legendBitter"></span></span>
@@ -112,32 +124,94 @@
       </div>
       <p class="replay-honesty" data-i18n="replayHonesty"></p>
       <p class="small" data-i18n="anatomySource"></p>
-      <p id="layout-note" class="small" hidden data-i18n="layoutPlaceholder"></p>
-      <details id="brain-details" class="brain-details">
+      <p id="layout-note" data-panel="layout-note" class="small" hidden data-i18n="layoutPlaceholder"></p>
+      <details id="brain-details" data-panel="brain-details" class="brain-details">
         <summary data-i18n="brainDetails"></summary>
         <h3 class="sub-h" data-i18n="rasterTitle"></h3>
-        <canvas id="raster-canvas" class="raster-canvas" data-i18n-aria="ariaRaster"></canvas>
-        <p id="mn11-replay-note" class="small"></p>
+        <canvas id="raster-canvas" data-panel="raster-canvas" class="raster-canvas" data-i18n-aria="ariaRaster"></canvas>
+        <p id="mn11-replay-note" data-panel="mn11-replay-note" class="small"></p>
         <h3 class="sub-h" data-i18n="hudTitle"></h3>
-        <p id="hud-idle" class="brain-caption" data-i18n="brainIdle"></p>
-        <dl id="hud" class="hud">
-          <dt data-i18n="hudTotalNeurons"></dt><dd id="hud-total">–</dd>
-          <dt data-i18n="hudActive"></dt><dd id="hud-active">–</dd>
-          <dt data-i18n="hudMn9"></dt><dd id="hud-mn9">–</dd>
-          <dt data-i18n="hudCell"></dt><dd id="hud-cell" class="mono">–</dd>
-          <dt data-i18n="hudLatency"></dt><dd id="hud-latency">–</dd>
-          <dt data-i18n="hudInputs"></dt><dd id="hud-inputs">–</dd>
+        <p id="hud-idle" data-panel="hud-idle" class="brain-caption" data-i18n="brainIdle"></p>
+        <dl id="hud" data-panel="hud" class="hud">
+          <dt data-i18n="hudTotalNeurons"></dt><dd id="hud-total" data-panel="hud-total">–</dd>
+          <dt data-i18n="hudActive"></dt><dd id="hud-active" data-panel="hud-active">–</dd>
+          <dt data-i18n="hudMn9"></dt><dd id="hud-mn9" data-panel="hud-mn9">–</dd>
+          <dt data-i18n="hudCell"></dt><dd id="hud-cell" data-panel="hud-cell" class="mono">–</dd>
+          <dt data-i18n="hudLatency"></dt><dd id="hud-latency" data-panel="hud-latency">–</dd>
+          <dt data-i18n="hudInputs"></dt><dd id="hud-inputs" data-panel="hud-inputs">–</dd>
         </dl>
         <h3 class="sub-h" data-i18n="silenceTitle"></h3>
-        <div id="silence-controls" class="silence-controls"></div>
-        <p id="silence-caption" class="brain-caption"></p>
+        <div id="silence-controls" data-panel="silence-controls" class="silence-controls"></div>
+        <p id="silence-caption" data-panel="silence-caption" class="brain-caption"></p>
         <p class="replay-honesty" data-i18n="silenceHonesty"></p>
-        <label class="sound"><input type="checkbox" id="sound-toggle"> <span data-i18n="soundToggle"></span></label>
+        <label class="sound"><input type="checkbox" id="sound-toggle" data-panel="sound-toggle"> <span data-i18n="soundToggle"></span></label>
       </details>
     </section>
+    </div>
+    <template id="fly-panel-template">
+    <section class="panel scene-panel" id="scene-panel-male" data-panel="scene-panel" hidden>
+      <h2 data-panel="fly-name" class="fly-name" hidden></h2>
+      <div class="scene-head">
+        <span id="scene-status-male" data-panel="scene-status" class="scene-status"></span>
+        <label class="speed"><span data-i18n="speed"></span>
+          <select id="speed-male" data-panel="speed"><option value="0.5">0.5×</option><option value="1" selected>1×</option><option value="2">2×</option></select>
+        </label>
+        <button id="skip-btn-male" data-panel="skip-btn" class="btn btn-secondary btn-small" type="button" data-i18n="skip"></button>
+      </div>
+      <div class="scene-stage">
+        <canvas id="scene-canvas-male" data-panel="scene-canvas" class="scene-canvas" data-i18n-aria="ariaSceneCanvas"></canvas>
+        <div id="plate-labels-male" data-panel="plate-labels" class="plate-labels"></div>
+        <div id="fly-bubble-male" data-panel="fly-bubble" class="fly-bubble" aria-live="polite" hidden><span class="bubble-emotion" aria-hidden="true"></span><span class="bubble-text"></span></div>
+      </div>
+      <div id="response-detail-male" data-panel="response-detail" class="response-detail" hidden>
+        <canvas id="mouth-inset-male" data-panel="mouth-inset" width="128" height="128" data-i18n-aria="responseInset"></canvas>
+        <div><p id="response-description-male" data-panel="response-description"></p><p data-panel="male-state-note" class="small" hidden></p><p class="small" data-i18n="responseDesign"></p></div>
+      </div>
+      <div class="brain-wrap">
+        <canvas id="brain-canvas-male" data-panel="brain-canvas" class="brain-canvas" data-i18n-aria="ariaBrainCanvas"></canvas>
+        <div id="mn9-pill-male" data-panel="mn9-pill" class="mn9-counter" hidden><span data-i18n="mn9Label"></span> <strong id="mn9-count-male" data-panel="mn9-count">0</strong></div>
+      </div>
+      <p id="brain-caption-male" data-panel="brain-caption" class="brain-caption"></p>
+      <div class="legend">
+        <span class="chip"><i class="sw-sugar"></i><span data-i18n="legendSugar"></span></span>
+        <span class="chip"><i class="sw-bitter"></i><span data-i18n="legendBitter"></span></span>
+        <span class="chip"><i class="sw-water"></i><span data-i18n="legendWater"></span></span>
+        <span class="chip"><i class="sw-ir94e"></i><span data-i18n="legendIr94e"></span></span>
+        <span class="chip"><i class="sw-mn9"></i><span data-i18n="legendMn9"></span></span>
+        <span class="chip"><i class="sw-named"></i><span data-i18n="legendNamed"></span></span>
+        <span class="chip"><i class="sw-other"></i><span data-i18n="legendOther"></span></span>
+      </div>
+      <p class="replay-honesty" data-i18n="replayHonesty"></p>
+      <p class="small" data-i18n="anatomySource"></p>
+      <p id="layout-note-male" data-panel="layout-note" class="small" hidden data-i18n="layoutPlaceholder"></p>
+      <details id="brain-details-male" data-panel="brain-details" class="brain-details">
+        <summary data-i18n="brainDetails"></summary>
+        <h3 class="sub-h" data-i18n="rasterTitle"></h3>
+        <canvas id="raster-canvas-male" data-panel="raster-canvas" class="raster-canvas" data-i18n-aria="ariaRaster"></canvas>
+        <p id="mn11-replay-note-male" data-panel="mn11-replay-note" class="small"></p>
+        <h3 class="sub-h" data-i18n="hudTitle"></h3>
+        <p id="hud-idle-male" data-panel="hud-idle" class="brain-caption" data-i18n="brainIdle"></p>
+        <dl id="hud-male" data-panel="hud" class="hud">
+          <dt data-i18n="hudTotalNeurons"></dt><dd id="hud-total-male" data-panel="hud-total">–</dd>
+          <dt data-i18n="hudActive"></dt><dd id="hud-active-male" data-panel="hud-active">–</dd>
+          <dt data-i18n="hudMn9"></dt><dd id="hud-mn9-male" data-panel="hud-mn9">–</dd>
+          <dt data-i18n="hudCell"></dt><dd id="hud-cell-male" data-panel="hud-cell" class="mono">–</dd>
+          <dt data-i18n="hudLatency"></dt><dd id="hud-latency-male" data-panel="hud-latency">–</dd>
+          <dt data-i18n="hudInputs"></dt><dd id="hud-inputs-male" data-panel="hud-inputs">–</dd>
+        </dl>
+        <h3 class="sub-h" data-i18n="silenceTitle"></h3>
+        <div id="silence-controls-male" data-panel="silence-controls" class="silence-controls"></div>
+        <p id="silence-caption-male" data-panel="silence-caption" class="brain-caption"></p>
+        <p class="replay-honesty" data-i18n="silenceHonesty"></p>
+        <label class="sound"><input type="checkbox" id="sound-toggle-male" data-panel="sound-toggle"> <span data-i18n="soundToggle"></span></label>
+      </details>
+    </section>
+    </template>
 
     <section class="panel" id="result-panel" hidden>
       <div id="verdict" class="verdict"></div>
+      <p id="disagreement" class="disagreement" hidden><strong data-i18n="disagreement.label"></strong> <span data-i18n="disagreement.sentence"></span></p>
+      <p id="result-fly" class="small" hidden></p>
       <canvas id="result-hero" class="result-hero" data-i18n-aria="ariaResultHero"></canvas>
       <div id="misses" class="misses"></div>
       <div class="actions">
@@ -149,8 +223,10 @@
       <div class="how-inline">
         <p data-i18n="howP1"></p>
         <p data-i18n="howP2"></p>
+        <p data-i18n="howMale" class="male-how" hidden></p>
         <p data-i18n="howExtra"></p>
       </div>
+      <h3 id="table-fly" hidden></h3>
       <table class="results" id="results-table">
         <thead>
           <tr>
@@ -172,6 +248,7 @@
         <p class="how-inline-note" data-i18n="ir94eExplain"></p>
       </div>
       <ul id="card-lines" class="card-lines"></ul>
+      <div id="male-results" hidden></div>
       </details>
     </section>
   </main>

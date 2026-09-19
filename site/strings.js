@@ -196,7 +196,10 @@ export const STRINGS = {
       "replay": "This replay is grid trial 0, one of the 30 trials behind the male score; not a live simulation.",
       "weight": "Male synaptic weight: 0.17875 mV = 0.65 × Shiu’s, a calibration from the independent fly-brain-minecraft project, replicated by us.",
       "bitterGate": "One of our four gates fails: bitter alone at 25 Hz gives 1.07 Hz MN9, above our 1.0 Hz limit but below our 5 Hz display threshold.",
-      "state": "In our designed depiction, this brain usually extends the proboscis without the mouth following for these dishes (the three-cell MN11D mean reaches our designed 5 Hz threshold in 9 of 400 cells), so “proboscis only” is its usual state here, not an oddity."
+      "state": "In our designed depiction, this brain usually extends the proboscis without the mouth following for these dishes (the three-cell MN11D mean reaches our designed 5 Hz threshold in 9 of 400 cells), so “proboscis only” is its usual state here, not an oddity.",
+      "responseDesign": "State: 30-trial means of primary MN9 and three-cell MN11D, with our 5 Hz threshold. MN11V/right MN9 do not decide it. Movements, emotions and speech are designed, not observed feeding.",
+      "colMn11D": "MN11D (three-cell mean)",
+      "legendNamed": "named readout"
     },
     "tableFly": {
       "female": "Female fly · dish scores",
@@ -403,7 +406,10 @@ export const STRINGS = {
       "replay": "这段回放是网格试验 0，属于雄蝇分数所依据的 30 次试验之一；不是实时仿真。",
       "weight": "雄蝇突触权重：0.17875 mV，即 Shiu 的 0.65 倍；这套标定来自独立项目 fly-brain-minecraft，我们做了复现。",
       "bitterGate": "四项门槛有一项未通过：单独以 25 Hz 刺激苦味，MN9 为 1.07 Hz，高于我们设定的 1.0 Hz 上限，但低于 5 Hz 显示阈值。",
-      "state": "按我们的示意状态，这只脑面对这些菜时通常只伸喙、嘴却没跟上（三细胞 MN11D 均值仅在 400 格中的 9 格达到设计的 5 Hz 阈值），所以“只伸了喙”是它在这份菜单上的常态，不是偶发现象。"
+      "state": "按我们的示意状态，这只脑面对这些菜时通常只伸喙、嘴却没跟上（三细胞 MN11D 均值仅在 400 格中的 9 格达到设计的 5 Hz 阈值），所以“只伸了喙”是它在这份菜单上的常态，不是偶发现象。",
+      "responseDesign": "状态由主读出 MN9 与 MN11D 三细胞的 30 次均值及我们设定的 5 Hz 阈值决定。MN11V、右 MN9 不参与判定。动作、情绪和台词是设计，不是观测到的进食行为。",
+      "colMn11D": "MN11D（三细胞均值）",
+      "legendNamed": "已标注读出"
     },
     "tableFly": {
       "female": "雌蝇 · 每道菜的分数",

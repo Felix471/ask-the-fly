@@ -1283,6 +1283,24 @@
       "context": "Shown under the male fly's state explanation; designed depiction, not observed feeding. Usual state refers to these 174 dishes (90 proboscis_only), not a majority of all 400 grid cells.",
       "en": "In our designed depiction, this brain usually extends the proboscis without the mouth following for these dishes (the three-cell MN11D mean reaches our designed 5 Hz threshold in 9 of 400 cells), so “proboscis only” is its usual state here, not an oddity.",
       "zh": "按我们的示意状态，这只脑面对这些菜时通常只伸喙、嘴却没跟上（三细胞 MN11D 均值仅在 400 格中的 9 格达到设计的 5 Hz 阈值），所以“只伸了喙”是它在这份菜单上的常态，不是偶发现象。"
+    },
+    {
+      "key": "maleNote.responseDesign",
+      "context": "Male panel state-method explanation; three male MN11D cells rather than the frozen female two. Existing approved male state rule, no new scientific claim.",
+      "en": "State: 30-trial means of primary MN9 and three-cell MN11D, with our 5 Hz threshold. MN11V/right MN9 do not decide it. Movements, emotions and speech are designed, not observed feeding.",
+      "zh": "状态由主读出 MN9 与 MN11D 三细胞的 30 次均值及我们设定的 5 Hz 阈值决定。MN11V、右 MN9 不参与判定。动作、情绪和台词是设计，不是观测到的进食行为。"
+    },
+    {
+      "key": "maleNote.colMn11D",
+      "context": "Male result table MN11D column; mean across three cells.",
+      "en": "MN11D (three-cell mean)",
+      "zh": "MN11D（三细胞均值）"
+    },
+    {
+      "key": "maleNote.legendNamed",
+      "context": "Male brain legend for named readouts; these include VNC neurons, so the female named SEZ-neuron label does not apply.",
+      "en": "named readout",
+      "zh": "已标注读出"
     }
   ]
 }

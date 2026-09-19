@@ -27,6 +27,8 @@ def render(args: argparse.Namespace) -> tuple[Path, Path]:
     from playwright.sync_api import sync_playwright
 
     query = "?v=2&d=" + ",".join("k." + d for d in args.dishes.split(",")) + f"&lang={args.lang}" + ("&m=opposite" if args.opposite else "")
+    if args.fly != "female":
+        query += "&f=" + args.fly
     out = Path(args.out)
     phone = out.with_name(out.stem + "-phone" + out.suffix)
     out.parent.mkdir(parents=True, exist_ok=True)
@@ -83,6 +85,7 @@ def main() -> int:
     parser.add_argument("--url", default="http://127.0.0.1:8765/", help="site origin (a local static server on site/)")
     parser.add_argument("--dishes", default="teriyaki-chicken,sour-plum-drink,hot-and-sour-noodles,lemon", help="comma-separated slugs, as in ?d=")
     parser.add_argument("--lang", choices=("zh", "en"), default="zh")
+    parser.add_argument("--fly", choices=("female", "male", "both"), default="female")
     parser.add_argument("--opposite", action="store_true", help="replay 'Do the opposite' instead of 'Ask the fly'")
     parser.add_argument("--width", type=int, default=390, help="viewport width in CSS px for the phone screenshot")
     parser.add_argument("--out", default=str(ROOT / "docs" / "media" / "share-card-sample.png"))
@@ -92,6 +95,8 @@ def main() -> int:
     print(f"card: {out}\nphone view: {phone}")
     # Legacy input links use the deterministic presentation seed 0 in v1.2.
     expected = f"{SITE_URL}?v=2&d=" + ",".join("k." + d for d in args.dishes.split(",")) + f"&lang={args.lang}" + ("&m=opposite" if args.opposite else "") + "&seed=0"
+    if args.fly != "female":
+        expected += "&f=" + args.fly
     decoded = decode_qr(out)
     if decoded is None:
         print("QR not checked (pip install opencv-python-headless to decode)")

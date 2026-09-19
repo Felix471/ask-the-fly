@@ -291,9 +291,212 @@ def check_F15(browser):
     return finish(page, errors, problems)
 
 
+def check_F16(browser):
+    """Fly selection is lazy, keyboard accessible, persistent, and old links stay female."""
+    page, errors, requests = open_page(browser, "")
+    problems = []
+    page.wait_for_function("document.querySelectorAll('#popular-row .tile').length > 0")
+    if any('_male' in u for u in requests):
+        problems.append('female-only page fetched male data')
+    radio = page.locator('input[name="fly"][value="female"]')
+    radio.focus()
+    page.keyboard.press('ArrowRight')
+    page.wait_for_function("window.__askfly.snapshot().panels.male")
+    if debug(page)['fly'] != 'male' or page.evaluate("localStorage.getItem('askfly.fly')") != 'male':
+        problems.append('keyboard selection did not persist male')
+    page.reload()
+    page.wait_for_function("window.__askfly.snapshot().panels.male")
+    if debug(page)['fly'] != 'male':
+        problems.append('male preference not restored')
+    page.goto(BASE + '?d=candy,steak&lang=en')
+    page.wait_for_selector('#scene-panel:not([hidden])')
+    if debug(page)['fly'] != 'female':
+        problems.append('old link inherited male preference')
+    page.click('#skip-btn')
+    wait_result(page)
+    page.click('#again-btn')
+    page.locator('input[name="fly"][value="both"]').check()
+    page.wait_for_function("window.__askfly.snapshot().panels.male")
+    page.locator('input[name="fly"][value="male"]').check()
+    page.locator('#how').evaluate('el => el.open = true')
+    if not page.locator('#how [data-i18n="howMale"]').is_visible():
+        problems.append('male how-it-works copy is not rendered')
+    page.locator('#how').evaluate('el => el.open = false')
+    page.click('#ask-btn')
+    page.wait_for_selector('#scene-panel:not([hidden])')
+    page.wait_for_function("window.__askfly.snapshot().panels.male.currentCell")
+    if page.locator('#scene-panel [data-panel="layout-note"]').inner_text().find('228') < 0:
+        problems.append('male layout placeholder count absent')
+    if 'grid trial 0' not in page.locator('#scene-panel [data-panel="mn11-replay-note"]').inner_text():
+        problems.append('male trial-0 note not visible')
+    if page.locator('#scene-panel [data-panel="silence-controls"]').is_visible():
+        problems.append('male silencing controls visible')
+    page.click('#skip-btn')
+    wait_result(page)
+    if 'Male fly' not in page.locator('#table-fly').text_content():
+        problems.append('male table heading missing')
+    page.click('#again-btn')
+    page.locator('input[name="fly"][value="female"]').check()
+    page.click('#ask-btn')
+    page.wait_for_selector('#scene-panel:not([hidden])')
+    page.wait_for_function("window.__askfly.snapshot().panels.female.currentCell")
+    if debug(page)['panels']['male']['brainPlaying']:
+        problems.append('male replay leaked into female round')
+    return finish(page, errors, problems)
+
+
+def check_F17(browser):
+    """Both scenes run independently, show honest disagreement, and share f=both."""
+    page, errors, requests = open_page(browser, '?d=brownie,steak&lang=en&f=both', width=1280)
+    problems = []
+    page.wait_for_function("Object.values(window.__askfly.snapshot().panels).length === 2 && Object.values(window.__askfly.snapshot().panels).every(p=>p.sceneRunning)")
+    if page.locator('.scene-panel:visible').count() != 2:
+        problems.append('two scenes not visible')
+    if page.locator('#skip-btn-male').inner_text() != 'Skip':
+        problems.append('cloned male controls were not translated')
+    if not page.locator('#scene-panel-male [data-i18n="legendSugar"]').inner_text():
+        problems.append('cloned male legend missing')
+    page.wait_for_function("Object.values(window.__askfly.snapshot().panels).every(p=>p.currentCell)")
+    page.click('#skip-btn')
+    wait_result(page)
+    if not page.locator('#disagreement').is_visible():
+        problems.append('brownie/steak disagreement absent')
+    sentence = page.locator('#disagreement span').inner_text()
+    if 'sex, reconstruction, cell typing, sign assignment, weight, or stimulus protocol' not in sentence:
+        problems.append('commitment 4 not rendered verbatim')
+    if page.locator('#results-table-male th').count() != 10:
+        problems.append('male table does not have 10 columns')
+    for fly in ['female','male']:
+        if debug(page)['panels'][fly]['brainPlaying']:
+            problems.append(f'{fly} replay still playing after skip')
+    page.click('#share-btn')
+    page.wait_for_selector('#card-dialog[open]')
+    parsed = page.evaluate("""async () => {
+      const app=await import('./app.js');
+      return app.parseShareParams(app.shareParams({known:[],misses:[{name:'a'}],mode:'ask',fly:'both'},'en')).fly;
+    }""")
+    if parsed != 'both':
+        problems.append('both share selection not round-tripped')
+    page.click('#close-card-btn')
+    page.click('#again-btn')
+    if any(p['sceneRunning'] or p['brainPlaying'] for p in debug(page)['panels'].values()):
+        problems.append('reset left a panel running')
+    page.goto(BASE + '?d=candy,steak&lang=en&f=both')
+    page.wait_for_selector('#scene-panel:not([hidden])')
+    page.click('#skip-btn')
+    wait_result(page)
+    if page.locator('#disagreement').is_visible():
+        problems.append('agreeing candy/steak pair has disagreement line')
+    return finish(page, errors, problems)
+
+
+def check_F18(browser):
+    """Male and both language changes preserve phase, notes, and state explanation."""
+    page, errors, requests = open_page(browser, '?d=candy,steak&lang=en&f=male')
+    problems = []
+    page.wait_for_selector('#scene-panel:not([hidden])')
+    page.click('#lang-toggle')
+    if debug(page)['phase'] != 'tasting':
+        problems.append('male language switch revealed result')
+    wait_result(page)
+    note=page.locator('#scene-panel [data-panel="male-state-note"]')
+    if not note.is_visible() or '400' not in note.inner_text():
+        problems.append('male state note absent beneath state explanation')
+    if '30' not in page.locator('#scene-panel [data-panel="mn11-replay-note"]').inner_text():
+        problems.append('male replay note lost on language switch')
+    page.click('#again-btn')
+    page.locator('input[name="fly"][value="both"]').check()
+    page.click('#ask-btn')
+    page.wait_for_function("Object.values(window.__askfly.snapshot().panels).every(p=>p.sceneRunning)")
+    page.click('#lang-toggle')
+    if debug(page)['phase'] != 'tasting':
+        problems.append('both language switch revealed result')
+    page.click('#skip-btn-male')
+    wait_result(page)
+    if any(p['brainPlaying'] for p in debug(page)['panels'].values()):
+        problems.append('secondary skip did not stop both replays')
+    return finish(page, errors, problems)
+
+
+def check_F19(browser):
+    """A broken male bundle reports a notice, never substitutes female data, and retries."""
+    page, errors, requests = open_page(browser, '')
+    problems = []
+    page.wait_for_function("document.querySelectorAll('#popular-row .tile').length > 0")
+    warnings = []
+    page.on('console', lambda m: warnings.append(m.text) if m.type == 'warning' else None)
+    pattern = '**/data/lookup_table_male.json'
+    page.route(pattern, lambda route: route.fulfill(status=200, content_type='application/json', body='{}'))
+    page.locator('input[name="fly"][value="male"]').check()
+    page.wait_for_selector('#notice:not([hidden])')
+    if debug(page)['panels'].get('male'):
+        problems.append('broken male lookup was accepted')
+    if not any('scene disabled:' in message for message in warnings):
+        problems.append('male bundle error was swallowed')
+    page.unroute(pattern)
+    page.locator('input[name="fly"][value="female"]').check()
+    page.locator('input[name="fly"][value="male"]').check()
+    page.wait_for_function("window.__askfly.snapshot().panels.male")
+    page.fill('#option-input', 'candy,steak')
+    page.locator('#option-form').dispatch_event('submit')
+    page.click('#ask-btn')
+    page.wait_for_selector('#scene-panel:not([hidden])')
+    page.click('#skip-btn')
+    wait_result(page)
+    # Male and female provenance must not be exchanged when rebinding the first block.
+    table_commit = page.evaluate("async()=> (await (await fetch('data/lookup_table_male.json')).json()).git_commit.slice(0,7)")
+    if table_commit not in page.locator('#table-meta').inner_text():
+        problems.append('male view has female lookup metadata')
+    return finish(page, errors, problems)
+
+
+def check_F20(browser):
+    """Reset cancels a delayed male replay while the independent female scene runs."""
+    page, errors, requests = open_page(browser, '')
+    problems = []
+    hold = Hold(page, '**/data/replay_male/G_*.bin')
+    page.goto(BASE + '?d=brownie,steak&lang=en&f=both')
+    page.wait_for_selector('#scene-panel:not([hidden])')
+    page.wait_for_function("window.__askfly.snapshot().panels.female.currentCell")
+    page.click('#skip-btn-male')
+    wait_result(page)
+    page.click('#again-btn')
+    hold.release()
+    page.wait_for_timeout(1000)
+    if debug(page)['phase'] != 'input':
+        problems.append('late male replay changed the reset view')
+    for key, panel in debug(page)['panels'].items():
+        if panel['currentCell'] or panel['brainPlaying'] or panel['sceneRunning']:
+            problems.append(f'{key} retained run state after reset')
+    hold.stop()
+    return finish(page, errors, problems)
+
+
+def check_F21(browser):
+    """A failed male replay has a visible notice while the female replay remains independent."""
+    page, errors, requests = open_page(browser, '')
+    problems = []
+    page.route('**/data/replay_male/G_*.bin', lambda route: route.fulfill(status=200, body=b'bad replay'))
+    page.goto(BASE + '?d=brownie,steak&lang=en&f=both')
+    page.wait_for_selector('#notice:not([hidden])', timeout=20000)
+    if not page.locator('#brain-caption-male').inner_text():
+        problems.append('male failed replay has no panel failure caption')
+    page.wait_for_function("window.__askfly.snapshot().panels.female.currentCell")
+    if debug(page)['panels']['male']['currentCell']:
+        problems.append('failed male replay was presented as loaded')
+    page.click('#skip-btn')
+    wait_result(page)
+    if not page.locator('#notice').is_visible():
+        problems.append('male replay failure notice disappeared at result')
+    return finish(page, errors, problems)
+
+
 CHECKS = {
     "F02": check_F02, "F03": check_F03, "F04": check_F04, "F05": check_F05,
     "F06": check_F06, "F08": check_F08, "F15": check_F15,
+    "F16": check_F16, "F17": check_F17, "F18": check_F18,
+    "F19": check_F19, "F20": check_F20,
+    "F21": check_F21,
 }
 
 
