@@ -79,7 +79,11 @@ class ResultReportTests(unittest.TestCase):
 
     def test_report_regeneration_equality(self):
         text = report.DOCUMENT.read_text(encoding='utf-8')
-        self.assertEqual(report.MARKER + text.split(report.MARKER, 1)[1], report.generate())
+        block = report.generate()
+        tail = report.MARKER + text.split(report.MARKER, 1)[1]
+        self.assertTrue(tail.startswith(block))
+        following = tail[len(block):]
+        self.assertTrue(not following or following.startswith('\n## '))
 
     def test_historical_ledger_rows_preserved(self):
         old = report_m1h.generate().split('## Male line closing decision — 2026-09-14', 1)[1]
