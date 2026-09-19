@@ -108,6 +108,14 @@ in the 128-unit layout. The owner records that v2 re-typing must also
 redefine water as LB3a; this is a follow-up, not an M1j gate or water-set
 change. Declaration only; no M1j simulation or product change.
 
+**M1j outcome (2026-09-19):** bilateral typed-sugar adoption is REJECTED
+under the declared both-brains rule. Female frozen left passes A/B/C/D and
+S1/S2/S3; male L10331 passes A/B/D and S1/S2/S3 but fails C (bitter25 alone
+1.067 ± 0.772 Hz against 1.0 Hz). Female sugar100 network range and sugar200
+counts, and A′ LB3c-only above union, are recorded observations without a
+mechanism claim. The male line closes at nine variants; no product or frozen
+set change follows. [Results and activity counts](bilateral_sugar_policy.md#m1j-results-checkpoint--2026-09-19), [nine-variant ledger](malecns_phase0.md#male-line-closing-ledger--nine-variants-2026-09-19).
+
 ## OQ-8: MN9/MN11 bitter separation replicated; CEM input audit (2026-09-13)
 
 The [feeding-MN report](feeding_mn_readouts.md) contains C1 (400 existing
@@ -496,3 +504,11 @@ at nine variants. The ledger becomes nine variants after M1j whatever
 the result, with no further variant, set, gain or threshold change under
 this authorization. Exact ten-trial M0 spike-array reproduction is
 required before any M1j trial. Declaration only; no new result.
+
+**M1j outcome (2026-09-19):** male L10331 overall FAIL solely on required
+gate C (bitter25 alone 1.067 ± 0.772 Hz against 1.0 Hz); A/B/D and S1/S2/S3
+pass, coverage 5/5, S3 ratio 1.151808. R16949 is silent. Female primary
+passes all required gates (S3 1.044325), but adoption requires both brains
+and is REJECTED. The male line is Closed after nine variants; no further
+variant, gain/threshold change, M2 or product migration follows.
+[Both-brain results and S3 scope](bilateral_sugar_policy.md#m1j-results-checkpoint--2026-09-19), [closing ledger](malecns_phase0.md#male-line-closing-ledger--nine-variants-2026-09-19).

@@ -339,3 +339,116 @@ The [M0 recheck](../sim/malecns/m0_recheck.py) uses the original whole-CNS all-e
 Windows build checks include both layouts and A′ zeroing, protocol/cell tamper rejection, exact M0 array comparison, and female historical A–D predicate agreement. No numerical M1j result or policy adoption is claimed.
 
 Verification: 20 new targeted tests pass; general Python discovery passes 353 tests. Male discovery passes all 109 tests after the reviewer-authorized report-scope correction: the exact generated M1i block must be a prefix, followed only by an empty suffix or a later top-level section beginning with `\n## `. Generated M1i text and the declaration prefix remain byte-identical. Female `--check`, M1i report regeneration and diff whitespace checks pass. Earlier build checks passed retention verification, both Windows `--check` commands and release validation; the earlier missing-directory M0 comparison failed cleanly as expected. The reviewer runs the M0 recheck separately.
+
+## M1j results checkpoint — 2026-09-19
+
+**Adoption verdict: REJECTED.** male: FAIL, failing required gates: C; female: PASS, failing required gates: none. Adoption requires both primary readouts to pass A–D and S1–S3. The male line closes at nine variants either way.
+
+### M0 environment recheck
+
+**IDENTICAL**: 10 trials, 88,346 neuron spike-time arrays and 5,792,465 spikes compared exactly; both MN9 rates and latencies are identical. None of the six source files differs from its stored M0 hash. The saved hashes and identical outputs are reported as recorded, without assuming intervening edits. [M0 record](../data/malecns/m0_recheck.json).
+
+M0 records neuron trains only, with no saved Poisson event trains. The audit reconstructs the declared 91-unit inputs but cannot compare them with unsaved inputs; all ten whole-network per-neuron comparisons are exact. This input-comparison limitation is not a failed output recheck.
+
+### Run metadata
+
+| Brain | Completed UTC | Brian2 / backend | Workers used (budget) | Trials | Seeds | Wall seconds | Peak worker RSS GiB |
+|---|---|---|---:|---:|---|---:|---:|
+| male | 2026-09-19T02:09:07.236910+00:00 | 2.9.0 / cython | 8 (8) | 480 | 20260910–20260939 | 547.299 | 0.978657 |
+| female | 2026-09-19T02:14:14.163694+00:00 | 2.9.0 / cython | 9 (9) | 480 | 20260910–20260939 | 289.028 | 3.123585 |
+
+Male: whole CNS, 166,700 neurons / 6,242,085 edges / 89,859,938 synapses, edges >=5 after autapse removal, w_syn 0.17875 mV; bilateral sugar34, 108 physical input units. Female: unchanged frozen FlyWire v783 graph, w_syn 0.275 mV; bilateral sugar57, 128 physical input units. Both use 1 s trials, dt 0.1 ms, n=30 per condition. The seven female water-overlap roots occupy sugar slots only.
+
+### Declared gates, both brains
+
+| Gate | Male L10331 primary | Male R16949 recorded | Female frozen left primary | Female right recorded |
+|---|---|---|---|---|
+| A | PASS | FAIL | PASS | PASS |
+| B | PASS | FAIL | PASS | PASS |
+| C | FAIL | PASS | PASS | PASS |
+| D | PASS | PASS | PASS | PASS |
+| C_literal_zero | FAIL | PASS | PASS | PASS |
+| D_literal_zero | PASS | PASS | PASS | PASS |
+| S1 | PASS (5/5) | FAIL (0/5) | PASS (5/5) | PASS (5/5) |
+| S2 | PASS | PASS | PASS | PASS |
+| S3 | PASS (1.151808) | PASS (1.151808) | PASS (1.044325) | PASS (1.044325) |
+| S | PASS | FAIL | PASS | PASS |
+| Overall | FAIL | FAIL | PASS | PASS |
+
+Secondary S/Overall cells are descriptive evaluations of the same predicates from audited summaries; the saved results declare S and Overall only for the primary. C_literal_zero and D_literal_zero are additional observations, not extra acceptance gates; historical D tests completeness. Male C fails: bitter25 alone is 1.067 ± 0.772 Hz against its 1.000 Hz limit. Male R is silent throughout.
+
+### Sugar curves side by side
+
+Mean ± population SD, Hz; n=30 per level. Historical references use different input sets/layouts and are not paired with M1j. Female historical values are the frozen 23-cell left readout in the [Phase 0 report](phase0_report.md#results); 120 Hz was not measured there.
+
+| Sugar Hz | Male L | Male R | Female left | Female right | Historical M1i sugar17 L | Historical female23 left |
+|---|---:|---:|---:|---:|---:|---:|
+| 25 | 0.900 ± 1.044 | 0.000 ± 0.000 | 0.367 ± 0.752 | 0.100 ± 0.300 | 0.000 ± 0.000 | 0.1 ± 0.3 |
+| 50 | 6.833 ± 3.297 | 0.000 ± 0.000 | 31.967 ± 6.819 | 23.233 ± 5.835 | 0.000 ± 0.000 | 17.6 ± 4.9 |
+| 100 | 67.233 ± 8.261 | 0.000 ± 0.000 | 48.467 ± 13.725 | 33.167 ± 12.267 | 0.800 ± 1.013 | 67.2 ± 4.7 |
+| 120 | 81.267 ± 5.046 | 0.000 ± 0.000 | 44.733 ± 6.942 | 27.667 ± 5.393 | 6.300 ± 3.874 | Not measured |
+| 200 | 101.967 ± 4.309 | 0.000 ± 0.000 | 77.633 ± 5.660 | 48.133 ± 5.058 | 37.067 ± 4.494 | 93.3 ± 5.8 |
+
+### Every condition
+
+Mean ± population SD, Hz; n=30 for every row. Network and neuron counts are median [min–max].
+
+| Brain | Condition | MN9 L Hz | MN9 R Hz | Whole-network spikes | Neurons fired |
+|---|---|---:|---:|---:|---:|
+| male | A_s25_b0 | 0.900 ± 1.044 | 0.000 ± 0.000 | 1,586.0 [1,049–2,221] | 166.5 [66–236] |
+| male | A_s50_b0 | 6.833 ± 3.297 | 0.000 ± 0.000 | 4,932.0 [4,145–7,079] | 409.5 [204–625] |
+| male | A_s100_b0 | 67.233 ± 8.261 | 0.000 ± 0.000 | 17,755.0 [14,869–185,766] | 995.0 [838–7,906] |
+| male | A_s200_b0 | 101.967 ± 4.309 | 0.000 ± 0.000 | 327,007.5 [291,428–335,669] | 8,086.5 [7,581–8,256] |
+| male | B_s200_b0 | 101.967 ± 4.309 | 0.000 ± 0.000 | 327,007.5 [291,428–335,669] | 8,086.5 [7,581–8,256] |
+| male | B_s200_b25 | 4.367 ± 2.258 | 0.000 ± 0.000 | 328,751.5 [287,048–338,153] | 8,154.0 [7,828–8,343] |
+| male | B_s200_b50 | 0.300 ± 0.526 | 0.000 ± 0.000 | 313,555.5 [268,915–339,455] | 8,000.0 [7,327–8,210] |
+| male | B_s200_b100 | 0.000 ± 0.000 | 0.000 ± 0.000 | 321,689.5 [305,076–334,262] | 8,218.0 [7,897–8,317] |
+| male | B_s200_b200 | 0.000 ± 0.000 | 0.000 ± 0.000 | 329,433.0 [307,224–353,686] | 8,182.5 [7,456–8,529] |
+| male | C_s0_b25 | 1.067 ± 0.772 | 0.000 ± 0.000 | 296,820.0 [256,384–308,675] | 7,832.0 [7,135–8,152] |
+| male | C_s0_b50 | 0.000 ± 0.000 | 0.000 ± 0.000 | 300,598.5 [284,837–314,816] | 7,975.0 [7,818–8,308] |
+| male | C_s0_b100 | 0.000 ± 0.000 | 0.000 ± 0.000 | 311,841.0 [294,105–321,519] | 8,131.5 [7,690–8,286] |
+| male | C_s0_b200 | 0.000 ± 0.000 | 0.000 ± 0.000 | 314,555.5 [275,526–330,828] | 8,093.0 [7,302–8,243] |
+| male | D_s0_b0 | 0.000 ± 0.000 | 0.000 ± 0.000 | 0.0 [0–0] | 0.0 [0–0] |
+| male | AP_sugar_120 | 81.267 ± 5.046 | 0.000 ± 0.000 | 24,533.0 [19,483–250,157] | 1,292.5 [939–8,236] |
+| male | AP_sugar_lb3c_120 | 61.267 ± 7.371 | 0.000 ± 0.000 | 17,346.5 [15,055–21,723] | 886.5 [773–1,068] |
+| female | A_s25_b0 | 0.367 ± 0.752 | 0.100 ± 0.300 | 1,970.5 [1,862–2,135] | 106.5 [98–161] |
+| female | A_s50_b0 | 31.967 ± 6.819 | 23.233 ± 5.835 | 5,727.5 [4,663–6,273] | 268.0 [224–330] |
+| female | A_s100_b0 | 48.467 ± 13.725 | 33.167 ± 12.267 | 258,735.5 [14,226–453,947] | 8,646.0 [426–8,759] |
+| female | A_s200_b0 | 77.633 ± 5.660 | 48.133 ± 5.058 | 473,902.5 [459,673–480,048] | 8,748.0 [8,714–8,788] |
+| female | B_s200_b0 | 77.633 ± 5.660 | 48.133 ± 5.058 | 473,902.5 [459,673–480,048] | 8,748.0 [8,714–8,788] |
+| female | B_s200_b25 | 69.300 ± 4.173 | 43.267 ± 4.074 | 474,601.0 [461,409–479,609] | 8,782.0 [8,725–8,858] |
+| female | B_s200_b50 | 59.267 ± 4.986 | 38.100 ± 3.290 | 475,074.0 [461,040–479,787] | 8,794.5 [8,750–8,831] |
+| female | B_s200_b100 | 13.867 ± 3.201 | 9.833 ± 2.853 | 475,104.0 [462,019–481,588] | 8,780.0 [8,744–8,842] |
+| female | B_s200_b200 | 0.500 ± 0.671 | 1.567 ± 1.023 | 480,108.0 [466,071–484,470] | 8,716.0 [8,684–8,755] |
+| female | C_s0_b25 | 0.000 ± 0.000 | 0.000 ± 0.000 | 1,249.5 [1,123–1,333] | 49.0 [47–52] |
+| female | C_s0_b50 | 0.000 ± 0.000 | 0.000 ± 0.000 | 2,616.0 [2,466–2,725] | 65.0 [62–71] |
+| female | C_s0_b100 | 0.000 ± 0.000 | 0.000 ± 0.000 | 5,861.0 [5,618–6,033] | 100.0 [97–108] |
+| female | C_s0_b200 | 0.000 ± 0.000 | 0.000 ± 0.000 | 12,397.0 [12,167–12,769] | 139.0 [136–142] |
+| female | D_s0_b0 | 0.000 ± 0.000 | 0.000 ± 0.000 | 0.0 [0–0] | 0.0 [0–0] |
+| female | AP_sugar_120 | 44.733 ± 6.942 | 27.667 ± 5.393 | 419,227.0 [270,919–464,932] | 8,716.5 [8,652–8,764] |
+| female | AP_sugar_lb3c_120 | 64.667 ± 4.928 | 49.400 ± 4.055 | 12,660.0 [11,735–13,343] | 398.0 [383–419] |
+
+### A′ at 120 Hz
+
+n=30 paired seeds per brain; difference is bilateral LB3c subset minus bilateral LB3b union LB3c.
+
+| Brain / side | Union Hz | LB3c-only Hz | Paired subset−union Hz | Lower/equal/higher trials |
+|---|---:|---:|---:|---:|
+| male / L | 81.267 ± 5.046 | 61.267 ± 7.371 | -20.000 ± 9.018 | 29/0/1 |
+| male / R | 0.000 ± 0.000 | 0.000 ± 0.000 | 0.000 ± 0.000 | 0/30/0 |
+| female / L | 44.733 ± 6.942 | 64.667 ± 4.928 | 19.933 ± 9.578 | 1/0/29 |
+| female / R | 27.667 ± 5.393 | 49.400 ± 4.055 | 21.733 ± 7.759 | 0/0/30 |
+
+### Scope of S3 and recorded activity
+
+S3 tests consistency within sugar 200 trials, not absolute activity. Whole-network spikes, median [min–max]: male sugar100 17,755.0 [14,869–185,766], sugar200 327,007.5 [291,428–335,669]; female sugar100 258,735.5 [14,226–453,947], sugar200 473,902.5 [459,673–480,048].
+
+The female sugar100 range and sugar200 counts above, and female A′ LB3c-only 64.667 ± 4.928 Hz above union 44.733 ± 6.942 Hz on the primary, are recorded observations. No mechanism is inferred. Female S2 passes despite the 100→120 decrease because it is within the declared pooled population-SD allowance.
+
+### Execution and verification
+
+The saved WSL runs were launched from commits `4f12a89` / `b859f68`; run metadata records source hashes rather than a launch git commit. The audit checks those hashes, plans, raw ledgers, every trial rate/latency, source counts, network counts and neurons fired, and reconstructs every summary field with the unchanged A–D/S predicates. No simulation or runner change was performed for this report.
+
+Independent audit: 960 M1j trials, 1920 MN9-neuron trials, 113,280 saved Poisson-unit trials exactly reconstructed. male: 30 A′ pairs / 690 shared unit trains / 2550 silent non-subset unit trials, 30 identical A200/B0 networks; female: 30 A′ pairs / 960 shared unit trains / 2880 silent non-subset unit trials, 30 identical A200/B0 networks. M0 adds ten exact output comparisons; its saved-input limitation is stated above. Repeated seeds are not independent extra replicates.
+
+[Male results](../data/malecns/m1j_male_results.json), [female results](../data/m1j_female_results.json), [independent audit](../data/malecns/m1j_runs_audit.json), [audit implementation](../sim/malecns/audit_m1j.py), [report/corruption tests](../sim/malecns/test_m1j_report.py). No product, frozen-data, copy or honesty-table changes. No further variant, gain/threshold change, M2 or product migration follows.
