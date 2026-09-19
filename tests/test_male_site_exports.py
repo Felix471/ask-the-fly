@@ -103,20 +103,30 @@ class MalePositions(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'Malformed'):
             neurons.position('[1 2]')
 
-    def test_axes_are_inferred_and_brain_scale_excludes_vnc(self):
-        # ML is z (L larger), DV is x (ventral smaller), AP is y.
-        xyz = np.array([[10, 0, 9], [11, 1, 11], [10, 1, -9], [11, 0, -11],
-                        [-100, 0, 9], [-101, 1, -9]], dtype=float)
+    def test_flyem_anterior_axes_and_brain_scale_excludes_vnc(self):
+        # VNC separation is greatest on z, but anterior view must remain x-y.
+        xyz = np.array([[9, 10, 0], [11, 11, 1], [-9, 10, 1], [-11, 11, 0],
+                        [100, 100, 1000], [-100, 101, 1001]], dtype=float)
         table = pd.DataFrame(dict(somaSide=['L', 'L', 'R', 'R', 'L', 'R'],
                                   somaNeuromere=['', '', '', '', 'T1', 'T2']))
         xy, frame, vnc = neurons.project(table, xyz, np.array(['soma'] * 6), np.arange(6))
-        self.assertEqual(frame['axes'], ['z', 'x'])
-        self.assertEqual(frame['flip'], [True, True])
+        self.assertEqual(frame['axes'], ['x', 'y'])
+        self.assertEqual(frame['flip'], [True, False])
+        self.assertEqual(frame['dropped_axis'], 'z')
+        self.assertEqual(frame['axis_rule'], 'FlyEM convention: x mediolateral, y dorsoventral '
+                         '(increasing ventrally), z anteroposterior; anterior view is x–y')
         self.assertLess(xy[0, 0], xy[2, 0])
-        self.assertLess(xy[1, 1], xy[0, 1])
+        self.assertGreater(xy[1, 1], xy[0, 1])
         self.assertTrue(((xy[vnc, 1] >= .96) & (xy[vnc, 1] <= 1)).all())
         self.assertEqual(frame['span'], 22)
         self.assertAlmostEqual(abs(xy[1, 1]-xy[0, 1]), abs(xy[1, 0]-xy[0, 0])/2)
+        xyz[:, 2] *= -1000
+        changed, _, _ = neurons.project(table, xyz, np.array(['soma'] * 6), np.arange(6))
+        np.testing.assert_array_equal(xy, changed)
+        table.somaSide = table.somaSide.map({'L': 'R', 'R': 'L'})
+        mirrored, frame, _ = neurons.project(table, xyz, np.array(['soma'] * 6), np.arange(6))
+        self.assertEqual(frame['flip'], [False, False])
+        self.assertLess(mirrored[2, 0], mirrored[0, 0])
 
     def test_deterministic_layout_keeps_missing_readout_outside_replay_prefix(self):
         cells = shipping.read(ROOT / 'data/malecns/cells_male_v1.json')

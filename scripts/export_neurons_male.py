@@ -66,12 +66,10 @@ def project(table, xyz, sources, selected):
     measured = (sources != 'placeholder') & np.isfinite(xyz).all(axis=1)
     lateral, delta_lr = separation(xyz, measured & brain & table.somaSide.eq('L').to_numpy(),
                                   measured & brain & table.somaSide.eq('R').to_numpy())
-    ml = int(np.argmax(lateral))
-    vertical, delta_bv = separation(xyz, measured & brain, measured & ~brain)
-    remaining = [a for a in range(3) if a != ml]
-    dv = max(remaining, key=lambda a: vertical[a])
-    signs = np.array([1 if delta_lr[ml] > 0 else -1, 1 if delta_bv[dv] > 0 else -1])
-    oriented = xyz[:, [ml, dv]] * signs
+    # FlyEM anterior view is x-y. Brain/VNC separation along z reflects depth,
+    # not dorsoventral position; only the horizontal orientation is inferred.
+    signs = np.array([1 if delta_lr[0] > 0 else -1, 1])
+    oriented = xyz[:, [0, 1]] * signs
     # One scale for both axes; leave a gap above the placeholder and VNC bands.
     brain_xy = oriented[brain & np.isfinite(oriented).all(axis=1)]
     lo, hi = brain_xy.min(axis=0), brain_xy.max(axis=0)
@@ -90,15 +88,16 @@ def project(table, xyz, sources, selected):
     if strip.any():
         v = chosen[strip, 1]
         xy[strip, 1] = .96 + .04 * (v - v.min()) / max(float(np.ptp(v)), 1e-9)
-    axes = ['xyz'[ml], 'xyz'[dv]]
+    axes = ['x', 'y']
     frame = dict(axes=axes, flip=[bool(s < 0) for s in signs],
-                 dropped_axis=next(a for a in 'xyz' if a not in axes),
+                 dropped_axis='z',
                  lo=lo.tolist(), span=span, scale=scale, offset=offset.tolist(),
                  voxel_nm=[8., 8.], units='MaleCNS v1.0 8 nm voxel coordinates',
                  brain_y=[0., .88], placeholder_y=[.90, .95], vnc_y=[.96, 1.],
                  placeholder_rule='blake2b body ID; Box-Muller x mean 0.5 SD 0.08, clipped [0.15,0.85]; uniform band y',
-                 axis_rule='largest absolute median separation / pooled population SD; brain L/R then brain/VNC',
-                 lateral_separation=lateral.tolist(), vertical_separation=vertical.tolist())
+                 axis_rule='FlyEM convention: x mediolateral, y dorsoventral (increasing ventrally), '
+                           'z anteroposterior; anterior view is x–y',
+                 lateral_separation=lateral.tolist())
     return np.clip(xy, 0, 1), frame, is_vnc
 
 
