@@ -167,8 +167,33 @@ Water removes 862 and Ir94e removes 1459 of the 4328 disagreeing pairs; 2664 are
 
 ## Phase 3
 
-not started
+Packages 1–4 are implemented; decision points 4 (sprite choice) and 5 (copy
+wording, including the four bilingual honesty commitments) remain pending.
+
+- Package 1 exports the independent lookup, 55 dish-occupied trial-0 replays and the male soma view: `scripts/export_male_site.py`, `scripts/export_neurons_male.py`, `site/data/lookup_table_male.json`, `site/data/replay_male/` and `site/data/neurons_male.json`. Checks live in `scripts/validate_release.py`, `tests/test_male_site_exports.py` and `site/test/male_data.test.mjs`; the full 400-cell research pack stays local.
+- Package 2 adds bilingual draft copy and README honesty rows in `copy/site_strings.json` and `copy/readme_sections.md`, imported into `site/strings.js`, `README.md` and `README.zh.md`. `copy/fly_lines.json` and generated `site/fly_lines.js` split proboscis-only speech into sweet, savoury, watery and remainder groups. The 5 Hz state and ranking rules are unchanged; `scripts/import_copy.py`, `tests/test_import_copy.py` and `tests/test_fly_lines.py` cover the copy contract.
+- Package 3 supplies three sprite candidates and preview sheets under `assets/male_candidates/`, produced by `scripts/prep_male_sprites.py`. No candidate is selected or promoted while decision point 4 is pending.
+- Package 4 adds the female/male/both selector, independent `FlyPanel` instances, brain/replay panels, result tables, disagreement sentence, share parameters and both-mode cards in `site/panel.js`, `site/app.js`, `site/fly.js`, `site/index.html` and `site/style.css`. Verification extends `site/test/male_ui.test.mjs`, `scripts/browser_checks.py` and `scripts/export_share_card.py`. Male art still uses the existing female set until promotion.
 
 ## Phase 4
 
-not started
+Release preparation is implemented with a v2.0.0 CHANGELOG entry and matching
+`site/data/release.json`; 2026-09-19 is a placeholder date to update at merge.
+The existing bilingual README What's new draft is retained without duplication
+or wording changes. `docs/site.md` records a pending-merge release row and the
+male-specific release checklist; `.github/workflows/ci.yml` includes male data/UI,
+female fixture and file-only male export/copy checks.
+
+`scripts/freeze_female_decisions.py` creates the immutable
+`site/test/fixtures/female_v1_2_1_decisions.json` from tag-verified, hash-pinned
+female inputs and refuses overwrite. `site/test/female_v121.test.mjs` checks all
+174 dish cells/scores/states, all 15,051 unordered pairs in both modes and a
+fixed v1.2.1 female share query against live code; the earlier pairwise test stays.
+
+`scripts/prep_male_sprites.py --promote <variant>` is ready to copy 42 approved
+PNGs into the sibling `fly_male` and `response_male` asset folders and then
+record the chosen variant in `site/config.json`. It refuses either existing
+folder; `tests/test_male_sprite_promotion.py` verifies promotion on a temporary
+copy, and the male UI tests verify the loader's paths and absent/present states.
+No promotion has been run on the real tree. Decision points 4 and 5 remain
+pending; no merge, deployment or tag is part of this preparation.

@@ -3,7 +3,7 @@
 // Pure functions are exported so they can be unit-tested with node (see test/).
 
 import { cellIdFor, decodeNeurons, makeReplayLoader } from "./brain.js";
-import { IdleFly, loadDishSprite, loadSprites } from "./fly.js";
+import { IdleFly, loadDishSprite, loadSprites, loadMaleSprites } from "./fly.js";
 import { FlyPanel } from './panel.js';
 import { qrcode } from "./vendor/qrcode-generator/qrcode.mjs";
 import { readoutState, stateLabel, stateExplanation, validSeed } from './taste_states.js';
@@ -1106,12 +1106,11 @@ if (isBrowser) {
         if (!response.ok) throw new Error(`${path}: HTTP ${response.status}`);
         return response.json();
       };
-      const [table, raw, manifest] = await Promise.all([
+      const [table, raw, manifest, config] = await Promise.all([
         json('data/lookup_table_male.json'), json('data/neurons_male.json'), json('data/replay_male/manifest.json'),
+        json('config.json'),
       ]);
-      // P3-3's approved asset set is pending. The parameterised prefix currently
-      // points at the existing female art; dish assets always retain their base.
-      const sprites = await loadSprites('assets/', undefined, 'assets/');
+      const sprites = await loadMaleSprites(config);
       if (!secondaryRoot) {
         secondaryRoot = $('fly-panel-template').content.firstElementChild.cloneNode(true);
         $('fly-panels').append(secondaryRoot);

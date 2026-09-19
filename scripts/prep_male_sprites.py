@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # SPDX-License-Identifier: MIT
-"""Build deterministic DP4 candidates; never write to the approved site assets.
+"""Build deterministic DP4 candidates; promotion requires explicit --promote.
 
 Run with .venv\\Scripts\\python scripts/prep_male_sprites.py.
 The spec's assets/ paths are browser-relative: inputs live in site/assets/.
@@ -35,9 +35,11 @@ Ambiguous full-body frames likewise omit tip darkening and are reported.
 from __future__ import annotations
 
 import csv
+import argparse
 import hashlib
 import io
 import json
+import shutil
 from pathlib import Path
 
 import cv2
@@ -182,7 +184,45 @@ def preview(images: dict, names: list[str], rows: list[str], target: Path, title
     sheet.save(target, optimize=True)
 
 
+def promote(variant: str, root: Path = ROOT) -> None:
+    """Copy a chosen set unchanged; refuse either existing destination.
+
+    Publish the config marker last so the site never probes absent image paths.
+    The original female art and shared emotion atlas are never copied or changed.
+    """
+    if variant not in VARIANTS:
+        raise ValueError(f'Unknown male sprite variant: {variant}')
+    assets = root / 'site/assets'
+    targets = [assets / 'fly_male', assets / 'response_male']
+    for target in targets:
+        if target.exists():
+            raise FileExistsError(f'Refusing to overwrite: {target}')
+    config_path = root / 'site/config.json'
+    config = json.loads(config_path.read_text(encoding='utf-8'))
+    copies = []
+    for original in source_paths():
+        source = root / 'assets/male_candidates' / variant / original.name
+        if not source.is_file():
+            raise FileNotFoundError(source)
+        with Image.open(source) as image:
+            image.verify()
+        copies.append((source, assets / (original.parent.name + '_male') / original.name))
+    for target in targets:
+        target.mkdir(parents=True)
+    for source, target in copies:
+        shutil.copyfile(source, target)
+    config['male_sprite_variant'] = variant
+    config_path.write_text(json.dumps(config, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+    print(f'Promoted {variant}: {len(copies)} PNGs; male_sprite_variant recorded in site/config.json')
+
+
 def main() -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--promote', choices=VARIANTS, help='promote the owner-chosen variant; refuse existing folders')
+    args = parser.parse_args()
+    if args.promote:
+        promote(args.promote)
+        return 0
     paths = source_paths()
     # Load everything before writing, so a missing required frame fails clearly.
     originals = {path: Image.open(path).convert("RGBA") for path in paths}

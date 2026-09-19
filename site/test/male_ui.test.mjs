@@ -3,7 +3,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {buildDictionary, decide, shareParams, parseShareParams, cardLines, flySelection, fliesDisagree, bothVerdict, STRINGS, fmt} from '../app.js';
 import {FlyPanel} from '../panel.js';
-import {loadSprites} from '../fly.js';
+import {loadSprites, loadMaleSprites} from '../fly.js';
 
 const item = (name, hz) => ({name, entry:{key:name,display:{en:name,zh:name},sugar:'none',bitter:'none',water:'none'}, cell:{mn9_mean:hz}, sugarOnly:{mn9_mean:hz}});
 const decision = (a=10,b=0,mode='ask') => decide([item('bread',a),item('steak',b)],mode);
@@ -93,4 +93,25 @@ test('fly sprite prefix is independent of shared dish assets; default paths are 
 test('panel replay loader failures propagate rather than yielding an empty replay', async () => {
   const panel=new FlyPanel(null,{flyKey:'male',loadReplay:async()=>{throw Error('missing male replay');}});
   await assert.rejects(panel.loadReplay('cell'),/missing male replay/);
+});
+
+test('promotion readiness uses the 42 sibling male assets only after a variant is promoted', async () => {
+  const calls = [];
+  const loader = async src => { calls.push(src); return {src}; };
+  for (const variant of ['tip', 'tip_small', 'cool']) {
+    calls.length = 0;
+    const sprites = await loadMaleSprites({male_sprite_variant: variant}, 'assets/', loader);
+    assert.equal(sprites.base, 'assets/');
+    assert.equal(calls.length, 42);
+    assert.equal(calls.filter(p => p.startsWith('assets/fly_male/')).length, 10);
+    assert.equal(calls.filter(p => p.startsWith('assets/response_male/')).length, 32);
+    assert.equal(sprites.fly.idle[0].src, 'assets/fly_male/idle_1.png');
+    assert.equal(sprites.insets.eats[0].src, 'assets/response_male/inset_eats_1.png');
+  }
+  calls.length = 0;
+  await loadMaleSprites({}, 'assets/', loader);
+  assert.equal(calls.length, 42);
+  assert.ok(calls.every(p => !p.includes('_male/')));
+  await assert.rejects(loadMaleSprites({male_sprite_variant:'unknown'}, 'assets/', loader), /variant/);
+  await assert.rejects(loadMaleSprites({male_sprite_variant:'tip'}, 'assets/', async () => null), /incomplete/);
 });
