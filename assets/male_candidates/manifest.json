@@ -1,0 +1,2481 @@
+{
+  "source_root": "site/assets",
+  "heuristic": "Build deterministic DP4 candidates; never write to the approved site assets.\n\nRun with .venv\\Scripts\\python scripts/prep_male_sprites.py.\nThe spec's assets/ paths are browser-relative: inputs live in site/assets/.\nNative canvases are 48px (fly/response) and 64px (inset), not display sizes.\n\nSegmentation heuristic (all thresholds are design choices, not anatomy labels):\n* Visible pixels have alpha > 0. Pale wing seeds have HSV saturation <= .48,\n  value >= .32. Keep seed components of >= 4 pixels, fill their enclosed holes,\n  and expand one pixel to protect the dark wing outline. Translucent pixels\n  (alpha < 200) are also protected. Wing pixels are never recoloured.\n* Remove those wings, open the remaining silhouette with a 3x3 ellipse to\n  remove thin legs/antennae, and take the largest connected core. PCA on that\n  core estimates the axis; reject eigenvalue ratios < 1.25.\n* The largest red-eye component (hue < 16 degrees, saturation > .70, value\n  > .35) orients the axis toward its centroid, excluding isolated reddish\n  leg/body pixels and the smaller proboscis component. Require >= 3 eye\n  pixels and separation from the\n  core centre >= 15% of its axial span. No filename-based left/right guess.\n* The rear third of the core's axial extent, including a one-pixel body rim,\n  receives RGB * .35 (therefore luminance * .35), with alpha unchanged.\n  This is a silhouette proxy for the requested posterior abdomen marking.\n* Insets are cropped head/mouth views: no abdomen or whole-body axis is\n  visible. Flag them for manual review and omit tip darkening, rather than\n  accidentally blackening their head. Palette/size transforms still apply.\n\nCool uses HSV hue -8 degrees, saturation * .85, value * .88 on non-wing\nvisible pixels, then tip darkening. tip_small resizes the complete tip canvas\nto round(90%) with nearest neighbour and centres it in the original canvas.\nAmbiguous full-body frames likewise omit tip darkening and are reported.\n",
+  "sources_sha256": {
+    "site/assets/fly/idle_1.png": "d9b4c4e068f13b8997ed09e7c72544f7b4d33a9e99efbb0455a25cb9ef2913c7",
+    "site/assets/fly/idle_2.png": "66f6f9da76f7054f0b455533f95fe98959382a131a99839dd7138c7dbe01c075",
+    "site/assets/fly/fly_1.png": "d509277981a5b51fcdb686b501396b3d11d114322246f16a88f29e7e29f4dc13",
+    "site/assets/fly/fly_2.png": "9ff3c8ce3ac67503f4d905e53827291da63ecff2c335bed507eb03328ed68de5",
+    "site/assets/fly/fly_3.png": "c01b70cfbb9c55bff9064718c0592a850d5b85544b80f62102bb6424c67da601",
+    "site/assets/fly/fly_4.png": "f24d9caa9c624c07ea4f594e0f2af9eb264dec09372021cd15cb28136737c87f",
+    "site/assets/fly/land_1.png": "5abef3b02f6c9e1887bcdb0a2c82d63a0cd445e373493d01b5308d444aa1e8da",
+    "site/assets/fly/proboscis_1.png": "9bbb6e776b0884e5be0b2855fd164a0aa6100e8e76e96bf1787047eb833182ab",
+    "site/assets/fly/proboscis_2.png": "ce847df08bc4e14bfe7d156010b7b9d14c05ec5d6a596e8ae1be3de5b0e0638e",
+    "site/assets/fly/proboscis_3.png": "5abef3b02f6c9e1887bcdb0a2c82d63a0cd445e373493d01b5308d444aa1e8da",
+    "site/assets/response/eats_1.png": "fe6bee9509d2eac7f831497fefde439ee0ed2abfb3d795c3a84471d9a51550df",
+    "site/assets/response/eats_2.png": "f7df2a24ba54a2527dcd1c188d3c96c3045c059d2d472d1d3d7c497a4bbad115",
+    "site/assets/response/eats_3.png": "671b6067957d2a029b7f054d7676c9a20731aec7a7e320060065580cfeb7be86",
+    "site/assets/response/eats_4.png": "cd6f271ed336a7072059d4c74e6f5f57531ea86a5657d7b4bb8df1ba0d1e5049",
+    "site/assets/response/mouth_moves_1.png": "3831ecc9a650fb2f455551d2809b083a0869a04269bf265a9108d4894ea05006",
+    "site/assets/response/mouth_moves_2.png": "f67a7bef5667b671fa3a4149cd585f441dcc976f5ee92555044aa1325837fe1e",
+    "site/assets/response/mouth_moves_3.png": "7c20ff51c7c26eb88d7006c14479b35927617ececc1c8973fe763ee5c9365d82",
+    "site/assets/response/mouth_moves_4.png": "31a30e65b54e8513739018d1fea1a4fabf5e2c592d98e43b19cb67e849e5be7c",
+    "site/assets/response/proboscis_only_1.png": "809098da085e49ad9e5ca71a14fd200ee1e6d195492f88622c378b29c8fa012f",
+    "site/assets/response/proboscis_only_2.png": "6087cea47810f255df91d359f6b6a7ce1344d7247dbe9769dcf47149ea671ba2",
+    "site/assets/response/proboscis_only_3.png": "3045a90b6f6a2f2e20a9d20aade74cf8f7e05d2e9dc159a324b03c0e36fdf597",
+    "site/assets/response/proboscis_only_4.png": "076b219ed5a08650a60aeca7c25a34448a4459506a99c0a4f991dd1ee84aff24",
+    "site/assets/response/no_response_1.png": "1179d6e028d03f6ef887485c938daba5d0e728f3a509a62f1c60bd48402ebc73",
+    "site/assets/response/no_response_2.png": "feea36c25bf121a41b6f04436d5b07c7d7a2779914cee0dceae6f01efaa57c2e",
+    "site/assets/response/no_response_3.png": "94ea754b6c42bdf00df5dfe76f6a6b0b89cf608fe7f8932ef6e03582af37acb0",
+    "site/assets/response/no_response_4.png": "3550ef3bdf9911e61c0094776ad638ae120e8cbf202d4c52f77fa448bb3511cd",
+    "site/assets/response/inset_eats_1.png": "d96627a4993ae5a1e5c2e61ff97a5e106d75f37ab4a4d5ac83adf207c508644a",
+    "site/assets/response/inset_eats_2.png": "cbad72c0ede37d62f9664ec9029616a05baed3e161b76ba29e1b743b539ee649",
+    "site/assets/response/inset_eats_3.png": "0b5c4c5a2161d26d3198d0d6a706c146caf57f2b4e89ef4d0b20ea7bb56b514f",
+    "site/assets/response/inset_eats_4.png": "833fc940981b17bc35ee8f1d1faf7a68ba6dc3a82bdbfd2cf7e7e73db571e7fd",
+    "site/assets/response/inset_mouth_moves_1.png": "92333d5d75b0ee62848a0b079266500e68853c101de25130fad6b6f216695874",
+    "site/assets/response/inset_mouth_moves_2.png": "43ae51865193d1d78ad8baecfd26820f3af35856025282765ac9f25f3bafb779",
+    "site/assets/response/inset_mouth_moves_3.png": "5d40e62500ecde669fe1a5061e7bda0a8222f5b0d04c91779f0757d690b316ce",
+    "site/assets/response/inset_mouth_moves_4.png": "88ab8449041c347073df6665a2dafb50fae2d80ab600fa9a484113f2ae1a993f",
+    "site/assets/response/inset_proboscis_only_1.png": "1b18fd555b8f93fa881d182a699c7c3074832b39213ba4ffbd549c1cad383900",
+    "site/assets/response/inset_proboscis_only_2.png": "d675a4bdc497bd43943752e09d927372d2aa1c073601cb98bad941377ee2a895",
+    "site/assets/response/inset_proboscis_only_3.png": "0fec50784ba526dbf6726ac942e7c42a6c83cd82cc6cdec6fc9d485eea28ccad",
+    "site/assets/response/inset_proboscis_only_4.png": "b35c22e4dabb8e93b193ee827848cb854f5143f1630c875cecde2dcc6c0278c5",
+    "site/assets/response/inset_no_response_1.png": "2be7843c2f16c4baa8e25da2c28141ca2ffc63e1880d72f879fe59f9fc70edf4",
+    "site/assets/response/inset_no_response_2.png": "2be7843c2f16c4baa8e25da2c28141ca2ffc63e1880d72f879fe59f9fc70edf4",
+    "site/assets/response/inset_no_response_3.png": "2be7843c2f16c4baa8e25da2c28141ca2ffc63e1880d72f879fe59f9fc70edf4",
+    "site/assets/response/inset_no_response_4.png": "2be7843c2f16c4baa8e25da2c28141ca2ffc63e1880d72f879fe59f9fc70edf4",
+    "site/assets/response/emotions-v1.png": "316af6999c5451f570b20420bc2d3614ef6ede7ffe1ff970b59a8ab8ecfeb51c"
+  },
+  "frames": [
+    {
+      "file": "idle_1.png",
+      "variant": "tip",
+      "changed_pixels": 104,
+      "width": 48,
+      "height": 48,
+      "head_end": "right (red eye; PCA)",
+      "reason": "",
+      "wing_pixels": 262,
+      "axis_ratio": 3.941172,
+      "axis_xy": [
+        0.9354705287595987,
+        -0.35340471109230687
+      ],
+      "centre_xy": [
+        28.065882352941177,
+        23.541176470588237
+      ],
+      "eye_xy": [
+        39.44444444444444,
+        20.833333333333332
+      ],
+      "eye_pixels": 18,
+      "tip_pixels": 104
+    },
+    {
+      "file": "idle_1.png",
+      "variant": "tip_small",
+      "changed_pixels": 633,
+      "width": 48,
+      "height": 48,
+      "head_end": "right (red eye; PCA)",
+      "reason": "",
+      "wing_pixels": 262,
+      "axis_ratio": 3.941172,
+      "axis_xy": [
+        0.9354705287595987,
+        -0.35340471109230687
+      ],
+      "centre_xy": [
+        28.065882352941177,
+        23.541176470588237
+      ],
+      "eye_xy": [
+        39.44444444444444,
+        20.833333333333332
+      ],
+      "eye_pixels": 18,
+      "tip_pixels": 104
+    },
+    {
+      "file": "idle_1.png",
+      "variant": "cool",
+      "changed_pixels": 473,
+      "width": 48,
+      "height": 48,
+      "head_end": "right (red eye; PCA)",
+      "reason": "",
+      "wing_pixels": 262,
+      "axis_ratio": 3.941172,
+      "axis_xy": [
+        0.9354705287595987,
+        -0.35340471109230687
+      ],
+      "centre_xy": [
+        28.065882352941177,
+        23.541176470588237
+      ],
+      "eye_xy": [
+        39.44444444444444,
+        20.833333333333332
+      ],
+      "eye_pixels": 18,
+      "tip_pixels": 104
+    },
+    {
+      "file": "idle_2.png",
+      "variant": "tip",
+      "changed_pixels": 108,
+      "width": 48,
+      "height": 48,
+      "head_end": "right (red eye; PCA)",
+      "reason": "",
+      "wing_pixels": 266,
+      "axis_ratio": 3.985135,
+      "axis_xy": [
+        0.9098943590579438,
+        -0.41484003586266066
+      ],
+      "centre_xy": [
+        27.71064814814815,
+        23.61111111111111
+      ],
+      "eye_xy": [
+        39.35,
+        20.45
+      ],
+      "eye_pixels": 20,
+      "tip_pixels": 108
+    },
+    {
+      "file": "idle_2.png",
+      "variant": "tip_small",
+      "changed_pixels": 662,
+      "width": 48,
+      "height": 48,
+      "head_end": "right (red eye; PCA)",
+      "reason": "",
+      "wing_pixels": 266,
+      "axis_ratio": 3.985135,
+      "axis_xy": [
+        0.9098943590579438,
+        -0.41484003586266066
+      ],
+      "centre_xy": [
+        27.71064814814815,
+        23.61111111111111
+      ],
+      "eye_xy": [
+        39.35,
+        20.45
+      ],
+      "eye_pixels": 20,
+      "tip_pixels": 108
+    },
+    {
+      "file": "idle_2.png",
+      "variant": "cool",
+      "changed_pixels": 496,
+      "width": 48,
+      "height": 48,
+      "head_end": "right (red eye; PCA)",
+      "reason": "",
+      "wing_pixels": 266,
+      "axis_ratio": 3.985135,
+      "axis_xy": [
+        0.9098943590579438,
+        -0.41484003586266066
+      ],
+      "centre_xy": [
+        27.71064814814815,
+        23.61111111111111
+      ],
+      "eye_xy": [
+        39.35,
+        20.45
+      ],
+      "eye_pixels": 20,
+      "tip_pixels": 108
+    },
+    {
+      "file": "fly_1.png",
+      "variant": "tip",
+      "changed_pixels": 99,
+      "width": 48,
+      "height": 48,
+      "head_end": "right (red eye; PCA)",
+      "reason": "",
+      "wing_pixels": 488,
+      "axis_ratio": 3.926719,
+      "axis_xy": [
+        0.9273511255559539,
+        -0.3741923167705417
+      ],
+      "centre_xy": [
+        29.160377358490567,
+        30.339622641509433
+      ],
+      "eye_xy": [
+        40.05,
+        27.35
+      ],
+      "eye_pixels": 20,
+      "tip_pixels": 99
+    },
+    {
+      "file": "fly_1.png",
+      "variant": "tip_small",
+      "changed_pixels": 822,
+      "width": 48,
+      "height": 48,
+      "head_end": "right (red eye; PCA)",
+      "reason": "",
+      "wing_pixels": 488,
+      "axis_ratio": 3.926719,
+      "axis_xy": [
+        0.9273511255559539,
+        -0.3741923167705417
+      ],
+      "centre_xy": [
+        29.160377358490567,
+        30.339622641509433
+      ],
+      "eye_xy": [
+        40.05,
+        27.35
+      ],
+      "eye_pixels": 20,
+      "tip_pixels": 99
+    },
+    {
+      "file": "fly_1.png",
+      "variant": "cool",
+      "changed_pixels": 480,
+      "width": 48,
+      "height": 48,
+      "head_end": "right (red eye; PCA)",
+      "reason": "",
+      "wing_pixels": 488,
+      "axis_ratio": 3.926719,
+      "axis_xy": [
+        0.9273511255559539,
+        -0.3741923167705417
+      ],
+      "centre_xy": [
+        29.160377358490567,
+        30.339622641509433
+      ],
+      "eye_xy": [
+        40.05,
+        27.35
+      ],
+      "eye_pixels": 20,
+      "tip_pixels": 99
+    },
+    {
+      "file": "fly_2.png",
+      "variant": "tip",
+      "changed_pixels": 135,
+      "width": 48,
+      "height": 48,
+      "head_end": "right (red eye; PCA)",
+      "reason": "",
+      "wing_pixels": 533,
+      "axis_ratio": 4.254544,
+      "axis_xy": [
+        0.9207840979394183,
+        -0.39007261501147694
+      ],
+      "centre_xy": [
+        25.746543778801843,
+        33.327188940092164
+      ],
+      "eye_xy": [
+        38.23076923076923,
+        30.53846153846154
+      ],
+      "eye_pixels": 13,
+      "tip_pixels": 135
+    },
+    {
+      "file": "fly_2.png",
+      "variant": "tip_small",
+      "changed_pixels": 870,
+      "width": 48,
+      "height": 48,
+      "head_end": "right (red eye; PCA)",
+      "reason": "",
+      "wing_pixels": 533,
+      "axis_ratio": 4.254544,
+      "axis_xy": [
+        0.9207840979394183,
+        -0.39007261501147694
+      ],
+      "centre_xy": [
+        25.746543778801843,
+        33.327188940092164
+      ],
+      "eye_xy": [
+        38.23076923076923,
+        30.53846153846154
+      ],
+      "eye_pixels": 13,
+      "tip_pixels": 135
+    },
+    {
+      "file": "fly_2.png",
+      "variant": "cool",
+      "changed_pixels": 473,
+      "width": 48,
+      "height": 48,
+      "head_end": "right (red eye; PCA)",
+      "reason": "",
+      "wing_pixels": 533,
+      "axis_ratio": 4.254544,
+      "axis_xy": [
+        0.9207840979394183,
+        -0.39007261501147694
+      ],
+      "centre_xy": [
+        25.746543778801843,
+        33.327188940092164
+      ],
+      "eye_xy": [
+        38.23076923076923,
+        30.53846153846154
+      ],
+      "eye_pixels": 13,
+      "tip_pixels": 135
+    },
+    {
+      "file": "fly_3.png",
+      "variant": "tip",
+      "changed_pixels": 135,
+      "width": 48,
+      "height": 48,
+      "head_end": "right (red eye; PCA)",
+      "reason": "",
+      "wing_pixels": 277,
+      "axis_ratio": 4.28882,
+      "axis_xy": [
+        0.9368023566259381,
+        -0.34985903535579665
+      ],
+      "centre_xy": [
+        28.255924170616115,
+        26.085308056872037
+      ],
+      "eye_xy": [
+        40.46153846153846,
+        23.615384615384617
+      ],
+      "eye_pixels": 13,
+      "tip_pixels": 135
+    },
+    {
+      "file": "fly_3.png",
+      "variant": "tip_small",
+      "changed_pixels": 655,
+      "width": 48,
+      "height": 48,
+      "head_end": "right (red eye; PCA)",
+      "reason": "",
+      "wing_pixels": 277,
+      "axis_ratio": 4.28882,
+      "axis_xy": [
+        0.9368023566259381,
+        -0.34985903535579665
+      ],
+      "centre_xy": [
+        28.255924170616115,
+        26.085308056872037
+      ],
+      "eye_xy": [
+        40.46153846153846,
+        23.615384615384617
+      ],
+      "eye_pixels": 13,
+      "tip_pixels": 135
+    },
+    {
+      "file": "fly_3.png",
+      "variant": "cool",
+      "changed_pixels": 482,
+      "width": 48,
+      "height": 48,
+      "head_end": "right (red eye; PCA)",
+      "reason": "",
+      "wing_pixels": 277,
+      "axis_ratio": 4.28882,
+      "axis_xy": [
+        0.9368023566259381,
+        -0.34985903535579665
+      ],
+      "centre_xy": [
+        28.255924170616115,
+        26.085308056872037
+      ],
+      "eye_xy": [
+        40.46153846153846,
+        23.615384615384617
+      ],
+      "eye_pixels": 13,
+      "tip_pixels": 135
+    },
+    {
+      "file": "fly_4.png",
+      "variant": "tip",
+      "changed_pixels": 65,
+      "width": 48,
+      "height": 48,
+      "head_end": "right (red eye; PCA)",
+      "reason": "",
+      "wing_pixels": 293,
+      "axis_ratio": 2.744772,
+      "axis_xy": [
+        0.8716869376951211,
+        -0.49006314149474883
+      ],
+      "centre_xy": [
+        31.070080862533693,
+        21.911051212938006
+      ],
+      "eye_xy": [
+        40.285714285714285,
+        19.714285714285715
+      ],
+      "eye_pixels": 21,
+      "tip_pixels": 65
+    },
+    {
+      "file": "fly_4.png",
+      "variant": "tip_small",
+      "changed_pixels": 609,
+      "width": 48,
+      "height": 48,
+      "head_end": "right (red eye; PCA)",
+      "reason": "",
+      "wing_pixels": 293,
+      "axis_ratio": 2.744772,
+      "axis_xy": [
+        0.8716869376951211,
+        -0.49006314149474883
+      ],
+      "centre_xy": [
+        31.070080862533693,
+        21.911051212938006
+      ],
+      "eye_xy": [
+        40.285714285714285,
+        19.714285714285715
+      ],
+      "eye_pixels": 21,
+      "tip_pixels": 65
+    },
+    {
+      "file": "fly_4.png",
+      "variant": "cool",
+      "changed_pixels": 440,
+      "width": 48,
+      "height": 48,
+      "head_end": "right (red eye; PCA)",
+      "reason": "",
+      "wing_pixels": 293,
+      "axis_ratio": 2.744772,
+      "axis_xy": [
+        0.8716869376951211,
+        -0.49006314149474883
+      ],
+      "centre_xy": [
+        31.070080862533693,
+        21.911051212938006
+      ],
+      "eye_xy": [
+        40.285714285714285,
+        19.714285714285715
+      ],
+      "eye_pixels": 21,
+      "tip_pixels": 65
+    },
+    {
+      "file": "land_1.png",
+      "variant": "tip",
+      "changed_pixels": 124,
+      "width": 48,
+      "height": 48,
+      "head_end": "right (red eye; PCA)",
+      "reason": "",
+      "wing_pixels": 253,
+      "axis_ratio": 3.224626,
+      "axis_xy": [
+        0.9187708467538903,
+        -0.394791250099517
+      ],
+      "centre_xy": [
+        28.07017543859649,
+        23.583333333333332
+      ],
+      "eye_xy": [
+        39.61904761904762,
+        19.952380952380953
+      ],
+      "eye_pixels": 21,
+      "tip_pixels": 124
+    },
+    {
+      "file": "land_1.png",
+      "variant": "tip_small",
+      "changed_pixels": 663,
+      "width": 48,
+      "height": 48,
+      "head_end": "right (red eye; PCA)",
+      "reason": "",
+      "wing_pixels": 253,
+      "axis_ratio": 3.224626,
+      "axis_xy": [
+        0.9187708467538903,
+        -0.394791250099517
+      ],
+      "centre_xy": [
+        28.07017543859649,
+        23.583333333333332
+      ],
+      "eye_xy": [
+        39.61904761904762,
+        19.952380952380953
+      ],
+      "eye_pixels": 21,
+      "tip_pixels": 124
+    },
+    {
+      "file": "land_1.png",
+      "variant": "cool",
+      "changed_pixels": 519,
+      "width": 48,
+      "height": 48,
+      "head_end": "right (red eye; PCA)",
+      "reason": "",
+      "wing_pixels": 253,
+      "axis_ratio": 3.224626,
+      "axis_xy": [
+        0.9187708467538903,
+        -0.394791250099517
+      ],
+      "centre_xy": [
+        28.07017543859649,
+        23.583333333333332
+      ],
+      "eye_xy": [
+        39.61904761904762,
+        19.952380952380953
+      ],
+      "eye_pixels": 21,
+      "tip_pixels": 124
+    },
+    {
+      "file": "proboscis_1.png",
+      "variant": "tip",
+      "changed_pixels": 116,
+      "width": 48,
+      "height": 48,
+      "head_end": "right (red eye; PCA)",
+      "reason": "",
+      "wing_pixels": 241,
+      "axis_ratio": 3.252278,
+      "axis_xy": [
+        0.9276558448185308,
+        -0.37343625101751693
+      ],
+      "centre_xy": [
+        28.112798264642084,
+        23.553145336225597
+      ],
+      "eye_xy": [
+        39.68181818181818,
+        21.318181818181817
+      ],
+      "eye_pixels": 22,
+      "tip_pixels": 116
+    },
+    {
+      "file": "proboscis_1.png",
+      "variant": "tip_small",
+      "changed_pixels": 664,
+      "width": 48,
+      "height": 48,
+      "head_end": "right (red eye; PCA)",
+      "reason": "",
+      "wing_pixels": 241,
+      "axis_ratio": 3.252278,
+      "axis_xy": [
+        0.9276558448185308,
+        -0.37343625101751693
+      ],
+      "centre_xy": [
+        28.112798264642084,
+        23.553145336225597
+      ],
+      "eye_xy": [
+        39.68181818181818,
+        21.318181818181817
+      ],
+      "eye_pixels": 22,
+      "tip_pixels": 116
+    },
+    {
+      "file": "proboscis_1.png",
+      "variant": "cool",
+      "changed_pixels": 535,
+      "width": 48,
+      "height": 48,
+      "head_end": "right (red eye; PCA)",
+      "reason": "",
+      "wing_pixels": 241,
+      "axis_ratio": 3.252278,
+      "axis_xy": [
+        0.9276558448185308,
+        -0.37343625101751693
+      ],
+      "centre_xy": [
+        28.112798264642084,
+        23.553145336225597
+      ],
+      "eye_xy": [
+        39.68181818181818,
+        21.318181818181817
+      ],
+      "eye_pixels": 22,
+      "tip_pixels": 116
+    },
+    {
+      "file": "proboscis_2.png",
+      "variant": "tip",
+      "changed_pixels": 93,
+      "width": 48,
+      "height": 48,
+      "head_end": "right (red eye; PCA)",
+      "reason": "",
+      "wing_pixels": 257,
+      "axis_ratio": 3.386703,
+      "axis_xy": [
+        0.9627058804037893,
+        -0.2705501577082614
+      ],
+      "centre_xy": [
+        29.009111617312072,
+        21.838268792710707
+      ],
+      "eye_xy": [
+        40.0,
+        20.25
+      ],
+      "eye_pixels": 20,
+      "tip_pixels": 93
+    },
+    {
+      "file": "proboscis_2.png",
+      "variant": "tip_small",
+      "changed_pixels": 677,
+      "width": 48,
+      "height": 48,
+      "head_end": "right (red eye; PCA)",
+      "reason": "",
+      "wing_pixels": 257,
+      "axis_ratio": 3.386703,
+      "axis_xy": [
+        0.9627058804037893,
+        -0.2705501577082614
+      ],
+      "centre_xy": [
+        29.009111617312072,
+        21.838268792710707
+      ],
+      "eye_xy": [
+        40.0,
+        20.25
+      ],
+      "eye_pixels": 20,
+      "tip_pixels": 93
+    },
+    {
+      "file": "proboscis_2.png",
+      "variant": "cool",
+      "changed_pixels": 520,
+      "width": 48,
+      "height": 48,
+      "head_end": "right (red eye; PCA)",
+      "reason": "",
+      "wing_pixels": 257,
+      "axis_ratio": 3.386703,
+      "axis_xy": [
+        0.9627058804037893,
+        -0.2705501577082614
+      ],
+      "centre_xy": [
+        29.009111617312072,
+        21.838268792710707
+      ],
+      "eye_xy": [
+        40.0,
+        20.25
+      ],
+      "eye_pixels": 20,
+      "tip_pixels": 93
+    },
+    {
+      "file": "proboscis_3.png",
+      "variant": "tip",
+      "changed_pixels": 124,
+      "width": 48,
+      "height": 48,
+      "head_end": "right (red eye; PCA)",
+      "reason": "",
+      "wing_pixels": 253,
+      "axis_ratio": 3.224626,
+      "axis_xy": [
+        0.9187708467538903,
+        -0.394791250099517
+      ],
+      "centre_xy": [
+        28.07017543859649,
+        23.583333333333332
+      ],
+      "eye_xy": [
+        39.61904761904762,
+        19.952380952380953
+      ],
+      "eye_pixels": 21,
+      "tip_pixels": 124
+    },
+    {
+      "file": "proboscis_3.png",
+      "variant": "tip_small",
+      "changed_pixels": 663,
+      "width": 48,
+      "height": 48,
+      "head_end": "right (red eye; PCA)",
+      "reason": "",
+      "wing_pixels": 253,
+      "axis_ratio": 3.224626,
+      "axis_xy": [
+        0.9187708467538903,
+        -0.394791250099517
+      ],
+      "centre_xy": [
+        28.07017543859649,
+        23.583333333333332
+      ],
+      "eye_xy": [
+        39.61904761904762,
+        19.952380952380953
+      ],
+      "eye_pixels": 21,
+      "tip_pixels": 124
+    },
+    {
+      "file": "proboscis_3.png",
+      "variant": "cool",
+      "changed_pixels": 519,
+      "width": 48,
+      "height": 48,
+      "head_end": "right (red eye; PCA)",
+      "reason": "",
+      "wing_pixels": 253,
+      "axis_ratio": 3.224626,
+      "axis_xy": [
+        0.9187708467538903,
+        -0.394791250099517
+      ],
+      "centre_xy": [
+        28.07017543859649,
+        23.583333333333332
+      ],
+      "eye_xy": [
+        39.61904761904762,
+        19.952380952380953
+      ],
+      "eye_pixels": 21,
+      "tip_pixels": 124
+    },
+    {
+      "file": "eats_1.png",
+      "variant": "tip",
+      "changed_pixels": 43,
+      "width": 48,
+      "height": 48,
+      "head_end": "right (red eye; PCA)",
+      "reason": "",
+      "wing_pixels": 123,
+      "axis_ratio": 2.839513,
+      "axis_xy": [
+        0.8998236969439896,
+        -0.43625372711078486
+      ],
+      "centre_xy": [
+        28.99601593625498,
+        19.54980079681275
+      ],
+      "eye_xy": [
+        36.92857142857143,
+        17.285714285714285
+      ],
+      "eye_pixels": 14,
+      "tip_pixels": 48
+    },
+    {
+      "file": "eats_1.png",
+      "variant": "tip_small",
+      "changed_pixels": 312,
+      "width": 48,
+      "height": 48,
+      "head_end": "right (red eye; PCA)",
+      "reason": "",
+      "wing_pixels": 123,
+      "axis_ratio": 2.839513,
+      "axis_xy": [
+        0.8998236969439896,
+        -0.43625372711078486
+      ],
+      "centre_xy": [
+        28.99601593625498,
+        19.54980079681275
+      ],
+      "eye_xy": [
+        36.92857142857143,
+        17.285714285714285
+      ],
+      "eye_pixels": 14,
+      "tip_pixels": 48
+    },
+    {
+      "file": "eats_1.png",
+      "variant": "cool",
+      "changed_pixels": 260,
+      "width": 48,
+      "height": 48,
+      "head_end": "right (red eye; PCA)",
+      "reason": "",
+      "wing_pixels": 123,
+      "axis_ratio": 2.839513,
+      "axis_xy": [
+        0.8998236969439896,
+        -0.43625372711078486
+      ],
+      "centre_xy": [
+        28.99601593625498,
+        19.54980079681275
+      ],
+      "eye_xy": [
+        36.92857142857143,
+        17.285714285714285
+      ],
+      "eye_pixels": 14,
+      "tip_pixels": 48
+    },
+    {
+      "file": "eats_2.png",
+      "variant": "tip",
+      "changed_pixels": 46,
+      "width": 48,
+      "height": 48,
+      "head_end": "right (red eye; PCA)",
+      "reason": "",
+      "wing_pixels": 118,
+      "axis_ratio": 2.190586,
+      "axis_xy": [
+        0.9030464760625091,
+        -0.42954285242695406
+      ],
+      "centre_xy": [
+        29.305882352941175,
+        19.937254901960785
+      ],
+      "eye_xy": [
+        36.4,
+        17.6
+      ],
+      "eye_pixels": 10,
+      "tip_pixels": 54
+    },
+    {
+      "file": "eats_2.png",
+      "variant": "tip_small",
+      "changed_pixels": 323,
+      "width": 48,
+      "height": 48,
+      "head_end": "right (red eye; PCA)",
+      "reason": "",
+      "wing_pixels": 118,
+      "axis_ratio": 2.190586,
+      "axis_xy": [
+        0.9030464760625091,
+        -0.42954285242695406
+      ],
+      "centre_xy": [
+        29.305882352941175,
+        19.937254901960785
+      ],
+      "eye_xy": [
+        36.4,
+        17.6
+      ],
+      "eye_pixels": 10,
+      "tip_pixels": 54
+    },
+    {
+      "file": "eats_2.png",
+      "variant": "cool",
+      "changed_pixels": 253,
+      "width": 48,
+      "height": 48,
+      "head_end": "right (red eye; PCA)",
+      "reason": "",
+      "wing_pixels": 118,
+      "axis_ratio": 2.190586,
+      "axis_xy": [
+        0.9030464760625091,
+        -0.42954285242695406
+      ],
+      "centre_xy": [
+        29.305882352941175,
+        19.937254901960785
+      ],
+      "eye_xy": [
+        36.4,
+        17.6
+      ],
+      "eye_pixels": 10,
+      "tip_pixels": 54
+    },
+    {
+      "file": "eats_3.png",
+      "variant": "tip",
+      "changed_pixels": 43,
+      "width": 48,
+      "height": 48,
+      "head_end": "right (red eye; PCA)",
+      "reason": "",
+      "wing_pixels": 123,
+      "axis_ratio": 4.091878,
+      "axis_xy": [
+        0.9116894245769038,
+        -0.4108800227738434
+      ],
+      "centre_xy": [
+        28.70689655172414,
+        19.125
+      ],
+      "eye_xy": [
+        36.8,
+        17.266666666666666
+      ],
+      "eye_pixels": 15,
+      "tip_pixels": 49
+    },
+    {
+      "file": "eats_3.png",
+      "variant": "tip_small",
+      "changed_pixels": 328,
+      "width": 48,
+      "height": 48,
+      "head_end": "right (red eye; PCA)",
+      "reason": "",
+      "wing_pixels": 123,
+      "axis_ratio": 4.091878,
+      "axis_xy": [
+        0.9116894245769038,
+        -0.4108800227738434
+      ],
+      "centre_xy": [
+        28.70689655172414,
+        19.125
+      ],
+      "eye_xy": [
+        36.8,
+        17.266666666666666
+      ],
+      "eye_pixels": 15,
+      "tip_pixels": 49
+    },
+    {
+      "file": "eats_3.png",
+      "variant": "cool",
+      "changed_pixels": 263,
+      "width": 48,
+      "height": 48,
+      "head_end": "right (red eye; PCA)",
+      "reason": "",
+      "wing_pixels": 123,
+      "axis_ratio": 4.091878,
+      "axis_xy": [
+        0.9116894245769038,
+        -0.4108800227738434
+      ],
+      "centre_xy": [
+        28.70689655172414,
+        19.125
+      ],
+      "eye_xy": [
+        36.8,
+        17.266666666666666
+      ],
+      "eye_pixels": 15,
+      "tip_pixels": 49
+    },
+    {
+      "file": "eats_4.png",
+      "variant": "tip",
+      "changed_pixels": 46,
+      "width": 48,
+      "height": 48,
+      "head_end": "right (red eye; PCA)",
+      "reason": "",
+      "wing_pixels": 137,
+      "axis_ratio": 2.454801,
+      "axis_xy": [
+        0.9266885898861584,
+        -0.37583009109809595
+      ],
+      "centre_xy": [
+        29.42738589211618,
+        19.506224066390043
+      ],
+      "eye_xy": [
+        36.6,
+        17.7
+      ],
+      "eye_pixels": 10,
+      "tip_pixels": 51
+    },
+    {
+      "file": "eats_4.png",
+      "variant": "tip_small",
+      "changed_pixels": 334,
+      "width": 48,
+      "height": 48,
+      "head_end": "right (red eye; PCA)",
+      "reason": "",
+      "wing_pixels": 137,
+      "axis_ratio": 2.454801,
+      "axis_xy": [
+        0.9266885898861584,
+        -0.37583009109809595
+      ],
+      "centre_xy": [
+        29.42738589211618,
+        19.506224066390043
+      ],
+      "eye_xy": [
+        36.6,
+        17.7
+      ],
+      "eye_pixels": 10,
+      "tip_pixels": 51
+    },
+    {
+      "file": "eats_4.png",
+      "variant": "cool",
+      "changed_pixels": 254,
+      "width": 48,
+      "height": 48,
+      "head_end": "right (red eye; PCA)",
+      "reason": "",
+      "wing_pixels": 137,
+      "axis_ratio": 2.454801,
+      "axis_xy": [
+        0.9266885898861584,
+        -0.37583009109809595
+      ],
+      "centre_xy": [
+        29.42738589211618,
+        19.506224066390043
+      ],
+      "eye_xy": [
+        36.6,
+        17.7
+      ],
+      "eye_pixels": 10,
+      "tip_pixels": 51
+    },
+    {
+      "file": "mouth_moves_1.png",
+      "variant": "tip",
+      "changed_pixels": 55,
+      "width": 48,
+      "height": 48,
+      "head_end": "right (red eye; PCA)",
+      "reason": "",
+      "wing_pixels": 123,
+      "axis_ratio": 2.303893,
+      "axis_xy": [
+        0.8508583670694011,
+        -0.5253951267265353
+      ],
+      "centre_xy": [
+        29.940425531914894,
+        19.46808510638298
+      ],
+      "eye_xy": [
+        37.6,
+        17.5
+      ],
+      "eye_pixels": 10,
+      "tip_pixels": 57
+    },
+    {
+      "file": "mouth_moves_1.png",
+      "variant": "tip_small",
+      "changed_pixels": 327,
+      "width": 48,
+      "height": 48,
+      "head_end": "right (red eye; PCA)",
+      "reason": "",
+      "wing_pixels": 123,
+      "axis_ratio": 2.303893,
+      "axis_xy": [
+        0.8508583670694011,
+        -0.5253951267265353
+      ],
+      "centre_xy": [
+        29.940425531914894,
+        19.46808510638298
+      ],
+      "eye_xy": [
+        37.6,
+        17.5
+      ],
+      "eye_pixels": 10,
+      "tip_pixels": 57
+    },
+    {
+      "file": "mouth_moves_1.png",
+      "variant": "cool",
+      "changed_pixels": 259,
+      "width": 48,
+      "height": 48,
+      "head_end": "right (red eye; PCA)",
+      "reason": "",
+      "wing_pixels": 123,
+      "axis_ratio": 2.303893,
+      "axis_xy": [
+        0.8508583670694011,
+        -0.5253951267265353
+      ],
+      "centre_xy": [
+        29.940425531914894,
+        19.46808510638298
+      ],
+      "eye_xy": [
+        37.6,
+        17.5
+      ],
+      "eye_pixels": 10,
+      "tip_pixels": 57
+    },
+    {
+      "file": "mouth_moves_2.png",
+      "variant": "tip",
+      "changed_pixels": 56,
+      "width": 48,
+      "height": 48,
+      "head_end": "right (red eye; PCA)",
+      "reason": "",
+      "wing_pixels": 125,
+      "axis_ratio": 2.301913,
+      "axis_xy": [
+        0.8615204142189401,
+        -0.5077229322022258
+      ],
+      "centre_xy": [
+        30.195833333333333,
+        19.425
+      ],
+      "eye_xy": [
+        37.888888888888886,
+        17.555555555555557
+      ],
+      "eye_pixels": 9,
+      "tip_pixels": 58
+    },
+    {
+      "file": "mouth_moves_2.png",
+      "variant": "tip_small",
+      "changed_pixels": 331,
+      "width": 48,
+      "height": 48,
+      "head_end": "right (red eye; PCA)",
+      "reason": "",
+      "wing_pixels": 125,
+      "axis_ratio": 2.301913,
+      "axis_xy": [
+        0.8615204142189401,
+        -0.5077229322022258
+      ],
+      "centre_xy": [
+        30.195833333333333,
+        19.425
+      ],
+      "eye_xy": [
+        37.888888888888886,
+        17.555555555555557
+      ],
+      "eye_pixels": 9,
+      "tip_pixels": 58
+    },
+    {
+      "file": "mouth_moves_2.png",
+      "variant": "cool",
+      "changed_pixels": 267,
+      "width": 48,
+      "height": 48,
+      "head_end": "right (red eye; PCA)",
+      "reason": "",
+      "wing_pixels": 125,
+      "axis_ratio": 2.301913,
+      "axis_xy": [
+        0.8615204142189401,
+        -0.5077229322022258
+      ],
+      "centre_xy": [
+        30.195833333333333,
+        19.425
+      ],
+      "eye_xy": [
+        37.888888888888886,
+        17.555555555555557
+      ],
+      "eye_pixels": 9,
+      "tip_pixels": 58
+    },
+    {
+      "file": "mouth_moves_3.png",
+      "variant": "tip",
+      "changed_pixels": 59,
+      "width": 48,
+      "height": 48,
+      "head_end": "right (red eye; PCA)",
+      "reason": "",
+      "wing_pixels": 116,
+      "axis_ratio": 3.411393,
+      "axis_xy": [
+        0.9048145858580726,
+        -0.425805783448845
+      ],
+      "centre_xy": [
+        28.80223880597015,
+        19.850746268656717
+      ],
+      "eye_xy": [
+        37.0,
+        17.25
+      ],
+      "eye_pixels": 12,
+      "tip_pixels": 65
+    },
+    {
+      "file": "mouth_moves_3.png",
+      "variant": "tip_small",
+      "changed_pixels": 342,
+      "width": 48,
+      "height": 48,
+      "head_end": "right (red eye; PCA)",
+      "reason": "",
+      "wing_pixels": 116,
+      "axis_ratio": 3.411393,
+      "axis_xy": [
+        0.9048145858580726,
+        -0.425805783448845
+      ],
+      "centre_xy": [
+        28.80223880597015,
+        19.850746268656717
+      ],
+      "eye_xy": [
+        37.0,
+        17.25
+      ],
+      "eye_pixels": 12,
+      "tip_pixels": 65
+    },
+    {
+      "file": "mouth_moves_3.png",
+      "variant": "cool",
+      "changed_pixels": 275,
+      "width": 48,
+      "height": 48,
+      "head_end": "right (red eye; PCA)",
+      "reason": "",
+      "wing_pixels": 116,
+      "axis_ratio": 3.411393,
+      "axis_xy": [
+        0.9048145858580726,
+        -0.425805783448845
+      ],
+      "centre_xy": [
+        28.80223880597015,
+        19.850746268656717
+      ],
+      "eye_xy": [
+        37.0,
+        17.25
+      ],
+      "eye_pixels": 12,
+      "tip_pixels": 65
+    },
+    {
+      "file": "mouth_moves_4.png",
+      "variant": "tip",
+      "changed_pixels": 58,
+      "width": 48,
+      "height": 48,
+      "head_end": "right (red eye; PCA)",
+      "reason": "",
+      "wing_pixels": 109,
+      "axis_ratio": 3.180864,
+      "axis_xy": [
+        0.9023775563026806,
+        -0.43094633758880263
+      ],
+      "centre_xy": [
+        28.643382352941178,
+        19.66176470588235
+      ],
+      "eye_xy": [
+        36.75,
+        16.833333333333332
+      ],
+      "eye_pixels": 12,
+      "tip_pixels": 66
+    },
+    {
+      "file": "mouth_moves_4.png",
+      "variant": "tip_small",
+      "changed_pixels": 334,
+      "width": 48,
+      "height": 48,
+      "head_end": "right (red eye; PCA)",
+      "reason": "",
+      "wing_pixels": 109,
+      "axis_ratio": 3.180864,
+      "axis_xy": [
+        0.9023775563026806,
+        -0.43094633758880263
+      ],
+      "centre_xy": [
+        28.643382352941178,
+        19.66176470588235
+      ],
+      "eye_xy": [
+        36.75,
+        16.833333333333332
+      ],
+      "eye_pixels": 12,
+      "tip_pixels": 66
+    },
+    {
+      "file": "mouth_moves_4.png",
+      "variant": "cool",
+      "changed_pixels": 275,
+      "width": 48,
+      "height": 48,
+      "head_end": "right (red eye; PCA)",
+      "reason": "",
+      "wing_pixels": 109,
+      "axis_ratio": 3.180864,
+      "axis_xy": [
+        0.9023775563026806,
+        -0.43094633758880263
+      ],
+      "centre_xy": [
+        28.643382352941178,
+        19.66176470588235
+      ],
+      "eye_xy": [
+        36.75,
+        16.833333333333332
+      ],
+      "eye_pixels": 12,
+      "tip_pixels": 66
+    },
+    {
+      "file": "proboscis_only_1.png",
+      "variant": "tip",
+      "changed_pixels": 35,
+      "width": 48,
+      "height": 48,
+      "head_end": "right (red eye; PCA)",
+      "reason": "",
+      "wing_pixels": 137,
+      "axis_ratio": 2.245123,
+      "axis_xy": [
+        0.7861175146616672,
+        -0.61807706084449
+      ],
+      "centre_xy": [
+        30.766666666666666,
+        18.69047619047619
+      ],
+      "eye_xy": [
+        37.875,
+        17.875
+      ],
+      "eye_pixels": 8,
+      "tip_pixels": 39
+    },
+    {
+      "file": "proboscis_only_1.png",
+      "variant": "tip_small",
+      "changed_pixels": 305,
+      "width": 48,
+      "height": 48,
+      "head_end": "right (red eye; PCA)",
+      "reason": "",
+      "wing_pixels": 137,
+      "axis_ratio": 2.245123,
+      "axis_xy": [
+        0.7861175146616672,
+        -0.61807706084449
+      ],
+      "centre_xy": [
+        30.766666666666666,
+        18.69047619047619
+      ],
+      "eye_xy": [
+        37.875,
+        17.875
+      ],
+      "eye_pixels": 8,
+      "tip_pixels": 39
+    },
+    {
+      "file": "proboscis_only_1.png",
+      "variant": "cool",
+      "changed_pixels": 230,
+      "width": 48,
+      "height": 48,
+      "head_end": "right (red eye; PCA)",
+      "reason": "",
+      "wing_pixels": 137,
+      "axis_ratio": 2.245123,
+      "axis_xy": [
+        0.7861175146616672,
+        -0.61807706084449
+      ],
+      "centre_xy": [
+        30.766666666666666,
+        18.69047619047619
+      ],
+      "eye_xy": [
+        37.875,
+        17.875
+      ],
+      "eye_pixels": 8,
+      "tip_pixels": 39
+    },
+    {
+      "file": "proboscis_only_2.png",
+      "variant": "tip",
+      "changed_pixels": 39,
+      "width": 48,
+      "height": 48,
+      "head_end": "right (red eye; PCA)",
+      "reason": "",
+      "wing_pixels": 131,
+      "axis_ratio": 2.12052,
+      "axis_xy": [
+        0.7799776032390219,
+        -0.6258074292028747
+      ],
+      "centre_xy": [
+        30.426666666666666,
+        19.83111111111111
+      ],
+      "eye_xy": [
+        36.61538461538461,
+        16.923076923076923
+      ],
+      "eye_pixels": 13,
+      "tip_pixels": 47
+    },
+    {
+      "file": "proboscis_only_2.png",
+      "variant": "tip_small",
+      "changed_pixels": 306,
+      "width": 48,
+      "height": 48,
+      "head_end": "right (red eye; PCA)",
+      "reason": "",
+      "wing_pixels": 131,
+      "axis_ratio": 2.12052,
+      "axis_xy": [
+        0.7799776032390219,
+        -0.6258074292028747
+      ],
+      "centre_xy": [
+        30.426666666666666,
+        19.83111111111111
+      ],
+      "eye_xy": [
+        36.61538461538461,
+        16.923076923076923
+      ],
+      "eye_pixels": 13,
+      "tip_pixels": 47
+    },
+    {
+      "file": "proboscis_only_2.png",
+      "variant": "cool",
+      "changed_pixels": 238,
+      "width": 48,
+      "height": 48,
+      "head_end": "right (red eye; PCA)",
+      "reason": "",
+      "wing_pixels": 131,
+      "axis_ratio": 2.12052,
+      "axis_xy": [
+        0.7799776032390219,
+        -0.6258074292028747
+      ],
+      "centre_xy": [
+        30.426666666666666,
+        19.83111111111111
+      ],
+      "eye_xy": [
+        36.61538461538461,
+        16.923076923076923
+      ],
+      "eye_pixels": 13,
+      "tip_pixels": 47
+    },
+    {
+      "file": "proboscis_only_3.png",
+      "variant": "tip",
+      "changed_pixels": 57,
+      "width": 48,
+      "height": 48,
+      "head_end": "right (red eye; PCA)",
+      "reason": "",
+      "wing_pixels": 124,
+      "axis_ratio": 3.317229,
+      "axis_xy": [
+        0.8167498202095661,
+        -0.5769919680443059
+      ],
+      "centre_xy": [
+        29.445414847161572,
+        19.46288209606987
+      ],
+      "eye_xy": [
+        37.09090909090909,
+        17.181818181818183
+      ],
+      "eye_pixels": 11,
+      "tip_pixels": 60
+    },
+    {
+      "file": "proboscis_only_3.png",
+      "variant": "tip_small",
+      "changed_pixels": 339,
+      "width": 48,
+      "height": 48,
+      "head_end": "right (red eye; PCA)",
+      "reason": "",
+      "wing_pixels": 124,
+      "axis_ratio": 3.317229,
+      "axis_xy": [
+        0.8167498202095661,
+        -0.5769919680443059
+      ],
+      "centre_xy": [
+        29.445414847161572,
+        19.46288209606987
+      ],
+      "eye_xy": [
+        37.09090909090909,
+        17.181818181818183
+      ],
+      "eye_pixels": 11,
+      "tip_pixels": 60
+    },
+    {
+      "file": "proboscis_only_3.png",
+      "variant": "cool",
+      "changed_pixels": 267,
+      "width": 48,
+      "height": 48,
+      "head_end": "right (red eye; PCA)",
+      "reason": "",
+      "wing_pixels": 124,
+      "axis_ratio": 3.317229,
+      "axis_xy": [
+        0.8167498202095661,
+        -0.5769919680443059
+      ],
+      "centre_xy": [
+        29.445414847161572,
+        19.46288209606987
+      ],
+      "eye_xy": [
+        37.09090909090909,
+        17.181818181818183
+      ],
+      "eye_pixels": 11,
+      "tip_pixels": 60
+    },
+    {
+      "file": "proboscis_only_4.png",
+      "variant": "tip",
+      "changed_pixels": 39,
+      "width": 48,
+      "height": 48,
+      "head_end": "right (red eye; PCA)",
+      "reason": "",
+      "wing_pixels": 123,
+      "axis_ratio": 3.038488,
+      "axis_xy": [
+        0.9145677900486222,
+        -0.4044326364248802
+      ],
+      "centre_xy": [
+        28.975,
+        19.208333333333332
+      ],
+      "eye_xy": [
+        36.333333333333336,
+        17.333333333333332
+      ],
+      "eye_pixels": 12,
+      "tip_pixels": 50
+    },
+    {
+      "file": "proboscis_only_4.png",
+      "variant": "tip_small",
+      "changed_pixels": 305,
+      "width": 48,
+      "height": 48,
+      "head_end": "right (red eye; PCA)",
+      "reason": "",
+      "wing_pixels": 123,
+      "axis_ratio": 3.038488,
+      "axis_xy": [
+        0.9145677900486222,
+        -0.4044326364248802
+      ],
+      "centre_xy": [
+        28.975,
+        19.208333333333332
+      ],
+      "eye_xy": [
+        36.333333333333336,
+        17.333333333333332
+      ],
+      "eye_pixels": 12,
+      "tip_pixels": 50
+    },
+    {
+      "file": "proboscis_only_4.png",
+      "variant": "cool",
+      "changed_pixels": 244,
+      "width": 48,
+      "height": 48,
+      "head_end": "right (red eye; PCA)",
+      "reason": "",
+      "wing_pixels": 123,
+      "axis_ratio": 3.038488,
+      "axis_xy": [
+        0.9145677900486222,
+        -0.4044326364248802
+      ],
+      "centre_xy": [
+        28.975,
+        19.208333333333332
+      ],
+      "eye_xy": [
+        36.333333333333336,
+        17.333333333333332
+      ],
+      "eye_pixels": 12,
+      "tip_pixels": 50
+    },
+    {
+      "file": "no_response_1.png",
+      "variant": "tip",
+      "changed_pixels": 54,
+      "width": 48,
+      "height": 48,
+      "head_end": "right (red eye; PCA)",
+      "reason": "",
+      "wing_pixels": 120,
+      "axis_ratio": 2.647756,
+      "axis_xy": [
+        0.8497453963720661,
+        -0.5271932865130967
+      ],
+      "centre_xy": [
+        29.816593886462883,
+        19.41484716157205
+      ],
+      "eye_xy": [
+        37.166666666666664,
+        17.166666666666668
+      ],
+      "eye_pixels": 12,
+      "tip_pixels": 61
+    },
+    {
+      "file": "no_response_1.png",
+      "variant": "tip_small",
+      "changed_pixels": 321,
+      "width": 48,
+      "height": 48,
+      "head_end": "right (red eye; PCA)",
+      "reason": "",
+      "wing_pixels": 120,
+      "axis_ratio": 2.647756,
+      "axis_xy": [
+        0.8497453963720661,
+        -0.5271932865130967
+      ],
+      "centre_xy": [
+        29.816593886462883,
+        19.41484716157205
+      ],
+      "eye_xy": [
+        37.166666666666664,
+        17.166666666666668
+      ],
+      "eye_pixels": 12,
+      "tip_pixels": 61
+    },
+    {
+      "file": "no_response_1.png",
+      "variant": "cool",
+      "changed_pixels": 248,
+      "width": 48,
+      "height": 48,
+      "head_end": "right (red eye; PCA)",
+      "reason": "",
+      "wing_pixels": 120,
+      "axis_ratio": 2.647756,
+      "axis_xy": [
+        0.8497453963720661,
+        -0.5271932865130967
+      ],
+      "centre_xy": [
+        29.816593886462883,
+        19.41484716157205
+      ],
+      "eye_xy": [
+        37.166666666666664,
+        17.166666666666668
+      ],
+      "eye_pixels": 12,
+      "tip_pixels": 61
+    },
+    {
+      "file": "no_response_2.png",
+      "variant": "tip",
+      "changed_pixels": 45,
+      "width": 48,
+      "height": 48,
+      "head_end": "right (red eye; PCA)",
+      "reason": "",
+      "wing_pixels": 140,
+      "axis_ratio": 5.074365,
+      "axis_xy": [
+        0.9048272459607225,
+        -0.4257788803676555
+      ],
+      "centre_xy": [
+        28.579908675799086,
+        19.073059360730593
+      ],
+      "eye_xy": [
+        36.54545454545455,
+        17.454545454545453
+      ],
+      "eye_pixels": 11,
+      "tip_pixels": 49
+    },
+    {
+      "file": "no_response_2.png",
+      "variant": "tip_small",
+      "changed_pixels": 319,
+      "width": 48,
+      "height": 48,
+      "head_end": "right (red eye; PCA)",
+      "reason": "",
+      "wing_pixels": 140,
+      "axis_ratio": 5.074365,
+      "axis_xy": [
+        0.9048272459607225,
+        -0.4257788803676555
+      ],
+      "centre_xy": [
+        28.579908675799086,
+        19.073059360730593
+      ],
+      "eye_xy": [
+        36.54545454545455,
+        17.454545454545453
+      ],
+      "eye_pixels": 11,
+      "tip_pixels": 49
+    },
+    {
+      "file": "no_response_2.png",
+      "variant": "cool",
+      "changed_pixels": 256,
+      "width": 48,
+      "height": 48,
+      "head_end": "right (red eye; PCA)",
+      "reason": "",
+      "wing_pixels": 140,
+      "axis_ratio": 5.074365,
+      "axis_xy": [
+        0.9048272459607225,
+        -0.4257788803676555
+      ],
+      "centre_xy": [
+        28.579908675799086,
+        19.073059360730593
+      ],
+      "eye_xy": [
+        36.54545454545455,
+        17.454545454545453
+      ],
+      "eye_pixels": 11,
+      "tip_pixels": 49
+    },
+    {
+      "file": "no_response_3.png",
+      "variant": "tip",
+      "changed_pixels": 56,
+      "width": 48,
+      "height": 48,
+      "head_end": "right (red eye; PCA)",
+      "reason": "",
+      "wing_pixels": 144,
+      "axis_ratio": 2.990837,
+      "axis_xy": [
+        0.9092618437526534,
+        -0.4162245781973059
+      ],
+      "centre_xy": [
+        29.57847533632287,
+        18.798206278026907
+      ],
+      "eye_xy": [
+        36.38461538461539,
+        17.076923076923077
+      ],
+      "eye_pixels": 13,
+      "tip_pixels": 57
+    },
+    {
+      "file": "no_response_3.png",
+      "variant": "tip_small",
+      "changed_pixels": 340,
+      "width": 48,
+      "height": 48,
+      "head_end": "right (red eye; PCA)",
+      "reason": "",
+      "wing_pixels": 144,
+      "axis_ratio": 2.990837,
+      "axis_xy": [
+        0.9092618437526534,
+        -0.4162245781973059
+      ],
+      "centre_xy": [
+        29.57847533632287,
+        18.798206278026907
+      ],
+      "eye_xy": [
+        36.38461538461539,
+        17.076923076923077
+      ],
+      "eye_pixels": 13,
+      "tip_pixels": 57
+    },
+    {
+      "file": "no_response_3.png",
+      "variant": "cool",
+      "changed_pixels": 258,
+      "width": 48,
+      "height": 48,
+      "head_end": "right (red eye; PCA)",
+      "reason": "",
+      "wing_pixels": 144,
+      "axis_ratio": 2.990837,
+      "axis_xy": [
+        0.9092618437526534,
+        -0.4162245781973059
+      ],
+      "centre_xy": [
+        29.57847533632287,
+        18.798206278026907
+      ],
+      "eye_xy": [
+        36.38461538461539,
+        17.076923076923077
+      ],
+      "eye_pixels": 13,
+      "tip_pixels": 57
+    },
+    {
+      "file": "no_response_4.png",
+      "variant": "tip",
+      "changed_pixels": 54,
+      "width": 48,
+      "height": 48,
+      "head_end": "right (red eye; PCA)",
+      "reason": "",
+      "wing_pixels": 115,
+      "axis_ratio": 2.878296,
+      "axis_xy": [
+        0.9148972826882037,
+        -0.4036867128476501
+      ],
+      "centre_xy": [
+        28.91699604743083,
+        19.58893280632411
+      ],
+      "eye_xy": [
+        36.416666666666664,
+        17.25
+      ],
+      "eye_pixels": 12,
+      "tip_pixels": 61
+    },
+    {
+      "file": "no_response_4.png",
+      "variant": "tip_small",
+      "changed_pixels": 332,
+      "width": 48,
+      "height": 48,
+      "head_end": "right (red eye; PCA)",
+      "reason": "",
+      "wing_pixels": 115,
+      "axis_ratio": 2.878296,
+      "axis_xy": [
+        0.9148972826882037,
+        -0.4036867128476501
+      ],
+      "centre_xy": [
+        28.91699604743083,
+        19.58893280632411
+      ],
+      "eye_xy": [
+        36.416666666666664,
+        17.25
+      ],
+      "eye_pixels": 12,
+      "tip_pixels": 61
+    },
+    {
+      "file": "no_response_4.png",
+      "variant": "cool",
+      "changed_pixels": 266,
+      "width": 48,
+      "height": 48,
+      "head_end": "right (red eye; PCA)",
+      "reason": "",
+      "wing_pixels": 115,
+      "axis_ratio": 2.878296,
+      "axis_xy": [
+        0.9148972826882037,
+        -0.4036867128476501
+      ],
+      "centre_xy": [
+        28.91699604743083,
+        19.58893280632411
+      ],
+      "eye_xy": [
+        36.416666666666664,
+        17.25
+      ],
+      "eye_pixels": 12,
+      "tip_pixels": 61
+    },
+    {
+      "file": "inset_eats_1.png",
+      "variant": "tip",
+      "changed_pixels": 0,
+      "width": 64,
+      "height": 64,
+      "head_end": "manual review",
+      "reason": "cropped head/mouth; abdomen and whole-body axis absent; tip omitted",
+      "wing_pixels": 86
+    },
+    {
+      "file": "inset_eats_1.png",
+      "variant": "tip_small",
+      "changed_pixels": 926,
+      "width": 64,
+      "height": 64,
+      "head_end": "manual review",
+      "reason": "cropped head/mouth; abdomen and whole-body axis absent; tip omitted",
+      "wing_pixels": 86
+    },
+    {
+      "file": "inset_eats_1.png",
+      "variant": "cool",
+      "changed_pixels": 866,
+      "width": 64,
+      "height": 64,
+      "head_end": "manual review",
+      "reason": "cropped head/mouth; abdomen and whole-body axis absent; tip omitted",
+      "wing_pixels": 86
+    },
+    {
+      "file": "inset_eats_2.png",
+      "variant": "tip",
+      "changed_pixels": 0,
+      "width": 64,
+      "height": 64,
+      "head_end": "manual review",
+      "reason": "cropped head/mouth; abdomen and whole-body axis absent; tip omitted",
+      "wing_pixels": 0
+    },
+    {
+      "file": "inset_eats_2.png",
+      "variant": "tip_small",
+      "changed_pixels": 955,
+      "width": 64,
+      "height": 64,
+      "head_end": "manual review",
+      "reason": "cropped head/mouth; abdomen and whole-body axis absent; tip omitted",
+      "wing_pixels": 0
+    },
+    {
+      "file": "inset_eats_2.png",
+      "variant": "cool",
+      "changed_pixels": 966,
+      "width": 64,
+      "height": 64,
+      "head_end": "manual review",
+      "reason": "cropped head/mouth; abdomen and whole-body axis absent; tip omitted",
+      "wing_pixels": 0
+    },
+    {
+      "file": "inset_eats_3.png",
+      "variant": "tip",
+      "changed_pixels": 0,
+      "width": 64,
+      "height": 64,
+      "head_end": "manual review",
+      "reason": "cropped head/mouth; abdomen and whole-body axis absent; tip omitted",
+      "wing_pixels": 30
+    },
+    {
+      "file": "inset_eats_3.png",
+      "variant": "tip_small",
+      "changed_pixels": 1062,
+      "width": 64,
+      "height": 64,
+      "head_end": "manual review",
+      "reason": "cropped head/mouth; abdomen and whole-body axis absent; tip omitted",
+      "wing_pixels": 30
+    },
+    {
+      "file": "inset_eats_3.png",
+      "variant": "cool",
+      "changed_pixels": 1035,
+      "width": 64,
+      "height": 64,
+      "head_end": "manual review",
+      "reason": "cropped head/mouth; abdomen and whole-body axis absent; tip omitted",
+      "wing_pixels": 30
+    },
+    {
+      "file": "inset_eats_4.png",
+      "variant": "tip",
+      "changed_pixels": 0,
+      "width": 64,
+      "height": 64,
+      "head_end": "manual review",
+      "reason": "cropped head/mouth; abdomen and whole-body axis absent; tip omitted",
+      "wing_pixels": 54
+    },
+    {
+      "file": "inset_eats_4.png",
+      "variant": "tip_small",
+      "changed_pixels": 992,
+      "width": 64,
+      "height": 64,
+      "head_end": "manual review",
+      "reason": "cropped head/mouth; abdomen and whole-body axis absent; tip omitted",
+      "wing_pixels": 54
+    },
+    {
+      "file": "inset_eats_4.png",
+      "variant": "cool",
+      "changed_pixels": 940,
+      "width": 64,
+      "height": 64,
+      "head_end": "manual review",
+      "reason": "cropped head/mouth; abdomen and whole-body axis absent; tip omitted",
+      "wing_pixels": 54
+    },
+    {
+      "file": "inset_mouth_moves_1.png",
+      "variant": "tip",
+      "changed_pixels": 0,
+      "width": 64,
+      "height": 64,
+      "head_end": "manual review",
+      "reason": "cropped head/mouth; abdomen and whole-body axis absent; tip omitted",
+      "wing_pixels": 220
+    },
+    {
+      "file": "inset_mouth_moves_1.png",
+      "variant": "tip_small",
+      "changed_pixels": 1336,
+      "width": 64,
+      "height": 64,
+      "head_end": "manual review",
+      "reason": "cropped head/mouth; abdomen and whole-body axis absent; tip omitted",
+      "wing_pixels": 220
+    },
+    {
+      "file": "inset_mouth_moves_1.png",
+      "variant": "cool",
+      "changed_pixels": 1298,
+      "width": 64,
+      "height": 64,
+      "head_end": "manual review",
+      "reason": "cropped head/mouth; abdomen and whole-body axis absent; tip omitted",
+      "wing_pixels": 220
+    },
+    {
+      "file": "inset_mouth_moves_2.png",
+      "variant": "tip",
+      "changed_pixels": 0,
+      "width": 64,
+      "height": 64,
+      "head_end": "manual review",
+      "reason": "cropped head/mouth; abdomen and whole-body axis absent; tip omitted",
+      "wing_pixels": 246
+    },
+    {
+      "file": "inset_mouth_moves_2.png",
+      "variant": "tip_small",
+      "changed_pixels": 1409,
+      "width": 64,
+      "height": 64,
+      "head_end": "manual review",
+      "reason": "cropped head/mouth; abdomen and whole-body axis absent; tip omitted",
+      "wing_pixels": 246
+    },
+    {
+      "file": "inset_mouth_moves_2.png",
+      "variant": "cool",
+      "changed_pixels": 1336,
+      "width": 64,
+      "height": 64,
+      "head_end": "manual review",
+      "reason": "cropped head/mouth; abdomen and whole-body axis absent; tip omitted",
+      "wing_pixels": 246
+    },
+    {
+      "file": "inset_mouth_moves_3.png",
+      "variant": "tip",
+      "changed_pixels": 0,
+      "width": 64,
+      "height": 64,
+      "head_end": "manual review",
+      "reason": "cropped head/mouth; abdomen and whole-body axis absent; tip omitted",
+      "wing_pixels": 261
+    },
+    {
+      "file": "inset_mouth_moves_3.png",
+      "variant": "tip_small",
+      "changed_pixels": 1352,
+      "width": 64,
+      "height": 64,
+      "head_end": "manual review",
+      "reason": "cropped head/mouth; abdomen and whole-body axis absent; tip omitted",
+      "wing_pixels": 261
+    },
+    {
+      "file": "inset_mouth_moves_3.png",
+      "variant": "cool",
+      "changed_pixels": 1408,
+      "width": 64,
+      "height": 64,
+      "head_end": "manual review",
+      "reason": "cropped head/mouth; abdomen and whole-body axis absent; tip omitted",
+      "wing_pixels": 261
+    },
+    {
+      "file": "inset_mouth_moves_4.png",
+      "variant": "tip",
+      "changed_pixels": 0,
+      "width": 64,
+      "height": 64,
+      "head_end": "manual review",
+      "reason": "cropped head/mouth; abdomen and whole-body axis absent; tip omitted",
+      "wing_pixels": 238
+    },
+    {
+      "file": "inset_mouth_moves_4.png",
+      "variant": "tip_small",
+      "changed_pixels": 1195,
+      "width": 64,
+      "height": 64,
+      "head_end": "manual review",
+      "reason": "cropped head/mouth; abdomen and whole-body axis absent; tip omitted",
+      "wing_pixels": 238
+    },
+    {
+      "file": "inset_mouth_moves_4.png",
+      "variant": "cool",
+      "changed_pixels": 1188,
+      "width": 64,
+      "height": 64,
+      "head_end": "manual review",
+      "reason": "cropped head/mouth; abdomen and whole-body axis absent; tip omitted",
+      "wing_pixels": 238
+    },
+    {
+      "file": "inset_proboscis_only_1.png",
+      "variant": "tip",
+      "changed_pixels": 0,
+      "width": 64,
+      "height": 64,
+      "head_end": "manual review",
+      "reason": "cropped head/mouth; abdomen and whole-body axis absent; tip omitted",
+      "wing_pixels": 82
+    },
+    {
+      "file": "inset_proboscis_only_1.png",
+      "variant": "tip_small",
+      "changed_pixels": 960,
+      "width": 64,
+      "height": 64,
+      "head_end": "manual review",
+      "reason": "cropped head/mouth; abdomen and whole-body axis absent; tip omitted",
+      "wing_pixels": 82
+    },
+    {
+      "file": "inset_proboscis_only_1.png",
+      "variant": "cool",
+      "changed_pixels": 909,
+      "width": 64,
+      "height": 64,
+      "head_end": "manual review",
+      "reason": "cropped head/mouth; abdomen and whole-body axis absent; tip omitted",
+      "wing_pixels": 82
+    },
+    {
+      "file": "inset_proboscis_only_2.png",
+      "variant": "tip",
+      "changed_pixels": 0,
+      "width": 64,
+      "height": 64,
+      "head_end": "manual review",
+      "reason": "cropped head/mouth; abdomen and whole-body axis absent; tip omitted",
+      "wing_pixels": 76
+    },
+    {
+      "file": "inset_proboscis_only_2.png",
+      "variant": "tip_small",
+      "changed_pixels": 911,
+      "width": 64,
+      "height": 64,
+      "head_end": "manual review",
+      "reason": "cropped head/mouth; abdomen and whole-body axis absent; tip omitted",
+      "wing_pixels": 76
+    },
+    {
+      "file": "inset_proboscis_only_2.png",
+      "variant": "cool",
+      "changed_pixels": 852,
+      "width": 64,
+      "height": 64,
+      "head_end": "manual review",
+      "reason": "cropped head/mouth; abdomen and whole-body axis absent; tip omitted",
+      "wing_pixels": 76
+    },
+    {
+      "file": "inset_proboscis_only_3.png",
+      "variant": "tip",
+      "changed_pixels": 0,
+      "width": 64,
+      "height": 64,
+      "head_end": "manual review",
+      "reason": "cropped head/mouth; abdomen and whole-body axis absent; tip omitted",
+      "wing_pixels": 71
+    },
+    {
+      "file": "inset_proboscis_only_3.png",
+      "variant": "tip_small",
+      "changed_pixels": 1001,
+      "width": 64,
+      "height": 64,
+      "head_end": "manual review",
+      "reason": "cropped head/mouth; abdomen and whole-body axis absent; tip omitted",
+      "wing_pixels": 71
+    },
+    {
+      "file": "inset_proboscis_only_3.png",
+      "variant": "cool",
+      "changed_pixels": 922,
+      "width": 64,
+      "height": 64,
+      "head_end": "manual review",
+      "reason": "cropped head/mouth; abdomen and whole-body axis absent; tip omitted",
+      "wing_pixels": 71
+    },
+    {
+      "file": "inset_proboscis_only_4.png",
+      "variant": "tip",
+      "changed_pixels": 0,
+      "width": 64,
+      "height": 64,
+      "head_end": "manual review",
+      "reason": "cropped head/mouth; abdomen and whole-body axis absent; tip omitted",
+      "wing_pixels": 61
+    },
+    {
+      "file": "inset_proboscis_only_4.png",
+      "variant": "tip_small",
+      "changed_pixels": 963,
+      "width": 64,
+      "height": 64,
+      "head_end": "manual review",
+      "reason": "cropped head/mouth; abdomen and whole-body axis absent; tip omitted",
+      "wing_pixels": 61
+    },
+    {
+      "file": "inset_proboscis_only_4.png",
+      "variant": "cool",
+      "changed_pixels": 883,
+      "width": 64,
+      "height": 64,
+      "head_end": "manual review",
+      "reason": "cropped head/mouth; abdomen and whole-body axis absent; tip omitted",
+      "wing_pixels": 61
+    },
+    {
+      "file": "inset_no_response_1.png",
+      "variant": "tip",
+      "changed_pixels": 0,
+      "width": 64,
+      "height": 64,
+      "head_end": "manual review",
+      "reason": "cropped head/mouth; abdomen and whole-body axis absent; tip omitted",
+      "wing_pixels": 124
+    },
+    {
+      "file": "inset_no_response_1.png",
+      "variant": "tip_small",
+      "changed_pixels": 1375,
+      "width": 64,
+      "height": 64,
+      "head_end": "manual review",
+      "reason": "cropped head/mouth; abdomen and whole-body axis absent; tip omitted",
+      "wing_pixels": 124
+    },
+    {
+      "file": "inset_no_response_1.png",
+      "variant": "cool",
+      "changed_pixels": 1762,
+      "width": 64,
+      "height": 64,
+      "head_end": "manual review",
+      "reason": "cropped head/mouth; abdomen and whole-body axis absent; tip omitted",
+      "wing_pixels": 124
+    },
+    {
+      "file": "inset_no_response_2.png",
+      "variant": "tip",
+      "changed_pixels": 0,
+      "width": 64,
+      "height": 64,
+      "head_end": "manual review",
+      "reason": "cropped head/mouth; abdomen and whole-body axis absent; tip omitted",
+      "wing_pixels": 124
+    },
+    {
+      "file": "inset_no_response_2.png",
+      "variant": "tip_small",
+      "changed_pixels": 1375,
+      "width": 64,
+      "height": 64,
+      "head_end": "manual review",
+      "reason": "cropped head/mouth; abdomen and whole-body axis absent; tip omitted",
+      "wing_pixels": 124
+    },
+    {
+      "file": "inset_no_response_2.png",
+      "variant": "cool",
+      "changed_pixels": 1762,
+      "width": 64,
+      "height": 64,
+      "head_end": "manual review",
+      "reason": "cropped head/mouth; abdomen and whole-body axis absent; tip omitted",
+      "wing_pixels": 124
+    },
+    {
+      "file": "inset_no_response_3.png",
+      "variant": "tip",
+      "changed_pixels": 0,
+      "width": 64,
+      "height": 64,
+      "head_end": "manual review",
+      "reason": "cropped head/mouth; abdomen and whole-body axis absent; tip omitted",
+      "wing_pixels": 124
+    },
+    {
+      "file": "inset_no_response_3.png",
+      "variant": "tip_small",
+      "changed_pixels": 1375,
+      "width": 64,
+      "height": 64,
+      "head_end": "manual review",
+      "reason": "cropped head/mouth; abdomen and whole-body axis absent; tip omitted",
+      "wing_pixels": 124
+    },
+    {
+      "file": "inset_no_response_3.png",
+      "variant": "cool",
+      "changed_pixels": 1762,
+      "width": 64,
+      "height": 64,
+      "head_end": "manual review",
+      "reason": "cropped head/mouth; abdomen and whole-body axis absent; tip omitted",
+      "wing_pixels": 124
+    },
+    {
+      "file": "inset_no_response_4.png",
+      "variant": "tip",
+      "changed_pixels": 0,
+      "width": 64,
+      "height": 64,
+      "head_end": "manual review",
+      "reason": "cropped head/mouth; abdomen and whole-body axis absent; tip omitted",
+      "wing_pixels": 124
+    },
+    {
+      "file": "inset_no_response_4.png",
+      "variant": "tip_small",
+      "changed_pixels": 1375,
+      "width": 64,
+      "height": 64,
+      "head_end": "manual review",
+      "reason": "cropped head/mouth; abdomen and whole-body axis absent; tip omitted",
+      "wing_pixels": 124
+    },
+    {
+      "file": "inset_no_response_4.png",
+      "variant": "cool",
+      "changed_pixels": 1762,
+      "width": 64,
+      "height": 64,
+      "head_end": "manual review",
+      "reason": "cropped head/mouth; abdomen and whole-body axis absent; tip omitted",
+      "wing_pixels": 124
+    }
+  ]
+}
