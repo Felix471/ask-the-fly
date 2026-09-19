@@ -2,6 +2,11 @@
 
 What a visitor to askthefly.app would notice, newest first. One section per release; the heading is `## vX.Y.Z — YYYY-MM-DD` (the release tag on `main` and its date), and `scripts/validate_release.py` checks that `site/data/release.json` matches the top entry. Each entry ends with a line on whether the README honesty table changed.
 
+## v2.0.1 — 2026-09-19
+
+- Chinese wording of the male brain-view caption revised to the owner's text; no data, scores, states, allocations or English text changed.
+- README honesty table: unchanged.
+
 ## v2.0.0 — 2026-09-19
 
 - Adds a second, independently computed male fly using MaleCNS v1.0, connections with at least 5 synapses, 0.17875 mV synaptic weight and bilateral Tastekin-typed taste-cell sets. Select female, male or both; results and share cards keep their choices separate and show the disagreement sentence whenever they disagree.
