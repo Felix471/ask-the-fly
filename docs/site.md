@@ -119,6 +119,8 @@ Annotated tags on `main`; every update ships under a version (feature branch off
 | v1.1.1 | 31021cb | Brain view follows the fly's final landing (caption, HUD, raster switch to the plate it lands on); the empty "Brain response:" page line dropped. |
 | v1.1.2 | 65fa510 | Footer "what's new" line and CHANGELOG.md; README "What's new"; tonic-inhibition honesty row (designed experiment, not in the product); no dish score changed. |
 | v1.1.3 | c58c735 | Long plate names no longer overlap on narrow screens: ellipsis with full-name titles; row heights unchanged; no dish score changed. |
+| v1.2.0 | 1ff70c1 | Four designed response states (eats / mouth_moves / proboscis_only / no_response) with a per-plate fly reaction, emotion bubble and bilingual speech; MN11 readouts on results, share cards and baseline rasters; no MN9 score, ranking, tie or allocation changed. Honesty table: state/readout row added, animation row revised, owner-approved before release. |
+| v1.2.1 | 5789e3b | Owner-supplied bilingual fly speech refreshed; pixel-art emotion faces, speech bubbles and lettering; no scores, state rules or allocation changed. Honesty table unchanged. |
 
 ### Changelog and the footer "what's new" line
 
