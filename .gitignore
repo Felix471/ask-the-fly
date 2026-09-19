@@ -9,6 +9,7 @@ results/
 docs/papers/
 assets/raw/
 data/external/
+data/external/malecns_rois/
 
 # Wrangler
 .wrangler/

@@ -1106,9 +1106,9 @@ if (isBrowser) {
         if (!response.ok) throw new Error(`${path}: HTTP ${response.status}`);
         return response.json();
       };
-      const [table, raw, manifest, config] = await Promise.all([
+      const [table, raw, manifest, config, neuropils] = await Promise.all([
         json('data/lookup_table_male.json'), json('data/neurons_male.json'), json('data/replay_male/manifest.json'),
-        json('config.json'),
+        json('config.json'), json('data/neuropils_male.json'),
       ]);
       const sprites = await loadMaleSprites(config);
       if (!secondaryRoot) {
@@ -1117,8 +1117,8 @@ if (isBrowser) {
       }
       const panel = new FlyPanel(secondaryRoot, {
         flyKey:'male', lookup:buildLookup(table), loadReplay:makeReplayLoader('data/replay_male/'),
-        neurons:decodeNeurons(raw), placeholderIndexed:raw.placeholder_indexed,
-        neuropils:null, manifest, sprites,
+        neurons:decodeNeurons(raw), synapseCentroidIndexed:raw.position_sources.synapse_centroid,
+        neuropils, manifest, sprites,
       }, panelHost);
       panel.mount();
       state.panels.male = panel;
@@ -1476,32 +1476,32 @@ if (isBrowser) {
     const lead = document.createElement("span");
     const strong = document.createElement("strong");
     if (!d.flyPick) {
-      lead.textContent = t.verdictNone;
+      lead.textContent = panel.verdictText('verdictNone');
     } else if (d.tie.length) {
-      lead.textContent = t.verdictTie;
+      lead.textContent = panel.verdictText('verdictTie');
       strong.textContent = d.tie.map((i) => displayName(i, state.lang)).join(" / ");
     } else if (readoutState(d.flyPick.cell) === 'no_response') {
-      lead.textContent = t.sceneNoResponse;
+      lead.textContent = panel.statusText('sceneNoResponse');
       strong.textContent = '';
     } else if (d.mode === "opposite" && d.many) {
       lead.textContent = "";
-      strong.textContent = fmt(t.verdictOppositeMany, { fly_pick: displayName(d.flyPick, state.lang) });
+      strong.textContent = panel.verdictText('verdictOppositeMany', { fly_pick: displayName(d.flyPick, state.lang) });
       const sub = document.createElement("span");
       sub.className = "verdict-sub";
-      sub.textContent = fmt(t.oppositeLeast, { lowest: d.lowest.map((i) => displayName(i, state.lang)).join(" / ") });
+      sub.textContent = panel.verdictText('oppositeLeast', { lowest: d.lowest.map((i) => displayName(i, state.lang)).join(" / ") });
       verdict.append(lead, strong, sub);
     } else if (d.mode === "opposite") {
       lead.textContent = "";
-      strong.textContent = fmt(t.verdictOpposite, { fly_pick: displayName(d.flyPick, state.lang), human_pick: displayName(d.winner, state.lang) });
+      strong.textContent = panel.verdictText('verdictOpposite', { fly_pick: displayName(d.flyPick, state.lang), human_pick: displayName(d.winner, state.lang) });
     } else {
-      lead.textContent = t.verdictAsk;
+      lead.textContent = panel.verdictText('verdictAsk');
       strong.textContent = displayName(d.winner, state.lang);
     }
     if (!verdict.contains(strong)) verdict.append(lead, strong);
     if (lowInterest(d)) {
       const sub = document.createElement("span");
       sub.className = "verdict-sub";
-      sub.textContent = t.lowInterest;
+      sub.textContent = panel.verdictText('lowInterest');
       verdict.append(sub);
     }
     $("table-fly").hidden = state.fly === 'female';
@@ -1644,7 +1644,8 @@ if (isBrowser) {
       catch(error){
         console.warn('scene error:',error);
         if(state.session!==session) return;
-        panel.el('scene-status').textContent=tr('stateSceneError');
+        panel.sceneStatus={key:'stateSceneError'};
+        panel.renderSceneStatus();
         notice('stateSceneError');
       }
     }));

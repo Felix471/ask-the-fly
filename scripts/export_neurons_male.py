@@ -2,7 +2,6 @@
 """Export MaleCNS soma positions in the existing neurons_v1 format; no simulation."""
 import argparse
 import base64
-import hashlib
 import json
 from pathlib import Path
 import re
@@ -28,27 +27,20 @@ def position(value):
     return [float(v) for v in value.strip()[1:-1].split()]
 
 
-def positions(table):
+def positions(table, centroids=None):
     soma = np.array([position(v) for v in table.somaLocation])
     towards = np.array([position(v) for v in table.tosomaLocation])
     sources = np.where(np.isfinite(soma[:, 0]), 'soma',
-                       np.where(np.isfinite(towards[:, 0]), 'tosoma', 'placeholder'))
+                       np.where(np.isfinite(towards[:, 0]), 'tosoma', 'synapse_centroid'))
     xyz = np.where(np.isfinite(soma), soma, towards)
+    for i, body in enumerate(table.index):
+        if not np.isfinite(xyz[i]).all() and centroids and str(body) in centroids:
+            record = centroids[str(body)]
+            point = [record[axis] for axis in 'xyz']
+            if not np.isfinite(point).all() or record['n_all'] <= 0:
+                raise ValueError(f'Invalid synapse centroid: {body}')
+            xyz[i] = point
     return xyz, sources
-
-
-def placeholder_xy(body_ids):
-    """Per-body blake2b uniforms; Box-Muller x spread, independent band y.
-
-    These are explicitly designed display positions, never anatomical estimates.
-    """
-    xy = []
-    for body in body_ids:
-        digest = hashlib.blake2b(str(body).encode('ascii'), digest_size=24).digest()
-        u, v, w = [(int.from_bytes(digest[i:i+8], 'little') + .5) / 2**64 for i in (0, 8, 16)]
-        normal = np.sqrt(-2 * np.log(u)) * np.cos(2 * np.pi * v)
-        xy.append([np.clip(.5 + .08 * normal, .15, .85), .90 + .05 * w])
-    return np.asarray(xy, dtype=float).reshape(-1, 2)
 
 
 def separation(xyz, first, second):
@@ -63,15 +55,15 @@ def separation(xyz, first, second):
 
 def project(table, xyz, sources, selected):
     brain = table.somaNeuromere.eq('').to_numpy()
-    measured = (sources != 'placeholder') & np.isfinite(xyz).all(axis=1)
+    measured = (sources != 'synapse_centroid') & np.isfinite(xyz).all(axis=1)
     lateral, delta_lr = separation(xyz, measured & brain & table.somaSide.eq('L').to_numpy(),
                                   measured & brain & table.somaSide.eq('R').to_numpy())
     # FlyEM anterior view is x-y. Brain/VNC separation along z reflects depth,
     # not dorsoventral position; only the horizontal orientation is inferred.
     signs = np.array([1 if delta_lr[0] > 0 else -1, 1])
     oriented = xyz[:, [0, 1]] * signs
-    # One scale for both axes; leave a gap above the placeholder and VNC bands.
-    brain_xy = oriented[brain & np.isfinite(oriented).all(axis=1)]
+    # Preserve the anatomical brain-only frame and bottom VNC strip.
+    brain_xy = oriented[brain & measured]
     lo, hi = brain_xy.min(axis=0), brain_xy.max(axis=0)
     span = float(max(hi - lo))
     if span <= 0:
@@ -81,9 +73,9 @@ def project(table, xyz, sources, selected):
     chosen = oriented[selected]
     xy = (chosen - lo) * scale + offset
     is_vnc = ~brain[selected]
-    placeholder = ~measured[selected]
-    xy[placeholder] = placeholder_xy(table.index.to_numpy()[selected[placeholder]])
-    strip = is_vnc & ~placeholder
+    if not np.isfinite(chosen).all():
+        raise ValueError('Selected neuron has no soma, entry point or synaptic sites')
+    strip = is_vnc
     # Compression of VNC y is explicit; x retains the brain mediolateral scale.
     if strip.any():
         v = chosen[strip, 1]
@@ -93,15 +85,14 @@ def project(table, xyz, sources, selected):
                  dropped_axis='z',
                  lo=lo.tolist(), span=span, scale=scale, offset=offset.tolist(),
                  voxel_nm=[8., 8.], units='MaleCNS v1.0 8 nm voxel coordinates',
-                 brain_y=[0., .88], placeholder_y=[.90, .95], vnc_y=[.96, 1.],
-                 placeholder_rule='blake2b body ID; Box-Muller x mean 0.5 SD 0.08, clipped [0.15,0.85]; uniform band y',
+                 brain_y=[0., .88], vnc_y=[.96, 1.],
                  axis_rule='FlyEM convention: x mediolateral, y dorsoventral (increasing ventrally), '
                            'z anteroposterior; anterior view is x–y',
                  lateral_separation=lateral.tolist())
     return np.clip(xy, 0, 1), frame, is_vnc
 
 
-def build(index, table, cells, commit, background=20000):
+def build(index, table, cells, commit, background=20000, centroids=None):
     if not table.index.is_unique:
         raise ValueError('Duplicate annotation body IDs')
     root_ids = index['root_ids']
@@ -112,8 +103,8 @@ def build(index, table, cells, commit, background=20000):
     missing_readouts = sorted(set(readout_ids) - set(indexed_ids))
     # Silent readouts absent from trial-0 index get non-replay display slots. Never
     # insert into or alter the frozen prefix; flags remain exactly as recorded.
-    xyz, sources = positions(table)
-    extras = table[table.somaNeuromere.eq('') & (sources != 'placeholder')].drop(
+    xyz, sources = positions(table, centroids)
+    extras = table[table.somaNeuromere.eq('') & (sources != 'synapse_centroid')].drop(
         index=indexed_ids + missing_readouts, errors='ignore')
     if len(extras) < background:
         raise ValueError('Not enough non-indexed brain neurons for background sample')
@@ -125,35 +116,32 @@ def build(index, table, cells, commit, background=20000):
     xy, frame, is_vnc = project(table, xyz, sources, selected)
     by_id = {str(b): i for i, b in enumerate(ids)}
     named = []
-    for key in ('mn9_primary', 'mn9_secondary', 'mn11d', 'mn11v', 'cem'):
-        group = cells['readouts']['mn9' if key.startswith('mn9_') else key]
+    for key, label in [('mn9', 'MN9'), ('mn11d', 'MN11D'), ('mn11v', 'MN11V'), ('cem', 'CEM')]:
+        group = cells['readouts'][key]
         rows = group['source_rows']
-        if key.startswith('mn9_'):
-            rows = [r for r in rows if int(r['Body_ID']) == group[key.split('_')[1]]]
         labels = {r['Target_Muscle'] for r in rows}
         if len(labels) != 1:
             raise ValueError('Inconsistent Target_Muscle labels')
-        named.append(dict(key=key, label=labels.pop(), cells=[dict(index=by_id[r['Body_ID']],
-                          root_id=r['Body_ID'], side=r['Root_Side']) for r in rows]))
+        named.append(dict(key=key, label=label, code=None, cells=[dict(index=by_id[r['Body_ID']],
+                          root_id=r['Body_ID'], side=table.loc[int(r['Body_ID']), 'somaSide']) for r in rows]))
     def counts(values):
-        return {key: int(np.count_nonzero(values == key)) for key in ('soma', 'tosoma', 'placeholder')}
+        return {key: int(np.count_nonzero(values == key)) for key in ('soma', 'tosoma', 'synapse_centroid')}
     indexed_counts = counts(sources[selected[:len(root_ids)]])
     flags = np.concatenate([np.asarray(index['flags'], dtype=np.uint8), np.zeros(len(ids)-len(root_ids), dtype=np.uint8)])
     q = np.round(xy * 65535).astype('<u2')
     return dict(schema_version='neurons_v1', layout='malecns_v1_soma', n=len(ids), n_indexed=len(root_ids),
                 frame=frame, flag_bits=index['flag_bits'], git_commit=commit,
-                source=SOURCE + f"; canvas axes {frame['axes']}, flip {frame['flip']}; named sides: XLSX Root_Side; "
-                       'unpositioned neurons use an explicitly non-anatomical placeholder band',
-                named=named, named_side_source='XLSX Root_Side in data/malecns/cells_male_v1.json',
+                source=SOURCE + f"; canvas axes {frame['axes']}, flip {frame['flip']}; "
+                       'missing soma/entry points use cached median synaptic site coordinates',
+                named=named, named_side_source='MaleCNS v1.0 annotation somaSide',
                 non_replay_readouts=[str(b) for b in missing_readouts], n_background=background,
                 position_sources=indexed_counts, position_sources_scope='indexed neurons',
                 position_sources_all=counts(sources[selected]), vnc_indexed=int(is_vnc[:len(root_ids)].sum()),
-                placeholder_indexed=indexed_counts['placeholder'],
-                vnc_positioned_indexed=int((is_vnc[:len(root_ids)] & (sources[selected[:len(root_ids)]] != 'placeholder')).sum()),
-                layout_note=f"{indexed_counts['placeholder']} indexed neurons have no soma or entry point recorded in the "
-                            'MaleCNS v1.0 annotations (sensory neurons among them); they are drawn in a band below the '
-                            'brain outline and those positions are not anatomical. VNC somas are drawn in the strip '
-                            'at the bottom edge.',
+                synapse_centroid_indexed=indexed_counts['synapse_centroid'],
+                vnc_positioned_indexed=int(is_vnc[:len(root_ids)].sum()),
+                layout_note=f"{indexed_counts['synapse_centroid']} indexed neurons have no soma or entry point recorded in the "
+                            'MaleCNS v1.0 annotations; they are placed at their synapse centroid (median of postsynaptic '
+                            'sites, or of all sites when none). VNC somas are drawn in the strip at the bottom edge.',
                 xy_b64=base64.b64encode(q.tobytes()).decode('ascii'),
                 flags_b64=base64.b64encode(flags.tobytes()).decode('ascii'))
 
@@ -163,7 +151,8 @@ def main():
     table = pd.read_csv(ROOT / 'data/malecns/derived/neuron_index.csv', keep_default_na=False,
                         low_memory=False).set_index('bodyId')
     payload = build(read(ROOT / 'data/replay_neurons_male.json'), table,
-                    read(ROOT / 'data/malecns/cells_male_v1.json'), current_commit(ROOT))
+                    read(ROOT / 'data/malecns/cells_male_v1.json'), current_commit(ROOT),
+                    centroids=read(ROOT / 'data/malecns/derived/male_synapse_centroids.json')['bodies'])
     blob = (json.dumps(payload, separators=(',', ':'), ensure_ascii=False, allow_nan=False) + '\n').encode('utf-8')
     if len(blob) >= 300000:
         raise ValueError('Male neuron layout exceeds 300 KB')
