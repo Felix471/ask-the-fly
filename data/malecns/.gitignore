@@ -1,5 +1,6 @@
 # Source downloads and generated large graph/index artifacts stay local.
 /downloads/
-/derived/
+/derived/*
+!/derived/male_synapse_centroids.json
 /runs/
 *.partial

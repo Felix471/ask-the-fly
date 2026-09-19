@@ -491,12 +491,80 @@ def check_F21(browser):
     return finish(page, errors, problems)
 
 
+def check_F22(browser):
+    """Both inset boxes match single-fly sizing/alignment and draw full source frames."""
+    problems = []
+    for width in (1280, 390):
+        for lang in ('en', 'zh'):
+            references = {}
+            for fly in ('female', 'male', 'both'):
+                page, errors, _ = open_page(browser,
+                    f'?d=mapo-tofu,dumplings,xiaolongbao&lang={lang}&f={fly}', width=width)
+                wait_result(page)
+                page.evaluate('document.fonts.ready')
+                boxes = page.locator('.scene-panel:visible').evaluate_all('''async panels => {
+                  const results=[];
+                  for(const panel of panels) {
+                    const el=panel.querySelector('[data-panel="mouth-inset"]');
+                    const row=el.parentElement, text=row.querySelector('[data-panel="response-description"]');
+                    const box=el.getBoundingClientRect(), parent=row.getBoundingClientRect();
+                    const kind=panel.querySelector('[data-panel="fly-name"]').textContent.includes('MaleCNS')?'male':'female';
+                    // Compare the actual backing pixels to a full-frame draw of
+                    // each approved source frame. This detects clipping that a
+                    // bounding-box-only test would miss.
+                    const actual=el.getContext('2d').getImageData(0,0,el.width,el.height).data;
+                    let fullFrame=false;
+                    for(const state of ['eats','mouth_moves','proboscis_only','no_response']) {
+                      for(let i=1;i<=4;i++) {
+                        const image=new Image();
+                        image.src=`assets/response${kind==='male'?'_male':''}/inset_${state}_${i}.png`;
+                        await image.decode();
+                        const expected=document.createElement('canvas');
+                        expected.width=128; expected.height=128;
+                        const ctx=expected.getContext('2d');ctx.imageSmoothingEnabled=false;
+                        ctx.drawImage(image,0,0,128,128);
+                        const pixels=ctx.getImageData(0,0,128,128).data;
+                        if(pixels.length===actual.length && pixels.every((v,j)=>v===actual[j])) fullFrame=true;
+                      }
+                    }
+                    results.push({kind,width:box.width,height:box.height,
+                      left:box.left-parent.left,center:box.y+box.height/2-(parent.y+parent.height/2),
+                      textLeft:text.getBoundingClientRect().left-box.right,
+                      backing:[el.width,el.height],fullFrame,visible:!row.hidden,
+                      noteInside:row.contains(panel.querySelector('[data-panel="male-state-note"]'))});
+                  }
+                  return results;
+                }''')
+                for box in boxes:
+                    label=f'{width}/{lang}/{fly}/{box["kind"]}'
+                    if not box['visible'] or not box['fullFrame'] or box['backing'] != [128, 128]:
+                        problems.append(f'{label}: inset frame hidden/clipped/changed: {box}')
+                    if box['kind']=='male' and box['noteInside']:
+                        problems.append(f'{label}: extra male note shifts inset centering within the state row')
+                    if box['width'] != 96 or box['height'] != 96 or abs(box['center']) > 1 or box['left'] != 0 or box['textLeft'] != 16:
+                        problems.append(f'{label}: inset sizing/alignment changed: {box}')
+                    if fly == 'both':
+                        reference=references[box['kind']]
+                        for key in ('width','height','left','center','textLeft','backing'):
+                            if box[key] != reference[key]:
+                                problems.append(f'{label}: {key} differs from single-fly box')
+                        status=page.locator('.scene-panel:visible').nth(0 if box['kind']=='female' else 1).locator('[data-panel="scene-status"]').inner_text()
+                        name=('female fly' if box['kind']=='female' else 'male fly') if lang=='en' else ('雌蝇' if box['kind']=='female' else '雄蝇')
+                        if name not in status:
+                            problems.append(f'{label}: status does not name the fly')
+                    else:
+                        references[box['kind']]=box
+                problems=finish(page,errors,problems)
+    return problems
+
+
 CHECKS = {
     "F02": check_F02, "F03": check_F03, "F04": check_F04, "F05": check_F05,
     "F06": check_F06, "F08": check_F08, "F15": check_F15,
     "F16": check_F16, "F17": check_F17, "F18": check_F18,
     "F19": check_F19, "F20": check_F20,
     "F21": check_F21,
+    "F22": check_F22,
 }
 
 

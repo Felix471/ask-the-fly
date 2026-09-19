@@ -23,7 +23,7 @@ export class FlyPanel {
   el(name) { return this.root.querySelector(`[data-panel="${name}"]`); }
   tr(key, values = {}) { return fmt(STRINGS[this.lang][key], values); }
   bindSources(sources) {
-    for (const key of ['lookup','loadReplay','neurons','manifest','neuropils','sprites','flyKey','placeholderIndexed']) {
+    for (const key of ['lookup','loadReplay','neurons','manifest','neuropils','sprites','flyKey','synapseCentroidIndexed']) {
       if (key in sources) this[key] = sources[key];
     }
   }
@@ -53,6 +53,7 @@ export class FlyPanel {
   renderResponse() {
     const t=STRINGS[this.lang];
     if(this.responseItem) this.el('response-description').textContent=stateLabel(this.responseItem.cell,t)+' — '+stateExplanation(this.responseItem.cell,t);
+    this.el('male-state-note').hidden=this.flyKey!=='male' || this.el('response-detail').hidden;
   }
   score(names, dictionary, mode, seed, selection = this.flyKey) {
     this.scored = scoreOptions(names, dictionary, this.lookup);
@@ -79,7 +80,9 @@ export class FlyPanel {
     this.el('fly-name').textContent=t.flyName[this.flyKey]+' · '+t.flySource[this.flyKey];
     this.el('fly-name').hidden=!male && this.host.selection?.()==='female';
     this.el('layout-note').hidden=!male && this.neurons?.layout!=='placeholder';
-    this.el('layout-note').textContent=male?fmt(t.maleNote.brain,{n:this.placeholderIndexed}):t.layoutPlaceholder;
+    this.el('layout-note').textContent=male?fmt(t.maleNote.brain,{n:this.synapseCentroidIndexed}):t.layoutPlaceholder;
+    this.el('male-outlines-note').hidden=!male || !this.neuropils;
+    this.el('male-outlines-note').textContent=male?t.maleNote.outlines:'';
     for(const key of ['anatomySource','replayHonesty','silenceTitle','silenceHonesty']) this.root.querySelector(`[data-i18n="${key}"]`).hidden=male;
     this.el('silence-controls').hidden=male;
     this.el('silence-caption').hidden=male;
@@ -102,7 +105,7 @@ export class FlyPanel {
     for(const key of ['responseItem','decision','sceneStatus','brainCaption','scenePlates','currentCell','currentItem','currentCellLevels']) this[key]=null;
     this.scored=[];this.variant='';this.appliedVariant='';this.variantRequest+=1;
     if(!this.root) return;
-    for(const key of ['response-detail','fly-bubble','mn9-pill']) this.el(key).hidden=true;
+    for(const key of ['response-detail','male-state-note','fly-bubble','mn9-pill']) this.el(key).hidden=true;
     for(const key of ['brain-caption','silence-caption']) this.el(key).textContent='';
     this.el('mn9-count').textContent='0';
     this.renderSilenceControls();
@@ -110,7 +113,7 @@ export class FlyPanel {
   skip() {
     this.token?.cancel();this.brain?.stop();
     if(this.scene) {this.scene.speech=null;this.scene.fly.hidden=true;this.scene.draw();}
-    this.el('fly-bubble').hidden=true;this.el('response-detail').hidden=true;
+    this.el('fly-bubble').hidden=true;this.el('response-detail').hidden=true;this.el('male-state-note').hidden=true;
     this.renderSilenceControls();
     if(this.scenePlates) {for(const item of this.scenePlates){item.loading=false;item.tasted=Boolean(item.cell);}this.relabelPlates();}
     if(this.decision){this.sceneStatus=this.finalSceneStatus(this.decision);this.renderSceneStatus();}
@@ -132,7 +135,19 @@ export class FlyPanel {
     if (!st) return;
     const values = {};
     for (const k of ["dish", "fly", "pick", "fly_pick", "human_pick"]) if (st[k]) values[k] = displayName(st[k], this.lang);
-    this.el("scene-status").textContent = this.tr(st.key, values);
+    this.el("scene-status").textContent = this.statusText(st.key, values);
+  }
+
+  statusText(key, values = {}) {
+    const t = STRINGS[this.lang];
+    const template = this.host.selection?.() === 'both' ? t.panelStatus[key] : t[key];
+    return fmt(template, {...values, fly:t.flyName[this.flyKey]});
+  }
+
+  verdictText(key, values = {}) {
+    const t = STRINGS[this.lang];
+    const template = this.host.selection?.() === 'both' ? t.panelVerdict[key] : t[key];
+    return fmt(template, {...values, fly:t.flyName[this.flyKey]});
   }
 
   plateSub(item) {

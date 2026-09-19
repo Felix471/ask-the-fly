@@ -177,6 +177,10 @@ class ValidateMale(unittest.TestCase):
         self.write('data/replay_neurons_male.json', {'n_neurons': 11271})
         self.write('site/data/neurons_male.json', {'schema_version': 'neurons_v1',
                    'layout': 'malecns_v1_soma', 'n_indexed': 11271})
+        self.outlines = dict(schema_version='neuropils_v1', source='Synthetic test meshes', groups=[
+            dict(key=str(i), polygon=[[.1,.1],[.2,.1],[.2,.2]], label_at=[.15,.15],
+                 label_en='ROI', label_zh='ROI') for i in range(5)])
+        self.write('site/data/neuropils_male.json', self.outlines)
         from sim.grid import resolve_levels
         self.ids = sorted({vr.cell_id(resolve_levels(self.table, d)) for d in dishes})
         cells = {}
@@ -198,6 +202,19 @@ class ValidateMale(unittest.TestCase):
 
     def test_male_data_checked_before_ui_activation(self):
         self.assertEqual(vr.check_male(self.root), [])
+
+    def test_male_neuropils_required_complete_and_in_bounds(self):
+        path = self.root / 'site/data/neuropils_male.json'
+        path.unlink()
+        self.assertTrue(any('neuropils missing' in p for p in vr.check_male(self.root)))
+        for coordinate in (-.01, 1.01, float('nan'), True):
+            self.outlines['groups'][0]['polygon'][0][0] = coordinate
+            self.write('site/data/neuropils_male.json', self.outlines)
+            self.assertTrue(any('invalid neuropil polygon' in p for p in vr.check_male(self.root)))
+        self.outlines['groups'][0]['polygon'][0][0] = .1
+        self.outlines['groups'].pop()
+        self.write('site/data/neuropils_male.json', self.outlines)
+        self.assertTrue(any('at least 5 groups' in p for p in vr.check_male(self.root)))
 
     def test_tampered_male_cell(self):
         self.table['cells'][0]['mn9_mean'] = 42
