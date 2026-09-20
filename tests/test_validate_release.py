@@ -10,6 +10,12 @@ from unittest.mock import patch
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
+
+try:  # the pages.yml preflight job runs on stdlib-only Python; Pillow-dependent tests are skipped there
+    import PIL  # noqa: F401
+    PIL_AVAILABLE = True
+except ImportError:
+    PIL_AVAILABLE = False
 import validate_release as vr  # noqa: E402
 
 LEVELS = {"sugar": {"none": 0, "low": 60}, "bitter": {"none": 0}, "water": {"none": 0, "low": 60, "medium": 60}, "ir94e": {"none": 0}}
@@ -246,6 +252,7 @@ class ValidateRelease(unittest.TestCase):
         self.assertTrue(any("placeholder layout" in p for p in self.b.problems()))
 
 
+@unittest.skipUnless(PIL_AVAILABLE, "Pillow not installed (stdlib-only preflight job)")
 class PrepareNewSprites(unittest.TestCase):
     def test_crop_ignores_alpha_that_final_palette_discards(self):
         import prep_assets as prep
