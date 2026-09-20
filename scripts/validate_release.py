@@ -195,6 +195,13 @@ def check_replays(root: Path, table: dict | None, dishes: list[dict]) -> list[st
     return problems
 
 
+def check_sprites(root: Path) -> list[str]:
+    """Every dictionary dish needs an existing, exclusively owned sprite."""
+    from scripts.audit_sprites import audit
+
+    return audit(root)["problems"]
+
+
 def check_site(root: Path) -> list[str]:
     problems = []
     neurons = root / "site" / "data" / "neurons.json"
@@ -401,6 +408,7 @@ def validate(root: Path) -> list[str]:
     problems += dict_problems
     problems += check_source_dictionary(root)
     problems += check_sync(root)
+    problems += check_sprites(root)
     problems += check_replays(root, table, dishes)
     problems += check_site(root)
     problems += check_release(root)

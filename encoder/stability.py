@@ -12,7 +12,7 @@ from collections import Counter, defaultdict
 from datetime import datetime, timezone
 from pathlib import Path
 
-from .encode import PROMPT_VERSION, _PROMPT_PATH_FOR, encode_dish
+from .encode import PROMPT_VERSION, _PROMPT_PATH_FOR, dimensions_for, encode_dish, prompt_addendum
 from .levels import levels_for, prompt_has_ir94e
 from .normalize import normalize_name
 
@@ -97,6 +97,8 @@ def _fake_entry(food: dict[str, str], prompt_version: str) -> dict:
         result["ir94e"] = ir94e
         result["reason"]["ir94e"] = "deterministic dry-run heuristic"
         result["confidence"]["ir94e"] = 0.9
+    if prompt_addendum(food):
+        result["encoder_addendum"] = prompt_addendum(food)
     return result
 
 
@@ -108,17 +110,8 @@ def _markdown_cell(value: object) -> str:
     return " ".join(str(value).split()).replace("|", "\\|")
 
 
-def _write_report(
-    foods: list[dict[str, str]],
-    records: list[dict],
-    repeats: int,
-    langs: list[str],
-    model_id: str,
-    encoder_version: str,
-    prompt_version: str,
-    dimensions: list[str],
-    report_path: Path,
-) -> None:
+def level_statistics(foods, records, repeats, langs, dimensions):
+    """Shared report/gate metrics; missing/error observations keep the repeats denominator."""
     grouped: dict[tuple[int, str], list[dict]] = defaultdict(list)
     for record in records:
         if "entry" in record:
@@ -139,6 +132,21 @@ def _write_report(
                 consistencies[(index, lang, dimension)] = (
                     values.count(modal) / repeats if modal else 0.0
                 )
+    return grouped, modes, consistencies
+
+
+def _write_report(
+    foods: list[dict[str, str]],
+    records: list[dict],
+    repeats: int,
+    langs: list[str],
+    model_id: str,
+    encoder_version: str,
+    prompt_version: str,
+    dimensions: list[str],
+    report_path: Path,
+) -> None:
+    grouped, modes, consistencies = level_statistics(foods, records, repeats, langs, dimensions)
 
     lines = [
         "# Encoder stability",
@@ -326,13 +334,14 @@ def _run_observation(
     prompt_version: str,
 ) -> dict:
     started = time.perf_counter()
-    record = {"food_index": food_index, "food": dict(food), "lang": lang, "repeat": repeat}
+    record = {"food_index": food_index, "food": dict(food), "lang": lang, "repeat": repeat,
+              "prompt_addendum": prompt_addendum(food)}
     configured_model = "dry-run" if dry_run else (os.getenv("ENCODER_MODEL") or "")
     try:
         entry = (
             _fake_entry(food, prompt_version)
             if dry_run
-            else encode_dish(food[lang], lang, prompt_version)
+            else encode_dish(food[lang], lang, prompt_version, not_food=food.get("not_food") is True)
         )
         record["entry"] = entry
         current_model = entry["encoder_version"].rsplit("@", 1)[0]
@@ -409,7 +418,7 @@ def main() -> None:
              "run only the missing (food, lang, repeat) cells",
     )
     parser.add_argument("--prompt-version", default=PROMPT_VERSION)
-    parser.add_argument("--dimensions", default="sugar,bitter,water")
+    parser.add_argument("--dimensions", help="report dimensions (default: all dimensions in the prompt)")
     parser.add_argument("--raw", type=Path, default=RAW_PATH)
     parser.add_argument("--report", type=Path, default=REPORT_PATH)
     parser.add_argument("--foods", type=Path, default=FOODS_PATH, help="food list JSON (default: encoder/foods_stability.json)")
@@ -423,7 +432,7 @@ def main() -> None:
     langs = [value.strip() for value in args.langs.split(",") if value.strip()]
     if not langs or any(value not in ("zh", "en") for value in langs) or len(langs) != len(set(langs)):
         parser.error("--langs must be a unique comma-separated subset of zh,en")
-    dimensions = [value.strip() for value in args.dimensions.split(",") if value.strip()]
+    dimensions = [value.strip() for value in args.dimensions.split(",") if value.strip()] if args.dimensions else list(dimensions_for(args.prompt_version))
     if (
         not dimensions
         or any(value not in DIMENSIONS for value in dimensions)
@@ -440,6 +449,8 @@ def main() -> None:
         parser.error(f"unknown prompt version: {args.prompt_version}")
 
     foods = json.loads(args.foods.read_text(encoding="utf-8"))
+    if any(prompt_addendum(food) for food in foods) and args.prompt_version != "encode_v2.3":
+        parser.error("not-food addendum requires encode_v2.3")
     if args.limit is not None and not (args.retry_errors or args.report_only):
         if args.limit < 1:
             parser.error("--limit must be at least 1")
@@ -500,10 +511,14 @@ def main() -> None:
             if "error" in record or record.get("prompt_version") != args.prompt_version:
                 continue
             index = int(record["food_index"])
-            if index >= len(foods) or record.get("food") != foods[index]:
+            if not 0 <= index < len(foods) or record.get("food") != foods[index]:
                 raise ValueError(
                     f"{args.raw}: food_index {index} does not match the configured food list"
                 )
+            if record.get("prompt_addendum") != prompt_addendum(foods[index]):
+                raise ValueError(f"{args.raw}: prompt addendum mismatch for food_index {index}")
+            if (record.get("model_id") == "dry-run") != args.dry_run:
+                raise ValueError("cannot resume across dry-run and real observations")
             existing[(index, str(record["lang"]), int(record["repeat"]))] = record
     records = []
     reused = 0
@@ -523,6 +538,9 @@ def main() -> None:
                     raw_file.write(json.dumps(record, ensure_ascii=False) + "\n")
                     raw_file.flush()
                     records.append(record)
+    if args.resume:
+        # Append while running for crash recovery, then retain one current row per slot.
+        _atomic_write_records(records, args.raw)
     encoder_version = next(
         (record["encoder_version"] for record in records), f"{model_id}@{args.prompt_version}"
     )

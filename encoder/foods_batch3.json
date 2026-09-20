@@ -4,161 +4,161 @@
     "en": "feces",
     "key": "feces",
     "section_zh": "不是给人吃的",
-    "section_en": "Not food"
+    "section_en": "Not food", "not_food": true
   },
   {
     "zh": "泔水",
     "en": "food waste swill",
     "key": "food-waste-swill",
     "section_zh": "不是给人吃的",
-    "section_en": "Not food"
+    "section_en": "Not food", "not_food": true
   },
   {
     "zh": "烂香蕉",
     "en": "rotting banana",
     "key": "rotting-banana",
     "section_zh": "不是给人吃的",
-    "section_en": "Not food"
+    "section_en": "Not food", "not_food": true
   },
   {
     "zh": "烂苹果",
     "en": "rotting apple",
     "key": "rotting-apple",
     "section_zh": "不是给人吃的",
-    "section_en": "Not food"
+    "section_en": "Not food", "not_food": true
   },
   {
     "zh": "烂番茄",
     "en": "rotting tomato",
     "key": "rotting-tomato",
     "section_zh": "不是给人吃的",
-    "section_en": "Not food"
+    "section_en": "Not food", "not_food": true
   },
   {
     "zh": "臭鸡蛋",
     "en": "rotten egg",
     "key": "rotten-egg",
     "section_zh": "不是给人吃的",
-    "section_en": "Not food"
+    "section_en": "Not food", "not_food": true
   },
   {
     "zh": "变质牛奶",
     "en": "sour milk",
     "key": "sour-milk",
     "section_zh": "不是给人吃的",
-    "section_en": "Not food"
+    "section_en": "Not food", "not_food": true
   },
   {
     "zh": "酒糟",
     "en": "spent grain lees",
     "key": "spent-grain-lees",
     "section_zh": "不是给人吃的",
-    "section_en": "Not food"
+    "section_en": "Not food", "not_food": true
   },
   {
     "zh": "发酵中的面团",
     "en": "fermenting dough",
     "key": "fermenting-dough",
     "section_zh": "不是给人吃的",
-    "section_en": "Not food"
+    "section_en": "Not food", "not_food": true
   },
   {
     "zh": "泡菜汁",
     "en": "kimchi brine",
     "key": "kimchi-brine",
     "section_zh": "不是给人吃的",
-    "section_en": "Not food"
+    "section_en": "Not food", "not_food": true
   },
   {
     "zh": "啤酒渣",
     "en": "beer dregs",
     "key": "beer-dregs",
     "section_zh": "不是给人吃的",
-    "section_en": "Not food"
+    "section_en": "Not food", "not_food": true
   },
   {
     "zh": "咖啡渣",
     "en": "coffee grounds",
     "key": "coffee-grounds",
     "section_zh": "不是给人吃的",
-    "section_en": "Not food"
+    "section_en": "Not food", "not_food": true
   },
   {
     "zh": "花蜜",
     "en": "nectar",
     "key": "nectar",
     "section_zh": "不是给人吃的",
-    "section_en": "Not food"
+    "section_en": "Not food", "not_food": true
   },
   {
     "zh": "蚜虫蜜露",
     "en": "aphid honeydew",
     "key": "aphid-honeydew",
     "section_zh": "不是给人吃的",
-    "section_en": "Not food"
+    "section_en": "Not food", "not_food": true
   },
   {
     "zh": "树汁",
     "en": "tree sap",
     "key": "tree-sap",
     "section_zh": "不是给人吃的",
-    "section_en": "Not food"
+    "section_en": "Not food", "not_food": true
   },
   {
     "zh": "花粉",
     "en": "pollen",
     "key": "pollen",
     "section_zh": "不是给人吃的",
-    "section_en": "Not food"
+    "section_en": "Not food", "not_food": true
   },
   {
     "zh": "汗水",
     "en": "sweat",
     "key": "sweat",
     "section_zh": "不是给人吃的",
-    "section_en": "Not food"
+    "section_en": "Not food", "not_food": true
   },
   {
     "zh": "眼泪",
     "en": "tears",
     "key": "tears",
     "section_zh": "不是给人吃的",
-    "section_en": "Not food"
+    "section_en": "Not food", "not_food": true
   },
   {
     "zh": "牙膏",
     "en": "toothpaste",
     "key": "toothpaste",
     "section_zh": "不是给人吃的",
-    "section_en": "Not food"
+    "section_en": "Not food", "not_food": true
   },
   {
     "zh": "洗洁精",
     "en": "dish soap",
     "key": "dish-soap",
     "section_zh": "不是给人吃的",
-    "section_en": "Not food"
+    "section_en": "Not food", "not_food": true
   },
   {
     "zh": "肥皂",
     "en": "soap",
     "key": "soap",
     "section_zh": "不是给人吃的",
-    "section_en": "Not food"
+    "section_en": "Not food", "not_food": true
   },
   {
     "zh": "蜡烛",
     "en": "candle",
     "key": "candle",
     "section_zh": "不是给人吃的",
-    "section_en": "Not food"
+    "section_en": "Not food", "not_food": true
   },
   {
     "zh": "电蚊香液",
     "en": "mosquito coil liquid",
     "key": "mosquito-coil-liquid",
     "section_zh": "不是给人吃的",
-    "section_en": "Not food"
+    "section_en": "Not food", "not_food": true
   },
   {
     "zh": "醋",

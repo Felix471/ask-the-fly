@@ -3,7 +3,7 @@
 All sprites are produced by `scripts/prep_assets.py` from raw PNGs in `assets/raw/` (raw files are not tracked; see `.gitignore`). Output goes to `site/assets/` and is tracked.
 
 ```
-.venv\Scripts\python scripts/prep_assets.py            # dishes + fly
+.venv\Scripts\python scripts/prep_assets.py --only-new --palette-from site/assets/dishes
 .venv\Scripts\python scripts/prep_assets.py --only fly
 ```
 
@@ -34,20 +34,47 @@ Output: `site/assets/fly/<state>_<n>.png`, 48 × 48, facing right; the site mirr
 
 ## Sprite fallbacks
 
-Eight batch-2 keys were skipped by the image generator as near-duplicates. `site/assets/dishes/fallbacks.json` maps them to the nearest existing sprite and the site draws that instead:
+The eight batch-2 keys formerly borrowed sibling sprites; batch 3 replaces all eight with their own sprites, leaving `site/assets/dishes/fallbacks.json` with an empty map.
 
 | key | renders with |
 |---|---|
-| soy-milk | milk |
-| americano | black-coffee |
-| cappuccino | latte |
-| hot-chocolate | latte |
-| oolong-tea | green-tea |
-| sparkling-water | water |
-| apple-juice | orange-juice |
-| milk-chocolate | dark-chocolate-85 |
+| None | All 174 dishes have their own sprite |
 
-Adding a real `assets/raw/<key>.png` and re-running `prep_assets.py --only-new --palette-from site/assets/dishes` replaces the fallback automatically (the site prefers a sprite of its own when the file exists).
+`scripts/audit_sprites.py` prints every dictionary key, its expected and resolved sprite,
+borrows, missing files, sharing and orphans; `--check` also invokes the release validator's
+`check_sprites`. Both reject borrows, missing sprites and shared resolved files. The
+validator also rejects malformed fallback maps and missing targets, even unused ones.
+
+## Generation record
+
+Batch-3 replacements use the **built-in image generator of the coding agent,
+reference-image edit**, one call per dish with the corresponding sibling raw PNG as
+the style reference. Verbatim prompts and reference paths are recorded in
+`assets/raw/prompts/batch3_replacements.md` (local, gitignored).
+
+Style rules: chunky pixel-art look; a single dish or glass centred; dark brown
+outline; warm limited palette; plain white or transparent background; no text;
+no plate unless the dish sits on one in real life; the same scale as siblings.
+Soy milk has a youtiao stick, americano a tall paper cup, cappuccino cocoa-dusted
+foam, hot chocolate marshmallows, oolong amber tea, sparkling water bubbles and a
+lime wedge, apple juice an apple slice, and milk chocolate a lighter bar in a wrapper.
+
+The eight native generator outputs were 1254 × 1254, retained unchanged in
+`assets/raw/batch3_generated/`; nearest-neighbour normalization produces the requested
+1024 × 1024 `assets/raw/<slug>.png` inputs, preserving generated alpha. Cropping uses
+the same alpha > 127 visibility threshold as final quantization, so faint peripheral
+alpha noise cannot shrink the sprite. Processing uses
+only `prep_assets.py --only-new --palette-from site/assets/dishes`: dictionary dishes
+only, existing sprites skipped, no implicit fly processing. This also excludes raw
+contact sheets from future additive runs. Never regenerate shipped sprites.
+
+All 166 previous dish sprites are checked byte-for-byte using SHA256 before and
+after processing. Local records: `assets/raw/batch3_sprites_before_sha256.json` and
+`assets/raw/batch3_sprites_hash_proof.json`. The owner's decision-point-2 comparison
+is `assets/raw/batch3_replacements_sheet.png`: eight borrowed/own pairs, each sprite
+at 4× nearest-neighbour with labels. Future dictionary additions use this same
+recorded pipeline after the owner fixes their list; this task generates only the
+eight replacements.
 
 ## Placeholders
 

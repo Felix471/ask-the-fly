@@ -43,10 +43,12 @@ def main() -> int:
     parser.add_argument("--min-confidence", type=float, default=0.8)
     parser.add_argument("--report", type=Path, help="append the review to this markdown file")
     args = parser.parse_args()
-    keys = [d["key"] for d in json.loads(args.batch.read_text(encoding="utf-8"))["dishes"]]
+    batch = json.loads(args.batch.read_text(encoding="utf-8"))
+    keys = [d["key"] for d in (batch if isinstance(batch, list) else batch["dishes"])]
     entries = {e["key"]: e for e in json.loads(args.dishes.read_text(encoding="utf-8"))}
     lines = ["", "## Batch review", ""]
-    fmt = lambda e: f"sugar {e['sugar']} · bitter {e['bitter']} · water {e['water']}"
+    dimensions = ("sugar", "bitter", "water", "ir94e")
+    fmt = lambda e: " · ".join(f"{d} {e[d]}" for d in dimensions if d in e)
 
     missing = [k for k in keys if k not in entries]
     lines += [f"Batch keys: {len(keys)}; merged: {len(keys) - len(missing)}" + (f"; missing: {', '.join(missing)}" if missing else ""), ""]
@@ -63,7 +65,7 @@ def main() -> int:
         lines.append("none")
 
     lines += ["", f"### confidence < {args.min_confidence}", ""]
-    low = [(k, d, entries[k]["confidence"][d]) for k in keys if k in entries for d in ("sugar", "bitter", "water") if entries[k]["confidence"][d] < args.min_confidence]
+    low = [(k, d, entries[k]["confidence"][d]) for k in keys if k in entries for d in dimensions if d in entries[k] and entries[k]["confidence"][d] < args.min_confidence]
     if low:
         lines += ["| key | levels | dimension | confidence |", "|---|---|---|---:|"]
         for k, d, c in low:
@@ -86,8 +88,14 @@ def main() -> int:
     text = "\n".join(lines)
     print(text)
     if args.report:
-        with args.report.open("a", encoding="utf-8") as fh:
-            fh.write(text + "\n")
+        previous = args.report.read_text(encoding="utf-8") if args.report.exists() else ""
+        marker = '<!-- batch3-gate:start -->'
+        if marker in previous:
+            before, gate = previous.split(marker, 1)
+            previous = before.rstrip() + '\n' + text + '\n' + marker + gate
+        else:
+            previous += text + '\n'
+        args.report.write_text(previous, encoding="utf-8")
         print(f"appended to {args.report}")
     return 0
 

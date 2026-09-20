@@ -94,14 +94,18 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--batch", type=Path, help="batch file whose keys get aliases (data/batch2_dishes.json)")
     parser.add_argument("--all", action="store_true")
+    parser.add_argument("--dishes", type=Path, default=DISHES)
+    parser.add_argument("--dry-run", action="store_true")
     args = parser.parse_args()
     if not args.batch and not args.all:
         parser.error("pass --batch FILE or --all")
-    entries = json.loads(DISHES.read_text(encoding="utf-8"))
-    keys = None if args.all else {d["key"] for d in json.loads(args.batch.read_text(encoding="utf-8"))["dishes"]}
+    entries = json.loads(args.dishes.read_text(encoding="utf-8"))
+    batch = json.loads(args.batch.read_text(encoding="utf-8")) if args.batch else None
+    keys = None if args.all else {d["key"] for d in (batch if isinstance(batch, list) else batch["dishes"])}
     added = augment(entries, keys)
-    DISHES.write_text(json.dumps(entries, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    print(f"added {added} aliases")
+    if not args.dry_run:
+        args.dishes.write_text(json.dumps(entries, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    print(f"{'would add' if args.dry_run else 'added'} {added} aliases")
     return 0
 
 

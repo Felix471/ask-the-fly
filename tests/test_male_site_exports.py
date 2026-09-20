@@ -52,7 +52,9 @@ class MaleShipping(unittest.TestCase):
     def test_export_preserves_sources_and_check_writes_nothing(self):
         before = self.snapshot()
         manifest = shipping.export(self.root)
-        self.assertEqual(manifest['n_cells'], 55)
+        expected = shipping.occupied_cells(self.root, shipping.read(self.root / 'data/lookup_table_male.json'))
+        self.assertEqual(set(manifest['cells']), set(expected))
+        self.assertEqual(manifest['n_cells'], len(expected))
         after = self.snapshot()
         for path, content in before.items():
             self.assertEqual(after[path], content)
@@ -72,9 +74,26 @@ class MaleShipping(unittest.TestCase):
         self.assertFalse(orphan.exists())
         self.assertEqual(len(list((self.root / 'data/replay_male').glob('*.bin'))), 400)
 
-    def test_wrong_comparison_refused_before_any_site_write(self):
-        self.write('data/malecns/male_female_comparison.json', {'n_distinct_male_cells': 54})
-        with self.assertRaisesRegex(ValueError, 'occupied cell count'):
+    def test_dictionary_growth_uses_new_cells_and_leaves_historical_comparison(self):
+        table = shipping.read(self.root / 'data/lookup_table_male.json')
+        occupied = shipping.occupied_cells(self.root, table)
+        new = next(levels for c in table['cells']
+                   if shipping.grid_cell_id(levels := {d: c[d] for d in table['dimensions']}) not in occupied)
+        dishes = shipping.read(self.root / 'data/dishes.json')
+        dishes.append(dict(key='synthetic-new', **{d: new[d] for d in table['dimensions']}))
+        self.write('data/dishes.json', dishes)
+        historical = (self.root / 'data/malecns/male_female_comparison.json').read_bytes()
+        manifest = shipping.export(self.root)
+        self.assertEqual(manifest['n_cells'], len(occupied) + 1)
+        self.assertIn(shipping.grid_cell_id(new), manifest['cells'])
+        self.assertEqual(shipping.check_export(self.root), [])
+        self.assertEqual((self.root / 'data/malecns/male_female_comparison.json').read_bytes(), historical)
+
+    def test_duplicate_dictionary_keys_refused_before_any_site_write(self):
+        dishes = shipping.read(self.root / 'data/dishes.json')
+        dishes.append(dishes[0])
+        self.write('data/dishes.json', dishes)
+        with self.assertRaisesRegex(ValueError, 'distinct keys'):
             shipping.export(self.root)
         self.assertFalse((self.root / 'site').exists())
 

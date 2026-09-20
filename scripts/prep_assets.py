@@ -15,6 +15,7 @@ See docs/assets.md for the expected filenames.
 from __future__ import annotations
 
 import argparse
+import json
 import sys
 from collections import deque
 from pathlib import Path
@@ -22,6 +23,8 @@ from pathlib import Path
 from PIL import Image
 
 ROOT = Path(__file__).resolve().parents[1]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
 RAW_DIR = ROOT / "assets" / "raw"
 OUT_DISHES = ROOT / "site" / "assets" / "dishes"
 OUT_FLY = ROOT / "site" / "assets" / "fly"
@@ -72,7 +75,9 @@ def remove_background(image: Image.Image, tolerance: int) -> Image.Image:
 
 
 def crop_and_square(image: Image.Image, margin: float) -> Image.Image:
-    box = image.getchannel("A").getbbox()
+    # Match apply_palette's visibility threshold: faint generated alpha noise
+    # outside the object must not shrink the visible sprite during cropping.
+    box = image.getchannel("A").point(lambda a: 255 if a > 127 else 0).getbbox()
     if box:
         image = image.crop(box)
     side = int(max(image.size) * (1.0 + 2.0 * margin)) or 1
@@ -197,7 +202,13 @@ def main() -> int:
     if args.only in (None, "dishes"):
         dish_paths = sorted(p for p in args.raw.glob("*.png"))
         if args.only_new:
-            dish_paths = [p for p in dish_paths if not (OUT_DISHES / (p.stem.lower() + ".png")).exists()]
+            # Review sheets and other raw art are not dishes. Additive processing
+            # must also leave all shipped dish and fly sprites untouched.
+            from scripts.export_dish_list import asset_filename
+            dishes = json.loads((ROOT / "data/dishes.json").read_text(encoding="utf-8"))
+            names = {asset_filename(d["key"]) for d in dishes}
+            dish_paths = [p for p in dish_paths if p.name.lower() in names
+                          and not (OUT_DISHES / (p.stem.lower() + ".png")).exists()]
         if dish_paths:
             palette = palette_from_sprites(args.palette_from, PALETTE_SIZE) if args.palette_from else None
             written = prepare(dish_paths, args.dish_size, OUT_DISHES, args.tolerance, args.margin, palette)
@@ -205,7 +216,7 @@ def main() -> int:
         else:
             print(f"dishes: no PNGs in {args.raw}")
 
-    if args.only in (None, "fly"):
+    if args.only == "fly" or (args.only is None and not args.only_new):
         fly_dir = args.raw / "fly"
         if fly_dir.is_dir():
             if (fly_dir / "fly.png").exists():

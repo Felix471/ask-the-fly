@@ -6,6 +6,7 @@ import hashlib
 import sys
 import tempfile
 import unittest
+from unittest.mock import patch
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
@@ -37,6 +38,11 @@ class Bundle:
         self.named = {"neurons": []}
         self.variants = ["baseline", "silence_x"]
         self.write()
+        sprites = self.root / "site/assets/dishes"
+        sprites.mkdir(parents=True)
+        (sprites / "fallbacks.json").write_text('{"fallbacks": {}}', encoding="utf-8")
+        for name in ("a", "b"):
+            (sprites / f"{name}.png").write_bytes(b"sprite")
 
     def write(self, table=None, dishes=None, site_dishes=None):
         table = self.table if table is None else table
@@ -81,6 +87,40 @@ class ValidateRelease(unittest.TestCase):
 
     def test_good_bundle_passes(self):
         self.assertEqual(self.b.problems(), [])
+
+    def test_sprites_pass_and_validate_calls_check(self):
+        self.assertEqual(vr.check_sprites(self.b.root), [])
+        (self.b.root / "site/assets/dishes/a.png").unlink()
+        self.assertTrue(any("sprites:" in p and "missing" in p for p in self.b.problems()))
+
+    def test_sprites_shared_and_missing(self):
+        sprites = self.b.root / "site/assets/dishes"
+        (sprites / "b.png").unlink()
+        (sprites / "fallbacks.json").write_text('{"fallbacks": {"b": "a"}}', encoding="utf-8")
+        errors = vr.check_sprites(self.b.root)
+        self.assertTrue(any("shared" in p and "a, b" in p for p in errors), errors)
+        self.assertTrue(any("borrow" in p for p in errors), errors)
+        (sprites / "a.png").unlink()
+        errors = vr.check_sprites(self.b.root)
+        self.assertTrue(any("fallback target" in p and "missing" in p for p in errors), errors)
+        self.assertTrue(any("'a'" in p and "missing" in p for p in errors), errors)
+
+    def test_sprites_invalid_fallbacks_and_unused_target(self):
+        path = self.b.root / "site/assets/dishes/fallbacks.json"
+        for content in ('{', '[]', '{"fallbacks": []}', '{"fallbacks": {"b": 2}}',
+                        '{"fallbacks": {"b": "../a"}}', '{"fallbacks": {"b": "gone"}}'):
+            with self.subTest(content=content):
+                path.write_text(content, encoding="utf-8")
+                self.assertTrue(vr.check_sprites(self.b.root))
+        path.unlink()
+        self.assertTrue(vr.check_sprites(self.b.root))
+
+    def test_sprites_slug_collision_and_own_sprite_precedence(self):
+        path = self.b.root / "site/assets/dishes/fallbacks.json"
+        path.write_text('{"fallbacks": {"b": "a"}}', encoding="utf-8")
+        self.assertEqual(vr.check_sprites(self.b.root), [])
+        self.b.write(dishes=[dish("a"), dish("A!")])
+        self.assertTrue(any("shared" in p for p in vr.check_sprites(self.b.root)))
 
     def test_stub_table_fails(self):
         self.b.write(table={**self.b.table, "stub": True})
@@ -159,6 +199,36 @@ class ValidateRelease(unittest.TestCase):
     def test_placeholder_layout_fails(self):
         (self.b.root / "site" / "data" / "neurons.json").write_text(json.dumps({"layout": "placeholder"}), encoding="utf-8")
         self.assertTrue(any("placeholder layout" in p for p in self.b.problems()))
+
+
+class PrepareNewSprites(unittest.TestCase):
+    def test_crop_ignores_alpha_that_final_palette_discards(self):
+        import prep_assets as prep
+        from PIL import Image
+        image = Image.new("RGBA", (100, 100), (0, 0, 0, 0))
+        image.putpixel((0, 0), (100, 80, 60, 1))
+        image.paste((100, 80, 60, 255), (30, 30, 70, 70))
+        self.assertEqual(prep.crop_and_square(image, 0).size, (40, 40))
+
+    def test_only_new_skips_fly_and_non_dictionary_raw_images(self):
+        import prep_assets as prep
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            raw, out = root / "assets/raw", root / "site/assets/dishes"
+            (raw / "fly").mkdir(parents=True)
+            out.mkdir(parents=True)
+            (root / "data").mkdir()
+            (root / "data/dishes.json").write_text('[{"key":"a"},{"key":"new dish"}]')
+            for name in ("a", "new-dish", "batch3_replacements_sheet"):
+                (raw / f"{name}.png").write_bytes(b"raw")
+            (raw / "fly/idle_1.png").write_bytes(b"raw")
+            (out / "a.png").write_bytes(b"existing")
+            with patch.object(prep, "ROOT", root), patch.object(prep, "OUT_DISHES", out), \
+                 patch.object(prep, "prepare", return_value=[]) as prepare, \
+                 patch.object(sys, "argv", ["prep_assets.py", "--raw", str(raw), "--only-new"]):
+                self.assertEqual(prep.main(), 0)
+            self.assertEqual(prepare.call_count, 1)
+            self.assertEqual(prepare.call_args.args[0], [raw / "new-dish.png"])
 
 
 class ValidateMale(unittest.TestCase):
