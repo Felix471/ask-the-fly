@@ -69,6 +69,18 @@
       "sha256": "ebbd1e543afaba4588d27f7c410c71f2f5751c23145ca961db3d64c4c98a071a",
       "bytes": 1225732
     },
+    "G_shigh_bnone_wlow_imedium": {
+      "levels": {
+        "sugar": "high",
+        "bitter": "none",
+        "water": "low",
+        "ir94e": "medium"
+      },
+      "n_spikes": 313559,
+      "mn9_left_count": 0,
+      "sha256": "6b64943433c18195a25a56e01362fdb4789d77b7c80d7312c1a8924510aa4ae6",
+      "bytes": 1255297
+    },
     "G_shigh_bnone_wlow_inone": {
       "levels": {
         "sugar": "high",
@@ -224,18 +236,6 @@
       "mn9_left_count": 3,
       "sha256": "a3bb8d442c17c78aa6331c51caaae74b304e7f7180698cf198c70bb0d6baf5e9",
       "bytes": 1246248
-    },
-    "G_slow_bmedium_wlow_imedium": {
-      "levels": {
-        "sugar": "low",
-        "bitter": "medium",
-        "water": "low",
-        "ir94e": "medium"
-      },
-      "n_spikes": 315276,
-      "mn9_left_count": 0,
-      "sha256": "625fba04c9e282e0369e8928bad8d9290f3ba12ebb67f02fad3144372fdd3503",
-      "bytes": 1262167
     },
     "G_slow_bnone_whigh_ilow": {
       "levels": {
@@ -850,5 +850,5 @@
       "bytes": 1255450
     }
   },
-  "git_commit": "15b77eece8aa5b6188a25e985a837452b7e338a4"
+  "git_commit": "3aed9e0b0395e03f67311b7e0af0d97bfab27a7a"
 }

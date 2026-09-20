@@ -230,7 +230,12 @@ export const STRINGS = {
       "verdictOppositeMany": "The {fly} took {fly_pick}. The rest is yours.",
       "oppositeLeast": "The {fly}'s least favorite: {lowest}",
       "lowInterest": "The {fly} didn't care for much of any of these. This one was just the least uninteresting."
-    }
+    },
+    "notFood": {
+      "badge": "not food",
+      "note": "The fly has no idea whether this is edible; it reacts only to the four estimated taste levels."
+    },
+    "releaseSummaryV210Draft": "105 new entries, 14 sections, and not-food labels."
   },
   "zh": {
     "add": "添加",
@@ -461,6 +466,11 @@ export const STRINGS = {
       "verdictOppositeMany": "{fly}选了{fly_pick}，剩下的都归你。",
       "oppositeLeast": "{fly}最不想吃的是{lowest}",
       "lowInterest": "{fly}对这几道都不太感兴趣，这道只是相对没那么无聊。"
-    }
+    },
+    "notFood": {
+      "badge": "不是给人吃的",
+      "note": "果蝇不知道这能不能吃，它只按估算出来的四个味觉档位反应。"
+    },
+    "releaseSummaryV210Draft": "新增 105 个条目、14 个分类与非食物标记。"
   }
 };

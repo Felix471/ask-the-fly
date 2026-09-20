@@ -7,6 +7,8 @@ Try it: https://askthefly.app/
 
 **What's new** (full list in [CHANGELOG.md](CHANGELOG.md))
 
+- v2.1.0 (draft, not released): 105 new entries and 14 sections, with not-food badges and notes. Taste levels are encoder estimates; existing dishes' scores and choices are unchanged.
+
 - v2.0.1 (2026-09-19): Chinese wording of the male brain-view caption revised; nothing else changed.
 - v2.0.0 (2026-09-19): a second, independently computed male fly, with separate results and replays; compare both flies without pooling their choices. Female results are unchanged.
 - v1.2.1 (2026-09-15): refreshed all 16 groups of bilingual fly speech, with pixel-art faces, bubbles and lettering; scores, states, allocation rules and the honesty table are unchanged.
@@ -62,6 +64,7 @@ The existing female claims below retain their female scope. Rows explicitly nami
 
 | Claim | Status | Source |
 |---|---|---|
+| Not-food items use the same encoder to estimate sugar, bitter, water and Ir94e levels. Edibility is not represented in the model; the fly reacts only to those four estimated levels. | **model** — the response to the four levels; **our design** — item names, not-food classification and encoder estimates. This is not an edibility assessment. | [Encoder](docs/encoder.md), [Sections](data/dish_sections.json) |
 | Scores come from a published female-brain LIF model on FlyWire v783 | yes | Shiu et al. 2024; docs/phase0_report.md |
 | Sugar drives, bitter suppresses, MN9 as the proboscis-extension readout | reproduced (directions) | docs/phase0_report.md, gates A–D |
 | The model has spontaneous activity | **no** — baseline is 0 Hz by construction | Shiu 2024 Methods; our condition D |

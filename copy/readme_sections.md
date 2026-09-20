@@ -11,6 +11,8 @@ Try it: https://askthefly.app/
 
 **What's new** (full list in [CHANGELOG.md](CHANGELOG.md))
 
+- v2.1.0 (draft, not released): 105 new entries and 14 sections, with not-food badges and notes. Taste levels are encoder estimates; existing dishes' scores and choices are unchanged.
+
 - v2.0.1 (2026-09-19): Chinese wording of the male brain-view caption revised; nothing else changed.
 - v2.0.0 (2026-09-19): a second, independently computed male fly, with separate results and replays; compare both flies without pooling their choices. Female results are unchanged.
 - v1.2.1 (2026-09-15): refreshed all 16 groups of bilingual fly speech, with pixel-art faces, bubbles and lettering; scores, states, allocation rules and the honesty table are unchanged.
@@ -71,6 +73,7 @@ The existing female claims below retain their female scope. Rows explicitly nami
 
 | Claim | Status | Source |
 |---|---|---|
+| Not-food items use the same encoder to estimate sugar, bitter, water and Ir94e levels. Edibility is not represented in the model; the fly reacts only to those four estimated levels. | **model** — the response to the four levels; **our design** — item names, not-food classification and encoder estimates. This is not an edibility assessment. | [Encoder](docs/encoder.md), [Sections](data/dish_sections.json) |
 | Scores come from a published female-brain LIF model on FlyWire v783 | yes | Shiu et al. 2024; docs/phase0_report.md |
 | Sugar drives, bitter suppresses, MN9 as the proboscis-extension readout | reproduced (directions) | docs/phase0_report.md, gates A–D |
 | The model has spontaneous activity | **no** — baseline is 0 Hz by construction | Shiu 2024 Methods; our condition D |
@@ -174,6 +177,8 @@ English: [README.md](README.md)
 
 **最近更新**（完整列表见 [CHANGELOG.md](CHANGELOG.md)）
 
+- v2.1.0（草稿，尚未发布）：新增 105 个条目，整理为 14 个分类，并为非食物条目加上标记和说明。味觉等级由编码器估算；现有菜品的分数和选择不变。
+
 - v2.0.1（2026-09-19）：修订雄蝇脑图说明的中文措辞；其他不变。
 - v2.0.0（2026-09-19）：加入第二只独立计算的雄蝇，分别展示结果和回放；可以比较两只果蝇的选择，不合并结果。雌蝇结果保持不变。
 - v1.2.1（2026-09-15）：更新果蝇全部 16 组中英文台词，改用像素表情、气泡和字体；分数、状态和分配规则不变，诚实声明表不变。
@@ -234,6 +239,7 @@ English: [README.md](README.md)
 
 | 说法 | 状态 | 依据 |
 |---|---|---|
+| 非食物条目也由同一个编码器估算糖、苦、水和 Ir94e 等级。模型不表示可食用性；果蝇只对这四个估算等级作出反应。 | **模型** —— 对四个等级的反应；**我们的设计** —— 条目名称、非食物分类和编码器估算。这不是可食用性判断。 | [编码器](docs/encoder.md)、[分类](data/dish_sections.json) |
 | 分数来自已发表的雌性果蝇脑 LIF 模型，运行在 FlyWire v783 上 | 是 | Shiu et al. 2024；docs/phase0_report.md |
 | 糖驱动、苦抑制、以 MN9 作为伸喙读数 | 已复现（方向） | docs/phase0_report.md，门槛 A–D |
 | 模型有自发活动 | **否** —— 基线按构造为 0 Hz | Shiu 2024 Methods；我们的条件 D |

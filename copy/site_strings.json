@@ -1403,6 +1403,24 @@
       "context": "Both-mode per-fly variant of lowInterest; {fly} uses flyName.female/male. Single-fly copy is unchanged.",
       "en": "The {fly} didn't care for much of any of these. This one was just the least uninteresting.",
       "zh": "{fly}对这几道都不太感兴趣，这道只是相对没那么无聊。"
+    },
+    {
+      "key": "notFood.badge",
+      "context": "Badge for entries in the not_food section, on library tiles and scene plate labels; classification is our design, independent of fly/mode. DP3 draft.",
+      "zh": "不是给人吃的",
+      "en": "not food"
+    },
+    {
+      "key": "notFood.note",
+      "context": "One-sentence note on each not-food result table row and beneath the result hero, for either fly and mode. Four levels are encoder estimates. DP3 draft.",
+      "zh": "果蝇不知道这能不能吃，它只按估算出来的四个味觉档位反应。",
+      "en": "The fly has no idea whether this is edible; it reacts only to the four estimated taste levels."
+    },
+    {
+      "key": "releaseSummaryV210Draft",
+      "context": "DP3 draft for v2.1.0; not displayed. At release, copy approved text into releaseSummary; keep the current live summary until then.",
+      "zh": "新增 105 个条目、14 个分类与非食物标记。",
+      "en": "105 new entries, 14 sections, and not-food labels."
     }
   ]
 }

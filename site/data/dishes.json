@@ -86,7 +86,7 @@
       "water": 0.875,
       "ir94e": 0.825
     },
-    "review": "needs_review",
+    "review": "human_checked",
     "encoder_version": "gemini-3.1-flash-lite@encode_v2.3",
     "arbitration": {
       "water": {
@@ -841,7 +841,7 @@
       "water": 0.9,
       "ir94e": 0.9
     },
-    "review": "needs_review",
+    "review": "human_checked",
     "encoder_version": "gemini-3.1-flash-lite@encode_v2.3",
     "arbitration": {
       "sugar": {
@@ -2907,7 +2907,7 @@
       "water": 0.85,
       "ir94e": 0.8
     },
-    "review": "needs_review",
+    "review": "human_checked",
     "encoder_version": "gemini-3.1-flash-lite@encode_v2.3",
     "arbitration": {
       "sugar": {
@@ -3615,7 +3615,7 @@
       "water": 0.875,
       "ir94e": 0.85
     },
-    "review": "needs_review",
+    "review": "human_checked",
     "encoder_version": "gemini-3.1-flash-lite@encode_v2.3",
     "arbitration": {
       "sugar": {
@@ -5546,15 +5546,15 @@
       "zh": "番茄酱",
       "en": "ketchup"
     },
-    "sugar": "medium",
+    "sugar": "high",
     "bitter": "none",
     "water": "low",
-    "ir94e": "low",
+    "ir94e": "medium",
     "reason": {
-      "sugar": "contains significant added sugar for balance",
+      "sugar": "product-owner override 2026-09-19 (encoder v2.3 said medium): ketchup is >20 g sugar per 100 g and concentrated tomato",
       "bitter": "no bitter ingredients present",
       "water": "thick, viscous paste with low free water content",
-      "ir94e": "contains tomato concentrate which provides a small amount of natural glutamate"
+      "ir94e": "product-owner override 2026-09-19 (encoder v2.3 said low): ketchup is >20 g sugar per 100 g and concentrated tomato"
     },
     "confidence": {
       "sugar": 0.925,
@@ -5562,20 +5562,26 @@
       "water": 0.85,
       "ir94e": 0.8
     },
-    "review": "needs_review",
+    "review": "human_checked",
     "encoder_version": "gemini-3.1-flash-lite@encode_v2.3",
     "arbitration": {
       "sugar": {
         "zh": "medium",
         "en": "high",
-        "chosen": "medium",
-        "rule": "lower_level"
+        "chosen": "high",
+        "rule": "human_checked",
+        "note": "product-owner override 2026-09-19"
       },
       "water": {
         "zh": "low",
         "en": "medium",
         "chosen": "low",
         "rule": "lower_level"
+      },
+      "ir94e": {
+        "chosen": "medium",
+        "rule": "human_checked",
+        "note": "product-owner override 2026-09-19"
       }
     }
   },
@@ -7400,7 +7406,7 @@
       "water": 0.9,
       "ir94e": 0.85
     },
-    "review": "needs_review",
+    "review": "human_checked",
     "encoder_version": "gemini-3.1-flash-lite@encode_v2.3",
     "arbitration": {
       "water": {
@@ -7830,7 +7836,7 @@
       "water": 0.85,
       "ir94e": 0.85
     },
-    "review": "needs_review",
+    "review": "human_checked",
     "encoder_version": "gemini-3.1-flash-lite@encode_v2.3",
     "arbitration": {
       "sugar": {
@@ -8934,13 +8940,13 @@
       "en": "rotting tomato"
     },
     "sugar": "low",
-    "bitter": "medium",
-    "water": "medium",
+    "bitter": "low",
+    "water": "high",
     "ir94e": "medium",
     "reason": {
       "sugar": "fermentation consumes sugars",
-      "bitter": "microbial degradation produces bitter alkaloids and decomposition products",
-      "water": "high moisture content remains as the fruit tissue breaks down",
+      "bitter": "product-owner override 2026-09-19 (encoder v2.3 said medium): rotting is fermentation, not bitterness, and tomato is glutamate-rich",
+      "water": "product-owner override 2026-09-19 (encoder v2.3 said medium): rotting is fermentation, not bitterness, and tomato is glutamate-rich",
       "ir94e": "proteolysis during decay releases significant amounts of free amino acids and glutamate"
     },
     "confidence": {
@@ -8949,7 +8955,7 @@
       "water": 0.9,
       "ir94e": 0.8
     },
-    "review": "needs_review",
+    "review": "human_checked",
     "encoder_version": "gemini-3.1-flash-lite@encode_v2.3",
     "arbitration": {
       "sugar": {
@@ -8961,8 +8967,14 @@
       "water": {
         "zh": "high",
         "en": "medium",
-        "chosen": "medium",
-        "rule": "lower_level"
+        "chosen": "high",
+        "rule": "human_checked",
+        "note": "product-owner override 2026-09-19"
+      },
+      "bitter": {
+        "chosen": "low",
+        "rule": "human_checked",
+        "note": "product-owner override 2026-09-19"
       }
     },
     "encoder_addendum": "addendum_not_food_v1"
@@ -9585,7 +9597,7 @@
       "water": 0.95,
       "ir94e": 0.8
     },
-    "review": "needs_review",
+    "review": "human_checked",
     "encoder_version": "gemini-3.1-flash-lite@encode_v2.3",
     "arbitration": {
       "sugar": {
@@ -10521,7 +10533,7 @@
       "water": 0.925,
       "ir94e": 0.875
     },
-    "review": "needs_review",
+    "review": "human_checked",
     "encoder_version": "gemini-3.1-flash-lite@encode_v2.3",
     "arbitration": {
       "sugar": {
@@ -11567,7 +11579,7 @@
       "water": 0.85,
       "ir94e": 0.6
     },
-    "review": "needs_review",
+    "review": "human_checked",
     "encoder_version": "gemini-3.1-flash-lite@encode_v2.3",
     "arbitration": {
       "sugar": {
@@ -11824,7 +11836,7 @@
       "water": 0.9,
       "ir94e": 0.8
     },
-    "review": "needs_review",
+    "review": "human_checked",
     "encoder_version": "gemini-3.1-flash-lite@encode_v2.3",
     "arbitration": {
       "water": {
