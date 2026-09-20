@@ -11,7 +11,7 @@ Try it: https://askthefly.app/
 
 **What's new** (full list in [CHANGELOG.md](CHANGELOG.md))
 
-- v2.1.0 (draft, not released): 105 new entries and 14 sections, with not-food badges and notes. Taste levels are encoder estimates; existing dishes' scores and choices are unchanged.
+- v2.1.0 (2026-09-19): 105 new entries and 14 sections, with not-food badges and notes. Taste levels are encoder estimates; existing dishes' scores and choices are unchanged.
 
 - v2.0.1 (2026-09-19): Chinese wording of the male brain-view caption revised; nothing else changed.
 - v2.0.0 (2026-09-19): a second, independently computed male fly, with separate results and replays; compare both flies without pooling their choices. Female results are unchanged.
@@ -38,7 +38,7 @@ Try it: https://askthefly.app/
 - FlyWire v783 connectome data: CC BY-NC 4.0.
 - Shiu et al. (2024), *Nature*, model code: MIT.
 - Eon fly-brain benchmark repository: GPL-2.0; used as read-only reference/data, with no code copied.
-- Assets: the 166 dish sprites and the fly sprite sheet (`site/assets/`) are original pixel art generated for this project, released under CC BY 4.0; the code stays MIT. Only the processed sprites are tracked; the raw 1024 px sources in `assets/raw/` are not.
+- Assets: the 279 menu-entry sprites and the fly sprite sheet (`site/assets/`) are original pixel art generated for this project, released under CC BY 4.0; the code stays MIT. Only the processed sprites are tracked; the raw 1024 px sources in `assets/raw/` are not.
 - FlyWire neuron annotations (Schlegel et al. 2024; github.com/flyconnectome/flywire_annotations): CC BY 4.0.
 - Share-card QR codes: qrcode-generator 2.0.4 (Kazuhiko Arase), MIT, vendored unmodified in `site/vendor/qrcode-generator/` with its license.
 - Display fonts (self-hosted, woff2, subset by `scripts/prep_fonts.py`): Pixelify Sans (Stefie Justprince and the Pixelify Sans Project Authors), SIL Open Font License 1.1, `site/assets/fonts/LICENSE-PixelifySans.txt`; Fusion Pixel 12px proportional (TakWolf; built on Ark Pixel, Cubic 11 and Galmuri), SIL Open Font License 1.1, `site/assets/fonts/LICENSE-FusionPixel.txt`. The CJK font is subset to the characters the site shows (`site/assets/fonts/glyphs-zh.txt`); anything else falls back to the system CJK sans.
@@ -177,7 +177,7 @@ English: [README.md](README.md)
 
 **最近更新**（完整列表见 [CHANGELOG.md](CHANGELOG.md)）
 
-- v2.1.0（草稿，尚未发布）：新增 105 个条目，整理为 14 个分类，并为非食物条目加上标记和说明。味觉等级由编码器估算；现有菜品的分数和选择不变。
+- v2.1.0（2026-09-19）：新增 105 个条目，整理为 14 个分类，并为非食物条目加上标记和说明。味觉等级由编码器估算；现有菜品的分数和选择不变。
 
 - v2.0.1（2026-09-19）：修订雄蝇脑图说明的中文措辞；其他不变。
 - v2.0.0（2026-09-19）：加入第二只独立计算的雄蝇，分别展示结果和回放；可以比较两只果蝇的选择，不合并结果。雌蝇结果保持不变。
@@ -204,7 +204,7 @@ English: [README.md](README.md)
 - FlyWire v783 连接组数据：CC BY-NC 4.0。
 - Shiu 等（2024），*Nature*，模型代码：MIT。
 - Eon fly-brain 基准仓库：GPL-2.0；仅作只读参考/数据使用，未复制任何代码。
-- 素材：166 张菜品像素图和果蝇精灵图（`site/assets/`）是为本项目生成的原创像素画，以 CC BY 4.0 发布；代码仍为 MIT。仓库只跟踪处理后的精灵图，`assets/raw/` 里的 1024 px 原图不入库。
+- 素材：279 张菜单条目像素图和果蝇精灵图（`site/assets/`）是为本项目生成的原创像素画，以 CC BY 4.0 发布；代码仍为 MIT。仓库只跟踪处理后的精灵图，`assets/raw/` 里的 1024 px 原图不入库。
 - FlyWire 神经元注释表（Schlegel 等 2024；github.com/flyconnectome/flywire_annotations）：CC BY 4.0。
 - 分享卡二维码：qrcode-generator 2.0.4（Kazuhiko Arase），MIT，原样放在 `site/vendor/qrcode-generator/`，附许可证。
 - 展示字体（自托管 woff2，由 `scripts/prep_fonts.py` 子集化）：Pixelify Sans（Stefie Justprince 与 Pixelify Sans 项目作者），SIL Open Font License 1.1，`site/assets/fonts/LICENSE-PixelifySans.txt`；缝合怪像素字体 Fusion Pixel 12px 比例版（TakWolf；基于方舟像素、俐方体 11 号和 Galmuri），SIL Open Font License 1.1，`site/assets/fonts/LICENSE-FusionPixel.txt`。中文字体只包含站点会显示的字符（`site/assets/fonts/glyphs-zh.txt`），其余字符回退到系统中文无衬线字体。

@@ -6,7 +6,7 @@ import { fileURLToPath } from "node:url";
 import path from "node:path";
 
 import {
-  buildDictionary, buildLookup, cardLines, decide, ir94eLevel, issueUrl, lowInterest, normalizeName, releaseLine, scoreOptions, STRINGS, fmt,
+  buildDictionary, buildLookup, buildSections, notFoodCopy, cardLines, decide, ir94eLevel, issueUrl, lowInterest, normalizeName, releaseLine, scoreOptions, STRINGS, fmt,
 } from "../app.js";
 
 test("footer release line: version · date · summary from site/data/release.json, version linked to the changelog", () => {
@@ -26,6 +26,32 @@ test("footer release line: version · date · summary from site/data/release.jso
 const here = path.dirname(fileURLToPath(import.meta.url));
 const dishes = JSON.parse(readFileSync(path.join(here, "..", "data", "dishes.json"), "utf8"));
 const table = JSON.parse(readFileSync(path.join(here, "..", "data", "lookup_table.json"), "utf8"));
+
+test('section loader accepts v2 and marks only members of the not_food section', () => {
+  const entries = [{...dishes[0], key:'sample', aliases:['synthetic']}, {...dishes[1], key:'food', aliases:[]}];
+  const dictionary = buildDictionary(entries);
+  const sections = buildSections({schema:'dish_sections_v2', popular:['food'], sections:[
+    {zh:'食物', en:'Food', keys:['food']},
+    {zh:'不是给人吃的', en:'Not food', keys:['sample'], not_food:true},
+  ]});
+  assert.equal(sections.sections[1].not_food, true);
+  assert.deepEqual(sections.popular, ['food']);
+  for (const lang of ['zh','en']) {
+    assert.deepEqual(notFoodCopy(dictionary.find('synthetic'), sections, lang), STRINGS[lang].notFood);
+    assert.equal(notFoodCopy(dictionary.find('food'), sections, lang), null);
+    assert.equal(notFoodCopy(null, sections, lang), null);
+  }
+  assert.throws(() => buildSections({schema:'dish_sections_v1',sections:[]}), /schema/);
+  for (const filename of ['lookup_table_v1_2.json','lookup_table_male.json']) {
+    const lookup = buildLookup(JSON.parse(readFileSync(path.join(here,'..','data',filename),'utf8')));
+    const scored = scoreOptions(['synthetic','food'],dictionary,lookup);
+    for (const mode of ['ask','opposite']) {
+      const decision = decide(scored,mode);
+      assert.equal(decision.known.filter(item=>notFoodCopy(item.entry,sections,'en')).length,1);
+      assert.equal(scored[0].entry,entries[0], 'classification does not mutate the dictionary');
+    }
+  }
+});
 
 test("normalizeName mirrors encoder/normalize.py", () => {
   assert.equal(normalizeName("  Mapo   Tofu "), "mapo tofu");
@@ -218,7 +244,7 @@ test("every dictionary entry maps to a replay file that parses and matches the m
     assert.equal(replay.header.hz.sugar, cell.hz.sugar);
     assert.equal(replay.header.hz.water, cell.hz.water);
     for (let i = 1; i < replay.t.length; i += 1) assert.ok(replay.t[i] >= replay.t[i - 1], "times sorted");
-    if (replay.idx.length) assert.ok(Math.max(...replay.idx) < neurons.n, "indices inside neurons.json");
+    assert.ok(replay.idx.every(index => index < neurons.n), "indices inside neurons.json");
     assert.ok(typeof replay.header.seed === "number" && replay.header.git_commit.length >= 7, "provenance present");
   }
 });

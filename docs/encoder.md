@@ -60,3 +60,7 @@ The commands below record the original three-dimension batch. Its later Ir94e ad
 5. `python scripts/batch_review.py --batch data/batch2_dishes.json --report docs/encoder_stability_batch2.md` appends the needs_review list, every confidence below 0.8, and the sanity checks (expectations per dish; disagreements are listed, the model's output is kept).
 6. `python scripts/export_site_data.py`, sprites via `scripts/prep_assets.py --only-new --palette-from site/assets/dishes`, sections in `data/dish_sections.json`.
 
+
+### Batch 3 history (2026-09-19)
+
+[Batch 3](dictionary_batch3.md): owner-authorized single v2.3 pass for 105 new entries across all four dimensions, with not-food addendum provenance, twelve hand checks and two overrides; the [aggregate stability gate remained FAIL](encoder_stability_batch3.md#batch-3-stability-gate), and the recorded owner decision accepted per-entry arbitration after dropping umeboshi. Existing 174-entry levels were preserved.

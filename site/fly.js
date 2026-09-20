@@ -37,7 +37,7 @@ export function makeToken() {
   return token;
 }
 
-export function layoutPlates(count, width) {
+export function layoutPlates(count, width, captionExtra = 0) {
   const perRow = Math.max(1, Math.min(count, Math.floor((width - 16) / (PLATE + 28))));
   const rows = Math.ceil(count / perRow);
   const positions = [];
@@ -47,10 +47,10 @@ export function layoutPlates(count, width) {
     const col = i - row * perRow;
     const span = inRow * (PLATE + 28) - 28;
     const x = (width - span) / 2 + col * (PLATE + 28) + PLATE / 2;
-    const y = 70 + row * ROW_HEIGHT + PLATE / 2;
+    const y = 70 + row * (ROW_HEIGHT + captionExtra) + PLATE / 2;
     positions.push({ x, y });
   }
-  return { positions, height: 70 + rows * ROW_HEIGHT };
+  return { positions, height: 70 + rows * (ROW_HEIGHT + captionExtra) };
 }
 
 async function loadImage(url) {
@@ -188,7 +188,7 @@ export class FlyScene {
   async setPlates(plates) {
     this.plates = plates;
     const width = this.canvas.clientWidth || 360;
-    const { positions, height } = layoutPlates(plates.length, width);
+    const { positions, height } = layoutPlates(plates.length, width, plates.some(plate => plate.badge) ? 18 : 0);
     this.positions = positions;
     this.canvas.width = Math.round(width * this.pixelRatio);
     this.canvas.height = Math.round(height * this.pixelRatio);
@@ -198,8 +198,7 @@ export class FlyScene {
     this.labels = plates.map((plate, i) => {
       const label = this.labelContainer.ownerDocument.createElement("span");
       label.className = "plate-label";
-      label.textContent = plate.label;
-      label.title = plate.label;
+      this.renderPlateLabel(label, plate.label, plate.badge);
       label.style.left = `${positions[i].x / width * 100}%`;
       label.style.top = `${(positions[i].y + PLATE / 2 + 7) / height * 100}%`;
       label.style.width = `${112 / width * 100}%`;
@@ -216,14 +215,30 @@ export class FlyScene {
 
   // Text on the plates can change without restarting anything (language
   // switch, "loading…" while a replay is fetched).
-  relabel(index, label, sub) {
+  renderPlateLabel(node, label, badge) {
+    node.textContent = label;
+    node.title = label;
+    node.classList.toggle('has-not-food', Boolean(badge));
+    if (badge) {
+      const name = node.ownerDocument.createElement('span');
+      name.className = 'plate-name';
+      name.textContent = label;
+      const tag = node.ownerDocument.createElement('span');
+      tag.className = 'not-food-badge';
+      tag.textContent = badge;
+      node.replaceChildren(name, tag);
+      node.title = `${label} — ${badge}`;
+    }
+  }
+
+  relabel(index, label, sub, badge) {
     const plate = this.plates[index];
     if (!plate) return;
     if (label != null) {
       plate.label = label;
-      this.labels[index].textContent = label;
-      this.labels[index].title = label;
     }
+    if (badge != null) plate.badge = badge;
+    this.renderPlateLabel(this.labels[index], plate.label, plate.badge);
     if (sub != null) plate.sub = sub;
     if (!this.raf) this.draw();
   }
@@ -280,7 +295,7 @@ export class FlyScene {
     if (plate.sub) {
       ctx.fillStyle = "#6b625b";
       ctx.font = "12px system-ui, -apple-system, 'Segoe UI', sans-serif";
-      ctx.fillText(plate.sub, 0, r + 38);
+      ctx.fillText(plate.sub, 0, r + 38 + (plate.badge ? 18 : 0));
     }
     ctx.restore();
   }

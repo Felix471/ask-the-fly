@@ -34,7 +34,10 @@ class Bundle:
         self.cells = [cell("none", "none"), cell("low", "low"), cell("low", "none")]
         self.table = {"schema_version": "lookup_v1", "levels": LEVELS, "cells": self.cells, "cells_sha256": vr.cells_sha256(self.cells)}
         self.dishes = [dish("a"), dish("b", "none", "none")]
-        self.sections = {"sections": []}
+        self.sections = {"schema": "dish_sections_v2", "popular": ["a"], "sections": [
+            {"zh": "食物", "en": "Food", "keys": ["a", "b"]},
+            {"zh": "不是给人吃的", "en": "Not food", "keys": [], "not_food": True},
+        ]}
         self.named = {"neurons": []}
         self.variants = ["baseline", "silence_x"]
         self.write()
@@ -87,6 +90,48 @@ class ValidateRelease(unittest.TestCase):
 
     def test_good_bundle_passes(self):
         self.assertEqual(self.b.problems(), [])
+
+    def test_sections_valid_and_wired_into_validate(self):
+        self.assertEqual(vr.check_sections(self.b.root), [])
+        self.b.sections["sections"][0]["keys"].remove("a")
+        self.b.write()
+        self.assertTrue(any("sections:" in p and "missing" in p for p in self.b.problems()))
+
+    def test_sections_reject_bad_membership(self):
+        for keys, reason in [(["a"], "missing"), (["a", "b", "a"], "exactly once"),
+                             (["a", "b", "unknown"], "unknown")]:
+            with self.subTest(keys=keys):
+                self.b.sections["sections"][0]["keys"] = keys
+                self.b.write()
+                self.assertTrue(any(reason in p for p in vr.check_sections(self.b.root)))
+        self.b.sections["sections"][0]["keys"] = ["a", "b"]
+        self.b.sections["sections"][1]["keys"] = ["a"]
+        self.b.write()
+        self.assertTrue(any("exactly once" in p for p in vr.check_sections(self.b.root)))
+
+    def test_sections_names_schema_popular_and_flag(self):
+        mutations = [lambda s: s.update(schema="dish_sections_v1"),
+                     lambda s: s.update(popular=["missing"]),
+                     lambda s: s["sections"][0].update(zh="  "),
+                     lambda s: s["sections"][0].update(en=""),
+                     lambda s: s["sections"][1].pop("not_food"),
+                     lambda s: s["sections"][0].update(not_food=True),
+                     lambda s: s["sections"][1].update(not_food="true")]
+        original = json.dumps(self.b.sections)
+        for mutate in mutations:
+            self.b.sections = json.loads(original)
+            mutate(self.b.sections)
+            self.b.write()
+            self.assertTrue(vr.check_sections(self.b.root))
+
+    def test_sections_missing_and_malformed(self):
+        path = self.b.root / "data/dish_sections.json"
+        for text in ('{', '[]', '{"schema":"dish_sections_v2","sections":[null]}',
+                     '{"schema":"dish_sections_v2","sections":[{"keys":[{}]}]}'):
+            path.write_text(text, encoding="utf-8")
+            self.assertTrue(vr.check_sections(self.b.root))
+        path.unlink()
+        self.assertTrue(vr.check_sections(self.b.root))
 
     def test_sprites_pass_and_validate_calls_check(self):
         self.assertEqual(vr.check_sprites(self.b.root), [])
@@ -262,7 +307,7 @@ class ValidateMale(unittest.TestCase):
         self.write('site/data/replay_male/manifest.json', {
             'schema_version': 'replay_manifest_v1', 'fly': 'male', 'git_commit': 'a' * 40,
             'n_cells': len(cells), 'n_cells_recorded': 400, 'variants': ['baseline'],
-            'shipping_rule': 'cells occupied by the 174 dishes; the other recorded cells stay in the research pack',
+            'shipping_rule': f'cells occupied by the {len(dishes)} dishes; the other recorded cells stay in the research pack',
             'source_manifest_sha256': 'b' * 64, 'cells': cells})
 
     def write(self, rel, value):
@@ -272,6 +317,13 @@ class ValidateMale(unittest.TestCase):
 
     def test_male_data_checked_before_ui_activation(self):
         self.assertEqual(vr.check_male(self.root), [])
+
+    def test_stale_male_shipping_count_is_rejected(self):
+        path = self.root / 'site/data/replay_male/manifest.json'
+        manifest = json.loads(path.read_text(encoding='utf-8'))
+        manifest['shipping_rule'] = 'cells occupied by the 1 dishes; the other recorded cells stay in the research pack'
+        self.write('site/data/replay_male/manifest.json', manifest)
+        self.assertIn('male: invalid replay manifest shipping_rule', vr.check_male(self.root))
 
     def test_male_neuropils_required_complete_and_in_bounds(self):
         path = self.root / 'site/data/neuropils_male.json'

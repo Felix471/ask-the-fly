@@ -9,6 +9,37 @@ import {cellIdFor, decodeNeurons, parseReplay} from '../brain.js';
 
 const json = path => JSON.parse(readFileSync(new URL(path, import.meta.url), 'utf8'));
 
+test('batch 3: all 279 entries resolve to both flies and an intact shipped male replay', () => {
+  const dishes = json('../../data/dishes.json');
+  assert.equal(dishes.length, 279);
+  assert.deepEqual(json('../data/dishes.json'), dishes);
+  const dictionary = buildDictionary(dishes);
+  const manifest = json('../data/replay_male/manifest.json');
+  const verified = new Set();
+  for (const filename of ['lookup_table_v1_2.json', 'lookup_table_male.json']) {
+    const scored = scoreOptions(dishes.map(d => d.key), dictionary, buildLookup(json(`../data/${filename}`)));
+    assert.equal(scored.length, 279);
+    for (const [i, item] of scored.entries()) {
+      assert.equal(item.entry.key, dishes[i].key);
+      assert.ok(item.cell, `${filename}: ${dishes[i].key}`);
+      assert.ok(Number.isFinite(item.cell.mn9_mean), item.entry.key);
+      assert.equal(readoutState(item.cell), item.cell.state);
+      if (filename === 'lookup_table_male.json') {
+        const cid = cellIdFor(item.cell);
+        const record = manifest.cells[cid];
+        assert.ok(record, item.entry.key);
+        if (!verified.has(cid)) {
+          const bytes = readFileSync(new URL(`../data/replay_male/${cid}.bin`, import.meta.url));
+          assert.equal(createHash('sha256').update(bytes).digest('hex'), record.sha256, cid);
+          verified.add(cid);
+        }
+      }
+    }
+  }
+  assert.equal(verified.size, 70);
+  assert.deepEqual(verified, new Set(Object.keys(manifest.cells)));
+});
+
 test('male v2.0.0: immutable scores and states for the 174 reference dishes', () => {
   const bytes = readFileSync(new URL('./fixtures/male_v2_0_0_scores.json', import.meta.url));
   assert.equal(createHash('sha256').update(bytes).digest('hex'),
