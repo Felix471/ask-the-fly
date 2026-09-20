@@ -123,7 +123,7 @@ Annotated tags on `main`; every update ships under a version (feature branch off
 | v1.2.1 | 5789e3b | Owner-supplied bilingual fly speech refreshed; pixel-art emotion faces, speech bubbles and lettering; no scores, state rules or allocation changed. Honesty table unchanged. |
 | v2.0.0 | 641f29b | Second, independently computed male fly (MaleCNS v1.0, >=5-synapse connections, 0.17875 mV, bilateral Tastekin-typed sets) with a female/male/both selector, the fixed disagreement sentence, male brain view (soma or synapse-centroid positions, MaleCNS ROI outlines), trial-0 replays for the 55 dish cells and proboscis-only speech split into four groups; female scores, states, ties and allocations unchanged (v1.2.1 fixture). Honesty table: MaleCNS row rewritten; four commitment rows, Phase 2 comparison, male readout/state and replay/layout rows added, owner-approved. |
 | v2.0.1 | 54837ca | Chinese wording of the male brain-view caption revised to the owner's text; no data, scores, states, allocations or English text changed. Honesty table unchanged. |
-| v2.1.0 | pending merge | 105 new entries (23 Not food), 14 bilingual sections, not-food badges and notes, eight replacement sprites and 105 new sprites; existing scores unchanged for both flies. Owner-approved not-food honesty row added. See [batch report](dictionary_batch3.md). |
+| v2.1.0 | 5f28a72 | 105 new entries (23 Not food), 14 bilingual sections, not-food badges and notes, eight replacement sprites and 105 new sprites; existing scores unchanged for both flies. Owner-approved not-food honesty row added. See [batch report](dictionary_batch3.md). |
 
 ### Changelog and the footer "what's new" line
 
