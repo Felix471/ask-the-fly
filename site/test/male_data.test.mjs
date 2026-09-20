@@ -2,20 +2,68 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
+import {createHash} from 'node:crypto';
 import {buildDictionary, buildLookup, scoreOptions, DIMENSIONS} from '../app.js';
 import {readoutState} from '../taste_states.js';
 import {cellIdFor, decodeNeurons, parseReplay} from '../brain.js';
 
 const json = path => JSON.parse(readFileSync(new URL(path, import.meta.url), 'utf8'));
 
-test('male lookup has 400 distinct Hz keys and scores all 174 dishes with the recorded state', () => {
+test('batch 3: all 279 entries resolve to both flies and an intact shipped male replay', () => {
+  const dishes = json('../../data/dishes.json');
+  assert.equal(dishes.length, 279);
+  assert.deepEqual(json('../data/dishes.json'), dishes);
+  const dictionary = buildDictionary(dishes);
+  const manifest = json('../data/replay_male/manifest.json');
+  const verified = new Set();
+  for (const filename of ['lookup_table_v1_2.json', 'lookup_table_male.json']) {
+    const scored = scoreOptions(dishes.map(d => d.key), dictionary, buildLookup(json(`../data/${filename}`)));
+    assert.equal(scored.length, 279);
+    for (const [i, item] of scored.entries()) {
+      assert.equal(item.entry.key, dishes[i].key);
+      assert.ok(item.cell, `${filename}: ${dishes[i].key}`);
+      assert.ok(Number.isFinite(item.cell.mn9_mean), item.entry.key);
+      assert.equal(readoutState(item.cell), item.cell.state);
+      if (filename === 'lookup_table_male.json') {
+        const cid = cellIdFor(item.cell);
+        const record = manifest.cells[cid];
+        assert.ok(record, item.entry.key);
+        if (!verified.has(cid)) {
+          const bytes = readFileSync(new URL(`../data/replay_male/${cid}.bin`, import.meta.url));
+          assert.equal(createHash('sha256').update(bytes).digest('hex'), record.sha256, cid);
+          verified.add(cid);
+        }
+      }
+    }
+  }
+  assert.equal(verified.size, 70);
+  assert.deepEqual(verified, new Set(Object.keys(manifest.cells)));
+});
+
+test('male v2.0.0: immutable scores and states for the 174 reference dishes', () => {
+  const bytes = readFileSync(new URL('./fixtures/male_v2_0_0_scores.json', import.meta.url));
+  assert.equal(createHash('sha256').update(bytes).digest('hex'),
+    'b3da79e6b3bdab1ef4fcb4f5c7c3bc663600c44c43346ba9ac1a71594506cc03');
+  const fixture = JSON.parse(bytes);
+  const female = json('./fixtures/female_v1_2_1_decisions.json');
+  assert.equal(fixture.dishes.length, 174);
+  assert.deepEqual(fixture.dishes.map(d => d[0]), female.dishes.map(d => d[0]));
+  const dictionary = buildDictionary(json('../data/dishes.json'));
+  const table = json('../data/lookup_table_male.json');
+  assert.equal(table.cells_sha256, fixture.lookup_cells_sha256);
+  const scored = scoreOptions(fixture.dishes.map(d => d[0]), dictionary, buildLookup(table));
+  assert.deepEqual(scored.map(d => [d.entry.key, cellIdFor(d.cell), d.cell.mn9_mean, readoutState(d.cell)]), fixture.dishes);
+});
+
+test('male lookup has 400 distinct Hz keys and scores every current dish with the recorded state', () => {
   const table = json('../data/lookup_table_male.json');
   const dishes = json('../../data/dishes.json');
   const lookup = buildLookup(table);
   assert.equal(table.cells.length, 400);
   assert.equal(new Set(table.cells.map(c => DIMENSIONS.map(d => c.hz[d]).join('|'))).size, 400);
-  assert.equal(dishes.length, 174);
-  for (const item of scoreOptions(dishes.map(d => d.key), buildDictionary(dishes), lookup)) {
+  const scored = scoreOptions(dishes.map(d => d.key), buildDictionary(dishes), lookup);
+  assert.equal(scored.length, dishes.length);
+  for (const item of scored) {
     assert.ok(item.cell, item.name);
     assert.equal(readoutState(item.cell), item.cell.state, item.name);
   }
@@ -97,6 +145,7 @@ test('every dish has a male trial-0 replay with exact indexed primary MN9 counts
     }
     assert.equal(header.mn9_left_count, count, cid);
   }
-  assert.equal(parsed.size, 55);
+  const occupied = new Set(json('../../data/dishes.json').map(d => cellIdFor(lookup.get(d))));
+  assert.deepEqual(new Set(parsed.keys()), occupied);
   assert.equal(manifest.n_cells, parsed.size);
 });

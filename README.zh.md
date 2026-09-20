@@ -8,6 +8,8 @@ English: [README.md](README.md)
 
 **最近更新**（完整列表见 [CHANGELOG.md](CHANGELOG.md)）
 
+- v2.1.0（2026-09-19）：新增 105 个条目，整理为 14 个分类，并为非食物条目加上标记和说明。味觉等级由编码器估算；现有菜品的分数和选择不变。
+
 - v2.0.1（2026-09-19）：修订雄蝇脑图说明的中文措辞；其他不变。
 - v2.0.0（2026-09-19）：加入第二只独立计算的雄蝇，分别展示结果和回放；可以比较两只果蝇的选择，不合并结果。雌蝇结果保持不变。
 - v1.2.1（2026-09-15）：更新果蝇全部 16 组中英文台词，改用像素表情、气泡和字体；分数、状态和分配规则不变，诚实声明表不变。
@@ -31,7 +33,7 @@ English: [README.md](README.md)
 - FlyWire v783 连接组数据：CC BY-NC 4.0。
 - Shiu 等（2024），*Nature*，模型代码：MIT。
 - Eon fly-brain 基准仓库：GPL-2.0；仅作只读参考/数据使用，未复制任何代码。
-- 素材：166 张菜品像素图和果蝇精灵图（`site/assets/`）是为本项目生成的原创像素画，以 CC BY 4.0 发布；代码仍为 MIT。仓库只跟踪处理后的精灵图，`assets/raw/` 里的 1024 px 原图不入库。
+- 素材：279 张菜单条目像素图和果蝇精灵图（`site/assets/`）是为本项目生成的原创像素画，以 CC BY 4.0 发布；代码仍为 MIT。仓库只跟踪处理后的精灵图，`assets/raw/` 里的 1024 px 原图不入库。
 - FlyWire 神经元注释表（Schlegel 等 2024；github.com/flyconnectome/flywire_annotations）：CC BY 4.0。
 - 分享卡二维码：qrcode-generator 2.0.4（Kazuhiko Arase），MIT，原样放在 `site/vendor/qrcode-generator/`，附许可证。
 - 展示字体（自托管 woff2，由 `scripts/prep_fonts.py` 子集化）：Pixelify Sans（Stefie Justprince 与 Pixelify Sans 项目作者），SIL Open Font License 1.1，`site/assets/fonts/LICENSE-PixelifySans.txt`；缝合怪像素字体 Fusion Pixel 12px 比例版（TakWolf；基于方舟像素、俐方体 11 号和 Galmuri），SIL Open Font License 1.1，`site/assets/fonts/LICENSE-FusionPixel.txt`。中文字体只包含站点会显示的字符（`site/assets/fonts/glyphs-zh.txt`），其余字符回退到系统中文无衬线字体。
@@ -63,6 +65,7 @@ English: [README.md](README.md)
 
 | 说法 | 状态 | 依据 |
 |---|---|---|
+| 非食物条目也由同一个编码器估算糖、苦、水和 Ir94e 等级。模型不表示可食用性；果蝇只对这四个估算等级作出反应。 | **模型** —— 对四个等级的反应；**我们的设计** —— 条目名称、非食物分类和编码器估算。这不是可食用性判断。 | [编码器](docs/encoder.md)、[分类](data/dish_sections.json) |
 | 分数来自已发表的雌性果蝇脑 LIF 模型，运行在 FlyWire v783 上 | 是 | Shiu et al. 2024；docs/phase0_report.md |
 | 糖驱动、苦抑制、以 MN9 作为伸喙读数 | 已复现（方向） | docs/phase0_report.md，门槛 A–D |
 | 模型有自发活动 | **否** —— 基线按构造为 0 Hz | Shiu 2024 Methods；我们的条件 D |

@@ -3,6 +3,8 @@
 
 Inputs were compared to the v1.2.1 tag. Canonical JSON hashes ignore checkout
 line endings; their contents must never change. Existing fixtures are refused.
+The 174-dish guard is the frozen v1.2.1 reference set, not today's dictionary.
+Do not rerun this generator against an expanded dictionary.
 Pair order is i<j in dictionary order; each pair has ask then opposite outcomes.
 An outcome is [winner, flyPick, tie, flyTies, humanSet]: first two are local
 indices 0/1 (-1 means no winner); sets are bit masks (1=first, 2=second).

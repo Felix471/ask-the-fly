@@ -265,6 +265,16 @@ body { padding: 0 16px 32px; max-width: 640px; margin: 0 auto; }
 /* Match the canvas content box. Percentage positions follow its CSS scaling
    without relaying out the plates or restarting an in-flight animation. */
 .plate-labels { position: absolute; inset: 2px; pointer-events: none; }
+.plate-label.has-not-food { height: auto; overflow: visible; }
+.plate-name { display: block; overflow: hidden; text-overflow: ellipsis; }
+.not-food-badge {
+  display: inline-block; max-width: 100%; padding: 1px 4px;
+  border: 1px solid var(--line); border-radius: 4px;
+  background: var(--panel); color: var(--ink);
+  font: 600 10px/14px system-ui, sans-serif; white-space: nowrap;
+}
+.not-food-note { font-size: 0.8rem; line-height: 1.4; color: var(--muted); }
+.result-hero-notes p { margin: 4px 0 8px; }
 .plate-label {
   position: absolute; transform: translateX(-50%);
   height: 18px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;
@@ -335,6 +345,10 @@ body { padding: 0 16px 32px; max-width: 640px; margin: 0 auto; }
 .tabs { display: flex; gap: 6px; overflow-x: auto; margin-top: 8px; padding-bottom: 4px; }
 .tabs button { font: inherit; font-size: 0.85rem; white-space: nowrap; border: 1px solid var(--line); background: var(--panel); color: var(--ink); border-radius: 999px; padding: 4px 12px; cursor: pointer; }
 .tabs button[aria-selected="true"] { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+.tabs button { flex: 0 0 auto; }
+@media (max-width: 599px) {
+  .tabs { flex-wrap: wrap; overflow-x: visible; }
+}
 
 /* ---- selected dishes: chips with a sprite thumbnail ---- */
 .thumb { width: 26px; height: 26px; image-rendering: pixelated; flex: 0 0 auto; }

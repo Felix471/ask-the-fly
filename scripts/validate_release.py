@@ -142,6 +142,61 @@ def check_sync(root: Path) -> list[str]:
     return problems
 
 
+def check_sections(root: Path) -> list[str]:
+    """Taxonomy membership is total and exclusive; empty future sections are allowed."""
+    from collections import Counter
+
+    try:
+        payload = load_json(root / "data/dish_sections.json")
+        dishes = load_json(root / "data/dishes.json")
+    except (OSError, ValueError) as exc:
+        return [f"sections: missing or unreadable source: {exc}"]
+    if not isinstance(payload, dict):
+        return ["sections: expected an object"]
+    problems = []
+    if payload.get("schema") != "dish_sections_v2":
+        problems.append("sections: schema must be dish_sections_v2")
+    sections = payload.get("sections")
+    if not isinstance(sections, list):
+        return problems + ["sections: sections must be an array"]
+    known = {dish["key"] for dish in dishes}
+    counts = Counter()
+    flagged = 0
+    for index, section in enumerate(sections):
+        if not isinstance(section, dict):
+            problems.append(f"sections: section {index} must be an object")
+            continue
+        for lang in ("zh", "en"):
+            name = section.get(lang)
+            if not isinstance(name, str) or not name.strip():
+                problems.append(f"sections: section {index} has empty/invalid {lang} name")
+        if "not_food" in section and not isinstance(section["not_food"], bool):
+            problems.append(f"sections: section {index} not_food must be boolean")
+        flagged += section.get("not_food") is True
+        keys = section.get("keys")
+        if not isinstance(keys, list) or any(not isinstance(key, str) for key in keys):
+            problems.append(f"sections: section {index} keys must be a string array")
+            continue
+        counts.update(keys)
+    if flagged != 1:
+        problems.append(f"sections: exactly one not_food section required, found {flagged}")
+    for key in sorted(known - counts.keys()):
+        problems.append(f"sections: missing dictionary key {key!r}")
+    for key, count in sorted(counts.items()):
+        if key not in known:
+            problems.append(f"sections: unknown key {key!r}")
+        if count != 1:
+            problems.append(f"sections: {key!r} must appear exactly once (found {count})")
+    popular = payload.get("popular")
+    if not isinstance(popular, list) or any(not isinstance(key, str) for key in popular):
+        problems.append("sections: popular must be a string array")
+    else:
+        for key in popular:
+            if key not in known:
+                problems.append(f"sections: popular has unknown key {key!r}")
+    return problems
+
+
 def check_replays(root: Path, table: dict | None, dishes: list[dict]) -> list[str]:
     problems = []
     replay_dir = root / "site" / "data" / "replay"
@@ -193,6 +248,13 @@ def check_replays(root: Path, table: dict | None, dishes: list[dict]) -> list[st
             elif cell_id(cell) not in cells:
                 problems.append(f"replay: dish {dish.get('key')!r} cell {cell_id(cell)} has no replay")
     return problems
+
+
+def check_sprites(root: Path) -> list[str]:
+    """Every dictionary dish needs an existing, exclusively owned sprite."""
+    from scripts.audit_sprites import audit
+
+    return audit(root)["problems"]
 
 
 def check_site(root: Path) -> list[str]:
@@ -401,6 +463,8 @@ def validate(root: Path) -> list[str]:
     problems += dict_problems
     problems += check_source_dictionary(root)
     problems += check_sync(root)
+    problems += check_sections(root)
+    problems += check_sprites(root)
     problems += check_replays(root, table, dishes)
     problems += check_site(root)
     problems += check_release(root)

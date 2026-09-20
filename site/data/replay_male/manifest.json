@@ -1,14 +1,26 @@
 {
   "schema_version": "replay_manifest_v1",
   "fly": "male",
-  "n_cells": 55,
+  "n_cells": 70,
   "n_cells_recorded": 400,
-  "shipping_rule": "cells occupied by the 174 dishes; the other recorded cells stay in the research pack",
+  "shipping_rule": "cells occupied by the 279 dishes; the other recorded cells stay in the research pack",
   "variants": [
     "baseline"
   ],
   "source_manifest_sha256": "b4371add9d8733885521aaa7cbf771731f2bec4b6fc3d326b489e806be0da20a",
   "cells": {
+    "G_shigh_blow_wlow_imedium": {
+      "levels": {
+        "sugar": "high",
+        "bitter": "low",
+        "water": "low",
+        "ir94e": "medium"
+      },
+      "n_spikes": 309092,
+      "mn9_left_count": 0,
+      "sha256": "7c00c3473c12da25847e4984913861c6f1d600d6a896d843b9b894ea958b52c2",
+      "bytes": 1237428
+    },
     "G_shigh_blow_wlow_inone": {
       "levels": {
         "sugar": "high",
@@ -57,6 +69,18 @@
       "sha256": "ebbd1e543afaba4588d27f7c410c71f2f5751c23145ca961db3d64c4c98a071a",
       "bytes": 1225732
     },
+    "G_shigh_bnone_wlow_imedium": {
+      "levels": {
+        "sugar": "high",
+        "bitter": "none",
+        "water": "low",
+        "ir94e": "medium"
+      },
+      "n_spikes": 313559,
+      "mn9_left_count": 0,
+      "sha256": "6b64943433c18195a25a56e01362fdb4789d77b7c80d7312c1a8924510aa4ae6",
+      "bytes": 1255297
+    },
     "G_shigh_bnone_wlow_inone": {
       "levels": {
         "sugar": "high",
@@ -93,6 +117,18 @@
       "sha256": "0851a9755979628859cb87e94da699adc0fd27f9712bf2a1c1a9bfdd5daa74e4",
       "bytes": 1213977
     },
+    "G_slow_bhigh_wlow_imedium": {
+      "levels": {
+        "sugar": "low",
+        "bitter": "high",
+        "water": "low",
+        "ir94e": "medium"
+      },
+      "n_spikes": 324938,
+      "mn9_left_count": 0,
+      "sha256": "cf70a51f665df8e0138de3746f7f4ac895ed46e691e06acef23c8ab97fc054f2",
+      "bytes": 1300812
+    },
     "G_slow_bhigh_wlow_inone": {
       "levels": {
         "sugar": "low",
@@ -117,6 +153,18 @@
       "sha256": "93c62ebbaa32b3ae9c7b862618ca3ccf0e989692be2af11564815e3efdd6a0f1",
       "bytes": 1266775
     },
+    "G_slow_blow_whigh_ilow": {
+      "levels": {
+        "sugar": "low",
+        "bitter": "low",
+        "water": "high",
+        "ir94e": "low"
+      },
+      "n_spikes": 300857,
+      "mn9_left_count": 10,
+      "sha256": "9581a66ebb70aecf3e62caf5444091fc75922bd7adbc809f37a8faebf5ab2b72",
+      "bytes": 1204542
+    },
     "G_slow_blow_whigh_imedium": {
       "levels": {
         "sugar": "low",
@@ -128,6 +176,18 @@
       "mn9_left_count": 7,
       "sha256": "e2d15485ac9d2251c6c2a024941089f7cfaed21f5614fca16050dd15097d7e84",
       "bytes": 1211846
+    },
+    "G_slow_blow_wlow_ihigh": {
+      "levels": {
+        "sugar": "low",
+        "bitter": "low",
+        "water": "low",
+        "ir94e": "high"
+      },
+      "n_spikes": 313532,
+      "mn9_left_count": 2,
+      "sha256": "4803076732c57d811874f2140618e27b6d73eff7f0f49b205ad832174ff41c2a",
+      "bytes": 1255193
     },
     "G_slow_blow_wlow_ilow": {
       "levels": {
@@ -164,6 +224,18 @@
       "mn9_left_count": 7,
       "sha256": "320770c1c10f7226a2691f6a7750f2d9dcab348d6d13c51b6be7509e6f24f42f",
       "bytes": 1175585
+    },
+    "G_slow_blow_wnone_imedium": {
+      "levels": {
+        "sugar": "low",
+        "bitter": "low",
+        "water": "none",
+        "ir94e": "medium"
+      },
+      "n_spikes": 311293,
+      "mn9_left_count": 3,
+      "sha256": "a3bb8d442c17c78aa6331c51caaae74b304e7f7180698cf198c70bb0d6baf5e9",
+      "bytes": 1246248
     },
     "G_slow_bnone_whigh_ilow": {
       "levels": {
@@ -261,6 +333,30 @@
       "sha256": "e89842177b083df1f3975714f21e2171b7aafff61d3ee33ab41d9b96b58cd326",
       "bytes": 45047
     },
+    "G_smedium_blow_wlow_ilow": {
+      "levels": {
+        "sugar": "medium",
+        "bitter": "low",
+        "water": "low",
+        "ir94e": "low"
+      },
+      "n_spikes": 309775,
+      "mn9_left_count": 3,
+      "sha256": "7ce20ef238775b1f3df4595fa682a49f0e349f60ffbbd811340e8a5f6075ad73",
+      "bytes": 1240174
+    },
+    "G_smedium_blow_wlow_imedium": {
+      "levels": {
+        "sugar": "medium",
+        "bitter": "low",
+        "water": "low",
+        "ir94e": "medium"
+      },
+      "n_spikes": 313596,
+      "mn9_left_count": 3,
+      "sha256": "f93ce9789484aec730b79ea53c7bfa9856b7b7182474d8f57e5a9c8106f1ea6b",
+      "bytes": 1255465
+    },
     "G_smedium_blow_wlow_inone": {
       "levels": {
         "sugar": "medium",
@@ -272,6 +368,18 @@
       "mn9_left_count": 2,
       "sha256": "58034887c7518efb98adab8fc4315896a5dd8436f892685581ef592a70e6c532",
       "bytes": 1231109
+    },
+    "G_smedium_bmedium_whigh_imedium": {
+      "levels": {
+        "sugar": "medium",
+        "bitter": "medium",
+        "water": "high",
+        "ir94e": "medium"
+      },
+      "n_spikes": 310678,
+      "mn9_left_count": 0,
+      "sha256": "bd41f1f50cd6093da09aa0dd26c259200879931a2a1da6080ad7ead30cb77273",
+      "bytes": 1243784
     },
     "G_smedium_bmedium_whigh_inone": {
       "levels": {
@@ -333,6 +441,18 @@
       "sha256": "0e9303e4272a1918c29ed6cabafd97208f5b447182b244365b73074a9da2eda3",
       "bytes": 47645
     },
+    "G_smedium_bvery_high_wlow_inone": {
+      "levels": {
+        "sugar": "medium",
+        "bitter": "very_high",
+        "water": "low",
+        "ir94e": "none"
+      },
+      "n_spikes": 324001,
+      "mn9_left_count": 0,
+      "sha256": "eab197e196692968a4ce19ae109d0786160437766c6e1489cc7a414e1d78e22f",
+      "bytes": 1297074
+    },
     "G_snone_bhigh_whigh_inone": {
       "levels": {
         "sugar": "none",
@@ -344,6 +464,18 @@
       "mn9_left_count": 0,
       "sha256": "1da18aa658f2c461b7c8284ed6e644b03b471d44b74fc556c4914dc3d3821788",
       "bytes": 1245794
+    },
+    "G_snone_bhigh_wlow_ihigh": {
+      "levels": {
+        "sugar": "none",
+        "bitter": "high",
+        "water": "low",
+        "ir94e": "high"
+      },
+      "n_spikes": 321743,
+      "mn9_left_count": 0,
+      "sha256": "3cb133b739af3eb3870a1b5466033e3eedeff7cc302951f9d2eb32b508fae345",
+      "bytes": 1288029
     },
     "G_snone_bhigh_wlow_inone": {
       "levels": {
@@ -380,6 +512,18 @@
       "mn9_left_count": 2,
       "sha256": "a50b57362c80d342594542de9e5f73e1fa375791da243edd520bb2ae438d7953",
       "bytes": 1147178
+    },
+    "G_snone_blow_whigh_imedium": {
+      "levels": {
+        "sugar": "none",
+        "bitter": "low",
+        "water": "high",
+        "ir94e": "medium"
+      },
+      "n_spikes": 313941,
+      "mn9_left_count": 6,
+      "sha256": "0c3e4a93da3afa0220a9e5fb99987d4206bbfdf2e9c7f52ef5cb7767dbfe47fa",
+      "bytes": 1256861
     },
     "G_snone_blow_whigh_inone": {
       "levels": {
@@ -537,6 +681,18 @@
       "sha256": "a403a2a5e9f378b873b6b0ef427e00978b640d143c28701a540114b4e514e1d8",
       "bytes": 19284
     },
+    "G_snone_bnone_wlow_ihigh": {
+      "levels": {
+        "sugar": "none",
+        "bitter": "none",
+        "water": "low",
+        "ir94e": "high"
+      },
+      "n_spikes": 306158,
+      "mn9_left_count": 10,
+      "sha256": "bad7993ebfa1f4fa17153de7f7fdc290b6ac4ad0422d6189b9d2811faf6d09c6",
+      "bytes": 1225748
+    },
     "G_snone_bnone_wlow_ilow": {
       "levels": {
         "sugar": "none",
@@ -633,6 +789,18 @@
       "sha256": "3090d7af75c9d90aceded8d4977567e06cc41aa2d00cfd10eb919abf49f5f6db",
       "bytes": 1268880
     },
+    "G_snone_bvery_high_wlow_ilow": {
+      "levels": {
+        "sugar": "none",
+        "bitter": "very_high",
+        "water": "low",
+        "ir94e": "low"
+      },
+      "n_spikes": 311391,
+      "mn9_left_count": 0,
+      "sha256": "5ea3faa23ef43062ad6cdaf38da77cd2422def3af40de8a6b8995a6325596339",
+      "bytes": 1246628
+    },
     "G_snone_bvery_high_wlow_inone": {
       "levels": {
         "sugar": "none",
@@ -644,6 +812,18 @@
       "mn9_left_count": 0,
       "sha256": "23d3c0939cbb0014737e9c7424830894f54a50ff2779f2a4d7fa967a86855b5f",
       "bytes": 1304421
+    },
+    "G_svery_high_bnone_wlow_ilow": {
+      "levels": {
+        "sugar": "very_high",
+        "bitter": "none",
+        "water": "low",
+        "ir94e": "low"
+      },
+      "n_spikes": 327626,
+      "mn9_left_count": 17,
+      "sha256": "8285f3a1e8b9ff836d885a5839ef66cb76e25b670c88b4ce99a7f4ea51598c82",
+      "bytes": 1311666
     },
     "G_svery_high_bnone_wlow_inone": {
       "levels": {
@@ -670,5 +850,5 @@
       "bytes": 1255450
     }
   },
-  "git_commit": "4a419bcd246bcbb20e0f308e8fb0c3d245ef0199"
+  "git_commit": "3aed9e0b0395e03f67311b7e0af0d97bfab27a7a"
 }

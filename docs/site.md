@@ -96,7 +96,7 @@ then open http://localhost:8000/. `fetch()` needs an HTTP origin; opening `index
 
 ## Copy (all user-facing text)
 
-Every string the page shows lives in `copy/site_strings.json` (key, context, en, zh, optional max_length). `scripts/import_copy.py` generates `site/strings.js` from it (the page imports that module; never edit it by hand) and writes the `<title>` and the description / Open Graph / Twitter meta tags into `site/index.html` from the `meta.*` entries. Keys are stable; edit only `en` and `zh`. The importer warns about keys that were removed (previous value kept), unknown keys (ignored) and values over `max_length` (still applied); `--check` reports without writing. The README prose is exported per section with `scripts/export_copy.py --readme` into `copy/readme_sections.md` and rebuilt with `scripts/import_copy.py --readme`.
+Every string the page shows lives in `copy/site_strings.json` (key, context, en, zh, optional max_length). `scripts/import_copy.py` generates `site/strings.js` from it (the page imports that module; never edit it by hand) and writes the `<title>` and the description / Open Graph / Twitter meta tags into `site/index.html` from the `meta.*` entries. Keys are stable; edit only `en` and `zh`. The importer warns about keys that were removed (previous value kept unless explicitly retired with `--remove-key KEY`, after removal from the copy source), unknown keys (ignored) and values over `max_length` (still applied); `--check` reports without writing. The README prose is exported per section with `scripts/export_copy.py --readme` into `copy/readme_sections.md` and rebuilt with `scripts/import_copy.py --readme`.
 
 ## Deploy (Cloudflare Workers, GitHub Pages as backup)
 
@@ -123,6 +123,7 @@ Annotated tags on `main`; every update ships under a version (feature branch off
 | v1.2.1 | 5789e3b | Owner-supplied bilingual fly speech refreshed; pixel-art emotion faces, speech bubbles and lettering; no scores, state rules or allocation changed. Honesty table unchanged. |
 | v2.0.0 | 641f29b | Second, independently computed male fly (MaleCNS v1.0, >=5-synapse connections, 0.17875 mV, bilateral Tastekin-typed sets) with a female/male/both selector, the fixed disagreement sentence, male brain view (soma or synapse-centroid positions, MaleCNS ROI outlines), trial-0 replays for the 55 dish cells and proboscis-only speech split into four groups; female scores, states, ties and allocations unchanged (v1.2.1 fixture). Honesty table: MaleCNS row rewritten; four commitment rows, Phase 2 comparison, male readout/state and replay/layout rows added, owner-approved. |
 | v2.0.1 | 54837ca | Chinese wording of the male brain-view caption revised to the owner's text; no data, scores, states, allocations or English text changed. Honesty table unchanged. |
+| v2.1.0 | pending merge | 105 new entries (23 Not food), 14 bilingual sections, not-food badges and notes, eight replacement sprites and 105 new sprites; existing scores unchanged for both flies. Owner-approved not-food honesty row added. See [batch report](dictionary_batch3.md). |
 
 ### Changelog and the footer "what's new" line
 
@@ -130,9 +131,18 @@ Annotated tags on `main`; every update ships under a version (feature branch off
 
 Release checklist: add the `CHANGELOG.md` entry → update `site/data/release.json` (version, date) and the `releaseSummary` en/zh strings → refresh the README "What's new" block in `copy/readme_sections.md` → `python scripts/import_copy.py --readme` → `python scripts/validate_release.py` → PR into `dev`, PR `dev` → `main`, tag after the automatic deploy is verified, then add the row to the Releases table above.
 
+For dictionary batches, also:
+
+- Validate complete, exclusive section membership and bilingual labels with the sections validator in `scripts/validate_release.py`.
+- Run `scripts/audit_sprites.py --check`: every dictionary key must own an existing sprite, with no borrowed/shared sprite; report unused orphans separately.
+- Run the unchanged 174-key female and male fixtures, the full-menu lookup/replay Node test, and `scripts/report_batch3.py --check` for batch 3.
+- Run live browser F23 (all 14 section labels plus All reachable at 390 px) and F24 (not-food badges/notes in both languages, both flies and both modes); F24 must pass, not skip.
+- Run `scripts/check_plate_labels.py`, including `--dishes hainanese-chicken-rice,mosquito-coil-liquid,food-waste-swill`, and export a Chinese `nectar,steak` share card with a decoded QR.
+- Set the actual release date in CHANGELOG, release metadata and both README What's new lines at merge; 2026-09-19 is the v2.1.0 preparation placeholder. The Releases row remains pending merge until the owner releases and tags.
+
 v2.0.0 shipped on 2026-09-19 (tag on 641f29b) with the owner-approved wording and the `tip` sprite promoted. Before any later PR that touches the male bundle:
 
-- Run `scripts/export_male_site.py --check` and `scripts/validate_release.py`: the male lookup must match its frozen source byte-for-byte, and the shipping manifest must cover exactly 55 dish-occupied trial-0 replays with matching hashes and no orphans.
+- Run `scripts/export_male_site.py --check` and `scripts/validate_release.py`: the male lookup must match its frozen source byte-for-byte, and the shipping manifest must cover exactly the current dish-occupied trial-0 replays (70 for batch 3; 55 at v2.0.0) with matching hashes and no orphans.
 - Check `site/data/neurons_male.json` with the male data/export tests: replay index order and counts, named readouts, anterior soma projection, explicitly non-anatomical placeholders and the size limit must hold.
 - Run the female v1.2.1 fixture test (174 dishes, 15,051 pairs × both modes, fixed share query), male UI tests, browser checks and narrow plate-label checks.
 - Export both-mode share cards in English and Chinese, including a disagreeing pair and opposite mode; decode each QR and check the full disagreement sentence and card bounds. Example: `.venv\Scripts\python scripts/export_share_card.py --url http://127.0.0.1:8765/ --dishes brownie,steak --fly both --lang en --out results/p4/card-both-en.png`.

@@ -15,7 +15,9 @@ if str(ROOT) not in sys.path:
 
 from sim.grid import grid_cell_id, resolve_levels
 
-SHIPPING_RULE = ('cells occupied by the 174 dishes; the other recorded cells stay in the research pack')
+def shipping_rule(root):
+    count = len(read(root / 'data/dishes.json'))
+    return f'cells occupied by the {count} dishes; the other recorded cells stay in the research pack'
 
 
 def read(path):
@@ -33,12 +35,10 @@ def current_commit(root):
 
 def occupied_cells(root, table):
     dishes = read(root / 'data/dishes.json')
-    if len(dishes) != 174 or len({d['key'] for d in dishes}) != 174:
-        raise ValueError('male: expected 174 distinct dishes')
+    if not dishes or len({d['key'] for d in dishes}) != len(dishes):
+        raise ValueError('male: expected nonempty dictionary with distinct keys')
     cells = sorted({grid_cell_id(resolve_levels(table, dish)) for dish in dishes})
-    comparison = read(root / 'data/malecns/male_female_comparison.json')
-    if len(cells) != comparison['n_distinct_male_cells'] or len(cells) != 55:
-        raise ValueError('male: occupied cell count differs from comparison / expected 55')
+    # Phase 2's 55 occupied cells is a historical comparison, not a size guard.
     return cells
 
 
@@ -56,7 +56,7 @@ def source_manifest(root, ids):
         file = folder / (cid + '.bin')
         entries[cid] = dict(manifest['cells'][cid], sha256=sha256(file), bytes=file.stat().st_size)
     return dict(schema_version='replay_manifest_v1', fly='male', n_cells=len(ids),
-                n_cells_recorded=400, shipping_rule=SHIPPING_RULE, variants=['baseline'],
+                n_cells_recorded=400, shipping_rule=shipping_rule(root), variants=['baseline'],
                 source_manifest_sha256=sha256(path), cells=entries)
 
 
@@ -71,7 +71,7 @@ def check_export(root=ROOT, *, research_optional=False):
     folder = root / 'site/data/replay_male'
     manifest = read(folder / 'manifest.json')
     expected = dict(schema_version='replay_manifest_v1', fly='male', n_cells=len(ids),
-                    n_cells_recorded=400, shipping_rule=SHIPPING_RULE, variants=['baseline'])
+                    n_cells_recorded=400, shipping_rule=shipping_rule(root), variants=['baseline'])
     for key, value in expected.items():
         if manifest.get(key) != value:
             problems.append('male: invalid replay manifest ' + key)

@@ -9,6 +9,7 @@ copy/readme_sections.md -> README.md and README.zh.md (with --readme).
 Keys are stable: only `en` and `zh` are read from the JSON. A key missing from the
 JSON keeps its previous value and is reported; an unknown key is reported and
 ignored; a value longer than `max_length` is reported (and still applied).
+Use --remove-key KEY to retire a key explicitly after removing it from the source.
 `max_length` may be one integer or a mapping of language codes to limits.
 
   .venv\\Scripts\\python scripts/import_copy.py            # strings + meta
@@ -142,17 +143,21 @@ def patch_site_url(html: str, url: str) -> str:
     return html
 
 
-def apply_strings(entries: list[dict], check: bool, allow_new: bool = False) -> int:
+def apply_strings(entries: list[dict], check: bool, allow_new: bool = False,
+                  remove_keys: list[str] | None = None) -> int:
     shipped = {lang: flatten(current_strings().get(lang, {})) for lang in LANGS}
     known_keys = set(shipped["en"]) | set(shipped["zh"])
     problems = 0
     incoming = {entry["key"]: entry for entry in entries}
-    for key in sorted(known_keys - set(incoming)):
+    removed = set(remove_keys or [])
+    if removed & set(incoming):
+        raise ValueError('Explicitly removed keys must first be removed from the copy source')
+    for key in sorted(known_keys - set(incoming) - removed):
         if key.startswith("meta."):
             continue
         print(f"warning: key removed from copy, keeping previous value: {key}")
         problems += 1
-    new_strings = {lang: dict(shipped[lang]) for lang in LANGS}
+    new_strings = {lang: {k: v for k, v in shipped[lang].items() if k not in removed} for lang in LANGS}
     meta: dict[str, str] = {}
     for key, entry in incoming.items():
         if key.startswith("meta."):
@@ -230,8 +235,9 @@ def main() -> int:
     parser.add_argument("--readme", action="store_true", help="also rebuild README.md / README.zh.md from copy/readme_sections.md")
     parser.add_argument("--check", action="store_true", help="report warnings without writing")
     parser.add_argument("--allow-new", action="store_true", help="accept keys not yet in site/strings.js (they must carry a context)")
+    parser.add_argument("--remove-key", action="append", default=[], help="explicitly retire a key absent from the copy source; repeat for multiple keys")
     args = parser.parse_args()
-    problems = apply_strings(load_copy(), args.check, args.allow_new)
+    problems = apply_strings(load_copy(), args.check, args.allow_new, args.remove_key)
     if args.readme and not args.check:
         apply_readme()
     return 1 if problems else 0

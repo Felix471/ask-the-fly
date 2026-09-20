@@ -11,6 +11,7 @@ from pathlib import Path
 
 from .levels import IR94E_LEVELS, LEVELS, levels_for
 from .normalize import normalize_name
+from .encode import prompt_addendum
 
 ROOT = Path(__file__).resolve().parents[1]
 FOODS_PATH = Path(__file__).with_name("foods_stability.json")
@@ -284,6 +285,28 @@ def _from_stability(
     records: list[object], draft: bool = False, require: tuple[str, ...] = ()
 ) -> list[dict]:
     foods = json.loads((FOODS_OVERRIDE or FOODS_PATH).read_text(encoding="utf-8"))
+    if FOODS_OVERRIDE and foods and all(food.get("key") for food in foods):
+        # A filtered food list keeps the original raw JSONL. Match explicit food
+        # identities, then reindex only retained rows before the unchanged D07 gate.
+        by_key = {food["key"]: (index, food) for index, food in enumerate(foods)}
+        if len(by_key) != len(foods):
+            raise MergeError("duplicate keys in --foods")
+        selected = []
+        for row, record in enumerate(records, 1):
+            if not isinstance(record, dict) or not isinstance(record.get("food"), dict):
+                raise MergeError(f"row {row}: keyed --foods requires explicit raw food identity")
+            raw_food = record["food"]
+            if not raw_food.get("key"):
+                raise MergeError(f"row {row}: missing raw food key")
+            if raw_food["key"] not in by_key:
+                continue
+            index, food = by_key[raw_food["key"]]
+            if raw_food != food:
+                raise MergeError(f"row {row}: raw food differs from --foods for {food['key']}")
+            selected.append({**record, "food_index": index})
+        records = selected
+    if not foods:
+        raise MergeError("food list is empty; nothing to merge")
     problems = validate_stability(records, foods)
     if problems and not draft:
         shown = "\n  ".join(problems[:25])
@@ -309,6 +332,11 @@ def _from_stability(
         if not 0 <= food_index < len(foods):
             raise MergeError(f"food_index {food_index} is outside foods_stability.json")
         food = dict(food_records[0].get("food", {})) or _raw_food(food_records, foods[food_index])
+        expected_addendum = prompt_addendum(food)
+        if any(record.get("prompt_addendum") != expected_addendum for record in food_records):
+            raise MergeError(f"food_index {food_index}: inconsistent prompt addendum")
+        if expected_addendum and any(record.get("prompt_version") != "encode_v2.3" for record in food_records):
+            raise MergeError("not-food addendum requires encode_v2.3")
         ambiguous_inputs = {
             normalize_name(food.get(lang, "")) for lang in ("zh", "en")
         } & AMBIGUOUS_NAMES.keys()
@@ -375,6 +403,8 @@ def _from_stability(
         }
         if arbitration:
             result["arbitration"] = arbitration
+        if expected_addendum:
+            result["encoder_addendum"] = expected_addendum
         merged.append(_normalized_entry(result, f"food_index {food_index} merged entry"))
     canonical_owner = {
         normalize_name(name): entry["key"]
@@ -499,18 +529,24 @@ def merge(
     replace_llm: bool = False,
     arbitration_report: bool = False,
     only_dimension: str | None = None,
+    new_only: bool = False,
 ) -> tuple[int, int, list[dict]]:
     """Merge entries; replace_llm explicitly requests the existing default LLM replacement."""
     if only_dimension is not None and only_dimension not in OPTIONAL_DIMENSIONS:
         raise MergeError(
             f"--only-dimension must be one of {', '.join(OPTIONAL_DIMENSIONS)}"
         )
+    if new_only and only_dimension:
+        raise MergeError("--new-only cannot be combined with --only-dimension")
     require = (only_dimension,) if only_dimension else ()
     incoming = _read_source(source, require=require)
     drafts = [entry["key"] for entry in incoming if entry.get("review") == "draft"]
     if drafts:
         raise MergeError(f"draft entries cannot be merged (re-encode a complete batch): {drafts[:10]}")
     existing = _read_dictionary(destination) if destination.exists() else []
+    if new_only and destination.exists():
+        # Validation above must not re-normalize or augment any frozen entry.
+        existing = json.loads(destination.read_text(encoding="utf-8"))
     owner = _assert_unique(existing, "destination")
     # Aliases the model proposed that already name another entry (existing, or earlier
     # in this batch) are dropped, so one name never points at two dishes.
@@ -621,6 +657,8 @@ def merge(
     result = list(existing)
     for candidate in incoming:
         matched = {owner[name] for name in _names(candidate) if name in owner}
+        if new_only and matched:
+            raise MergeError(f"--new-only: {candidate['key']!r} matches an existing entry")
         human = [i for i in matched if result[i]["review"] == "human_checked"]
         if human:
             skipped += 1
@@ -754,6 +792,7 @@ def main() -> None:
     modes.add_argument("--sample", type=int, metavar="N")
     modes.add_argument("--mark-checked", nargs="+", metavar="KEY")
     parser.add_argument("--seed", type=int)
+    parser.add_argument("--new-only", action="store_true", help="refuse replacement of any existing entry")
     parser.add_argument(
         "--replace-llm",
         action="store_true",
@@ -798,6 +837,7 @@ def main() -> None:
             merged, skipped, result = merge(
                 args.source, args.into, args.replace_llm, args.arbitration_report,
                 args.only_dimension,
+                new_only=args.new_only,
             )
             print(f"Merged {merged} entries; skipped {skipped}; dictionary count: {len(result)}")
     except (OSError, MergeError) as exc:

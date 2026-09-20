@@ -159,7 +159,7 @@ export class FlyPanel {
 
   relabelPlates() {
     if (!this.scene || !this.scenePlates) return;
-    this.scenePlates.forEach((item, i) => this.scene.relabel(i, displayName(item, this.lang), this.plateSub(item)));
+    this.scenePlates.forEach((item, i) => this.scene.relabel(i, displayName(item, this.lang), this.plateSub(item), this.host.notFoodBadge?.(item) || ''));
   }
 
   rasterLabels() {
@@ -319,6 +319,7 @@ export class FlyPanel {
     const plates = scored.map((item) => ({
       key: item.entry ? item.entry.key : item.name,
       label: displayName(item, this.lang),
+      badge: this.host.notFoodBadge?.(item) || '',
       sub: this.plateSub(item),
       slug: this.host.spriteSlug(item),
     }));

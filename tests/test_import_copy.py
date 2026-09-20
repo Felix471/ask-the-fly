@@ -3,11 +3,27 @@ import contextlib
 import io
 import unittest
 from unittest.mock import patch
+from pathlib import Path
+import tempfile
 
 from scripts.import_copy import apply_strings
 
 
 class CopyLengthTests(unittest.TestCase):
+    def test_explicit_removal_requires_absent_source_and_preserves_other_keys(self):
+        shipped = {lang: {'draft': 'old', 'keep': 'kept'} for lang in ('en', 'zh')}
+        with tempfile.TemporaryDirectory() as tmp, patch('scripts.import_copy.current_strings', return_value=shipped):
+            root = Path(tmp)
+            (root / 'index.html').write_text('', encoding='utf-8')
+            with patch('scripts.import_copy.ROOT', root), patch('scripts.import_copy.STRINGS_JS', root / 'strings.js'), patch('scripts.import_copy.INDEX_HTML', root / 'index.html'), patch('scripts.import_copy.site_url', return_value='https://askthefly.app/'):
+                with self.assertRaises(ValueError):
+                    apply_strings([dict(key='draft', en='x', zh='x')], True, remove_keys=['draft'])
+                apply_strings([dict(key='keep', en='kept', zh='kept')], False, remove_keys=['draft'])
+                output = (root / 'strings.js').read_text(encoding='utf-8')
+                self.assertNotIn('draft', output)
+                self.assertEqual(output.count('kept'), 2)
+                self.assertEqual(apply_strings([], True), 2)
+
     def check_entry(self, key, en, zh, limit):
         entry = dict(key=key, context="test", en=en, zh=zh, max_length=limit)
         output = io.StringIO()

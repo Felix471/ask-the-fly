@@ -48,6 +48,17 @@ export function buildDictionary(entries) {
   };
 }
 
+// Classification is presentation metadata, independent of dictionary taste levels.
+export function buildSections(payload) {
+  if (payload?.schema !== 'dish_sections_v2') throw new Error('Unsupported sections schema');
+  const notFood = new Set(payload.sections.filter(section => section.not_food === true).flatMap(section => section.keys));
+  return {...payload, isNotFood: key => notFood.has(key)};
+}
+
+export function notFoodCopy(entry, sections, lang) {
+  return entry && sections?.isNotFood(entry.key) ? STRINGS[lang].notFood : null;
+}
+
 export function hzKey(levels, hz) {
   return DIMENSIONS.map((dimension) => Number(hz[dimension])).join("|");
 }
@@ -1080,6 +1091,7 @@ if (isBrowser) {
   const primaryPanel = () => state.fly === 'male' ? state.panels.male : state.panels.female;
   const activePanels = () => (state.fly === 'both' ? [state.panels.female,state.panels.male] : [primaryPanel()]).filter(Boolean);
   const panelHost = {lang:()=>state.lang,selection:()=>state.fly,notice, spriteSlug,skip:skipAll,
+    notFoodBadge:item=>notFoodCopy(item.entry,state.sections,state.lang)?.badge || '',
     get scrollBehavior(){return scrollBehavior;}};
   state.panels.female = new FlyPanel(primaryRoot, {flyKey:'female', loadReplay:(()=>{
     const baseline=makeReplayLoader('data/replay_v1_2/'),variants=makeReplayLoader('data/replay/');
@@ -1265,6 +1277,13 @@ if (isBrowser) {
     check.className = "check";
     check.textContent = "✓";
     tile.append(name, check);
+    const classification = notFoodCopy(entry, state.sections, state.lang);
+    if (classification) {
+      const badge = document.createElement('span');
+      badge.className = 'not-food-badge';
+      badge.textContent = classification.badge;
+      tile.append(badge);
+    }
     tile.addEventListener("click", () => { toggleSelection(entry.key); closeSuggest(); });
     return tile;
   }
@@ -1525,6 +1544,13 @@ if (isBrowser) {
         sub.textContent = item.entry.display[state.lang === "zh" ? "en" : "zh"] || "";
         name.append(sub);
       }
+      const classification = notFoodCopy(item.entry, state.sections, state.lang);
+      if (classification) {
+        const note = document.createElement('span');
+        note.className = 'sub not-food-note';
+        note.textContent = classification.note;
+        name.append(note);
+      }
       tr.append(name);
       if (item.cell) {
         for (const dimension of ["sugar", "bitter", "water", "ir94e"]) {
@@ -1606,6 +1632,22 @@ if (isBrowser) {
   async function renderHero(panel, canvas) {
     const decision = panel.decision;
     const sprites = panel.sprites;
+    let notes = canvas.nextElementSibling;
+    if (!notes?.classList.contains('result-hero-notes')) {
+      notes = document.createElement('div');
+      notes.className = 'result-hero-notes';
+      canvas.after(notes);
+    }
+    notes.replaceChildren();
+    for (const item of decision?.known || []) {
+      const classification = notFoodCopy(item.entry, state.sections, state.lang);
+      if (!classification) continue;
+      const note = document.createElement('p');
+      note.className = 'not-food-note';
+      note.textContent = `${displayName(item, state.lang)} — ${classification.note}`;
+      notes.append(note);
+    }
+    notes.hidden = !notes.childElementCount;
     if (!decision || !decision.flyPick || !sprites) { canvas.hidden = true; return; }
     await Promise.all(decision.known.map((item) => loadDishSprite(sprites, spriteSlug(item)).catch(() => null)));
     if (panel.decision !== decision) return;
@@ -1828,7 +1870,7 @@ if (isBrowser) {
     $("stub-banner").hidden = !table.stub;
     const [fallbacks, sections, config, release] = await Promise.all([
       fetch("assets/dishes/fallbacks.json").then((r) => (r.ok ? r.json() : null)).catch(() => null),
-      fetch("data/sections.json").then((r) => (r.ok ? r.json() : null)).catch(() => null),
+      fetch("data/sections.json").then((r) => { if (!r.ok) throw new Error('sections missing'); return r.json(); }).then(buildSections),
       fetch("config.json").then((r) => (r.ok ? r.json() : null)).catch(() => null),
       fetch("data/release.json").then((r) => (r.ok ? r.json() : null)).catch(() => null),
     ]);
