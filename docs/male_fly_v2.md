@@ -177,6 +177,8 @@ wording, including the four bilingual honesty commitments) remain pending.
 
 ## Phase 4
 
+Shipped: v2.0.0 was tagged on main at 641f29b on 2026-09-19, including the four post-merge review fixes (PR #54: synapse-centroid positions, MaleCNS ROI outlines, MN-type readout labels, both-mode headlines and inset alignment). The male fly program is complete; nothing is pending.
+
 Release preparation is implemented with a v2.0.0 CHANGELOG entry and matching
 `site/data/release.json`; 2026-09-19 is a placeholder date to update at merge.
 The existing bilingual README What's new draft is retained without duplication

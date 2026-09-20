@@ -121,7 +121,7 @@ Annotated tags on `main`; every update ships under a version (feature branch off
 | v1.1.3 | c58c735 | Long plate names no longer overlap on narrow screens: ellipsis with full-name titles; row heights unchanged; no dish score changed. |
 | v1.2.0 | 1ff70c1 | Four designed response states (eats / mouth_moves / proboscis_only / no_response) with a per-plate fly reaction, emotion bubble and bilingual speech; MN11 readouts on results, share cards and baseline rasters; no MN9 score, ranking, tie or allocation changed. Honesty table: state/readout row added, animation row revised, owner-approved before release. |
 | v1.2.1 | 5789e3b | Owner-supplied bilingual fly speech refreshed; pixel-art emotion faces, speech bubbles and lettering; no scores, state rules or allocation changed. Honesty table unchanged. |
-| v2.0.0 | pending merge | Independently computed male fly; female/male/both selector, separate brain views, trial-0 male replays and comparison cards. Female results unchanged and fixture-tested. Honesty table adds the four commitments and Phase 2 comparison. Sprite and copy approval pending; 2026-09-19 is the release-date placeholder. |
+| v2.0.0 | 641f29b | Second, independently computed male fly (MaleCNS v1.0, >=5-synapse connections, 0.17875 mV, bilateral Tastekin-typed sets) with a female/male/both selector, the fixed disagreement sentence, male brain view (soma or synapse-centroid positions, MaleCNS ROI outlines), trial-0 replays for the 55 dish cells and proboscis-only speech split into four groups; female scores, states, ties and allocations unchanged (v1.2.1 fixture). Honesty table: MaleCNS row rewritten; four commitment rows, Phase 2 comparison, male readout/state and replay/layout rows added, owner-approved. |
 
 ### Changelog and the footer "what's new" line
 
@@ -129,15 +129,14 @@ Annotated tags on `main`; every update ships under a version (feature branch off
 
 Release checklist: add the `CHANGELOG.md` entry → update `site/data/release.json` (version, date) and the `releaseSummary` en/zh strings → refresh the README "What's new" block in `copy/readme_sections.md` → `python scripts/import_copy.py --readme` → `python scripts/validate_release.py` → PR into `dev`, PR `dev` → `main`, tag after the automatic deploy is verified, then add the row to the Releases table above.
 
-For v2.0.0, keep the draft wording until owner approval (DP5), and replace the
-2026-09-19 placeholder date in both release files at merge time. Before the PR:
+v2.0.0 shipped on 2026-09-19 (tag on 641f29b) with the owner-approved wording and the `tip` sprite promoted. Before any later PR that touches the male bundle:
 
 - Run `scripts/export_male_site.py --check` and `scripts/validate_release.py`: the male lookup must match its frozen source byte-for-byte, and the shipping manifest must cover exactly 55 dish-occupied trial-0 replays with matching hashes and no orphans.
 - Check `site/data/neurons_male.json` with the male data/export tests: replay index order and counts, named readouts, anterior soma projection, explicitly non-anatomical placeholders and the size limit must hold.
 - Run the female v1.2.1 fixture test (174 dishes, 15,051 pairs × both modes, fixed share query), male UI tests, browser checks and narrow plate-label checks.
 - Export both-mode share cards in English and Chinese, including a disagreeing pair and opposite mode; decode each QR and check the full disagreement sentence and card bounds. Example: `.venv\Scripts\python scripts/export_share_card.py --url http://127.0.0.1:8765/ --dishes brownie,steak --fly both --lang en --out results/p4/card-both-en.png`.
-- After owner sprite approval (DP4), run `.venv\Scripts\python scripts/prep_male_sprites.py --promote <variant>` once. It refuses existing `site/assets/fly_male/` or `site/assets/response_male/`, copies all 42 PNGs unchanged and records `male_sprite_variant` in `site/config.json` only after copying. The loader then uses those sibling folders; shared dish/emotion assets retain their paths. Until promotion, the male uses the existing art without requesting absent files.
-- Require both CI `test` and Workers Builds to pass. The owner merges, deploys and tags; the pending row above is preparation, not a shipped release.
+- Male art: the `tip` variant was promoted for v2.0.0 with `scripts/prep_male_sprites.py --promote tip` (42 PNGs in `site/assets/fly_male/` and `site/assets/response_male/`, `male_sprite_variant` in `site/config.json`). A different variant needs those folders removed first; the command refuses to overwrite.
+- Require both CI `test` and Workers Builds to pass. The owner merges, deploys and tags.
 
 ## Tests
 
