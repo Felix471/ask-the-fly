@@ -6,6 +6,7 @@ import hashlib
 import sys
 import tempfile
 import unittest
+from unittest.mock import patch
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
@@ -33,10 +34,18 @@ class Bundle:
         self.cells = [cell("none", "none"), cell("low", "low"), cell("low", "none")]
         self.table = {"schema_version": "lookup_v1", "levels": LEVELS, "cells": self.cells, "cells_sha256": vr.cells_sha256(self.cells)}
         self.dishes = [dish("a"), dish("b", "none", "none")]
-        self.sections = {"sections": []}
+        self.sections = {"schema": "dish_sections_v2", "popular": ["a"], "sections": [
+            {"zh": "食物", "en": "Food", "keys": ["a", "b"]},
+            {"zh": "不是给人吃的", "en": "Not food", "keys": [], "not_food": True},
+        ]}
         self.named = {"neurons": []}
         self.variants = ["baseline", "silence_x"]
         self.write()
+        sprites = self.root / "site/assets/dishes"
+        sprites.mkdir(parents=True)
+        (sprites / "fallbacks.json").write_text('{"fallbacks": {}}', encoding="utf-8")
+        for name in ("a", "b"):
+            (sprites / f"{name}.png").write_bytes(b"sprite")
 
     def write(self, table=None, dishes=None, site_dishes=None):
         table = self.table if table is None else table
@@ -81,6 +90,82 @@ class ValidateRelease(unittest.TestCase):
 
     def test_good_bundle_passes(self):
         self.assertEqual(self.b.problems(), [])
+
+    def test_sections_valid_and_wired_into_validate(self):
+        self.assertEqual(vr.check_sections(self.b.root), [])
+        self.b.sections["sections"][0]["keys"].remove("a")
+        self.b.write()
+        self.assertTrue(any("sections:" in p and "missing" in p for p in self.b.problems()))
+
+    def test_sections_reject_bad_membership(self):
+        for keys, reason in [(["a"], "missing"), (["a", "b", "a"], "exactly once"),
+                             (["a", "b", "unknown"], "unknown")]:
+            with self.subTest(keys=keys):
+                self.b.sections["sections"][0]["keys"] = keys
+                self.b.write()
+                self.assertTrue(any(reason in p for p in vr.check_sections(self.b.root)))
+        self.b.sections["sections"][0]["keys"] = ["a", "b"]
+        self.b.sections["sections"][1]["keys"] = ["a"]
+        self.b.write()
+        self.assertTrue(any("exactly once" in p for p in vr.check_sections(self.b.root)))
+
+    def test_sections_names_schema_popular_and_flag(self):
+        mutations = [lambda s: s.update(schema="dish_sections_v1"),
+                     lambda s: s.update(popular=["missing"]),
+                     lambda s: s["sections"][0].update(zh="  "),
+                     lambda s: s["sections"][0].update(en=""),
+                     lambda s: s["sections"][1].pop("not_food"),
+                     lambda s: s["sections"][0].update(not_food=True),
+                     lambda s: s["sections"][1].update(not_food="true")]
+        original = json.dumps(self.b.sections)
+        for mutate in mutations:
+            self.b.sections = json.loads(original)
+            mutate(self.b.sections)
+            self.b.write()
+            self.assertTrue(vr.check_sections(self.b.root))
+
+    def test_sections_missing_and_malformed(self):
+        path = self.b.root / "data/dish_sections.json"
+        for text in ('{', '[]', '{"schema":"dish_sections_v2","sections":[null]}',
+                     '{"schema":"dish_sections_v2","sections":[{"keys":[{}]}]}'):
+            path.write_text(text, encoding="utf-8")
+            self.assertTrue(vr.check_sections(self.b.root))
+        path.unlink()
+        self.assertTrue(vr.check_sections(self.b.root))
+
+    def test_sprites_pass_and_validate_calls_check(self):
+        self.assertEqual(vr.check_sprites(self.b.root), [])
+        (self.b.root / "site/assets/dishes/a.png").unlink()
+        self.assertTrue(any("sprites:" in p and "missing" in p for p in self.b.problems()))
+
+    def test_sprites_shared_and_missing(self):
+        sprites = self.b.root / "site/assets/dishes"
+        (sprites / "b.png").unlink()
+        (sprites / "fallbacks.json").write_text('{"fallbacks": {"b": "a"}}', encoding="utf-8")
+        errors = vr.check_sprites(self.b.root)
+        self.assertTrue(any("shared" in p and "a, b" in p for p in errors), errors)
+        self.assertTrue(any("borrow" in p for p in errors), errors)
+        (sprites / "a.png").unlink()
+        errors = vr.check_sprites(self.b.root)
+        self.assertTrue(any("fallback target" in p and "missing" in p for p in errors), errors)
+        self.assertTrue(any("'a'" in p and "missing" in p for p in errors), errors)
+
+    def test_sprites_invalid_fallbacks_and_unused_target(self):
+        path = self.b.root / "site/assets/dishes/fallbacks.json"
+        for content in ('{', '[]', '{"fallbacks": []}', '{"fallbacks": {"b": 2}}',
+                        '{"fallbacks": {"b": "../a"}}', '{"fallbacks": {"b": "gone"}}'):
+            with self.subTest(content=content):
+                path.write_text(content, encoding="utf-8")
+                self.assertTrue(vr.check_sprites(self.b.root))
+        path.unlink()
+        self.assertTrue(vr.check_sprites(self.b.root))
+
+    def test_sprites_slug_collision_and_own_sprite_precedence(self):
+        path = self.b.root / "site/assets/dishes/fallbacks.json"
+        path.write_text('{"fallbacks": {"b": "a"}}', encoding="utf-8")
+        self.assertEqual(vr.check_sprites(self.b.root), [])
+        self.b.write(dishes=[dish("a"), dish("A!")])
+        self.assertTrue(any("shared" in p for p in vr.check_sprites(self.b.root)))
 
     def test_stub_table_fails(self):
         self.b.write(table={**self.b.table, "stub": True})
@@ -161,6 +246,36 @@ class ValidateRelease(unittest.TestCase):
         self.assertTrue(any("placeholder layout" in p for p in self.b.problems()))
 
 
+class PrepareNewSprites(unittest.TestCase):
+    def test_crop_ignores_alpha_that_final_palette_discards(self):
+        import prep_assets as prep
+        from PIL import Image
+        image = Image.new("RGBA", (100, 100), (0, 0, 0, 0))
+        image.putpixel((0, 0), (100, 80, 60, 1))
+        image.paste((100, 80, 60, 255), (30, 30, 70, 70))
+        self.assertEqual(prep.crop_and_square(image, 0).size, (40, 40))
+
+    def test_only_new_skips_fly_and_non_dictionary_raw_images(self):
+        import prep_assets as prep
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            raw, out = root / "assets/raw", root / "site/assets/dishes"
+            (raw / "fly").mkdir(parents=True)
+            out.mkdir(parents=True)
+            (root / "data").mkdir()
+            (root / "data/dishes.json").write_text('[{"key":"a"},{"key":"new dish"}]')
+            for name in ("a", "new-dish", "batch3_replacements_sheet"):
+                (raw / f"{name}.png").write_bytes(b"raw")
+            (raw / "fly/idle_1.png").write_bytes(b"raw")
+            (out / "a.png").write_bytes(b"existing")
+            with patch.object(prep, "ROOT", root), patch.object(prep, "OUT_DISHES", out), \
+                 patch.object(prep, "prepare", return_value=[]) as prepare, \
+                 patch.object(sys, "argv", ["prep_assets.py", "--raw", str(raw), "--only-new"]):
+                self.assertEqual(prep.main(), 0)
+            self.assertEqual(prepare.call_count, 1)
+            self.assertEqual(prepare.call_args.args[0], [raw / "new-dish.png"])
+
+
 class ValidateMale(unittest.TestCase):
     def setUp(self):
         self.tmp = tempfile.TemporaryDirectory()
@@ -192,7 +307,7 @@ class ValidateMale(unittest.TestCase):
         self.write('site/data/replay_male/manifest.json', {
             'schema_version': 'replay_manifest_v1', 'fly': 'male', 'git_commit': 'a' * 40,
             'n_cells': len(cells), 'n_cells_recorded': 400, 'variants': ['baseline'],
-            'shipping_rule': 'cells occupied by the 174 dishes; the other recorded cells stay in the research pack',
+            'shipping_rule': f'cells occupied by the {len(dishes)} dishes; the other recorded cells stay in the research pack',
             'source_manifest_sha256': 'b' * 64, 'cells': cells})
 
     def write(self, rel, value):
@@ -202,6 +317,13 @@ class ValidateMale(unittest.TestCase):
 
     def test_male_data_checked_before_ui_activation(self):
         self.assertEqual(vr.check_male(self.root), [])
+
+    def test_stale_male_shipping_count_is_rejected(self):
+        path = self.root / 'site/data/replay_male/manifest.json'
+        manifest = json.loads(path.read_text(encoding='utf-8'))
+        manifest['shipping_rule'] = 'cells occupied by the 1 dishes; the other recorded cells stay in the research pack'
+        self.write('site/data/replay_male/manifest.json', manifest)
+        self.assertIn('male: invalid replay manifest shipping_rule', vr.check_male(self.root))
 
     def test_male_neuropils_required_complete_and_in_bounds(self):
         path = self.root / 'site/data/neuropils_male.json'

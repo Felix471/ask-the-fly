@@ -20,9 +20,9 @@ jobs:
           node-version: "22"
       - name: Unit tests against the shipped data (pure functions + audit regressions)
         run: node --test site/test/app.test.mjs site/test/regress.test.mjs site/test/male_data.test.mjs site/test/male_ui.test.mjs site/test/female_v121.test.mjs
-      - name: Install file-only male export test dependencies
-        run: python3 -m pip install numpy pandas
+      - name: Install file-only export, sprite and mocked encoder test dependencies
+        run: python3 -m pip install numpy pandas pillow python-dotenv google-genai
       - name: Python quick tests (encoder gate, release validator, male exports and copy)
-        run: python3 -m unittest tests.test_merge_validation tests.test_validate_release tests.test_male_site_exports tests.test_import_copy tests.test_fly_lines -v
+        run: python3 -m unittest tests.test_merge_validation tests.test_validate_release tests.test_male_site_exports tests.test_import_copy tests.test_fly_lines tests.test_batch3_encoder tests.test_apply_sections_batch3 tests.test_report_batch3 -v
       - name: Validate the production data bundle (Q06)
         run: python3 scripts/validate_release.py

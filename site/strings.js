@@ -143,7 +143,7 @@ export const STRINGS = {
     "colIr94e": "Amino acids",
     "ir94eExplain": "Amino acids = the Ir94e channel: in this model free amino acids and glutamate put the fly off, so soy-, stock- and meat-heavy dishes score low. Which level a dish gets is our estimate; the suppression is the model's.",
     "lowInterest": "The fly didn't care much for any of these. This one was just the least uninteresting.",
-    "releaseSummary": "Independent male fly added; female results unchanged.",
+    "releaseSummary": "105 new entries, 14 sections, and not-food labels.",
     "releaseLink": "what's new",
     "stateV12": {
       "EatsLabel": "Eats",
@@ -230,6 +230,10 @@ export const STRINGS = {
       "verdictOppositeMany": "The {fly} took {fly_pick}. The rest is yours.",
       "oppositeLeast": "The {fly}'s least favorite: {lowest}",
       "lowInterest": "The {fly} didn't care for much of any of these. This one was just the least uninteresting."
+    },
+    "notFood": {
+      "badge": "not food",
+      "note": "The fly has no idea whether this is edible; it reacts only to the four estimated taste levels."
     }
   },
   "zh": {
@@ -374,7 +378,7 @@ export const STRINGS = {
     "colIr94e": "氨基酸",
     "ir94eExplain": "氨基酸一列是 Ir94e 通道：在这个模型里，游离氨基酸和谷氨酸（俗称的“鲜”）会让果蝇扫兴，所以酱油、高汤、肉多的菜得分很低。菜对应哪个等级是我们估的，抑制本身是模型的。",
     "lowInterest": "这几样果蝇都不太想吃，勉强挑了这个。",
-    "releaseSummary": "新增独立计算的雄蝇；雌蝇结果不变。",
+    "releaseSummary": "新增 105 个条目、14 个分类与非食物标记。",
     "releaseLink": "更新记录",
     "stateV12": {
       "EatsLabel": "吃",
@@ -461,6 +465,10 @@ export const STRINGS = {
       "verdictOppositeMany": "{fly}选了{fly_pick}，剩下的都归你。",
       "oppositeLeast": "{fly}最不想吃的是{lowest}",
       "lowInterest": "{fly}对这几道都不太感兴趣，这道只是相对没那么无聊。"
+    },
+    "notFood": {
+      "badge": "不是给人吃的",
+      "note": "果蝇不知道这能不能吃，它只按估算出来的四个味觉档位反应。"
     }
   }
 };

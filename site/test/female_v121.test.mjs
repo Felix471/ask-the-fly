@@ -20,8 +20,9 @@ test('female v1.2.1: immutable fixture covers every dish and both modes of every
   assert.equal(female, 'female');
   const dictionary = buildDictionary(json('../data/dishes.json'));
   const lookup = buildLookup(json('../data/lookup_table_v1_2.json'));
-  const scored = scoreOptions(dictionary.entries.map(d => d.key), dictionary, lookup);
-  assert.equal(scored.length, 174);
+  assert.equal(fixture.dishes.length, 174); // Frozen reference set, not the live dictionary size.
+  const scored = scoreOptions(fixture.dishes.map(d => d[0]), dictionary, lookup);
+  assert.equal(scored.length, fixture.dishes.length);
   assert.deepEqual(scored.map(d => [d.entry.key, cellIdFor(d.cell), d.cell.mn9_mean, readoutState(d.cell)]), fixture.dishes);
   const pairs = [];
   for (let i = 0; i < scored.length; i++) for (let j = i + 1; j < scored.length; j++) {

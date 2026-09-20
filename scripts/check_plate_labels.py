@@ -50,9 +50,14 @@ def inspect_labels(page, names):
       return {
         height: canvas.getBoundingClientRect().height,
         labels: labels.map(el => {
-          const r = el.getBoundingClientRect(), s = getComputedStyle(el);
-          return {text: el.textContent, title: el.title, left: r.left, top: r.top,
-            width: r.width, height: r.height, clipped: el.scrollWidth > el.clientWidth,
+          const name = el.querySelector('.plate-name') || el;
+          const badge = el.querySelector('.not-food-badge');
+          const r = name.getBoundingClientRect(), s = getComputedStyle(name);
+          const outer = el.getBoundingClientRect();
+          return {text: name.textContent, title: el.title, left: r.left, top: r.top,
+            width: r.width, height: r.height, clipped: name.scrollWidth > name.clientWidth,
+            outer: {left:outer.left,top:outer.top,width:outer.width,height:outer.height},
+            badge: badge?.textContent || '', badgeFits: !badge || (badge.scrollWidth <= badge.clientWidth && badge.getBoundingClientRect().bottom <= outer.bottom),
             overflow: s.overflow, textOverflow: s.textOverflow, whiteSpace: s.whiteSpace};
         }),
         paint: names.map(name => window.__platePaint[name] || null)
@@ -63,11 +68,14 @@ def inspect_labels(page, names):
 def assert_labels(state, names):
     labels = state["labels"]
     assert [item["text"] for item in labels] == names, "display names changed or missing"
-    assert [item["title"] for item in labels] == names, "full-name titles changed or missing"
+    assert [item["title"] for item in labels] == [name + (' — ' + item['badge'] if item['badge'] else '')
+                                                for name, item in zip(names, labels)], "full-name titles changed or missing"
     assert all(item["overflow"] == "hidden" and item["textOverflow"] == "ellipsis"
                and item["whiteSpace"] == "nowrap" for item in labels), "labels are not clipped"
     assert len({item["height"] for item in labels}) == 1, "label row heights differ"
     assert not any(intersect(a, b) for i, a in enumerate(labels) for b in labels[i + 1:]), "label boxes overlap"
+    assert all(item['badgeFits'] for item in labels), 'not-food badge clipped'
+    assert not any(intersect(a['outer'], b['outer']) for i, a in enumerate(labels) for b in labels[i + 1:]), 'caption boxes overlap'
 
 
 def main():
@@ -76,6 +84,7 @@ def main():
     parser.add_argument("--out", type=Path, default=ROOT / "results/plate-labels/after")
     parser.add_argument("--baseline", action="store_true")
     parser.add_argument("--compare", type=Path, help="baseline report.json for scene-height comparison")
+    parser.add_argument("--dishes", help="comma-separated keys to check instead of the automatically selected longest names")
     args = parser.parse_args()
     args.out.mkdir(parents=True, exist_ok=True)
     dishes = json.loads((ROOT / "data/dishes.json").read_text(encoding="utf-8"))
@@ -90,7 +99,8 @@ def main():
               return names.map(name => ctx.measureText(name).width);
             }""", {"names": [d["display"][lang] for d in dishes], "font": FONT})
             ranked = sorted(zip(dishes, widths), key=lambda pair: (-len(pair[0]["display"][lang]), -pair[1], pair[0]["key"]))
-            selected = [d for d, _ in ranked[:3]]
+            by_key = {d['key']: d for d in dishes}
+            selected = [by_key[key] for key in args.dishes.split(',')] if args.dishes else [d for d, _ in ranked[:3]]
             names = [d["display"][lang] for d in selected]
             print(f"{lang} longest: " + json.dumps(names, ensure_ascii=False), flush=True)
             for width in (360, 390, 430):

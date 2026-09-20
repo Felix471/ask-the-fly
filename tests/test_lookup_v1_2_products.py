@@ -60,7 +60,9 @@ class LookupV12ProductsTests(unittest.TestCase):
         self.assertEqual(self.audit['checkpoint']['grouped_readout_trials_reconstructed'], 48000)
 
     def test_dish_counts_and_mouth_moves_list(self):
-        dishes = json.loads((ROOT / 'data/dishes.json').read_bytes())
+        dictionary = {d['key']: d for d in json.loads((ROOT / 'data/dishes.json').read_bytes())}
+        fixture = json.loads((ROOT / 'site/test/fixtures/female_v1_2_1_decisions.json').read_bytes())
+        dishes = [dictionary[d[0]] for d in fixture['dishes']]
         table = LookupTable.load(self.new_path)
         states = {d['key']: table.get(**{k: d[k] for k in table.data['dimensions']})['state'] for d in dishes}
         self.assertEqual(len(states), 174)

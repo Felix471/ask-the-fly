@@ -49,11 +49,12 @@ test('v1.2 threshold is inclusive and MN11V/right MN9 cannot decide state',()=>{
   assert.equal(readoutState({mn9_mean:5,mn11d_mean:4.99}),'proboscis_only');
   assert.equal(readoutState({mn9_mean:0,mn11d_mean:0}),'no_response');
 });
-test('v1.2 all 174 dish scores and pairwise decisions match frozen product',()=>{
+test('v1.2 all current dish scores and pairwise decisions match frozen product',()=>{
   const dictionary=buildDictionary(json('../../data/dishes.json'));
   const names=dictionary.entries.map(d=>d.key);
   const a=scoreOptions(names,dictionary,buildLookup(old)),b=scoreOptions(names,dictionary,buildLookup(table));
-  assert.equal(a.length,174);
+  assert.equal(a.length,dictionary.entries.length);
+  assert.equal(b.length,dictionary.entries.length);
   for(let i=0;i<a.length;i++)for(let j=i+1;j<a.length;j++)for(const mode of ['ask','opposite']){
     const before=decide([a[i],a[j]],mode),after=decide([b[i],b[j]],mode);
     for(const key of ['winner','flyPick'])assert.equal(before[key]?.name,after[key]?.name);

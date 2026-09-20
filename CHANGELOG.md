@@ -2,6 +2,13 @@
 
 What a visitor to askthefly.app would notice, newest first. One section per release; the heading is `## vX.Y.Z — YYYY-MM-DD` (the release tag on `main` and its date), and `scripts/validate_release.py` checks that `site/data/release.json` matches the top entry. Each entry ends with a line on whether the README honesty table changed.
 
+## v2.1.0 — 2026-09-19
+
+- Adds 105 entries, including 23 not-food items, for a 279-entry menu organized into 14 bilingual sections. Not-food entries carry a badge and an explanatory note.
+- Eight existing dishes now have their own sprites; all 105 new entries have dedicated art.
+- Existing dishes' scores and choices are unchanged, fixture-tested on all 174 reference keys for both flies. No lookup table or scientific protocol changed.
+- README honesty table: added the owner-approved bilingual not-food row, distinguishing the model response from our names, classification and encoder estimates.
+
 ## v2.0.1 — 2026-09-19
 
 - Chinese wording of the male brain-view caption revised to the owner's text; no data, scores, states, allocations or English text changed.

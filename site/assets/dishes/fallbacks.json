@@ -1,13 +1,4 @@
 {
-  "note": "keys without their own sprite render with the nearest existing sprite",
-  "fallbacks": {
-    "soy-milk": "milk",
-    "americano": "black-coffee",
-    "cappuccino": "latte",
-    "hot-chocolate": "latte",
-    "oolong-tea": "green-tea",
-    "sparkling-water": "water",
-    "apple-juice": "orange-juice",
-    "milk-chocolate": "dark-chocolate-85"
-  }
+  "note": "all 174 dishes have their own sprite; the eight batch-2 borrows were replaced in batch 3",
+  "fallbacks": {}
 }

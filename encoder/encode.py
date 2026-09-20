@@ -18,6 +18,22 @@ _PROMPT_PATH_FOR = {
     for version in ("encode_v1", "encode_v2", "encode_v2.1", "encode_v2.2", "encode_v2.3")
 }
 _DIMENSIONS = ("sugar", "bitter", "water", "ir94e")
+ADDENDUM_ID = "addendum_not_food_v1"
+ADDENDUM_PATH = _PROMPTS_DIR / f"{ADDENDUM_ID}.md"
+
+
+def prompt_addendum(food: dict) -> str | None:
+    return ADDENDUM_ID if food.get("not_food") is True else None
+
+
+def build_prompt(name: str, lang: str, prompt_version: str, *, not_food: bool = False) -> str:
+    template = _PROMPT_PATH_FOR[prompt_version].read_text(encoding="utf-8")
+    prompt = template.replace("{dish}", name).replace("{input_language}", lang)
+    if not_food:
+        if prompt_version != "encode_v2.3":
+            raise ValueError("not-food addendum requires encode_v2.3")
+        prompt += "\n\n" + ADDENDUM_PATH.read_text(encoding="utf-8").strip() + "\n"
+    return prompt
 
 
 def dimensions_for(prompt_version: str) -> tuple[str, ...]:
@@ -78,7 +94,8 @@ def _validate_model_entry(value: object, model_id: str, prompt_version: str = PR
 
 
 def encode_dish(
-    name: str, lang: Literal["zh", "en"], prompt_version: str | None = None
+    name: str, lang: Literal["zh", "en"], prompt_version: str | None = None,
+    *, not_food: bool = False,
 ) -> dict:
     if lang not in ("zh", "en"):
         raise ValueError("lang must be 'zh' or 'en'")
@@ -92,16 +109,18 @@ def encode_dish(
         raise ValueError(f"unknown prompt version: {selected_prompt}")
     from .client import GeminiEncoder, schema_version_for
 
+    prompt = build_prompt(name, lang, selected_prompt, not_food=not_food)
     client = GeminiEncoder()
     schema_version = schema_version_for(selected_prompt)
-    template = prompt_path.read_text(encoding="utf-8")
-    prompt = template.replace("{dish}", name).replace("{input_language}", lang)
     last_error: Exception | None = None
     for _ in range(2):
         try:
-            return _validate_model_entry(
+            entry = _validate_model_entry(
                 _loads_model_json(client.generate(prompt, schema_version)), client.model_id, selected_prompt
             )
+            if not_food:
+                entry["encoder_addendum"] = ADDENDUM_ID
+            return entry
         except (json.JSONDecodeError, ValueError, TypeError, KeyError) as exc:
             last_error = exc
     raise ValueError(f"model output failed validation twice: {last_error}")
@@ -112,10 +131,12 @@ def main() -> None:
     parser.add_argument("name")
     parser.add_argument("--lang", choices=("zh", "en"), required=True)
     parser.add_argument("--prompt-version", default=PROMPT_VERSION)
+    parser.add_argument("--not-food", action="store_true")
     args = parser.parse_args()
     print(
         json.dumps(
-            encode_dish(args.name, args.lang, args.prompt_version), ensure_ascii=False, indent=2
+            encode_dish(args.name, args.lang, args.prompt_version, not_food=args.not_food),
+            ensure_ascii=False, indent=2
         )
     )
 

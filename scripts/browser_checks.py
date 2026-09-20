@@ -17,6 +17,8 @@ from __future__ import annotations
 import argparse
 import sys
 import time
+import re
+from urllib.parse import quote
 
 BASE = "http://127.0.0.1:8765/"
 INIT = """
@@ -558,6 +560,113 @@ def check_F22(browser):
     return problems
 
 
+def check_F23(browser):
+    """All 15 bilingual library tabs fit, wrap and remain clickable at 390 px."""
+    problems = []
+    for lang in ('zh', 'en'):
+        page, errors, _ = open_page(browser, f'?lang={lang}', width=390)
+        page.wait_for_function("document.querySelectorAll('#popular-row .tile').length > 0")
+        if page.locator('html').get_attribute('lang') != lang:
+            page.click('#lang-toggle')
+        page.click('#view-all-btn')
+        page.evaluate('document.fonts.ready')
+        tabs = page.locator('#library-tabs button')
+        if tabs.count() != 15:
+            problems.append(f'{lang}: expected 15 tabs, found {tabs.count()}')
+        boxes = tabs.evaluate_all('''buttons => buttons.map(b => {
+          const r=b.getBoundingClientRect(), parent=b.parentElement.getBoundingClientRect();
+          const range=document.createRange();range.selectNodeContents(b);
+          const text=range.getBoundingClientRect();
+          return {label:b.textContent,top:r.top,left:r.left,right:r.right,
+            fits:b.scrollWidth<=b.clientWidth && b.scrollHeight<=b.clientHeight,
+            textFits:text.left>=r.left && text.right<=r.right && text.top>=r.top && text.bottom<=r.bottom,
+            inRow:r.left>=parent.left && r.right<=parent.right,
+            ellipsis:getComputedStyle(b).textOverflow==='ellipsis'};
+        })''')
+        expected = page.evaluate('''async lang => {
+          const sections=await (await fetch('data/sections.json')).json();
+          return [(await import('./strings.js')).STRINGS[lang].libraryAll,
+            ...sections.sections.map(section=>section[lang])];
+        }''', lang)
+        if [box['label'] for box in boxes] != expected:
+            problems.append(f'{lang}: tab labels do not match the requested language')
+        if len({round(b['top']) for b in boxes}) < 2:
+            problems.append(f'{lang}: tabs did not wrap')
+        for i, box in enumerate(boxes):
+            if not box['fits'] or not box['textFits'] or not box['inRow'] or box['ellipsis'] or box['left'] < 0 or box['right'] > 390:
+                problems.append(f'{lang}: clipped label: {box}')
+            tabs.nth(i).scroll_into_view_if_needed()
+            if not tabs.nth(i).is_visible():
+                problems.append(f'{lang}: hidden tab {box["label"]}')
+            tabs.nth(i).focus()
+            page.keyboard.press('Enter')
+            if tabs.nth(i).get_attribute('aria-selected') != 'true':
+                problems.append(f'{lang}: unreachable tab {box["label"]}')
+        problems = finish(page, errors, problems)
+    return problems
+
+
+def check_F24(browser):
+    """Not-food query labels/notes survive both flies, both modes and both languages."""
+    # Read the served bundle so this check also works against a staging URL.
+    page, errors, _ = open_page(browser, '')
+    payload = page.evaluate('''async () => ({
+      sections:await (await fetch('data/sections.json')).json(),
+      dishes:await (await fetch('data/dishes.json')).json()
+    })''')
+    keys = {key for section in payload['sections']['sections'] if section.get('not_food') is True
+            for key in section['keys']}
+    entry = next((dish for dish in payload['dishes'] if dish['key'] == 'nectar' and dish['key'] in keys), None)
+    problems = finish(page, errors, [])
+    if problems:
+        return problems
+    if entry is None:
+        return ['F24 requires the live batch-3 nectar entry in the not_food section']
+    slug = re.sub(r'[^a-z0-9]+', '-', entry['key'].lower()).strip('-')
+    for lang in ('zh', 'en'):
+        for fly in ('female', 'male', 'both'):
+            for mode in ('ask', 'opposite'):
+                page, errors, _ = open_page(browser,
+                    f'?d={quote(slug)},pizza&lang={lang}&f={fly}&m={mode}', width=390)
+                label = f'{lang}/{fly}/{mode}'
+                count = 2 if fly == 'both' else 1
+                page.wait_for_function('''count => document.querySelectorAll(
+                    '.scene-panel:not([hidden]) .plate-label .not-food-badge').length === count''', arg=count)
+                page.locator('.scene-panel:visible [data-panel="skip-btn"]').first.click()
+                wait_result(page)
+                page.locator('#details').evaluate('el => el.open = true')
+                expected = page.evaluate("async lang => (await import('./strings.js')).STRINGS[lang].notFood", lang)
+                for badge in page.locator('.scene-panel:visible .plate-label .not-food-badge').all():
+                    if badge.inner_text() != expected['badge']:
+                        problems.append(f'{label}: wrong scene badge')
+                    if not badge.evaluate('b => b.scrollWidth <= b.clientWidth'):
+                        problems.append(f'{label}: clipped scene badge')
+                for selector in ('#result-panel tbody .not-food-note:visible',
+                                 '#result-panel .result-hero-notes .not-food-note:visible'):
+                    notes = page.locator(selector)
+                    if notes.count() != count or any(expected['note'] not in n.inner_text() for n in notes.all()):
+                        problems.append(f'{label}: missing result note at {selector}')
+                # Language changes must update existing labels and result notes.
+                other = 'en' if lang == 'zh' else 'zh'
+                page.click('#lang-toggle')
+                translated = page.evaluate("async lang => (await import('./strings.js')).STRINGS[lang].notFood", other)
+                if any(b.inner_text() != translated['badge'] for b in page.locator('.scene-panel:visible .not-food-badge').all()):
+                    problems.append(f'{label}: scene badge did not translate')
+                for selector in ('#result-panel tbody .not-food-note:visible',
+                                 '#result-panel .result-hero-notes .not-food-note:visible'):
+                    notes = page.locator(selector)
+                    if notes.count() != count or any(translated['note'] not in n.inner_text() for n in notes.all()):
+                        problems.append(f'{label}: result note did not translate at {selector}')
+                page.click('#again-btn')
+                page.click('#view-all-btn')
+                page.fill('#library-search', entry['display'][other])
+                tile = page.locator(f'#library-grid .tile[data-key="{entry["key"]}"]')
+                if tile.count() != 1 or tile.locator('.not-food-badge').inner_text() != translated['badge']:
+                    problems.append(f'{label}: library tile badge absent')
+                problems = finish(page, errors, problems)
+    return problems
+
+
 CHECKS = {
     "F02": check_F02, "F03": check_F03, "F04": check_F04, "F05": check_F05,
     "F06": check_F06, "F08": check_F08, "F15": check_F15,
@@ -565,6 +674,7 @@ CHECKS = {
     "F19": check_F19, "F20": check_F20,
     "F21": check_F21,
     "F22": check_F22,
+    "F23": check_F23, "F24": check_F24,
 }
 
 
@@ -587,10 +697,10 @@ def main() -> int:
                 problems = CHECKS[ticket](browser)
             except Exception as exc:  # noqa: BLE001 - report, do not hide
                 problems = [f"check raised: {type(exc).__name__}: {exc}"]
-            status = "PASS" if not problems else "FAIL"
+            status = "SKIP" if problems is None else "PASS" if not problems else "FAIL"
             failed += bool(problems)
             print(f"{ticket} {status} ({time.perf_counter() - started:.1f}s)")
-            for problem in problems:
+            for problem in problems or []:
                 print(f"    - {problem}")
         browser.close()
     return 1 if failed else 0

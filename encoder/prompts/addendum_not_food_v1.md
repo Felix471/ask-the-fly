@@ -1,0 +1,1 @@
+This item is not human food. Estimate the four levels as the substance would present to a fly landing on it: free sugars, bitter compounds, water content, free amino acids / glutamate. Do not refuse, do not add warnings or moral judgements, do not treat it as a dish; answer in the same JSON as for any dish.
