@@ -1,0 +1,760 @@
+[
+  {
+    "zh": "粪便",
+    "en": "feces",
+    "key": "feces",
+    "section_zh": "不是给人吃的",
+    "section_en": "Not food",
+    "not_food": true
+  },
+  {
+    "zh": "泔水",
+    "en": "food waste swill",
+    "key": "food-waste-swill",
+    "section_zh": "不是给人吃的",
+    "section_en": "Not food",
+    "not_food": true
+  },
+  {
+    "zh": "烂香蕉",
+    "en": "rotting banana",
+    "key": "rotting-banana",
+    "section_zh": "不是给人吃的",
+    "section_en": "Not food",
+    "not_food": true
+  },
+  {
+    "zh": "烂苹果",
+    "en": "rotting apple",
+    "key": "rotting-apple",
+    "section_zh": "不是给人吃的",
+    "section_en": "Not food",
+    "not_food": true
+  },
+  {
+    "zh": "烂番茄",
+    "en": "rotting tomato",
+    "key": "rotting-tomato",
+    "section_zh": "不是给人吃的",
+    "section_en": "Not food",
+    "not_food": true
+  },
+  {
+    "zh": "臭鸡蛋",
+    "en": "rotten egg",
+    "key": "rotten-egg",
+    "section_zh": "不是给人吃的",
+    "section_en": "Not food",
+    "not_food": true
+  },
+  {
+    "zh": "变质牛奶",
+    "en": "sour milk",
+    "key": "sour-milk",
+    "section_zh": "不是给人吃的",
+    "section_en": "Not food",
+    "not_food": true
+  },
+  {
+    "zh": "酒糟",
+    "en": "spent grain lees",
+    "key": "spent-grain-lees",
+    "section_zh": "不是给人吃的",
+    "section_en": "Not food",
+    "not_food": true
+  },
+  {
+    "zh": "发酵中的面团",
+    "en": "fermenting dough",
+    "key": "fermenting-dough",
+    "section_zh": "不是给人吃的",
+    "section_en": "Not food",
+    "not_food": true
+  },
+  {
+    "zh": "泡菜汁",
+    "en": "kimchi brine",
+    "key": "kimchi-brine",
+    "section_zh": "不是给人吃的",
+    "section_en": "Not food",
+    "not_food": true
+  },
+  {
+    "zh": "啤酒渣",
+    "en": "beer dregs",
+    "key": "beer-dregs",
+    "section_zh": "不是给人吃的",
+    "section_en": "Not food",
+    "not_food": true
+  },
+  {
+    "zh": "咖啡渣",
+    "en": "coffee grounds",
+    "key": "coffee-grounds",
+    "section_zh": "不是给人吃的",
+    "section_en": "Not food",
+    "not_food": true
+  },
+  {
+    "zh": "花蜜",
+    "en": "nectar",
+    "key": "nectar",
+    "section_zh": "不是给人吃的",
+    "section_en": "Not food",
+    "not_food": true
+  },
+  {
+    "zh": "蚜虫蜜露",
+    "en": "aphid honeydew",
+    "key": "aphid-honeydew",
+    "section_zh": "不是给人吃的",
+    "section_en": "Not food",
+    "not_food": true
+  },
+  {
+    "zh": "树汁",
+    "en": "tree sap",
+    "key": "tree-sap",
+    "section_zh": "不是给人吃的",
+    "section_en": "Not food",
+    "not_food": true
+  },
+  {
+    "zh": "花粉",
+    "en": "pollen",
+    "key": "pollen",
+    "section_zh": "不是给人吃的",
+    "section_en": "Not food",
+    "not_food": true
+  },
+  {
+    "zh": "汗水",
+    "en": "sweat",
+    "key": "sweat",
+    "section_zh": "不是给人吃的",
+    "section_en": "Not food",
+    "not_food": true
+  },
+  {
+    "zh": "眼泪",
+    "en": "tears",
+    "key": "tears",
+    "section_zh": "不是给人吃的",
+    "section_en": "Not food",
+    "not_food": true
+  },
+  {
+    "zh": "牙膏",
+    "en": "toothpaste",
+    "key": "toothpaste",
+    "section_zh": "不是给人吃的",
+    "section_en": "Not food",
+    "not_food": true
+  },
+  {
+    "zh": "洗洁精",
+    "en": "dish soap",
+    "key": "dish-soap",
+    "section_zh": "不是给人吃的",
+    "section_en": "Not food",
+    "not_food": true
+  },
+  {
+    "zh": "肥皂",
+    "en": "soap",
+    "key": "soap",
+    "section_zh": "不是给人吃的",
+    "section_en": "Not food",
+    "not_food": true
+  },
+  {
+    "zh": "蜡烛",
+    "en": "candle",
+    "key": "candle",
+    "section_zh": "不是给人吃的",
+    "section_en": "Not food",
+    "not_food": true
+  },
+  {
+    "zh": "电蚊香液",
+    "en": "mosquito coil liquid",
+    "key": "mosquito-coil-liquid",
+    "section_zh": "不是给人吃的",
+    "section_en": "Not food",
+    "not_food": true
+  },
+  {
+    "zh": "醋",
+    "en": "vinegar",
+    "key": "vinegar",
+    "section_zh": "调料",
+    "section_en": "Condiments"
+  },
+  {
+    "zh": "腐乳",
+    "en": "furu",
+    "key": "furu",
+    "section_zh": "调料",
+    "section_en": "Condiments"
+  },
+  {
+    "zh": "大阪烧",
+    "en": "okonomiyaki",
+    "key": "okonomiyaki",
+    "section_zh": "日本",
+    "section_en": "Japanese"
+  },
+  {
+    "zh": "烤鸡串",
+    "en": "yakitori",
+    "key": "yakitori",
+    "section_zh": "日本",
+    "section_en": "Japanese"
+  },
+  {
+    "zh": "日式煎饺",
+    "en": "gyoza",
+    "key": "gyoza",
+    "section_zh": "日本",
+    "section_en": "Japanese"
+  },
+  {
+    "zh": "炸猪排",
+    "en": "tonkatsu",
+    "key": "tonkatsu",
+    "section_zh": "日本",
+    "section_en": "Japanese"
+  },
+  {
+    "zh": "咖喱猪排饭",
+    "en": "katsu curry",
+    "key": "katsu-curry",
+    "section_zh": "日本",
+    "section_en": "Japanese"
+  },
+  {
+    "zh": "鳗鱼饭",
+    "en": "unagi don",
+    "key": "unagi-don",
+    "section_zh": "日本",
+    "section_en": "Japanese"
+  },
+  {
+    "zh": "亲子丼",
+    "en": "oyakodon",
+    "key": "oyakodon",
+    "section_zh": "日本",
+    "section_en": "Japanese"
+  },
+  {
+    "zh": "牛肉饭",
+    "en": "gyudon",
+    "key": "gyudon",
+    "section_zh": "日本",
+    "section_en": "Japanese"
+  },
+  {
+    "zh": "荞麦面",
+    "en": "soba",
+    "key": "soba",
+    "section_zh": "日本",
+    "section_en": "Japanese"
+  },
+  {
+    "zh": "玉子烧",
+    "en": "tamagoyaki",
+    "key": "tamagoyaki",
+    "section_zh": "日本",
+    "section_en": "Japanese"
+  },
+  {
+    "zh": "茶碗蒸",
+    "en": "chawanmushi",
+    "key": "chawanmushi",
+    "section_zh": "日本",
+    "section_en": "Japanese"
+  },
+  {
+    "zh": "鲷鱼烧",
+    "en": "taiyaki",
+    "key": "taiyaki",
+    "section_zh": "日本",
+    "section_en": "Japanese"
+  },
+  {
+    "zh": "铜锣烧",
+    "en": "dorayaki",
+    "key": "dorayaki",
+    "section_zh": "日本",
+    "section_en": "Japanese"
+  },
+  {
+    "zh": "日式炸鸡",
+    "en": "karaage",
+    "key": "karaage",
+    "section_zh": "日本",
+    "section_en": "Japanese"
+  },
+  {
+    "zh": "泡菜汤",
+    "en": "kimchi jjigae",
+    "key": "kimchi-jjigae",
+    "section_zh": "韩国",
+    "section_en": "Korean"
+  },
+  {
+    "zh": "参鸡汤",
+    "en": "samgyetang",
+    "key": "samgyetang",
+    "section_zh": "韩国",
+    "section_en": "Korean"
+  },
+  {
+    "zh": "杂菜",
+    "en": "japchae",
+    "key": "japchae",
+    "section_zh": "韩国",
+    "section_en": "Korean"
+  },
+  {
+    "zh": "紫菜包饭",
+    "en": "kimbap",
+    "key": "kimbap",
+    "section_zh": "韩国",
+    "section_en": "Korean"
+  },
+  {
+    "zh": "嫩豆腐汤",
+    "en": "sundubu jjigae",
+    "key": "sundubu-jjigae",
+    "section_zh": "韩国",
+    "section_en": "Korean"
+  },
+  {
+    "zh": "糖饼",
+    "en": "hotteok",
+    "key": "hotteok",
+    "section_zh": "韩国",
+    "section_en": "Korean"
+  },
+  {
+    "zh": "叻沙",
+    "en": "laksa",
+    "key": "laksa",
+    "section_zh": "东南亚",
+    "section_en": "Southeast Asian"
+  },
+  {
+    "zh": "椰浆饭",
+    "en": "nasi lemak",
+    "key": "nasi-lemak",
+    "section_zh": "东南亚",
+    "section_en": "Southeast Asian"
+  },
+  {
+    "zh": "沙爹",
+    "en": "satay",
+    "key": "satay",
+    "section_zh": "东南亚",
+    "section_en": "Southeast Asian"
+  },
+  {
+    "zh": "仁当牛肉",
+    "en": "beef rendang",
+    "key": "beef-rendang",
+    "section_zh": "东南亚",
+    "section_en": "Southeast Asian"
+  },
+  {
+    "zh": "越南法棍",
+    "en": "banh mi",
+    "key": "banh-mi",
+    "section_zh": "东南亚",
+    "section_en": "Southeast Asian"
+  },
+  {
+    "zh": "绿咖喱",
+    "en": "green curry",
+    "key": "green-curry",
+    "section_zh": "东南亚",
+    "section_en": "Southeast Asian"
+  },
+  {
+    "zh": "芒果糯米饭",
+    "en": "mango sticky rice",
+    "key": "mango-sticky-rice",
+    "section_zh": "东南亚",
+    "section_en": "Southeast Asian"
+  },
+  {
+    "zh": "青木瓜沙拉",
+    "en": "som tam",
+    "key": "som-tam",
+    "section_zh": "东南亚",
+    "section_en": "Southeast Asian"
+  },
+  {
+    "zh": "海南鸡饭",
+    "en": "hainanese chicken rice",
+    "key": "hainanese-chicken-rice",
+    "section_zh": "东南亚",
+    "section_en": "Southeast Asian"
+  },
+  {
+    "zh": "印度香饭",
+    "en": "biryani",
+    "key": "biryani",
+    "section_zh": "南亚",
+    "section_en": "South Asian"
+  },
+  {
+    "zh": "黄油鸡",
+    "en": "butter chicken",
+    "key": "butter-chicken",
+    "section_zh": "南亚",
+    "section_en": "South Asian"
+  },
+  {
+    "zh": "萨莫萨",
+    "en": "samosa",
+    "key": "samosa",
+    "section_zh": "南亚",
+    "section_en": "South Asian"
+  },
+  {
+    "zh": "馕",
+    "en": "naan",
+    "key": "naan",
+    "section_zh": "南亚",
+    "section_en": "South Asian"
+  },
+  {
+    "zh": "扁豆咖喱",
+    "en": "dal",
+    "key": "dal",
+    "section_zh": "南亚",
+    "section_en": "South Asian"
+  },
+  {
+    "zh": "马萨拉奶茶",
+    "en": "masala chai",
+    "key": "masala-chai",
+    "section_zh": "饮料",
+    "section_en": "Drinks"
+  },
+  {
+    "zh": "法拉费",
+    "en": "falafel",
+    "key": "falafel",
+    "section_zh": "中东与非洲",
+    "section_en": "Middle East & Africa"
+  },
+  {
+    "zh": "沙威玛",
+    "en": "shawarma",
+    "key": "shawarma",
+    "section_zh": "中东与非洲",
+    "section_en": "Middle East & Africa"
+  },
+  {
+    "zh": "果仁蜜饼",
+    "en": "baklava",
+    "key": "baklava",
+    "section_zh": "中东与非洲",
+    "section_en": "Middle East & Africa"
+  },
+  {
+    "zh": "塔吉锅",
+    "en": "tagine",
+    "key": "tagine",
+    "section_zh": "中东与非洲",
+    "section_en": "Middle East & Africa"
+  },
+  {
+    "zh": "库斯库斯",
+    "en": "couscous",
+    "key": "couscous",
+    "section_zh": "中东与非洲",
+    "section_en": "Middle East & Africa"
+  },
+  {
+    "zh": "西非什锦饭",
+    "en": "jollof rice",
+    "key": "jollof-rice",
+    "section_zh": "中东与非洲",
+    "section_en": "Middle East & Africa"
+  },
+  {
+    "zh": "英吉拉",
+    "en": "injera",
+    "key": "injera",
+    "section_zh": "中东与非洲",
+    "section_en": "Middle East & Africa"
+  },
+  {
+    "zh": "北非蛋",
+    "en": "shakshuka",
+    "key": "shakshuka",
+    "section_zh": "中东与非洲",
+    "section_en": "Middle East & Africa"
+  },
+  {
+    "zh": "西班牙海鲜饭",
+    "en": "paella",
+    "key": "paella",
+    "section_zh": "欧洲",
+    "section_en": "European"
+  },
+  {
+    "zh": "意式烩饭",
+    "en": "risotto",
+    "key": "risotto",
+    "section_zh": "欧洲",
+    "section_en": "European"
+  },
+  {
+    "zh": "培根蛋面",
+    "en": "carbonara",
+    "key": "carbonara",
+    "section_zh": "欧洲",
+    "section_en": "European"
+  },
+  {
+    "zh": "土豆团子",
+    "en": "gnocchi",
+    "key": "gnocchi",
+    "section_zh": "欧洲",
+    "section_en": "European"
+  },
+  {
+    "zh": "普罗旺斯炖菜",
+    "en": "ratatouille",
+    "key": "ratatouille",
+    "section_zh": "欧洲",
+    "section_en": "European"
+  },
+  {
+    "zh": "可丽饼",
+    "en": "crepe",
+    "key": "crepe",
+    "section_zh": "欧洲",
+    "section_en": "European"
+  },
+  {
+    "zh": "炸肉排",
+    "en": "schnitzel",
+    "key": "schnitzel",
+    "section_zh": "欧洲",
+    "section_en": "European"
+  },
+  {
+    "zh": "德式香肠",
+    "en": "bratwurst",
+    "key": "bratwurst",
+    "section_zh": "欧洲",
+    "section_en": "European"
+  },
+  {
+    "zh": "碱水面包",
+    "en": "pretzel",
+    "key": "pretzel",
+    "section_zh": "欧洲",
+    "section_en": "European"
+  },
+  {
+    "zh": "匈牙利炖牛肉",
+    "en": "goulash",
+    "key": "goulash",
+    "section_zh": "欧洲",
+    "section_en": "European"
+  },
+  {
+    "zh": "罗宋汤",
+    "en": "borscht",
+    "key": "borscht",
+    "section_zh": "欧洲",
+    "section_en": "European"
+  },
+  {
+    "zh": "波兰饺子",
+    "en": "pierogi",
+    "key": "pierogi",
+    "section_zh": "欧洲",
+    "section_en": "European"
+  },
+  {
+    "zh": "芝士火锅",
+    "en": "cheese fondue",
+    "key": "cheese-fondue",
+    "section_zh": "欧洲",
+    "section_en": "European"
+  },
+  {
+    "zh": "希腊沙拉",
+    "en": "greek salad",
+    "key": "greek-salad",
+    "section_zh": "欧洲",
+    "section_en": "European"
+  },
+  {
+    "zh": "马卡龙",
+    "en": "macarons",
+    "key": "macarons",
+    "section_zh": "甜点与零食",
+    "section_en": "Sweets & snacks"
+  },
+  {
+    "zh": "帕芙洛娃",
+    "en": "pavlova",
+    "key": "pavlova",
+    "section_zh": "甜点与零食",
+    "section_en": "Sweets & snacks"
+  },
+  {
+    "zh": "吉事果",
+    "en": "churros",
+    "key": "churros",
+    "section_zh": "甜点与零食",
+    "section_en": "Sweets & snacks"
+  },
+  {
+    "zh": "肉汁奶酪薯条",
+    "en": "poutine",
+    "key": "poutine",
+    "section_zh": "美洲与大洋洲",
+    "section_en": "Americas & Oceania"
+  },
+  {
+    "zh": "蛤蜊浓汤",
+    "en": "clam chowder",
+    "key": "clam-chowder",
+    "section_zh": "美洲与大洋洲",
+    "section_en": "Americas & Oceania"
+  },
+  {
+    "zh": "烤肋排",
+    "en": "bbq ribs",
+    "key": "bbq-ribs",
+    "section_zh": "美洲与大洋洲",
+    "section_en": "Americas & Oceania"
+  },
+  {
+    "zh": "芝士通心粉",
+    "en": "mac and cheese",
+    "key": "mac-and-cheese",
+    "section_zh": "美洲与大洋洲",
+    "section_en": "Americas & Oceania"
+  },
+  {
+    "zh": "酸橘汁腌鱼",
+    "en": "ceviche",
+    "key": "ceviche",
+    "section_zh": "美洲与大洋洲",
+    "section_en": "Americas & Oceania"
+  },
+  {
+    "zh": "恩潘纳达",
+    "en": "empanada",
+    "key": "empanada",
+    "section_zh": "美洲与大洋洲",
+    "section_en": "Americas & Oceania"
+  },
+  {
+    "zh": "黑豆炖肉",
+    "en": "feijoada",
+    "key": "feijoada",
+    "section_zh": "美洲与大洋洲",
+    "section_en": "Americas & Oceania"
+  },
+  {
+    "zh": "牛油果酱",
+    "en": "guacamole",
+    "key": "guacamole",
+    "section_zh": "美洲与大洋洲",
+    "section_en": "Americas & Oceania"
+  },
+  {
+    "zh": "澳式肉派",
+    "en": "meat pie",
+    "key": "meat-pie",
+    "section_zh": "美洲与大洋洲",
+    "section_en": "Americas & Oceania"
+  },
+  {
+    "zh": "维吉麦",
+    "en": "vegemite",
+    "key": "vegemite",
+    "section_zh": "调料",
+    "section_en": "Condiments"
+  },
+  {
+    "zh": "酱油",
+    "en": "soy sauce",
+    "key": "soy-sauce",
+    "section_zh": "调料",
+    "section_en": "Condiments"
+  },
+  {
+    "zh": "鱼露",
+    "en": "fish sauce",
+    "key": "fish-sauce",
+    "section_zh": "调料",
+    "section_en": "Condiments"
+  },
+  {
+    "zh": "番茄酱",
+    "en": "ketchup",
+    "key": "ketchup",
+    "section_zh": "调料",
+    "section_en": "Condiments"
+  },
+  {
+    "zh": "黄芥末",
+    "en": "yellow mustard",
+    "key": "yellow-mustard",
+    "section_zh": "调料",
+    "section_en": "Condiments"
+  },
+  {
+    "zh": "是拉差辣酱",
+    "en": "sriracha",
+    "key": "sriracha",
+    "section_zh": "调料",
+    "section_en": "Condiments"
+  },
+  {
+    "zh": "蛋黄酱",
+    "en": "mayonnaise",
+    "key": "mayonnaise",
+    "section_zh": "调料",
+    "section_en": "Condiments"
+  },
+  {
+    "zh": "康普茶",
+    "en": "kombucha",
+    "key": "kombucha",
+    "section_zh": "饮料",
+    "section_en": "Drinks"
+  },
+  {
+    "zh": "苹果酒",
+    "en": "cider",
+    "key": "cider",
+    "section_zh": "酒",
+    "section_en": "Alcohol"
+  },
+  {
+    "zh": "蜂蜜酒",
+    "en": "mead",
+    "key": "mead",
+    "section_zh": "酒",
+    "section_en": "Alcohol"
+  },
+  {
+    "zh": "金汤力",
+    "en": "gin and tonic",
+    "key": "gin-and-tonic",
+    "section_zh": "酒",
+    "section_en": "Alcohol"
+  }
+]

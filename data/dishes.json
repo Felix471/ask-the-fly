@@ -53,6 +53,58 @@
     }
   },
   {
+    "key": "aphid-honeydew",
+    "aliases": [
+      "蚜虫蜜露",
+      "aphid honeydew",
+      "yachongmilu",
+      "honeydew",
+      "aphid honeydews",
+      "aphid-honeydews",
+      "honeydews",
+      "ya chong mi lu",
+      "yachongmilus",
+      "蚜蟲蜜露"
+    ],
+    "display": {
+      "zh": "蚜虫蜜露",
+      "en": "aphid honeydew"
+    },
+    "sugar": "very_high",
+    "bitter": "none",
+    "water": "low",
+    "ir94e": "low",
+    "reason": {
+      "sugar": "composed primarily of concentrated plant sap sugars",
+      "bitter": "lacks significant bitter secondary metabolites",
+      "water": "viscous, syrupy consistency with low free water activity",
+      "ir94e": "contains trace amounts of amino acids from plant sap"
+    },
+    "confidence": {
+      "sugar": 0.95,
+      "bitter": 0.85,
+      "water": 0.875,
+      "ir94e": 0.825
+    },
+    "review": "needs_review",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.3",
+    "arbitration": {
+      "water": {
+        "zh": "medium",
+        "en": "low",
+        "chosen": "low",
+        "rule": "lower_level"
+      },
+      "ir94e": {
+        "zh": "low",
+        "en": "medium",
+        "chosen": "low",
+        "rule": "lower_level"
+      }
+    },
+    "encoder_addendum": "addendum_not_food_v1"
+  },
+  {
     "key": "apple",
     "aliases": [
       "苹果",
@@ -346,6 +398,46 @@
     }
   },
   {
+    "key": "baklava",
+    "aliases": [
+      "果仁蜜饼",
+      "baklava",
+      "turkish baklava",
+      "baklawa",
+      "baqlawa",
+      "baklavas",
+      "baklawas",
+      "baqlawas",
+      "guo ren mi bing",
+      "guorenmibing",
+      "turkish baklavas",
+      "turkish-baklava",
+      "果仁蜜餅"
+    ],
+    "display": {
+      "zh": "果仁蜜饼",
+      "en": "baklava"
+    },
+    "sugar": "very_high",
+    "bitter": "none",
+    "water": "low",
+    "ir94e": "none",
+    "reason": {
+      "sugar": "heavily soaked in sugar syrup or honey",
+      "bitter": "no bitter ingredients used",
+      "water": "dense pastry and nuts with low free water content",
+      "ir94e": "no fermented or glutamate-rich ingredients"
+    },
+    "confidence": {
+      "sugar": 1.0,
+      "bitter": 0.9,
+      "water": 0.9,
+      "ir94e": 1.0
+    },
+    "review": "llm_v1",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.3"
+  },
+  {
     "key": "banana",
     "aliases": [
       "香蕉",
@@ -377,6 +469,96 @@
     "encoder_version_by_dimension": {
       "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
     }
+  },
+  {
+    "key": "banh-mi",
+    "aliases": [
+      "越南法棍",
+      "banh mi",
+      "越南三明治",
+      "vietnamese sandwich",
+      "banh mi sandwich",
+      "banh mi sandwichs",
+      "banh mis",
+      "banh-mi-sandwich",
+      "banh-mis",
+      "vietnamese sandwichs",
+      "vietnamese-sandwich",
+      "yue nan fa gun",
+      "yue nan san ming zhi",
+      "yuenanfagun",
+      "yuenansanmingzhi"
+    ],
+    "display": {
+      "zh": "越南法棍",
+      "en": "banh mi"
+    },
+    "sugar": "low",
+    "bitter": "none",
+    "water": "low",
+    "ir94e": "medium",
+    "reason": {
+      "sugar": "pickled vegetables often contain a small amount of sugar",
+      "bitter": "no significant bitter ingredients",
+      "water": "bread and meat are moist solids with low free water content",
+      "ir94e": "contains pate, mayonnaise, and often fish sauce or soy sauce as key flavor components"
+    },
+    "confidence": {
+      "sugar": 0.9,
+      "bitter": 0.95,
+      "water": 0.85,
+      "ir94e": 0.9
+    },
+    "review": "llm_v1",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.3"
+  },
+  {
+    "key": "bbq-ribs",
+    "aliases": [
+      "烤肋排",
+      "bbq ribs",
+      "kao le pai",
+      "烤排骨",
+      "grilled pork ribs",
+      "barbecue ribs",
+      "烧烤排骨",
+      "barbecue rib",
+      "barbecue-ribs",
+      "bbq rib",
+      "bbq-rib",
+      "grilled pork rib",
+      "grilled-pork-ribs",
+      "kao le pais",
+      "kao pai gu",
+      "kao-le-pai",
+      "kaolepai",
+      "kaopaigu",
+      "shao kao pai gu",
+      "shaokaopaigu",
+      "燒烤排骨"
+    ],
+    "display": {
+      "zh": "烤肋排",
+      "en": "bbq ribs"
+    },
+    "sugar": "medium",
+    "bitter": "low",
+    "water": "low",
+    "ir94e": "medium",
+    "reason": {
+      "sugar": "BBQ sauce typically contains significant sugar or molasses",
+      "bitter": "slight bitterness from charred meat and smoky flavor",
+      "water": "moist meat with thick sauce, not a liquid",
+      "ir94e": "rich in umami from meat proteins and savory sauce ingredients"
+    },
+    "confidence": {
+      "sugar": 0.9,
+      "bitter": 0.8,
+      "water": 0.9,
+      "ir94e": 0.9
+    },
+    "review": "llm_v1",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.3"
   },
   {
     "key": "beef jerky",
@@ -453,6 +635,50 @@
     }
   },
   {
+    "key": "beef-rendang",
+    "aliases": [
+      "仁当牛肉",
+      "beef rendang",
+      "rendang niurou",
+      "巴东牛肉",
+      "rendang daging",
+      "ba dong niu rou",
+      "badongniurou",
+      "beef rendangs",
+      "beef-rendangs",
+      "ren dang niu rou",
+      "rendang dagings",
+      "rendang niurous",
+      "rendang-daging",
+      "rendang-niurou",
+      "rendangniurou",
+      "仁當牛肉",
+      "巴東牛肉"
+    ],
+    "display": {
+      "zh": "仁当牛肉",
+      "en": "beef rendang"
+    },
+    "sugar": "low",
+    "bitter": "low",
+    "water": "low",
+    "ir94e": "medium",
+    "reason": {
+      "sugar": "contains a small amount of palm sugar for balance",
+      "bitter": "faint bitterness from toasted coconut and spices",
+      "water": "a dry, thick curry with very little free liquid",
+      "ir94e": "rich in umami from long-simmered beef and coconut milk reduction"
+    },
+    "confidence": {
+      "sugar": 0.9,
+      "bitter": 0.8,
+      "water": 0.925,
+      "ir94e": 0.9
+    },
+    "review": "llm_v1",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.3"
+  },
+  {
     "key": "beer",
     "aliases": [
       "啤酒",
@@ -486,6 +712,49 @@
     "encoder_version_by_dimension": {
       "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
     }
+  },
+  {
+    "key": "beer-dregs",
+    "aliases": [
+      "啤酒渣",
+      "beer dregs",
+      "pijiu zha",
+      "spent grain",
+      "brewers grain",
+      "beer dreg",
+      "beer-dreg",
+      "brewers grains",
+      "brewers-grain",
+      "pi jiu zha",
+      "pijiu zhas",
+      "pijiu-zha",
+      "pijiuzha",
+      "spent grains",
+      "spent-grain"
+    ],
+    "display": {
+      "zh": "啤酒渣",
+      "en": "beer dregs"
+    },
+    "sugar": "low",
+    "bitter": "high",
+    "water": "low",
+    "ir94e": "medium",
+    "reason": {
+      "sugar": "residual sugars from fermentation are low",
+      "bitter": "contains concentrated hop resins and bitter compounds from grain",
+      "water": "moist solid texture with moderate water activity",
+      "ir94e": "rich in amino acids and peptides from yeast and grain breakdown"
+    },
+    "confidence": {
+      "sugar": 0.8,
+      "bitter": 0.9,
+      "water": 0.85,
+      "ir94e": 0.825
+    },
+    "review": "llm_v1",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.3",
+    "encoder_addendum": "addendum_not_food_v1"
   },
   {
     "key": "bibimbap",
@@ -528,6 +797,65 @@
     "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
     "encoder_version_by_dimension": {
       "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    }
+  },
+  {
+    "key": "biryani",
+    "aliases": [
+      "印度香饭",
+      "biryani",
+      "yinduxiangfan",
+      "indian biryani",
+      "印度炒饭",
+      "biriyani",
+      "briyani",
+      "biriyanis",
+      "biryanis",
+      "briyanis",
+      "indian biryanis",
+      "indian-biryani",
+      "yin du chao fan",
+      "yin du xiang fan",
+      "yinduchaofan",
+      "yinduxiangfans",
+      "印度炒飯",
+      "印度香飯"
+    ],
+    "display": {
+      "zh": "印度香饭",
+      "en": "biryani"
+    },
+    "sugar": "none",
+    "bitter": "none",
+    "water": "low",
+    "ir94e": "medium",
+    "reason": {
+      "sugar": "savory dish without added sugar",
+      "bitter": "no significant bitter ingredients",
+      "water": "moist solid dish consisting of rice and meat",
+      "ir94e": "heavily seasoned with spices, meat stock, and often yogurt or onion-based masalas"
+    },
+    "confidence": {
+      "sugar": 0.85,
+      "bitter": 0.85,
+      "water": 0.9,
+      "ir94e": 0.9
+    },
+    "review": "needs_review",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.3",
+    "arbitration": {
+      "sugar": {
+        "zh": "none",
+        "en": "low",
+        "chosen": "none",
+        "rule": "lower_level"
+      },
+      "bitter": {
+        "zh": "low",
+        "en": "none",
+        "chosen": "none",
+        "rule": "lower_level"
+      }
     }
   },
   {
@@ -692,6 +1020,50 @@
     }
   },
   {
+    "key": "borscht",
+    "aliases": [
+      "罗宋汤",
+      "borscht",
+      "luosongtang",
+      "russian borscht",
+      "红菜汤",
+      "beet soup",
+      "beet soups",
+      "beet-soup",
+      "borschts",
+      "hong cai tang",
+      "hongcaitang",
+      "luo song tang",
+      "luosongtangs",
+      "russian borschts",
+      "russian-borscht",
+      "紅菜湯",
+      "羅宋湯"
+    ],
+    "display": {
+      "zh": "罗宋汤",
+      "en": "borscht"
+    },
+    "sugar": "low",
+    "bitter": "none",
+    "water": "high",
+    "ir94e": "medium",
+    "reason": {
+      "sugar": "contains beets and carrots which have natural sweetness",
+      "bitter": "no significant bitter ingredients",
+      "water": "a broth-based soup with high water content",
+      "ir94e": "contains meat stock and often tomato paste or fermented elements"
+    },
+    "confidence": {
+      "sugar": 0.9,
+      "bitter": 0.975,
+      "water": 0.975,
+      "ir94e": 0.875
+    },
+    "review": "llm_v1",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.3"
+  },
+  {
     "key": "braised pork belly",
     "aliases": [
       "红烧肉",
@@ -727,6 +1099,49 @@
     "encoder_version_by_dimension": {
       "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
     }
+  },
+  {
+    "key": "bratwurst",
+    "aliases": [
+      "德式香肠",
+      "bratwurst",
+      "deshixiangchang",
+      "german sausage",
+      "德国香肠",
+      "brat",
+      "brats",
+      "bratwursts",
+      "de guo xiang chang",
+      "de shi xiang chang",
+      "deguoxiangchang",
+      "deshixiangchangs",
+      "german sausages",
+      "german-sausage",
+      "德國香腸",
+      "德式香腸"
+    ],
+    "display": {
+      "zh": "德式香肠",
+      "en": "bratwurst"
+    },
+    "sugar": "low",
+    "bitter": "none",
+    "water": "low",
+    "ir94e": "medium",
+    "reason": {
+      "sugar": "contains trace amounts of sugar in seasoning",
+      "bitter": "no significant bitter components",
+      "water": "moist solid meat product",
+      "ir94e": "cured and seasoned meat with high amino acid content"
+    },
+    "confidence": {
+      "sugar": 0.9,
+      "bitter": 0.95,
+      "water": 0.9,
+      "ir94e": 0.85
+    },
+    "review": "llm_v1",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.3"
   },
   {
     "key": "bread",
@@ -946,6 +1361,44 @@
     }
   },
   {
+    "key": "butter-chicken",
+    "aliases": [
+      "黄油鸡",
+      "butter chicken",
+      "huangyouji",
+      "murgh makhani",
+      "butter chickens",
+      "butter-chickens",
+      "huang you ji",
+      "huangyoujis",
+      "murgh makhanis",
+      "murgh-makhani",
+      "黃油雞"
+    ],
+    "display": {
+      "zh": "黄油鸡",
+      "en": "butter chicken"
+    },
+    "sugar": "low",
+    "bitter": "none",
+    "water": "medium",
+    "ir94e": "medium",
+    "reason": {
+      "sugar": "contains a small amount of sugar or honey in the tomato-based sauce",
+      "bitter": "no significant bitter ingredients",
+      "water": "a creamy, sauce-heavy dish",
+      "ir94e": "rich in glutamate from tomatoes, cream, and long-simmered chicken"
+    },
+    "confidence": {
+      "sugar": 0.9,
+      "bitter": 0.975,
+      "water": 0.875,
+      "ir94e": 0.9
+    },
+    "review": "llm_v1",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.3"
+  },
+  {
     "key": "caesar-salad",
     "aliases": [
       "凯撒沙拉",
@@ -1016,6 +1469,52 @@
     "encoder_version_by_dimension": {
       "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
     }
+  },
+  {
+    "key": "candle",
+    "aliases": [
+      "蜡烛",
+      "candle",
+      "lazhu",
+      "wax candle",
+      "candles",
+      "la zhu",
+      "lazhus",
+      "wax candles",
+      "wax-candle",
+      "蠟燭"
+    ],
+    "display": {
+      "zh": "蜡烛",
+      "en": "candle"
+    },
+    "sugar": "none",
+    "bitter": "none",
+    "water": "none",
+    "ir94e": "none",
+    "reason": {
+      "sugar": "composed of paraffin or beeswax with no free sugars",
+      "bitter": "chemically inert and lacks bitter alkaloids or compounds",
+      "water": "solid hydrophobic wax contains no free water",
+      "ir94e": "no protein or amino acid content"
+    },
+    "confidence": {
+      "sugar": 1.0,
+      "bitter": 0.85,
+      "water": 1.0,
+      "ir94e": 1.0
+    },
+    "review": "llm_v1",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.3",
+    "arbitration": {
+      "bitter": {
+        "zh": "none",
+        "en": "low",
+        "chosen": "none",
+        "rule": "lower_level"
+      }
+    },
+    "encoder_addendum": "addendum_not_food_v1"
   },
   {
     "key": "candy",
@@ -1092,6 +1591,52 @@
     "encoder_version_by_dimension": {
       "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
     }
+  },
+  {
+    "key": "carbonara",
+    "aliases": [
+      "培根蛋面",
+      "carbonara",
+      "peigendanmian",
+      "spaghetti alla carbonara",
+      "pasta carbonara",
+      "卡邦尼意面",
+      "培根蛋酱意面",
+      "carbonaras",
+      "ka bang ni yi mian",
+      "kabangniyimian",
+      "pasta carbonaras",
+      "pasta-carbonara",
+      "pei gen dan jiang yi mian",
+      "pei gen dan mian",
+      "peigendanjiangyimian",
+      "peigendanmians",
+      "spaghetti alla carbonaras",
+      "spaghetti-alla-carbonara",
+      "培根蛋醬意面"
+    ],
+    "display": {
+      "zh": "培根蛋面",
+      "en": "carbonara"
+    },
+    "sugar": "none",
+    "bitter": "none",
+    "water": "low",
+    "ir94e": "medium",
+    "reason": {
+      "sugar": "savory dish with no added sugar",
+      "bitter": "no bitter ingredients used",
+      "water": "moist pasta dish with sauce",
+      "ir94e": "contains significant amounts of parmesan and pecorino cheese"
+    },
+    "confidence": {
+      "sugar": 1.0,
+      "bitter": 1.0,
+      "water": 0.9,
+      "ir94e": 0.9
+    },
+    "review": "llm_v1",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.3"
   },
   {
     "key": "carrot",
@@ -1266,6 +1811,99 @@
     }
   },
   {
+    "key": "ceviche",
+    "aliases": [
+      "酸橘汁腌鱼",
+      "ceviche",
+      "秘鲁腌鱼",
+      "塞维切",
+      "peruvian ceviche",
+      "bi lu yan yu",
+      "biluyanyu",
+      "ceviches",
+      "peruvian ceviches",
+      "peruvian-ceviche",
+      "sai wei qie",
+      "saiweiqie",
+      "suan ju zhi yan yu",
+      "suanjuzhiyanyu",
+      "塞維切",
+      "秘魯醃魚",
+      "酸橘汁醃魚"
+    ],
+    "display": {
+      "zh": "酸橘汁腌鱼",
+      "en": "ceviche"
+    },
+    "sugar": "none",
+    "bitter": "low",
+    "water": "medium",
+    "ir94e": "low",
+    "reason": {
+      "sugar": "typically a savory dish with no added sugar",
+      "bitter": "faint bitterness from lime zest or citrus pith",
+      "water": "contains significant citrus juice and moisture from raw fish",
+      "ir94e": "contains free amino acids from raw fish and potentially a splash of fish sauce or soy"
+    },
+    "confidence": {
+      "sugar": 0.925,
+      "bitter": 0.75,
+      "water": 0.85,
+      "ir94e": 0.825
+    },
+    "review": "llm_v1",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.3"
+  },
+  {
+    "key": "chawanmushi",
+    "aliases": [
+      "茶碗蒸",
+      "chawanmushi",
+      "蒸蛋",
+      "steamed egg custard",
+      "japanese steamed egg",
+      "cha wan zheng",
+      "chawanmushis",
+      "chawanzheng",
+      "japanese steamed eggs",
+      "japanese-steamed-egg",
+      "steamed egg custards",
+      "steamed-egg-custard",
+      "zheng dan",
+      "zhengdan"
+    ],
+    "display": {
+      "zh": "茶碗蒸",
+      "en": "chawanmushi"
+    },
+    "sugar": "none",
+    "bitter": "none",
+    "water": "high",
+    "ir94e": "medium",
+    "reason": {
+      "sugar": "savory dish without added sugar",
+      "bitter": "no bitter ingredients used in standard preparation",
+      "water": "a delicate, high-moisture egg custard made with dashi broth",
+      "ir94e": "heavily reliant on dashi stock which is rich in glutamates"
+    },
+    "confidence": {
+      "sugar": 0.95,
+      "bitter": 1.0,
+      "water": 0.9,
+      "ir94e": 0.925
+    },
+    "review": "llm_v1",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.3",
+    "arbitration": {
+      "sugar": {
+        "zh": "none",
+        "en": "low",
+        "chosen": "none",
+        "rule": "lower_level"
+      }
+    }
+  },
+  {
     "key": "cheese",
     "aliases": [
       "奶酪",
@@ -1304,6 +1942,51 @@
     "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
     "encoder_version_by_dimension": {
       "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    }
+  },
+  {
+    "key": "cheese-fondue",
+    "aliases": [
+      "芝士火锅",
+      "cheese fondue",
+      "zhishi huoguo",
+      "cheese fondues",
+      "cheese-fondues",
+      "zhi shi huo guo",
+      "zhishi huoguos",
+      "zhishi-huoguo",
+      "zhishihuoguo",
+      "芝士火鍋"
+    ],
+    "display": {
+      "zh": "芝士火锅",
+      "en": "cheese fondue"
+    },
+    "sugar": "none",
+    "bitter": "low",
+    "water": "low",
+    "ir94e": "medium",
+    "reason": {
+      "sugar": "savory dish with no added sugar",
+      "bitter": "faint bitterness from wine and aged cheese",
+      "water": "moist solid consistency when dipped with bread",
+      "ir94e": "high concentration of aged cheese provides significant free amino acids"
+    },
+    "confidence": {
+      "sugar": 0.9,
+      "bitter": 0.8,
+      "water": 0.85,
+      "ir94e": 0.9
+    },
+    "review": "llm_v1",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.3",
+    "arbitration": {
+      "sugar": {
+        "zh": "low",
+        "en": "none",
+        "chosen": "none",
+        "rule": "lower_level"
+      }
     }
   },
   {
@@ -1432,6 +2115,97 @@
     }
   },
   {
+    "key": "churros",
+    "aliases": [
+      "吉事果",
+      "churros",
+      "jishiguo",
+      "西班牙油条",
+      "吉拿棒",
+      "spanish fried dough pastry",
+      "churro",
+      "ji na bang",
+      "ji shi guo",
+      "jinabang",
+      "jishiguos",
+      "spanish fried dough pastrys",
+      "spanish-fried-dough-pastry",
+      "xi ban ya you tiao",
+      "xibanyayoutiao",
+      "西班牙油條"
+    ],
+    "display": {
+      "zh": "吉事果",
+      "en": "churros"
+    },
+    "sugar": "high",
+    "bitter": "none",
+    "water": "low",
+    "ir94e": "none",
+    "reason": {
+      "sugar": "typically coated in a generous layer of granulated sugar",
+      "bitter": "no bitter ingredients in standard preparation",
+      "water": "fried dough is a moist solid with low free water content",
+      "ir94e": "no significant source of free amino acids or glutamate"
+    },
+    "confidence": {
+      "sugar": 0.95,
+      "bitter": 0.9,
+      "water": 0.875,
+      "ir94e": 0.925
+    },
+    "review": "llm_v1",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.3"
+  },
+  {
+    "key": "cider",
+    "aliases": [
+      "苹果酒",
+      "cider",
+      "pingguojiu",
+      "apple cider",
+      "hard cider",
+      "apple ciders",
+      "apple-cider",
+      "ciders",
+      "hard ciders",
+      "hard-cider",
+      "ping guo jiu",
+      "pingguojius",
+      "蘋果酒"
+    ],
+    "display": {
+      "zh": "苹果酒",
+      "en": "cider"
+    },
+    "sugar": "low",
+    "bitter": "low",
+    "water": "medium",
+    "ir94e": "none",
+    "reason": {
+      "sugar": "contains residual sugars from apples but is generally fermented dry",
+      "bitter": "contains mild tannins from apples",
+      "water": "liquid beverage with moderate solute concentration",
+      "ir94e": "no significant source of free amino acids or glutamate"
+    },
+    "confidence": {
+      "sugar": 0.9,
+      "bitter": 0.8,
+      "water": 0.9,
+      "ir94e": 0.9
+    },
+    "review": "llm_v1",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.3",
+    "arbitration": {
+      "sugar": {
+        "zh": "low",
+        "en": "medium",
+        "chosen": "low",
+        "rule": "lower_level"
+      }
+    }
+  },
+  {
     "key": "cilantro",
     "aliases": [
       "香菜",
@@ -1482,6 +2256,50 @@
         "rule": "lower_level"
       }
     }
+  },
+  {
+    "key": "clam-chowder",
+    "aliases": [
+      "蛤蜊浓汤",
+      "clam chowder",
+      "蛤蜊汤",
+      "new england clam chowder",
+      "manhattan clam chowder",
+      "clam chowders",
+      "clam-chowders",
+      "ge li nong tang",
+      "ge li tang",
+      "gelinongtang",
+      "gelitang",
+      "manhattan clam chowders",
+      "manhattan-clam-chowder",
+      "new england clam chowders",
+      "new-england-clam-chowder",
+      "蛤蜊湯",
+      "蛤蜊濃湯"
+    ],
+    "display": {
+      "zh": "蛤蜊浓汤",
+      "en": "clam chowder"
+    },
+    "sugar": "low",
+    "bitter": "none",
+    "water": "high",
+    "ir94e": "medium",
+    "reason": {
+      "sugar": "contains trace sugar from vegetables and dairy",
+      "bitter": "no significant bitter ingredients",
+      "water": "a creamy or broth-based soup with high water content",
+      "ir94e": "clams and long-simmered stock provide significant free amino acids"
+    },
+    "confidence": {
+      "sugar": 0.9,
+      "bitter": 0.975,
+      "water": 0.9,
+      "ir94e": 0.875
+    },
+    "review": "llm_v1",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.3"
   },
   {
     "key": "clear broth",
@@ -1570,6 +2388,44 @@
     "encoder_version_by_dimension": {
       "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
     }
+  },
+  {
+    "key": "coffee-grounds",
+    "aliases": [
+      "咖啡渣",
+      "coffee grounds",
+      "kafeizha",
+      "spent coffee grounds",
+      "coffee ground",
+      "coffee-ground",
+      "ka fei zha",
+      "kafeizhas",
+      "spent coffee ground",
+      "spent-coffee-grounds"
+    ],
+    "display": {
+      "zh": "咖啡渣",
+      "en": "coffee grounds"
+    },
+    "sugar": "none",
+    "bitter": "very_high",
+    "water": "low",
+    "ir94e": "low",
+    "reason": {
+      "sugar": "roasted coffee beans contain negligible free sugars",
+      "bitter": "contains high concentrations of caffeine and chlorogenic acids",
+      "water": "moist solid residue after brewing",
+      "ir94e": "contains trace amounts of free amino acids from the roasted bean"
+    },
+    "confidence": {
+      "sugar": 0.9,
+      "bitter": 0.975,
+      "water": 0.85,
+      "ir94e": 0.7
+    },
+    "review": "llm_v1",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.3",
+    "encoder_addendum": "addendum_not_food_v1"
   },
   {
     "key": "cola",
@@ -1750,6 +2606,44 @@
     }
   },
   {
+    "key": "couscous",
+    "aliases": [
+      "库斯库斯",
+      "couscous",
+      "kuskusi",
+      "北非小米",
+      "bei fei xiao mi",
+      "beifeixiaomi",
+      "couscou",
+      "ku si ku si",
+      "kusikusi",
+      "kuskusis",
+      "庫斯庫斯"
+    ],
+    "display": {
+      "zh": "库斯库斯",
+      "en": "couscous"
+    },
+    "sugar": "none",
+    "bitter": "none",
+    "water": "low",
+    "ir94e": "none",
+    "reason": {
+      "sugar": "it is a steamed semolina grain product with no added sugar",
+      "bitter": "it has no bitter components",
+      "water": "it is a moist, starchy grain product",
+      "ir94e": "it is a plain grain product without fermented or aged ingredients"
+    },
+    "confidence": {
+      "sugar": 1.0,
+      "bitter": 1.0,
+      "water": 0.9,
+      "ir94e": 1.0
+    },
+    "review": "llm_v1",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.3"
+  },
+  {
     "key": "crackers",
     "aliases": [
       "咸饼干",
@@ -1790,6 +2684,58 @@
         "zh": "none",
         "en": "low",
         "chosen": "none",
+        "rule": "lower_level"
+      }
+    }
+  },
+  {
+    "key": "crepe",
+    "aliases": [
+      "可丽饼",
+      "crepe",
+      "kelibing",
+      "crepes",
+      "法式薄饼",
+      "crêpe",
+      "french pancake",
+      "crep",
+      "crêpes",
+      "fa shi bao bing",
+      "fashibaobing",
+      "french pancakes",
+      "french-pancake",
+      "ke li bing",
+      "kelibings",
+      "可麗餅",
+      "法式薄餅"
+    ],
+    "display": {
+      "zh": "可丽饼",
+      "en": "crepe"
+    },
+    "sugar": "low",
+    "bitter": "none",
+    "water": "low",
+    "ir94e": "none",
+    "reason": {
+      "sugar": "batter contains minimal sugar, though toppings may vary",
+      "bitter": "no bitter ingredients in standard batter",
+      "water": "moist solid texture with low free water content",
+      "ir94e": "no significant source of free amino acids"
+    },
+    "confidence": {
+      "sugar": 0.9,
+      "bitter": 1.0,
+      "water": 0.9,
+      "ir94e": 0.95
+    },
+    "review": "llm_v1",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.3",
+    "arbitration": {
+      "sugar": {
+        "zh": "medium",
+        "en": "low",
+        "chosen": "low",
         "rule": "lower_level"
       }
     }
@@ -1916,6 +2862,75 @@
     }
   },
   {
+    "key": "dal",
+    "aliases": [
+      "扁豆咖喱",
+      "dal",
+      "biandou gali",
+      "dal curry",
+      "lentil curry",
+      "dhal",
+      "daal",
+      "印度豆汤",
+      "bian dou ga li",
+      "biandou galis",
+      "biandou-gali",
+      "biandougali",
+      "daals",
+      "dal currys",
+      "dal-curry",
+      "dals",
+      "dhals",
+      "lentil currys",
+      "lentil-curry",
+      "yin du dou tang",
+      "yindudoutang",
+      "印度豆湯"
+    ],
+    "display": {
+      "zh": "扁豆咖喱",
+      "en": "dal"
+    },
+    "sugar": "none",
+    "bitter": "none",
+    "water": "high",
+    "ir94e": "medium",
+    "reason": {
+      "sugar": "savory lentil dish without added sugar",
+      "bitter": "no significant bitter ingredients",
+      "water": "a soup-like consistency with high water content",
+      "ir94e": "lentils and long-simmered aromatics provide significant free amino acids"
+    },
+    "confidence": {
+      "sugar": 0.9,
+      "bitter": 0.85,
+      "water": 0.85,
+      "ir94e": 0.8
+    },
+    "review": "needs_review",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.3",
+    "arbitration": {
+      "sugar": {
+        "zh": "low",
+        "en": "none",
+        "chosen": "none",
+        "rule": "lower_level"
+      },
+      "bitter": {
+        "zh": "low",
+        "en": "none",
+        "chosen": "none",
+        "rule": "lower_level"
+      },
+      "ir94e": {
+        "zh": "medium",
+        "en": "low",
+        "chosen": "medium",
+        "rule": "confidence"
+      }
+    }
+  },
+  {
     "key": "dark chocolate 85%",
     "aliases": [
       "黑巧克力",
@@ -1950,6 +2965,47 @@
     "encoder_version_by_dimension": {
       "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
     }
+  },
+  {
+    "key": "dish-soap",
+    "aliases": [
+      "洗洁精",
+      "dish soap",
+      "xijiejing",
+      "dishwashing liquid",
+      "detergent",
+      "detergents",
+      "dish soaps",
+      "dish-soaps",
+      "dishwashing liquids",
+      "dishwashing-liquid",
+      "xi jie jing",
+      "xijiejings",
+      "洗潔精"
+    ],
+    "display": {
+      "zh": "洗洁精",
+      "en": "dish soap"
+    },
+    "sugar": "none",
+    "bitter": "very_high",
+    "water": "high",
+    "ir94e": "none",
+    "reason": {
+      "sugar": "contains no sugars",
+      "bitter": "contains bitter denaturants and surfactants",
+      "water": "aqueous solution of surfactants",
+      "ir94e": "no amino acids or glutamate present"
+    },
+    "confidence": {
+      "sugar": 1.0,
+      "bitter": 0.95,
+      "water": 0.9,
+      "ir94e": 1.0
+    },
+    "review": "llm_v1",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.3",
+    "encoder_addendum": "addendum_not_food_v1"
   },
   {
     "key": "donut",
@@ -1988,6 +3044,46 @@
     "encoder_version_by_dimension": {
       "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
     }
+  },
+  {
+    "key": "dorayaki",
+    "aliases": [
+      "铜锣烧",
+      "dorayaki",
+      "tongluoshao",
+      "bean paste pancake",
+      "japanese pancake",
+      "bean paste pancakes",
+      "bean-paste-pancake",
+      "dorayakis",
+      "japanese pancakes",
+      "japanese-pancake",
+      "tong luo shao",
+      "tongluoshaos",
+      "銅鑼燒"
+    ],
+    "display": {
+      "zh": "铜锣烧",
+      "en": "dorayaki"
+    },
+    "sugar": "high",
+    "bitter": "none",
+    "water": "low",
+    "ir94e": "none",
+    "reason": {
+      "sugar": "contains a sweet red bean paste filling and sweetened pancake batter",
+      "bitter": "no bitter ingredients used in traditional preparation",
+      "water": "moist solid texture with low free water content",
+      "ir94e": "no fermented or high-glutamate ingredients"
+    },
+    "confidence": {
+      "sugar": 0.95,
+      "bitter": 1.0,
+      "water": 0.9,
+      "ir94e": 0.95
+    },
+    "review": "llm_v1",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.3"
   },
   {
     "key": "douhua",
@@ -2236,6 +3332,45 @@
     }
   },
   {
+    "key": "empanada",
+    "aliases": [
+      "恩潘纳达",
+      "empanada",
+      "西班牙馅饼",
+      "empanadas",
+      "turnover",
+      "en pan na da",
+      "enpannada",
+      "turnovers",
+      "xi ban ya xian bing",
+      "xibanyaxianbing",
+      "恩潘納達",
+      "西班牙餡餅"
+    ],
+    "display": {
+      "zh": "恩潘纳达",
+      "en": "empanada"
+    },
+    "sugar": "low",
+    "bitter": "none",
+    "water": "low",
+    "ir94e": "low",
+    "reason": {
+      "sugar": "pastry dough may contain a small amount of sugar",
+      "bitter": "no significant bitter ingredients",
+      "water": "moist solid baked pastry",
+      "ir94e": "contains savory meat filling with seasoning"
+    },
+    "confidence": {
+      "sugar": 0.9,
+      "bitter": 0.95,
+      "water": 0.9,
+      "ir94e": 0.85
+    },
+    "review": "llm_v1",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.3"
+  },
+  {
     "key": "endive",
     "aliases": [
       "苦菊",
@@ -2355,6 +3490,200 @@
     }
   },
   {
+    "key": "falafel",
+    "aliases": [
+      "法拉费",
+      "falafel",
+      "炸鹰嘴豆饼",
+      "炸豆丸子",
+      "ta'amiya",
+      "fa la fei",
+      "falafei",
+      "falafels",
+      "ta'amiyas",
+      "zha dou wan zi",
+      "zha ying zui dou bing",
+      "zhadouwanzi",
+      "zhayingzuidoubing",
+      "法拉費",
+      "炸鷹嘴豆餅"
+    ],
+    "display": {
+      "zh": "法拉费",
+      "en": "falafel"
+    },
+    "sugar": "none",
+    "bitter": "low",
+    "water": "low",
+    "ir94e": "low",
+    "reason": {
+      "sugar": "savory dish made of chickpeas and herbs with no added sugar",
+      "bitter": "faint bitterness from herbs like parsley and cilantro",
+      "water": "moist solid texture from fried chickpea paste",
+      "ir94e": "contains chickpeas which have some natural amino acids"
+    },
+    "confidence": {
+      "sugar": 0.95,
+      "bitter": 0.8,
+      "water": 0.9,
+      "ir94e": 0.7
+    },
+    "review": "llm_v1",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.3"
+  },
+  {
+    "key": "feces",
+    "aliases": [
+      "粪便",
+      "feces",
+      "fenbian",
+      "stool",
+      "excrement",
+      "excrements",
+      "fec",
+      "fen bian",
+      "fenbians",
+      "stools",
+      "糞便"
+    ],
+    "display": {
+      "zh": "粪便",
+      "en": "feces"
+    },
+    "sugar": "none",
+    "bitter": "high",
+    "water": "low",
+    "ir94e": "high",
+    "reason": {
+      "sugar": "contains negligible free sugars",
+      "bitter": "contains bile salts and metabolic waste products",
+      "water": "moist solid consistency",
+      "ir94e": "high concentration of nitrogenous waste and bacterial breakdown products"
+    },
+    "confidence": {
+      "sugar": 0.9,
+      "bitter": 0.8,
+      "water": 0.9,
+      "ir94e": 0.85
+    },
+    "review": "llm_v1",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.3",
+    "encoder_addendum": "addendum_not_food_v1"
+  },
+  {
+    "key": "feijoada",
+    "aliases": [
+      "黑豆炖肉",
+      "feijoada",
+      "heidoudunrou",
+      "stewed pork with black beans",
+      "braised pork with black beans",
+      "巴西黑豆炖肉",
+      "brazilian black bean stew",
+      "ba xi hei dou dun rou",
+      "baxiheidoudunrou",
+      "braised pork with black bean",
+      "braised-pork-with-black-beans",
+      "braized pork with black beans",
+      "brazilian black bean stews",
+      "brazilian-black-bean-stew",
+      "feijoadas",
+      "hei dou dun rou",
+      "heidoudunrous",
+      "stewed pork with black bean",
+      "stewed-pork-with-black-beans",
+      "巴西黑豆燉肉",
+      "黑豆燉肉"
+    ],
+    "display": {
+      "zh": "黑豆炖肉",
+      "en": "feijoada"
+    },
+    "sugar": "none",
+    "bitter": "none",
+    "water": "medium",
+    "ir94e": "medium",
+    "reason": {
+      "sugar": "savory stew with no added sugar",
+      "bitter": "no significant bitter ingredients",
+      "water": "braised dish with a sauce consistency",
+      "ir94e": "contains cured meats and long-simmered beans rich in amino acids"
+    },
+    "confidence": {
+      "sugar": 0.9,
+      "bitter": 0.825,
+      "water": 0.875,
+      "ir94e": 0.85
+    },
+    "review": "needs_review",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.3",
+    "arbitration": {
+      "sugar": {
+        "zh": "low",
+        "en": "none",
+        "chosen": "none",
+        "rule": "lower_level"
+      },
+      "bitter": {
+        "zh": "none",
+        "en": "low",
+        "chosen": "none",
+        "rule": "confidence"
+      },
+      "water": {
+        "zh": "medium",
+        "en": "high",
+        "chosen": "medium",
+        "rule": "lower_level"
+      }
+    }
+  },
+  {
+    "key": "fermenting-dough",
+    "aliases": [
+      "发酵中的面团",
+      "fermenting dough",
+      "fajiao zhong de miantuan",
+      "发酵面团",
+      "yeast dough",
+      "fa jiao mian tuan",
+      "fa jiao zhong de mian tuan",
+      "fajiao zhong de miantuans",
+      "fajiao-zhong-de-miantuan",
+      "fajiaomiantuan",
+      "fajiaozhongdemiantuan",
+      "fermenting doughs",
+      "fermenting-doughs",
+      "yeast doughs",
+      "yeast-dough",
+      "發酵中的麵團",
+      "發酵麵團"
+    ],
+    "display": {
+      "zh": "发酵中的面团",
+      "en": "fermenting dough"
+    },
+    "sugar": "low",
+    "bitter": "low",
+    "water": "low",
+    "ir94e": "low",
+    "reason": {
+      "sugar": "residual sugars from starch breakdown by yeast",
+      "bitter": "trace bitterness from yeast metabolites and fermentation byproducts",
+      "water": "moist solid consistency",
+      "ir94e": "small amounts of free amino acids released by yeast proteolysis"
+    },
+    "confidence": {
+      "sugar": 0.8,
+      "bitter": 0.7,
+      "water": 0.9,
+      "ir94e": 0.75
+    },
+    "review": "llm_v1",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.3",
+    "encoder_addendum": "addendum_not_food_v1"
+  },
+  {
     "key": "fish-and-chips",
     "aliases": [
       "炸鱼薯条",
@@ -2392,6 +3721,106 @@
     "encoder_version_by_dimension": {
       "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
     }
+  },
+  {
+    "key": "fish-sauce",
+    "aliases": [
+      "鱼露",
+      "fish sauce",
+      "yulu",
+      "nam pla",
+      "nuoc mam",
+      "fish sauces",
+      "fish-sauces",
+      "nam plas",
+      "nam-pla",
+      "nuoc mams",
+      "nuoc-mam",
+      "yu lu",
+      "yulus",
+      "魚露"
+    ],
+    "display": {
+      "zh": "鱼露",
+      "en": "fish sauce"
+    },
+    "sugar": "none",
+    "bitter": "none",
+    "water": "medium",
+    "ir94e": "high",
+    "reason": {
+      "sugar": "purely savory and salty, no added sugar",
+      "bitter": "not inherently bitter",
+      "water": "liquid condiment with high salt content",
+      "ir94e": "highly concentrated fermented fish product rich in free amino acids"
+    },
+    "confidence": {
+      "sugar": 0.925,
+      "bitter": 0.85,
+      "water": 0.875,
+      "ir94e": 1.0
+    },
+    "review": "llm_v1",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.3",
+    "arbitration": {
+      "bitter": {
+        "zh": "low",
+        "en": "none",
+        "chosen": "none",
+        "rule": "lower_level"
+      }
+    }
+  },
+  {
+    "key": "food-waste-swill",
+    "aliases": [
+      "泔水",
+      "food waste swill",
+      "ganshui",
+      "swill",
+      "slop",
+      "food waste",
+      "garbage",
+      "food scraps",
+      "餐厨垃圾",
+      "can chu la ji",
+      "canchulaji",
+      "food scrap",
+      "food waste swills",
+      "food wastes",
+      "food-scraps",
+      "food-waste",
+      "food-waste-swills",
+      "gan shui",
+      "ganshuis",
+      "garbages",
+      "slops",
+      "swills",
+      "餐廚垃圾"
+    ],
+    "display": {
+      "zh": "泔水",
+      "en": "food waste swill"
+    },
+    "sugar": "medium",
+    "bitter": "medium",
+    "water": "high",
+    "ir94e": "medium",
+    "reason": {
+      "sugar": "mixture of various food scraps including fruits and starches",
+      "bitter": "presence of decaying organic matter and various vegetable compounds",
+      "water": "high moisture content from mixed food liquids and decomposition",
+      "ir94e": "high concentration of free amino acids from protein breakdown and fermentation"
+    },
+    "confidence": {
+      "sugar": 0.7,
+      "bitter": 0.75,
+      "water": 0.85,
+      "ir94e": 0.8
+    },
+    "review": "llm_v1",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.3",
+    "encoder_addendum": "addendum_not_food_v1"
   },
   {
     "key": "french-fries",
@@ -2556,6 +3985,48 @@
     }
   },
   {
+    "key": "furu",
+    "aliases": [
+      "腐乳",
+      "furu",
+      "豆腐乳",
+      "fermented bean curd",
+      "sufu",
+      "tofu cheese",
+      "dou fu ru",
+      "doufuru",
+      "fermented bean curds",
+      "fermented-bean-curd",
+      "fu ru",
+      "furus",
+      "sufus",
+      "tofu cheeses",
+      "tofu-cheese"
+    ],
+    "display": {
+      "zh": "腐乳",
+      "en": "furu"
+    },
+    "sugar": "low",
+    "bitter": "low",
+    "water": "low",
+    "ir94e": "high",
+    "reason": {
+      "sugar": "often contains a small amount of added sugar for balance",
+      "bitter": "slight bitterness from the fermentation process and mold cultures",
+      "water": "a moist, paste-like solid preserved in brine",
+      "ir94e": "highly concentrated source of free amino acids and glutamates from fermentation"
+    },
+    "confidence": {
+      "sugar": 0.9,
+      "bitter": 0.8,
+      "water": 0.9,
+      "ir94e": 1.0
+    },
+    "review": "llm_v1",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.3"
+  },
+  {
     "key": "gai lan",
     "aliases": [
       "芥蓝",
@@ -2602,6 +4073,155 @@
       "ir94e": {
         "zh": "none",
         "en": "low",
+        "chosen": "none",
+        "rule": "lower_level"
+      }
+    }
+  },
+  {
+    "key": "gin-and-tonic",
+    "aliases": [
+      "金汤力",
+      "gin and tonic",
+      "jin tang li",
+      "g&t",
+      "g&ts",
+      "gin and tonics",
+      "gin-and-tonics",
+      "jin tang lis",
+      "jin-tang-li",
+      "jintangli",
+      "金湯力"
+    ],
+    "display": {
+      "zh": "金汤力",
+      "en": "gin and tonic"
+    },
+    "sugar": "medium",
+    "bitter": "very_high",
+    "water": "medium",
+    "ir94e": "none",
+    "reason": {
+      "sugar": "tonic water contains significant added sugar",
+      "bitter": "tonic water is dominated by quinine bitterness",
+      "water": "it is a carbonated beverage with dissolved solutes",
+      "ir94e": "no fermented or glutamate-rich ingredients"
+    },
+    "confidence": {
+      "sugar": 0.9,
+      "bitter": 1.0,
+      "water": 0.9,
+      "ir94e": 1.0
+    },
+    "review": "llm_v1",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.3",
+    "arbitration": {
+      "water": {
+        "zh": "high",
+        "en": "medium",
+        "chosen": "medium",
+        "rule": "lower_level"
+      }
+    }
+  },
+  {
+    "key": "gnocchi",
+    "aliases": [
+      "土豆团子",
+      "gnocchi",
+      "tudou tuanzi",
+      "potato dumplings",
+      "potato balls",
+      "意式土豆团子",
+      "potato gnocchi",
+      "gnocchis",
+      "potato ball",
+      "potato dumpling",
+      "potato gnocchis",
+      "potato-balls",
+      "potato-dumplings",
+      "potato-gnocchi",
+      "tu dou tuan zi",
+      "tudou tuanzis",
+      "tudou-tuanzi",
+      "tudoutuanzi",
+      "yi shi tu dou tuan zi",
+      "yishitudoutuanzi",
+      "土豆糰子",
+      "意式土豆糰子"
+    ],
+    "display": {
+      "zh": "土豆团子",
+      "en": "gnocchi"
+    },
+    "sugar": "none",
+    "bitter": "none",
+    "water": "low",
+    "ir94e": "none",
+    "reason": {
+      "sugar": "savory potato-based pasta",
+      "bitter": "no bitter ingredients",
+      "water": "moist solid starch",
+      "ir94e": "no fermented or high-glutamate ingredients typically used"
+    },
+    "confidence": {
+      "sugar": 0.95,
+      "bitter": 0.975,
+      "water": 0.875,
+      "ir94e": 0.85
+    },
+    "review": "llm_v1",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.3",
+    "arbitration": {
+      "ir94e": {
+        "zh": "none",
+        "en": "low",
+        "chosen": "none",
+        "rule": "lower_level"
+      }
+    }
+  },
+  {
+    "key": "goulash",
+    "aliases": [
+      "匈牙利炖牛肉",
+      "goulash",
+      "hungarian goulash",
+      "gulyas",
+      "goulashs",
+      "gulya",
+      "hungarian goulashs",
+      "hungarian-goulash",
+      "xiong ya li dun niu rou",
+      "xiongyalidunniurou",
+      "匈牙利燉牛肉"
+    ],
+    "display": {
+      "zh": "匈牙利炖牛肉",
+      "en": "goulash"
+    },
+    "sugar": "none",
+    "bitter": "low",
+    "water": "high",
+    "ir94e": "medium",
+    "reason": {
+      "sugar": "savory stew without added sugar",
+      "bitter": "faint bitterness from paprika and onions",
+      "water": "a broth-based stew with high water content",
+      "ir94e": "long-simmered beef and tomato base provide significant free amino acids"
+    },
+    "confidence": {
+      "sugar": 0.9,
+      "bitter": 0.8,
+      "water": 0.9,
+      "ir94e": 0.9
+    },
+    "review": "llm_v1",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.3",
+    "arbitration": {
+      "sugar": {
+        "zh": "low",
+        "en": "none",
         "chosen": "none",
         "rule": "lower_level"
       }
@@ -2689,6 +4309,43 @@
     }
   },
   {
+    "key": "greek-salad",
+    "aliases": [
+      "希腊沙拉",
+      "greek salad",
+      "xilashala",
+      "horiatiki",
+      "greek salads",
+      "greek-salads",
+      "horiatikis",
+      "xi la sha la",
+      "xilashalas",
+      "希臘沙拉"
+    ],
+    "display": {
+      "zh": "希腊沙拉",
+      "en": "greek salad"
+    },
+    "sugar": "low",
+    "bitter": "low",
+    "water": "medium",
+    "ir94e": "low",
+    "reason": {
+      "sugar": "contains vegetables like tomatoes and peppers with natural trace sugars",
+      "bitter": "olives and some salad greens provide a faint bitter note",
+      "water": "fresh vegetables release juice when chewed",
+      "ir94e": "feta cheese and olives provide a small amount of amino acids"
+    },
+    "confidence": {
+      "sugar": 0.9,
+      "bitter": 0.9,
+      "water": 0.9,
+      "ir94e": 0.8
+    },
+    "review": "llm_v1",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.3"
+  },
+  {
     "key": "green tea",
     "aliases": [
       "绿茶",
@@ -2722,6 +4379,221 @@
     "encoder_version_by_dimension": {
       "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
     }
+  },
+  {
+    "key": "green-curry",
+    "aliases": [
+      "绿咖喱",
+      "green curry",
+      "lv_ka_li",
+      "thai green curry",
+      "泰式绿咖喱",
+      "gaeng keow wan",
+      "gaeng keow wans",
+      "gaeng-keow-wan",
+      "green currys",
+      "green-currys",
+      "lv ga li",
+      "lv_ka_lis",
+      "lvgali",
+      "tai shi lv ga li",
+      "taishilvgali",
+      "thai green currys",
+      "thai-green-curry",
+      "泰式綠咖喱",
+      "綠咖喱"
+    ],
+    "display": {
+      "zh": "绿咖喱",
+      "en": "green curry"
+    },
+    "sugar": "low",
+    "bitter": "low",
+    "water": "medium",
+    "ir94e": "medium",
+    "reason": {
+      "sugar": "contains a small amount of palm sugar to balance spice",
+      "bitter": "faint bitterness from green chili and herbs like kaffir lime leaves",
+      "water": "coconut milk base provides a medium-solute liquid consistency",
+      "ir94e": "fish sauce and shrimp paste are key savory components"
+    },
+    "confidence": {
+      "sugar": 0.9,
+      "bitter": 0.8,
+      "water": 0.9,
+      "ir94e": 0.925
+    },
+    "review": "llm_v1",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.3",
+    "arbitration": {
+      "water": {
+        "zh": "high",
+        "en": "medium",
+        "chosen": "medium",
+        "rule": "lower_level"
+      }
+    }
+  },
+  {
+    "key": "guacamole",
+    "aliases": [
+      "牛油果酱",
+      "guacamole",
+      "avocado dip",
+      "avocado dips",
+      "avocado-dip",
+      "guacamoles",
+      "niu you guo jiang",
+      "niuyouguojiang",
+      "牛油果醬"
+    ],
+    "display": {
+      "zh": "牛油果酱",
+      "en": "guacamole"
+    },
+    "sugar": "none",
+    "bitter": "low",
+    "water": "low",
+    "ir94e": "low",
+    "reason": {
+      "sugar": "avocado is not sweet and no sugar is added",
+      "bitter": "avocado skin and some varieties can have faint bitterness",
+      "water": "moist solid texture with low free water content",
+      "ir94e": "contains small amounts of glutamate from lime juice and onion/cilantro seasoning"
+    },
+    "confidence": {
+      "sugar": 0.95,
+      "bitter": 0.8,
+      "water": 0.9,
+      "ir94e": 0.775
+    },
+    "review": "llm_v1",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.3"
+  },
+  {
+    "key": "gyoza",
+    "aliases": [
+      "日式煎饺",
+      "gyoza",
+      "rishijianjiao",
+      "日式饺子",
+      "japanese pan-fried dumplings",
+      "gyozas",
+      "japanese pan fried dumplings",
+      "japanese pan-fried dumpling",
+      "japanese-pan-fried-dumplings",
+      "ri shi jian jiao",
+      "ri shi jiao zi",
+      "rishijianjiaos",
+      "rishijiaozi",
+      "日式煎餃",
+      "日式餃子"
+    ],
+    "display": {
+      "zh": "日式煎饺",
+      "en": "gyoza"
+    },
+    "sugar": "low",
+    "bitter": "none",
+    "water": "low",
+    "ir94e": "medium",
+    "reason": {
+      "sugar": "small amount of sugar often added to the filling for balance",
+      "bitter": "no significant bitter ingredients",
+      "water": "moist solid texture from the wrapper and filling",
+      "ir94e": "contains soy sauce, meat, and aromatics providing significant free glutamate"
+    },
+    "confidence": {
+      "sugar": 0.9,
+      "bitter": 1.0,
+      "water": 0.9,
+      "ir94e": 0.9
+    },
+    "review": "llm_v1",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.3"
+  },
+  {
+    "key": "gyudon",
+    "aliases": [
+      "牛肉饭",
+      "gyudon",
+      "niuroufan",
+      "beef rice bowl",
+      "牛丼",
+      "beef bowl",
+      "gyu-don",
+      "beef bowls",
+      "beef rice bowls",
+      "beef-bowl",
+      "beef-rice-bowl",
+      "gyu don",
+      "gyu-dons",
+      "gyudons",
+      "niu jing",
+      "niu rou fan",
+      "niujing",
+      "niuroufans",
+      "牛肉飯"
+    ],
+    "display": {
+      "zh": "牛肉饭",
+      "en": "gyudon"
+    },
+    "sugar": "low",
+    "bitter": "none",
+    "water": "low",
+    "ir94e": "medium",
+    "reason": {
+      "sugar": "contains mirin and sugar in the sauce",
+      "bitter": "no significant bitter ingredients",
+      "water": "moist beef and rice, but not a liquid-heavy dish",
+      "ir94e": "heavily seasoned with soy sauce and dashi-based broth"
+    },
+    "confidence": {
+      "sugar": 0.9,
+      "bitter": 1.0,
+      "water": 0.85,
+      "ir94e": 0.9
+    },
+    "review": "llm_v1",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.3"
+  },
+  {
+    "key": "hainanese-chicken-rice",
+    "aliases": [
+      "海南鸡饭",
+      "hainanese chicken rice",
+      "hainan jifan",
+      "hai nan ji fan",
+      "hainan jifans",
+      "hainan-jifan",
+      "hainanese chicken rices",
+      "hainanese-chicken-rices",
+      "hainanjifan",
+      "海南雞飯"
+    ],
+    "display": {
+      "zh": "海南鸡饭",
+      "en": "hainanese chicken rice"
+    },
+    "sugar": "low",
+    "bitter": "none",
+    "water": "low",
+    "ir94e": "medium",
+    "reason": {
+      "sugar": "small amount of sugar often used in the dipping sauces",
+      "bitter": "no significant bitter ingredients",
+      "water": "steamed rice and poached chicken are moist but not liquid-heavy",
+      "ir94e": "chicken stock used in rice and soy-based dipping sauces provide significant amino acids"
+    },
+    "confidence": {
+      "sugar": 0.9,
+      "bitter": 1.0,
+      "water": 0.9,
+      "ir94e": 0.9
+    },
+    "review": "llm_v1",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.3"
   },
   {
     "key": "hamburger",
@@ -3044,6 +4916,55 @@
     }
   },
   {
+    "key": "hotteok",
+    "aliases": [
+      "糖饼",
+      "hotteok",
+      "tangbing",
+      "sugar pancake",
+      "sweet pancake",
+      "韩式糖饼",
+      "korean sweet pancake",
+      "hoddeok",
+      "han shi tang bing",
+      "hanshitangbing",
+      "hoddeoks",
+      "hotteoks",
+      "korean sweet pancakes",
+      "korean-sweet-pancake",
+      "sugar pancakes",
+      "sugar-pancake",
+      "sweet pancakes",
+      "sweet-pancake",
+      "tang bing",
+      "tangbings",
+      "糖餅",
+      "韓式糖餅"
+    ],
+    "display": {
+      "zh": "糖饼",
+      "en": "hotteok"
+    },
+    "sugar": "high",
+    "bitter": "none",
+    "water": "low",
+    "ir94e": "none",
+    "reason": {
+      "sugar": "filled with a mixture of brown sugar, cinnamon, and nuts",
+      "bitter": "no bitter ingredients used in standard preparation",
+      "water": "a dense, chewy dough with a syrupy filling",
+      "ir94e": "no fermented or high-glutamate ingredients"
+    },
+    "confidence": {
+      "sugar": 0.95,
+      "bitter": 0.95,
+      "water": 0.875,
+      "ir94e": 0.925
+    },
+    "review": "llm_v1",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.3"
+  },
+  {
     "key": "hummus",
     "aliases": [
       "鹰嘴豆泥",
@@ -3124,6 +5045,49 @@
     "encoder_version_by_dimension": {
       "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
     }
+  },
+  {
+    "key": "injera",
+    "aliases": [
+      "英吉拉",
+      "injera",
+      "埃塞俄比亚大饼",
+      "英杰拉",
+      "ethiopian flatbread",
+      "ai sai e bi ya da bing",
+      "aisaiebiyadabing",
+      "ethiopian flatbreads",
+      "ethiopian-flatbread",
+      "injeras",
+      "ying ji la",
+      "ying jie la",
+      "yingjiela",
+      "yingjila",
+      "英傑拉",
+      "衣索比亞大餅"
+    ],
+    "display": {
+      "zh": "英吉拉",
+      "en": "injera"
+    },
+    "sugar": "none",
+    "bitter": "low",
+    "water": "low",
+    "ir94e": "medium",
+    "reason": {
+      "sugar": "made from fermented teff flour without added sugar",
+      "bitter": "fermentation process imparts a mild, characteristic sour-bitter taste",
+      "water": "moist, spongy flatbread with moderate water content",
+      "ir94e": "long fermentation of teff flour releases significant free amino acids"
+    },
+    "confidence": {
+      "sugar": 0.975,
+      "bitter": 0.875,
+      "water": 0.9,
+      "ir94e": 0.8
+    },
+    "review": "llm_v1",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.3"
   },
   {
     "key": "instant-noodles",
@@ -3216,6 +5180,66 @@
     }
   },
   {
+    "key": "japchae",
+    "aliases": [
+      "杂菜",
+      "japchae",
+      "zaca",
+      "mixed vegetables",
+      "stir-fried mixed vegetables",
+      "잡채",
+      "korean glass noodle stir-fry",
+      "korean stir-fried glass noodles",
+      "japchaes",
+      "korean glass noodle stir fry",
+      "korean glass noodle stir-frys",
+      "korean stir fried glass noodles",
+      "korean stir-fried glass noodl",
+      "korean-glass-noodle-stir-fry",
+      "korean-stir-fried-glass-noodles",
+      "mixed vegetabl",
+      "mixed-vegetables",
+      "stir fried mixed vegetables",
+      "stir-fried mixed vegetabl",
+      "stir-fried-mixed-vegetables",
+      "za cai",
+      "zacai",
+      "zacas",
+      "雜菜",
+      "잡채s"
+    ],
+    "display": {
+      "zh": "杂菜",
+      "en": "japchae"
+    },
+    "sugar": "low",
+    "bitter": "none",
+    "water": "low",
+    "ir94e": "low",
+    "reason": {
+      "sugar": "contains a small amount of sugar in the seasoning sauce",
+      "bitter": "no significant bitter ingredients",
+      "water": "moist starch-based noodles with some vegetable moisture",
+      "ir94e": "contains small amounts of soy sauce or oyster sauce for seasoning"
+    },
+    "confidence": {
+      "sugar": 0.85,
+      "bitter": 0.925,
+      "water": 0.825,
+      "ir94e": 0.85
+    },
+    "review": "llm_v1",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.3",
+    "arbitration": {
+      "ir94e": {
+        "zh": "low",
+        "en": "medium",
+        "chosen": "low",
+        "rule": "lower_level"
+      }
+    }
+  },
+  {
     "key": "jelly",
     "aliases": [
       "果冻",
@@ -3303,6 +5327,147 @@
     }
   },
   {
+    "key": "jollof-rice",
+    "aliases": [
+      "西非什锦饭",
+      "jollof rice",
+      "benachin",
+      "jollof",
+      "jolof rice",
+      "西非焖饭",
+      "benachins",
+      "jollof rices",
+      "jollof-rices",
+      "jollofs",
+      "jolof rices",
+      "jolof-rice",
+      "xi fei men fan",
+      "xi fei shi jin fan",
+      "xifeimenfan",
+      "xifeishijinfan",
+      "西非什錦飯",
+      "西非燜飯"
+    ],
+    "display": {
+      "zh": "西非什锦饭",
+      "en": "jollof rice"
+    },
+    "sugar": "low",
+    "bitter": "none",
+    "water": "low",
+    "ir94e": "medium",
+    "reason": {
+      "sugar": "contains small amounts of sugar in tomato-based sauce",
+      "bitter": "no significant bitter ingredients",
+      "water": "cooked rice is a moist solid",
+      "ir94e": "rich tomato and onion base with meat stock provides significant umami"
+    },
+    "confidence": {
+      "sugar": 0.9,
+      "bitter": 0.95,
+      "water": 0.9,
+      "ir94e": 0.875
+    },
+    "review": "llm_v1",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.3"
+  },
+  {
+    "key": "karaage",
+    "aliases": [
+      "日式炸鸡",
+      "karaage",
+      "japanese fried chicken",
+      "唐扬鸡块",
+      "japanese fried chickens",
+      "japanese-fried-chicken",
+      "karaages",
+      "ri shi zha ji",
+      "rishizhaji",
+      "tang yang ji kuai",
+      "tangyangjikuai",
+      "唐揚雞塊",
+      "日式炸雞"
+    ],
+    "display": {
+      "zh": "日式炸鸡",
+      "en": "karaage"
+    },
+    "sugar": "low",
+    "bitter": "none",
+    "water": "low",
+    "ir94e": "low",
+    "reason": {
+      "sugar": "contains a small amount of sugar in the soy-based marinade",
+      "bitter": "no significant bitter components",
+      "water": "moist fried meat with low free water content",
+      "ir94e": "contains soy sauce in the marinade"
+    },
+    "confidence": {
+      "sugar": 0.9,
+      "bitter": 1.0,
+      "water": 0.9,
+      "ir94e": 0.9
+    },
+    "review": "llm_v1",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.3",
+    "arbitration": {
+      "ir94e": {
+        "zh": "low",
+        "en": "medium",
+        "chosen": "low",
+        "rule": "lower_level"
+      }
+    }
+  },
+  {
+    "key": "katsu-curry",
+    "aliases": [
+      "咖喱猪排饭",
+      "katsu curry",
+      "curry pork cutlet rice",
+      "日式咖喱猪排饭",
+      "日式炸猪排咖喱",
+      "japanese pork cutlet curry",
+      "curry pork cutlet rices",
+      "curry-pork-cutlet-rice",
+      "ga li zhu pai fan",
+      "galizhupaifan",
+      "japanese pork cutlet currys",
+      "japanese-pork-cutlet-curry",
+      "katsu currys",
+      "katsu-currys",
+      "ri shi ga li zhu pai fan",
+      "ri shi zha zhu pai ga li",
+      "rishigalizhupaifan",
+      "rishizhazhupaigali",
+      "咖喱豬排飯",
+      "日式咖喱豬排飯",
+      "日式炸豬排咖喱"
+    ],
+    "display": {
+      "zh": "咖喱猪排饭",
+      "en": "katsu curry"
+    },
+    "sugar": "low",
+    "bitter": "low",
+    "water": "low",
+    "ir94e": "medium",
+    "reason": {
+      "sugar": "Japanese curry roux typically contains a small amount of sugar or fruit puree for balance",
+      "bitter": "spices like turmeric and cumin in the curry roux provide a faint bitterness",
+      "water": "the dish consists of fried pork and thick curry sauce served over rice, which is a moist solid",
+      "ir94e": "the curry sauce is typically made with meat stocks, vegetable purees, and soy sauce, providing significant umami"
+    },
+    "confidence": {
+      "sugar": 0.9,
+      "bitter": 0.8,
+      "water": 0.9,
+      "ir94e": 0.9
+    },
+    "review": "llm_v1",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.3"
+  },
+  {
     "key": "kebab",
     "aliases": [
       "烤肉卷",
@@ -3364,6 +5529,100 @@
     }
   },
   {
+    "key": "ketchup",
+    "aliases": [
+      "番茄酱",
+      "ketchup",
+      "fanqiejiang",
+      "tomato ketchup",
+      "fan qie jiang",
+      "fanqiejiangs",
+      "ketchups",
+      "tomato ketchups",
+      "tomato-ketchup",
+      "番茄醬"
+    ],
+    "display": {
+      "zh": "番茄酱",
+      "en": "ketchup"
+    },
+    "sugar": "medium",
+    "bitter": "none",
+    "water": "low",
+    "ir94e": "low",
+    "reason": {
+      "sugar": "contains significant added sugar for balance",
+      "bitter": "no bitter ingredients present",
+      "water": "thick, viscous paste with low free water content",
+      "ir94e": "contains tomato concentrate which provides a small amount of natural glutamate"
+    },
+    "confidence": {
+      "sugar": 0.925,
+      "bitter": 0.925,
+      "water": 0.85,
+      "ir94e": 0.8
+    },
+    "review": "needs_review",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.3",
+    "arbitration": {
+      "sugar": {
+        "zh": "medium",
+        "en": "high",
+        "chosen": "medium",
+        "rule": "lower_level"
+      },
+      "water": {
+        "zh": "low",
+        "en": "medium",
+        "chosen": "low",
+        "rule": "lower_level"
+      }
+    }
+  },
+  {
+    "key": "kimbap",
+    "aliases": [
+      "紫菜包饭",
+      "kimbap",
+      "zicaibaofan",
+      "韩式紫菜包饭",
+      "gimbap",
+      "korean seaweed rice roll",
+      "gimbaps",
+      "han shi zi cai bao fan",
+      "hanshizicaibaofan",
+      "kimbaps",
+      "korean seaweed rice rolls",
+      "korean-seaweed-rice-roll",
+      "zi cai bao fan",
+      "zicaibaofans",
+      "紫菜包飯",
+      "韓式紫菜包飯"
+    ],
+    "display": {
+      "zh": "紫菜包饭",
+      "en": "kimbap"
+    },
+    "sugar": "low",
+    "bitter": "none",
+    "water": "low",
+    "ir94e": "low",
+    "reason": {
+      "sugar": "seasoned rice often contains a small amount of sugar",
+      "bitter": "no significant bitter ingredients",
+      "water": "moist solid consisting of rice and vegetables",
+      "ir94e": "contains small amounts of sesame oil and sometimes pickled ingredients"
+    },
+    "confidence": {
+      "sugar": 0.9,
+      "bitter": 0.975,
+      "water": 0.9,
+      "ir94e": 0.825
+    },
+    "review": "llm_v1",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.3"
+  },
+  {
     "key": "kimchi",
     "aliases": [
       "泡菜",
@@ -3404,6 +5663,137 @@
     "encoder_version_by_dimension": {
       "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
     }
+  },
+  {
+    "key": "kimchi-brine",
+    "aliases": [
+      "泡菜汁",
+      "kimchi brine",
+      "paocai zhi",
+      "kimchi juice",
+      "pickled vegetable brine",
+      "kimchi liquid",
+      "kimchi brines",
+      "kimchi juices",
+      "kimchi liquids",
+      "kimchi-brines",
+      "kimchi-juice",
+      "kimchi-liquid",
+      "pao cai zhi",
+      "paocai zhis",
+      "paocai-zhi",
+      "paocaizhi",
+      "pickled vegetable brines",
+      "pickled-vegetable-brine"
+    ],
+    "display": {
+      "zh": "泡菜汁",
+      "en": "kimchi brine"
+    },
+    "sugar": "low",
+    "bitter": "low",
+    "water": "medium",
+    "ir94e": "high",
+    "reason": {
+      "sugar": "contains small amounts of residual sugars from vegetables and fermentation",
+      "bitter": "faint bitterness from fermented cabbage and garlic",
+      "water": "liquid solution with moderate solute concentration",
+      "ir94e": "rich in free amino acids and glutamate from fermentation and fish sauce"
+    },
+    "confidence": {
+      "sugar": 0.85,
+      "bitter": 0.75,
+      "water": 0.925,
+      "ir94e": 0.95
+    },
+    "review": "llm_v1",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.3",
+    "encoder_addendum": "addendum_not_food_v1"
+  },
+  {
+    "key": "kimchi-jjigae",
+    "aliases": [
+      "泡菜汤",
+      "kimchi jjigae",
+      "paocaitang",
+      "kimchi stew",
+      "泡菜锅",
+      "kimchi jjigaes",
+      "kimchi stews",
+      "kimchi-jjigaes",
+      "kimchi-stew",
+      "pao cai guo",
+      "pao cai tang",
+      "paocaiguo",
+      "paocaitangs",
+      "泡菜湯",
+      "泡菜鍋"
+    ],
+    "display": {
+      "zh": "泡菜汤",
+      "en": "kimchi jjigae"
+    },
+    "sugar": "low",
+    "bitter": "low",
+    "water": "high",
+    "ir94e": "medium",
+    "reason": {
+      "sugar": "contains a small amount of sugar to balance the acidity of the kimchi",
+      "bitter": "faint bitterness from fermented cabbage and chili powder",
+      "water": "a broth-based stew with high water content",
+      "ir94e": "fermented kimchi and anchovy or meat stock provide significant glutamate"
+    },
+    "confidence": {
+      "sugar": 0.9,
+      "bitter": 0.8,
+      "water": 0.95,
+      "ir94e": 0.9
+    },
+    "review": "llm_v1",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.3"
+  },
+  {
+    "key": "kombucha",
+    "aliases": [
+      "康普茶",
+      "kombucha",
+      "kangpucha",
+      "红茶菌",
+      "tea fungus",
+      "fermented tea",
+      "fermented teas",
+      "fermented-tea",
+      "hong cha jun",
+      "hongchajun",
+      "kang pu cha",
+      "kangpuchas",
+      "kombuchas",
+      "tea fungu",
+      "tea-fungus",
+      "紅茶菌"
+    ],
+    "display": {
+      "zh": "康普茶",
+      "en": "kombucha"
+    },
+    "sugar": "medium",
+    "bitter": "low",
+    "water": "medium",
+    "ir94e": "low",
+    "reason": {
+      "sugar": "contains residual sugar from the fermentation process",
+      "bitter": "contains tannins from tea leaves",
+      "water": "a fermented tea-based beverage",
+      "ir94e": "contains amino acids produced during fermentation"
+    },
+    "confidence": {
+      "sugar": 0.9,
+      "bitter": 0.8,
+      "water": 0.9,
+      "ir94e": 0.7
+    },
+    "review": "llm_v1",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.3"
   },
   {
     "key": "korean-bbq",
@@ -3504,6 +5894,44 @@
     "encoder_version_by_dimension": {
       "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
     }
+  },
+  {
+    "key": "laksa",
+    "aliases": [
+      "叻沙",
+      "laksa",
+      "curry laksa",
+      "asam laksa",
+      "asam laksas",
+      "asam-laksa",
+      "curry laksas",
+      "curry-laksa",
+      "laksas",
+      "le sha",
+      "lesha"
+    ],
+    "display": {
+      "zh": "叻沙",
+      "en": "laksa"
+    },
+    "sugar": "low",
+    "bitter": "low",
+    "water": "high",
+    "ir94e": "medium",
+    "reason": {
+      "sugar": "contains a small amount of sugar for flavor balance",
+      "bitter": "faint bitterness from spices like turmeric and galangal",
+      "water": "a soup-based dish with high liquid content",
+      "ir94e": "rich in umami from shrimp paste, fish stock, and coconut milk"
+    },
+    "confidence": {
+      "sugar": 0.9,
+      "bitter": 0.8,
+      "water": 0.95,
+      "ir94e": 0.9
+    },
+    "review": "llm_v1",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.3"
   },
   {
     "key": "lamb-skewers",
@@ -3907,6 +6335,93 @@
     }
   },
   {
+    "key": "mac-and-cheese",
+    "aliases": [
+      "芝士通心粉",
+      "mac and cheese",
+      "zhishi tongxin fen",
+      "macaroni and cheese",
+      "通心粉芝士",
+      "mac and cheeses",
+      "mac-and-cheeses",
+      "macaroni and cheeses",
+      "macaroni-and-cheese",
+      "tong xin fen zhi shi",
+      "tongxinfenzhishi",
+      "zhi shi tong xin fen",
+      "zhishi tongxin fens",
+      "zhishi-tongxin-fen",
+      "zhishitongxinfen"
+    ],
+    "display": {
+      "zh": "芝士通心粉",
+      "en": "mac and cheese"
+    },
+    "sugar": "none",
+    "bitter": "none",
+    "water": "low",
+    "ir94e": "medium",
+    "reason": {
+      "sugar": "savory dish with no added sugar",
+      "bitter": "no bitter ingredients",
+      "water": "moist solid pasta and cheese sauce",
+      "ir94e": "contains significant amounts of aged cheese"
+    },
+    "confidence": {
+      "sugar": 1.0,
+      "bitter": 1.0,
+      "water": 0.9,
+      "ir94e": 0.9
+    },
+    "review": "llm_v1",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.3"
+  },
+  {
+    "key": "macarons",
+    "aliases": [
+      "马卡龙",
+      "macarons",
+      "makalong",
+      "macaron",
+      "french macaron",
+      "french macarons",
+      "french-macaron",
+      "ma ka long",
+      "makalongs",
+      "馬卡龍"
+    ],
+    "display": {
+      "zh": "马卡龙",
+      "en": "macarons"
+    },
+    "sugar": "high",
+    "bitter": "none",
+    "water": "low",
+    "ir94e": "none",
+    "reason": {
+      "sugar": "primary ingredients are sugar and almond flour",
+      "bitter": "no bitter ingredients used in standard preparation",
+      "water": "moist solid texture with high sugar content",
+      "ir94e": "no fermented or glutamate-rich ingredients"
+    },
+    "confidence": {
+      "sugar": 1.0,
+      "bitter": 0.95,
+      "water": 0.9,
+      "ir94e": 1.0
+    },
+    "review": "llm_v1",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.3",
+    "arbitration": {
+      "sugar": {
+        "zh": "very_high",
+        "en": "high",
+        "chosen": "high",
+        "rule": "lower_level"
+      }
+    }
+  },
+  {
     "key": "malatang",
     "aliases": [
       "麻辣烫",
@@ -3993,6 +6508,41 @@
         "rule": "lower_level"
       }
     }
+  },
+  {
+    "key": "mango-sticky-rice",
+    "aliases": [
+      "芒果糯米饭",
+      "mango sticky rice",
+      "mangguonuomifan",
+      "mang guo nuo mi fan",
+      "mangguonuomifans",
+      "mango sticky rices",
+      "mango-sticky-rices",
+      "芒果糯米飯"
+    ],
+    "display": {
+      "zh": "芒果糯米饭",
+      "en": "mango sticky rice"
+    },
+    "sugar": "high",
+    "bitter": "none",
+    "water": "low",
+    "ir94e": "none",
+    "reason": {
+      "sugar": "contains sweetened coconut milk and ripe mango",
+      "bitter": "no bitter ingredients",
+      "water": "sticky rice and coconut cream are moist solids",
+      "ir94e": "no fermented or high-glutamate ingredients"
+    },
+    "confidence": {
+      "sugar": 0.95,
+      "bitter": 1.0,
+      "water": 0.9,
+      "ir94e": 0.975
+    },
+    "review": "llm_v1",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.3"
   },
   {
     "key": "mapo tofu",
@@ -4125,6 +6675,57 @@
     }
   },
   {
+    "key": "masala-chai",
+    "aliases": [
+      "马萨拉奶茶",
+      "masala chai",
+      "印度香料奶茶",
+      "spiced tea",
+      "masala tea",
+      "ma sa la nai cha",
+      "masala chais",
+      "masala teas",
+      "masala-chais",
+      "masala-tea",
+      "masalanaicha",
+      "spiced teas",
+      "spiced-tea",
+      "yin du xiang liao nai cha",
+      "yinduxiangliaonaicha",
+      "馬薩拉奶茶"
+    ],
+    "display": {
+      "zh": "马萨拉奶茶",
+      "en": "masala chai"
+    },
+    "sugar": "medium",
+    "bitter": "low",
+    "water": "medium",
+    "ir94e": "none",
+    "reason": {
+      "sugar": "typically prepared with a noticeable amount of added sugar",
+      "bitter": "contains black tea which has mild tannins",
+      "water": "a liquid beverage with dissolved solutes",
+      "ir94e": "no significant source of free glutamate or amino acids"
+    },
+    "confidence": {
+      "sugar": 0.9,
+      "bitter": 0.8,
+      "water": 0.9,
+      "ir94e": 0.9
+    },
+    "review": "llm_v1",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.3",
+    "arbitration": {
+      "water": {
+        "zh": "medium",
+        "en": "high",
+        "chosen": "medium",
+        "rule": "lower_level"
+      }
+    }
+  },
+  {
     "key": "mashed-potatoes",
     "aliases": [
       "土豆泥",
@@ -4249,6 +6850,127 @@
     "encoder_version_by_dimension": {
       "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
     }
+  },
+  {
+    "key": "mayonnaise",
+    "aliases": [
+      "蛋黄酱",
+      "mayonnaise",
+      "danhuangjiang",
+      "mayo",
+      "美乃滋",
+      "dan huang jiang",
+      "danhuangjiangs",
+      "mayonnaises",
+      "mayonnaize",
+      "mayos",
+      "mei nai zi",
+      "meinaizi",
+      "蛋黃醬"
+    ],
+    "display": {
+      "zh": "蛋黄酱",
+      "en": "mayonnaise"
+    },
+    "sugar": "low",
+    "bitter": "none",
+    "water": "low",
+    "ir94e": "low",
+    "reason": {
+      "sugar": "contains a small amount of sugar for balance",
+      "bitter": "no significant bitter ingredients",
+      "water": "an emulsion of oil and egg yolk with low free water content",
+      "ir94e": "contains egg yolk which provides a small amount of free amino acids"
+    },
+    "confidence": {
+      "sugar": 0.9,
+      "bitter": 0.95,
+      "water": 0.85,
+      "ir94e": 0.75
+    },
+    "review": "llm_v1",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.3"
+  },
+  {
+    "key": "mead",
+    "aliases": [
+      "蜂蜜酒",
+      "mead",
+      "fengmijiu",
+      "honey wine",
+      "feng mi jiu",
+      "fengmijius",
+      "honey wines",
+      "honey-wine",
+      "meads"
+    ],
+    "display": {
+      "zh": "蜂蜜酒",
+      "en": "mead"
+    },
+    "sugar": "high",
+    "bitter": "none",
+    "water": "medium",
+    "ir94e": "none",
+    "reason": {
+      "sugar": "mead is a fermented honey beverage with significant residual sweetness",
+      "bitter": "mead does not typically contain bittering agents like hops",
+      "water": "it is a liquid beverage with a high concentration of dissolved sugars",
+      "ir94e": "mead is made from honey and water, lacking significant amino acid sources"
+    },
+    "confidence": {
+      "sugar": 0.9,
+      "bitter": 0.95,
+      "water": 0.875,
+      "ir94e": 0.95
+    },
+    "review": "llm_v1",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.3"
+  },
+  {
+    "key": "meat-pie",
+    "aliases": [
+      "澳式肉派",
+      "meat pie",
+      "aussie meat pie",
+      "australian meat pie",
+      "肉派",
+      "savory pie",
+      "ao shi rou pai",
+      "aoshiroupai",
+      "aussie meat pies",
+      "aussie-meat-pie",
+      "australian meat pies",
+      "australian-meat-pie",
+      "meat pies",
+      "meat-pies",
+      "rou pai",
+      "roupai",
+      "savory pies",
+      "savory-pie"
+    ],
+    "display": {
+      "zh": "澳式肉派",
+      "en": "meat pie"
+    },
+    "sugar": "low",
+    "bitter": "none",
+    "water": "low",
+    "ir94e": "medium",
+    "reason": {
+      "sugar": "pastry crust may contain a small amount of sugar",
+      "bitter": "no significant bitter ingredients",
+      "water": "moist solid food with a dense crust and filling",
+      "ir94e": "meat filling and gravy provide significant glutamate content"
+    },
+    "confidence": {
+      "sugar": 0.9,
+      "bitter": 0.95,
+      "water": 0.85,
+      "ir94e": 0.9
+    },
+    "review": "llm_v1",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.3"
   },
   {
     "key": "milk",
@@ -4473,6 +7195,143 @@
     }
   },
   {
+    "key": "mosquito-coil-liquid",
+    "aliases": [
+      "电蚊香液",
+      "mosquito coil liquid",
+      "electric mosquito repellent liquid",
+      "蚊香液",
+      "mosquito repellent liquid",
+      "dian wen xiang ye",
+      "dianwenxiangye",
+      "electric mosquito repellent liquids",
+      "electric-mosquito-repellent-liquid",
+      "mosquito coil liquids",
+      "mosquito repellent liquids",
+      "mosquito-coil-liquids",
+      "mosquito-repellent-liquid",
+      "wen xiang ye",
+      "wenxiangye",
+      "電蚊香液"
+    ],
+    "display": {
+      "zh": "电蚊香液",
+      "en": "mosquito coil liquid"
+    },
+    "sugar": "none",
+    "bitter": "very_high",
+    "water": "medium",
+    "ir94e": "none",
+    "reason": {
+      "sugar": "contains no sugar",
+      "bitter": "contains pyrethroids and bittering agents to deter ingestion",
+      "water": "solvent base is typically a mixture of water and organic solvents",
+      "ir94e": "contains no amino acids or glutamate"
+    },
+    "confidence": {
+      "sugar": 1.0,
+      "bitter": 0.9,
+      "water": 0.8,
+      "ir94e": 1.0
+    },
+    "review": "llm_v1",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.3",
+    "arbitration": {
+      "water": {
+        "zh": "medium",
+        "en": "high",
+        "chosen": "medium",
+        "rule": "lower_level"
+      }
+    },
+    "encoder_addendum": "addendum_not_food_v1"
+  },
+  {
+    "key": "naan",
+    "aliases": [
+      "馕",
+      "naan",
+      "nang",
+      "nan bread",
+      "naan bread",
+      "indian flatbread",
+      "indian flatbreads",
+      "indian-flatbread",
+      "naan breads",
+      "naan-bread",
+      "naans",
+      "nan breads",
+      "nan-bread",
+      "nangs",
+      "饢"
+    ],
+    "display": {
+      "zh": "馕",
+      "en": "naan"
+    },
+    "sugar": "none",
+    "bitter": "none",
+    "water": "low",
+    "ir94e": "none",
+    "reason": {
+      "sugar": "traditional naan is a savory leavened flatbread without added sugar",
+      "bitter": "no bitter ingredients are typically used in the dough",
+      "water": "it is a moist solid bread with a low water activity compared to soups or juices",
+      "ir94e": "it is a simple flour-based bread without fermented or glutamate-rich additives"
+    },
+    "confidence": {
+      "sugar": 0.9,
+      "bitter": 0.975,
+      "water": 0.9,
+      "ir94e": 0.925
+    },
+    "review": "llm_v1",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.3"
+  },
+  {
+    "key": "nasi-lemak",
+    "aliases": [
+      "椰浆饭",
+      "nasi lemak",
+      "yejiangfan",
+      "nasi lemaks",
+      "nasi-lemaks",
+      "ye jiang fan",
+      "yejiangfans",
+      "椰漿飯"
+    ],
+    "display": {
+      "zh": "椰浆饭",
+      "en": "nasi lemak"
+    },
+    "sugar": "low",
+    "bitter": "none",
+    "water": "low",
+    "ir94e": "low",
+    "reason": {
+      "sugar": "Sambal often contains a small amount of sugar for balance.",
+      "bitter": "No significant bitter components in standard preparation.",
+      "water": "Coconut rice is a moist solid, not a liquid-heavy dish.",
+      "ir94e": "contains small amounts of anchovies and sambal seasoning"
+    },
+    "confidence": {
+      "sugar": 0.9,
+      "bitter": 0.975,
+      "water": 0.875,
+      "ir94e": 0.85
+    },
+    "review": "llm_v1",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.3",
+    "arbitration": {
+      "ir94e": {
+        "zh": "low",
+        "en": "medium",
+        "chosen": "low",
+        "rule": "lower_level"
+      }
+    }
+  },
+  {
     "key": "natto",
     "aliases": [
       "纳豆",
@@ -4510,6 +7369,54 @@
     "encoder_version_by_dimension": {
       "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
     }
+  },
+  {
+    "key": "nectar",
+    "aliases": [
+      "花蜜",
+      "nectar",
+      "huami",
+      "hua mi",
+      "huamis",
+      "nectars"
+    ],
+    "display": {
+      "zh": "花蜜",
+      "en": "nectar"
+    },
+    "sugar": "very_high",
+    "bitter": "none",
+    "water": "low",
+    "ir94e": "none",
+    "reason": {
+      "sugar": "primarily a concentrated solution of sucrose, glucose, and fructose",
+      "bitter": "generally lacks bitter secondary metabolites in most floral sources",
+      "water": "viscous liquid with high solute concentration",
+      "ir94e": "contains negligible amounts of free amino acids or glutamate"
+    },
+    "confidence": {
+      "sugar": 1.0,
+      "bitter": 0.85,
+      "water": 0.9,
+      "ir94e": 0.85
+    },
+    "review": "needs_review",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.3",
+    "arbitration": {
+      "water": {
+        "zh": "low",
+        "en": "medium",
+        "chosen": "low",
+        "rule": "lower_level"
+      },
+      "ir94e": {
+        "zh": "low",
+        "en": "none",
+        "chosen": "none",
+        "rule": "lower_level"
+      }
+    },
+    "encoder_addendum": "addendum_not_food_v1"
   },
   {
     "key": "oatmeal",
@@ -4558,6 +7465,49 @@
         "note": "resolved by hand 2026-09-11: product-owner decision"
       }
     }
+  },
+  {
+    "key": "okonomiyaki",
+    "aliases": [
+      "大阪烧",
+      "okonomiyaki",
+      "daban烧",
+      "御好烧",
+      "japanese savory pancake",
+      "da ban shao",
+      "daban shao",
+      "dabanshao",
+      "daban燒",
+      "japanese savory pancakes",
+      "japanese-savory-pancake",
+      "okonomiyakis",
+      "yu hao shao",
+      "yuhaoshao",
+      "大阪燒",
+      "御好燒"
+    ],
+    "display": {
+      "zh": "大阪烧",
+      "en": "okonomiyaki"
+    },
+    "sugar": "low",
+    "bitter": "none",
+    "water": "low",
+    "ir94e": "medium",
+    "reason": {
+      "sugar": "sauce contains some sugar but the dish is savory",
+      "bitter": "no significant bitter ingredients",
+      "water": "moist solid pancake texture",
+      "ir94e": "contains dashi, soy sauce, and often bonito flakes"
+    },
+    "confidence": {
+      "sugar": 0.9,
+      "bitter": 0.95,
+      "water": 0.85,
+      "ir94e": 0.9
+    },
+    "review": "llm_v1",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.3"
   },
   {
     "key": "onigiri",
@@ -4739,6 +7689,55 @@
     }
   },
   {
+    "key": "oyakodon",
+    "aliases": [
+      "亲子丼",
+      "oyakodon",
+      "qinzi_don",
+      "親子丼",
+      "chicken and egg bowl",
+      "oyako donburi",
+      "chicken and egg bowls",
+      "chicken-and-egg-bowl",
+      "oyako donburis",
+      "oyako-donburi",
+      "oyakodons",
+      "qin zi jing",
+      "qinzi_dons",
+      "qinzijing"
+    ],
+    "display": {
+      "zh": "亲子丼",
+      "en": "oyakodon"
+    },
+    "sugar": "low",
+    "bitter": "none",
+    "water": "medium",
+    "ir94e": "medium",
+    "reason": {
+      "sugar": "contains mirin and sugar in the dashi-based sauce",
+      "bitter": "no bitter ingredients are typically used",
+      "water": "the dish is served with a significant amount of savory sauce and moist rice",
+      "ir94e": "the sauce is based on dashi and soy sauce, providing significant umami"
+    },
+    "confidence": {
+      "sugar": 0.9,
+      "bitter": 1.0,
+      "water": 0.9,
+      "ir94e": 0.925
+    },
+    "review": "llm_v1",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.3",
+    "arbitration": {
+      "sugar": {
+        "zh": "low",
+        "en": "medium",
+        "chosen": "low",
+        "rule": "lower_level"
+      }
+    }
+  },
+  {
     "key": "pad-thai",
     "aliases": [
       "泰式炒河粉",
@@ -4795,6 +7794,60 @@
     }
   },
   {
+    "key": "paella",
+    "aliases": [
+      "西班牙海鲜饭",
+      "paella",
+      "xibanyahaixianfan",
+      "spanish seafood paella",
+      "spanish seafood rice",
+      "paellas",
+      "spanish seafood paellas",
+      "spanish seafood rices",
+      "spanish-seafood-paella",
+      "spanish-seafood-rice",
+      "xi ban ya hai xian fan",
+      "xibanyahaixianfans",
+      "西班牙海鮮飯"
+    ],
+    "display": {
+      "zh": "西班牙海鲜饭",
+      "en": "paella"
+    },
+    "sugar": "none",
+    "bitter": "none",
+    "water": "low",
+    "ir94e": "medium",
+    "reason": {
+      "sugar": "savory rice dish without added sugar",
+      "bitter": "no significant bitter ingredients",
+      "water": "moist solid rice dish",
+      "ir94e": "contains seafood, meat, and stock-based flavor"
+    },
+    "confidence": {
+      "sugar": 0.9,
+      "bitter": 0.85,
+      "water": 0.85,
+      "ir94e": 0.85
+    },
+    "review": "needs_review",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.3",
+    "arbitration": {
+      "sugar": {
+        "zh": "low",
+        "en": "none",
+        "chosen": "none",
+        "rule": "lower_level"
+      },
+      "bitter": {
+        "zh": "low",
+        "en": "none",
+        "chosen": "none",
+        "rule": "lower_level"
+      }
+    }
+  },
+  {
     "key": "pancakes",
     "aliases": [
       "松饼",
@@ -4839,6 +7892,45 @@
     "encoder_version_by_dimension": {
       "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
     }
+  },
+  {
+    "key": "pavlova",
+    "aliases": [
+      "帕芙洛娃",
+      "pavlova",
+      "meringue cake",
+      "帕夫洛娃",
+      "pavlova cake",
+      "meringue cakes",
+      "meringue-cake",
+      "pa fu luo wa",
+      "pafuluowa",
+      "pavlova cakes",
+      "pavlova-cake",
+      "pavlovas"
+    ],
+    "display": {
+      "zh": "帕芙洛娃",
+      "en": "pavlova"
+    },
+    "sugar": "very_high",
+    "bitter": "none",
+    "water": "low",
+    "ir94e": "none",
+    "reason": {
+      "sugar": "primarily composed of sugar and egg whites",
+      "bitter": "no bitter ingredients used",
+      "water": "moist solid structure with low free water content",
+      "ir94e": "no fermented or glutamate-rich ingredients"
+    },
+    "confidence": {
+      "sugar": 1.0,
+      "bitter": 1.0,
+      "water": 0.9,
+      "ir94e": 1.0
+    },
+    "review": "llm_v1",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.3"
   },
   {
     "key": "peach",
@@ -5059,6 +8151,51 @@
     }
   },
   {
+    "key": "pierogi",
+    "aliases": [
+      "波兰饺子",
+      "pierogi",
+      "bolanjiaozi",
+      "polish dumplings",
+      "bo lan jiao zi",
+      "bolanjiaozis",
+      "pierogis",
+      "polish dumpling",
+      "polish-dumplings",
+      "波蘭餃子"
+    ],
+    "display": {
+      "zh": "波兰饺子",
+      "en": "pierogi"
+    },
+    "sugar": "none",
+    "bitter": "none",
+    "water": "low",
+    "ir94e": "low",
+    "reason": {
+      "sugar": "savory dumpling typically filled with potato, cheese, or meat",
+      "bitter": "no bitter ingredients used in standard preparation",
+      "water": "moist solid dough and filling",
+      "ir94e": "contains small amounts of cheese or meat providing minor amino acid content"
+    },
+    "confidence": {
+      "sugar": 0.925,
+      "bitter": 0.975,
+      "water": 0.9,
+      "ir94e": 0.8
+    },
+    "review": "llm_v1",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.3",
+    "arbitration": {
+      "sugar": {
+        "zh": "low",
+        "en": "none",
+        "chosen": "none",
+        "rule": "lower_level"
+      }
+    }
+  },
+  {
     "key": "pineapple",
     "aliases": [
       "菠萝",
@@ -5133,6 +8270,43 @@
     "encoder_version_by_dimension": {
       "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
     }
+  },
+  {
+    "key": "pollen",
+    "aliases": [
+      "花粉",
+      "pollen",
+      "huafen",
+      "bee pollen",
+      "bee pollens",
+      "bee-pollen",
+      "hua fen",
+      "huafens",
+      "pollens"
+    ],
+    "display": {
+      "zh": "花粉",
+      "en": "pollen"
+    },
+    "sugar": "low",
+    "bitter": "low",
+    "water": "none",
+    "ir94e": "medium",
+    "reason": {
+      "sugar": "contains small amounts of nectar sugars",
+      "bitter": "contains secondary metabolites like flavonoids",
+      "water": "dry granular solid",
+      "ir94e": "rich in free amino acids and proteins"
+    },
+    "confidence": {
+      "sugar": 0.8,
+      "bitter": 0.7,
+      "water": 0.9,
+      "ir94e": 0.9
+    },
+    "review": "llm_v1",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.3",
+    "encoder_addendum": "addendum_not_food_v1"
   },
   {
     "key": "popcorn",
@@ -5211,6 +8385,108 @@
     "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
     "encoder_version_by_dimension": {
       "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    }
+  },
+  {
+    "key": "poutine",
+    "aliases": [
+      "肉汁奶酪薯条",
+      "poutine",
+      "普丁",
+      "poutines",
+      "pu ding",
+      "puding",
+      "rou zhi nai lao shu tiao",
+      "rouzhinailaoshutiao",
+      "肉汁奶酪薯條"
+    ],
+    "display": {
+      "zh": "肉汁奶酪薯条",
+      "en": "poutine"
+    },
+    "sugar": "low",
+    "bitter": "none",
+    "water": "low",
+    "ir94e": "medium",
+    "reason": {
+      "sugar": "contains small amounts of sugar in the gravy and ketchup",
+      "bitter": "no significant bitter components",
+      "water": "moist solid dish with gravy and cheese curds",
+      "ir94e": "brown gravy is rich in savory meat stock and glutamate"
+    },
+    "confidence": {
+      "sugar": 0.9,
+      "bitter": 0.95,
+      "water": 0.85,
+      "ir94e": 0.9
+    },
+    "review": "llm_v1",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.3",
+    "arbitration": {
+      "water": {
+        "zh": "low",
+        "en": "medium",
+        "chosen": "low",
+        "rule": "lower_level"
+      }
+    }
+  },
+  {
+    "key": "pretzel",
+    "aliases": [
+      "碱水面包",
+      "pretzel",
+      "jianshuimianbao",
+      "德国碱水面包",
+      "laugenbrezel",
+      "普雷结",
+      "soft pretzel",
+      "hard pretzel",
+      "de guo jian shui mian bao",
+      "deguojianshuimianbao",
+      "hard pretzels",
+      "hard-pretzel",
+      "jian shui mian bao",
+      "jianshuimianbaos",
+      "laugenbrezels",
+      "pretzels",
+      "pu lei jie",
+      "puleijie",
+      "soft pretzels",
+      "soft-pretzel",
+      "德國鹼水麵包",
+      "普雷結",
+      "鹼水麵包"
+    ],
+    "display": {
+      "zh": "碱水面包",
+      "en": "pretzel"
+    },
+    "sugar": "none",
+    "bitter": "none",
+    "water": "low",
+    "ir94e": "none",
+    "reason": {
+      "sugar": "typically a savory bread product without added sugar",
+      "bitter": "no significant bitter components",
+      "water": "a baked, relatively dry dough product",
+      "ir94e": "no significant source of free amino acids or glutamate"
+    },
+    "confidence": {
+      "sugar": 0.925,
+      "bitter": 0.85,
+      "water": 0.85,
+      "ir94e": 0.925
+    },
+    "review": "llm_v1",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.3",
+    "arbitration": {
+      "bitter": {
+        "zh": "low",
+        "en": "none",
+        "chosen": "none",
+        "rule": "lower_level"
+      }
     }
   },
   {
@@ -5302,6 +8578,47 @@
     }
   },
   {
+    "key": "ratatouille",
+    "aliases": [
+      "普罗旺斯炖菜",
+      "ratatouille",
+      "普罗旺斯蔬菜煲",
+      "ratatouille niçoise",
+      "pu luo wang si dun cai",
+      "pu luo wang si shu cai bao",
+      "puluowangsiduncai",
+      "puluowangsishucaibao",
+      "ratatouille niçoises",
+      "ratatouille niçoize",
+      "ratatouille-niçoise",
+      "ratatouilles",
+      "普羅旺斯燉菜",
+      "普羅旺斯蔬菜煲"
+    ],
+    "display": {
+      "zh": "普罗旺斯炖菜",
+      "en": "ratatouille"
+    },
+    "sugar": "low",
+    "bitter": "low",
+    "water": "high",
+    "ir94e": "low",
+    "reason": {
+      "sugar": "natural sweetness from cooked tomatoes and onions",
+      "bitter": "faint bitterness from eggplant skin and herbs",
+      "water": "stewed vegetables release significant liquid",
+      "ir94e": "contains tomatoes and cooked aromatics providing mild umami"
+    },
+    "confidence": {
+      "sugar": 0.9,
+      "bitter": 0.8,
+      "water": 0.9,
+      "ir94e": 0.8
+    },
+    "review": "llm_v1",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.3"
+  },
+  {
     "key": "red-wine",
     "aliases": [
       "红酒",
@@ -5357,6 +8674,47 @@
     }
   },
   {
+    "key": "risotto",
+    "aliases": [
+      "意式烩饭",
+      "risotto",
+      "yishihuifan",
+      "意大利烩饭",
+      "italian risotto",
+      "italian risottos",
+      "italian-risotto",
+      "risottos",
+      "yi da li hui fan",
+      "yi shi hui fan",
+      "yidalihuifan",
+      "yishihuifans",
+      "意式燴飯",
+      "義大利燴飯"
+    ],
+    "display": {
+      "zh": "意式烩饭",
+      "en": "risotto"
+    },
+    "sugar": "none",
+    "bitter": "none",
+    "water": "low",
+    "ir94e": "medium",
+    "reason": {
+      "sugar": "savory dish without added sugar",
+      "bitter": "no bitter ingredients typically used",
+      "water": "moist solid texture from starch and broth",
+      "ir94e": "rich in glutamate from parmesan cheese and chicken or vegetable stock"
+    },
+    "confidence": {
+      "sugar": 0.975,
+      "bitter": 0.95,
+      "water": 0.875,
+      "ir94e": 0.9
+    },
+    "review": "llm_v1",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.3"
+  },
+  {
     "key": "roasted-sweet-potato",
     "aliases": [
       "烤红薯",
@@ -5403,6 +8761,288 @@
     "encoder_version_by_dimension": {
       "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
     }
+  },
+  {
+    "key": "rotten-egg",
+    "aliases": [
+      "臭鸡蛋",
+      "rotten egg",
+      "choudan",
+      "putrid egg",
+      "腐蛋",
+      "decomposed egg",
+      "chou ji dan",
+      "choudans",
+      "choujidan",
+      "decomposed eggs",
+      "decomposed-egg",
+      "fu dan",
+      "fudan",
+      "putrid eggs",
+      "putrid-egg",
+      "rotten eggs",
+      "rotten-eggs",
+      "臭雞蛋"
+    ],
+    "display": {
+      "zh": "臭鸡蛋",
+      "en": "rotten egg"
+    },
+    "sugar": "none",
+    "bitter": "high",
+    "water": "medium",
+    "ir94e": "high",
+    "reason": {
+      "sugar": "no significant sugar content in decomposing egg proteins",
+      "bitter": "high levels of bitter-tasting sulfur compounds and amines produced by decay",
+      "water": "the egg white liquefies during decomposition providing a moist surface",
+      "ir94e": "extensive proteolysis releases high concentrations of free amino acids and glutamate"
+    },
+    "confidence": {
+      "sugar": 0.9,
+      "bitter": 0.8,
+      "water": 0.85,
+      "ir94e": 0.9
+    },
+    "review": "llm_v1",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.3",
+    "encoder_addendum": "addendum_not_food_v1"
+  },
+  {
+    "key": "rotting-apple",
+    "aliases": [
+      "烂苹果",
+      "rotting apple",
+      "rotten apple",
+      "decaying apple",
+      "腐烂的苹果",
+      "decaying apples",
+      "decaying-apple",
+      "fu lan de ping guo",
+      "fulandepingguo",
+      "lan ping guo",
+      "lanpingguo",
+      "rotten apples",
+      "rotten-apple",
+      "rotting apples",
+      "rotting-apples",
+      "爛蘋果",
+      "腐爛的蘋果"
+    ],
+    "display": {
+      "zh": "烂苹果",
+      "en": "rotting apple"
+    },
+    "sugar": "medium",
+    "bitter": "low",
+    "water": "medium",
+    "ir94e": "low",
+    "reason": {
+      "sugar": "fermentation consumes some sugar but residual fructose remains",
+      "bitter": "minor bitter compounds produced during microbial decay",
+      "water": "cell wall breakdown releases significant free juice",
+      "ir94e": "protein breakdown during decay releases free amino acids"
+    },
+    "confidence": {
+      "sugar": 0.8,
+      "bitter": 0.7,
+      "water": 0.9,
+      "ir94e": 0.7
+    },
+    "review": "llm_v1",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.3",
+    "encoder_addendum": "addendum_not_food_v1"
+  },
+  {
+    "key": "rotting-banana",
+    "aliases": [
+      "烂香蕉",
+      "rotting banana",
+      "lanxiangjiao",
+      "rotten banana",
+      "overripe banana",
+      "腐烂的香蕉",
+      "decaying banana",
+      "decaying bananas",
+      "decaying-banana",
+      "fu lan de xiang jiao",
+      "fulandexiangjiao",
+      "lan xiang jiao",
+      "lanxiangjiaos",
+      "overripe bananas",
+      "overripe-banana",
+      "rotten bananas",
+      "rotten-banana",
+      "rotting bananas",
+      "rotting-bananas",
+      "爛香蕉",
+      "腐爛的香蕉"
+    ],
+    "display": {
+      "zh": "烂香蕉",
+      "en": "rotting banana"
+    },
+    "sugar": "high",
+    "bitter": "low",
+    "water": "medium",
+    "ir94e": "medium",
+    "reason": {
+      "sugar": "enzymatic breakdown of starch into simple sugars",
+      "bitter": "trace bitterness from fermentation byproducts",
+      "water": "cell wall breakdown releases significant intracellular fluid",
+      "ir94e": "proteolysis releases free amino acids during decay"
+    },
+    "confidence": {
+      "sugar": 0.9,
+      "bitter": 0.7,
+      "water": 0.8,
+      "ir94e": 0.75
+    },
+    "review": "llm_v1",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.3",
+    "arbitration": {
+      "ir94e": {
+        "zh": "low",
+        "en": "medium",
+        "chosen": "medium",
+        "rule": "confidence"
+      }
+    },
+    "encoder_addendum": "addendum_not_food_v1"
+  },
+  {
+    "key": "rotting-tomato",
+    "aliases": [
+      "烂番茄",
+      "rotting tomato",
+      "lanfanqie",
+      "rotten tomato",
+      "腐烂的番茄",
+      "fu lan de fan qie",
+      "fulandefanqie",
+      "lan fan qie",
+      "lanfanqies",
+      "rotten tomatos",
+      "rotten-tomato",
+      "rotting tomatos",
+      "rotting-tomatos",
+      "爛番茄",
+      "腐爛的番茄"
+    ],
+    "display": {
+      "zh": "烂番茄",
+      "en": "rotting tomato"
+    },
+    "sugar": "low",
+    "bitter": "medium",
+    "water": "medium",
+    "ir94e": "medium",
+    "reason": {
+      "sugar": "fermentation consumes sugars",
+      "bitter": "microbial degradation produces bitter alkaloids and decomposition products",
+      "water": "high moisture content remains as the fruit tissue breaks down",
+      "ir94e": "proteolysis during decay releases significant amounts of free amino acids and glutamate"
+    },
+    "confidence": {
+      "sugar": 0.8,
+      "bitter": 0.75,
+      "water": 0.9,
+      "ir94e": 0.8
+    },
+    "review": "needs_review",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.3",
+    "arbitration": {
+      "sugar": {
+        "zh": "low",
+        "en": "medium",
+        "chosen": "low",
+        "rule": "lower_level"
+      },
+      "water": {
+        "zh": "high",
+        "en": "medium",
+        "chosen": "medium",
+        "rule": "lower_level"
+      }
+    },
+    "encoder_addendum": "addendum_not_food_v1"
+  },
+  {
+    "key": "samgyetang",
+    "aliases": [
+      "参鸡汤",
+      "samgyetang",
+      "ginseng chicken soup",
+      "korean ginseng chicken soup",
+      "can ji tang",
+      "canjitang",
+      "ginseng chicken soups",
+      "ginseng-chicken-soup",
+      "korean ginseng chicken soups",
+      "korean-ginseng-chicken-soup",
+      "samgyetangs",
+      "參雞湯"
+    ],
+    "display": {
+      "zh": "参鸡汤",
+      "en": "samgyetang"
+    },
+    "sugar": "none",
+    "bitter": "low",
+    "water": "high",
+    "ir94e": "medium",
+    "reason": {
+      "sugar": "a savory chicken soup with no added sugar",
+      "bitter": "contains ginseng which has a mild bitter profile",
+      "water": "a clear, broth-based soup",
+      "ir94e": "long-simmered chicken broth provides significant free amino acids"
+    },
+    "confidence": {
+      "sugar": 1.0,
+      "bitter": 0.9,
+      "water": 1.0,
+      "ir94e": 0.9
+    },
+    "review": "llm_v1",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.3"
+  },
+  {
+    "key": "samosa",
+    "aliases": [
+      "萨莫萨",
+      "samosa",
+      "咖喱角",
+      "炸三角",
+      "ga li jiao",
+      "galijiao",
+      "sa mo sa",
+      "samosas",
+      "zha san jiao",
+      "zhasanjiao",
+      "薩莫薩"
+    ],
+    "display": {
+      "zh": "萨莫萨",
+      "en": "samosa"
+    },
+    "sugar": "none",
+    "bitter": "none",
+    "water": "low",
+    "ir94e": "low",
+    "reason": {
+      "sugar": "savory fried pastry with no added sugar",
+      "bitter": "no bitter ingredients used in standard preparation",
+      "water": "moist potato and pea filling inside a fried crust",
+      "ir94e": "contains small amounts of spices and sometimes onion or garlic which provide trace amino acids"
+    },
+    "confidence": {
+      "sugar": 0.95,
+      "bitter": 0.9,
+      "water": 0.85,
+      "ir94e": 0.75
+    },
+    "review": "llm_v1",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.3"
   },
   {
     "key": "sandwich",
@@ -5483,6 +9123,45 @@
     }
   },
   {
+    "key": "satay",
+    "aliases": [
+      "沙爹",
+      "satay",
+      "shadie",
+      "satay skewers",
+      "satay sauce",
+      "satay sauces",
+      "satay skewer",
+      "satay-sauce",
+      "satay-skewers",
+      "satays",
+      "sha die",
+      "shadies"
+    ],
+    "display": {
+      "zh": "沙爹",
+      "en": "satay"
+    },
+    "sugar": "medium",
+    "bitter": "none",
+    "water": "low",
+    "ir94e": "medium",
+    "reason": {
+      "sugar": "the peanut sauce is typically sweetened with palm sugar",
+      "bitter": "no significant bitter ingredients",
+      "water": "the sauce is a thick paste and the meat is grilled solid",
+      "ir94e": "contains fermented shrimp paste and soy sauce as key flavor components"
+    },
+    "confidence": {
+      "sugar": 0.9,
+      "bitter": 0.95,
+      "water": 0.85,
+      "ir94e": 0.9
+    },
+    "review": "llm_v1",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.3"
+  },
+  {
     "key": "scallion-pancake",
     "aliases": [
       "葱油饼",
@@ -5526,6 +9205,53 @@
     }
   },
   {
+    "key": "schnitzel",
+    "aliases": [
+      "炸肉排",
+      "schnitzel",
+      "zharoupai",
+      "wiener schnitzel",
+      "breaded cutlet",
+      "breaded cutlets",
+      "breaded-cutlet",
+      "schnitzels",
+      "wiener schnitzels",
+      "wiener-schnitzel",
+      "zha rou pai",
+      "zharoupais"
+    ],
+    "display": {
+      "zh": "炸肉排",
+      "en": "schnitzel"
+    },
+    "sugar": "none",
+    "bitter": "none",
+    "water": "low",
+    "ir94e": "low",
+    "reason": {
+      "sugar": "savory breaded meat dish with no added sugar",
+      "bitter": "no bitter ingredients used in standard preparation",
+      "water": "moist solid meat with breading",
+      "ir94e": "contains small amounts of amino acids from meat and seasoning"
+    },
+    "confidence": {
+      "sugar": 0.925,
+      "bitter": 0.95,
+      "water": 0.9,
+      "ir94e": 0.825
+    },
+    "review": "llm_v1",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.3",
+    "arbitration": {
+      "sugar": {
+        "zh": "low",
+        "en": "none",
+        "chosen": "none",
+        "rule": "lower_level"
+      }
+    }
+  },
+  {
     "key": "scrambled-eggs",
     "aliases": [
       "炒蛋",
@@ -5563,6 +9289,80 @@
     "encoder_version_by_dimension": {
       "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
     }
+  },
+  {
+    "key": "shakshuka",
+    "aliases": [
+      "北非蛋",
+      "shakshuka",
+      "eggs in purgatory",
+      "shakshouka",
+      "bei fei dan",
+      "beifeidan",
+      "eggs in purgatorys",
+      "eggs-in-purgatory",
+      "shakshoukas",
+      "shakshukas"
+    ],
+    "display": {
+      "zh": "北非蛋",
+      "en": "shakshuka"
+    },
+    "sugar": "low",
+    "bitter": "low",
+    "water": "medium",
+    "ir94e": "medium",
+    "reason": {
+      "sugar": "tomatoes contain natural sugars and sometimes a pinch of sugar is added to balance acidity",
+      "bitter": "trace bitterness from bell peppers and spices like cumin or paprika",
+      "water": "the tomato-based sauce provides a medium-solute liquid environment",
+      "ir94e": "tomatoes are rich in natural glutamates and the dish is often cooked down into a savory base"
+    },
+    "confidence": {
+      "sugar": 0.9,
+      "bitter": 0.8,
+      "water": 0.9,
+      "ir94e": 0.9
+    },
+    "review": "llm_v1",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.3"
+  },
+  {
+    "key": "shawarma",
+    "aliases": [
+      "沙威玛",
+      "shawarma",
+      "沙威玛烤肉",
+      "sha wei ma",
+      "sha wei ma kao rou",
+      "shawarmas",
+      "shaweima",
+      "shaweimakaorou",
+      "沙威瑪",
+      "沙威瑪烤肉"
+    ],
+    "display": {
+      "zh": "沙威玛",
+      "en": "shawarma"
+    },
+    "sugar": "low",
+    "bitter": "none",
+    "water": "low",
+    "ir94e": "medium",
+    "reason": {
+      "sugar": "marinades often contain a small amount of sugar or honey",
+      "bitter": "no significant bitter ingredients in standard preparation",
+      "water": "moist meat and vegetables but not a liquid-based dish",
+      "ir94e": "heavily seasoned with spices and often served with savory sauces like tahini or garlic sauce"
+    },
+    "confidence": {
+      "sugar": 0.8,
+      "bitter": 0.9,
+      "water": 0.8,
+      "ir94e": 0.8
+    },
+    "review": "llm_v1",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.3"
   },
   {
     "key": "sichuan-boiled-fish",
@@ -5617,6 +9417,197 @@
         "rule": "lower_level"
       }
     }
+  },
+  {
+    "key": "soap",
+    "aliases": [
+      "肥皂",
+      "soap",
+      "feizao",
+      "soap bar",
+      "fei zao",
+      "feizaos",
+      "soap bars",
+      "soap-bar",
+      "soaps"
+    ],
+    "display": {
+      "zh": "肥皂",
+      "en": "soap"
+    },
+    "sugar": "none",
+    "bitter": "very_high",
+    "water": "low",
+    "ir94e": "none",
+    "reason": {
+      "sugar": "contains no sweet components",
+      "bitter": "alkaline salts and surfactants are highly bitter to insects",
+      "water": "solid bar with low free water content",
+      "ir94e": "contains no amino acids or glutamate"
+    },
+    "confidence": {
+      "sugar": 1.0,
+      "bitter": 0.9,
+      "water": 0.9,
+      "ir94e": 1.0
+    },
+    "review": "llm_v1",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.3",
+    "encoder_addendum": "addendum_not_food_v1"
+  },
+  {
+    "key": "soba",
+    "aliases": [
+      "荞麦面",
+      "soba",
+      "qiaomaimian",
+      "buckwheat noodles",
+      "buckwheat noodl",
+      "buckwheat-noodles",
+      "qiao mai mian",
+      "qiaomaimians",
+      "sobas",
+      "蕎麥麵"
+    ],
+    "display": {
+      "zh": "荞麦面",
+      "en": "soba"
+    },
+    "sugar": "none",
+    "bitter": "low",
+    "water": "low",
+    "ir94e": "low",
+    "reason": {
+      "sugar": "plain buckwheat noodles have no added sugar",
+      "bitter": "buckwheat flour has a faint natural bitterness",
+      "water": "moist solid noodle texture",
+      "ir94e": "dipping sauce contains soy sauce and dashi"
+    },
+    "confidence": {
+      "sugar": 0.925,
+      "bitter": 0.8,
+      "water": 0.9,
+      "ir94e": 0.875
+    },
+    "review": "llm_v1",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.3",
+    "arbitration": {
+      "sugar": {
+        "zh": "none",
+        "en": "low",
+        "chosen": "none",
+        "rule": "lower_level"
+      }
+    }
+  },
+  {
+    "key": "som-tam",
+    "aliases": [
+      "青木瓜沙拉",
+      "som tam",
+      "qingmugua shala",
+      "som tum",
+      "green papaya salad",
+      "thai papaya salad",
+      "green papaya salads",
+      "green-papaya-salad",
+      "qing mu gua sha la",
+      "qingmugua shalas",
+      "qingmugua-shala",
+      "qingmuguashala",
+      "som tams",
+      "som tums",
+      "som-tams",
+      "som-tum",
+      "thai papaya salads",
+      "thai-papaya-salad"
+    ],
+    "display": {
+      "zh": "青木瓜沙拉",
+      "en": "som tam"
+    },
+    "sugar": "medium",
+    "bitter": "low",
+    "water": "medium",
+    "ir94e": "medium",
+    "reason": {
+      "sugar": "Palm sugar is a key ingredient for the sweet-sour balance",
+      "bitter": "Lime peel and sometimes long beans provide a faint bitterness",
+      "water": "Shredded papaya and dressing release significant juice when chewed",
+      "ir94e": "Fish sauce and dried shrimp provide a strong umami base"
+    },
+    "confidence": {
+      "sugar": 0.9,
+      "bitter": 0.8,
+      "water": 0.9,
+      "ir94e": 0.9
+    },
+    "review": "llm_v1",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.3"
+  },
+  {
+    "key": "sour-milk",
+    "aliases": [
+      "变质牛奶",
+      "sour milk",
+      "bianzhi niunai",
+      "spoiled milk",
+      "fermented milk",
+      "bian zhi niu nai",
+      "bianzhi niunais",
+      "bianzhi-niunai",
+      "bianzhiniunai",
+      "fermented milks",
+      "fermented-milk",
+      "sour milks",
+      "sour-milks",
+      "spoiled milks",
+      "spoiled-milk",
+      "變質牛奶"
+    ],
+    "display": {
+      "zh": "变质牛奶",
+      "en": "sour milk"
+    },
+    "sugar": "none",
+    "bitter": "low",
+    "water": "high",
+    "ir94e": "medium",
+    "reason": {
+      "sugar": "natural lactose is not perceived as sweet by flies",
+      "bitter": "contains lactic acid and minor fermentation byproducts",
+      "water": "liquid dairy is high in free water",
+      "ir94e": "proteolysis releases significant free amino acids and peptides"
+    },
+    "confidence": {
+      "sugar": 0.85,
+      "bitter": 0.85,
+      "water": 0.95,
+      "ir94e": 0.8
+    },
+    "review": "needs_review",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.3",
+    "arbitration": {
+      "sugar": {
+        "zh": "low",
+        "en": "none",
+        "chosen": "none",
+        "rule": "lower_level"
+      },
+      "bitter": {
+        "zh": "medium",
+        "en": "low",
+        "chosen": "low",
+        "rule": "lower_level"
+      },
+      "ir94e": {
+        "zh": "medium",
+        "en": "low",
+        "chosen": "medium",
+        "rule": "confidence"
+      }
+    },
+    "encoder_addendum": "addendum_not_food_v1"
   },
   {
     "key": "sour-plum-drink",
@@ -5702,6 +9693,54 @@
     "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
     "encoder_version_by_dimension": {
       "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    }
+  },
+  {
+    "key": "soy-sauce",
+    "aliases": [
+      "酱油",
+      "soy sauce",
+      "jiangyou",
+      "shoyu",
+      "soya sauce",
+      "jiang you",
+      "jiangyous",
+      "shoyus",
+      "soy sauces",
+      "soy-sauces",
+      "soya sauces",
+      "soya-sauce",
+      "醬油"
+    ],
+    "display": {
+      "zh": "酱油",
+      "en": "soy sauce"
+    },
+    "sugar": "none",
+    "bitter": "low",
+    "water": "medium",
+    "ir94e": "high",
+    "reason": {
+      "sugar": "standard soy sauce contains no added sugar",
+      "bitter": "faint bitterness from fermentation and roasting",
+      "water": "liquid solution with high solute concentration",
+      "ir94e": "concentrated source of free glutamates from fermentation"
+    },
+    "confidence": {
+      "sugar": 0.925,
+      "bitter": 0.8,
+      "water": 0.9,
+      "ir94e": 1.0
+    },
+    "review": "llm_v1",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.3",
+    "arbitration": {
+      "sugar": {
+        "zh": "none",
+        "en": "low",
+        "chosen": "none",
+        "rule": "lower_level"
+      }
     }
   },
   {
@@ -5812,6 +9851,61 @@
     "encoder_version_by_dimension": {
       "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
     }
+  },
+  {
+    "key": "spent-grain-lees",
+    "aliases": [
+      "酒糟",
+      "spent grain lees",
+      "jiuzao",
+      "rice wine lees",
+      "distiller's grains",
+      "brewers spent grain",
+      "distillers grains",
+      "brewers spent grains",
+      "brewers-spent-grain",
+      "distiller's grain",
+      "distiller's-grains",
+      "distillers grain",
+      "distillers-grains",
+      "jiu zao",
+      "jiuzaos",
+      "rice wine le",
+      "rice-wine-lees",
+      "spent grain le",
+      "spent-grain-le"
+    ],
+    "display": {
+      "zh": "酒糟",
+      "en": "spent grain lees"
+    },
+    "sugar": "low",
+    "bitter": "low",
+    "water": "low",
+    "ir94e": "medium",
+    "reason": {
+      "sugar": "residual sugars are mostly fermented out",
+      "bitter": "faint bitterness from fermentation byproducts",
+      "water": "moist solid texture",
+      "ir94e": "rich in proteins and amino acids from grain and yeast"
+    },
+    "confidence": {
+      "sugar": 0.8,
+      "bitter": 0.7,
+      "water": 0.9,
+      "ir94e": 0.85
+    },
+    "review": "llm_v1",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.3",
+    "arbitration": {
+      "bitter": {
+        "zh": "low",
+        "en": "medium",
+        "chosen": "low",
+        "rule": "lower_level"
+      }
+    },
+    "encoder_addendum": "addendum_not_food_v1"
   },
   {
     "key": "spicy-crayfish",
@@ -5954,6 +10048,59 @@
     "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
     "encoder_version_by_dimension": {
       "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    }
+  },
+  {
+    "key": "sriracha",
+    "aliases": [
+      "是拉差辣酱",
+      "sriracha",
+      "sriracha sauce",
+      "sriracha chili sauce",
+      "isiracha",
+      "是拉差辣椒酱",
+      "isirachas",
+      "shi la cha la jiang",
+      "shi la cha la jiao jiang",
+      "shilachalajiang",
+      "shilachalajiaojiang",
+      "sriracha chili sauces",
+      "sriracha sauces",
+      "sriracha-chili-sauce",
+      "sriracha-sauce",
+      "srirachas",
+      "是拉差辣椒醬",
+      "是拉差辣醬"
+    ],
+    "display": {
+      "zh": "是拉差辣酱",
+      "en": "sriracha"
+    },
+    "sugar": "medium",
+    "bitter": "none",
+    "water": "medium",
+    "ir94e": "low",
+    "reason": {
+      "sugar": "contains significant added sugar for balance",
+      "bitter": "no significant bitter components",
+      "water": "liquid condiment with moderate solute concentration",
+      "ir94e": "contains small amounts of garlic and fermented chili components"
+    },
+    "confidence": {
+      "sugar": 0.9,
+      "bitter": 0.85,
+      "water": 0.85,
+      "ir94e": 0.75
+    },
+    "review": "llm_v1",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.3",
+    "arbitration": {
+      "bitter": {
+        "zh": "none",
+        "en": "low",
+        "chosen": "none",
+        "rule": "lower_level"
+      }
     }
   },
   {
@@ -6329,6 +10476,69 @@
     }
   },
   {
+    "key": "sundubu-jjigae",
+    "aliases": [
+      "嫩豆腐汤",
+      "sundubu jjigae",
+      "nendoufutang",
+      "soft tofu soup",
+      "silken tofu soup",
+      "순두부찌개",
+      "soft tofu stew",
+      "korean tofu stew",
+      "korean tofu stews",
+      "korean-tofu-stew",
+      "nen dou fu tang",
+      "nendoufutangs",
+      "silken tofu soups",
+      "silken-tofu-soup",
+      "soft tofu soups",
+      "soft tofu stews",
+      "soft-tofu-soup",
+      "soft-tofu-stew",
+      "sundubu jjigaes",
+      "sundubu-jjigaes",
+      "嫩豆腐湯",
+      "순두부찌개s"
+    ],
+    "display": {
+      "zh": "嫩豆腐汤",
+      "en": "sundubu jjigae"
+    },
+    "sugar": "none",
+    "bitter": "none",
+    "water": "high",
+    "ir94e": "medium",
+    "reason": {
+      "sugar": "savory dish with no added sugar",
+      "bitter": "no bitter ingredients used",
+      "water": "a broth-based soup with high water content",
+      "ir94e": "rich in glutamate from fermented kimchi, soy sauce, and seafood stock"
+    },
+    "confidence": {
+      "sugar": 0.9,
+      "bitter": 0.85,
+      "water": 0.925,
+      "ir94e": 0.875
+    },
+    "review": "needs_review",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.3",
+    "arbitration": {
+      "sugar": {
+        "zh": "none",
+        "en": "low",
+        "chosen": "none",
+        "rule": "lower_level"
+      },
+      "bitter": {
+        "zh": "none",
+        "en": "low",
+        "chosen": "none",
+        "rule": "lower_level"
+      }
+    }
+  },
+  {
     "key": "sushi",
     "aliases": [
       "寿司",
@@ -6375,6 +10585,42 @@
         "rule": "lower_level"
       }
     }
+  },
+  {
+    "key": "sweat",
+    "aliases": [
+      "汗水",
+      "sweat",
+      "hanshui",
+      "perspiration",
+      "han shui",
+      "hanshuis",
+      "perspirations",
+      "sweats"
+    ],
+    "display": {
+      "zh": "汗水",
+      "en": "sweat"
+    },
+    "sugar": "none",
+    "bitter": "low",
+    "water": "high",
+    "ir94e": "low",
+    "reason": {
+      "sugar": "sweat contains negligible amounts of glucose",
+      "bitter": "contains trace salts and urea which can be perceived as slightly bitter",
+      "water": "primarily water with dissolved electrolytes",
+      "ir94e": "contains trace amounts of free amino acids like serine and alanine"
+    },
+    "confidence": {
+      "sugar": 0.9,
+      "bitter": 0.7,
+      "water": 0.925,
+      "ir94e": 0.8
+    },
+    "review": "llm_v1",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.3",
+    "encoder_addendum": "addendum_not_food_v1"
   },
   {
     "key": "sweet red bean soup",
@@ -6526,6 +10772,89 @@
     }
   },
   {
+    "key": "tagine",
+    "aliases": [
+      "塔吉锅",
+      "tagine",
+      "tajine",
+      "moroccan tagine",
+      "moroccan tagines",
+      "moroccan-tagine",
+      "ta ji guo",
+      "tagines",
+      "tajiguo",
+      "tajines",
+      "塔吉鍋"
+    ],
+    "display": {
+      "zh": "塔吉锅",
+      "en": "tagine"
+    },
+    "sugar": "low",
+    "bitter": "none",
+    "water": "medium",
+    "ir94e": "medium",
+    "reason": {
+      "sugar": "often contains dried fruits like apricots or prunes",
+      "bitter": "no significant bitter ingredients",
+      "water": "stewed dish with a sauce base",
+      "ir94e": "long-simmered meat and spices create a rich umami base"
+    },
+    "confidence": {
+      "sugar": 0.8,
+      "bitter": 0.9,
+      "water": 0.85,
+      "ir94e": 0.8
+    },
+    "review": "llm_v1",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.3",
+    "arbitration": {
+      "water": {
+        "zh": "high",
+        "en": "medium",
+        "chosen": "medium",
+        "rule": "lower_level"
+      }
+    }
+  },
+  {
+    "key": "taiyaki",
+    "aliases": [
+      "鲷鱼烧",
+      "taiyaki",
+      "japanese fish-shaped cake",
+      "diao yu shao",
+      "diaoyushao",
+      "japanese fish shaped cake",
+      "japanese fish-shaped cakes",
+      "japanese-fish-shaped-cake",
+      "taiyakis",
+      "鯛魚燒"
+    ],
+    "display": {
+      "zh": "鲷鱼烧",
+      "en": "taiyaki"
+    },
+    "sugar": "high",
+    "bitter": "none",
+    "water": "low",
+    "ir94e": "none",
+    "reason": {
+      "sugar": "sweet red bean or custard filling with sweetened batter",
+      "bitter": "no bitter ingredients used in standard preparation",
+      "water": "moist solid cake texture",
+      "ir94e": "no significant source of free glutamate"
+    },
+    "confidence": {
+      "sugar": 0.95,
+      "bitter": 1.0,
+      "water": 0.9,
+      "ir94e": 0.95
+    },
+    "review": "llm_v1",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.3"
+  },
+  {
     "key": "takoyaki",
     "aliases": [
       "章鱼烧",
@@ -6568,6 +10897,47 @@
     "encoder_version_by_dimension": {
       "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
     }
+  },
+  {
+    "key": "tamagoyaki",
+    "aliases": [
+      "玉子烧",
+      "tamagoyaki",
+      "yuzishao",
+      "日式厚蛋烧",
+      "japanese rolled omelette",
+      "japanese rolled omelettes",
+      "japanese-rolled-omelette",
+      "ri shi hou dan shao",
+      "rishihoudanshao",
+      "tamagoyakis",
+      "yu zi shao",
+      "yuzishaos",
+      "日式厚蛋燒",
+      "玉子燒"
+    ],
+    "display": {
+      "zh": "玉子烧",
+      "en": "tamagoyaki"
+    },
+    "sugar": "low",
+    "bitter": "none",
+    "water": "low",
+    "ir94e": "low",
+    "reason": {
+      "sugar": "typically seasoned with a small amount of sugar",
+      "bitter": "no bitter ingredients used",
+      "water": "moist solid texture",
+      "ir94e": "contains small amounts of dashi or soy sauce"
+    },
+    "confidence": {
+      "sugar": 0.9,
+      "bitter": 1.0,
+      "water": 0.9,
+      "ir94e": 0.8
+    },
+    "review": "llm_v1",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.3"
   },
   {
     "key": "tangyuan",
@@ -6618,6 +10988,41 @@
     "encoder_version_by_dimension": {
       "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
     }
+  },
+  {
+    "key": "tears",
+    "aliases": [
+      "眼泪",
+      "tears",
+      "yanlei",
+      "tear",
+      "yan lei",
+      "yanleis",
+      "眼淚"
+    ],
+    "display": {
+      "zh": "眼泪",
+      "en": "tears"
+    },
+    "sugar": "none",
+    "bitter": "none",
+    "water": "very_high",
+    "ir94e": "low",
+    "reason": {
+      "sugar": "tears contain no significant sugar content",
+      "bitter": "tears are primarily saline and lack bitter compounds",
+      "water": "tears are a dilute aqueous solution",
+      "ir94e": "tears contain trace amounts of proteins and amino acids"
+    },
+    "confidence": {
+      "sugar": 1.0,
+      "bitter": 0.9,
+      "water": 1.0,
+      "ir94e": 0.8
+    },
+    "review": "llm_v1",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.3",
+    "encoder_addendum": "addendum_not_food_v1"
   },
   {
     "key": "tempura",
@@ -7025,6 +11430,162 @@
     }
   },
   {
+    "key": "tonkatsu",
+    "aliases": [
+      "炸猪排",
+      "tonkatsu",
+      "zha zhupai",
+      "日式炸猪排",
+      "pork cutlet",
+      "japanese pork cutlet",
+      "japanese pork cutlets",
+      "japanese-pork-cutlet",
+      "pork cutlets",
+      "pork-cutlet",
+      "ri shi zha zhu pai",
+      "rishizhazhupai",
+      "tonkatsus",
+      "zha zhu pai",
+      "zha zhupais",
+      "zha-zhupai",
+      "zhazhupai",
+      "日式炸豬排",
+      "炸豬排"
+    ],
+    "display": {
+      "zh": "炸猪排",
+      "en": "tonkatsu"
+    },
+    "sugar": "low",
+    "bitter": "none",
+    "water": "low",
+    "ir94e": "low",
+    "reason": {
+      "sugar": "the accompanying tonkatsu sauce contains sugar",
+      "bitter": "no significant bitter components",
+      "water": "fried breaded meat is a moist solid",
+      "ir94e": "contains small amounts of umami from the meat and potentially soy-based dipping sauce"
+    },
+    "confidence": {
+      "sugar": 0.9,
+      "bitter": 1.0,
+      "water": 0.9,
+      "ir94e": 0.85
+    },
+    "review": "llm_v1",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.3",
+    "arbitration": {
+      "ir94e": {
+        "zh": "low",
+        "en": "medium",
+        "chosen": "low",
+        "rule": "lower_level"
+      }
+    }
+  },
+  {
+    "key": "toothpaste",
+    "aliases": [
+      "牙膏",
+      "toothpaste",
+      "yagao",
+      "toothpastes",
+      "ya gao",
+      "yagaos"
+    ],
+    "display": {
+      "zh": "牙膏",
+      "en": "toothpaste"
+    },
+    "sugar": "low",
+    "bitter": "high",
+    "water": "low",
+    "ir94e": "none",
+    "reason": {
+      "sugar": "contains artificial sweeteners like sorbitol or saccharin",
+      "bitter": "contains detergents and fluoride compounds that are bitter",
+      "water": "moist paste consistency with high solute concentration",
+      "ir94e": "no protein or glutamate sources"
+    },
+    "confidence": {
+      "sugar": 0.8,
+      "bitter": 0.9,
+      "water": 0.9,
+      "ir94e": 0.95
+    },
+    "review": "llm_v1",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.3",
+    "arbitration": {
+      "water": {
+        "zh": "low",
+        "en": "medium",
+        "chosen": "low",
+        "rule": "lower_level"
+      }
+    },
+    "encoder_addendum": "addendum_not_food_v1"
+  },
+  {
+    "key": "tree-sap",
+    "aliases": [
+      "树汁",
+      "tree sap",
+      "shuzhi",
+      "树液",
+      "tree exudate",
+      "plant sap",
+      "plant saps",
+      "plant-sap",
+      "shu ye",
+      "shu zhi",
+      "shuye",
+      "shuzhis",
+      "tree exudates",
+      "tree saps",
+      "tree-exudate",
+      "tree-saps",
+      "樹汁",
+      "樹液"
+    ],
+    "display": {
+      "zh": "树汁",
+      "en": "tree sap"
+    },
+    "sugar": "medium",
+    "bitter": "low",
+    "water": "medium",
+    "ir94e": "low",
+    "reason": {
+      "sugar": "contains dissolved sugars like sucrose and glucose",
+      "bitter": "contains trace amounts of plant secondary metabolites",
+      "water": "viscous liquid with significant water content",
+      "ir94e": "contains trace amounts of free amino acids"
+    },
+    "confidence": {
+      "sugar": 0.85,
+      "bitter": 0.7,
+      "water": 0.85,
+      "ir94e": 0.6
+    },
+    "review": "needs_review",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.3",
+    "arbitration": {
+      "sugar": {
+        "zh": "medium",
+        "en": "high",
+        "chosen": "medium",
+        "rule": "lower_level"
+      },
+      "water": {
+        "zh": "high",
+        "en": "medium",
+        "chosen": "medium",
+        "rule": "lower_level"
+      }
+    },
+    "encoder_addendum": "addendum_not_food_v1"
+  },
+  {
     "key": "tteokbokki",
     "aliases": [
       "辣炒年糕",
@@ -7151,6 +11712,133 @@
     "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
     "encoder_version_by_dimension": {
       "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    }
+  },
+  {
+    "key": "unagi-don",
+    "aliases": [
+      "鳗鱼饭",
+      "unagi don",
+      "eel rice bowl",
+      "鳗鱼盖饭",
+      "unadon",
+      "eel rice bowls",
+      "eel-rice-bowl",
+      "man yu fan",
+      "man yu gai fan",
+      "manyufan",
+      "manyugaifan",
+      "unadons",
+      "unagi dons",
+      "unagi-dons",
+      "鰻魚蓋飯",
+      "鰻魚飯"
+    ],
+    "display": {
+      "zh": "鳗鱼饭",
+      "en": "unagi don"
+    },
+    "sugar": "medium",
+    "bitter": "none",
+    "water": "low",
+    "ir94e": "medium",
+    "reason": {
+      "sugar": "The kabayaki sauce is sweet due to mirin and sugar.",
+      "bitter": "No significant bitter ingredients.",
+      "water": "Steamed rice and grilled eel are moist solids.",
+      "ir94e": "The sauce is based on soy sauce and eel extract, providing significant umami."
+    },
+    "confidence": {
+      "sugar": 0.9,
+      "bitter": 0.95,
+      "water": 0.85,
+      "ir94e": 0.9
+    },
+    "review": "llm_v1",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.3"
+  },
+  {
+    "key": "vegemite",
+    "aliases": [
+      "维吉麦",
+      "vegemite",
+      "vegemites",
+      "wei ji mai",
+      "weijimai",
+      "維吉麥"
+    ],
+    "display": {
+      "zh": "维吉麦",
+      "en": "vegemite"
+    },
+    "sugar": "none",
+    "bitter": "high",
+    "water": "low",
+    "ir94e": "high",
+    "reason": {
+      "sugar": "contains no added sugar",
+      "bitter": "intensely bitter yeast extract",
+      "water": "thick, concentrated paste",
+      "ir94e": "extremely high concentration of yeast-derived glutamates"
+    },
+    "confidence": {
+      "sugar": 1.0,
+      "bitter": 0.925,
+      "water": 0.9,
+      "ir94e": 1.0
+    },
+    "review": "llm_v1",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.3"
+  },
+  {
+    "key": "vinegar",
+    "aliases": [
+      "醋",
+      "vinegar",
+      "cu",
+      "cù",
+      "acetic acid solution",
+      "acetic acid solutions",
+      "acetic-acid-solution",
+      "cus",
+      "cùs",
+      "vinegars"
+    ],
+    "display": {
+      "zh": "醋",
+      "en": "vinegar"
+    },
+    "sugar": "none",
+    "bitter": "low",
+    "water": "high",
+    "ir94e": "none",
+    "reason": {
+      "sugar": "pure vinegar contains no sugar",
+      "bitter": "contains trace bitter notes from fermentation",
+      "water": "mostly water with dissolved acetic acid",
+      "ir94e": "does not contain significant free amino acids"
+    },
+    "confidence": {
+      "sugar": 1.0,
+      "bitter": 0.8,
+      "water": 0.9,
+      "ir94e": 0.8
+    },
+    "review": "needs_review",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.3",
+    "arbitration": {
+      "water": {
+        "zh": "high",
+        "en": "very_high",
+        "chosen": "high",
+        "rule": "lower_level"
+      },
+      "ir94e": {
+        "zh": "low",
+        "en": "none",
+        "chosen": "none",
+        "rule": "confidence"
+      }
     }
   },
   {
@@ -7469,6 +12157,99 @@
     "encoder_version": "gemini-3.1-flash-lite@encode_v2.2",
     "encoder_version_by_dimension": {
       "ir94e": "gemini-3.1-flash-lite@encode_v2.3"
+    }
+  },
+  {
+    "key": "yakitori",
+    "aliases": [
+      "烤鸡串",
+      "yakitori",
+      "kaojichuan",
+      "grilled chicken skewers",
+      "日式烤鸡肉串",
+      "japanese grilled chicken skewers",
+      "grilled chicken skewer",
+      "grilled-chicken-skewers",
+      "japanese grilled chicken skewer",
+      "japanese-grilled-chicken-skewers",
+      "kao ji chuan",
+      "kaojichuans",
+      "ri shi kao ji rou chuan",
+      "rishikaojirouchuan",
+      "yakitoris",
+      "日式烤雞肉串",
+      "烤雞串"
+    ],
+    "display": {
+      "zh": "烤鸡串",
+      "en": "yakitori"
+    },
+    "sugar": "low",
+    "bitter": "none",
+    "water": "low",
+    "ir94e": "medium",
+    "reason": {
+      "sugar": "tare sauce contains mirin and sugar",
+      "bitter": "no significant bitter components",
+      "water": "moist grilled meat",
+      "ir94e": "heavily seasoned with soy-based tare sauce"
+    },
+    "confidence": {
+      "sugar": 0.9,
+      "bitter": 0.95,
+      "water": 0.875,
+      "ir94e": 0.9
+    },
+    "review": "llm_v1",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.3"
+  },
+  {
+    "key": "yellow-mustard",
+    "aliases": [
+      "黄芥末",
+      "yellow mustard",
+      "huangjiemo",
+      "yellow mustard sauce",
+      "prepared mustard",
+      "huang jie mo",
+      "huangjiemos",
+      "prepared mustards",
+      "prepared-mustard",
+      "yellow mustard sauces",
+      "yellow mustards",
+      "yellow-mustard-sauce",
+      "yellow-mustards",
+      "黃芥末"
+    ],
+    "display": {
+      "zh": "黄芥末",
+      "en": "yellow mustard"
+    },
+    "sugar": "none",
+    "bitter": "medium",
+    "water": "low",
+    "ir94e": "low",
+    "reason": {
+      "sugar": "typically contains no added sugar",
+      "bitter": "mustard seeds contain natural bitter compounds",
+      "water": "a moist paste with low free water content",
+      "ir94e": "contains trace amino acids from mustard seeds and vinegar fermentation"
+    },
+    "confidence": {
+      "sugar": 0.9,
+      "bitter": 0.85,
+      "water": 0.85,
+      "ir94e": 0.7
+    },
+    "review": "llm_v1",
+    "encoder_version": "gemini-3.1-flash-lite@encode_v2.3",
+    "arbitration": {
+      "water": {
+        "zh": "low",
+        "en": "medium",
+        "chosen": "low",
+        "rule": "lower_level"
+      }
     }
   },
   {
