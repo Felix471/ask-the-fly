@@ -1224,7 +1224,7 @@
       "key": "maleNote.brain",
       "context": "Male anterior view; {n}=neurons_male.json position_sources.synapse_centroid for indexed neurons; one appended readout is outside this count.",
       "en": "MaleCNS v1.0 soma positions, anterior view. {n} neurons without a recorded soma or entry point are placed at their synapse centroid.",
-      "zh": "MaleCNS v1.0 胞体位置，前视图。{n} 个未记录胞体或入脑点的神经元放在其突触位点的中位数位置。"
+      "zh": "MaleCNS v1.0 胞体位置，前视图。{n} 个没有记录胞体或入脑点的神经元，按其突触位置的中位数定位。"
     },
     {
       "key": "maleNote.replay",
