@@ -207,6 +207,12 @@ def main() -> int:
             from scripts.export_dish_list import asset_filename
             dishes = json.loads((ROOT / "data/dishes.json").read_text(encoding="utf-8"))
             names = {asset_filename(d["key"]) for d in dishes}
+            # Owner-approved additions may be illustrated before dictionary merge.
+            # Keep this an explicit allowlist, never all raw PNGs (review sheets).
+            batch3 = ROOT / "encoder/foods_batch3.json"
+            if batch3.exists():
+                additions = json.loads(batch3.read_text(encoding="utf-8"))
+                names.update(asset_filename(d["key"]) for d in additions)
             dish_paths = [p for p in dish_paths if p.name.lower() in names
                           and not (OUT_DISHES / (p.stem.lower() + ".png")).exists()]
         if dish_paths:

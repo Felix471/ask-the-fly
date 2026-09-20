@@ -73,8 +73,54 @@ after processing. Local records: `assets/raw/batch3_sprites_before_sha256.json` 
 `assets/raw/batch3_sprites_hash_proof.json`. The owner's decision-point-2 comparison
 is `assets/raw/batch3_replacements_sheet.png`: eight borrowed/own pairs, each sprite
 at 4× nearest-neighbour with labels. Future dictionary additions use this same
-recorded pipeline after the owner fixes their list; this task generates only the
-eight replacements.
+recorded pipeline after the owner fixes their list; the replacement stage generated
+only the eight replacements.
+
+### Batch-3 dictionary additions
+
+The approved 106-entry list is `encoder/foods_batch3.json`. New raw art uses the
+same built-in generator and reference style as the replacements, one call per
+slug. Exact prompts and sibling reference paths are in
+`assets/raw/prompts/batch3_new.md`; completed generation sources are recorded in
+`assets/raw/batch3_new_sources.jsonl`. Native outputs are retained under
+`assets/raw/batch3_new_generated/`, with nearest-neighbour normalization to
+1024 × 1024 for `assets/raw/<slug>.png` when necessary. Existing raw files are
+skipped on resumption.
+
+The 23 not-food items remain tasteful pixel art, never photorealistic or gross:
+feces is a small brown mound with two tiny flies; swill is a bucket of scraps;
+rotting fruit has brown spots and a tiny fly; rotten egg is cracked with a green
+wisp; sour milk has a curdled surface. Lees and risen dough use bowls; kimchi
+brine uses a jar, beer dregs the last inch of a glass, and coffee grounds a paper
+filter. Nectar is a flower with a droplet; honeydew a leaf with aphids and
+droplets; sap is bark with an amber drip; pollen is yellow dust on a flower.
+Sweat is a droplet on a towel without skin, and tears a teardrop without a face.
+Toothpaste uses a squeezed tube, dish soap a bottle with bubbles, soap a bar
+with bubbles, candle a lit candle, and mosquito repellent a plug-in bottle.
+
+Only `prep_assets.py --only-new --palette-from site/assets/dishes` processes
+additions. Its explicit allowlist includes the approved batch-3 keys before
+dictionary merge; contact sheets remain excluded and existing sprites are
+never overwritten. The 174 existing sprites have a SHA256 baseline in
+`assets/raw/batch3_new_before_sha256.json`; before/after proof is recorded in
+`assets/raw/batch3_new_hash_proof.json`. New sprites are expected audit orphans
+until their dictionary entries land; this does not relax the release gate.
+Owner review contact sheets are saved under `assets/raw/batch3_sheets/`.
+
+The addition stage completed 106 raw images and 106 distinct 96 × 96 RGBA sprites,
+with zero refusals and zero skipped slugs. All 174 baseline sprites remain
+byte-identical. The final sprite audit passed: 279 dictionary entries, no missing,
+borrowed or shared sprites, and one orphan (`umeboshi.png`). The dictionary changed
+concurrently during generation, so the anticipated 106-orphan pre-merge state
+was no longer present at final verification. No sprite gate was changed.
+
+The 12 section sheets use 4× nearest-neighbour sprites and three columns (two
+for Drinks), keeping their width at 1248 px or less. The requested five-column
+layout conflicts with the 1400 px limit: five 96 px sprites at 4× already occupy
+1920 px before margins. The phone-width limit and exact 4× scale were retained;
+five columns remains unmet. `all_new.png` uses 3× sprites in four columns, at
+1272 × 10620 px. Sheet paths, dimensions and file sizes are recorded in
+`assets/raw/batch3_sheets/manifest.json` and `assets/raw/batch3_new_report.md`.
 
 ## Placeholders
 
