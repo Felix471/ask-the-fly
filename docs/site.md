@@ -122,6 +122,7 @@ Annotated tags on `main`; every update ships under a version (feature branch off
 | v1.2.0 | 1ff70c1 | Four designed response states (eats / mouth_moves / proboscis_only / no_response) with a per-plate fly reaction, emotion bubble and bilingual speech; MN11 readouts on results, share cards and baseline rasters; no MN9 score, ranking, tie or allocation changed. Honesty table: state/readout row added, animation row revised, owner-approved before release. |
 | v1.2.1 | 5789e3b | Owner-supplied bilingual fly speech refreshed; pixel-art emotion faces, speech bubbles and lettering; no scores, state rules or allocation changed. Honesty table unchanged. |
 | v2.0.0 | 641f29b | Second, independently computed male fly (MaleCNS v1.0, >=5-synapse connections, 0.17875 mV, bilateral Tastekin-typed sets) with a female/male/both selector, the fixed disagreement sentence, male brain view (soma or synapse-centroid positions, MaleCNS ROI outlines), trial-0 replays for the 55 dish cells and proboscis-only speech split into four groups; female scores, states, ties and allocations unchanged (v1.2.1 fixture). Honesty table: MaleCNS row rewritten; four commitment rows, Phase 2 comparison, male readout/state and replay/layout rows added, owner-approved. |
+| v2.0.1 | 54837ca | Chinese wording of the male brain-view caption revised to the owner's text; no data, scores, states, allocations or English text changed. Honesty table unchanged. |
 
 ### Changelog and the footer "what's new" line
 
