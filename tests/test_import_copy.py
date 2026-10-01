@@ -44,6 +44,27 @@ class CopyLengthTests(unittest.TestCase):
         self.assertEqual(self.check_entry("old", "abcd", "四个汉字", 4)[0], 0)
         self.assertEqual(self.check_entry("old", "abcde", "五个汉字啊", 4)[0], 2)
 
+    def test_menu_meta_written_by_importer(self):
+        from scripts import import_copy
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (root / 'menu').mkdir()
+            html = '<title>old</title><meta name="description" content="old">'
+            (root / 'index.html').write_text(html, encoding='utf8')
+            (root / 'menu/index.html').write_text(html, encoding='utf8')
+            entries = [
+                {'key':'menu.meta.title','en':'Menu','zh':'??','context':'v2.2.0 draft'},
+                {'key':'menu.meta.description','en':'List','zh':'??','context':'v2.2.0 draft'},
+            ]
+            with patch.object(import_copy, 'ROOT', root), patch.object(import_copy, 'STRINGS_JS', root/'strings.js'), \
+                 patch.object(import_copy, 'INDEX_HTML', root/'index.html'), patch.object(import_copy, 'MENU_HTML', root/'menu/index.html'), \
+                 patch.object(import_copy, 'current_strings', return_value={'en':{},'zh':{}}), \
+                 patch.object(import_copy, 'site_url', return_value='https://askthefly.app/'):
+                self.assertEqual(import_copy.apply_strings(entries, False, allow_new=True), 0)
+            menu = (root/'menu/index.html').read_text(encoding='utf8')
+            self.assertIn('<title>Menu ??</title>', menu)
+            self.assertIn('content="?? List"', menu)
+
     def test_meta_uses_language_limits_too(self):
         limits = {"en": 6, "zh": 3}
         self.assertEqual(self.check_entry("meta.title", "abcdef", "三个字", limits)[0], 0)

@@ -6,7 +6,7 @@ import { cellIdFor, decodeNeurons, makeReplayLoader } from "./brain.js";
 import { IdleFly, loadDishSprite, loadSprites, loadMaleSprites } from "./fly.js";
 import { FlyPanel } from './panel.js';
 import { qrcode } from "./vendor/qrcode-generator/qrcode.mjs";
-import { readoutState, stateLabel, stateExplanation, validSeed } from './taste_states.js';
+import { readoutState, stateLabel, stateExplanation, validSeed, speechLine, finalSpeechContext } from './taste_states.js';
 
 export const LEVELS = ["none", "low", "medium", "high", "very_high"];
 export const DIMENSIONS = ["sugar", "bitter", "water", "ir94e"];
@@ -1063,6 +1063,104 @@ export function drawShareCard(canvas, decision, lang, options = {}) {
   return canvas;
 }
 
+// A phone-feed card. Its layout and semantics are separate from the unchanged standard card.
+export function drawShareCardXhs(canvas, decision, lang, options = {}) {
+  const ctx = canvas.getContext('2d');
+  const t = STRINGS[lang], both = Boolean(options.maleDecision);
+  const W = canvas.width, H = canvas.height, pad = 64;
+  const font = (size, weight = 400) => weight + ' ' + size + 'px system-ui, -apple-system, "Segoe UI", "PingFang SC", "Noto Sans CJK SC", "Microsoft YaHei", sans-serif';
+  const linesFor = (value, width) => {
+    ctx.font = ctx.font;
+    const result = [];
+    for (const initial of wrapLines(ctx, String(value), width)) {
+      if (ctx.measureText(initial).width <= width) { result.push(initial); continue; }
+      let line = '';
+      for (const character of initial) {
+        if (line && ctx.measureText(line + character).width > width) { result.push(line); line = character; }
+        else line += character;
+      }
+      if (line) result.push(line);
+    }
+    return result;
+  };
+  const write = (value,x,y,width,size,height,weight=400) => {
+    ctx.font=font(size,weight);
+    for(const line of linesFor(value,width)) { ctx.fillText(line,x,y);y+=height; }
+    return y;
+  };
+  const headline = d => {
+    if (!d.flyPick) return t.verdictNone;
+    if (d.tie.length) return t.cardTie;
+    const context = finalSpeechContext(d);
+    return context ? speechLine(context,d.flyPick.cell,d.shareSeed,lang) : t.sceneNoResponse;
+  };
+  ctx.fillStyle=options.stub?'#fff3c4':'#fbf8f2';ctx.fillRect(0,0,W,H);
+  ctx.fillStyle='#b5471f';ctx.fillRect(0,0,W,18);
+  ctx.textAlign='left';ctx.fillStyle='#1f1a17';
+  write(t.cardTitle,pad,84,W-2*pad,38,48,700);
+  const spriteFor=options.spriteFor||(()=>null);
+  const chosen = d => outcomeItems(d);
+  if (both) {
+    const pair=[['female',decision,options.sprites],['male',options.maleDecision,options.maleSprites]];
+    const col=(W-3*pad)/2, spriteSize=400;
+    const top=205, spriteTop=270, nameTop=755, speechTop=970;
+    for(let i=0;i<2;i++){
+      const [fly,d,sprites]=pair[i], x=pad+i*(col+pad), items=chosen(d);
+      ctx.textAlign='center';
+      ctx.fillStyle='#b5471f';write(t.flyName[fly],x+col/2,top,col,48,58,700);
+      const item=items[0]||d.flyPick;
+      if(item) {
+        drawDish(ctx,spriteFor(item),x+(col-spriteSize)/2,spriteTop,spriteSize,false);
+        if(d.flyPick && d.mode!=='opposite') drawResponseFly(ctx,sprites,d.flyPick,x+(col-spriteSize)/2,spriteTop,spriteSize);
+        else if(d.flyPick && item!==d.flyPick) {
+          drawDish(ctx,spriteFor(d.flyPick),x+col-120,spriteTop+250,108,false);
+          drawResponseFly(ctx,sprites,d.flyPick,x+col-120,spriteTop+250,108);
+        }
+      }
+      ctx.fillStyle='#1f1a17';
+      const names=items.map(value=>displayName(value,lang)).join(' / ')||t.cardEmptyValue;
+      write(names,x+col/2,nameTop,col,64,74,700);
+      ctx.fillStyle='#6b625b';write(headline(d),x+col/2,speechTop,col,56,65,600);
+    }
+    if(fliesDisagree(decision,options.maleDecision)){
+      ctx.textAlign='center';ctx.fillStyle='#b5471f';write(t.card.disagree,W/2,1150,W-2*pad,34,43,600);
+    }
+    ctx.textAlign='left';
+  } else {
+    const headlineEnd=write(headline(decision),pad,200,W-2*pad,96,108,700);
+    const items=chosen(decision);
+    const shown=items.length ? items.slice(0,3) : decision.flyPick ? [decision.flyPick] : [];
+    const gap=24;
+    const names=items.slice(0,3).map(value=>displayName(value,lang)).join(' / ')+(items.length>3?' / +'+(items.length-3):'')||t.cardEmptyValue;
+    const nameSize=shown.length===1?72:64;
+    ctx.font=font(nameSize,700);
+    const nameLines=linesFor(names,W-2*pad).length;
+    const heroTop=Math.max(355,headlineEnd+36);
+    const nameBaseline=1150-(nameLines-1)*82;
+    const nameRoom=nameBaseline-heroTop-46;
+    const size=Math.min(items.length>1?340:600,Math.max(180,nameRoom),Math.floor((W-2*pad-gap*(shown.length-1))/Math.max(1,shown.length)));
+    const x=(W-(shown.length*size+gap*(shown.length-1)))/2;
+    for (const [index,item] of shown.entries()) {
+      const xx=x+index*(size+gap);
+      drawDish(ctx,spriteFor(item),xx,heroTop,size,false);
+      if(decision.flyPick && decision.mode!=='opposite' && items.length===1) drawResponseFly(ctx,options.sprites,decision.flyPick,xx,heroTop,size);
+    }
+    if(decision.flyPick && decision.mode!=='opposite' && items.length>1) drawFlyOn(ctx,options.sprites?.fly,W/2-size/2,heroTop-size*0.12,size,false);
+    if(decision.flyPick && decision.mode==='opposite' && !items.includes(decision.flyPick)) {
+      drawDish(ctx,spriteFor(decision.flyPick),W-pad-160,heroTop+size-150,140,false);
+      drawResponseFly(ctx,options.sprites,decision.flyPick,W-pad-160,heroTop+size-150,140);
+    }
+    ctx.fillStyle='#1f1a17';
+    ctx.textAlign='center';write(names,W/2,heroTop+size+50,W-2*pad,nameSize,82,700);ctx.textAlign='left';
+  }
+  ctx.fillStyle='#e2dbd0';ctx.fillRect(pad,1195,W-2*pad,2);
+  ctx.fillStyle='#1f1a17';write('askthefly.app',pad,1270,600,44,52,700);
+  ctx.fillStyle='#6b625b';write(t.cardHonesty,pad,1330,690,34,41);
+  const qr=drawQr(ctx,shareUrl(decision,lang,options.siteUrl||SITE_URL),W-pad-235,1204,230);
+  if(options.stub){ctx.fillStyle='#4a3a00';ctx.font=font(34,700);ctx.fillText(t.stubStamp,pad,H-20);}
+  return canvas;
+}
+
 // ---------- DOM wiring (skipped under node) ----------
 
 const isBrowser = typeof document !== "undefined";
@@ -1748,6 +1846,9 @@ if (isBrowser) {
     const current = () => request.id === state.shareRequest && request.session === state.session && primaryPanel()?.decision === request.decision;
     if (!request.decision) return;
     const canvas = $("share-card");
+    const format = document.querySelector('input[name="card-format"]:checked').value;
+    canvas.width = format === "xhs" ? 1080 : 900;
+    canvas.height = format === "xhs" ? 1440 : 1200;
     $("download-link").removeAttribute("href"); // no stale PNG while this request runs
     const sprites = request.panel.sprites;
     let snapshot = null;
@@ -1766,7 +1867,7 @@ if (isBrowser) {
     await displayFontsReady(request.lang);
     if (!current()) return;
     try {
-      drawShareCard(canvas, request.decision, request.lang, {
+      (format === "xhs" ? drawShareCardXhs : drawShareCard)(canvas, request.decision, request.lang, {
         stub: Boolean(request.panel.lookup.table.stub),
         maleDecision: request.maleDecision,
         maleSprites: state.panels.male?.sprites,
@@ -1967,8 +2068,12 @@ if (isBrowser) {
   $("ask-btn").addEventListener("click", () => run("ask"));
   $("opposite-btn").addEventListener("click", () => run("opposite"));
   $("share-btn").addEventListener("click", () => {
+    document.querySelector('input[name="card-format"][value="standard"]').checked = true;
     showCard().catch((error) => { console.warn("share card failed:", error); notice("stateShareFailed"); });
   });
+  document.querySelectorAll('input[name="card-format"]').forEach(input => input.addEventListener("change", () => {
+    if ($('card-dialog').open) showCard().catch(error => { console.warn("share card redraw failed:", error); notice("stateShareFailed"); });
+  }));
   $("save-btn").addEventListener("click", () => { shareSave(); });
   $("close-card-btn").addEventListener("click", () => $("card-dialog").close());
   $("card-dialog").addEventListener("click", (event) => { if (event.target === event.currentTarget) event.currentTarget.close(); });
@@ -2002,6 +2107,7 @@ if (isBrowser) {
     }
     for (const option of resolveShared(shared.items, state.dictionary)) addSelection(option);
     if (state.options.length >= 2) await run(shared.mode, shared.seed ?? 0);
+    else await selectFly(state.fly, false);
   }).catch((error) => {
     console.warn("data load failed:", error);
     notice("stateDataFailed");

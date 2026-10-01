@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; font-src 'self'; object-src 'none'; base-uri 'none'; form-action 'self'">
+  <title>The fly's menu · Ask the Fly 果蝇的菜单 · 问问果蝇</title>
+  <meta name="description" content="看看两只果蝇的菜品排名。 See how the two flies rank every dish.">
+  <link rel="canonical" href="https://askthefly.app/menu/">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="menu.css">
+</head>
+<body>
+  <header class="menu-nav">
+    <a href="../" id="back-link"></a>
+    <div class="menu-nav-actions">
+      <button id="numbers-toggle" type="button"></button>
+      <button id="lang-toggle" type="button" aria-label="Switch language"></button>
+    </div>
+  </header>
+  <main id="menu-root">
+    <h1 id="page-title"></h1>
+    <nav class="menu-contents" aria-label="Menu sections" id="menu-contents"></nav>
+    <div id="lists"></div>
+    <section id="all" class="menu-block">
+      <header class="block-head"><small class="attribution"></small><h2></h2></header>
+      <div class="table-tools">
+        <label><span class="sr-only">Section</span><select id="section-filter"></select></label>
+        <label><span class="sr-only">Sort</span><select id="table-sort"></select></label>
+        <label><span class="sr-only">Search</span><input id="table-search" type="search"></label>
+      </div>
+      <p id="table-count" class="table-count"></p>
+      <div id="table-rows"></div>
+    </section>
+    <p id="menu-honesty"></p>
+  </main>
+  <script type="module" src="menu.js"></script>
+</body>
+</html>
+

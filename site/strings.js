@@ -234,6 +234,34 @@ export const STRINGS = {
     "notFood": {
       "badge": "not food",
       "note": "The fly has no idea whether this is edible; it reacts only to the four estimated taste levels."
+    },
+    "menu": {
+      "title": "The fly's menu",
+      "attribution": "Ask the Fly · askthefly.app · {version}",
+      "femaleTop": "The female fly's top ten",
+      "maleTop": "The male fly's top ten",
+      "divergence": "The ten dishes the two flies disagree on most",
+      "notFood": "Not for people: the full ranking · {fly}",
+      "sectionTops": "Top of each section",
+      "tied": "Tied at {rank} · {n} dishes",
+      "rank": "#{rank}",
+      "part": "({i}/{n})",
+      "showNumbers": "Show numbers",
+      "hideNumbers": "Hide numbers",
+      "numbers": "MN9 {mn9} · MN11D {mn11d} Hz",
+      "allTitle": "All {n} entries",
+      "allSections": "All sections",
+      "sortFemale": "Sort by female",
+      "sortMale": "Sort by male",
+      "search": "Search dishes",
+      "empty": "No match",
+      "mainLink": "See the fly's menu",
+      "back": "Back to Ask the Fly",
+      "honesty": "Rankings use the model's MN9 means in our frozen tables; lines and states are our design; female and male are separate experiments."
+    },
+    "cardFormat": {
+      "standard": "Standard",
+      "xhs": "Xiaohongshu"
     }
   },
   "zh": {
@@ -469,6 +497,34 @@ export const STRINGS = {
     "notFood": {
       "badge": "不是给人吃的",
       "note": "果蝇不知道这能不能吃，它只按估算出来的四个味觉档位反应。"
+    },
+    "menu": {
+      "title": "果蝇的菜单",
+      "attribution": "问问果蝇 · askthefly.app · {version}",
+      "femaleTop": "雌蝇最想吃的前十",
+      "maleTop": "雄蝇最想吃的前十",
+      "divergence": "两只果蝇分歧最大的十道菜",
+      "notFood": "「不是给人吃的」完整排名 · {fly}",
+      "sectionTops": "每个分类的榜首",
+      "tied": "并列第 {rank} · {n} 道",
+      "rank": "第 {rank}",
+      "part": "({i}/{n})",
+      "showNumbers": "显示数值",
+      "hideNumbers": "隐藏数值",
+      "numbers": "MN9 {mn9} · MN11D {mn11d} Hz",
+      "allTitle": "全部 {n} 项",
+      "allSections": "全部分类",
+      "sortFemale": "按雌蝇排",
+      "sortMale": "按雄蝇排",
+      "search": "搜菜名",
+      "empty": "没找到",
+      "mainLink": "看果蝇的菜单",
+      "back": "回去问果蝇",
+      "honesty": "排名是模型在冻结表中的 MN9 均值；台词和状态是我们的设计；雌蝇和雄蝇是两次独立实验。"
+    },
+    "cardFormat": {
+      "standard": "标准",
+      "xhs": "小红书"
     }
   }
 };

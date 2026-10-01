@@ -31,6 +31,7 @@ COPY_JSON = ROOT / "copy" / "site_strings.json"
 COPY_README = ROOT / "copy" / "readme_sections.md"
 STRINGS_JS = ROOT / "site" / "strings.js"
 INDEX_HTML = ROOT / "site" / "index.html"
+MENU_HTML = ROOT / "site" / "menu" / "index.html"
 SITE_CONFIG = ROOT / "site" / "config.json"
 LANGS = ("en", "zh")
 
@@ -153,14 +154,14 @@ def apply_strings(entries: list[dict], check: bool, allow_new: bool = False,
     if removed & set(incoming):
         raise ValueError('Explicitly removed keys must first be removed from the copy source')
     for key in sorted(known_keys - set(incoming) - removed):
-        if key.startswith("meta."):
+        if key.startswith("meta.") or key.startswith("menu.meta."):
             continue
         print(f"warning: key removed from copy, keeping previous value: {key}")
         problems += 1
     new_strings = {lang: {k: v for k, v in shipped[lang].items() if k not in removed} for lang in LANGS}
     meta: dict[str, str] = {}
     for key, entry in incoming.items():
-        if key.startswith("meta."):
+        if key.startswith("meta.") or key.startswith("menu.meta."):
             meta[key] = entry["en"] if entry["en"] == entry["zh"] else f"{entry['en']} {entry['zh']}".strip()
             for lang in LANGS:
                 limit = entry.get("max_length")
@@ -199,6 +200,10 @@ def apply_strings(entries: list[dict], check: bool, allow_new: bool = False,
             + 'export const FLY_LINES = ' + json.dumps(payload, ensure_ascii=False, indent=2) + ';\n', encoding='utf-8')
     html = INDEX_HTML.read_text(encoding="utf-8")
     INDEX_HTML.write_text(patch_site_url(patch_index_html(html, meta), site_url()), encoding="utf-8")
+    if "menu.meta.title" in meta and "menu.meta.description" in incoming:
+        menu_html = MENU_HTML.read_text(encoding="utf-8-sig")
+        menu_meta = {"meta.title": meta["menu.meta.title"], "meta.description": f"{incoming['menu.meta.description']['zh']} {incoming['menu.meta.description']['en']}"}
+        MENU_HTML.write_text(patch_index_html(menu_html, menu_meta), encoding="utf-8")
     print(f"wrote {STRINGS_JS} ({sum(len(v) for v in new_strings.values())} strings) and meta tags in {INDEX_HTML}; {problems} warnings")
     return problems
 

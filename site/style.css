@@ -402,3 +402,11 @@ body { padding: 0 16px 32px; max-width: 640px; margin: 0 auto; }
   .panels-both { grid-template-columns:repeat(2,minmax(0,1fr)); }
   .with-both #input-panel { max-width:608px; margin-left:auto; margin-right:auto; }
 }
+
+.menu-page-link { color: var(--accent); font: 600 13px var(--font-body); margin-left: auto; margin-right: 8px; white-space: nowrap; }
+
+.card-format { display:flex;gap:18px;justify-content:center;border:0;padding:0;margin:0; }
+.card-format label { display:flex;gap:5px;align-items:center;font:600 14px var(--font-body); }
+.card-format input { accent-color:var(--accent); }
+.card-dialog .share-card { max-height:calc(100dvh - 150px); }
+@media (min-width:700px) { .card-dialog .share-card { max-height:calc(92dvh - 160px); } }

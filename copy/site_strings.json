@@ -1415,6 +1415,162 @@
       "context": "One-sentence note on each not-food result table row and beneath the result hero, for either fly and mode. Four levels are encoder estimates. Owner-approved DP3 copy.",
       "zh": "果蝇不知道这能不能吃，它只按估算出来的四个味觉档位反应。",
       "en": "The fly has no idea whether this is edible; it reacts only to the four estimated taste levels."
+    },
+    {
+      "key": "menu.meta.title",
+      "context": "v2.2.0 draft",
+      "en": "The fly's menu · Ask the Fly",
+      "zh": "果蝇的菜单 · 问问果蝇"
+    },
+    {
+      "key": "menu.meta.description",
+      "context": "v2.2.0 draft",
+      "en": "See how the two flies rank every dish.",
+      "zh": "看看两只果蝇的菜品排名。"
+    },
+    {
+      "key": "menu.title",
+      "context": "v2.2.0 draft",
+      "en": "The fly's menu",
+      "zh": "果蝇的菜单"
+    },
+    {
+      "key": "menu.attribution",
+      "context": "v2.2.0 draft",
+      "en": "Ask the Fly · askthefly.app · {version}",
+      "zh": "问问果蝇 · askthefly.app · {version}"
+    },
+    {
+      "key": "menu.femaleTop",
+      "context": "v2.2.0 draft",
+      "en": "The female fly's top ten",
+      "zh": "雌蝇最想吃的前十"
+    },
+    {
+      "key": "menu.maleTop",
+      "context": "v2.2.0 draft",
+      "en": "The male fly's top ten",
+      "zh": "雄蝇最想吃的前十"
+    },
+    {
+      "key": "menu.divergence",
+      "context": "v2.2.0 draft",
+      "en": "The ten dishes the two flies disagree on most",
+      "zh": "两只果蝇分歧最大的十道菜"
+    },
+    {
+      "key": "menu.notFood",
+      "context": "v2.2.0 draft",
+      "en": "Not for people: the full ranking · {fly}",
+      "zh": "「不是给人吃的」完整排名 · {fly}"
+    },
+    {
+      "key": "menu.sectionTops",
+      "context": "v2.2.0 draft",
+      "en": "Top of each section",
+      "zh": "每个分类的榜首"
+    },
+    {
+      "key": "menu.tied",
+      "context": "v2.2.0 draft",
+      "en": "Tied at {rank} · {n} dishes",
+      "zh": "并列第 {rank} · {n} 道"
+    },
+    {
+      "key": "menu.rank",
+      "context": "v2.2.0 draft",
+      "en": "#{rank}",
+      "zh": "第 {rank}"
+    },
+    {
+      "key": "menu.part",
+      "context": "v2.2.0 draft",
+      "en": "({i}/{n})",
+      "zh": "({i}/{n})"
+    },
+    {
+      "key": "menu.showNumbers",
+      "context": "v2.2.0 draft",
+      "en": "Show numbers",
+      "zh": "显示数值"
+    },
+    {
+      "key": "menu.hideNumbers",
+      "context": "v2.2.0 draft",
+      "en": "Hide numbers",
+      "zh": "隐藏数值"
+    },
+    {
+      "key": "menu.numbers",
+      "context": "v2.2.0 draft",
+      "en": "MN9 {mn9} · MN11D {mn11d} Hz",
+      "zh": "MN9 {mn9} · MN11D {mn11d} Hz"
+    },
+    {
+      "key": "menu.allTitle",
+      "context": "v2.2.0 draft",
+      "en": "All {n} entries",
+      "zh": "全部 {n} 项"
+    },
+    {
+      "key": "menu.allSections",
+      "context": "v2.2.0 draft",
+      "en": "All sections",
+      "zh": "全部分类"
+    },
+    {
+      "key": "menu.sortFemale",
+      "context": "v2.2.0 draft",
+      "en": "Sort by female",
+      "zh": "按雌蝇排"
+    },
+    {
+      "key": "menu.sortMale",
+      "context": "v2.2.0 draft",
+      "en": "Sort by male",
+      "zh": "按雄蝇排"
+    },
+    {
+      "key": "menu.search",
+      "context": "v2.2.0 draft",
+      "en": "Search dishes",
+      "zh": "搜菜名"
+    },
+    {
+      "key": "menu.empty",
+      "context": "v2.2.0 draft",
+      "en": "No match",
+      "zh": "没找到"
+    },
+    {
+      "key": "menu.mainLink",
+      "context": "v2.2.0 draft",
+      "en": "See the fly's menu",
+      "zh": "看果蝇的菜单"
+    },
+    {
+      "key": "menu.back",
+      "context": "v2.2.0 draft",
+      "en": "Back to Ask the Fly",
+      "zh": "回去问果蝇"
+    },
+    {
+      "key": "menu.honesty",
+      "context": "v2.2.0 draft",
+      "en": "Rankings use the model's MN9 means in our frozen tables; lines and states are our design; female and male are separate experiments.",
+      "zh": "排名是模型在冻结表中的 MN9 均值；台词和状态是我们的设计；雌蝇和雄蝇是两次独立实验。"
+    },
+    {
+      "key": "cardFormat.standard",
+      "context": "v2.2.0 draft",
+      "en": "Standard",
+      "zh": "标准"
+    },
+    {
+      "key": "cardFormat.xhs",
+      "context": "v2.2.0 draft",
+      "en": "Xiaohongshu",
+      "zh": "小红书"
     }
   ]
 }

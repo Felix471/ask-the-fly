@@ -1,0 +1,66 @@
+/* Menu text uses the system UI stack so the pixel font needs no new glyphs. */
+body { max-width: 560px; padding: 0 12px 40px; }
+.menu-nav { display:flex;justify-content:space-between;align-items:center;padding:10px 2px;gap:8px; }
+.menu-nav-actions { display:flex;gap:8px; }
+.menu-nav a,.menu-nav button,.menu-contents a { color:var(--accent);font:600 14px var(--font-body); }
+.menu-nav button { background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:7px 10px; }
+#page-title { font:700 24px var(--font-body);margin:8px 0; }
+.menu-contents { display:flex;gap:6px;overflow-x:auto;padding:4px 0 12px;white-space:nowrap; }
+.menu-contents a { text-decoration:none;background:var(--soft);padding:5px 8px;border-radius:6px;font-size:12px; }
+.menu-block { background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px;margin:0 0 14px;overflow:hidden; }
+.block-head { border-bottom:2px solid var(--accent);padding-bottom:7px;margin-bottom:5px; }
+.attribution { display:block;color:var(--muted);font:600 12px var(--font-body);letter-spacing:.01em; }
+.block-head h2 { font:700 19px/1.3 var(--font-body);margin:3px 0 0; }
+.part-marker { font-size:14px;color:var(--muted); }
+.menu-row { display:grid;grid-template-columns:45px 43px minmax(0,1fr) 34px minmax(0,1.05fr);align-items:center;gap:5px;min-height:52px;padding:3px 0;border-bottom:1px solid var(--line);color:var(--ink);text-decoration:none;font-size:12px; }
+.menu-row:last-child { border-bottom:0; }
+.menu-row .rank { color:var(--accent);font-weight:700;white-space:nowrap; }
+.dish-sprite { width:42px;height:42px;object-fit:contain;image-rendering:pixelated; }
+.state-icon { width:34px;height:34px;object-fit:contain;image-rendering:pixelated; }
+.names { display:flex;flex-direction:column;min-width:0;line-height:1.2; }
+.names strong,.names small,.speech,.tied-grid span,.fly-detail span { overflow:hidden;text-overflow:ellipsis;white-space:nowrap;display:block; }
+.names strong { font-size:13px; }
+.names small { font-size:12px;color:var(--muted);margin-top:3px; }
+.speech { font-size:12px; }
+.numbers { grid-column:3/-1;color:var(--muted);font:12px var(--font-body); }
+.numbers[hidden] { display:none; }
+.tied-group { padding:5px 0; }
+.tied-title { display:flex;align-items:center;gap:6px;font-weight:700;color:var(--accent);font-size:13px;min-height:28px; }
+.tied-title .state-icon { width:34px;height:34px; }
+.tied-grid { display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px; }
+.tied-grid a { display:flex;flex-direction:column;align-items:center;min-width:0;background:var(--soft);border-radius:6px;padding:3px;color:var(--ink);text-decoration:none;font:12px/1.1 var(--font-body);height:66px; }
+.tied-grid .dish-sprite { width:39px;height:39px; }
+.tied-grid span { width:100%;text-align:center; }
+.divergence-row { grid-template-columns:45px minmax(0,1fr);min-height:82px;gap:2px 6px; }
+.divergence-row > .fly-detail { grid-column:2;display:flex;align-items:center;gap:3px;min-width:0;color:var(--ink);text-decoration:none;font-size:12px; }
+.divergence-row > .dish-sprite { grid-row:1/4; }
+.fly-detail .state-icon { width:34px;height:34px;flex:none; }
+.section-row { grid-template-columns:70px 42px minmax(0,1fr) 25px;min-height:48px; }
+.section-row b { overflow:hidden;text-overflow:ellipsis;white-space:nowrap; }
+.table-tools { display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:10px; }
+.table-tools label:last-child { grid-column:1/-1; }
+.table-tools input,.table-tools select { font:14px var(--font-body);width:100%;background:var(--panel);color:var(--ink);border:1px solid var(--line);border-radius:6px;padding:7px; }
+.sr-only { position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0); }
+.table-count { color:var(--muted);font-size:12px; }
+.table-row { display:grid;grid-template-columns:42px minmax(0,1fr) auto auto;gap:4px;align-items:center;padding:4px 0;border-top:1px solid var(--line);font-size:12px; }
+.table-row > a { color:var(--accent);font-weight:600;white-space:nowrap;text-decoration:none; }
+.table-row > a .numbers { display:block; }
+.not-food-badge { grid-column:2/-1;width:max-content;background:var(--warn);padding:1px 4px;border-radius:4px;font-size:12px; }
+#menu-honesty { color:var(--muted);font-size:12px;line-height:1.5; }
+@media (max-width:380px) { .menu-row {grid-template-columns:40px 39px minmax(0,1fr) 23px minmax(0,.8fr);} .dish-sprite{width:38px;height:38px}.state-icon{width:23px;height:23px}.table-row{grid-template-columns:38px minmax(0,1fr) auto auto;} }
+
+
+.table-row > a .numbers[hidden] { display:none; }
+
+/* Give the bilingual name and badge their own row; each fly link gets a column. */
+.table-row { grid-template-columns:42px minmax(0,1fr) minmax(0,1fr); grid-template-rows:auto auto auto; gap:2px 8px; min-height:76px; }
+.table-row > .dish-sprite { grid-column:1; grid-row:1/4; }
+.table-row > .names { grid-column:2/4; grid-row:1; }
+.table-row > .not-food-badge { grid-column:2/4; grid-row:2; }
+.table-row > a { white-space:normal; min-width:0; }
+.table-row > a[data-fly="female"] { grid-column:2; grid-row:3; }
+.table-row > a[data-fly="male"] { grid-column:3; grid-row:3; }
+.table-row > a .numbers { color:var(--muted);font-weight:400;overflow-wrap:anywhere;line-height:1.25;margin-top:2px; }
+@media (max-width:380px) { .table-row { grid-template-columns:38px minmax(0,1fr) minmax(0,1fr); } }
+
+.table-row > a[data-fly="male"] { border-left:1px solid var(--line); padding-left:8px; }

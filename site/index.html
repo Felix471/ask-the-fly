@@ -77,6 +77,7 @@
       <section class="library" id="library" aria-labelledby="library-title">
         <div class="library-head">
           <h2 id="library-title" class="library-title" data-i18n="browseTitle"></h2>
+          <a class="menu-page-link" href="menu/" data-i18n="menu.mainLink"></a>
           <button id="view-all-btn" class="btn btn-secondary btn-small" type="button" aria-expanded="false" aria-controls="library-panel" data-i18n="viewAll"></button>
         </div>
         <div id="popular-row" class="tile-row" role="group"></div>
@@ -259,6 +260,7 @@
 
   <dialog id="card-dialog" class="card-dialog" data-i18n-aria="ariaShareCard">
     <div class="card-dialog-body">
+      <fieldset class="card-format" aria-label="Card format"><label><input type="radio" name="card-format" value="standard" checked><span data-i18n="cardFormat.standard"></span></label><label><input type="radio" name="card-format" value="xhs"><span data-i18n="cardFormat.xhs"></span></label></fieldset>
       <canvas id="share-card" class="share-card" width="900" height="1200"></canvas>
       <img id="share-image" class="share-card share-image" alt="" hidden>
       <p id="save-hint" class="hint save-hint" hidden data-i18n="saveHint"></p>

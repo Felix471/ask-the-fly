@@ -457,6 +457,38 @@ def check_male(root: Path) -> list[str]:
     return problems
 
 
+def check_menu(root: Path) -> list[str]:
+    """Regenerate the menu and independently verify its shipped cell projections."""
+    try:
+        from scripts.export_menu import render_menu, lookup
+        expected = render_menu(root)
+        path = root / "site/data/menu.json"
+        if not path.exists():
+            return [f"menu: {path} missing"]
+        actual = path.read_bytes()
+        problems = [] if actual == expected else ["menu: generated menu is stale or tampered"]
+        payload = json.loads(actual)
+        expected_dishes = json.loads(expected)["dishes"]
+        actual_by_key = {dish["key"]: dish for dish in payload["dishes"]}
+        if len(payload["dishes"]) != len(expected_dishes) or len(actual_by_key) != len(expected_dishes):
+            problems.append("menu: dish count or keys differ from dictionary")
+        tables = {fly: load_json(root / f"site/data/lookup_table_{'v1_2' if fly == 'female' else 'male'}.json") for fly in ("female", "male")}
+        for source_dish in expected_dishes:
+            dish = actual_by_key.get(source_dish["key"])
+            if dish is None:
+                problems.append(f"menu: missing {source_dish['key']}")
+                continue
+            for fly, table in tables.items():
+                cell = lookup(table, dish["levels"])
+                value = dish[fly]
+                for field, source in (("mn9", "mn9_mean"), ("mn11d", "mn11d_mean"), ("mn11v", "mn11v_mean"), ("state", "state")):
+                    if value[field] != cell[source]:
+                        problems.append(f"menu: {dish['key']} {fly} {field} differs from site lookup")
+        return problems
+    except (OSError, ValueError, KeyError, TypeError, IndexError) as exc:
+        return [f"menu: {exc}"]
+
+
 def validate(root: Path) -> list[str]:
     problems, table = check_lookup(root)
     dict_problems, dishes = check_dictionary(root)
@@ -470,6 +502,7 @@ def validate(root: Path) -> list[str]:
     problems += check_release(root)
     problems += check_v12(root)
     problems += check_male(root)
+    problems += check_menu(root)
     return problems
 
 

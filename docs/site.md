@@ -82,6 +82,8 @@ Sprites come from `site/assets/` when present (see `docs/assets.md`); otherwise 
 ```
 .venv\Scripts\python scripts/export_site_data.py --stub   # dictionary + STUB lookup table (placeholder numbers)
 .venv\Scripts\python scripts/export_site_data.py          # dictionary + data/lookup_table.json (after build_lookup.py)
+.venv\Scripts\python scripts/export_menu.py               # generate the frozen menu view after data exports
+.venv\Scripts\python scripts/export_menu.py --check       # compare generated menu bytes
 ```
 
 The stub table has the real schema and 400 cells but its MN9 values are a closed-form guess, flagged `"stub": true`. The page shows a yellow banner and stamps "STUB DATA" on the share card while it is loaded. Replace it with the real table once `scripts/build_lookup.py` has run on `results/grid/full`.

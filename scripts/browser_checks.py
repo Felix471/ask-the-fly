@@ -667,6 +667,131 @@ def check_F24(browser):
     return problems
 
 
+def check_F25(browser):
+    """Bilingual menu list parts fit the reference phone viewport with self-attribution."""
+    from urllib.parse import urlparse
+    problems = []
+    for lang in ('zh', 'en'):
+        page, errors, requests = open_page(browser, f'menu/?lang={lang}', width=390)
+        page.set_viewport_size({'width': 390, 'height': 844})
+        page.wait_for_selector('#female-top .menu-row')
+        blocks = page.locator('#lists > .menu-block')
+        if blocks.count() < 7:
+            problems.append(f'{lang}: missing list blocks')
+        version = page.evaluate("async () => (await (await fetch('../data/release.json')).json()).version")
+        for info in blocks.evaluate_all("""xs => xs.map(x => ({id:x.id,height:x.getBoundingClientRect().height,
+          header:x.querySelector('.attribution')?.textContent,title:x.querySelector('h2')?.textContent}))"""):
+            if info['height'] > 844:
+                problems.append(f"{lang}: {info['id']} height {info['height']}")
+            if 'askthefly.app' not in info['header'] or version not in info['header']:
+                problems.append(f"{lang}: {info['id']} missing attribution")
+        if page.evaluate('document.documentElement.scrollWidth') > 390:
+            problems.append(f'{lang}: horizontal scroll')
+        icon_errors = page.evaluate("""async () => {
+          const data = await (await fetch('../data/menu.json')).json();
+          const dishes = new Map(data.dishes.map(d => [d.key, d]));
+          const frame = {eats:3,mouth_moves:3,proboscis_only:3,no_response:1};
+          const errors = [], seen = new Map();
+          for (const icon of document.querySelectorAll('#lists .state-icon')) {
+            if (!icon.complete || icon.naturalWidth <= 0) errors.push('unloaded icon: ' + icon.src);
+          }
+          for (const row of document.querySelectorAll('#lists .menu-row[data-key]')) {
+            for (const icon of row.querySelectorAll('.state-icon')) {
+              const fly = icon.closest('[data-fly]')?.dataset.fly ||
+                (row.closest('[id^="male"], [id^="not-food-male"]') ? 'male' : 'female');
+              const state = dishes.get(row.dataset.key)[fly].state;
+              const expected = '/assets/' + (fly === 'male' ? 'response_male/' : 'response/') +
+                'inset_' + state + '_' + frame[state] + '.png';
+              if (!icon.src.endsWith(expected)) errors.push(row.dataset.key + ':' + fly + ': wrong icon');
+              if (!icon.complete || icon.naturalWidth <= 0) errors.push(row.dataset.key + ':' + fly + ': unloaded icon');
+              seen.set(fly + ':' + state, icon.src);
+            }
+          }
+          for (const [a, srcA] of seen) for (const [b, srcB] of seen) {
+            if (a.split(':')[1] !== b.split(':')[1] && srcA === srcB) errors.push(a + '/' + b + ': shared icon');
+          }
+          return errors;
+        }""")
+        problems.extend(f'{lang}: {item}' for item in icon_errors)
+        for anchor in ('female-top','male-top','divergence','not-food-female','not-food-male','section-tops-female','section-tops-male','all'):
+            page.goto(BASE + 'menu/?lang=' + lang + '#' + anchor, wait_until='networkidle')
+            top = page.locator('#'+anchor).evaluate('x => x.getBoundingClientRect().top')
+            if not -1 <= top <= 2:
+                problems.append(f'{lang}: anchor {anchor} at {top}')
+        if any(urlparse(url).netloc != urlparse(BASE).netloc for url in requests):
+            problems.append(f'{lang}: non-self request')
+        problems = finish(page, errors, problems)
+    return problems
+
+
+def check_F26(browser):
+    """Numbers, filters, sorting, search and both per-fly row links work."""
+    problems = []
+    page, errors, requests = open_page(browser, 'menu/?lang=en', width=390)
+    page.wait_for_selector('#female-top .menu-row')
+    if page.locator('#female-top .numbers:visible').count():
+        problems.append('numbers visible by default')
+    page.click('#numbers-toggle')
+    if not page.locator('#female-top .numbers:visible').count():
+        problems.append('numbers toggle did not show values')
+    page.click('#numbers-toggle')
+    if page.locator('#female-top .numbers:visible').count():
+        problems.append('numbers toggle did not hide values')
+    if page.locator('#table-rows .table-row').count() != 279:
+        problems.append('full table missing rows')
+    page.select_option('#section-filter', '0')
+    expected = page.evaluate("async () => (await (await fetch('../data/sections.json')).json()).sections[0].keys.length")
+    if page.locator('#table-rows .table-row').count() != expected:
+        problems.append('section filter count')
+    page.select_option('#section-filter', 'all')
+    first_female = page.locator('#table-rows .table-row').first.get_attribute('data-key')
+    page.select_option('#table-sort', 'male')
+    first_male = page.locator('#table-rows .table-row').first.get_attribute('data-key')
+    if first_female == first_male:
+        problems.append('sort did not change leading dish')
+    page.fill('#table-search', 'nectar')
+    if page.locator('#table-rows .table-row').count() != 1:
+        problems.append('search count')
+    page.locator('#table-rows .table-row a[data-fly="male"]').click()
+    page.wait_for_selector('#option-list li')
+    if 'nectar' not in page.locator('#option-list').inner_text().lower():
+        problems.append('link did not prefill dish')
+    if not page.locator('input[name="fly"][value="male"]').is_checked():
+        problems.append('link did not select male')
+    if not page.url.endswith('f=male'):
+        problems.append('wrong per-fly link')
+    problems = finish(page, errors, problems)
+    return problems
+
+
+def check_F27(browser):
+    """Share format changes dimensions, then returns to the standard default."""
+    problems = []
+    page, errors, requests = open_page(browser, '?v=2&d=k.nectar,k.steak&lang=zh', width=390)
+    page.wait_for_selector('#scene-panel:not([hidden])')
+    page.click('#skip-btn')
+    page.wait_for_selector('#result-panel:not([hidden])')
+    page.click('#share-btn')
+    page.wait_for_selector('#card-dialog[open]')
+    if page.locator('#share-card').evaluate('x => [x.width,x.height]') != [900,1200]:
+        problems.append('standard card is not default')
+    page.check('input[name="card-format"][value="xhs"]')
+    page.wait_for_selector('#download-link[href]')
+    if page.locator('#share-card').evaluate('x => [x.width,x.height]') != [1080,1440]:
+        problems.append('xhs card dimensions')
+    page.check('input[name="card-format"][value="standard"]')
+    page.wait_for_selector('#download-link[href]')
+    if page.locator('#share-card').evaluate('x => [x.width,x.height]') != [900,1200]:
+        problems.append('standard card did not return')
+    page.click('#close-card-btn')
+    page.click('#share-btn')
+    page.wait_for_selector('#card-dialog[open]')
+    if not page.locator('input[name="card-format"][value="standard"]').is_checked():
+        problems.append('new dialog did not reset format')
+    problems = finish(page, errors, problems)
+    return problems
+
+
 CHECKS = {
     "F02": check_F02, "F03": check_F03, "F04": check_F04, "F05": check_F05,
     "F06": check_F06, "F08": check_F08, "F15": check_F15,
@@ -675,6 +800,7 @@ CHECKS = {
     "F21": check_F21,
     "F22": check_F22,
     "F23": check_F23, "F24": check_F24,
+    "F25": check_F25, "F26": check_F26, "F27": check_F27,
 }
 
 
