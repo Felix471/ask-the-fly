@@ -1,16 +1,23 @@
 #!/usr/bin/env python3
 # SPDX-License-Identifier: MIT
-"""Render site/og-image.png (1200 x 630) from the share-card design for link previews."""
+"""Render site/og-image.png (1200 x 630) from the share-card design for link previews.
+
+The three example bars are read from the shipped dictionary and the female lookup
+table the live page uses, so the preview cannot drift from the scores on the site.
+"""
 
 from __future__ import annotations
 
 import argparse
+import json
 from pathlib import Path
-
-from PIL import Image, ImageDraw, ImageFont
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "site" / "og-image.png"
+DISHES = ROOT / "site" / "data" / "dishes.json"
+LOOKUP = ROOT / "site" / "data" / "lookup_table_v1_2.json"
+EXAMPLE_KEYS = ("watermelon", "mapo tofu", "black coffee")
+AXES = ("sugar", "bitter", "water", "ir94e")
 FONT_CANDIDATES = [
     "C:/Windows/Fonts/msyhbd.ttc", "C:/Windows/Fonts/msyh.ttc", "C:/Windows/Fonts/NotoSansSC-VF.ttf",
     "/usr/share/fonts/truetype/noto/NotoSansCJK-Regular.ttc", "/System/Library/Fonts/PingFang.ttc",
@@ -19,7 +26,9 @@ FONT_CANDIDATES = [
 INK, MUTED, ACCENT, PAPER, LINE = "#1f1a17", "#6b625b", "#b5471f", "#fbf8f2", "#e2dbd0"
 
 
-def font(size: int, bold: bool = False) -> ImageFont.FreeTypeFont:
+def font(size: int, bold: bool = False):
+    from PIL import ImageFont
+
     for candidate in FONT_CANDIDATES:
         if "bd" in candidate and not bold:
             continue
@@ -31,7 +40,27 @@ def font(size: int, bold: bool = False) -> ImageFont.FreeTypeFont:
     return ImageFont.load_default()
 
 
+def example_rows(keys=EXAMPLE_KEYS, dishes_path: Path = DISHES, lookup_path: Path = LOOKUP) -> list[tuple[str, float, bool]]:
+    """(label, mean left-MN9 Hz, is the fly's pick) for each example dish, from the shipped data."""
+    dishes = json.loads(dishes_path.read_text(encoding="utf-8"))
+    entries = {entry["key"]: entry for entry in (dishes["dishes"] if isinstance(dishes, dict) else dishes)}
+    table = json.loads(lookup_path.read_text(encoding="utf-8"))
+    # Level names map to drive rates (two names may share a rate), as on the site.
+    cells = {tuple(float(cell["hz"][axis]) for axis in AXES): cell for cell in table["cells"]}
+    scored = []
+    for key in keys:
+        entry = entries[key]
+        cell = cells[tuple(float(table["levels"][axis][entry.get(axis, "none")]) for axis in AXES)]
+        scored.append((f"{entry['display']['en']} {entry['display']['zh']}", float(cell["mn9_mean"])))
+    top = max(hz for _label, hz in scored)
+    if sum(1 for _label, hz in scored if hz == top) != 1:
+        raise ValueError("the preview needs one clear pick among the example dishes")
+    return [(label, hz, hz == top) for label, hz in scored]
+
+
 def render(path: Path) -> None:
+    from PIL import Image, ImageDraw
+
     W, H = 1200, 630
     im = Image.new("RGB", (W, H), PAPER)
     d = ImageDraw.Draw(im)
@@ -40,7 +69,7 @@ def render(path: Path) -> None:
     d.text((64, 160), "A fly-brain model tastes your menu and picks for you.", font=font(32), fill=MUTED)
     d.text((64, 204), "让一只果蝇脑模型替你尝一口，然后选菜。", font=font(32), fill=MUTED)
     # Mini bar comparison, echoing the card's middle third.
-    rows = [("watermelon 西瓜", 70.6, True), ("mapo tofu 麻婆豆腐", 62.5, False), ("black coffee 黑咖啡", 0.0, False)]
+    rows = example_rows()
     y = 290
     for label, hz, win in rows:
         colour = ACCENT if win else INK
