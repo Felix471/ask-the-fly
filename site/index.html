@@ -59,7 +59,8 @@
           <canvas id="idle-fly" class="idle-fly" width="56" height="56" aria-hidden="true"></canvas>
         </div>
         <ul id="option-list" class="option-list" aria-live="polite"></ul>
-        <p id="table-empty" class="hint" data-i18n="hint"></p>
+        <p id="table-empty" class="hint"></p>
+        <button id="example-btn" class="btn btn-secondary btn-small example-btn" type="button" data-i18n="exampleBtn" hidden></button>
       </div>
       <fieldset class="fly-selector" aria-describedby="fly-selector-hint">
         <legend data-i18n="flySelector.label"></legend>
@@ -257,6 +258,11 @@
       </details>
     </section>
   </main>
+
+  <div id="sticky-bar" class="sticky-bar" hidden>
+    <span id="sticky-count" class="sticky-count" aria-live="polite"></span>
+    <button id="sticky-ask" class="btn btn-primary btn-small" type="button" data-i18n="ask"></button>
+  </div>
 
   <dialog id="card-dialog" class="card-dialog" data-i18n-aria="ariaShareCard">
     <div class="card-dialog-body">

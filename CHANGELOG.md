@@ -2,6 +2,14 @@
 
 What a visitor to askthefly.app would notice, newest first. One section per release; the heading is `## vX.Y.Z — YYYY-MM-DD` (the release tag on `main` and its date), and `scripts/validate_release.py` checks that `site/data/release.json` matches the top entry. Each entry ends with a line on whether the README honesty table changed.
 
+## v2.2.0 — 2026-11-23
+
+- Adds a menu page (`/menu/`) showing both flies' rankings of all 279 entries: top tens, biggest disagreements, the full not-food ranking, top of each section, and a searchable full list, with a toggle to show MN9 and MN11D scores and links to try any item on the main page.
+- Adds a second share-card format sized for Xiaohongshu (1080 × 1440), showing the fly's pick large above a row of the other options on the table with their scores. The chosen format is remembered for the rest of the visit.
+- Makes a first visit easier on phones: an empty table now has a one-tap example button, a one-item table notes that one more is needed, a sticky bottom bar keeps the count and ask button in reach while scrolling the full list, and the result scrolls into view automatically. With both flies on a phone, the two play one after the other and the page follows.
+- No scores, states, choices or lookup tables changed.
+- README honesty table: unchanged.
+
 ## v2.1.1 — 2026-11-23
 
 - The link-preview image now shows the current scores (mapo tofu 0.7 Hz, not the pre-Ir94e 62.5 Hz); it is generated from the shipped table.

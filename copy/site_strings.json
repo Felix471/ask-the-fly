@@ -302,6 +302,46 @@
       "max_length": 80
     },
     {
+      "key": "hintOneMore",
+      "context": "Hint inside the table when exactly one entry is on it (the ask buttons are disabled until there are two); also shown when arriving from the menu page with one entry already on the table.",
+      "en": "Add one more to ask the fly.",
+      "zh": "再加一样就能问果蝇了。",
+      "max_length": {
+        "en": 40,
+        "zh": 20
+      }
+    },
+    {
+      "key": "exampleBtn",
+      "context": "Small button inside the empty table on the first screen: one tap puts a ready-made set of two or three entries on the table.",
+      "en": "Try an example",
+      "zh": "先摆几样试试",
+      "max_length": {
+        "en": 18,
+        "zh": 8
+      }
+    },
+    {
+      "key": "stickyCount",
+      "context": "Bar fixed to the bottom while browsing the full list, left of the ask button: how many entries are chosen; {n}.",
+      "en": "{n} chosen",
+      "zh": "已选 {n} 样",
+      "max_length": {
+        "en": 14,
+        "zh": 8
+      }
+    },
+    {
+      "key": "stickyNeedMore",
+      "context": "Same bar when fewer than two are chosen (ask button disabled); {n} = how many more are needed (1 or 2).",
+      "en": "Pick {n} more",
+      "zh": "再选 {n} 样",
+      "max_length": {
+        "en": 20,
+        "zh": 10
+      }
+    },
+    {
       "key": "howTitle",
       "context": "Collapsed 'how it works' block under the intro: the summary line",
       "en": "How does it choose?",
@@ -724,8 +764,8 @@
     {
       "key": "releaseSummary",
       "context": "Footer 'what's new' line, one-line summary of the latest release; version and date come from site/data/release.json",
-      "en": "Link preview fixed; verdicts and Chinese copy reworded.",
-      "zh": "修正链接预览图，改写多处中文文案；分数不变。",
+      "en": "Menu page, Xiaohongshu card, easier start; scores unchanged.",
+      "zh": "新增两只果蝇的 279 样菜单榜、小红书尺寸分享卡，加了现成示例和固定提问栏；分数不变。",
       "max_length": 60
     },
     {
@@ -1456,8 +1496,8 @@
     {
       "key": "menu.meta.description",
       "context": "v2.2.0 draft",
-      "en": "See how the two flies rank every dish.",
-      "zh": "看看两只果蝇的菜品排名。"
+      "en": "See how the two flies rank everything on the menu.",
+      "zh": "看看两只果蝇给每道菜排的名次。"
     },
     {
       "key": "menu.title",
@@ -1486,32 +1526,38 @@
     {
       "key": "menu.divergence",
       "context": "v2.2.0 draft",
-      "en": "The ten dishes the two flies disagree on most",
-      "zh": "两只果蝇分歧最大的十道菜"
+      "en": "Where the two flies disagree most",
+      "zh": "两只果蝇意见差最大的几样"
     },
     {
       "key": "menu.notFood",
       "context": "v2.2.0 draft",
-      "en": "Not for people: the full ranking · {fly}",
-      "zh": "「不是给人吃的」完整排名 · {fly}"
+      "en": "Not food, ranked · {fly}",
+      "zh": "“不是给人吃的”完整排名 · {fly}"
     },
     {
       "key": "menu.sectionTops",
       "context": "v2.2.0 draft",
       "en": "Top of each section",
-      "zh": "每个分类的榜首"
+      "zh": "各分类第一名"
     },
     {
       "key": "menu.tied",
       "context": "v2.2.0 draft",
-      "en": "Tied at {rank} · {n} dishes",
-      "zh": "并列第 {rank} · {n} 道"
+      "en": "Tied for #{rank} · {n} items",
+      "zh": "并列第 {rank} · {n} 样"
+    },
+    {
+      "key": "menu.gapTied",
+      "context": "Menu page, disagreement list: heading of a group of entries that share the same rank gap between the two flies; {diff} = the gap in places, {n} = how many entries.",
+      "en": "{diff} places apart · {n} items",
+      "zh": "名次差 {diff} · {n} 样"
     },
     {
       "key": "menu.rank",
       "context": "v2.2.0 draft",
       "en": "#{rank}",
-      "zh": "第 {rank}"
+      "zh": "第 {rank} 名"
     },
     {
       "key": "menu.part",
@@ -1522,14 +1568,14 @@
     {
       "key": "menu.showNumbers",
       "context": "v2.2.0 draft",
-      "en": "Show numbers",
-      "zh": "显示数值"
+      "en": "Show scores",
+      "zh": "显示分数"
     },
     {
       "key": "menu.hideNumbers",
       "context": "v2.2.0 draft",
-      "en": "Hide numbers",
-      "zh": "隐藏数值"
+      "en": "Hide scores",
+      "zh": "隐藏分数"
     },
     {
       "key": "menu.numbers",
@@ -1544,6 +1590,12 @@
       "zh": "全部 {n} 项"
     },
     {
+      "key": "menu.shown",
+      "context": "Menu page, full table: count shown only while a section filter or search narrows the list; {n}.",
+      "en": "{n} shown",
+      "zh": "显示 {n} 样"
+    },
+    {
       "key": "menu.allSections",
       "context": "v2.2.0 draft",
       "en": "All sections",
@@ -1552,25 +1604,25 @@
     {
       "key": "menu.sortFemale",
       "context": "v2.2.0 draft",
-      "en": "Sort by female",
+      "en": "Sort by female fly",
       "zh": "按雌蝇排"
     },
     {
       "key": "menu.sortMale",
       "context": "v2.2.0 draft",
-      "en": "Sort by male",
+      "en": "Sort by male fly",
       "zh": "按雄蝇排"
     },
     {
       "key": "menu.search",
       "context": "v2.2.0 draft",
-      "en": "Search dishes",
+      "en": "Search the menu",
       "zh": "搜菜名"
     },
     {
       "key": "menu.empty",
       "context": "v2.2.0 draft",
-      "en": "No match",
+      "en": "Nothing matches.",
       "zh": "没找到"
     },
     {
@@ -1588,8 +1640,8 @@
     {
       "key": "menu.honesty",
       "context": "v2.2.0 draft",
-      "en": "Rankings use the model's MN9 means in our frozen tables; lines and states are our design; female and male are separate experiments.",
-      "zh": "排名是模型在冻结表中的 MN9 均值；台词和状态是我们的设计；雌蝇和雄蝇是两次独立实验。"
+      "en": "Rankings come from each model's precomputed MN9 means. The speech and states are our design, and the female and male flies are separate experiments.",
+      "zh": "排名按预计算表里模型的 MN9 均值来排，台词和状态都是我们设计的，雌蝇和雄蝇是两套独立实验。"
     },
     {
       "key": "cardFormat.standard",
@@ -1602,6 +1654,16 @@
       "context": "v2.2.0 draft",
       "en": "Xiaohongshu",
       "zh": "小红书"
+    },
+    {
+      "key": "cardXhs.passed",
+      "context": "Tiny label on the Xiaohongshu-format share card, left of the row of small greyed pictures of the entries ranked below the fly's pick. A model ranking, not a claim that the fly tasted and rejected them.",
+      "en": "Not picked",
+      "zh": "没选的",
+      "max_length": {
+        "en": 10,
+        "zh": 4
+      }
     }
   ]
 }

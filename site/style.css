@@ -410,3 +410,14 @@ body { padding: 0 16px 32px; max-width: 640px; margin: 0 auto; }
 .card-format input { accent-color:var(--accent); }
 .card-dialog .share-card { max-height:calc(100dvh - 150px); }
 @media (min-width:700px) { .card-dialog .share-card { max-height:calc(92dvh - 160px); } }
+
+/* First visit: example set button in the empty table, and the bar that keeps the
+   ask button in reach while browsing the full list. */
+.example-btn { margin-top: 8px; }
+.example-btn[hidden] { display: none; }
+.sticky-bar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 20; display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  padding: 10px 16px calc(10px + env(safe-area-inset-bottom)); background: var(--panel); border-top: 1px solid var(--line); box-shadow: 0 -4px 14px rgba(0,0,0,.08); }
+.sticky-bar[hidden] { display: none; }
+.sticky-count { font: 600 0.95rem var(--font-body); color: var(--ink); }
+.sticky-bar .btn { flex: 0 0 auto; min-width: 9em; }
+body.with-sticky-bar { padding-bottom: 72px; }

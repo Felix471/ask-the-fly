@@ -143,7 +143,7 @@ export const STRINGS = {
     "colIr94e": "Amino acids",
     "ir94eExplain": "Amino acids = the Ir94e channel: in this model free amino acids and glutamate put the fly off, so soy-, stock- and meat-heavy dishes score low. Which level a dish gets is our estimate; the suppression is the model's.",
     "lowInterest": "The fly didn't care much for any of these. This one was just the least uninteresting.",
-    "releaseSummary": "Link preview fixed; verdicts and Chinese copy reworded.",
+    "releaseSummary": "Menu page, Xiaohongshu card, easier start; scores unchanged.",
     "releaseLink": "what's new",
     "stateV12": {
       "EatsLabel": "Eats",
@@ -245,28 +245,37 @@ export const STRINGS = {
       "attribution": "Ask the Fly · askthefly.app · {version}",
       "femaleTop": "The female fly's top ten",
       "maleTop": "The male fly's top ten",
-      "divergence": "The ten dishes the two flies disagree on most",
-      "notFood": "Not for people: the full ranking · {fly}",
+      "divergence": "Where the two flies disagree most",
+      "notFood": "Not food, ranked · {fly}",
       "sectionTops": "Top of each section",
-      "tied": "Tied at {rank} · {n} dishes",
+      "tied": "Tied for #{rank} · {n} items",
       "rank": "#{rank}",
       "part": "({i}/{n})",
-      "showNumbers": "Show numbers",
-      "hideNumbers": "Hide numbers",
+      "showNumbers": "Show scores",
+      "hideNumbers": "Hide scores",
       "numbers": "MN9 {mn9} · MN11D {mn11d} Hz",
       "allTitle": "All {n} entries",
       "allSections": "All sections",
-      "sortFemale": "Sort by female",
-      "sortMale": "Sort by male",
-      "search": "Search dishes",
-      "empty": "No match",
+      "sortFemale": "Sort by female fly",
+      "sortMale": "Sort by male fly",
+      "search": "Search the menu",
+      "empty": "Nothing matches.",
       "mainLink": "See the fly's menu",
       "back": "Back to Ask the Fly",
-      "honesty": "Rankings use the model's MN9 means in our frozen tables; lines and states are our design; female and male are separate experiments."
+      "honesty": "Rankings come from each model's precomputed MN9 means. The speech and states are our design, and the female and male flies are separate experiments.",
+      "gapTied": "{diff} places apart · {n} items",
+      "shown": "{n} shown"
     },
     "cardFormat": {
       "standard": "Standard",
       "xhs": "Xiaohongshu"
+    },
+    "hintOneMore": "Add one more to ask the fly.",
+    "exampleBtn": "Try an example",
+    "stickyCount": "{n} chosen",
+    "stickyNeedMore": "Pick {n} more",
+    "cardXhs": {
+      "passed": "Not picked"
     }
   },
   "zh": {
@@ -411,7 +420,7 @@ export const STRINGS = {
     "colIr94e": "氨基酸",
     "ir94eExplain": "氨基酸对应 Ir94e 通道：在这个模型里，游离氨基酸和谷氨酸（常说的“鲜”）会让果蝇扫兴，所以酱油、高汤、肉多的菜得分很低。每道菜分到哪一档是我们估的，这种抑制反应来自模型本身。",
     "lowInterest": "这几样果蝇都不太想吃，勉强挑了这个。",
-    "releaseSummary": "修正链接预览图，改写多处中文文案；分数不变。",
+    "releaseSummary": "新增两只果蝇的 279 样菜单榜、小红书尺寸分享卡，加了现成示例和固定提问栏；分数不变。",
     "releaseLink": "更新记录",
     "stateV12": {
       "EatsLabel": "吃",
@@ -513,14 +522,14 @@ export const STRINGS = {
       "attribution": "问问果蝇 · askthefly.app · {version}",
       "femaleTop": "雌蝇最想吃的前十",
       "maleTop": "雄蝇最想吃的前十",
-      "divergence": "两只果蝇分歧最大的十道菜",
-      "notFood": "「不是给人吃的」完整排名 · {fly}",
-      "sectionTops": "每个分类的榜首",
-      "tied": "并列第 {rank} · {n} 道",
-      "rank": "第 {rank}",
+      "divergence": "两只果蝇意见差最大的几样",
+      "notFood": "“不是给人吃的”完整排名 · {fly}",
+      "sectionTops": "各分类第一名",
+      "tied": "并列第 {rank} · {n} 样",
+      "rank": "第 {rank} 名",
       "part": "({i}/{n})",
-      "showNumbers": "显示数值",
-      "hideNumbers": "隐藏数值",
+      "showNumbers": "显示分数",
+      "hideNumbers": "隐藏分数",
       "numbers": "MN9 {mn9} · MN11D {mn11d} Hz",
       "allTitle": "全部 {n} 项",
       "allSections": "全部分类",
@@ -530,11 +539,20 @@ export const STRINGS = {
       "empty": "没找到",
       "mainLink": "看果蝇的菜单",
       "back": "回去问果蝇",
-      "honesty": "排名是模型在冻结表中的 MN9 均值；台词和状态是我们的设计；雌蝇和雄蝇是两次独立实验。"
+      "honesty": "排名按预计算表里模型的 MN9 均值来排，台词和状态都是我们设计的，雌蝇和雄蝇是两套独立实验。",
+      "gapTied": "名次差 {diff} · {n} 样",
+      "shown": "显示 {n} 样"
     },
     "cardFormat": {
       "standard": "标准",
       "xhs": "小红书"
+    },
+    "hintOneMore": "再加一样就能问果蝇了。",
+    "exampleBtn": "先摆几样试试",
+    "stickyCount": "已选 {n} 样",
+    "stickyNeedMore": "再选 {n} 样",
+    "cardXhs": {
+      "passed": "没选的"
     }
   }
 };

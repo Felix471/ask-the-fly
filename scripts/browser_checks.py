@@ -765,7 +765,7 @@ def check_F26(browser):
 
 
 def check_F27(browser):
-    """Share format changes dimensions, then returns to the standard default."""
+    """Share format changes dimensions and is remembered when the dialog is reopened."""
     problems = []
     page, errors, requests = open_page(browser, '?v=2&d=k.nectar,k.steak&lang=zh', width=390)
     page.wait_for_selector('#scene-panel:not([hidden])')
@@ -783,12 +783,142 @@ def check_F27(browser):
     page.wait_for_selector('#download-link[href]')
     if page.locator('#share-card').evaluate('x => [x.width,x.height]') != [900,1200]:
         problems.append('standard card did not return')
+    # The chosen format is kept for the rest of the visit.
+    page.check('input[name="card-format"][value="xhs"]')
+    page.wait_for_selector('#download-link[href]')
     page.click('#close-card-btn')
     page.click('#share-btn')
     page.wait_for_selector('#card-dialog[open]')
-    if not page.locator('input[name="card-format"][value="standard"]').is_checked():
-        problems.append('new dialog did not reset format')
+    page.wait_for_selector('#download-link[href]')
+    if not page.locator('input[name="card-format"][value="xhs"]').is_checked():
+        problems.append('reopened dialog forgot the chosen format')
+    if page.locator('#share-card').evaluate('x => [x.width,x.height]') != [1080,1440]:
+        problems.append('reopened dialog did not draw the chosen format')
     problems = finish(page, errors, problems)
+    return problems
+
+
+def check_F28(browser):
+    """First visit on a phone: example set, disabled ask with a hint, no keyboard on View all,
+    sticky ask bar while browsing, and the result in view when the run ends."""
+    problems = []
+    context = browser.new_context(viewport={"width": 390, "height": 844}, is_mobile=True, has_touch=True, bypass_csp=True)
+    page = context.new_page()
+    page.add_init_script(INIT)
+    errors = []
+    page.on("pageerror", lambda e: errors.append(f"pageerror: {e}"))
+    page.on("console", lambda m: errors.append(f"console.{m.type}: {m.text}") if m.type == "error" else None)
+    page.goto(BASE + '?lang=en', wait_until="domcontentloaded")
+    page.wait_for_function("window.__askfly && !document.getElementById('example-btn').hidden")
+    strings = page.evaluate("import('./strings.js').then(m => ({hint: m.STRINGS.en.hint, one: m.STRINGS.en.hintOneMore}))")
+    if not page.locator('#ask-btn').is_disabled() or not page.locator('#opposite-btn').is_disabled():
+        problems.append('ask buttons enabled on an empty table')
+    if page.locator('#table-empty').inner_text() != strings['hint']:
+        problems.append('empty-table hint missing')
+    page.fill('#option-input', 'watermelon')
+    page.keyboard.press('Enter')
+    page.wait_for_function("window.__askfly.snapshot().options.length === 1")
+    if not page.locator('#ask-btn').is_disabled():
+        problems.append('ask enabled with one dish')
+    if page.locator('#table-empty').inner_text() != strings['one'] or not page.locator('#table-empty').is_visible():
+        problems.append('one-more hint not shown with one dish')
+    if page.locator('#example-btn').is_visible():
+        problems.append('example button still visible with a dish on the table')
+    page.locator('#option-list button').first.click()
+    page.locator('#example-btn').tap()
+    page.wait_for_function("window.__askfly.snapshot().options.length >= 2")
+    if page.locator('#ask-btn').is_disabled():
+        problems.append('ask disabled after the example set')
+    if page.locator('#table-empty').is_visible():
+        problems.append('hint still shown with two or more dishes')
+    page.locator('#view-all-btn').tap()
+    page.wait_for_selector('#library-panel:not([hidden])')
+    if page.evaluate("document.activeElement && document.activeElement.id") == 'library-search':
+        problems.append('View all focused the search box on a touch screen')
+    if page.locator('#sticky-bar').is_visible():
+        problems.append('sticky bar shown while the ask button is in view')
+    page.evaluate("document.getElementById('library-grid').scrollIntoView(); window.scrollBy(0, 600)")
+    page.wait_for_selector('#sticky-bar:not([hidden])')
+    if page.locator('#sticky-ask').is_disabled():
+        problems.append('sticky ask disabled with two or more dishes')
+    page.locator('#sticky-ask').tap()
+    page.wait_for_function("window.__askfly.snapshot().phase === 'tasting'")
+    if page.locator('#sticky-bar').is_visible():
+        problems.append('sticky bar still shown during tasting')
+    page.click('#skip-btn')
+    wait_result(page)
+    page.wait_for_timeout(1200)
+    box = page.evaluate("(() => { const r = document.getElementById('verdict').getBoundingClientRect(); return [r.top, r.bottom, innerHeight]; })()")
+    if not (box[0] >= 0 and box[1] <= box[2]):
+        problems.append(f'verdict not in view after the run: {box}')
+    problems = finish(page, errors, problems)
+    context.close()
+    return problems
+
+
+XHS_BOUNDS = """
+(() => {
+  const original = CanvasRenderingContext2D.prototype.fillText;
+  window.__xhsText = [];
+  CanvasRenderingContext2D.prototype.fillText = function(text, x, y, ...rest) {
+    if (this.canvas.id === 'share-card') {
+      const m = this.measureText(String(text));
+      const left = this.textAlign === 'center' ? x - m.width / 2 : this.textAlign === 'right' ? x - m.width : x;
+      window.__xhsText.push({text: String(text), left, right: left + m.width, top: y - m.actualBoundingBoxAscent, bottom: y + m.actualBoundingBoxDescent});
+    }
+    return original.call(this, text, x, y, ...rest);
+  };
+})();
+"""
+
+
+def check_F29(browser):
+    """Xiaohongshu card: no text overlaps other text or comes within 14 px of the footer rule, with the
+    longest names in the dictionary, in both languages, for one fly and for both."""
+    problems = []
+    cases = [
+        ('en', 'female', 'latiao,hot-and-sour-noodles,xiaolongbao,pickled-cabbage-fish'),
+        ('en', 'both', 'latiao,hot-and-sour-noodles,xiaolongbao'),
+        ('en', 'both', 'pickled-cabbage-fish,xiaolongbao'),
+        ('zh', 'female', 'injera,goulash,gnocchi,watermelon,honey'),
+        ('zh', 'both', 'injera,goulash,gnocchi,pickled-cabbage-fish,xiaolongbao'),
+        ('zh', 'male', 'hot-and-sour-noodles,injera,goulash'),
+    ]
+    for lang, fly, dishes in cases:
+        page = browser.new_page(viewport={"width": 390, "height": 900}, bypass_csp=True)
+        page.add_init_script(INIT)
+        page.add_init_script(XHS_BOUNDS)
+        errors = []
+        page.on("pageerror", lambda e: errors.append(f"pageerror: {e}"))
+        query = '?v=2&d=' + ','.join('k.' + d for d in dishes.split(',')) + f'&lang={lang}&seed=0' + ('' if fly == 'female' else f'&f={fly}')
+        page.goto(BASE + query, wait_until="domcontentloaded")
+        page.wait_for_function("window.__askfly && window.__askfly.snapshot().phase !== 'input'")
+        for selector in ('#skip-btn', '#skip-btn-male'):
+            if page.locator(selector).is_visible():
+                page.click(selector)
+        wait_result(page)
+        page.click('#share-btn')
+        page.wait_for_selector('#card-dialog[open]')
+        page.wait_for_selector('#download-link[href]')
+        page.evaluate("window.__xhsText = []")
+        page.check('input[name="card-format"][value="xhs"]')
+        page.wait_for_function("document.getElementById('share-card').width === 1080 && window.__xhsText.length > 3")
+        page.wait_for_timeout(600)
+        boxes = page.evaluate("window.__xhsText")
+        label = f'{lang}/{fly}/{dishes}'
+        for box in boxes:
+            if box['left'] < 0 or box['right'] > 1080 or box['top'] < 0 or box['bottom'] > 1440:
+                problems.append(f"{label}: text outside the card: {box['text']!r}")
+            # Text above the footer rule (y = 1195) keeps a clear margin from it.
+            if box['top'] < 1195 and box['bottom'] > 1195 - 14:
+                problems.append(f"{label}: text touches or crosses the footer rule: {box['text']!r} (bottom {box['bottom']:.0f})")
+        for i, a in enumerate(boxes):
+            for b in boxes[i + 1:]:
+                if a['left'] < b['right'] - 1 and b['left'] < a['right'] - 1 and a['top'] < b['bottom'] - 1 and b['top'] < a['bottom'] - 1:
+                    problems.append(f"{label}: text overlaps: {a['text']!r} / {b['text']!r}")
+        if errors:
+            problems.append(f"{label}: {errors}")
+        page.close()
     return problems
 
 
@@ -801,6 +931,7 @@ CHECKS = {
     "F22": check_F22,
     "F23": check_F23, "F24": check_F24,
     "F25": check_F25, "F26": check_F26, "F27": check_F27,
+    "F28": check_F28, "F29": check_F29,
 }
 
 

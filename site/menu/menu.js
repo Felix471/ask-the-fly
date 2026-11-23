@@ -65,7 +65,8 @@ function standardRow(dish, fly) {
 function compactTier(tier, fly, divergence = false) {
   const box = document.createElement('div'); box.className = 'tied-group';
   const title = document.createElement('div'); title.className = 'tied-title';
-  title.textContent = divergence ? tr('menu.tied',{rank:tier.diff,n:tier.keys.length}) : tr('menu.tied',{rank:tier.rank,n:tier.keys.length});
+  // A tied tier shares a rank; a divergence tier shares a rank gap between the two flies.
+  title.textContent = divergence ? tr('menu.gapTied',{diff:tier.diff,n:tier.keys.length}) : tr('menu.tied',{rank:tier.rank,n:tier.keys.length});
   if (!divergence) title.append(stateIcon(byKey.get(tier.keys[0]),fly));
   box.append(title);
   const grid = document.createElement('div'); grid.className = 'tied-grid';
@@ -158,13 +159,18 @@ function renderLists() {
       else for (const key of tier.keys) entries.push(fly ? standardRow(byKey.get(key),fly) : divergenceRow(byKey.get(key)));
       preceding += tier.keys.length;
     }
+    if (id === 'divergence') {
+      // The fixed sentence on why the two flies can differ belongs wherever they are compared.
+      const note = document.createElement('p'); note.className = 'menu-note'; note.textContent = t().disagreement.sentence;
+      entries.unshift(note);
+    }
     addPaginated(id,title,entries);
   }
   for (const fly of ['female','male']) {
     addPaginated('section-tops-'+fly,tr('menu.sectionTops')+' · '+t().flyName[fly],sections.map((_,i)=>sectionRow(i,fly)));
   }
   const nav = $('menu-contents'); nav.replaceChildren();
-  for (const [id,title] of [...definitions.map(d=>d.slice(0,2)),['section-tops-female',tr('menu.sectionTops')],['all',tr('menu.allTitle',{n:menu.dishes.length})]]) {
+  for (const [id,title] of [...definitions.map(d=>d.slice(0,2)),...['female','male'].map(fly=>['section-tops-'+fly,tr('menu.sectionTops')+' · '+t().flyName[fly]]),['all',tr('menu.allTitle',{n:menu.dishes.length})]]) {
     const a = document.createElement('a'); a.href = '#'+id; a.textContent = title; nav.append(a);
   }
 }
@@ -172,7 +178,8 @@ function renderTable() {
   const selected = menu.dishes.filter(dish => (sectionFilter === 'all' || dish.section === Number(sectionFilter)) &&
     (!search || normalize(dish.display.zh).includes(normalize(search)) || normalize(dish.display.en).includes(normalize(search))));
   selected.sort((a,b)=>b[sortFly].mn9-a[sortFly].mn9); // stable sort retains dictionary order for ties
-  $('table-count').textContent = tr('menu.allTitle',{n:selected.length});
+  // The heading already says how many there are in all; count only a filtered view.
+  $('table-count').textContent = selected.length === menu.dishes.length ? '' : tr('menu.shown',{n:selected.length});
   const fragment = document.createDocumentFragment();
   for (const dish of selected) {
     const row = document.createElement('div'); row.className = 'table-row'; row.dataset.key = dish.key;

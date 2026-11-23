@@ -337,6 +337,42 @@ export function cardReadoutLines(decision, lang, maleDecision = null) {
   ];
 }
 
+// ---------- first visit: example sets, table hint, sticky bar ----------
+// Ready-made tables for a first-time visitor (our choice of dishes; the scores
+// are the tables'). Each has one clear female pick, checked by the tests.
+export const EXAMPLE_SETS = [
+  ["watermelon", "mapo tofu", "black coffee"],
+  ["bubble tea", "hamburger", "tears"],
+  ["nectar", "steak"],
+  ["honey", "rotting-banana", "toothpaste"],
+];
+
+// Which hint the table shows: the general one when empty, "one more" with a
+// single dish, none once the fly can be asked.
+export function tableHintKey(count) {
+  return count === 0 ? "hint" : count === 1 ? "hintOneMore" : null;
+}
+
+// The bar pinned to the bottom while choosing: only when something is on the
+// table and the real ask button has scrolled out of view.
+export function stickyBarState({ phase, count, askVisible }) {
+  if (phase !== "input" || count < 1 || askVisible) return { show: false };
+  return count >= 2 ? { show: true, key: "stickyCount", n: count, ready: true } : { show: true, key: "stickyNeedMore", n: 2 - count, ready: false };
+}
+
+// Dishes ranked below the fly's pick, highest first, for the Xiaohongshu card.
+export function xhsPassedItems(decision) {
+  if (!decision.flyPick || decision.mode === "opposite") return [];
+  const chosen = decision.tie.length ? decision.tie : [decision.winner];
+  return decision.known.filter((item) => !chosen.includes(item)).sort((a, b) => b.cell.mn9_mean - a.cell.mn9_mean);
+}
+
+// With both flies on a narrow screen the panels are stacked, so they play one
+// after the other and the page follows the one that is playing.
+export function runPanelsInTurn(fly, stacked) {
+  return fly === "both" && Boolean(stacked);
+}
+
 export function flySelection(value) {
   return ['female', 'male', 'both'].includes(value) ? value : 'female';
 }
@@ -1107,9 +1143,10 @@ export function drawShareCardXhs(canvas, decision, lang, options = {}) {
   const ctx = canvas.getContext('2d');
   const t = STRINGS[lang], both = Boolean(options.maleDecision);
   const W = canvas.width, H = canvas.height, pad = 64;
+  const RULE = 1195; // the divider above the footer; nothing above may cross it
   const font = (size, weight = 400) => weight + ' ' + size + 'px system-ui, -apple-system, "Segoe UI", "PingFang SC", "Noto Sans CJK SC", "Microsoft YaHei", sans-serif';
+  // Lines of `value` at the current ctx.font that fit `width`; over-long words are split.
   const linesFor = (value, width) => {
-    ctx.font = ctx.font;
     const result = [];
     for (const initial of wrapLines(ctx, String(value), width)) {
       if (ctx.measureText(initial).width <= width) { result.push(initial); continue; }
@@ -1122,10 +1159,30 @@ export function drawShareCardXhs(canvas, decision, lang, options = {}) {
     }
     return result;
   };
-  const write = (value,x,y,width,size,height,weight=400) => {
-    ctx.font=font(size,weight);
-    for(const line of linesFor(value,width)) { ctx.fillText(line,x,y);y+=height; }
-    return y;
+  // The largest size from `sizes` whose wrapped text needs at most `maxLines` lines
+  // (the smallest size is used as given when nothing fits).
+  const fit = (value, width, sizes, maxLines, weight) => {
+    let chosen = null;
+    for (const size of sizes) {
+      ctx.font = font(size, weight);
+      chosen = { size, weight, lines: linesFor(value, width) };
+      if (chosen.lines.length <= maxLines) break;
+    }
+    return chosen;
+  };
+  const leading = (block) => Math.round(block.size * 1.16);
+  const blockHeight = (block) => block.lines.length * leading(block);
+  // Draws a fitted block with its first baseline at `y`; returns the y below the block.
+  const drawBlock = (block, x, y) => {
+    ctx.font = font(block.size, block.weight);
+    for (const line of block.lines) { ctx.fillText(line, x, y); y += leading(block); }
+    return y - leading(block) + Math.round(block.size * 0.3);
+  };
+  const ellipsize = (value, width) => {
+    if (ctx.measureText(value).width <= width) return value;
+    let text = String(value);
+    while (text.length > 1 && ctx.measureText(text + '…').width > width) text = text.slice(0, -1);
+    return text + '…';
   };
   const headline = d => {
     if (!d.flyPick) return t.verdictNone;
@@ -1133,51 +1190,82 @@ export function drawShareCardXhs(canvas, decision, lang, options = {}) {
     const context = finalSpeechContext(d);
     return context ? speechLine(context,d.flyPick.cell,d.shareSeed,lang) : t.sceneNoResponse;
   };
+  const namesOf = (items, d) => items.map(value => displayName(value, lang)).join(' / ')
+    || d.misses.map(value => displayName(value, lang)).join(' / ') || t.cardEmptyValue;
   ctx.fillStyle=options.stub?'#fff3c4':'#fbf8f2';ctx.fillRect(0,0,W,H);
   ctx.fillStyle='#b5471f';ctx.fillRect(0,0,W,18);
   ctx.textAlign='left';ctx.fillStyle='#1f1a17';
-  write(t.cardTitle,pad,84,W-2*pad,38,48,700);
+  ctx.font=font(38,700);
+  // A single male card says whose pick it is; the female fly is the default.
+  ctx.fillText(!both && decision.fly==='male' ? t.cardTitle+' · '+t.flyName.male : t.cardTitle,pad,84);
   const spriteFor=options.spriteFor||(()=>null);
   const chosen = d => outcomeItems(d);
   if (both) {
     const pair=[['female',decision,options.sprites],['male',options.maleDecision,options.maleSprites]];
-    const col=(W-3*pad)/2, spriteSize=400;
-    const top=205, spriteTop=270, nameTop=755, speechTop=970;
+    const col=(W-3*pad)/2;
+    const disagree=fliesDisagree(decision,options.maleDecision) ? fit(t.card.disagree,W-2*pad,[34,30,26],3,600) : null;
+    const bottom=RULE-22-(disagree ? blockHeight(disagree)+18 : 0);
+    // One layout for both columns: shrink the names, then the speech, then the
+    // picture, until the taller column fits above the footer.
+    let layout=null;
+    search: for (const spriteSize of [400,340,280,230]) {
+      for (const [nameSizes,speechSizes] of [[[64],[56]],[[64,56],[56,48]],[[64,56,48],[56,48,42]],[[56,48,42,36],[48,42,36]],[[48,42,36,32],[42,36,32,28]]]) {
+        // Both columns use one size: fit each, then set both at the smaller size.
+        const sameSize=(texts,sizes,maxLines,weight)=>{
+          const size=Math.min(...texts.map(text=>fit(text,col,sizes,maxLines,weight).size));
+          return texts.map(text=>fit(text,col,[size],maxLines,weight));
+        };
+        const names=sameSize(pair.map(([,d])=>namesOf(chosen(d),d)),nameSizes,3,700);
+        // Speech: one line at a slightly smaller size beats a wrap that strands a character.
+        const lines=pair.map(([,d])=>headline(d));
+        const oneLine=sameSize(lines,[...speechSizes,40],1,600);
+        const speeches=oneLine.every(block=>block.lines.length===1) ? oneLine : sameSize(lines,speechSizes,2,600);
+        const nameTop=270+spriteSize+30;
+        const nameHeight=Math.max(...names.map(blockHeight)), speechHeight=Math.max(...speeches.map(blockHeight));
+        layout={spriteSize,names,speeches,nameTop,speechTop:nameTop+nameHeight+16,end:nameTop+nameHeight+16+speechHeight};
+        if (layout.end<=bottom) break search;
+      }
+    }
+    const spriteTop=270, spriteSize=layout.spriteSize;
     for(let i=0;i<2;i++){
       const [fly,d,sprites]=pair[i], x=pad+i*(col+pad), items=chosen(d);
       ctx.textAlign='center';
-      ctx.fillStyle='#b5471f';write(t.flyName[fly],x+col/2,top,col,48,58,700);
+      ctx.fillStyle='#b5471f';ctx.font=font(48,700);ctx.fillText(t.flyName[fly],x+col/2,205);
       const item=items[0]||d.flyPick;
       if(item) {
         drawDish(ctx,spriteFor(item),x+(col-spriteSize)/2,spriteTop,spriteSize,false);
         if(d.flyPick && d.mode!=='opposite') drawResponseFly(ctx,sprites,d.flyPick,x+(col-spriteSize)/2,spriteTop,spriteSize);
         else if(d.flyPick && item!==d.flyPick) {
-          drawDish(ctx,spriteFor(d.flyPick),x+col-120,spriteTop+250,108,false);
-          drawResponseFly(ctx,sprites,d.flyPick,x+col-120,spriteTop+250,108);
+          const small=Math.round(spriteSize*0.27);
+          drawDish(ctx,spriteFor(d.flyPick),x+col-small-12,spriteTop+spriteSize-small-42,small,false);
+          drawResponseFly(ctx,sprites,d.flyPick,x+col-small-12,spriteTop+spriteSize-small-42,small);
         }
       }
-      ctx.fillStyle='#1f1a17';
-      const names=items.map(value=>displayName(value,lang)).join(' / ')||t.cardEmptyValue;
-      write(names,x+col/2,nameTop,col,64,74,700);
-      ctx.fillStyle='#6b625b';write(headline(d),x+col/2,speechTop,col,56,65,600);
+      ctx.fillStyle='#1f1a17';drawBlock(layout.names[i],x+col/2,layout.nameTop+layout.names[i].size);
+      ctx.fillStyle='#6b625b';drawBlock(layout.speeches[i],x+col/2,layout.speechTop+layout.speeches[i].size);
     }
-    if(fliesDisagree(decision,options.maleDecision)){
-      ctx.textAlign='center';ctx.fillStyle='#b5471f';write(t.card.disagree,W/2,1150,W-2*pad,34,43,600);
+    if(disagree){
+      ctx.textAlign='center';ctx.fillStyle='#b5471f';
+      drawBlock(disagree,W/2,RULE-22-blockHeight(disagree)+disagree.size);
     }
     ctx.textAlign='left';
   } else {
-    const headlineEnd=write(headline(decision),pad,200,W-2*pad,96,108,700);
+    const single=fit(headline(decision),W-2*pad,[96,84,76],1,700);
+    const head=single.lines.length===1 ? single : fit(headline(decision),W-2*pad,[96,84,72,60],3,700);
+    ctx.fillStyle='#1f1a17';
+    const headlineEnd=drawBlock(head,pad,200+Math.round((head.size-96)*0.6));
     const items=chosen(decision);
     const shown=items.length ? items.slice(0,3) : decision.flyPick ? [decision.flyPick] : [];
     const gap=24;
-    const names=items.slice(0,3).map(value=>displayName(value,lang)).join(' / ')+(items.length>3?' / +'+(items.length-3):'')||t.cardEmptyValue;
-    const nameSize=shown.length===1?72:64;
-    ctx.font=font(nameSize,700);
-    const nameLines=linesFor(names,W-2*pad).length;
-    const heroTop=Math.max(355,headlineEnd+36);
-    const nameBaseline=1150-(nameLines-1)*82;
-    const nameRoom=nameBaseline-heroTop-46;
-    const size=Math.min(items.length>1?340:600,Math.max(180,nameRoom),Math.floor((W-2*pad-gap*(shown.length-1))/Math.max(1,shown.length)));
+    const names=items.slice(0,3).map(value=>displayName(value,lang)).join(' / ')+(items.length>3?' / +'+(items.length-3):'')
+      || decision.misses.map(value=>displayName(value,lang)).join(' / ') || t.cardEmptyValue;
+    const name=fit(names,W-2*pad,shown.length===1?[72,64,56,48]:[64,56,48,42],2,700);
+    // The dishes ranked below the pick: small, greyed, each with its name and score.
+    const passed=xhsPassedItems(decision);
+    const thumb=124, passedHeight=passed.length ? thumb+84 : 0;
+    const heroTop=Math.max(330,headlineEnd+30);
+    const room=RULE-24-passedHeight-(passed.length?26:0)-blockHeight(name)-34-heroTop;
+    const size=Math.max(140,Math.min(items.length>1?340:600,room,Math.floor((W-2*pad-gap*(shown.length-1))/Math.max(1,shown.length))));
     const x=(W-(shown.length*size+gap*(shown.length-1)))/2;
     for (const [index,item] of shown.entries()) {
       const xx=x+index*(size+gap);
@@ -1189,12 +1277,34 @@ export function drawShareCardXhs(canvas, decision, lang, options = {}) {
       drawDish(ctx,spriteFor(decision.flyPick),W-pad-160,heroTop+size-150,140,false);
       drawResponseFly(ctx,options.sprites,decision.flyPick,W-pad-160,heroTop+size-150,140);
     }
-    ctx.fillStyle='#1f1a17';
-    ctx.textAlign='center';write(names,W/2,heroTop+size+50,W-2*pad,nameSize,82,700);ctx.textAlign='left';
+    ctx.fillStyle='#1f1a17';ctx.textAlign='center';
+    const nameEnd=drawBlock(name,W/2,heroTop+size+34+name.size*0.8);
+    if (passed.length) {
+      const show=passed.slice(0,3), more=passed.length-show.length;
+      ctx.font=font(30,400);ctx.textAlign='left';ctx.fillStyle='#6b625b';
+      const label=t.cardXhs.passed, labelWidth=ctx.measureText(label).width+24;
+      const moreWidth=more>0 ? ctx.measureText(fmt(t.cardMore,{n:more})).width+20 : 0;
+      const top=Math.min(nameEnd+26,RULE-24-passedHeight);
+      const cell=(W-2*pad-labelWidth-moreWidth)/3;
+      ctx.fillText(label,pad,top+thumb/2+10);
+      if (more>0) { ctx.textAlign='right'; ctx.fillText(fmt(t.cardMore,{n:more}),W-pad,top+thumb/2+10); }
+      ctx.textAlign='center';
+      for (const [index,item] of show.entries()) {
+        const cx=pad+labelWidth+cell*index+cell/2;
+        ctx.globalAlpha=0.6;drawDish(ctx,spriteFor(item),cx-thumb/2,top,thumb,false);ctx.globalAlpha=1;
+        ctx.fillStyle='#51463e';ctx.font=font(30,400);
+        ctx.fillText(ellipsize(displayName(item,lang),cell-14),cx,top+thumb+36);
+        ctx.fillStyle='#6b625b';ctx.font=font(28,400);
+        ctx.fillText(fmt(t.hzValue,{hz:item.cell.mn9_mean.toFixed(1)}),cx,top+thumb+72);
+      }
+    }
+    ctx.textAlign='left';
   }
-  ctx.fillStyle='#e2dbd0';ctx.fillRect(pad,1195,W-2*pad,2);
-  ctx.fillStyle='#1f1a17';write('askthefly.app',pad,1270,600,44,52,700);
-  ctx.fillStyle='#6b625b';write(t.cardHonesty,pad,1330,690,34,41);
+  ctx.fillStyle='#e2dbd0';ctx.fillRect(pad,RULE,W-2*pad,2);
+  ctx.fillStyle='#1f1a17';ctx.font=font(44,700);ctx.fillText('askthefly.app',pad,1270);
+  ctx.fillStyle='#6b625b';
+  const honesty=fit(t.cardHonesty,690,[34,30,27],3,400);
+  drawBlock(honesty,pad,1330);
   const qr=drawQr(ctx,shareUrl(decision,lang,options.siteUrl||SITE_URL),W-pad-235,1204,230);
   if(options.stub){ctx.fillStyle='#4a3a00';ctx.font=font(34,700);ctx.fillText(t.stubStamp,pad,H-20);}
   return canvas;
@@ -1219,6 +1329,7 @@ if (isBrowser) {
     fly: (() => {try {return flySelection(localStorage.getItem('askfly.fly'));} catch (_) {return 'female';}})(),
     spriteFallbacks: {}, sections:null, siteUrl:SITE_URL,
     session:0, shareRequest:0, phase:'input', selectionRequest:0,
+    askVisible:true, exampleIndex:0, cardFormat:'standard', skippedSession:null,
     idleFly: null,
   };
 
@@ -1229,7 +1340,13 @@ if (isBrowser) {
   const activePanels = () => (state.fly === 'both' ? [state.panels.female,state.panels.male] : [primaryPanel()]).filter(Boolean);
   const panelHost = {lang:()=>state.lang,selection:()=>state.fly,notice, spriteSlug,skip:skipAll,
     notFoodBadge:item=>notFoodCopy(item.entry,state.sections,state.lang)?.badge || '',
-    get scrollBehavior(){return scrollBehavior;}};
+    get scrollBehavior(){return scrollBehavior;},
+    // Where the page goes when a fly starts: the top, or that fly's own panel when the
+    // two panels are stacked and play in turn (the visitor may be deep in the dish list).
+    scrollToPanel(panel){
+      if(runPanelsInTurn(state.fly,panelsStacked())) panel.root.scrollIntoView({behavior:scrollBehavior,block:'start'});
+      else window.scrollTo({top:0,behavior:scrollBehavior});
+    }};
   state.panels.female = new FlyPanel(primaryRoot, {flyKey:'female', loadReplay:(()=>{
     const baseline=makeReplayLoader('data/replay_v1_2/'),variants=makeReplayLoader('data/replay/');
     return (id,variant)=>variant && variant!=='baseline'?variants(id,variant):baseline(id);
@@ -1595,12 +1712,16 @@ if (isBrowser) {
     });
     renderLibrarySelection();
     const ready = Boolean(state.panels.female.lookup && state.dictionary);
-    $("ask-btn").disabled = !ready;
-    $("opposite-btn").disabled = !ready;
+    // Asking needs two dishes: the buttons stay disabled and the hint says why.
+    const enough = ready && state.options.length >= 2;
+    $("ask-btn").disabled = !enough;
+    $("opposite-btn").disabled = !enough;
     if (state.options.length >= 2) notice(null);
-    // Empty table: the one-line hint shows until a dish arrives; the fly rests
-    // on the table's edge throughout.
-    $("table-empty").hidden = state.options.length > 0;
+    const hintKey = tableHintKey(state.options.length);
+    $("table-empty").hidden = !hintKey;
+    if (hintKey) $("table-empty").textContent = tr(hintKey);
+    $("example-btn").hidden = state.options.length > 0 || !ready;
+    renderStickyBar();
     if (state.idleFly) { if (reducedMotion) { state.idleFly.stop(); state.idleFly.draw(); } else state.idleFly.start(); }
   }
 
@@ -1731,18 +1852,34 @@ if (isBrowser) {
 
   // The only place that shows or hides the three views. Text re-renders
   // (language switch) never call it (F06).
+  // Bottom bar while browsing the full list: the count and the ask button.
+  function renderStickyBar() {
+    const bar = stickyBarState({ phase: state.phase, count: state.options.length, askVisible: state.askVisible });
+    $("sticky-bar").hidden = !bar.show;
+    document.body.classList.toggle("with-sticky-bar", bar.show);
+    if (!bar.show) return;
+    $("sticky-count").textContent = tr(bar.key, { n: bar.n });
+    $("sticky-ask").disabled = !bar.ready || !state.panels.female.lookup || !state.dictionary;
+  }
+
+  // Narrow screens stack the two fly panels (the two-column layout starts at 960 px).
+  const panelsStacked = () => typeof matchMedia !== "function" || !matchMedia("(min-width: 960px)").matches;
+
   function setPhase(phase) {
     state.phase = phase;
     $("input-panel").hidden = phase !== "input";
     for(const panel of Object.values(state.panels).filter(Boolean)) panel.root.hidden=phase==='input' || !activePanels().includes(panel);
     $('fly-panels').hidden=phase==='input';
     $("result-panel").hidden = phase !== "result";
+    renderStickyBar();
   }
 
   function showResult() {
     for (const panel of activePanels()) panel.showFinalResponse();
     renderDecision();
     setPhase("result");
+    // The verdict sits below the stage and the brain: bring it into view.
+    $("result-panel").scrollIntoView({ behavior: scrollBehavior, block: "start" });
   }
 
   // The winner sprite with the fly is the result's main image, drawn as soon
@@ -1798,7 +1935,8 @@ if (isBrowser) {
     }
     if(!primaryPanel().decision.known.length){notice('stateAllUnknown');showResult();return;}
     setPhase('tasting');
-    await Promise.all(activePanels().map(async panel=>{
+    state.skippedSession=null;
+    const play=async panel=>{
       if(!panel.brain || !panel.scene) return;
       const panelSession=panel.session;
       try {await panel.runScene(panel.decision,panelSession);}
@@ -1809,12 +1947,30 @@ if (isBrowser) {
         panel.renderSceneStatus();
         notice('stateSceneError');
       }
-    }));
-    if(state.session!==session) return;
+    };
+    if(runPanelsInTurn(state.fly,panelsStacked())) {
+      // Stacked panels: one fly at a time, with the page following it.
+      for(const panel of activePanels()) {
+        if(state.session!==session) break;
+        if(state.skippedSession===session) {
+          // Skipped before this fly's turn: lay out its plates, then show its final state.
+          const pending=play(panel);
+          panel.token?.cancel();
+          await pending;
+          if(state.session===session) panel.skip();
+          continue;
+        }
+        await play(panel);
+      }
+    } else {
+      await Promise.all(activePanels().map(play));
+    }
+    if(state.session!==session || state.skippedSession===session) return;
     showResult();
   }
 
   function skipAll() {
+    state.skippedSession=state.session; // also stops a fly that has not started its turn
     for(const panel of activePanels()) panel.skip();
     if(primaryPanel()?.decision) showResult();
   }
@@ -2083,16 +2239,32 @@ if (isBrowser) {
   $("view-all-btn").addEventListener("click", () => {
     library.open = !library.open;
     renderTasted();
-    if (library.open) $("library-search").focus({ preventScroll: true });
+    // No autofocus on touch screens: it would raise the keyboard over the tabs.
+    const touch = typeof matchMedia === "function" && matchMedia("(pointer: coarse)").matches;
+    if (library.open && !touch) $("library-search").focus({ preventScroll: true });
   });
   $("library-search").addEventListener("input", (event) => { library.query = event.target.value; renderTasted(); });
   $("ask-btn").addEventListener("click", () => run("ask"));
+  $("sticky-ask").addEventListener("click", () => run("ask"));
+  $("example-btn").addEventListener("click", () => {
+    const set = EXAMPLE_SETS[state.exampleIndex % EXAMPLE_SETS.length];
+    state.exampleIndex += 1;
+    state.options = [];
+    for (const key of set) addSelection(optionFromText(key, state.dictionary));
+  });
+  if (typeof IntersectionObserver === "function") {
+    new IntersectionObserver((entries) => {
+      state.askVisible = entries[entries.length - 1].isIntersecting;
+      renderStickyBar();
+    }).observe($("ask-btn"));
+  }
   $("opposite-btn").addEventListener("click", () => run("opposite"));
   $("share-btn").addEventListener("click", () => {
-    document.querySelector('input[name="card-format"][value="standard"]').checked = true;
+    document.querySelector('input[name="card-format"][value="' + state.cardFormat + '"]').checked = true;
     showCard().catch((error) => { console.warn("share card failed:", error); notice("stateShareFailed"); });
   });
   document.querySelectorAll('input[name="card-format"]').forEach(input => input.addEventListener("change", () => {
+    if (input.checked) state.cardFormat = input.value; // kept for the rest of this visit
     if ($('card-dialog').open) showCard().catch(error => { console.warn("share card redraw failed:", error); notice("stateShareFailed"); });
   }));
   $("save-btn").addEventListener("click", () => { shareSave(); });
