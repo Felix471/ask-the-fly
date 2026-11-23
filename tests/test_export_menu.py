@@ -70,4 +70,3 @@ class MenuExport(unittest.TestCase):
             (root / export_menu.INPUTS['fly_lines']).write_text(json.dumps(objects['fly_lines']),encoding='utf8')
             with self.assertRaisesRegex(ValueError, 'No speech bucket'):
                 export_menu.build_menu(root)
-

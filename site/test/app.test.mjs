@@ -636,7 +636,7 @@ test("the table hint explains what is missing until two dishes are on it", () =>
 
 test("the sticky bar shows only while choosing with the ask button out of view", () => {
   assert.deepEqual(stickyBarState({ phase: "input", count: 0, askVisible: false }), { show: false });
-  assert.deepEqual(stickyBarState({ phase: "input", count: 1, askVisible: false }), { show: true, key: "stickyNeedMore", n: 1, ready: false });
+  assert.deepEqual(stickyBarState({ phase: "input", count: 1, askVisible: false }), { show: true, key: "stickyNeedMore", n: 1, count: 1, ready: false });
   assert.deepEqual(stickyBarState({ phase: "input", count: 3, askVisible: false }), { show: true, key: "stickyCount", n: 3, ready: true });
   assert.deepEqual(stickyBarState({ phase: "input", count: 3, askVisible: true }), { show: false });
   assert.deepEqual(stickyBarState({ phase: "tasting", count: 3, askVisible: false }), { show: false });
@@ -658,4 +658,15 @@ test("both flies play one after the other only when their panels are stacked", (
   assert.equal(runPanelsInTurn("both", false), false);
   assert.equal(runPanelsInTurn("female", true), false);
   assert.equal(runPanelsInTurn("male", true), false);
+});
+
+import { clipText } from "../app.js";
+
+test("a clipped free-text name never ends on half a surrogate pair", () => {
+  const name = "x".repeat(79) + "\u{1f600}";
+  assert.equal(clipText(name, 80), "x".repeat(79));
+  assert.equal(clipText("abc", 80), "abc");
+  assert.equal(clipText("x".repeat(78) + "\u{1f600}", 80), "x".repeat(78) + "\u{1f600}");
+  const decision = decide([{ name, cell: null }, { name: "other", cell: null }], "ask");
+  assert.doesNotThrow(() => shareParams(decision, "en"));
 });

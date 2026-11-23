@@ -357,7 +357,7 @@ export function tableHintKey(count) {
 // table and the real ask button has scrolled out of view.
 export function stickyBarState({ phase, count, askVisible }) {
   if (phase !== "input" || count < 1 || askVisible) return { show: false };
-  return count >= 2 ? { show: true, key: "stickyCount", n: count, ready: true } : { show: true, key: "stickyNeedMore", n: 2 - count, ready: false };
+  return count >= 2 ? { show: true, key: "stickyCount", n: count, ready: true } : { show: true, key: "stickyNeedMore", n: 2 - count, count, ready: false };
 }
 
 // Dishes ranked below the fly's pick, highest first, for the Xiaohongshu card.
@@ -445,9 +445,16 @@ export function slugFor(key) {
 // A link re-runs the choice against the current data; it is not a snapshot.
 export const SHARE_LIMITS = { maxItems: 20, maxTextLength: 80 };
 
+// At most `limit` UTF-16 units, never ending on half of a surrogate pair (which
+// would make encodeURIComponent throw).
+export function clipText(text, limit) {
+  const cut = text.slice(0, limit);
+  return /[\uD800-\uDBFF]$/.test(cut) ? cut.slice(0, -1) : cut;
+}
+
 function shareItemsFor(decision) {
   return [...decision.known, ...decision.misses].slice(0, SHARE_LIMITS.maxItems).map((item) => (
-    item.entry ? { kind: "key", value: slugFor(item.entry.key) } : { kind: "text", value: String(item.name).trim().slice(0, SHARE_LIMITS.maxTextLength) }
+    item.entry ? { kind: "key", value: slugFor(item.entry.key) } : { kind: "text", value: clipText(String(item.name).trim(), SHARE_LIMITS.maxTextLength) }
   ));
 }
 
@@ -1159,6 +1166,13 @@ export function drawShareCardXhs(canvas, decision, lang, options = {}) {
     }
     return result;
   };
+  // `value` cut to `width` at the current ctx.font, ending in an ellipsis when cut.
+  const ellipsize = (value, width) => {
+    if (ctx.measureText(value).width <= width) return value;
+    let text = Array.from(String(value).replace(/…$/, ''));
+    while (text.length > 1 && ctx.measureText(text.join('') + '…').width > width) text.pop();
+    return text.join('') + '…';
+  };
   // The largest size from `sizes` whose wrapped text needs at most `maxLines` lines
   // (the smallest size is used as given when nothing fits).
   const fit = (value, width, sizes, maxLines, weight) => {
@@ -1167,6 +1181,11 @@ export function drawShareCardXhs(canvas, decision, lang, options = {}) {
       ctx.font = font(size, weight);
       chosen = { size, weight, lines: linesFor(value, width) };
       if (chosen.lines.length <= maxLines) break;
+    }
+    if (chosen.lines.length > maxLines) {
+      // Even the smallest size needs too many lines: keep the budget and end with an ellipsis.
+      ctx.font = font(chosen.size, weight);
+      chosen.lines = [...chosen.lines.slice(0, maxLines - 1), ellipsize(chosen.lines[maxLines - 1] + '…', width)];
     }
     return chosen;
   };
@@ -1177,12 +1196,6 @@ export function drawShareCardXhs(canvas, decision, lang, options = {}) {
     ctx.font = font(block.size, block.weight);
     for (const line of block.lines) { ctx.fillText(line, x, y); y += leading(block); }
     return y - leading(block) + Math.round(block.size * 0.3);
-  };
-  const ellipsize = (value, width) => {
-    if (ctx.measureText(value).width <= width) return value;
-    let text = String(value);
-    while (text.length > 1 && ctx.measureText(text + '…').width > width) text = text.slice(0, -1);
-    return text + '…';
   };
   const headline = d => {
     if (!d.flyPick) return t.verdictNone;
@@ -1265,15 +1278,17 @@ export function drawShareCardXhs(canvas, decision, lang, options = {}) {
     const thumb=124, passedHeight=passed.length ? thumb+84 : 0;
     const heroTop=Math.max(330,headlineEnd+30);
     const room=RULE-24-passedHeight-(passed.length?26:0)-blockHeight(name)-34-heroTop;
-    const size=Math.max(140,Math.min(items.length>1?340:600,room,Math.floor((W-2*pad-gap*(shown.length-1))/Math.max(1,shown.length))));
-    const x=(W-(shown.length*size+gap*(shown.length-1)))/2;
+    const inset=Boolean(decision.flyPick && decision.mode==='opposite' && !items.includes(decision.flyPick));
+    const rowWidth=W-2*pad-(inset && shown.length>1 ? 176 : 0); // the fly's own pick keeps a slot at the right
+    const size=Math.max(140,Math.min(items.length>1?340:600,room,Math.floor((rowWidth-gap*(shown.length-1))/Math.max(1,shown.length))));
+    const x=pad+(rowWidth-(shown.length*size+gap*(shown.length-1)))/2;
     for (const [index,item] of shown.entries()) {
       const xx=x+index*(size+gap);
       drawDish(ctx,spriteFor(item),xx,heroTop,size,false);
       if(decision.flyPick && decision.mode!=='opposite' && items.length===1) drawResponseFly(ctx,options.sprites,decision.flyPick,xx,heroTop,size);
     }
     if(decision.flyPick && decision.mode!=='opposite' && items.length>1) drawFlyOn(ctx,options.sprites?.fly,W/2-size/2,heroTop-size*0.12,size,false);
-    if(decision.flyPick && decision.mode==='opposite' && !items.includes(decision.flyPick)) {
+    if(inset) {
       drawDish(ctx,spriteFor(decision.flyPick),W-pad-160,heroTop+size-150,140,false);
       drawResponseFly(ctx,options.sprites,decision.flyPick,W-pad-160,heroTop+size-150,140);
     }
@@ -1305,7 +1320,8 @@ export function drawShareCardXhs(canvas, decision, lang, options = {}) {
   ctx.fillStyle='#6b625b';
   const honesty=fit(t.cardHonesty,690,[34,30,27],3,400);
   drawBlock(honesty,pad,1330);
-  const qr=drawQr(ctx,shareUrl(decision,lang,options.siteUrl||SITE_URL),W-pad-235,1204,230);
+  try { drawQr(ctx,shareUrl(decision,lang,options.siteUrl||SITE_URL),W-pad-235,1204,230); }
+  catch (error) { console.warn('QR code skipped (link too long):', error); }
   if(options.stub){ctx.fillStyle='#4a3a00';ctx.font=font(34,700);ctx.fillText(t.stubStamp,pad,H-20);}
   return canvas;
 }
@@ -1329,7 +1345,7 @@ if (isBrowser) {
     fly: (() => {try {return flySelection(localStorage.getItem('askfly.fly'));} catch (_) {return 'female';}})(),
     spriteFallbacks: {}, sections:null, siteUrl:SITE_URL,
     session:0, shareRequest:0, phase:'input', selectionRequest:0,
-    askVisible:true, exampleIndex:0, cardFormat:'standard', skippedSession:null,
+    askVisible:true, exampleIndex:0, cardFormat:'standard', skippedSession:null, viewAllPointer:null,
     idleFly: null,
   };
 
@@ -1858,7 +1874,7 @@ if (isBrowser) {
     $("sticky-bar").hidden = !bar.show;
     document.body.classList.toggle("with-sticky-bar", bar.show);
     if (!bar.show) return;
-    $("sticky-count").textContent = tr(bar.key, { n: bar.n });
+    $("sticky-count").textContent = bar.ready ? tr(bar.key, { n: bar.n }) : tr("stickyCount", { n: bar.count }) + " · " + tr(bar.key, { n: bar.n });
     $("sticky-ask").disabled = !bar.ready || !state.panels.female.lookup || !state.dictionary;
   }
 
@@ -1928,6 +1944,7 @@ if (isBrowser) {
     cancelShare();
     const ready=await selectFly(state.fly,false);
     if(session!==state.session || !ready) return;
+    if(state.options.length<2) return; // an entry was removed while the data loaded
     const seed=validSeed(shareSeed)?shareSeed:crypto.getRandomValues(new Uint32Array(1))[0];
     for(const panel of activePanels()) {
       panel.reset();
@@ -1957,7 +1974,7 @@ if (isBrowser) {
           const pending=play(panel);
           panel.token?.cancel();
           await pending;
-          if(state.session===session) panel.skip();
+          if(state.session===session) { panel.skip(); panel.showFinalResponse(); }
           continue;
         }
         await play(panel);
@@ -2236,11 +2253,15 @@ if (isBrowser) {
       addOption(text);
     }
   });
+  $("view-all-btn").addEventListener("pointerdown", (event) => { state.viewAllPointer = event.pointerType || null; });
   $("view-all-btn").addEventListener("click", () => {
     library.open = !library.open;
     renderTasted();
-    // No autofocus on touch screens: it would raise the keyboard over the tabs.
-    const touch = typeof matchMedia === "function" && matchMedia("(pointer: coarse)").matches;
+    // No autofocus after a touch: it would raise the keyboard over the tabs. Where the
+    // press gave no pointer type, fall back to the primary pointer.
+    const coarse = typeof matchMedia === "function" && matchMedia("(pointer: coarse)").matches;
+    const touch = state.viewAllPointer ? state.viewAllPointer !== "mouse" : coarse;
+    state.viewAllPointer = null;
     if (library.open && !touch) $("library-search").focus({ preventScroll: true });
   });
   $("library-search").addEventListener("input", (event) => { library.query = event.target.value; renderTasted(); });

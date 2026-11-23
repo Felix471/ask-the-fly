@@ -818,8 +818,8 @@ def check_F28(browser):
     page.fill('#option-input', 'watermelon')
     page.keyboard.press('Enter')
     page.wait_for_function("window.__askfly.snapshot().options.length === 1")
-    if not page.locator('#ask-btn').is_disabled():
-        problems.append('ask enabled with one dish')
+    if not page.locator('#ask-btn').is_disabled() or not page.locator('#opposite-btn').is_disabled():
+        problems.append('an ask button is enabled with one dish')
     if page.locator('#table-empty').inner_text() != strings['one'] or not page.locator('#table-empty').is_visible():
         problems.append('one-more hint not shown with one dish')
     if page.locator('#example-btn').is_visible():
@@ -883,6 +883,9 @@ def check_F29(browser):
         ('zh', 'female', 'injera,goulash,gnocchi,watermelon,honey'),
         ('zh', 'both', 'injera,goulash,gnocchi,pickled-cabbage-fish,xiaolongbao'),
         ('zh', 'male', 'hot-and-sour-noodles,injera,goulash'),
+        ('zh', 'female', 'cake,donut,steak'),                                   # tied winners
+        ('en', 'female', 'nectar,honey,steak,watermelon,pizza&m=opposite'),     # the fly keeps one, several remain
+        ('en', 'both', 'latiao,hot-and-sour-noodles,xiaolongbao,pickled-cabbage-fish,injera,goulash,gnocchi,samgyetang,borscht,clam-chowder&m=opposite'),
     ]
     for lang, fly, dishes in cases:
         page = browser.new_page(viewport={"width": 390, "height": 900}, bypass_csp=True)
@@ -890,7 +893,8 @@ def check_F29(browser):
         page.add_init_script(XHS_BOUNDS)
         errors = []
         page.on("pageerror", lambda e: errors.append(f"pageerror: {e}"))
-        query = '?v=2&d=' + ','.join('k.' + d for d in dishes.split(',')) + f'&lang={lang}&seed=0' + ('' if fly == 'female' else f'&f={fly}')
+        dishes, _, extra = dishes.partition('&')
+        query = '?v=2&d=' + ','.join('k.' + d for d in dishes.split(',')) + f'&lang={lang}&seed=0' + ('' if fly == 'female' else f'&f={fly}') + ('&' + extra if extra else '')
         page.goto(BASE + query, wait_until="domcontentloaded")
         page.wait_for_function("window.__askfly && window.__askfly.snapshot().phase !== 'input'")
         for selector in ('#skip-btn', '#skip-btn-male'):
@@ -904,6 +908,9 @@ def check_F29(browser):
         page.check('input[name="card-format"][value="xhs"]')
         page.wait_for_function("document.getElementById('share-card').width === 1080 && window.__xhsText.length > 3")
         page.wait_for_timeout(600)
+        # The picture must also have been prepared for saving, not only drawn.
+        if not page.evaluate("Boolean(document.getElementById('download-link').href) || !document.getElementById('save-btn').hidden"):
+            problems.append(f'{lang}/{fly}/{dishes}: no saved image was prepared')
         boxes = page.evaluate("window.__xhsText")
         label = f'{lang}/{fly}/{dishes}'
         for box in boxes:
@@ -922,6 +929,41 @@ def check_F29(browser):
     return problems
 
 
+
+def check_F30(browser):
+    """Both flies on a phone play in turn; Skip during the first fly's turn still leaves the
+    second fly's stage laid out with its final state, and the result is shown."""
+    problems = []
+    page, errors, requests = open_page(browser, '?v=2&d=k.pickled-cabbage-fish,k.xiaolongbao&lang=en&seed=0&f=both', width=390)
+    page.wait_for_function("window.__askfly && window.__askfly.snapshot().phase === 'tasting'")
+    page.wait_for_function("window.__askfly.snapshot().panels.female.sceneRunning")
+    if debug(page)['panels']['male']['sceneRunning']:
+        problems.append('the male fly started while the female fly was still playing on a stacked layout')
+    page.click('#skip-btn')
+    wait_result(page)
+    page.wait_for_timeout(2500)
+    state = page.evaluate("""(() => {
+      const male = document.getElementById('scene-panel-male');
+      const status = male.querySelector('[data-panel="scene-status"]');
+      const detail = male.querySelector('[data-panel="response-detail"]');
+      return {phase: window.__askfly.snapshot().phase, status: status ? status.textContent.trim() : null,
+              detailHidden: detail ? detail.hidden : null, running: window.__askfly.snapshot().panels.male.brainPlaying};
+    })()""")
+    if state['phase'] != 'result':
+        problems.append(f"phase after skip: {state['phase']}")
+    if not state['status']:
+        problems.append('the male stage has no final status after a skip before its turn')
+    if state['detailHidden']:
+        problems.append('the male final response is hidden after a skip before its turn')
+    if state['running']:
+        problems.append('the male replay is still playing after skip')
+    box = page.evaluate("(() => { const r = document.getElementById('verdict').getBoundingClientRect(); return [r.top, r.bottom, innerHeight]; })()")
+    if not (box[0] >= 0 and box[1] <= box[2]):
+        problems.append(f'verdict not in view after skip: {box}')
+    problems = finish(page, errors, problems)
+    return problems
+
+
 CHECKS = {
     "F02": check_F02, "F03": check_F03, "F04": check_F04, "F05": check_F05,
     "F06": check_F06, "F08": check_F08, "F15": check_F15,
@@ -931,7 +973,7 @@ CHECKS = {
     "F22": check_F22,
     "F23": check_F23, "F24": check_F24,
     "F25": check_F25, "F26": check_F26, "F27": check_F27,
-    "F28": check_F28, "F29": check_F29,
+    "F28": check_F28, "F29": check_F29, "F30": check_F30,
 }
 
 

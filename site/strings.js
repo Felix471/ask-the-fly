@@ -264,7 +264,12 @@ export const STRINGS = {
       "back": "Back to Ask the Fly",
       "honesty": "Rankings come from each model's precomputed MN9 means. The speech and states are our design, and the female and male flies are separate experiments.",
       "gapTied": "{diff} places apart · {n} items",
-      "shown": "{n} shown"
+      "shown": "{n} shown",
+      "aria": {
+        "contents": "Menu sections",
+        "section": "Section",
+        "sort": "Sort"
+      }
     },
     "cardFormat": {
       "standard": "Standard",
@@ -276,7 +281,8 @@ export const STRINGS = {
     "stickyNeedMore": "Pick {n} more",
     "cardXhs": {
       "passed": "Not picked"
-    }
+    },
+    "ariaCardFormat": "Card format"
   },
   "zh": {
     "add": "添加",
@@ -541,7 +547,12 @@ export const STRINGS = {
       "back": "回去问果蝇",
       "honesty": "排名按预计算表里模型的 MN9 均值来排，台词和状态都是我们设计的，雌蝇和雄蝇是两套独立实验。",
       "gapTied": "名次差 {diff} · {n} 样",
-      "shown": "显示 {n} 样"
+      "shown": "显示 {n} 样",
+      "aria": {
+        "contents": "菜单目录",
+        "section": "分类",
+        "sort": "排序"
+      }
     },
     "cardFormat": {
       "standard": "标准",
@@ -553,6 +564,7 @@ export const STRINGS = {
     "stickyNeedMore": "再选 {n} 样",
     "cardXhs": {
       "passed": "没选的"
-    }
+    },
+    "ariaCardFormat": "分享卡格式"
   }
 };

@@ -215,6 +215,10 @@ function renderStatic() {
   sort.replaceChildren(new Option(tr('menu.sortFemale'),'female'),new Option(tr('menu.sortMale'),'male'));
   sort.value=sortFly;
   $('table-search').placeholder=tr('menu.search');
+  $('menu-contents').setAttribute('aria-label',tr('menu.aria.contents'));
+  $('label-section').textContent=tr('menu.aria.section');
+  $('label-sort').textContent=tr('menu.aria.sort');
+  $('label-search').textContent=tr('menu.search');
   renderLists();renderTable();
 }
 async function load() {
@@ -230,4 +234,3 @@ $('section-filter').addEventListener('change',event=>{sectionFilter=event.target
 $('table-sort').addEventListener('change',event=>{sortFly=event.target.value;renderTable();});
 $('table-search').addEventListener('input',event=>{search=event.target.value;renderTable();});
 load().catch(error=>{console.error(error);$('lists').textContent=error.message;});
-

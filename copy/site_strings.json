@@ -51,6 +51,13 @@
       "max_length": 30
     },
     {
+      "key": "ariaCardFormat",
+      "context": "aria-label of the card-format choice in the share dialog (screen readers only)",
+      "en": "Card format",
+      "zh": "分享卡格式",
+      "max_length": 30
+    },
+    {
       "key": "ask",
       "context": "Primary button",
       "en": "Ask the fly",
@@ -1618,6 +1625,24 @@
       "context": "v2.2.0 draft",
       "en": "Search the menu",
       "zh": "搜菜名"
+    },
+    {
+      "key": "menu.aria.contents",
+      "context": "Menu page: aria-label of the jump links at the top (screen readers only)",
+      "en": "Menu sections",
+      "zh": "菜单目录"
+    },
+    {
+      "key": "menu.aria.section",
+      "context": "Menu page: label of the section filter (screen readers only)",
+      "en": "Section",
+      "zh": "分类"
+    },
+    {
+      "key": "menu.aria.sort",
+      "context": "Menu page: label of the sort choice (screen readers only)",
+      "en": "Sort",
+      "zh": "排序"
     },
     {
       "key": "menu.empty",

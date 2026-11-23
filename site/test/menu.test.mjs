@@ -68,4 +68,3 @@ test('ranks are competition ranks, with complete cutoff ties',()=>{
     assert.deepEqual(top[fly].keys,members.filter(d=>d[fly].mn9===max).map(d=>d.key));
   }});
 });
-
