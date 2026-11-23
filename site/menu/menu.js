@@ -125,7 +125,8 @@ function addPaginated(id,title,elements) {
       element.remove();
       part++;
       current = block(id + '-part-' + part,title);
-      host.append(current,element);
+      host.append(current);
+      current.append(element); // the row that did not fit opens the next part
     }
   }
   if (part > 1) {

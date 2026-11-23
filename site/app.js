@@ -1175,14 +1175,14 @@ export function drawShareCardXhs(canvas, decision, lang, options = {}) {
   };
   // The largest size from `sizes` whose wrapped text needs at most `maxLines` lines
   // (the smallest size is used as given when nothing fits).
-  const fit = (value, width, sizes, maxLines, weight) => {
+  const fit = (value, width, sizes, maxLines, weight, clip = true) => {
     let chosen = null;
     for (const size of sizes) {
       ctx.font = font(size, weight);
       chosen = { size, weight, lines: linesFor(value, width) };
       if (chosen.lines.length <= maxLines) break;
     }
-    if (chosen.lines.length > maxLines) {
+    if (clip && chosen.lines.length > maxLines) {
       // Even the smallest size needs too many lines: keep the budget and end with an ellipsis.
       ctx.font = font(chosen.size, weight);
       chosen.lines = [...chosen.lines.slice(0, maxLines - 1), ellipsize(chosen.lines[maxLines - 1] + '…', width)];
@@ -1224,14 +1224,14 @@ export function drawShareCardXhs(canvas, decision, lang, options = {}) {
     search: for (const spriteSize of [400,340,280,230]) {
       for (const [nameSizes,speechSizes] of [[[64],[56]],[[64,56],[56,48]],[[64,56,48],[56,48,42]],[[56,48,42,36],[48,42,36]],[[48,42,36,32],[42,36,32,28]]]) {
         // Both columns use one size: fit each, then set both at the smaller size.
-        const sameSize=(texts,sizes,maxLines,weight)=>{
-          const size=Math.min(...texts.map(text=>fit(text,col,sizes,maxLines,weight).size));
-          return texts.map(text=>fit(text,col,[size],maxLines,weight));
+        const sameSize=(texts,sizes,maxLines,weight,clip=true)=>{
+          const size=Math.min(...texts.map(text=>fit(text,col,sizes,maxLines,weight,clip).size));
+          return texts.map(text=>fit(text,col,[size],maxLines,weight,clip));
         };
         const names=sameSize(pair.map(([,d])=>namesOf(chosen(d),d)),nameSizes,3,700);
         // Speech: one line at a slightly smaller size beats a wrap that strands a character.
         const lines=pair.map(([,d])=>headline(d));
-        const oneLine=sameSize(lines,[...speechSizes,40],1,600);
+        const oneLine=sameSize(lines,[...speechSizes,40],1,600,false); // a probe: not clipped
         const speeches=oneLine.every(block=>block.lines.length===1) ? oneLine : sameSize(lines,speechSizes,2,600);
         const nameTop=270+spriteSize+30;
         const nameHeight=Math.max(...names.map(blockHeight)), speechHeight=Math.max(...speeches.map(blockHeight));
@@ -1263,7 +1263,7 @@ export function drawShareCardXhs(canvas, decision, lang, options = {}) {
     }
     ctx.textAlign='left';
   } else {
-    const single=fit(headline(decision),W-2*pad,[96,84,76],1,700);
+    const single=fit(headline(decision),W-2*pad,[96,84,76],1,700,false); // a probe: not clipped
     const head=single.lines.length===1 ? single : fit(headline(decision),W-2*pad,[96,84,72,60],3,700);
     ctx.fillStyle='#1f1a17';
     const headlineEnd=drawBlock(head,pad,200+Math.round((head.size-96)*0.6));
@@ -2095,6 +2095,7 @@ if (isBrowser) {
     const blob = await new Promise((resolve) => canvas.toBlob(resolve, "image/png"));
     if (!blob || !(request.id === state.shareRequest)) return;
     saveFile = new File([blob], "ask-the-fly.png", { type: "image/png" });
+    $("save-btn").disabled = false;
     const canShareFiles = typeof navigator.canShare === "function" && navigator.canShare({ files: [saveFile] });
     const link = $("download-link");
     const button = $("save-btn");
@@ -2286,6 +2287,10 @@ if (isBrowser) {
   });
   document.querySelectorAll('input[name="card-format"]').forEach(input => input.addEventListener("change", () => {
     if (input.checked) state.cardFormat = input.value; // kept for the rest of this visit
+    // Until the new picture is ready there is nothing to save: the old one is the other format.
+    saveFile = null;
+    $('save-btn').disabled = true;
+    $('download-link').removeAttribute('href');
     if ($('card-dialog').open) showCard().catch(error => { console.warn("share card redraw failed:", error); notice("stateShareFailed"); });
   }));
   $("save-btn").addEventListener("click", () => { shareSave(); });

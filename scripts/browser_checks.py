@@ -824,6 +824,20 @@ def check_F28(browser):
         problems.append('one-more hint not shown with one dish')
     if page.locator('#example-btn').is_visible():
         problems.append('example button still visible with a dish on the table')
+    # The full list makes the page long enough for the ask button to leave the view.
+    page.locator('#view-all-btn').tap()
+    page.wait_for_selector('#library-panel:not([hidden])')
+    if page.evaluate("document.activeElement && document.activeElement.id") == 'library-search':
+        problems.append('View all focused the search box on a touch screen')
+    if page.locator('#sticky-bar').is_visible():
+        problems.append('sticky bar shown while the ask button is in view')
+    page.evaluate("document.getElementById('library-grid').scrollIntoView(); window.scrollBy(0, 600)")
+    page.wait_for_selector('#sticky-bar:not([hidden])')
+    sticky = page.locator('#sticky-count').inner_text()
+    if '1' not in sticky or not page.locator('#sticky-ask').is_disabled():
+        problems.append(f'one-entry sticky bar: {sticky!r}, ask disabled = {page.locator("#sticky-ask").is_disabled()}')
+    page.evaluate("window.scrollTo(0, 0)")
+    page.wait_for_selector('#sticky-bar', state='hidden')
     page.locator('#option-list button').first.click()
     page.locator('#example-btn').tap()
     page.wait_for_function("window.__askfly.snapshot().options.length >= 2")
@@ -831,12 +845,6 @@ def check_F28(browser):
         problems.append('ask disabled after the example set')
     if page.locator('#table-empty').is_visible():
         problems.append('hint still shown with two or more dishes')
-    page.locator('#view-all-btn').tap()
-    page.wait_for_selector('#library-panel:not([hidden])')
-    if page.evaluate("document.activeElement && document.activeElement.id") == 'library-search':
-        problems.append('View all focused the search box on a touch screen')
-    if page.locator('#sticky-bar').is_visible():
-        problems.append('sticky bar shown while the ask button is in view')
     page.evaluate("document.getElementById('library-grid').scrollIntoView(); window.scrollBy(0, 600)")
     page.wait_for_selector('#sticky-bar:not([hidden])')
     if page.locator('#sticky-ask').is_disabled():
@@ -883,7 +891,9 @@ def check_F29(browser):
         ('zh', 'female', 'injera,goulash,gnocchi,watermelon,honey'),
         ('zh', 'both', 'injera,goulash,gnocchi,pickled-cabbage-fish,xiaolongbao'),
         ('zh', 'male', 'hot-and-sour-noodles,injera,goulash'),
-        ('zh', 'female', 'cake,donut,steak'),                                   # tied winners
+        ('zh', 'female', 'cake,donut,steak'),                                   # two tied winners
+        ('en', 'female', 'apple-pie,cake,churros,steak'),                       # three tied winners
+        ('en', 'female', 'zz-not-a-dish-one,zz-not-a-dish-two'),                # nothing known: the headline wraps
         ('en', 'female', 'nectar,honey,steak,watermelon,pizza&m=opposite'),     # the fly keeps one, several remain
         ('en', 'both', 'latiao,hot-and-sour-noodles,xiaolongbao,pickled-cabbage-fish,injera,goulash,gnocchi,samgyetang,borscht,clam-chowder&m=opposite'),
     ]
@@ -894,7 +904,7 @@ def check_F29(browser):
         errors = []
         page.on("pageerror", lambda e: errors.append(f"pageerror: {e}"))
         dishes, _, extra = dishes.partition('&')
-        query = '?v=2&d=' + ','.join('k.' + d for d in dishes.split(',')) + f'&lang={lang}&seed=0' + ('' if fly == 'female' else f'&f={fly}') + ('&' + extra if extra else '')
+        query = '?v=2&d=' + ','.join(('t.' if d.startswith('zz-') else 'k.') + d for d in dishes.split(',')) + f'&lang={lang}&seed=0' + ('' if fly == 'female' else f'&f={fly}') + ('&' + extra if extra else '')
         page.goto(BASE + query, wait_until="domcontentloaded")
         page.wait_for_function("window.__askfly && window.__askfly.snapshot().phase !== 'input'")
         for selector in ('#skip-btn', '#skip-btn-male'):
@@ -903,7 +913,7 @@ def check_F29(browser):
         wait_result(page)
         page.click('#share-btn')
         page.wait_for_selector('#card-dialog[open]')
-        page.wait_for_selector('#download-link[href]')
+        page.wait_for_function("Boolean(document.getElementById('download-link').href) || !document.getElementById('save-btn').hidden")
         page.evaluate("window.__xhsText = []")
         page.check('input[name="card-format"][value="xhs"]')
         page.wait_for_function("document.getElementById('share-card').width === 1080 && window.__xhsText.length > 3")
@@ -913,11 +923,13 @@ def check_F29(browser):
             problems.append(f'{lang}/{fly}/{dishes}: no saved image was prepared')
         boxes = page.evaluate("window.__xhsText")
         label = f'{lang}/{fly}/{dishes}'
+        if any(box['text'].endswith('…') for box in boxes) and 'zz-' in dishes:
+            problems.append(f'{label}: the headline was cut instead of wrapped')
         for box in boxes:
             if box['left'] < 0 or box['right'] > 1080 or box['top'] < 0 or box['bottom'] > 1440:
                 problems.append(f"{label}: text outside the card: {box['text']!r}")
             # Text above the footer rule (y = 1195) keeps a clear margin from it.
-            if box['top'] < 1195 and box['bottom'] > 1195 - 14:
+            if box['top'] < 1195 and box['bottom'] >= 1195 - 14:
                 problems.append(f"{label}: text touches or crosses the footer rule: {box['text']!r} (bottom {box['bottom']:.0f})")
         for i, a in enumerate(boxes):
             for b in boxes[i + 1:]:
@@ -947,12 +959,15 @@ def check_F30(browser):
       const status = male.querySelector('[data-panel="scene-status"]');
       const detail = male.querySelector('[data-panel="response-detail"]');
       return {phase: window.__askfly.snapshot().phase, status: status ? status.textContent.trim() : null,
-              detailHidden: detail ? detail.hidden : null, running: window.__askfly.snapshot().panels.male.brainPlaying};
+              plates: male.querySelectorAll('.plate-label').length,
+              detailHidden: detail ? detail.hidden : true, running: window.__askfly.snapshot().panels.male.brainPlaying};
     })()""")
     if state['phase'] != 'result':
         problems.append(f"phase after skip: {state['phase']}")
     if not state['status']:
         problems.append('the male stage has no final status after a skip before its turn')
+    if state['plates'] != 2:
+        problems.append(f"the male stage has {state['plates']} plate labels after a skip before its turn, expected 2")
     if state['detailHidden']:
         problems.append('the male final response is hidden after a skip before its turn')
     if state['running']:
