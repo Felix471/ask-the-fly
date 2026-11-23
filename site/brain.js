@@ -127,6 +127,7 @@ export function rasterRows(replay, neurons, labels) {
     { key: "sugar", bit: FLAG.sugar, colour: COLORS.sugar },
     { key: "bitter", bit: FLAG.bitter, colour: COLORS.bitter },
     { key: "water", bit: FLAG.water, colour: COLORS.water },
+    { key: "ir94e", bit: FLAG.ir94e, colour: COLORS.ir94e },
   ];
   const namedIndex = new Map();
   for (const entry of neurons.named) for (const cell of entry.cells) namedIndex.set(cell.index, entry.key);

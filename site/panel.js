@@ -164,7 +164,7 @@ export class FlyPanel {
 
   rasterLabels() {
     const t = STRINGS[this.lang];
-    return { sugar: t.rasterSugar, bitter: t.rasterBitter, water: t.rasterWater, mn9_left: t.rasterMn9L, mn9_right: t.rasterMn9R };
+    return { sugar: t.rasterSugar, bitter: t.rasterBitter, water: t.rasterWater, ir94e: t.rasterIr94e, mn9_left: t.rasterMn9L, mn9_right: t.rasterMn9R };
   }
 
   showReplayDetails(replay) {

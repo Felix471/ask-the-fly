@@ -65,7 +65,7 @@ export const FLY_LINES = {
       "context": "Draft speech bubble; alternatives ordered direct, emotional, action/image.",
       "zh": [
         "冲一下，吃。",
-        "那一下过去了。",
+        "苦那一下过去了。",
         "咽了。"
       ],
       "en": [
@@ -92,7 +92,7 @@ export const FLY_LINES = {
       "zh": [
         "那股鲜先不管。",
         "甜够本。",
-        "勉强吃。"
+        "冲着甜，吃了。"
       ],
       "en": [
         "Skip that other note.",
@@ -143,7 +143,7 @@ export const FLY_LINES = {
       "context": "Draft speech bubble; alternatives ordered direct, emotional, action/image.",
       "zh": [
         "先润一口。",
-        "清。",
+        "解渴。",
         "喝进去了。"
       ],
       "en": [
@@ -410,7 +410,7 @@ export const FLY_LINES = {
       "zh": [
         "过。",
         "没劲。",
-        "一眼带过。"
+        "懒得停。"
       ],
       "en": [
         "Pass.",

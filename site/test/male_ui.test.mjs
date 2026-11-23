@@ -10,7 +10,7 @@ const decision = (a=10,b=0,mode='ask') => decide([item('bread',a),item('steak',b
 
 test('every both-mode panel status/headline names its fly; single modes preserve exact copy', () => {
   const status=['sceneIdle','sceneNone','sceneTasting','sceneTie','sceneWinner','sceneNoResponse','sceneOpposite','sceneOppositeMany','stateSceneError'];
-  const verdict=['verdictAsk','verdictNone','verdictTie','verdictOpposite','verdictOppositeMany','oppositeLeast','lowInterest'];
+  const verdict=['verdictAsk','verdictNone','verdictTie','verdictOpposite','verdictOppositeMany','oppositeLeast','lowInterest','lowInterestTie','verdictNoResponse'];
   const values={dish:'bread',pick:'bread',fly_pick:'bread',human_pick:'steak',lowest:'steak'};
   for(const lang of ['en','zh']) for(const fly of ['female','male']) for(const selection of [fly,'both']) {
     const panel=new FlyPanel(null,{flyKey:fly},{lang:()=>lang,selection:()=>selection});

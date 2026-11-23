@@ -11,8 +11,9 @@ Try it: https://askthefly.app/
 
 **What's new** (full list in [CHANGELOG.md](CHANGELOG.md))
 
-- v2.1.0 (2026-09-19): 105 new entries and 14 sections, with not-food badges and notes. Taste levels are encoder estimates; existing dishes' scores and choices are unchanged.
+- v2.1.1 (2026-11-23): corrected the scores on the link-preview image, clearer verdicts when nothing gets a clear response, an Ir94e row in the spike raster, and a rewrite of much of the Chinese copy with some Chinese section and dish names. No scores or choices changed.
 
+- v2.1.0 (2026-09-19): 105 new entries and 14 sections, with not-food badges and notes. Taste levels are encoder estimates; existing dishes' scores and choices are unchanged.
 - v2.0.1 (2026-09-19): Chinese wording of the male brain-view caption revised; nothing else changed.
 - v2.0.0 (2026-09-19): a second, independently computed male fly, with separate results and replays; compare both flies without pooling their choices. Female results are unchanged.
 - v1.2.1 (2026-09-15): refreshed all 16 groups of bilingual fly speech, with pixel-art faces, bubbles and lettering; scores, states, allocation rules and the honesty table are unchanged.
@@ -169,7 +170,7 @@ Names that mean more than one dish (for example "biscuit") are split into separa
 <!-- section: 1 | file: README.zh.md | context: Chinese README (mirror of the English one) — section '(preamble: title, tagline, language link)' -->
 # 问问果蝇（Ask the Fly）
 
-不知道吃什么时，就丢几道菜进来，让一个果蝇脑模型替你选一道。
+不知道吃什么？丢几道菜进来，让果蝇脑模型替你选一道。
 
 English: [README.md](README.md)
 
@@ -177,10 +178,11 @@ English: [README.md](README.md)
 
 **最近更新**（完整列表见 [CHANGELOG.md](CHANGELOG.md)）
 
-- v2.1.0（2026-09-19）：新增 105 个条目，整理为 14 个分类，并为非食物条目加上标记和说明。味觉等级由编码器估算；现有菜品的分数和选择不变。
+- v2.1.1（2026-11-23）：修正链接预览图上的分数；所有菜都没引起明显反应时，结果会写明硬选出的那一道；放电栅格新增 Ir94e 一行；改写多处中文文案，调整部分分类名和菜名。分数和选择不变。
 
+- v2.1.0（2026-09-19）：新增 105 个条目，分成 14 个分类，并给非食物条目加上标记和说明。味觉档位由编码器估算，原有菜品的分数和选择不变。
 - v2.0.1（2026-09-19）：修订雄蝇脑图说明的中文措辞；其他不变。
-- v2.0.0（2026-09-19）：加入第二只独立计算的雄蝇，分别展示结果和回放；可以比较两只果蝇的选择，不合并结果。雌蝇结果保持不变。
+- v2.0.0（2026-09-19）：新增一只独立计算的雄蝇，结果和回放各自展示，方便对比两只果蝇的选择，不合并算分。雌蝇结果不变。
 - v1.2.1（2026-09-15）：更新果蝇全部 16 组中英文台词，改用像素表情、气泡和字体；分数、状态和分配规则不变，诚实声明表不变。
 - v1.2.0（2026-09-15）：新增四种设计状态、MN11 读数与示意动作。MN9 分数和排序不变；诚实声明表区分状态规则、动画和实测行为。
 - v1.1.3（2026-09-13）：窄屏下盘子下方的长菜名不再挤在一起，超长部分显示省略号，title 提示保留完整菜名；行高不变。没有任何菜的分数变化；诚实声明表未改动。
@@ -227,10 +229,10 @@ English: [README.md](README.md)
 <!-- section: 5 | file: README.zh.md | context: Chinese README (mirror of the English one) — section '屏幕上看到的是什么' -->
 ## 屏幕上看到的是什么
 
-- **一段真实仿真结果的回放。** 深色脑图会按照 FlyWire 的胞体坐标画出 29,326 个神经元，然后播放当前味觉条件下预先记录好的一秒放电。画面里的每一次闪烁，都对应 Brian2 模型实际记录到的 spike；这里展示的是回放，并不是在浏览器里现场跑仿真。
-- **果蝇动画由模型结果来驱动。** 它会挨个去尝每个盘子，最后落在 MN9 平均反应最强的那一道上；两种模式里果蝇都是这么做的。“问问果蝇想吃啥”把果蝇选的那道给你；“让果蝇先吃”把剩下的给你：两道菜时是另一道，更多时是余下的全部，结果页和分享卡都会这么写。结果完全相同的菜会并列。
-- **LLM 负责把菜转成味觉输入，连接组模型负责算出脑反应。** 编码器会先估算每道菜的甜、苦、水和 Ir94e（氨基酸厌恶）四个维度的等级（`data/dishes.json`），然后用这四个味觉输入去查预先算好的 400 格结果表。菜品到输入的映射是我们设计的；MN9 反应来自连接组模型。
-- **这些结果都可以复现。** 每个回放文件里都会保存对应的条件、刺激等级、随机种子、commit 和协议哈希，并由 `scripts/run_replay.py` 统一生成。
+- **预录的脑仿真回放。** 深色脑图按 FlyWire 胞体坐标画出 29,326 个神经元，回放当前味觉条件下录好的 1 秒放电过程。每次闪烁都对应 Brian2 模型真实记录到的放电，并非在浏览器里现场跑仿真。
+- **动画跟着模型结果走。** 果蝇会挨个尝过每个盘子，最后停在 MN9 平均反应最强的那道上——两种模式里都如此。“问问果蝇想吃啥”把果蝇选的那道给你；“让果蝇先吃”把剩下的留给你（两道菜时是另一道，三道及以上则是其余全部），结果页和分享卡都会如实写明。得分完全相同的菜保持并列。
+- **LLM 把菜翻译成味觉输入，连接组模型算出脑反应。** 编码器先估算每道菜在甜、苦、水和 Ir94e（氨基酸厌恶）四个维度上的档位（`data/dishes.json`），再拿这组输入去查预算好的 400 格查找表。菜品到味觉输入的映射是我们设计的，MN9 反应来自连接组模型。
+- **所有结果均可复现。** 每个回放文件都由 `scripts/run_replay.py` 生成，里面保存了对应的条件、刺激等级、随机种子、commit 和协议哈希。
 
 <!-- section: 6 | file: README.zh.md | context: Chinese README (mirror of the English one) — section '诚实声明：这个仿真做了什么、没做什么' -->
 ## 这个模型能说明什么，又不能说明什么
@@ -239,13 +241,13 @@ English: [README.md](README.md)
 
 | 说法 | 状态 | 依据 |
 |---|---|---|
-| 非食物条目也由同一个编码器估算糖、苦、水和 Ir94e 等级。模型不表示可食用性；果蝇只对这四个估算等级作出反应。 | **模型** —— 对四个等级的反应；**我们的设计** —— 条目名称、非食物分类和编码器估算。这不是可食用性判断。 | [编码器](docs/encoder.md)、[分类](data/dish_sections.json) |
+| 非食物条目也由同一个编码器估算糖、苦、水和 Ir94e 等级。模型里没有“能不能吃”的概念，果蝇只对估算出的这四个味觉档位有反应。 | **模型** —— 对四个等级的反应；**我们的设计** —— 条目名称、非食物分类和编码器估算。这不是可食用性判断。 | [编码器](docs/encoder.md)、[分类](data/dish_sections.json) |
 | 分数来自已发表的雌性果蝇脑 LIF 模型，运行在 FlyWire v783 上 | 是 | Shiu et al. 2024；docs/phase0_report.md |
 | 糖驱动、苦抑制、以 MN9 作为伸喙读数 | 已复现（方向） | docs/phase0_report.md，门槛 A–D |
-| 模型有自发活动 | **否** —— 基线按构造为 0 Hz | Shiu 2024 Methods；我们的条件 D |
-| 表达了去抑制（富集的 LB3 → Quasimodo → MN 回路） | **否** —— 基础放电为零，没有可释放的持续性抑制；v1 只包含前馈的 Clavicle 通路 | Tastekin et al. 2026，图 6I/6J、图 S17；docs/open_questions.md OQ-3 |
+| 模型有自发活动 | **否** —— 模型本身的构造决定了基线是 0 Hz | Shiu 2024 Methods；我们的条件 D |
+| 体现出去抑制效应（富集的 LB3 → Quasimodo → MN 回路） | **否** —— 基础放电为零，没有可释放的持续性抑制；v1 只包含前馈的 Clavicle 通路 | Tastekin et al. 2026，图 6I/6J、图 S17；docs/open_questions.md OQ-3 |
 | 覆盖完整的进食序列 | **否** —— 真实进食是一串检查点：足部刚毛 → 唇瓣刚毛 → 味觉钉 → 咽。本仿真只覆盖唇瓣刚毛这一站。 | Tastekin et al. 2026，讨论部分 "Sequential checkpoints and action control" |
-| 水在模型里是独立的味觉品质 | **否** —— 在这个模型里水是第二种食欲驱动，主要帮弱糖加分（糖 40 Hz + 水 40 Hz 得到 24 Hz MN9，单独糖只有 4 Hz；糖 200 Hz 时只多 7%）。所以湿的咸菜会赢过干的。这是连接组模型的性质，不是我们写的规则。 | docs/phase1_characterization.md，糖 × 水 |
+| 水在模型里是独立的味觉 | **否** —— 在这个模型里水是第二种食欲驱动，主要帮弱糖加分（糖 40 Hz + 水 40 Hz 得到 24 Hz MN9，单独糖只有 4 Hz；糖 200 Hz 时只多 7%）。所以带汤水的咸口菜会排在干的咸口菜前面。这是连接组模型的性质，不是我们写的规则。 | docs/phase1_characterization.md，糖 × 水 |
 | Ir94e 是氨基酸厌恶通道（Tastekin et al. 2026，LB1e）。每道菜对应哪个 Ir94e 等级是我们定的（编码器 v2.3）。它对 MN9 的作用是模型的：在糖低 / 水低时，MN9 沿 无 / 低 / 中 / 高 从 61.8 → 9.3 → 1.6 → 0.5 Hz。在这个模型里，果蝇把清淡的主食排在所有肉类或酱油调味的菜之上。这种抑制的强度没有和行为数据校准过（docs/open_questions.md OQ-6）。 | 方向已复现，映射是设计的 | docs/phase1_characterization.md，糖 × ir94e；docs/encoder_stability_v2_3_batch2.md |
 | 使用了 2026 年 9 月的完整味觉接线（MaleCNS） | **是** —— 产品中加入了第二只独立计算的雄蝇，使用 MaleCNS v1.0 和 Tastekin 的 GRN 分型；雄蝇的连接图只保留至少 5 个突触的连接，所以“完整”要打个折扣。冻结的雌蝇实验保持不变。两只果蝇各用各的查找表，不合并分数或选择。 | [雄蝇项目记录](docs/male_fly_v2.md) |
 | 雄蝇脑使用 MaleCNS v1.0，只保留至少 5 个突触的连接，突触权重为 Shiu 的 0.65 倍（0.17875 mV）；这套标定取自独立项目 blendi-remade/fly-brain-minecraft，并由我们复现。雌蝇使用 FlyWire v783、全部连接和 Shiu 的 0.275 mV。 | **模型** —— 速率来自连接组 LIF 模型；连接截断门槛和采用的权重标定是设计选择，并非与动物行为数据的校准。 | [雄蝇项目记录](docs/male_fly_v2.md)；[M1i 复现](docs/malecns_phase0.md) |
@@ -261,16 +263,16 @@ English: [README.md](README.md)
 | 四种状态能确定果蝇是否进食 | **否** —— MN9、MN11 的速率来自模型；我们用左 MN9 和 MN11D 双细胞平均速率各自的 30 次试验均值，按设计的 5 Hz 阈值分类。右 MN9 和 MN11V 不决定状态。标签未经行为校准；排序仍用未改变的左 MN9 分数 | docs/grid_provenance.md, docs/feeding_mn_readouts.md |
 | 果蝇的排名是实时计算 | **否** —— 一张预先算好的 400 格查找表（每格 30 次试验，`data/lookup_table.json`）；页面只是读取它 | docs/grid_provenance.md |
 
-在这个模型里，微量的水只在帮糖时才被看见；只有食物基本是水时，果蝇才注意到水。因此查找网格把水的"低"和"中"放进同一个格子（60 Hz）：固定路径复核（docs/fixed_path_recheck.md）在任何一条曲线上都分不开它们。
+在这个模型里，少量水只有在帮甜味加分时才看得出作用；只有食物基本是水时，果蝇才注意到水。因此查找网格把水的“低”和“中”放进同一个格子（60 Hz）：固定路径复核（docs/fixed_path_recheck.md）在任何一条曲线上都分不开它们。
 
-当果蝇自己选的那道菜 MN9 低于 5 Hz 时，结果会多一句"这个只是最不无聊的一个"；这个 5 Hz 阈值是我们定的，只改措辞，不改选择也不改平局。
+当果蝇自己选的那道菜 MN9 低于 5 Hz 时，结果会多一句“这几样果蝇都不太想吃，勉强挑了这个。”；这个 5 Hz 阈值是我们定的，只改措辞，不改选择也不改平局。
 
 产品口号："它只管第一口。"
 
 <!-- section: 7 | file: README.zh.md | context: Chinese README (mirror of the English one) — section '复现 Phase 0 曲线' -->
 ## 运行、测试、重算
 
-运行已构建的网站、跑快速测试、获取仿真输入、重算仿真，是四件不同的事。前两件不需要仓库之外的任何东西。
+直接运行网站、跑快速测试、获取仿真输入、重算仿真，是四件不同的事。前两件不需要仓库之外的任何东西。
 
 **运行网站。** `python -m http.server 8765 --directory site`，然后打开 http://127.0.0.1:8765/。网站是静态的：它读取的所有文件都在 `site/data/` 和 `site/assets/` 里；不需要 API key，不需要 vendor 数据，也没有构建步骤。
 
@@ -326,7 +328,7 @@ conda run -n flybrain --no-capture-output python scripts/phase0_report.py       
 
 网站目前只认识 `data/dishes.json` 里已经收录的菜。如果页面提示“果蝇还没吃过这道菜”：
 
-1. 点那一行的 **提交这道菜**。页面会打开一个已经预填了你所输入名称的 GitHub issue。再补上中文名、英文名，以及一句话说明这是什么菜就可以了。（你也可以手动新建 issue，填写同样的四项内容。）
+1. 点那一行的 **提交这道菜**。页面会打开一个自动填好菜名的 GitHub issue。再补上中文名、英文名，以及一句话说明这是什么菜就可以了。（你也可以手动新建 issue，填写同样的四项内容。）
 2. 对于新菜，我们先用 `encode_v2.2` 估算甜、苦、水，再用 `--only-dimension ir94e` 仅加入 `encode_v2.3` 生成的 Ir94e 等级。每个提示词都在两种语言下各编码六次，并按 `docs/encoder.md` 的跨语言仲裁规则合并。`encoder_version_by_dimension` 记录 Ir94e 的版本；已冻结的甜、苦、水数值保持不变。如果两边的判断相差两级以上，就会标记为 `needs_review`，再由人工裁定。
 3. 不需要重新跑仿真。甜、苦、水和 Ir94e 这四个味觉输入会直接映射到预先算好的 400 格网格里。审核并发布后，这道菜就会出现在词典和网站上。
 

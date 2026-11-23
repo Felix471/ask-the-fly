@@ -523,10 +523,10 @@ test("replay caption shows levels in the page language, not the cell id", () => 
   const en = levelsText(pho.cell, "en");
   const zh = levelsText(pho.cell, "zh");
   assert.match(en, /^sugar \S+ · bitter \S+ · water \S+ · amino acids \S+$/);
-  assert.match(zh, /^糖 \S+ · 苦 \S+ · 水 \S+ · 氨基酸 \S+$/);
+  assert.match(zh, /^甜 \S+ · 苦 \S+ · 水 \S+ · 氨基酸 \S+$/);
   assert.ok(!/G_s/.test(en) && !/G_s/.test(zh), "no raw cell id in the caption");
   assert.equal(levelsText({ sugar: "low", bitter: "none", water: "high" }, "en"), `sugar low · bitter none · water high · amino acids ${STRINGS.en.levelNames.none}`);
-  assert.equal(levelsText({ sugar: "low", bitter: "none", water: "high" }, "zh"), `糖 低 · 苦 无 · 水 高 · 氨基酸 ${STRINGS.zh.levelNames.none}`);
+  assert.equal(levelsText({ sugar: "low", bitter: "none", water: "high" }, "zh"), `甜 低 · 苦 无 · 水 高 · 氨基酸 ${STRINGS.zh.levelNames.none}`);
   assert.equal(levelsText({ sugar: "low", bitter: "none", water: "high", ir94e: "medium" }, "en"), "sugar low · bitter none · water high · amino acids medium");
 });
 
@@ -542,3 +542,70 @@ test("opposite mode: the fly's own pick drives the fly; with three dishes the ot
   assert.equal(two.winner.entry.key, "black coffee", "two dishes: the remaining dish is the human's");
 });
 import './taste_states.test.mjs';
+
+// ---- v2.1.1: coherent verdicts for low-response picks; Ir94e raster row ----
+import { verdictParts } from "../app.js";
+
+test("a no-response pick is named and the verdict has no dangling 'this one'", () => {
+  const text = (key, values = {}) => `${key}${values.fly_pick ? ":" + values.fly_pick : ""}`;
+  const name = (item) => item.name;
+  const cell = (mn9, state) => ({ mn9_mean: mn9, mn11d_mean: 0, mn11v_mean: 0, state });
+  const scored = [{ name: "steak", cell: cell(1.2, "no_response") }, { name: "coffee", cell: cell(0, "no_response") }, { name: "tea", cell: cell(0.3, "no_response") }];
+  const ask = verdictParts(decide(scored, "ask"), name, text);
+  assert.deepEqual(ask, { lead: "verdictNoResponse", strong: "steak", subs: [] });
+  const two = verdictParts(decide(scored.slice(0, 2), "opposite"), name, text);
+  assert.equal(two.strong, "verdictOpposite:steak", "opposite mode still says who gets what");
+  assert.deepEqual(two.subs, ["lowInterest"]);
+  const many = verdictParts(decide(scored, "opposite"), name, text);
+  assert.equal(many.strong, "verdictOppositeMany:steak");
+  assert.deepEqual(many.subs, ["oppositeLeast", "lowInterest"]);
+  const sharedTop = verdictParts(decide([{ name: "a", cell: cell(0.1, "") }, { name: "b", cell: cell(0.1, "") }, scored[1]], "opposite"), name, text);
+  assert.deepEqual(sharedTop.subs, ["lowInterestTie"], "a shared top score in opposite mode is not called one pick");
+  assert.equal(sharedTop.strong, "verdictOpposite:a / b", "every dish the fly keeps is named");
+  const tied = verdictParts(decide([scored[1], { name: "soap", cell: cell(0, "no_response") }], "ask"), name, text);
+  assert.deepEqual(tied, { lead: "verdictTie", strong: "coffee / soap", subs: ["lowInterestTie"] }, "a tie never says 'picked this one'");
+  const mixed = verdictParts(decide([scored[0], { name: "broth", cell: { mn9_mean: 0.4, mn11d_mean: 6, mn11v_mean: 0 } }], "ask"), name, text);
+  assert.deepEqual(mixed, { lead: "verdictAsk", strong: "steak", subs: ["lowInterest"] }, "'nothing got a response' is not claimed when another dish moves the mouth");
+  const eats = verdictParts(decide([{ name: "honey", cell: cell(97, "eats") }, scored[0]], "ask"), name, text);
+  assert.deepEqual(eats, { lead: "verdictAsk", strong: "honey", subs: [] });
+  assert.deepEqual(verdictParts(decide([{ name: "x", cell: null }], "ask"), name, text), { lead: "verdictNone", strong: "", subs: [] });
+});
+
+test("verdict copy exists in both languages for single-fly and both-fly wording", () => {
+  for (const lang of ["en", "zh"]) for (const key of ["verdictNoResponse", "lowInterestTie", "lowInterest"]) {
+    assert.ok(STRINGS[lang][key], `${lang} ${key}`);
+    assert.ok(STRINGS[lang].panelVerdict[key].includes("{fly}"), `${lang} panelVerdict.${key}`);
+  }
+  assert.ok(!/care for much of any/.test(STRINGS.en.panelVerdict.lowInterest));
+});
+
+test("the raster has an Ir94e GRN row that fires only when Ir94e is driven", () => {
+  const neurons = decodeNeurons(JSON.parse(readFileSync(path.join(here, "..", "data", "neurons.json"), "utf8")));
+  const labels = { sugar: "s", bitter: "b", water: "w", ir94e: "i", mn9_left: "L", mn9_right: "R" };
+  const on = rasterRows(loadReplay("G_snone_bnone_wnone_ihigh"), neurons, labels);
+  assert.deepEqual(on.slice(0, 4).map((r) => r.key), ["sugar", "bitter", "water", "ir94e"]);
+  assert.ok(on[3].times.length > 0 && on[3].label === "i");
+  const off = rasterRows(loadReplay("G_svery_high_bnone_wnone_inone"), neurons, labels);
+  assert.equal(off.find((r) => r.key === "ir94e").times.length, 0);
+});
+
+import { cardReadoutLines } from "../app.js";
+
+test("with both flies the card has one labelled readout line per fly, each from its own pick", () => {
+  const male = buildLookup(JSON.parse(readFileSync(path.join(here, "..", "data", "lookup_table_male.json"), "utf8")));
+  const keys = ["hamburger", "watermelon", "steak"];
+  const dictionary = buildDictionary(dishes);
+  const lookup = buildLookup(table);
+  const f = decide(scoreOptions(keys, dictionary, lookup), "ask");
+  const m = decide(scoreOptions(keys, dictionary, male), "ask");
+  for (const lang of ["en", "zh"]) {
+    const single = cardReadoutLines(f, lang);
+    assert.deepEqual(single, [{ fly: null, text: cardLines(f, lang).fixed[1] }], "single-fly card line is unchanged");
+    const [a, b] = cardReadoutLines(f, lang, m);
+    assert.deepEqual([a.fly, b.fly], ["female", "male"]);
+    assert.ok(a.text.startsWith(STRINGS[lang].flyName.female) && a.text.includes(f.flyPick.cell.mn9_mean.toFixed(1)));
+    assert.ok(b.text.startsWith(STRINGS[lang].flyName.male) && b.text.includes(m.flyPick.cell.mn9_mean.toFixed(1)));
+    assert.ok(b.text.includes(m.flyPick.sugarOnly.mn9_mean.toFixed(1)), "the male line uses the male table's sugar-only cell");
+  }
+  assert.notEqual(f.flyPick.cell.mn9_mean, m.flyPick.cell.mn9_mean);
+});
