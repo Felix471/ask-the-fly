@@ -1616,7 +1616,7 @@
       "培根蛋醬意面"
     ],
     "display": {
-      "zh": "培根蛋面",
+      "zh": "培根蛋意面",
       "en": "carbonara"
     },
     "sugar": "none",
@@ -1770,7 +1770,7 @@
       "麥片"
     ],
     "display": {
-      "zh": "麦片",
+      "zh": "牛奶麦片",
       "en": "cereal with milk"
     },
     "sugar": "low",
@@ -3348,7 +3348,7 @@
       "西班牙餡餅"
     ],
     "display": {
-      "zh": "恩潘纳达",
+      "zh": "拉美馅饼",
       "en": "empanada"
     },
     "sugar": "low",
@@ -3509,7 +3509,7 @@
       "炸鷹嘴豆餅"
     ],
     "display": {
-      "zh": "法拉费",
+      "zh": "炸鹰嘴豆饼",
       "en": "falafel"
     },
     "sugar": "none",
@@ -3660,7 +3660,7 @@
       "發酵麵團"
     ],
     "display": {
-      "zh": "发酵中的面团",
+      "zh": "发酵面团",
       "en": "fermenting dough"
     },
     "sugar": "low",
@@ -4151,7 +4151,7 @@
       "意式土豆糰子"
     ],
     "display": {
-      "zh": "土豆团子",
+      "zh": "意式土豆团子",
       "en": "gnocchi"
     },
     "sugar": "none",
@@ -4536,7 +4536,7 @@
       "牛肉飯"
     ],
     "display": {
-      "zh": "牛肉饭",
+      "zh": "日式牛肉饭",
       "en": "gyudon"
     },
     "sugar": "low",
@@ -4942,7 +4942,7 @@
       "韓式糖餅"
     ],
     "display": {
-      "zh": "糖饼",
+      "zh": "韩式糖饼",
       "en": "hotteok"
     },
     "sugar": "high",
@@ -5067,7 +5067,7 @@
       "衣索比亞大餅"
     ],
     "display": {
-      "zh": "英吉拉",
+      "zh": "埃塞俄比亚酸饼",
       "en": "injera"
     },
     "sugar": "none",
@@ -5143,10 +5143,11 @@
       "ipa",
       "精酿啤酒",
       "ipa啤酒",
-      "ipa 啤酒"
+      "ipa 啤酒",
+      "IPA啤酒"
     ],
     "display": {
-      "zh": "IPA啤酒",
+      "zh": "IPA 啤酒",
       "en": "IPA beer"
     },
     "sugar": "none",
@@ -5209,7 +5210,7 @@
       "잡채s"
     ],
     "display": {
-      "zh": "杂菜",
+      "zh": "韩式杂菜",
       "en": "japchae"
     },
     "sugar": "low",
@@ -8558,7 +8559,7 @@
       "日式拉麵"
     ],
     "display": {
-      "zh": "拉面",
+      "zh": "日式拉面",
       "en": "ramen"
     },
     "sugar": "low",
@@ -9034,7 +9035,7 @@
       "薩莫薩"
     ],
     "display": {
-      "zh": "萨莫萨",
+      "zh": "咖喱角",
       "en": "samosa"
     },
     "sugar": "none",
@@ -9233,7 +9234,7 @@
       "zharoupais"
     ],
     "display": {
-      "zh": "炸肉排",
+      "zh": "维也纳炸肉排",
       "en": "schnitzel"
     },
     "sugar": "none",
@@ -12193,7 +12194,7 @@
       "烤雞串"
     ],
     "display": {
-      "zh": "烤鸡串",
+      "zh": "日式烤鸡串",
       "en": "yakitori"
     },
     "sugar": "low",

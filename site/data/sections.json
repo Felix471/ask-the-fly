@@ -46,7 +46,7 @@
    ]
   },
   {
-   "zh": "日本",
+   "zh": "日料",
    "en": "Japanese",
    "keys": [
     "miso soup",
@@ -77,7 +77,7 @@
    ]
   },
   {
-   "zh": "韩国",
+   "zh": "韩餐",
    "en": "Korean",
    "keys": [
     "bibimbap",
@@ -124,7 +124,7 @@
    ]
   },
   {
-   "zh": "中东与非洲",
+   "zh": "中东非洲",
    "en": "Middle East & Africa",
    "keys": [
     "hummus",
@@ -172,7 +172,7 @@
    ]
   },
   {
-   "zh": "美洲与大洋洲",
+   "zh": "美洲大洋洲",
    "en": "Americas & Oceania",
    "keys": [
     "bacon",
@@ -201,7 +201,7 @@
    ]
   },
   {
-   "zh": "甜点与零食",
+   "zh": "甜点零食",
    "en": "Sweets & snacks",
    "keys": [
     "apple-pie",
@@ -304,7 +304,7 @@
    ]
   },
   {
-   "zh": "水果与蔬菜",
+   "zh": "蔬果",
    "en": "Fruit & vegetables",
    "keys": [
     "apple",

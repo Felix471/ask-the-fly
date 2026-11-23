@@ -2,9 +2,9 @@
   "schema": "menu_v1",
   "seed_note": "Presentation only: zlib.crc32(key.encode('utf-8')); never used for scoring.",
   "sources": {
-    "dishes": "15d1077b8377966cc39aa7cdc6ac1eacccd8ba258a916acd831776334b2ed160",
-    "sections": "a868bdd740edb1529eced749c9fa08a1e1ce793d3da5618efa791c101f01d912",
-    "fly_lines": "2fd3f3707832b5dfa60cd61770a717cdd42531272d0c3d36c4cdea2aeba82f11",
+    "dishes": "1df263524b6b8ff20897da0047c0082d5e9b8b62e1bfc459eb9d52183d63bc5f",
+    "sections": "0e9213ed2d1f924bd5da7a1d9779219c09c5afbe7aeb93a80e776cae5f4be6dd",
+    "fly_lines": "41618387eeed7589762cdf828fe0593570bed4293c94b49ac0ea0fa421a71726",
     "fallbacks": "87b73048021724fa5d68c8b86c1260592e5fed837aafdbee0933b7fbc5ed40c5",
     "female_cells_sha256": "e71c2bf519f98ed7e11bfe55b9f30948f9c0b35a61a854a55787aa75b0ab8829",
     "male_cells_sha256": "6e6d4595f337a874c35da1547eca2f6a7f4b5e9b79de00539e1c9113b12d7657"
@@ -594,7 +594,7 @@
         "state": "eats",
         "rank": 79,
         "line": {
-          "zh": "清。",
+          "zh": "解渴。",
           "en": "Clean."
         }
       },
@@ -765,7 +765,7 @@
         "state": "no_response",
         "rank": 180,
         "line": {
-          "zh": "一眼带过。",
+          "zh": "懒得停。",
           "en": "Glance and on."
         }
       }
@@ -1205,7 +1205,7 @@
         "state": "no_response",
         "rank": 228,
         "line": {
-          "zh": "一眼带过。",
+          "zh": "懒得停。",
           "en": "Glance and on."
         }
       }
@@ -1234,7 +1234,7 @@
         "state": "eats",
         "rank": 85,
         "line": {
-          "zh": "清。",
+          "zh": "解渴。",
           "en": "Clean."
         }
       },
@@ -1535,7 +1535,7 @@
       "slug": "carbonara",
       "sprite": "carbonara",
       "display": {
-        "zh": "培根蛋面",
+        "zh": "培根蛋意面",
         "en": "carbonara"
       },
       "section": 6,
@@ -1655,7 +1655,7 @@
       "slug": "cereal",
       "sprite": "cereal",
       "display": {
-        "zh": "麦片",
+        "zh": "牛奶麦片",
         "en": "cereal with milk"
       },
       "section": 7,
@@ -2045,7 +2045,7 @@
         "state": "no_response",
         "rank": 167,
         "line": {
-          "zh": "一眼带过。",
+          "zh": "懒得停。",
           "en": "Glance and on."
         }
       }
@@ -2114,7 +2114,7 @@
         "state": "eats",
         "rank": 79,
         "line": {
-          "zh": "清。",
+          "zh": "解渴。",
           "en": "Clean."
         }
       },
@@ -2154,7 +2154,7 @@
         "state": "eats",
         "rank": 105,
         "line": {
-          "zh": "清。",
+          "zh": "解渴。",
           "en": "Clean."
         }
       },
@@ -2285,7 +2285,7 @@
         "state": "no_response",
         "rank": 228,
         "line": {
-          "zh": "一眼带过。",
+          "zh": "懒得停。",
           "en": "Glance and on."
         }
       }
@@ -2325,7 +2325,7 @@
         "state": "no_response",
         "rank": 242,
         "line": {
-          "zh": "一眼带过。",
+          "zh": "懒得停。",
           "en": "Glance and on."
         }
       }
@@ -2645,7 +2645,7 @@
         "state": "no_response",
         "rank": 180,
         "line": {
-          "zh": "一眼带过。",
+          "zh": "懒得停。",
           "en": "Glance and on."
         }
       }
@@ -3055,7 +3055,7 @@
       "slug": "empanada",
       "sprite": "empanada",
       "display": {
-        "zh": "恩潘纳达",
+        "zh": "拉美馅饼",
         "en": "empanada"
       },
       "section": 7,
@@ -3154,7 +3154,7 @@
         "state": "eats",
         "rank": 24,
         "line": {
-          "zh": "那一下过去了。",
+          "zh": "苦那一下过去了。",
           "en": "That flash is gone."
         }
       },
@@ -3215,7 +3215,7 @@
       "slug": "falafel",
       "sprite": "falafel",
       "display": {
-        "zh": "法拉费",
+        "zh": "炸鹰嘴豆饼",
         "en": "falafel"
       },
       "section": 5,
@@ -3335,7 +3335,7 @@
       "slug": "fermenting-dough",
       "sprite": "fermenting-dough",
       "display": {
-        "zh": "发酵中的面团",
+        "zh": "发酵面团",
         "en": "fermenting dough"
       },
       "section": 13,
@@ -3775,7 +3775,7 @@
       "slug": "gnocchi",
       "sprite": "gnocchi",
       "display": {
-        "zh": "土豆团子",
+        "zh": "意式土豆团子",
         "en": "gnocchi"
       },
       "section": 6,
@@ -3965,7 +3965,7 @@
         "state": "no_response",
         "rank": 164,
         "line": {
-          "zh": "一眼带过。",
+          "zh": "懒得停。",
           "en": "Glance and on."
         }
       }
@@ -4135,7 +4135,7 @@
       "slug": "gyudon",
       "sprite": "gyudon",
       "display": {
-        "zh": "牛肉饭",
+        "zh": "日式牛肉饭",
         "en": "gyudon"
       },
       "section": 1,
@@ -4274,7 +4274,7 @@
         "state": "eats",
         "rank": 126,
         "line": {
-          "zh": "清。",
+          "zh": "解渴。",
           "en": "Clean."
         }
       },
@@ -4405,7 +4405,7 @@
         "state": "no_response",
         "rank": 235,
         "line": {
-          "zh": "一眼带过。",
+          "zh": "懒得停。",
           "en": "Glance and on."
         }
       }
@@ -4474,7 +4474,7 @@
         "state": "eats",
         "rank": 85,
         "line": {
-          "zh": "清。",
+          "zh": "解渴。",
           "en": "Clean."
         }
       },
@@ -4495,7 +4495,7 @@
       "slug": "hotteok",
       "sprite": "hotteok",
       "display": {
-        "zh": "糖饼",
+        "zh": "韩式糖饼",
         "en": "hotteok"
       },
       "section": 2,
@@ -4615,7 +4615,7 @@
       "slug": "injera",
       "sprite": "injera",
       "display": {
-        "zh": "英吉拉",
+        "zh": "埃塞俄比亚酸饼",
         "en": "injera"
       },
       "section": 5,
@@ -4695,7 +4695,7 @@
       "slug": "ipa-beer",
       "sprite": "ipa-beer",
       "display": {
-        "zh": "IPA啤酒",
+        "zh": "IPA 啤酒",
         "en": "IPA beer"
       },
       "section": 10,
@@ -4735,7 +4735,7 @@
       "slug": "japchae",
       "sprite": "japchae",
       "display": {
-        "zh": "杂菜",
+        "zh": "韩式杂菜",
         "en": "japchae"
       },
       "section": 2,
@@ -5554,7 +5554,7 @@
         "state": "no_response",
         "rank": 202,
         "line": {
-          "zh": "一眼带过。",
+          "zh": "懒得停。",
           "en": "Glance and on."
         }
       },
@@ -5565,7 +5565,7 @@
         "state": "no_response",
         "rank": 235,
         "line": {
-          "zh": "一眼带过。",
+          "zh": "懒得停。",
           "en": "Glance and on."
         }
       }
@@ -5634,7 +5634,7 @@
         "state": "eats",
         "rank": 24,
         "line": {
-          "zh": "那一下过去了。",
+          "zh": "苦那一下过去了。",
           "en": "That flash is gone."
         }
       },
@@ -5965,7 +5965,7 @@
         "state": "no_response",
         "rank": 180,
         "line": {
-          "zh": "一眼带过。",
+          "zh": "懒得停。",
           "en": "Glance and on."
         }
       }
@@ -6085,7 +6085,7 @@
         "state": "no_response",
         "rank": 201,
         "line": {
-          "zh": "一眼带过。",
+          "zh": "懒得停。",
           "en": "Glance and on."
         }
       }
@@ -6405,7 +6405,7 @@
         "state": "no_response",
         "rank": 228,
         "line": {
-          "zh": "一眼带过。",
+          "zh": "懒得停。",
           "en": "Glance and on."
         }
       }
@@ -6445,7 +6445,7 @@
         "state": "no_response",
         "rank": 180,
         "line": {
-          "zh": "一眼带过。",
+          "zh": "懒得停。",
           "en": "Glance and on."
         }
       }
@@ -6554,7 +6554,7 @@
         "state": "eats",
         "rank": 47,
         "line": {
-          "zh": "勉强吃。",
+          "zh": "冲着甜，吃了。",
           "en": "Fine. I'll take it."
         }
       },
@@ -6565,7 +6565,7 @@
         "state": "no_response",
         "rank": 206,
         "line": {
-          "zh": "一眼带过。",
+          "zh": "懒得停。",
           "en": "Glance and on."
         }
       }
@@ -7554,7 +7554,7 @@
         "state": "no_response",
         "rank": 197,
         "line": {
-          "zh": "一眼带过。",
+          "zh": "懒得停。",
           "en": "Glance and on."
         }
       },
@@ -7565,7 +7565,7 @@
         "state": "no_response",
         "rank": 217,
         "line": {
-          "zh": "一眼带过。",
+          "zh": "懒得停。",
           "en": "Glance and on."
         }
       }
@@ -7775,7 +7775,7 @@
       "slug": "ramen",
       "sprite": "ramen",
       "display": {
-        "zh": "拉面",
+        "zh": "日式拉面",
         "en": "ramen"
       },
       "section": 1,
@@ -8175,7 +8175,7 @@
       "slug": "samosa",
       "sprite": "samosa",
       "display": {
-        "zh": "萨莫萨",
+        "zh": "咖喱角",
         "en": "samosa"
       },
       "section": 4,
@@ -8375,7 +8375,7 @@
       "slug": "schnitzel",
       "sprite": "schnitzel",
       "display": {
-        "zh": "炸肉排",
+        "zh": "维也纳炸肉排",
         "en": "schnitzel"
       },
       "section": 6,
@@ -8565,7 +8565,7 @@
         "state": "no_response",
         "rank": 180,
         "line": {
-          "zh": "一眼带过。",
+          "zh": "懒得停。",
           "en": "Glance and on."
         }
       }
@@ -8765,7 +8765,7 @@
         "state": "no_response",
         "rank": 201,
         "line": {
-          "zh": "一眼带过。",
+          "zh": "懒得停。",
           "en": "Glance and on."
         }
       }
@@ -8965,7 +8965,7 @@
         "state": "no_response",
         "rank": 180,
         "line": {
-          "zh": "一眼带过。",
+          "zh": "懒得停。",
           "en": "Glance and on."
         }
       }
@@ -9005,7 +9005,7 @@
         "state": "no_response",
         "rank": 180,
         "line": {
-          "zh": "一眼带过。",
+          "zh": "懒得停。",
           "en": "Glance and on."
         }
       }
@@ -9685,7 +9685,7 @@
         "state": "no_response",
         "rank": 180,
         "line": {
-          "zh": "一眼带过。",
+          "zh": "懒得停。",
           "en": "Glance and on."
         }
       }
@@ -10034,7 +10034,7 @@
         "state": "eats",
         "rank": 104,
         "line": {
-          "zh": "那一下过去了。",
+          "zh": "苦那一下过去了。",
           "en": "That flash is gone."
         }
       },
@@ -10405,7 +10405,7 @@
         "state": "no_response",
         "rank": 175,
         "line": {
-          "zh": "一眼带过。",
+          "zh": "懒得停。",
           "en": "Glance and on."
         }
       }
@@ -10935,7 +10935,7 @@
       "slug": "yakitori",
       "sprite": "yakitori",
       "display": {
-        "zh": "烤鸡串",
+        "zh": "日式烤鸡串",
         "en": "yakitori"
       },
       "section": 1,

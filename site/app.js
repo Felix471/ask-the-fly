@@ -169,6 +169,26 @@ export function lowInterest(decision, threshold = LOW_INTEREST_HZ) {
   return Boolean(pick && pick.cell && pick.cell.mn9_mean < threshold);
 }
 
+// The verdict as text parts: a lead, the emphasised part, and sub-lines.
+// `name(item)` gives a display name and `text(key, values)` the copy string.
+// When every dish is in the designed "no response" state the pick is still named
+// (it is the highest MN9, however low), and a tie never claims one dish was picked.
+export function verdictParts(d, name, text) {
+  const names = (items) => items.map(name).join(" / ");
+  if (!d.flyPick) return { lead: text('verdictNone'), strong: '', subs: [] };
+  if (d.tie.length) return { lead: text('verdictTie'), strong: names(d.tie), subs: lowInterest(d) ? [text('lowInterestTie')] : [] };
+  // The fly's top score can be shared while other dishes remain: still no single pick.
+  const low = lowInterest(d) ? [text(d.flyTies.length ? 'lowInterestTie' : 'lowInterest')] : [];
+  const taken = names(d.flyTies.length ? d.flyTies : [d.flyPick]); // every dish the fly keeps
+  if (d.mode === "opposite" && d.many) {
+    return { lead: '', strong: text('verdictOppositeMany', { fly_pick: taken }), subs: [text('oppositeLeast', { lowest: names(d.lowest) }), ...low] };
+  }
+  if (d.mode === "opposite") return { lead: '', strong: text('verdictOpposite', { fly_pick: taken, human_pick: name(d.winner) }), subs: low };
+  // Only when every known dish is in that state: a lower-MN9 dish may still be "mouth moves".
+  if (d.known.every((item) => readoutState(item.cell) === 'no_response')) return { lead: text('verdictNoResponse'), strong: name(d.winner), subs: [] };
+  return { lead: text('verdictAsk'), strong: name(d.winner), subs: low };
+}
+
 // The fly's animation plan for a decision: taste every known dish in order,
 // then land on the fly's own pick, or hover between the fly's ties.
 export function scenePlan(decision, scored) {
@@ -303,6 +323,18 @@ export function cardLines(decision, lang, fly = decision.fly || 'female') {
     : Object.fromEntries(["dish", "hz", "hz_sugar_only", "sugar", "bitter", "water", "ir94e"].map((k) => [k, t.cardEmptyValue]));
   return { fixed: t.fixedLines.map((line) => fmt(line, values)), bottom: t.cardHonesty,
     ...(fly === 'male' ? {fly: fmt(t.card.flyLine, {fly:t.flyName.male,dish:values.dish})} : {}) };
+}
+
+// The card's readout line(s): one unlabelled line for a single fly; with both
+// flies, one line per fly, each labelled and computed from that fly's own pick.
+export function cardReadoutLines(decision, lang, maleDecision = null) {
+  const t = STRINGS[lang];
+  const own = cardLines(decision, lang).fixed[1];
+  if (!maleDecision) return [{ fly: null, text: own }];
+  return [
+    { fly: 'female', text: `${t.flyName.female} · ${own}` },
+    { fly: 'male', text: `${t.flyName.male} · ${cardLines(maleDecision, lang).fixed[1]}` },
+  ];
 }
 
 export function flySelection(value) {
@@ -724,7 +756,8 @@ export function drawResultHero(canvas, decision, lang, options = {}) {
       drawDish(ctx, spriteFor(item), x, y, small, !flyPick || many);
       if (flyPick) drawResponseFly(ctx, options.sprites, item, x, y, small);
       ctx.font = font(12, flyPick ? 600 : 400);
-      ctx.fillStyle = flyPick ? "#1f1a17" : "#9a928a";
+      // The hero canvas is transparent over the page panel, so the label follows the page ink (dark mode).
+      ctx.fillStyle = flyPick ? (options.ink || "#1f1a17") : "#9a928a";
       const label = displayName(item, lang);
       const short = ctx.measureText(label).width > small + 10 ? wrapLines(ctx, label, small + 10)[0] : label;
       ctx.fillText(short, x + small / 2, y + small + 16);
@@ -847,7 +880,17 @@ export function drawShareCard(canvas, decision, lang, options = {}) {
   const barsHeight = ranked.length ? 16 + barRows * rowHeight + (ranked.length > barRows ? 28 : 0) : 0;
   const lines = cardLines(decision, lang);
   ctx.font = font(21);
-  const mn9TextHeight = wrapLines(ctx, lines.fixed[1], W - 2 * pad).length * 28;
+  const readouts = cardReadoutLines(decision, lang, both ? options.maleDecision : null);
+  // With both flies each line sits under its own bars, smaller and muted.
+  const drawReadout = (entry, top) => {
+    ctx.font = font(both ? 17 : 21);
+    ctx.fillStyle = both ? '#51463e' : "#1f1a17";
+    let line = top;
+    for (const part of wrapLines(ctx, entry.text, W - 2 * pad)) { ctx.fillText(part, pad, line); line += both ? 24 : 28; }
+    return line;
+  };
+  ctx.font = font(both ? 17 : 21);
+  const mn9TextHeight = readouts.reduce((sum, entry) => sum + wrapLines(ctx, entry.text, W - 2 * pad).length * (both ? 24 : 28), 0) + (both ? 12 : 0);
   ctx.font = font(19, 600);
   const textBlock = 12 + mn9TextHeight + wrapLines(ctx, lines.bottom, W - 2 * pad).slice(0,3).length * 26;
   const opposite = decision.mode === "opposite" && decision.flyPick && !chosen.includes(decision.flyPick);
@@ -952,6 +995,7 @@ export function drawShareCard(canvas, decision, lang, options = {}) {
   }
 
   if (both) {
+    y = drawReadout(readouts[0], y + 4);
     const male = options.maleDecision;
     const items = [...male.known].sort((a,b)=>b.cell.mn9_mean-a.cell.mn9_mean);
     const maleChosen = outcomeItems(male);
@@ -975,17 +1019,12 @@ export function drawShareCard(canvas, decision, lang, options = {}) {
       y+=38;
     }
     if(items.length>4){ctx.font=font(18);ctx.fillText(fmt(t.cardMore,{n:items.length-4}),pad,y);y+=24;}
-    y+=8;
+    y = drawReadout(readouts[1], y + 2);
   }
 
   // The MN9 line and the one honesty sentence.
   y += 6;
-  ctx.font = font(21);
-  ctx.fillStyle = "#1f1a17";
-  for (const part of wrapLines(ctx, lines.fixed[1], W - 2 * pad)) {
-    ctx.fillText(part, pad, y);
-    y += 28;
-  }
+  if (!both) y = drawReadout(readouts[0], y);
   y += 6;
   if (both && fliesDisagree(decision,options.maleDecision)) {
     ctx.font=font(17,600);ctx.fillStyle='#b5471f';
@@ -1592,33 +1631,14 @@ if (isBrowser) {
     verdict.innerHTML = "";
     const lead = document.createElement("span");
     const strong = document.createElement("strong");
-    if (!d.flyPick) {
-      lead.textContent = panel.verdictText('verdictNone');
-    } else if (d.tie.length) {
-      lead.textContent = panel.verdictText('verdictTie');
-      strong.textContent = d.tie.map((i) => displayName(i, state.lang)).join(" / ");
-    } else if (readoutState(d.flyPick.cell) === 'no_response') {
-      lead.textContent = panel.statusText('sceneNoResponse');
-      strong.textContent = '';
-    } else if (d.mode === "opposite" && d.many) {
-      lead.textContent = "";
-      strong.textContent = panel.verdictText('verdictOppositeMany', { fly_pick: displayName(d.flyPick, state.lang) });
+    const parts = verdictParts(d, (item) => displayName(item, state.lang), (key, values) => panel.verdictText(key, values));
+    lead.textContent = parts.lead;
+    strong.textContent = parts.strong;
+    verdict.append(lead, strong);
+    for (const text of parts.subs) {
       const sub = document.createElement("span");
       sub.className = "verdict-sub";
-      sub.textContent = panel.verdictText('oppositeLeast', { lowest: d.lowest.map((i) => displayName(i, state.lang)).join(" / ") });
-      verdict.append(lead, strong, sub);
-    } else if (d.mode === "opposite") {
-      lead.textContent = "";
-      strong.textContent = panel.verdictText('verdictOpposite', { fly_pick: displayName(d.flyPick, state.lang), human_pick: displayName(d.winner, state.lang) });
-    } else {
-      lead.textContent = panel.verdictText('verdictAsk');
-      strong.textContent = displayName(d.winner, state.lang);
-    }
-    if (!verdict.contains(strong)) verdict.append(lead, strong);
-    if (lowInterest(d)) {
-      const sub = document.createElement("span");
-      sub.className = "verdict-sub";
-      sub.textContent = panel.verdictText('lowInterest');
+      sub.textContent = text;
       verdict.append(sub);
     }
     $("table-fly").hidden = state.fly === 'female';
@@ -1753,6 +1773,7 @@ if (isBrowser) {
     const width = Math.min(420, canvas.parentElement.clientWidth || 360);
     canvas.style.width = `${width}px`;
     drawResultHero(canvas, decision, state.lang, {
+      ink: getComputedStyle(document.documentElement).getPropertyValue('--ink').trim() || undefined,
       pixelRatio: Math.min(2, window.devicePixelRatio || 1),
       width,
       sprites,

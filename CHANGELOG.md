@@ -2,6 +2,15 @@
 
 What a visitor to askthefly.app would notice, newest first. One section per release; the heading is `## vX.Y.Z — YYYY-MM-DD` (the release tag on `main` and its date), and `scripts/validate_release.py` checks that `site/data/release.json` matches the top entry. Each entry ends with a line on whether the README honesty table changed.
 
+## v2.1.1 — 2026-11-23
+
+- The link-preview image now shows the current scores (mapo tofu 0.7 Hz, not the pre-Ir94e 62.5 Hz); it is generated from the shipped table.
+- When nothing gets a clear response, the verdict names the dish the fly would pick and says so plainly; a low-scoring tie no longer says one dish was picked. English wording of the both-fly low-interest line corrected. In dark mode, the label under the fly's own pick in "Let the fly eat first" is readable again.
+- On a share card for both flies, the MN9 breakdown line is now shown once per fly, labelled, under that fly's own bars; before, one unlabelled female line sat under the male bars.
+- The spike raster gains an Ir94e GRN row. No scores, states, choices or data changed.
+- Chinese copy revised across the site for a more natural voice and consistent terms (67 interface strings, four fly lines), six Chinese section names shortened (for example 日料, 韩餐, 蔬果) and fifteen Chinese dish names clarified (for example 咖喱角 for samosa); the old names still work in search. English text is unchanged apart from the lines above.
+- README honesty table: no claim added or changed. In the Chinese table the wording of several rows was revised and one mistranslation corrected (a wet savory dish had been rendered as pickles); the English table is unchanged.
+
 ## v2.1.0 — 2026-09-19
 
 - Adds 105 entries, including 23 not-food items, for a 279-entry menu organized into 14 bilingual sections. Not-food entries carry a badge and an explanatory note.

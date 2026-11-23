@@ -1,5 +1,23 @@
 # v2 decision memo
 
+> **Superseded for the male fly by v2.0.0 (2026-09-19).** This memo records the
+> research position before the male-fly program. Its MaleCNS section below says
+> the line is closed with no product integration; that was true of the nine
+> research variants, and it is no longer the state of the product. The owner
+> then opened a separate program that shipped an independently computed male fly
+> in v2.0.0. The current record is [docs/male_fly_v2.md](male_fly_v2.md).
+>
+> One gate exception carries over from this memo into the product and is
+> recorded there as an owner commitment: the shipped male configuration (M1j,
+> bilateral Tastekin-typed sets on the >= 5-synapse MaleCNS graph at 0.17875 mV)
+> misses one of our four behavioural gates. Bitter alone at 25 Hz gives 1.07 Hz
+> on MN9 against our 1.0 Hz limit (gate C, a miss of 0.07 Hz;
+> [M1j results](bilateral_sugar_policy.md#m1j-results-checkpoint--2026-09-19)).
+> The gate was not changed and the result was not rerun; the male fly shipped
+> with this miss disclosed. It is invisible in the product below our designed
+> 5 Hz activity threshold. The salt and cell-set decisions in this memo are
+> unaffected.
+
 2026-09-13, updated 2026-09-19 after M1j and male-line closure. Records the owner's salt and
 cell-set decisions; other candidates remain unranked proposals, not a roadmap
 or an authorisation to run experiments. Findings are taken from linked reports.
