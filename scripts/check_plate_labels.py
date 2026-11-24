@@ -78,6 +78,21 @@ def assert_labels(state, names):
     assert not any(intersect(a['outer'], b['outer']) for i, a in enumerate(labels) for b in labels[i + 1:]), 'caption boxes overlap'
 
 
+def pass_guess_step(page):
+    """The page offers a guess before the fly starts; these checks are about the run itself."""
+    # Polled with evaluate: the page's CSP blocks the eval that wait_for_function relies on.
+    phase = "window.__askfly ? window.__askfly.snapshot().phase : 'input'"
+    for wanted in (('guess', 'tasting', 'result'), ('tasting', 'result')):
+        for _ in range(600):
+            if page.evaluate(phase) in wanted:
+                break
+            page.wait_for_timeout(50)
+        else:
+            raise AssertionError(f'phase {page.evaluate(phase)!r}, expected one of {wanted}')
+        if page.evaluate(phase) == 'guess':
+            page.locator('[data-panel="guess-watch"]:visible').click()
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--base", default="http://127.0.0.1:8765/")
@@ -118,6 +133,7 @@ def main():
                 page.goto(args.base.rstrip("/") + "/?" + query, wait_until="domcontentloaded")
                 try:
                     page.locator("#scene-panel").wait_for(state="visible", timeout=20000)
+                    pass_guess_step(page)
                     assert page.evaluate("window.__askfly.snapshot().phase") == "tasting"
                 except Exception:
                     print(page.evaluate("({state: window.__askfly?.snapshot(), text: document.body.innerText})"), flush=True)
@@ -160,6 +176,7 @@ def main():
                     assert page.locator("#scene-panel").is_hidden(), "reset did not hide labels"
                     page.click("#ask-btn")
                     page.locator("#scene-panel").wait_for(state="visible")
+                    pass_guess_step(page)
                     assert page.evaluate("window.__askfly.snapshot().phase") == "tasting"
                     assert_labels(inspect_labels(page, other_names), other_names)
                     print(f"{key}: PASS, scene_height={state['height']}, clipped={[x['clipped'] for x in state['labels']]}", flush=True)

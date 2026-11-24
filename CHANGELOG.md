@@ -2,6 +2,14 @@
 
 What a visitor to askthefly.app would notice, newest first. One section per release; the heading is `## vX.Y.Z — YYYY-MM-DD` (the release tag on `main` and its date), and `scripts/validate_release.py` checks that `site/data/release.json` matches the top entry. Each entry ends with a line on whether the README honesty table changed.
 
+## v2.3.0 — 2026-11-24
+
+- Adds a guess before the reveal: after pressing an ask button, the table waits for the visitor to tap the dish they think the fly will take. The result then says whether the guess was right, a count of right guesses is kept for the visit, and the share card can carry one short line about it. "Just watch" starts the fly without a guess, and Skip still goes straight to the result.
+- A shared link no longer plays on its own: the recipient sees the table and is invited to guess first. The guess itself is not part of the link.
+- The guess is the visitor's own and stays in the page: nothing is stored or sent, and the count is gone on reload.
+- No scores, states, choices or lookup tables changed.
+- README honesty table: unchanged.
+
 ## v2.2.0 — 2026-11-23
 
 - Adds a menu page (`/menu/`) showing both flies' rankings of all 279 entries: top tens, biggest disagreements, the full not-food ranking, top of each section, and a searchable full list, with a toggle to show MN9 and MN11D scores and links to try any item on the main page.

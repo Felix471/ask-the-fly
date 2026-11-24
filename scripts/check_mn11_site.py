@@ -7,6 +7,21 @@ from urllib.parse import urlparse
 from playwright.sync_api import sync_playwright
 
 
+def pass_guess_step(page):
+    """The page offers a guess before the fly starts; these checks are about the run itself."""
+    # Polled with evaluate: the page's CSP blocks the eval that wait_for_function relies on.
+    phase = "window.__askfly ? window.__askfly.snapshot().phase : 'input'"
+    for wanted in (('guess', 'tasting', 'result'), ('tasting', 'result')):
+        for _ in range(600):
+            if page.evaluate(phase) in wanted:
+                break
+            page.wait_for_timeout(50)
+        else:
+            raise AssertionError(f'phase {page.evaluate(phase)!r}, expected one of {wanted}')
+        if page.evaluate(phase) == 'guess':
+            page.locator('[data-panel="guess-watch"]:visible').click()
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--base', default='http://127.0.0.1:8773/')
@@ -27,6 +42,7 @@ def main():
                 page.on('response', lambda response: failed.append(response.url) if response.status >= 400 else None)
                 query = f'?d={dishes}&lang={lang}&seed=1' + ('&m=opposite' if state=='no_response' else '')
                 page.goto(args.base.rstrip('/')+'/'+query)
+                pass_guess_step(page)
                 page.wait_for_function('(s)=>window.__askfly?.snapshot().responseState===s && !document.querySelector("#response-detail").hidden', arg=state, timeout=30000)
                 page.locator('#scene-panel').screenshot(path=str(args.out/f'{lang}-{state}-action.png'))
                 page.wait_for_function('()=>window.__askfly.snapshot().phase==="result"', timeout=45000)

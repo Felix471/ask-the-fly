@@ -43,6 +43,7 @@ def capture(args: argparse.Namespace, frames_dir: Path) -> int:
             page.click(".btn-add")
         page.evaluate("(v) => { document.getElementById('speed').value = v; }", str(args.speed))
         page.click("#opposite-btn" if args.opposite else "#ask-btn")
+        pass_guess_step(page)
         # Keep the scene panel at the top of the frame.
         page.evaluate("document.getElementById('scene-panel').scrollIntoView({block: 'start'})")
         interval = 1.0 / args.fps
@@ -78,6 +79,21 @@ def encode(frames_dir: Path, fps: float, mp4: Path, gif: Path, width: int) -> No
                     "-vf", f"{gif_scale},palettegen=max_colors=128", str(palette)], check=True)
     subprocess.run([exe, "-y", "-loglevel", "error", "-framerate", f"{fps:.3f}", "-i", pattern, "-i", str(palette),
                     "-lavfi", f"{gif_scale} [x]; [x][1:v] paletteuse=dither=bayer:bayer_scale=3", str(gif)], check=True)
+
+
+def pass_guess_step(page):
+    """The page offers a guess before the fly starts; these checks are about the run itself."""
+    # Polled with evaluate: the page's CSP blocks the eval that wait_for_function relies on.
+    phase = "window.__askfly ? window.__askfly.snapshot().phase : 'input'"
+    for wanted in (('guess', 'tasting', 'result'), ('tasting', 'result')):
+        for _ in range(600):
+            if page.evaluate(phase) in wanted:
+                break
+            page.wait_for_timeout(50)
+        else:
+            raise AssertionError(f'phase {page.evaluate(phase)!r}, expected one of {wanted}')
+        if page.evaluate(phase) == 'guess':
+            page.locator('[data-panel="guess-watch"]:visible').click()
 
 
 def main() -> int:

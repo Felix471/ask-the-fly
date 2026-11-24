@@ -24,6 +24,14 @@ BASE = "http://127.0.0.1:8765/"
 INIT = """
 window.__rejections = [];
 window.addEventListener('unhandledrejection', (e) => window.__rejections.push(String(e.reason)));
+// The checks written before the guess step are about the run itself: unless a check sets
+// window.__guess to something else, the step is passed through its own "Just watch" button.
+window.__guess = 'watch';
+setInterval(() => {
+  if (window.__guess !== 'watch') return;
+  const button = document.querySelector('[data-panel="guess-watch"]:not([hidden])');
+  if (button && button.offsetParent) button.click();
+}, 40);
 """
 
 
@@ -49,10 +57,10 @@ class Hold:
         self.page.unroute(self.pattern)
 
 
-def open_page(browser, query, width=390):
+def open_page(browser, query, width=390, init=None):
     # bypass_csp: the page's CSP (verified separately) would block Playwright's evaluated predicates
     page = browser.new_page(viewport={"width": width, "height": 900}, bypass_csp=True)
-    page.add_init_script(INIT)
+    page.add_init_script(INIT + (init or ''))
     errors = []
     page.on("pageerror", lambda e: errors.append(f"pageerror: {e}"))
     page.on("console", lambda m: errors.append(f"console.{m.type}: {m.text}") if m.type == "error" else None)
@@ -979,6 +987,197 @@ def check_F30(browser):
     return problems
 
 
+
+def check_F31(browser):
+    """Guess before the reveal: the table waits for a tap, only scored plates can be tapped,
+    the result says right or wrong, the count stays in the page, the card carries one line,
+    Skip and "Just watch" leave no trace of a guess, and a shared link invites a guess."""
+    problems = []
+    manual = "window.__guess = 'manual'"
+
+    def open_manual(query, width=390):
+        page, errors, requests = open_page(browser, query, width=width, init=manual)
+        page.wait_for_function("window.__askfly && window.__askfly.snapshot().phase === 'guess'")
+        page.wait_for_selector('.plate-guess')
+        return page, errors, requests
+
+    def guess_state(page):
+        return page.evaluate("""(() => {
+          const line = document.getElementById('guess-result'), tally = document.getElementById('guess-tally');
+          return {hidden: line.hidden, text: line.textContent, right: line.classList.contains('right'),
+                  tallyHidden: tally.hidden, tally: tally.textContent, snap: window.__askfly.snapshot()};
+        })()""")
+
+    # A shared link: the recipient is invited to guess; nothing plays until they choose.
+    page, errors, requests = open_manual('?v=2&d=k.watermelon,k.mapo-tofu,k.black-coffee,t.zz-not-a-dish&lang=en&seed=0')
+    page.wait_for_timeout(1200)
+    snap = debug(page)
+    if snap['phase'] != 'guess' or snap['brainPlaying']:
+        problems.append(f"the run started without a choice: {snap['phase']}, brain playing = {snap['brainPlaying']}")
+    if page.locator('.plate-guess').count() != 3:
+        problems.append(f"{page.locator('.plate-guess').count()} tap targets for three scored dishes and one unknown entry")
+    if not page.locator('#result-panel').is_hidden() or page.locator('#scene-panel .brain-wrap').is_visible():
+        problems.append('result or brain shown during the guess step')
+    if page.locator('#scene-status').inner_text() != STRINGS_EN_SHARED:
+        problems.append(f"shared-link caption: {page.locator('#scene-status').inner_text()!r}")
+    boxes = page.evaluate("[...document.querySelectorAll('.plate-guess')].map(b => { const r = b.getBoundingClientRect(); return [r.left, r.top, r.right, r.bottom]; })")
+    for i, a in enumerate(boxes):
+        if a[2] - a[0] < 44 or a[3] - a[1] < 44:
+            problems.append(f'tap target {i} smaller than 44 px: {a}')
+        for c in boxes[i + 1:]:
+            if a[0] < c[2] and c[0] < a[2] and a[1] < c[3] and c[1] < a[3]:
+                problems.append(f'tap targets overlap: {a} {c}')
+    # A narrower window, then the language switch: the step stays and the targets stay on their plates.
+    page.set_viewport_size({'width': 360, 'height': 900})
+    page.click('#lang-toggle')
+    if debug(page)['phase'] != 'guess' or page.locator('.plate-guess').count() != 3:
+        problems.append('the language switch ended the guess step')
+    off = page.evaluate("""(() => {
+      const buttons = [...document.querySelectorAll('.plate-guess')].map(b => b.getBoundingClientRect());
+      const labels = [...document.querySelectorAll('#scene-panel .plate-label')].slice(0, 3).map(b => b.getBoundingClientRect());
+      const stage = document.getElementById('scene-canvas').getBoundingClientRect();
+      return buttons.map((b, i) => [Math.abs((b.left + b.right) / 2 - (labels[i].left + labels[i].right) / 2), b.left >= stage.left - 1 && b.right <= stage.right + 1]);
+    })()""")
+    if any(distance > 2 or not inside for distance, inside in off):
+        problems.append(f'tap targets off their plates after a resize and a language switch: {off}')
+    page.click('#lang-toggle')
+    page.set_viewport_size({'width': 390, 'height': 900})
+    # A wrong guess (black coffee is the third scored plate; the female fly takes watermelon).
+    page.locator('.plate-guess').nth(2).click()
+    page.wait_for_function("window.__askfly.snapshot().phase === 'tasting'")
+    page.wait_for_selector('.plate-tag')
+    if page.locator('.plate-guess').count() or page.locator('[data-panel="guess-watch"]:visible').count():
+        problems.append('guess controls still shown while the fly tastes')
+    page.click('#skip-btn')
+    wait_result(page)
+    state = guess_state(page)
+    if state['hidden'] or state['right'] or 'black coffee' not in state['text'] or state['snap']['tally'] != {'right': 0, 'total': 1}:
+        problems.append(f"wrong guess: {state['text']!r}, right = {state['right']}, tally = {state['snap']['tally']}")
+    # The card carries the line at the right of its title row.
+    page.evaluate("""(() => {
+      window.__cardText = [];
+      const fill = CanvasRenderingContext2D.prototype.fillText;
+      CanvasRenderingContext2D.prototype.fillText = function (text, x, y, ...rest) {
+        if (this.canvas.id === 'share-card') window.__cardText.push({text: String(text), x, y, width: this.measureText(String(text)).width, align: this.textAlign});
+        return fill.call(this, text, x, y, ...rest);
+      };
+    })()""")
+    page.click('#share-btn')
+    page.wait_for_selector('#card-dialog[open]')
+    for card_format, title_y in (('xhs', 84), ('standard', 108)):  # the dialog opens on the standard card
+        page.evaluate("window.__cardText = []")
+        page.check(f'input[name="card-format"][value="{card_format}"]', force=True)
+        page.wait_for_function("window.__cardText.length > 3")
+        page.wait_for_timeout(500)
+        texts = page.evaluate("window.__cardText")
+        line = [t for t in texts if 'black coffee' in t['text'] and t['align'] == 'right']
+        title = [t for t in texts if t['y'] == title_y and t['align'] != 'right']
+        if len(line) != 1 or not title:
+            problems.append(f'{card_format} card: guess line drawn {len(line)} times')
+        elif line[0]['x'] - line[0]['width'] < title[0]['x'] + title[0]['width'] + 20:
+            problems.append(f'{card_format} card: the guess line runs into the title')
+    page.click('#close-card-btn')
+    # Play again with a right guess: the count shows by the table title and after the line.
+    page.click('#again-btn')
+    if guess_state(page)['tallyHidden']:
+        problems.append('the count is not shown by the table title after a guess')
+    page.click('#ask-btn')
+    page.wait_for_selector('.plate-guess')
+    if page.locator('#scene-status').inner_text() == STRINGS_EN_SHARED:
+        problems.append('the shared-link caption was used for an ordinary run')
+    page.locator('.plate-guess').nth(0).click()
+    page.wait_for_function("window.__askfly.snapshot().phase === 'tasting'")
+    page.click('#skip-btn')
+    wait_result(page)
+    state = guess_state(page)
+    if state['hidden'] or not state['right'] or state['snap']['tally'] != {'right': 1, 'total': 2} or '1 / 2' not in state['text']:
+        problems.append(f"right guess: {state['text']!r}, right = {state['right']}, tally = {state['snap']['tally']}")
+    # "Just watch" and Skip: no guess, no line, the count unchanged.
+    for control in ('[data-panel="guess-watch"]:visible', '#skip-btn'):
+        page.click('#again-btn')
+        page.click('#ask-btn')
+        page.wait_for_selector('.plate-guess')
+        page.click(control)
+        if control != '#skip-btn':
+            page.wait_for_function("window.__askfly.snapshot().phase === 'tasting'")
+            page.click('#skip-btn')
+        wait_result(page)
+        state = guess_state(page)
+        if not state['hidden'] or state['snap']['guess'] is not None or state['snap']['tally'] != {'right': 1, 'total': 2}:
+            problems.append(f"{control}: a guess was recorded: {state['text']!r}, {state['snap']['guess']}, {state['snap']['tally']}")
+        if page.locator('.plate-tag').count():
+            problems.append(f'{control}: a plate is tagged without a guess')
+        if page.locator('#option-list li').count() and not page.locator('#results-body tr').count():
+            problems.append(f'{control}: the result table is empty')
+    # "Ask again" during a later run's guess step must not be undone by the earlier one.
+    page.click('#again-btn')
+    page.click('#ask-btn')
+    page.wait_for_selector('.plate-guess')
+    snap = debug(page)
+    if snap['phase'] != 'guess' or snap['guess'] is not None or page.locator('.plate-tag').count():
+        problems.append(f"a new run started with an old guess: {snap['phase']}, {snap['guess']}")
+    problems = finish(page, errors, problems)
+
+    # Skip while the plates' pictures are still held back: the result comes at once.
+    page = browser.new_page(viewport={"width": 390, "height": 900}, bypass_csp=True)
+    page.add_init_script(INIT + manual)
+    errors = []
+    page.on("pageerror", lambda e: errors.append(f"pageerror: {e}"))
+    hold = Hold(page, "**/assets/dishes/mapo-tofu.png")
+    page.goto(BASE + '?v=2&d=k.watermelon,k.mapo-tofu,k.black-coffee&lang=en&seed=0', wait_until="domcontentloaded")
+    page.wait_for_function("window.__askfly && window.__askfly.snapshot().phase === 'guess'")
+    for _ in range(100):
+        if hold.routes:
+            break
+        page.wait_for_timeout(50)
+    else:
+        problems.append('the held plate picture was never requested: the Skip case below proves nothing')
+    page.click('#skip-btn')
+    try:
+        wait_result(page, timeout=5000)
+    except Exception:
+        problems.append('Skip during the guess step waited for the plate pictures')
+    hold.release()
+    page.wait_for_timeout(800)
+    state = guess_state(page)
+    if state['snap']['phase'] != 'result' or not state['hidden'] or page.locator('.plate-guess').count():
+        problems.append(f"after Skip with held pictures: {state['snap']['phase']}, tap targets = {page.locator('.plate-guess').count()}")
+    problems = finish(page, errors, problems)
+
+    # Both flies on a phone: one table to guess on, both stages tagged, one line for both.
+    page, errors, requests = open_manual('?v=2&d=k.latiao,k.hot-and-sour-noodles,k.xiaolongbao,k.injera&lang=zh&seed=0&f=both')
+    if page.locator('#scene-panel-male').is_visible():
+        problems.append('two tables shown during the guess step with both flies')
+    page.locator('.plate-guess').nth(0).click()   # latiao: the female fly's pick, not the male fly's
+    page.wait_for_function("window.__askfly.snapshot().phase === 'tasting'")
+    page.wait_for_selector('#scene-panel .plate-tag')
+    page.click('#skip-btn')
+    wait_result(page)
+    page.wait_for_timeout(1500)
+    stages = page.evaluate("""['scene-panel', 'scene-panel-male'].map(id => {
+      const root = document.getElementById(id);
+      return [root.querySelectorAll('.plate-label').length, root.querySelectorAll('.plate-tag').length, root.querySelectorAll('.plate-guess').length];
+    })""")
+    if stages != [[4, 1, 0], [4, 1, 0]]:
+        problems.append(f'both flies after a guess and Skip: [labels, tags, tap targets] per stage = {stages}')
+    state = guess_state(page)
+    expected = page.evaluate("import('./strings.js').then(m => m.STRINGS.zh.guess.resultOneFly.replace('{hit}', m.STRINGS.zh.flyName.female).replace('{miss}', m.STRINGS.zh.flyName.male))")
+    if state['text'] != expected or state['right'] or state['snap']['tally'] != {'right': 0, 'total': 1}:
+        problems.append(f"both flies, right for one: {state['text']!r} (expected {expected!r}), tally = {state['snap']['tally']}")
+    problems = finish(page, errors, problems)
+
+    # Fewer than two scored dishes: no guess step at all.
+    page, errors, requests = open_page(browser, '?v=2&d=k.watermelon,t.zz-not-a-dish&lang=en&seed=0', init=manual)
+    page.wait_for_function("window.__askfly && window.__askfly.snapshot().phase === 'tasting'")
+    if page.locator('.plate-guess').count():
+        problems.append('a guess was offered with one scored dish')
+    problems = finish(page, errors, problems)
+    return problems
+
+
+STRINGS_EN_SHARED = "Table's set. Tap to guess"
+
+
 CHECKS = {
     "F02": check_F02, "F03": check_F03, "F04": check_F04, "F05": check_F05,
     "F06": check_F06, "F08": check_F08, "F15": check_F15,
@@ -988,7 +1187,7 @@ CHECKS = {
     "F22": check_F22,
     "F23": check_F23, "F24": check_F24,
     "F25": check_F25, "F26": check_F26, "F27": check_F27,
-    "F28": check_F28, "F29": check_F29, "F30": check_F30,
+    "F28": check_F28, "F29": check_F29, "F30": check_F30, "F31": check_F31,
 }
 
 

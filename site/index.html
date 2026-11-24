@@ -56,6 +56,7 @@
       <div class="table" id="table">
         <div class="table-head">
           <span class="table-title" data-i18n="tableTitle"></span>
+          <span id="guess-tally" class="guess-tally" hidden></span>
           <canvas id="idle-fly" class="idle-fly" width="56" height="56" aria-hidden="true"></canvas>
         </div>
         <ul id="option-list" class="option-list" aria-live="polite"></ul>
@@ -106,6 +107,7 @@
         <div id="plate-labels" data-panel="plate-labels" class="plate-labels"></div>
         <div id="fly-bubble" data-panel="fly-bubble" class="fly-bubble" aria-live="polite" hidden><span class="bubble-emotion" aria-hidden="true"></span><span class="bubble-text"></span></div>
       </div>
+      <button data-panel="guess-watch" class="btn btn-secondary guess-watch" type="button" data-i18n="guess.justWatch" hidden></button>
       <div id="response-detail" data-panel="response-detail" class="response-detail" hidden>
         <canvas id="mouth-inset" data-panel="mouth-inset" width="128" height="128" data-i18n-aria="responseInset"></canvas>
         <div><p id="response-description" data-panel="response-description"></p><p class="small" data-i18n="responseDesign"></p></div>
@@ -167,6 +169,7 @@
         <div id="plate-labels-male" data-panel="plate-labels" class="plate-labels"></div>
         <div id="fly-bubble-male" data-panel="fly-bubble" class="fly-bubble" aria-live="polite" hidden><span class="bubble-emotion" aria-hidden="true"></span><span class="bubble-text"></span></div>
       </div>
+      <button data-panel="guess-watch" class="btn btn-secondary guess-watch" type="button" data-i18n="guess.justWatch" hidden></button>
       <div id="response-detail-male" data-panel="response-detail" class="response-detail" hidden>
         <canvas id="mouth-inset-male" data-panel="mouth-inset" width="128" height="128" data-i18n-aria="responseInset"></canvas>
         <div><p id="response-description-male" data-panel="response-description"></p><p class="small" data-i18n="responseDesign"></p></div>
@@ -216,6 +219,7 @@
 
     <section class="panel" id="result-panel" hidden>
       <div id="verdict" class="verdict"></div>
+      <p id="guess-result" class="guess-result" hidden></p>
       <p id="disagreement" class="disagreement" hidden><strong data-i18n="disagreement.label"></strong> <span data-i18n="disagreement.sentence"></span></p>
       <p id="result-fly" class="small" hidden></p>
       <canvas id="result-hero" class="result-hero" data-i18n-aria="ariaResultHero"></canvas>

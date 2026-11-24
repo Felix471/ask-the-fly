@@ -143,7 +143,7 @@ export const STRINGS = {
     "colIr94e": "Amino acids",
     "ir94eExplain": "Amino acids = the Ir94e channel: in this model free amino acids and glutamate put the fly off, so soy-, stock- and meat-heavy dishes score low. Which level a dish gets is our estimate; the suppression is the model's.",
     "lowInterest": "The fly didn't care much for any of these. This one was just the least uninteresting.",
-    "releaseSummary": "Menu page, Xiaohongshu card, easier start; scores unchanged.",
+    "releaseSummary": "Guess the fly's pick before the reveal; scores unchanged.",
     "releaseLink": "what's new",
     "stateV12": {
       "EatsLabel": "Eats",
@@ -282,7 +282,29 @@ export const STRINGS = {
     "cardXhs": {
       "passed": "Not picked"
     },
-    "ariaCardFormat": "Card format"
+    "ariaCardFormat": "Card format",
+    "guess": {
+      "promptAsk": "Tap a plate to guess",
+      "promptOpposite": "Tap what the fly takes",
+      "promptBoth": "Tap a plate for both flies",
+      "promptBothOpposite": "Tap what they take first",
+      "promptShared": "Table's set. Tap to guess",
+      "justWatch": "Just watch",
+      "plateTag": "Your guess",
+      "ariaPick": "Guess {dish}",
+      "resultRight": "You called it.",
+      "resultWrong": "Not quite — you guessed {guess}.",
+      "resultTieRight": "Counts — it ended in a tie.",
+      "resultBothRight": "Right on both flies.",
+      "resultBothWrong": "Missed both — you guessed {guess}.",
+      "resultOneFly": "Right on the {hit} only.",
+      "tally": "{right} / {total} right",
+      "cardRight": "I called it",
+      "cardBothRight": "Called both flies",
+      "cardTieRight": "Guessed {guess} — tie",
+      "cardWrong": "Guessed {guess}. Wrong.",
+      "cardOneFly": "Right on the {hit} only"
+    }
   },
   "zh": {
     "add": "添加",
@@ -426,7 +448,7 @@ export const STRINGS = {
     "colIr94e": "氨基酸",
     "ir94eExplain": "氨基酸对应 Ir94e 通道：在这个模型里，游离氨基酸和谷氨酸（常说的“鲜”）会让果蝇扫兴，所以酱油、高汤、肉多的菜得分很低。每道菜分到哪一档是我们估的，这种抑制反应来自模型本身。",
     "lowInterest": "这几样果蝇都不太想吃，勉强挑了这个。",
-    "releaseSummary": "新增两只果蝇的 279 样菜单榜、小红书尺寸分享卡，加了现成示例和固定提问栏；分数不变。",
+    "releaseSummary": "果蝇开吃前可以先猜它选哪盘，揭晓时告诉你猜没猜中；分数不变。",
     "releaseLink": "更新记录",
     "stateV12": {
       "EatsLabel": "吃",
@@ -565,6 +587,28 @@ export const STRINGS = {
     "cardXhs": {
       "passed": "没选的"
     },
-    "ariaCardFormat": "分享卡格式"
+    "ariaCardFormat": "分享卡格式",
+    "guess": {
+      "promptAsk": "点一盘，猜它选哪个",
+      "promptOpposite": "点一盘，猜果蝇先吃哪个",
+      "promptBoth": "点一盘，猜两只选哪个",
+      "promptBothOpposite": "点一盘，猜两只先吃哪个",
+      "promptShared": "这桌摆好了，点一盘猜",
+      "justWatch": "不猜，直接看",
+      "plateTag": "你猜的",
+      "ariaPick": "猜果蝇选{dish}",
+      "resultRight": "你猜对了。",
+      "resultWrong": "没猜中，你猜的是{guess}。",
+      "resultTieRight": "算猜对了，不过这几样打平了。",
+      "resultBothRight": "两只都猜对了。",
+      "resultBothWrong": "两只都没猜中，你猜的是{guess}。",
+      "resultOneFly": "{hit}猜对了，{miss}没有。",
+      "tally": "猜对 {right} / {total}",
+      "cardRight": "我猜对了",
+      "cardBothRight": "两只我都猜对了",
+      "cardTieRight": "我猜了{guess}，打平了",
+      "cardWrong": "我猜了{guess}，没中",
+      "cardOneFly": "只猜对了{hit}"
+    }
   }
 };
