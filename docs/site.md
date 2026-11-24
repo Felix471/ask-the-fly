@@ -82,6 +82,8 @@ Sprites come from `site/assets/` when present (see `docs/assets.md`); otherwise 
 ```
 .venv\Scripts\python scripts/export_site_data.py --stub   # dictionary + STUB lookup table (placeholder numbers)
 .venv\Scripts\python scripts/export_site_data.py          # dictionary + data/lookup_table.json (after build_lookup.py)
+.venv\Scripts\python scripts/export_menu.py               # generate the frozen menu view after data exports
+.venv\Scripts\python scripts/export_menu.py --check       # compare generated menu bytes
 ```
 
 The stub table has the real schema and 400 cells but its MN9 values are a closed-form guess, flagged `"stub": true`. The page shows a yellow banner and stamps "STUB DATA" on the share card while it is loaded. Replace it with the real table once `scripts/build_lookup.py` has run on `results/grid/full`.
@@ -124,6 +126,7 @@ Annotated tags on `main`; every update ships under a version (feature branch off
 | v2.0.0 | 641f29b | Second, independently computed male fly (MaleCNS v1.0, >=5-synapse connections, 0.17875 mV, bilateral Tastekin-typed sets) with a female/male/both selector, the fixed disagreement sentence, male brain view (soma or synapse-centroid positions, MaleCNS ROI outlines), trial-0 replays for the 55 dish cells and proboscis-only speech split into four groups; female scores, states, ties and allocations unchanged (v1.2.1 fixture). Honesty table: MaleCNS row rewritten; four commitment rows, Phase 2 comparison, male readout/state and replay/layout rows added, owner-approved. |
 | v2.0.1 | 54837ca | Chinese wording of the male brain-view caption revised to the owner's text; no data, scores, states, allocations or English text changed. Honesty table unchanged. |
 | v2.1.0 | 5f28a72 | 105 new entries (23 Not food), 14 bilingual sections, not-food badges and notes, eight replacement sprites and 105 new sprites; existing scores unchanged for both flies. Owner-approved not-food honesty row added. See [batch report](dictionary_batch3.md). |
+| v2.1.1 | 8a9ef0c | Link-preview image generated from the shipped table (mapo tofu 0.7 Hz), verdicts that name the pick when nothing gets a clear response, one labelled MN9 breakdown line per fly on the both-fly share card, Ir94e raster row, dark-mode label fix, and a revision of the Chinese copy with six section names and fifteen dish names. No scores, states, choices or data changed. No honesty-table claim added or changed; Chinese wording of several rows revised and one mistranslation corrected. |
 
 ### Changelog and the footer "what's new" line
 
@@ -160,6 +163,10 @@ Pure functions (`normalizeName`, `buildDictionary`, `buildLookup`, `scoreOptions
 With a local server serving `site/` on port 8765, run `python scripts/browser_checks.py` for browser regressions and `python scripts/check_plate_labels.py` for the longest dictionary names in en/zh at 360, 390 and 430 px. The latter saves six screenshots and a JSON report under `results/plate-labels/after/`, and checks full names/titles, non-overlap, stable scene height, language switching, resize, skip and reset. `--baseline --out results/plate-labels/before` records the original canvas-label overlap before applying the fix; `--compare results/plate-labels/before/report.json` also checks heights against that baseline.
 
 ## Behaviour
+
+- First visit (v2.2.0): an empty table shows a hint and an example button (`EXAMPLE_SETS` in `site/app.js`, our choice of ready-made tables; each has one clear female pick, tested). The two ask buttons stay disabled until two entries are on the table, and the table hint says what is missing (`tableHintKey`: the general hint when empty, "one more" with a single entry, which is also what a visitor arriving from a menu-page link sees). "View all" does not focus the search box on touch screens. While the visitor is choosing and the ask button is out of view, a bar fixed to the bottom shows the count and an ask button (`stickyBarState`). When a run starts the page goes to the stage, and when it ends the result panel scrolls into view. With both flies on a screen narrower than 960 px the panels are stacked, so the flies play one after the other and the page follows the one playing (`runPanelsInTurn`); side by side they play together as before. Skip ends both.
+- Share cards: the standard 900 × 1200 card and a 1080 × 1440 Xiaohongshu format (`drawShareCardXhs`), chosen in the dialog and remembered for the rest of the visit. The Xiaohongshu layout measures its text: names and speech shrink through fixed size steps, then the picture, so nothing overlaps or comes near the footer rule (browser check F29 uses the longest names in the dictionary in both languages). A single-fly card shows up to three entries ranked below the pick as small pictures with name and MN9 (`xhsPassedItems`; not in "Let the fly eat first"), and a male-only card names the male fly in its title.
+- Menu page (`site/menu/`, data `site/data/menu.json` from `scripts/export_menu.py`): both flies' top tens, the entries they disagree on most (with the fixed disagreement sentence), the full not-food ranking per fly, the top of each section per fly, and a filterable table of all entries. Rows link to the main page with that entry on the table.
 
 - Mobile-first, zh/en toggle (remembered per browser in `localStorage`).
 - Plate names use fixed-height, single-line HTML captions over the canvas; long names end in a CSS ellipsis, with the unchanged full name in the caption's text and `title`. The plate layout and scene height do not change with name length or language.

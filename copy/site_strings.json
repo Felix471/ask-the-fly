@@ -51,6 +51,13 @@
       "max_length": 30
     },
     {
+      "key": "ariaCardFormat",
+      "context": "aria-label of the card-format choice in the share dialog (screen readers only)",
+      "en": "Card format",
+      "zh": "分享卡格式",
+      "max_length": 30
+    },
+    {
       "key": "ask",
       "context": "Primary button",
       "en": "Ask the fly",
@@ -300,6 +307,46 @@
       "en": "Add at least two dishes. The fly only judges the first bite.",
       "zh": "至少加两道菜。果蝇只管第一口。",
       "max_length": 80
+    },
+    {
+      "key": "hintOneMore",
+      "context": "Hint inside the table when exactly one entry is on it (the ask buttons are disabled until there are two); also shown when arriving from the menu page with one entry already on the table.",
+      "en": "Add one more to ask the fly.",
+      "zh": "再加一样就能问果蝇了。",
+      "max_length": {
+        "en": 40,
+        "zh": 20
+      }
+    },
+    {
+      "key": "exampleBtn",
+      "context": "Small button inside the empty table on the first screen: one tap puts a ready-made set of two or three entries on the table.",
+      "en": "Try an example",
+      "zh": "先摆几样试试",
+      "max_length": {
+        "en": 18,
+        "zh": 8
+      }
+    },
+    {
+      "key": "stickyCount",
+      "context": "Bar fixed to the bottom while browsing the full list, left of the ask button: how many entries are chosen; {n}.",
+      "en": "{n} chosen",
+      "zh": "已选 {n} 样",
+      "max_length": {
+        "en": 14,
+        "zh": 8
+      }
+    },
+    {
+      "key": "stickyNeedMore",
+      "context": "Same bar when fewer than two are chosen (ask button disabled); {n} = how many more are needed (1 or 2).",
+      "en": "Pick {n} more",
+      "zh": "再选 {n} 样",
+      "max_length": {
+        "en": 20,
+        "zh": 10
+      }
     },
     {
       "key": "howTitle",
@@ -724,8 +771,8 @@
     {
       "key": "releaseSummary",
       "context": "Footer 'what's new' line, one-line summary of the latest release; version and date come from site/data/release.json",
-      "en": "Link preview fixed; verdicts and Chinese copy reworded.",
-      "zh": "修正链接预览图，改写多处中文文案；分数不变。",
+      "en": "Menu page, Xiaohongshu card, easier start; scores unchanged.",
+      "zh": "新增两只果蝇的 279 样菜单榜、小红书尺寸分享卡，加了现成示例和固定提问栏；分数不变。",
       "max_length": 60
     },
     {
@@ -1446,6 +1493,202 @@
       "context": "One-sentence note on each not-food result table row and beneath the result hero, for either fly and mode. Four levels are encoder estimates. Owner-approved DP3 copy.",
       "zh": "果蝇不知道这能不能吃，它只按估算出来的四个味觉档位反应。",
       "en": "The fly has no idea whether this is edible; it reacts only to the four estimated taste levels."
+    },
+    {
+      "key": "menu.meta.title",
+      "context": "v2.2.0 draft",
+      "en": "The fly's menu · Ask the Fly",
+      "zh": "果蝇的菜单 · 问问果蝇"
+    },
+    {
+      "key": "menu.meta.description",
+      "context": "v2.2.0 draft",
+      "en": "See how the two flies rank everything on the menu.",
+      "zh": "看看两只果蝇给每道菜排的名次。"
+    },
+    {
+      "key": "menu.title",
+      "context": "v2.2.0 draft",
+      "en": "The fly's menu",
+      "zh": "果蝇的菜单"
+    },
+    {
+      "key": "menu.attribution",
+      "context": "v2.2.0 draft",
+      "en": "Ask the Fly · askthefly.app · {version}",
+      "zh": "问问果蝇 · askthefly.app · {version}"
+    },
+    {
+      "key": "menu.femaleTop",
+      "context": "v2.2.0 draft",
+      "en": "The female fly's top ten",
+      "zh": "雌蝇最想吃的前十"
+    },
+    {
+      "key": "menu.maleTop",
+      "context": "v2.2.0 draft",
+      "en": "The male fly's top ten",
+      "zh": "雄蝇最想吃的前十"
+    },
+    {
+      "key": "menu.divergence",
+      "context": "v2.2.0 draft",
+      "en": "Where the two flies disagree most",
+      "zh": "两只果蝇意见差最大的几样"
+    },
+    {
+      "key": "menu.notFood",
+      "context": "v2.2.0 draft",
+      "en": "Not food, ranked · {fly}",
+      "zh": "“不是给人吃的”完整排名 · {fly}"
+    },
+    {
+      "key": "menu.sectionTops",
+      "context": "v2.2.0 draft",
+      "en": "Top of each section",
+      "zh": "各分类第一名"
+    },
+    {
+      "key": "menu.tied",
+      "context": "v2.2.0 draft",
+      "en": "Tied for #{rank} · {n} items",
+      "zh": "并列第 {rank} · {n} 样"
+    },
+    {
+      "key": "menu.gapTied",
+      "context": "Menu page, disagreement list: heading of a group of entries that share the same rank gap between the two flies; {diff} = the gap in places, {n} = how many entries.",
+      "en": "{diff} places apart · {n} items",
+      "zh": "名次差 {diff} · {n} 样"
+    },
+    {
+      "key": "menu.rank",
+      "context": "v2.2.0 draft",
+      "en": "#{rank}",
+      "zh": "第 {rank} 名"
+    },
+    {
+      "key": "menu.part",
+      "context": "v2.2.0 draft",
+      "en": "({i}/{n})",
+      "zh": "({i}/{n})"
+    },
+    {
+      "key": "menu.showNumbers",
+      "context": "v2.2.0 draft",
+      "en": "Show scores",
+      "zh": "显示分数"
+    },
+    {
+      "key": "menu.hideNumbers",
+      "context": "v2.2.0 draft",
+      "en": "Hide scores",
+      "zh": "隐藏分数"
+    },
+    {
+      "key": "menu.numbers",
+      "context": "v2.2.0 draft",
+      "en": "MN9 {mn9} · MN11D {mn11d} Hz",
+      "zh": "MN9 {mn9} · MN11D {mn11d} Hz"
+    },
+    {
+      "key": "menu.allTitle",
+      "context": "v2.2.0 draft",
+      "en": "All {n} entries",
+      "zh": "全部 {n} 项"
+    },
+    {
+      "key": "menu.shown",
+      "context": "Menu page, full table: count shown only while a section filter or search narrows the list; {n}.",
+      "en": "{n} shown",
+      "zh": "显示 {n} 样"
+    },
+    {
+      "key": "menu.allSections",
+      "context": "v2.2.0 draft",
+      "en": "All sections",
+      "zh": "全部分类"
+    },
+    {
+      "key": "menu.sortFemale",
+      "context": "v2.2.0 draft",
+      "en": "Sort by female fly",
+      "zh": "按雌蝇排"
+    },
+    {
+      "key": "menu.sortMale",
+      "context": "v2.2.0 draft",
+      "en": "Sort by male fly",
+      "zh": "按雄蝇排"
+    },
+    {
+      "key": "menu.search",
+      "context": "v2.2.0 draft",
+      "en": "Search the menu",
+      "zh": "搜菜名"
+    },
+    {
+      "key": "menu.aria.contents",
+      "context": "Menu page: aria-label of the jump links at the top (screen readers only)",
+      "en": "Menu sections",
+      "zh": "菜单目录"
+    },
+    {
+      "key": "menu.aria.section",
+      "context": "Menu page: label of the section filter (screen readers only)",
+      "en": "Section",
+      "zh": "分类"
+    },
+    {
+      "key": "menu.aria.sort",
+      "context": "Menu page: label of the sort choice (screen readers only)",
+      "en": "Sort",
+      "zh": "排序"
+    },
+    {
+      "key": "menu.empty",
+      "context": "v2.2.0 draft",
+      "en": "Nothing matches.",
+      "zh": "没找到"
+    },
+    {
+      "key": "menu.mainLink",
+      "context": "v2.2.0 draft",
+      "en": "See the fly's menu",
+      "zh": "看果蝇的菜单"
+    },
+    {
+      "key": "menu.back",
+      "context": "v2.2.0 draft",
+      "en": "Back to Ask the Fly",
+      "zh": "回去问果蝇"
+    },
+    {
+      "key": "menu.honesty",
+      "context": "v2.2.0 draft",
+      "en": "Rankings come from each model's precomputed MN9 means. The speech and states are our design, and the female and male flies are separate experiments.",
+      "zh": "排名按预计算表里模型的 MN9 均值来排，台词和状态都是我们设计的，雌蝇和雄蝇是两套独立实验。"
+    },
+    {
+      "key": "cardFormat.standard",
+      "context": "v2.2.0 draft",
+      "en": "Standard",
+      "zh": "标准"
+    },
+    {
+      "key": "cardFormat.xhs",
+      "context": "v2.2.0 draft",
+      "en": "Xiaohongshu",
+      "zh": "小红书"
+    },
+    {
+      "key": "cardXhs.passed",
+      "context": "Tiny label on the Xiaohongshu-format share card, left of the row of small greyed pictures of the entries ranked below the fly's pick. A model ranking, not a claim that the fly tasted and rejected them.",
+      "en": "Not picked",
+      "zh": "没选的",
+      "max_length": {
+        "en": 10,
+        "zh": 4
+      }
     }
   ]
 }

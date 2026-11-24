@@ -59,7 +59,8 @@
           <canvas id="idle-fly" class="idle-fly" width="56" height="56" aria-hidden="true"></canvas>
         </div>
         <ul id="option-list" class="option-list" aria-live="polite"></ul>
-        <p id="table-empty" class="hint" data-i18n="hint"></p>
+        <p id="table-empty" class="hint"></p>
+        <button id="example-btn" class="btn btn-secondary btn-small example-btn" type="button" data-i18n="exampleBtn" hidden></button>
       </div>
       <fieldset class="fly-selector" aria-describedby="fly-selector-hint">
         <legend data-i18n="flySelector.label"></legend>
@@ -77,6 +78,7 @@
       <section class="library" id="library" aria-labelledby="library-title">
         <div class="library-head">
           <h2 id="library-title" class="library-title" data-i18n="browseTitle"></h2>
+          <a class="menu-page-link" href="menu/" data-i18n="menu.mainLink"></a>
           <button id="view-all-btn" class="btn btn-secondary btn-small" type="button" aria-expanded="false" aria-controls="library-panel" data-i18n="viewAll"></button>
         </div>
         <div id="popular-row" class="tile-row" role="group"></div>
@@ -257,8 +259,14 @@
     </section>
   </main>
 
+  <div id="sticky-bar" class="sticky-bar" hidden>
+    <span id="sticky-count" class="sticky-count" aria-live="polite"></span>
+    <button id="sticky-ask" class="btn btn-primary btn-small" type="button" data-i18n="ask"></button>
+  </div>
+
   <dialog id="card-dialog" class="card-dialog" data-i18n-aria="ariaShareCard">
     <div class="card-dialog-body">
+      <fieldset class="card-format" data-i18n-aria="ariaCardFormat"><label><input type="radio" name="card-format" value="standard" checked><span data-i18n="cardFormat.standard"></span></label><label><input type="radio" name="card-format" value="xhs"><span data-i18n="cardFormat.xhs"></span></label></fieldset>
       <canvas id="share-card" class="share-card" width="900" height="1200"></canvas>
       <img id="share-image" class="share-card share-image" alt="" hidden>
       <p id="save-hint" class="hint save-hint" hidden data-i18n="saveHint"></p>

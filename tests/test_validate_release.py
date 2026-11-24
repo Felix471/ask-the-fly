@@ -52,6 +52,19 @@ class Bundle:
         (sprites / "fallbacks.json").write_text('{"fallbacks": {}}', encoding="utf-8")
         for name in ("a", "b"):
             (sprites / f"{name}.png").write_bytes(b"sprite")
+        # The generated menu gate has its own frozen readout and copy inputs.
+        from scripts import export_menu
+        readout = {**self.table, "cells": [{**c, "mn11d_mean": 0, "mn11v_mean": 0, "state": "no_response"} for c in self.cells]}
+        for rel in ("data/lookup_table_v1_2.json", "site/data/lookup_table_v1_2.json",
+                    "data/lookup_table_male.json", "site/data/lookup_table_male.json"):
+            path = self.root / rel
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_text(json.dumps(readout), encoding="utf-8")
+        lines = {"buckets": [{"state": "no_response", "when": {}, "zh": ["a", "b", "c"], "en": ["a", "b", "c"]}]}
+        path = self.root / "copy/fly_lines.json"
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(json.dumps(lines), encoding="utf-8")
+        (self.root / "site/data/menu.json").write_bytes(export_menu.render_menu(self.root))
 
     def write(self, table=None, dishes=None, site_dishes=None):
         table = self.table if table is None else table
@@ -84,7 +97,10 @@ class Bundle:
                 (replay / (f"{i}.bin" if v == "baseline" else f"{i}_{v}.bin")).write_bytes(b"AFR1")
 
     def problems(self):
-        return vr.validate(self.root)
+        # This legacy synthetic bundle has no male replay package; male shipping
+        # is exercised separately by MaleBundle below. Keep the menu gate active.
+        with patch.object(vr, "check_male", return_value=[]):
+            return vr.validate(self.root)
 
 
 class ValidateRelease(unittest.TestCase):
