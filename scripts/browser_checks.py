@@ -1175,6 +1175,62 @@ def check_F31(browser):
     return problems
 
 
+
+def check_F32(browser):
+    """Standard share card: the tablecloth patch behind the picture never covers the
+    name above it, with the longest names, a tie, the male fly and "Let the fly eat first"."""
+    problems = []
+    cases = [
+        ('en', 'female', 'xiaolongbao,hot-and-sour-noodles'),
+        ('en', 'male', 'xiaolongbao,hot-and-sour-noodles'),
+        ('en', 'female', 'pickled-cabbage-fish,latiao,injera'),
+        ('zh', 'female', 'hot-and-sour-noodles,injera,goulash'),
+        ('en', 'female', 'cake,donut,steak'),                              # two tied winners
+        ('en', 'female', 'apple-pie,cake,churros,steak'),                  # three tied winners
+        ('en', 'female', 'pickled-cabbage-fish,xiaolongbao&m=opposite'),
+        ('en', 'female', 'nectar,honey,steak,watermelon,pizza&m=opposite'),
+    ]
+    for lang, fly, dishes in cases:
+        dishes, _, extra = dishes.partition('&')
+        query = '?v=2&d=' + ','.join('k.' + d for d in dishes.split(',')) + f'&lang={lang}&seed=0' + ('' if fly == 'female' else f'&f={fly}') + ('&' + extra if extra else '')
+        page, errors, requests = open_page(browser, query)
+        page.wait_for_function("window.__askfly && ['guess', 'tasting'].includes(window.__askfly.snapshot().phase)")
+        page.click('#skip-btn')
+        wait_result(page)
+        page.evaluate("""(() => {
+          window.__card = {text: [], patch: [], order: 0};
+          const proto = CanvasRenderingContext2D.prototype, fill = proto.fillText, round = proto.roundRect;
+          proto.fillText = function (text, x, y, ...rest) {
+            if (this.canvas.id === 'share-card') {
+              const m = this.measureText(String(text)), left = this.textAlign === 'right' ? x - m.width : this.textAlign === 'center' ? x - m.width / 2 : x;
+              window.__card.text.push({order: window.__card.order++, text: String(text), font: this.font, left, right: left + m.width, top: y - m.actualBoundingBoxAscent, bottom: y + m.actualBoundingBoxDescent});
+            }
+            return fill.call(this, text, x, y, ...rest);
+          };
+          proto.roundRect = function (x, y, w, h, ...rest) {
+            if (this.canvas.id === 'share-card' && w > 150 && h > 100) window.__card.patch.push({order: window.__card.order++, left: x, top: y, right: x + w, bottom: y + h});
+            return round.call(this, x, y, w, h, ...rest);
+          };
+        })()""")
+        page.click('#share-btn')
+        page.wait_for_selector('#card-dialog[open]')
+        page.wait_for_function("document.getElementById('share-card').width === 900 && window.__card.text.length > 3")
+        page.wait_for_timeout(500)
+        card = page.evaluate("window.__card")
+        label = f'{lang}/{fly}/{dishes}' + (f'/{extra}' if extra else '')
+        # A crowded card has no large picture and so no patch; never more than one.
+        if len(card['patch']) > 1 or (not card['patch'] and len(dishes.split(',')) < 4):
+            problems.append(f"{label}: {len(card['patch'])} tablecloth patches found")
+        for patch in card['patch']:
+            for text in card['text']:
+                if text['order'] > patch['order']:
+                    continue  # drawn on the patch on purpose (the fly's own dish in "eat first")
+                if text['left'] < patch['right'] and patch['left'] < text['right'] and text['top'] < patch['bottom'] and patch['top'] < text['bottom']:
+                    problems.append(f"{label}: the tablecloth covers {text['text']!r} ({text['top']:.0f}-{text['bottom']:.0f} against a patch from {patch['top']:.0f})")
+        problems = finish(page, errors, problems)
+    return problems
+
+
 STRINGS_EN_SHARED = "Table's set. Tap to guess"
 
 
@@ -1187,7 +1243,7 @@ CHECKS = {
     "F22": check_F22,
     "F23": check_F23, "F24": check_F24,
     "F25": check_F25, "F26": check_F26, "F27": check_F27,
-    "F28": check_F28, "F29": check_F29, "F30": check_F30, "F31": check_F31,
+    "F28": check_F28, "F29": check_F29, "F30": check_F30, "F31": check_F31, "F32": check_F32,
 }
 
 

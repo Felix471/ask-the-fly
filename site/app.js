@@ -1008,9 +1008,14 @@ export function drawShareCard(canvas, decision, lang, options = {}) {
   const textBlock = 12 + mn9TextHeight + wrapLines(ctx, lines.bottom, W - 2 * pad).slice(0,3).length * 26;
   const opposite = decision.mode === "opposite" && decision.flyPick && !chosen.includes(decision.flyPick);
   const spriteTop = chosen.length > 1 && !many ? 30 : 0; // only ties need hover room
+  // The tablecloth patch reaches above the picture (its padding, plus hover room). The
+  // picture starts low enough for the patch to clear the name above it, whatever its length.
+  const clothRise = (size) => (options.tablecloth ? 22 + size * (chosen.length > 1 ? 0.16 : 0.1) : 0);
+  const pictureLead = (size) => Math.max(spriteTop, Math.ceil(clothRise(size)) - 10);
+  const leadReserve = pictureLead(chosen.length > 1 ? 180 : 250); // the largest picture: an upper bound
   const spriteTail = opposite ? (options.tablecloth ? 78 : 44) : (options.tablecloth ? 30 : 16);
   const maleHeight = both ? 68 + Math.min(options.maleDecision.known.length, 4) * 38 + (options.maleDecision.known.length > 4 ? 24 : 0) + (fliesDisagree(decision, options.maleDecision) ? 30 : 0) : 0;
-  const spriteRoom = Math.max(0, bottomEstimate - 44 - textBlock - barsHeight - y - spriteTop - spriteTail - maleHeight);
+  const spriteRoom = Math.max(0, bottomEstimate - 44 - textBlock - barsHeight - y - leadReserve - spriteTail - maleHeight);
   if (both && chosen.length && spriteRoom < 64) {
     // A small header sprite retains the female depiction when both tables use
     // the vertical space normally available for its large dish illustration.
@@ -1030,7 +1035,7 @@ export function drawShareCard(canvas, decision, lang, options = {}) {
     const flyExtra = opposite ? Math.round(bigSize * 0.56) + 28 : 0;
     const rowWidth = chosen.length * bigSize + (chosen.length - 1) * gap;
     const x0 = (W - rowWidth - flyExtra) / 2;
-    const sy = y + spriteTop;
+    const sy = y + pictureLead(bigSize);
     const shift = 0;
     // Tablecloth only behind the sprites; every line of text stays on solid cream.
     if (options.tablecloth) {
