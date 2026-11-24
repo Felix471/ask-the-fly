@@ -771,8 +771,8 @@
     {
       "key": "releaseSummary",
       "context": "Footer 'what's new' line, one-line summary of the latest release; version and date come from site/data/release.json",
-      "en": "Menu page, Xiaohongshu card, easier start; scores unchanged.",
-      "zh": "新增两只果蝇的 279 样菜单榜、小红书尺寸分享卡，加了现成示例和固定提问栏；分数不变。",
+      "en": "Guess the fly's pick before the reveal; scores unchanged.",
+      "zh": "果蝇开吃前可以先猜它选哪盘，揭晓时告诉你猜没猜中；分数不变。",
       "max_length": 60
     },
     {
@@ -1689,6 +1689,174 @@
         "en": 10,
         "zh": 4
       }
+    },
+    {
+      "key": "guess.promptAsk",
+      "context": "Guess step (the visitor taps the dish they think the fly will take, before the fly starts; the guess is the visitor's own and stays in the page). Stage caption while waiting for the guess, one fly, Ask the fly.",
+      "en": "Tap a plate to guess",
+      "zh": "点一盘，猜它选哪个",
+      "max_length": {
+        "en": 28,
+        "zh": 14
+      }
+    },
+    {
+      "key": "guess.promptOpposite",
+      "context": "Guess step (the visitor taps the dish they think the fly will take, before the fly starts; the guess is the visitor's own and stays in the page). Stage caption while waiting for the guess, one fly, Let the fly eat first: the guess is what the fly takes.",
+      "en": "Tap what the fly takes",
+      "zh": "点一盘，猜果蝇先吃哪个",
+      "max_length": {
+        "en": 28,
+        "zh": 16
+      }
+    },
+    {
+      "key": "guess.promptBoth",
+      "context": "Guess step (the visitor taps the dish they think the fly will take, before the fly starts; the guess is the visitor's own and stays in the page). Stage caption while waiting for the guess, both flies, Ask the fly: one guess for both.",
+      "en": "Tap a plate for both flies",
+      "zh": "点一盘，猜两只选哪个",
+      "max_length": {
+        "en": 30,
+        "zh": 16
+      }
+    },
+    {
+      "key": "guess.promptBothOpposite",
+      "context": "Guess step (the visitor taps the dish they think the fly will take, before the fly starts; the guess is the visitor's own and stays in the page). Stage caption while waiting for the guess, both flies, Let the fly eat first.",
+      "en": "Tap what they take first",
+      "zh": "点一盘，猜两只先吃哪个",
+      "max_length": {
+        "en": 30,
+        "zh": 16
+      }
+    },
+    {
+      "key": "guess.promptShared",
+      "context": "Guess step (the visitor taps the dish they think the fly will take, before the fly starts; the guess is the visitor's own and stays in the page). Stage caption while waiting for the guess when the page was opened from a shared link (Ask the fly).",
+      "en": "Table's set. Tap to guess",
+      "zh": "这桌摆好了，点一盘猜",
+      "max_length": {
+        "en": 30,
+        "zh": 16
+      }
+    },
+    {
+      "key": "guess.justWatch",
+      "context": "Guess step (the visitor taps the dish they think the fly will take, before the fly starts; the guess is the visitor's own and stays in the page). Button under the stage: start the fly without guessing.",
+      "en": "Just watch",
+      "zh": "不猜，直接看",
+      "max_length": {
+        "en": 16,
+        "zh": 10
+      }
+    },
+    {
+      "key": "guess.plateTag",
+      "context": "Guess step (the visitor taps the dish they think the fly will take, before the fly starts; the guess is the visitor's own and stays in the page). Small tag on the plate the visitor tapped, kept while the fly tastes.",
+      "en": "Your guess",
+      "zh": "你猜的",
+      "max_length": {
+        "en": 12,
+        "zh": 5
+      }
+    },
+    {
+      "key": "guess.ariaPick",
+      "context": "Guess step (the visitor taps the dish they think the fly will take, before the fly starts; the guess is the visitor's own and stays in the page). aria-label of the tap target over a plate (screen readers only). {dish} = the dish name.",
+      "en": "Guess {dish}",
+      "zh": "猜果蝇选{dish}"
+    },
+    {
+      "key": "guess.resultRight",
+      "context": "Guess step (the visitor taps the dish they think the fly will take, before the fly starts; the guess is the visitor's own and stays in the page). Result line under the verdict: one fly, the guess was the fly's pick.",
+      "en": "You called it.",
+      "zh": "你猜对了。",
+      "max_length": {
+        "en": 30,
+        "zh": 20
+      }
+    },
+    {
+      "key": "guess.resultWrong",
+      "context": "Guess step (the visitor taps the dish they think the fly will take, before the fly starts; the guess is the visitor's own and stays in the page). Result line: one fly, the guess was not the fly's pick. {guess} = the dish the visitor tapped.",
+      "en": "Not quite — you guessed {guess}.",
+      "zh": "没猜中，你猜的是{guess}。"
+    },
+    {
+      "key": "guess.resultTieRight",
+      "context": "Guess step (the visitor taps the dish they think the fly will take, before the fly starts; the guess is the visitor's own and stays in the page). Result line: the guessed dish shares the fly's top score with others (an exact tie).",
+      "en": "Counts — it ended in a tie.",
+      "zh": "算猜对了，不过这几样打平了。",
+      "max_length": {
+        "en": 40,
+        "zh": 24
+      }
+    },
+    {
+      "key": "guess.resultBothRight",
+      "context": "Guess step (the visitor taps the dish they think the fly will take, before the fly starts; the guess is the visitor's own and stays in the page). Result line: both flies, the guess was right for each.",
+      "en": "Right on both flies.",
+      "zh": "两只都猜对了。",
+      "max_length": {
+        "en": 32,
+        "zh": 20
+      }
+    },
+    {
+      "key": "guess.resultBothWrong",
+      "context": "Guess step (the visitor taps the dish they think the fly will take, before the fly starts; the guess is the visitor's own and stays in the page). Result line: both flies, the guess was wrong for each. {guess} = the dish tapped.",
+      "en": "Missed both — you guessed {guess}.",
+      "zh": "两只都没猜中，你猜的是{guess}。"
+    },
+    {
+      "key": "guess.resultOneFly",
+      "context": "Guess step (the visitor taps the dish they think the fly will take, before the fly starts; the guess is the visitor's own and stays in the page). Result line: both flies, right for one only. {hit} / {miss} = the fly names (female fly / male fly; 雌蝇 / 雄蝇).",
+      "en": "Right on the {hit} only.",
+      "zh": "{hit}猜对了，{miss}没有。"
+    },
+    {
+      "key": "guess.tally",
+      "context": "Guess step (the visitor taps the dish they think the fly will take, before the fly starts; the guess is the visitor's own and stays in the page). Running count of right guesses in this visit (kept in the page only, gone on reload). Shown by the table title and after the result line.",
+      "en": "{right} / {total} right",
+      "zh": "猜对 {right} / {total}"
+    },
+    {
+      "key": "guess.cardRight",
+      "context": "Guess step (the visitor taps the dish they think the fly will take, before the fly starts; the guess is the visitor's own and stays in the page). Share card, short line by the title: one fly, guessed right.",
+      "en": "I called it",
+      "zh": "我猜对了",
+      "max_length": {
+        "en": 20,
+        "zh": 12
+      }
+    },
+    {
+      "key": "guess.cardBothRight",
+      "context": "Guess step (the visitor taps the dish they think the fly will take, before the fly starts; the guess is the visitor's own and stays in the page). Share card: both flies, guessed right for each.",
+      "en": "Called both flies",
+      "zh": "两只我都猜对了",
+      "max_length": {
+        "en": 24,
+        "zh": 14
+      }
+    },
+    {
+      "key": "guess.cardTieRight",
+      "context": "Guess step (the visitor taps the dish they think the fly will take, before the fly starts; the guess is the visitor's own and stays in the page). Share card: the guessed dish tied at the fly's top score. {guess} = the dish tapped.",
+      "en": "Guessed {guess} — tie",
+      "zh": "我猜了{guess}，打平了"
+    },
+    {
+      "key": "guess.cardWrong",
+      "context": "Guess step (the visitor taps the dish they think the fly will take, before the fly starts; the guess is the visitor's own and stays in the page). Share card: guessed wrong (one fly, or both flies). {guess} = the dish tapped.",
+      "en": "Guessed {guess}. Wrong.",
+      "zh": "我猜了{guess}，没中"
+    },
+    {
+      "key": "guess.cardOneFly",
+      "context": "Guess step (the visitor taps the dish they think the fly will take, before the fly starts; the guess is the visitor's own and stays in the page). Share card: both flies, right for one only. {hit} = that fly's name.",
+      "en": "Right on the {hit} only",
+      "zh": "只猜对了{hit}"
     }
   ]
 }

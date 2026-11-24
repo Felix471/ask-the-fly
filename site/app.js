@@ -373,6 +373,75 @@ export function runPanelsInTurn(fly, stacked) {
   return fly === "both" && Boolean(stacked);
 }
 
+// ---------- guess before the reveal ----------
+// The guess is the visitor's own and stays in the page: it changes no score,
+// state or choice, and is not part of a shared link.
+
+// The plates that can be tapped: every dish with a score, when there are at least two.
+export function guessChoices(decision) {
+  return decision.known.length >= 2 ? decision.known : [];
+}
+
+// One fly: was the tapped dish the one it takes? A dish that shares the top
+// score counts (`tie`). The guess is always about the fly's own pick, also in
+// "Let the fly eat first".
+export function guessOutcome(decision, key) {
+  const item = decision.known.find((entry) => entry.entry && entry.entry.key === key);
+  if (!item || !decision.flyPick) return null;
+  const top = decision.flyTies.length ? decision.flyTies : [decision.flyPick];
+  const hit = top.includes(item);
+  return { item, hit, tie: hit && top.length > 1 };
+}
+
+// The guess against one fly, or against both (one guess, judged for each fly).
+// `correct` is what the tally counts: with both flies, right for both.
+export function guessSummary(decision, maleDecision, key) {
+  const own = guessOutcome(decision, key);
+  if (!own) return null;
+  const male = maleDecision ? guessOutcome(maleDecision, key) : null;
+  if (!male) return { kind: own.hit ? (own.tie ? "tieRight" : "right") : "wrong", item: own.item, correct: own.hit };
+  if (own.hit && male.hit) return { kind: "bothRight", item: own.item, correct: true };
+  if (!own.hit && !male.hit) return { kind: "bothWrong", item: own.item, correct: false };
+  return { kind: "oneFly", item: own.item, correct: false, hit: own.hit ? "female" : "male", miss: own.hit ? "male" : "female" };
+}
+
+// The sentence for a summary: `where` is "result" (under the verdict) or "card".
+export function guessText(summary, lang, where) {
+  if (!summary) return "";
+  const t = STRINGS[lang];
+  const name = { right: "Right", wrong: "Wrong", tieRight: "TieRight", bothRight: "BothRight", bothWrong: where === "card" ? "Wrong" : "BothWrong", oneFly: "OneFly" }[summary.kind];
+  return fmt(t.guess[where + name], { guess: displayName(summary.item, lang), hit: t.flyName[summary.hit] || "", miss: t.flyName[summary.miss] || "" });
+}
+
+// Which caption invites the guess.
+export function guessPromptKey(mode, fly, invited) {
+  if (invited && mode !== "opposite") return "promptShared";
+  if (fly === "both") return mode === "opposite" ? "promptBothOpposite" : "promptBoth";
+  return mode === "opposite" ? "promptOpposite" : "promptAsk";
+}
+
+// One line cut to `width` at the current ctx.font, ending in an ellipsis when cut.
+function clipLine(ctx, value, width) {
+  if (ctx.measureText(value).width <= width) return value;
+  const text = Array.from(String(value));
+  while (text.length > 1 && ctx.measureText(text.join("") + "…").width > width) text.pop();
+  return text.join("") + "…";
+}
+
+// The visitor's guess on a card: one short line at the right of the title row,
+// so nothing below it moves. Smaller first, then cut, when the title leaves little room.
+function drawGuessLine(ctx, line, font, sizes, titleWidth, W, pad, baseline) {
+  if (!line) return;
+  const room = W - 2 * pad - titleWidth - 28;
+  if (room < 120) return;
+  ctx.save();
+  for (const size of sizes) { ctx.font = font(size, 600); if (ctx.measureText(line).width <= room) break; }
+  ctx.fillStyle = "#b5471f";
+  ctx.textAlign = "right";
+  ctx.fillText(clipLine(ctx, line, room), W - pad, baseline);
+  ctx.restore();
+}
+
 export function flySelection(value) {
   return ['female', 'male', 'both'].includes(value) ? value : 'female';
 }
@@ -859,6 +928,7 @@ export function drawShareCard(canvas, decision, lang, options = {}) {
   ctx.font = display(50, 700);
   ctx.textAlign = "left";
   ctx.fillText(t.cardTitle, pad, 108);
+  drawGuessLine(ctx, options.guessLine, font, [24, 21, 18], ctx.measureText(t.cardTitle).width, W, pad, 106);
   if (both) {
     ctx.save();
     ctx.translate(W/2,120);
@@ -1210,7 +1280,9 @@ export function drawShareCardXhs(canvas, decision, lang, options = {}) {
   ctx.textAlign='left';ctx.fillStyle='#1f1a17';
   ctx.font=font(38,700);
   // A single male card says whose pick it is; the female fly is the default.
-  ctx.fillText(!both && decision.fly==='male' ? t.cardTitle+' · '+t.flyName.male : t.cardTitle,pad,84);
+  const xhsTitle=!both && decision.fly==='male' ? t.cardTitle+' · '+t.flyName.male : t.cardTitle;
+  ctx.fillText(xhsTitle,pad,84);
+  drawGuessLine(ctx,options.guessLine,font,[32,28,24],ctx.measureText(xhsTitle).width,W,pad,82);
   const spriteFor=options.spriteFor||(()=>null);
   const chosen = d => outcomeItems(d);
   if (both) {
@@ -1346,6 +1418,8 @@ if (isBrowser) {
     spriteFallbacks: {}, sections:null, siteUrl:SITE_URL,
     session:0, shareRequest:0, phase:'input', selectionRequest:0,
     askVisible:true, exampleIndex:0, cardFormat:'standard', skippedSession:null, viewAllPointer:null,
+    // The visitor's guess for the current run, and this visit's count (never stored or sent).
+    guess:null, guessResolve:null, tally:{right:0,total:0}, talliedSession:null,
     idleFly: null,
   };
 
@@ -1355,6 +1429,13 @@ if (isBrowser) {
   const primaryPanel = () => state.fly === 'male' ? state.panels.male : state.panels.female;
   const activePanels = () => (state.fly === 'both' ? [state.panels.female,state.panels.male] : [primaryPanel()]).filter(Boolean);
   const panelHost = {lang:()=>state.lang,selection:()=>state.fly,notice, spriteSlug,skip:skipAll,
+    guessWatch:()=>state.guessResolve?.('watch'),
+    // Every time a stage has its plates (a run, a language switch): the tag on the guessed plate.
+    platesReady(panel){
+      if(!panel.scene || !panel.scenePlates) return;
+      const guessed=state.phase!=='guess' && state.guess?.session===state.session ? state.guess.key : null;
+      panel.scene.markPlate(guessed ? panel.scenePlates.findIndex(item=>item.entry?.key===guessed) : -1, STRINGS[state.lang].guess.plateTag);
+    },
     notFoodBadge:item=>notFoodCopy(item.entry,state.sections,state.lang)?.badge || '',
     get scrollBehavior(){return scrollBehavior;},
     // Where the page goes when a fly starts: the top, or that fly's own panel when the
@@ -1491,6 +1572,8 @@ if (isBrowser) {
     for (const panel of Object.values(state.panels).filter(Boolean)) if(panel.root && panel.neurons) panel.renderStrings();
     renderFlySelection();
     if (primaryPanel()?.decision) renderDecision(); // text only; the phase is untouched
+    renderGuess();
+    renderGuessTargets();
     if (primaryPanel()?.decision && $('card-dialog').open) showCard().catch(error=>console.warn('share card redraw failed:',error));
   }
 
@@ -1884,15 +1967,89 @@ if (isBrowser) {
   function setPhase(phase) {
     state.phase = phase;
     $("input-panel").hidden = phase !== "input";
-    for(const panel of Object.values(state.panels).filter(Boolean)) panel.root.hidden=phase==='input' || !activePanels().includes(panel);
+    // While the visitor guesses there is one table, also with both flies: the guess is for both.
+    for(const panel of Object.values(state.panels).filter(Boolean)) {
+      panel.root.hidden=phase==='input' || !activePanels().includes(panel) || (phase==='guess' && panel!==primaryPanel());
+      panel.root.classList.toggle('guessing',phase==='guess');
+    }
     $('fly-panels').hidden=phase==='input';
     $("result-panel").hidden = phase !== "result";
     renderStickyBar();
   }
 
+  // The guess of this run against what the fly (or each fly) took; null without a guess.
+  function currentGuessSummary() {
+    const primary=primaryPanel();
+    if(!state.guess || state.guess.session!==state.session || !primary?.decision) return null;
+    return guessSummary(primary.decision,state.fly==='both' ? state.panels.male?.decision || null : null,state.guess.key);
+  }
+
+  // The line under the verdict and the count by the table title.
+  function renderGuess() {
+    const t=STRINGS[state.lang], summary=currentGuessSummary(), line=$('guess-result');
+    const tally=fmt(t.guess.tally,state.tally);
+    line.hidden=!summary;
+    line.className='guess-result'+(summary?.correct ? ' right' : '');
+    line.textContent=guessText(summary,state.lang,'result');
+    if(summary && state.tally.total>=2) {
+      const note=document.createElement('span');
+      note.className='guess-tally-note';
+      note.textContent=' · '+tally;
+      line.append(note);
+    }
+    $('guess-tally').hidden=state.tally.total<1;
+    $('guess-tally').textContent=tally;
+  }
+
+  // The tap targets of the guess step (rebuilt on a language switch: their labels are text).
+  function renderGuessTargets() {
+    const panel=primaryPanel();
+    if(state.phase!=='guess' || !state.guessResolve || !panel?.scene || !panel.scenePlates) return;
+    panel.scene.setPlateButtons(index=>{
+      const item=panel.scenePlates[index];
+      if(!item.cell || !item.entry) return null; // an entry without a score cannot be the fly's pick
+      const button=document.createElement('button');
+      button.type='button';
+      button.setAttribute('aria-label',fmt(STRINGS[state.lang].guess.ariaPick,{dish:displayName(item,state.lang)}));
+      button.addEventListener('click',()=>state.guessResolve?.({key:item.entry.key}));
+      return button;
+    });
+    panel.el('guess-watch').hidden=false;
+  }
+
+  // Lays out the table and waits for a tapped plate ({key}), "watch", "skip" or "reset".
+  async function askGuess(panel, mode, invited, session) {
+    let resolve;
+    const waiting=new Promise(done=>{resolve=done;});
+    state.guessResolve=resolve;
+    // Skip works at once, also while the plates' pictures are still loading.
+    panel.showTable(panel.decision,'guess.'+guessPromptKey(mode,state.fly,invited)).then(()=>{
+      if(state.session!==session || state.guessResolve!==resolve) return; // answered, reset or replaced
+      renderGuessTargets();
+      panelHost.scrollToPanel(panel);
+    }).catch(error=>{
+      console.warn('guess step skipped:',error);
+      resolve('watch');
+    });
+    const choice=await waiting;
+    if(state.session!==session) return 'reset'; // a newer run owns the stage now
+    if(state.guessResolve===resolve) state.guessResolve=null;
+    panel.scene?.clearPlateButtons();
+    panel.el('guess-watch').hidden=true;
+    return choice;
+  }
+
   function showResult() {
     for (const panel of activePanels()) panel.showFinalResponse();
+    if(state.talliedSession!==state.session) {
+      const summary=currentGuessSummary();
+      if(summary) {
+        state.tally={right:state.tally.right+(summary.correct ? 1 : 0),total:state.tally.total+1};
+        state.talliedSession=state.session;
+      }
+    }
     renderDecision();
+    renderGuess();
     setPhase("result");
     // The verdict sits below the stage and the brain: bring it into view.
     $("result-panel").scrollIntoView({ behavior: scrollBehavior, block: "start" });
@@ -1935,12 +2092,14 @@ if (isBrowser) {
   }
 
   // Score each experiment separately, then run the active panels concurrently.
-  async function run(mode, shareSeed = null) {
+  async function run(mode, shareSeed = null, invited = false) {
     if (!state.panels.female.lookup || !state.dictionary) {notice('stateDataFailed');return;}
     if(state.options.length<2){notice('stateNoOptions');return;}
     notice(null);
     state.session+=1;
     const session=state.session;
+    state.guessResolve?.('reset'); // an earlier run still waiting for a guess ends here
+    state.guessResolve=null;
     cancelShare();
     const ready=await selectFly(state.fly,false);
     if(session!==state.session || !ready) return;
@@ -1950,9 +2109,18 @@ if (isBrowser) {
       panel.reset();
       panel.score(state.options.map(optionQuery),state.dictionary,mode,seed,state.fly);
     }
+    state.guess=null;
     if(!primaryPanel().decision.known.length){notice('stateAllUnknown');showResult();return;}
-    setPhase('tasting');
     state.skippedSession=null;
+    // Guess first: with two or more scored dishes the table waits for a tap. Skippable.
+    let choice='watch';
+    if(guessChoices(primaryPanel().decision).length && primaryPanel().scene) {
+      setPhase('guess');
+      choice=await askGuess(primaryPanel(),mode,invited,session);
+      if(state.session!==session) return;
+      if(choice && choice.key) state.guess={key:choice.key,session};
+    }
+    setPhase('tasting');
     const play=async panel=>{
       if(!panel.brain || !panel.scene) return;
       const panelSession=panel.session;
@@ -1965,6 +2133,21 @@ if (isBrowser) {
         notice('stateSceneError');
       }
     };
+    if(choice==='skip') {
+      // Skipped instead of guessing: the result at once, then each table laid out behind it
+      // (the plates' pictures may still be loading).
+      state.skippedSession=session;
+      showResult();
+      await Promise.all(activePanels().map(async panel=>{
+        const pending=play(panel);
+        panel.token?.cancel();
+        await pending;
+        if(state.session!==session) return;
+        panel.skip();
+        panel.showFinalResponse();
+      }));
+      return;
+    }
     if(runPanelsInTurn(state.fly,panelsStacked())) {
       // Stacked panels: one fly at a time, with the page following it.
       for(const panel of activePanels()) {
@@ -1987,9 +2170,10 @@ if (isBrowser) {
   }
 
   function skipAll() {
+    if(state.phase==='guess' && state.guessResolve) {state.guessResolve('skip');return;} // run() finishes it
     state.skippedSession=state.session; // also stops a fly that has not started its turn
     for(const panel of activePanels()) panel.skip();
-    if(primaryPanel()?.decision) showResult();
+    if(primaryPanel()?.decision && state.phase!=='result') showResult(); // already shown: nothing to redo
   }
 
   function spriteSlug(item) {
@@ -2039,6 +2223,7 @@ if (isBrowser) {
     const request = { id: ++state.shareRequest, session: state.session, decision: primaryPanel()?.decision, panel: primaryPanel(), maleDecision: state.fly === 'both' ? state.panels.male?.decision : null, lang: state.lang, siteUrl: state.siteUrl };
     const current = () => request.id === state.shareRequest && request.session === state.session && primaryPanel()?.decision === request.decision;
     if (!request.decision) return;
+    request.guessLine = guessText(currentGuessSummary(), request.lang, "card"); // empty without a guess
     const canvas = $("share-card");
     const format = document.querySelector('input[name="card-format"]:checked').value;
     canvas.width = format === "xhs" ? 1080 : 900;
@@ -2064,6 +2249,7 @@ if (isBrowser) {
       (format === "xhs" ? drawShareCardXhs : drawShareCard)(canvas, request.decision, request.lang, {
         stub: Boolean(request.panel.lookup.table.stub),
         maleDecision: request.maleDecision,
+        guessLine: request.guessLine,
         maleSprites: state.panels.male?.sprites,
         sprites,
         snapshot,
@@ -2205,6 +2391,9 @@ if (isBrowser) {
   // different: it keeps the session and shows this run's result.
   function reset() {
     state.session+=1;
+    state.guessResolve?.('reset');
+    state.guessResolve=null;
+    state.guess=null;
     for(const panel of Object.values(state.panels).filter(Boolean)) panel.reset();
     cancelShare();
     if($('card-dialog').open) $('card-dialog').close();
@@ -2308,7 +2497,7 @@ if (isBrowser) {
   // Read-only view of the run state for browser regression checks (scripts/browser_checks.py).
   window.__askfly = {
     snapshot:()=>{
-      const common={phase:state.phase,options:state.options.map(o=>o.key||o.text),idleRunning:Boolean(state.idleFly?.raf),dialogOpen:$('card-dialog').open};
+      const common={phase:state.phase,guess:state.guess?.key??null,tally:{...state.tally},options:state.options.map(o=>o.key||o.text),idleRunning:Boolean(state.idleFly?.raf),dialogOpen:$('card-dialog').open};
       return {...state.panels.female.snapshot(common),fly:state.fly,
         panels:Object.fromEntries(Object.entries(state.panels).filter(([,p])=>p).map(([key,p])=>[key,p.snapshot(common)]))};
     },
@@ -2325,7 +2514,7 @@ if (isBrowser) {
       applyStrings();
     }
     for (const option of resolveShared(shared.items, state.dictionary)) addSelection(option);
-    if (state.options.length >= 2) await run(shared.mode, shared.seed ?? 0);
+    if (state.options.length >= 2) await run(shared.mode, shared.seed ?? 0, true); // the recipient is invited to guess
     else await selectFly(state.fly, false);
   }).catch((error) => {
     console.warn("data load failed:", error);

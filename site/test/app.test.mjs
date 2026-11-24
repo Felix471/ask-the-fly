@@ -670,3 +670,66 @@ test("a clipped free-text name never ends on half a surrogate pair", () => {
   const decision = decide([{ name, cell: null }, { name: "other", cell: null }], "ask");
   assert.doesNotThrow(() => shareParams(decision, "en"));
 });
+
+import { guessChoices, guessOutcome, guessSummary, guessText, guessPromptKey, displayName } from "../app.js";
+
+test("the guess is judged against the fly's own pick, ties count, unknown entries cannot be guessed", () => {
+  const dictionary = buildDictionary(dishes);
+  const lookup = buildLookup(table);
+  const keyOf = (decision, name) => decision.known.find((item) => item.name === name).entry.key;
+  const ask = decide(scoreOptions(["black coffee", "watermelon", "mapo tofu", "no such dish"], dictionary, lookup), "ask");
+  assert.equal(guessChoices(ask).length, 3, "only scored dishes can be tapped");
+  assert.deepEqual(guessChoices(decide(scoreOptions(["watermelon", "no such dish"], dictionary, lookup), "ask")), [], "one scored dish: nothing to guess");
+  assert.equal(guessOutcome(ask, keyOf(ask, "watermelon")).hit, true);
+  assert.equal(guessOutcome(ask, keyOf(ask, "black coffee")).hit, false);
+  assert.equal(guessOutcome(ask, "no such dish"), null);
+  assert.deepEqual(guessSummary(ask, null, keyOf(ask, "watermelon")).kind, "right");
+  assert.deepEqual(guessSummary(ask, null, keyOf(ask, "mapo tofu")).kind, "wrong");
+
+  // "Let the fly eat first": the guess is still what the fly takes, not what is left.
+  const opposite = decide(scoreOptions(["black coffee", "watermelon", "mapo tofu"], dictionary, lookup), "opposite");
+  assert.equal(guessOutcome(opposite, keyOf(opposite, "watermelon")).hit, true);
+  assert.equal(guessOutcome(opposite, keyOf(opposite, "black coffee")).hit, false);
+
+  // An exact tie at the top: either tied dish counts, and the sentence says it was a tie.
+  const tied = decide(scoreOptions(["steak", "black coffee", "watermelon"], dictionary, lookup), "ask");
+  const allTied = decide(scoreOptions(["steak", "black coffee"], dictionary, lookup), "ask");
+  assert.equal(allTied.flyTies.length, 2, "fixture: steak and black coffee share a cell score");
+  const summary = guessSummary(allTied, null, keyOf(allTied, "steak"));
+  assert.deepEqual([summary.kind, summary.correct], ["tieRight", true]);
+  assert.equal(guessSummary(tied, null, keyOf(tied, "steak")).kind, "wrong", "a tie below the top is not the pick");
+  for (const lang of ["en", "zh"]) {
+    assert.equal(guessText(summary, lang, "result"), STRINGS[lang].guess.resultTieRight);
+    assert.ok(guessText(summary, lang, "card").includes(displayName(summary.item, lang)));
+    assert.equal(guessText(null, lang, "card"), "");
+  }
+});
+
+test("one guess is judged for each fly; the tally counts a round only when both are right", () => {
+  const item = (key, hz) => ({ name: key, entry: { key, display: { en: key, zh: key } }, cell: { mn9_mean: hz } });
+  const table = (a, b, c) => decide([item("a", a), item("b", b), item("c", c)], "ask");
+  const female = table(30, 10, 0);
+  assert.deepEqual([guessSummary(female, table(40, 5, 0), "a").kind, guessSummary(female, table(40, 5, 0), "a").correct], ["bothRight", true]);
+  assert.deepEqual([guessSummary(female, table(40, 5, 0), "b").kind, guessSummary(female, table(40, 5, 0), "b").correct], ["bothWrong", false]);
+  const split = guessSummary(female, table(5, 40, 0), "a");
+  assert.deepEqual([split.kind, split.hit, split.miss, split.correct], ["oneFly", "female", "male", false]);
+  assert.equal(guessSummary(female, table(5, 40, 0), "b").hit, "male");
+  for (const lang of ["en", "zh"]) {
+    const t = STRINGS[lang];
+    assert.equal(guessText(split, lang, "result"), fmt(t.guess.resultOneFly, { hit: t.flyName.female, miss: t.flyName.male }));
+    assert.equal(guessText(split, lang, "card"), fmt(t.guess.cardOneFly, { hit: t.flyName.female }));
+    assert.equal(guessText(guessSummary(female, table(40, 5, 0), "b"), lang, "card"), fmt(t.guess.cardWrong, { guess: "b" }), "both wrong uses the short wrong line on the card");
+    for (const text of [guessText(split, lang, "result"), guessText(split, lang, "card")]) assert.ok(!/[{}]/.test(text), text);
+  }
+});
+
+test("the guess caption follows the mode, the flies asked, and a shared link", () => {
+  assert.equal(guessPromptKey("ask", "female", false), "promptAsk");
+  assert.equal(guessPromptKey("ask", "male", false), "promptAsk");
+  assert.equal(guessPromptKey("opposite", "female", false), "promptOpposite");
+  assert.equal(guessPromptKey("ask", "both", false), "promptBoth");
+  assert.equal(guessPromptKey("opposite", "both", false), "promptBothOpposite");
+  assert.equal(guessPromptKey("ask", "both", true), "promptShared");
+  assert.equal(guessPromptKey("opposite", "female", true), "promptOpposite", "the shared caption does not say whose dish it is");
+  for (const lang of ["en", "zh"]) for (const key of ["promptAsk", "promptOpposite", "promptBoth", "promptBothOpposite", "promptShared"]) assert.ok(STRINGS[lang].guess[key]);
+});

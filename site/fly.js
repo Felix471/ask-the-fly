@@ -190,6 +190,7 @@ export class FlyScene {
     const width = this.canvas.clientWidth || 360;
     const { positions, height } = layoutPlates(plates.length, width, plates.some(plate => plate.badge) ? 18 : 0);
     this.positions = positions;
+    this.layoutSize = { width, height }; // what the positions refer to; CSS scales the canvas later
     this.canvas.width = Math.round(width * this.pixelRatio);
     this.canvas.height = Math.round(height * this.pixelRatio);
     this.canvas.style.height = `${height}px`;
@@ -229,6 +230,44 @@ export class FlyScene {
       node.replaceChildren(name, tag);
       node.title = `${label} — ${badge}`;
     }
+  }
+
+  // Tap targets over the plates (the guess step). `make(index)` returns a button, or
+  // null for a plate that cannot be tapped. The next setPlates() removes them.
+  setPlateButtons(make) {
+    this.clearPlateButtons();
+    if (!this.layoutSize) return;
+    const { width, height } = this.layoutSize; // percentages, like the captions: they follow a resize
+    const r = PLATE / 2;
+    this.plates.forEach((plate, i) => {
+      const button = make(i);
+      if (!button) return;
+      const top = this.positions[i].y - r * 0.7 - 6;
+      const bottom = this.positions[i].y + r + 7 + 18 + (plate.badge ? 18 : 0) + 4; // under the caption
+      button.className = "plate-guess";
+      button.style.left = `${this.positions[i].x / width * 100}%`;
+      button.style.top = `${top / height * 100}%`;
+      button.style.width = `${116 / width * 100}%`;
+      button.style.height = `${(bottom - top) / height * 100}%`;
+      this.labelContainer.append(button);
+    });
+  }
+
+  clearPlateButtons() {
+    for (const node of this.labelContainer.querySelectorAll(".plate-guess")) node.remove();
+  }
+
+  // A small tag at the top of one plate (`index` -1: none).
+  markPlate(index, text) {
+    for (const node of this.labelContainer.querySelectorAll(".plate-tag")) node.remove();
+    if (!this.positions[index] || !this.layoutSize) return;
+    const { width, height } = this.layoutSize;
+    const tag = this.labelContainer.ownerDocument.createElement("span");
+    tag.className = "plate-tag";
+    tag.textContent = text;
+    tag.style.left = `${this.positions[index].x / width * 100}%`;
+    tag.style.top = `${(this.positions[index].y - PLATE / 2 * 0.7 - 2) / height * 100}%`;
+    this.labelContainer.append(tag);
   }
 
   relabel(index, label, sub, badge) {
