@@ -609,3 +609,64 @@ test("with both flies the card has one labelled readout line per fly, each from 
   }
   assert.notEqual(f.flyPick.cell.mn9_mean, m.flyPick.cell.mn9_mean);
 });
+
+// ---- v2.2.0: first-visit helpers ----
+import { EXAMPLE_SETS, tableHintKey, stickyBarState, xhsPassedItems, runPanelsInTurn } from "../app.js";
+
+test("example sets use real entries and give the female fly one clear pick", () => {
+  const dictionary = buildDictionary(dishes);
+  const lookup = buildLookup(table);
+  assert.ok(EXAMPLE_SETS.length >= 3);
+  for (const set of EXAMPLE_SETS) {
+    assert.ok(set.length >= 2 && set.length <= 3, set.join());
+    const scored = scoreOptions(set, dictionary, lookup);
+    assert.ok(scored.every((item) => item.cell && item.entry.key === item.name), `known keys: ${set.join()}`);
+    const d = decide(scored, "ask");
+    assert.equal(d.tie.length, 0, `clear pick: ${set.join()}`);
+    assert.ok(d.winner.cell.mn9_mean >= 5, `the pick is not a low-interest one: ${set.join()}`);
+  }
+});
+
+test("the table hint explains what is missing until two dishes are on it", () => {
+  assert.equal(tableHintKey(0), "hint");
+  assert.equal(tableHintKey(1), "hintOneMore");
+  assert.equal(tableHintKey(2), null);
+  assert.equal(tableHintKey(5), null);
+});
+
+test("the sticky bar shows only while choosing with the ask button out of view", () => {
+  assert.deepEqual(stickyBarState({ phase: "input", count: 0, askVisible: false }), { show: false });
+  assert.deepEqual(stickyBarState({ phase: "input", count: 1, askVisible: false }), { show: true, key: "stickyNeedMore", n: 1, count: 1, ready: false });
+  assert.deepEqual(stickyBarState({ phase: "input", count: 3, askVisible: false }), { show: true, key: "stickyCount", n: 3, ready: true });
+  assert.deepEqual(stickyBarState({ phase: "input", count: 3, askVisible: true }), { show: false });
+  assert.deepEqual(stickyBarState({ phase: "tasting", count: 3, askVisible: false }), { show: false });
+});
+
+test("the Xiaohongshu card lists the dishes the pick was ranked above, highest first", () => {
+  const dictionary = buildDictionary(dishes);
+  const lookup = buildLookup(table);
+  const keys = ["black coffee", "watermelon", "mapo tofu", "honey"];
+  const ask = decide(scoreOptions(keys, dictionary, lookup), "ask");
+  assert.deepEqual(xhsPassedItems(ask).map((i) => i.name), ["watermelon", "mapo tofu", "black coffee"]);
+  assert.deepEqual(xhsPassedItems(decide(scoreOptions(keys, dictionary, lookup), "opposite")), [], "opposite mode has its own layout");
+  assert.deepEqual(xhsPassedItems(decide(scoreOptions(["steak", "black coffee"], dictionary, lookup), "ask")), [], "an all-tied table has nothing below the tie");
+  assert.deepEqual(xhsPassedItems(decide(scoreOptions(["no such dish"], dictionary, lookup), "ask")), []);
+});
+
+test("both flies play one after the other only when their panels are stacked", () => {
+  assert.equal(runPanelsInTurn("both", true), true);
+  assert.equal(runPanelsInTurn("both", false), false);
+  assert.equal(runPanelsInTurn("female", true), false);
+  assert.equal(runPanelsInTurn("male", true), false);
+});
+
+import { clipText } from "../app.js";
+
+test("a clipped free-text name never ends on half a surrogate pair", () => {
+  const name = "x".repeat(79) + "\u{1f600}";
+  assert.equal(clipText(name, 80), "x".repeat(79));
+  assert.equal(clipText("abc", 80), "abc");
+  assert.equal(clipText("x".repeat(78) + "\u{1f600}", 80), "x".repeat(78) + "\u{1f600}");
+  const decision = decide([{ name, cell: null }, { name: "other", cell: null }], "ask");
+  assert.doesNotThrow(() => shareParams(decision, "en"));
+});

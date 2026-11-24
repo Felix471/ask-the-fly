@@ -54,11 +54,19 @@ def render(args: argparse.Namespace) -> tuple[Path, Path]:
         page.wait_for_selector("#result-panel:not([hidden])", timeout=20000)
         page.click("#share-btn")
         page.wait_for_selector("#card-dialog[open]", timeout=20000)
+        if args.format == "xhs":
+            page.check('input[name="card-format"][value="xhs"]')
+            page.wait_for_selector("#download-link[href]")
+            assert page.locator("#share-card").evaluate("canvas => canvas.width") == 1080
         page.wait_for_timeout(500)
         overflow=page.evaluate('window.__cardTextBounds.filter(b=>b.y<0 || b.bottom>b.height)')
         assert not overflow, f'Share-card text outside canvas: {overflow}'
         data_url = page.evaluate("document.getElementById('share-card').toDataURL('image/png')")
         out.write_bytes(base64.b64decode(data_url.split(",", 1)[1]))
+        from PIL import Image
+        with Image.open(out) as card:
+            scaled = card.resize((390, round(card.height * 390 / card.width)), Image.Resampling.LANCZOS)
+            scaled.save(out.with_name(out.stem + "-390" + out.suffix))
         page.screenshot(path=str(phone))  # the modal as the phone shows it
         browser.close()
     return out, phone
@@ -86,6 +94,7 @@ def main() -> int:
     parser.add_argument("--dishes", default="teriyaki-chicken,sour-plum-drink,hot-and-sour-noodles,lemon", help="comma-separated slugs, as in ?d=")
     parser.add_argument("--lang", choices=("zh", "en"), default="zh")
     parser.add_argument("--fly", choices=("female", "male", "both"), default="female")
+    parser.add_argument("--format", choices=("standard", "xhs"), default="standard")
     parser.add_argument("--opposite", action="store_true", help="replay 'Do the opposite' instead of 'Ask the fly'")
     parser.add_argument("--width", type=int, default=390, help="viewport width in CSS px for the phone screenshot")
     parser.add_argument("--out", default=str(ROOT / "docs" / "media" / "share-card-sample.png"))

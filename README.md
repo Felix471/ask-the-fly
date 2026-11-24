@@ -7,8 +7,9 @@ Try it: https://askthefly.app/
 
 **What's new** (full list in [CHANGELOG.md](CHANGELOG.md))
 
-- v2.1.1 (2026-11-23): corrected the scores on the link-preview image, clearer verdicts when nothing gets a clear response, an Ir94e row in the spike raster, and a rewrite of much of the Chinese copy with some Chinese section and dish names. No scores or choices changed.
+- v2.2.0 (2026-11-23): adds a menu page with both flies' rankings of all 279 entries, a Xiaohongshu-sized share card, and an easier first visit with a one-tap example set, a sticky ask bar, and auto-scrolling results, with all scores and choices unchanged.
 
+- v2.1.1 (2026-11-23): corrected the scores on the link-preview image, clearer verdicts when nothing gets a clear response, an Ir94e row in the spike raster, and a rewrite of much of the Chinese copy with some Chinese section and dish names. No scores or choices changed.
 - v2.1.0 (2026-09-19): 105 new entries and 14 sections, with not-food badges and notes. Taste levels are encoder estimates; existing dishes' scores and choices are unchanged.
 - v2.0.1 (2026-09-19): Chinese wording of the male brain-view caption revised; nothing else changed.
 - v2.0.0 (2026-09-19): a second, independently computed male fly, with separate results and replays; compare both flies without pooling their choices. Female results are unchanged.

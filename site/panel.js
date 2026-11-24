@@ -336,7 +336,8 @@ export class FlyPanel {
     this.brain.resize();
     await this.scene.setPlates(plates);
     if (!live()) return;
-    window.scrollTo({ top: 0, behavior: this.host.scrollBehavior });
+    if (this.host.scrollToPanel) this.host.scrollToPanel(this);
+    else window.scrollTo({ top: 0, behavior: this.host.scrollBehavior });
 
     const hooks = {
       onReact: async (index, reactionToken, final) => {

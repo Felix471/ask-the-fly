@@ -82,6 +82,8 @@ Sprites come from `site/assets/` when present (see `docs/assets.md`); otherwise 
 ```
 .venv\Scripts\python scripts/export_site_data.py --stub   # dictionary + STUB lookup table (placeholder numbers)
 .venv\Scripts\python scripts/export_site_data.py          # dictionary + data/lookup_table.json (after build_lookup.py)
+.venv\Scripts\python scripts/export_menu.py               # generate the frozen menu view after data exports
+.venv\Scripts\python scripts/export_menu.py --check       # compare generated menu bytes
 ```
 
 The stub table has the real schema and 400 cells but its MN9 values are a closed-form guess, flagged `"stub": true`. The page shows a yellow banner and stamps "STUB DATA" on the share card while it is loaded. Replace it with the real table once `scripts/build_lookup.py` has run on `results/grid/full`.
@@ -161,6 +163,10 @@ Pure functions (`normalizeName`, `buildDictionary`, `buildLookup`, `scoreOptions
 With a local server serving `site/` on port 8765, run `python scripts/browser_checks.py` for browser regressions and `python scripts/check_plate_labels.py` for the longest dictionary names in en/zh at 360, 390 and 430 px. The latter saves six screenshots and a JSON report under `results/plate-labels/after/`, and checks full names/titles, non-overlap, stable scene height, language switching, resize, skip and reset. `--baseline --out results/plate-labels/before` records the original canvas-label overlap before applying the fix; `--compare results/plate-labels/before/report.json` also checks heights against that baseline.
 
 ## Behaviour
+
+- First visit (v2.2.0): an empty table shows a hint and an example button (`EXAMPLE_SETS` in `site/app.js`, our choice of ready-made tables; each has one clear female pick, tested). The two ask buttons stay disabled until two entries are on the table, and the table hint says what is missing (`tableHintKey`: the general hint when empty, "one more" with a single entry, which is also what a visitor arriving from a menu-page link sees). "View all" does not focus the search box on touch screens. While the visitor is choosing and the ask button is out of view, a bar fixed to the bottom shows the count and an ask button (`stickyBarState`). When a run starts the page goes to the stage, and when it ends the result panel scrolls into view. With both flies on a screen narrower than 960 px the panels are stacked, so the flies play one after the other and the page follows the one playing (`runPanelsInTurn`); side by side they play together as before. Skip ends both.
+- Share cards: the standard 900 × 1200 card and a 1080 × 1440 Xiaohongshu format (`drawShareCardXhs`), chosen in the dialog and remembered for the rest of the visit. The Xiaohongshu layout measures its text: names and speech shrink through fixed size steps, then the picture, so nothing overlaps or comes near the footer rule (browser check F29 uses the longest names in the dictionary in both languages). A single-fly card shows up to three entries ranked below the pick as small pictures with name and MN9 (`xhsPassedItems`; not in "Let the fly eat first"), and a male-only card names the male fly in its title.
+- Menu page (`site/menu/`, data `site/data/menu.json` from `scripts/export_menu.py`): both flies' top tens, the entries they disagree on most (with the fixed disagreement sentence), the full not-food ranking per fly, the top of each section per fly, and a filterable table of all entries. Rows link to the main page with that entry on the table.
 
 - Mobile-first, zh/en toggle (remembered per browser in `localStorage`).
 - Plate names use fixed-height, single-line HTML captions over the canvas; long names end in a CSS ellipsis, with the unchanged full name in the caption's text and `title`. The plate layout and scene height do not change with name length or language.
