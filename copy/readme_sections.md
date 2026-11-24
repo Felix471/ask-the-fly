@@ -11,6 +11,8 @@ Try it: https://askthefly.app/
 
 **What's new** (full list in [CHANGELOG.md](CHANGELOG.md))
 
+- v2.3.1 (2026-11-24): fixes the standard share card so the tablecloth no longer covers a long dish name, and corrects one word in the English male brain note, with all scores and choices unchanged.
+
 - v2.3.0 (2026-11-24): adds a guess before the reveal: tap the dish you think the fly will take, then see whether you were right; a shared link now invites the recipient to guess first, with all scores and choices unchanged.
 
 - v2.2.0 (2026-11-23): adds a menu page with both flies' rankings of all 279 entries, a Xiaohongshu-sized share card, and an easier first visit with a one-tap example set, a sticky ask bar, and auto-scrolling results, with all scores and choices unchanged.
@@ -180,6 +182,8 @@ English: [README.md](README.md)
 在线试用：https://askthefly.app/
 
 **最近更新**（完整列表见 [CHANGELOG.md](CHANGELOG.md)）
+
+- v2.3.1（2026-11-24）：修正标准分享卡上桌布底图盖住长菜名的问题，并改正英文雄蝇脑图说明里的一个用词，所有分数和选择不变。
 
 - v2.3.0（2026-11-24）：新增“先猜再揭晓”：果蝇开吃前先点一盘猜它选哪个，揭晓时告诉你猜没猜中；打开分享链接的人也会先被邀请猜一次，所有分数和选择不变。
 

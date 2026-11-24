@@ -771,8 +771,8 @@
     {
       "key": "releaseSummary",
       "context": "Footer 'what's new' line, one-line summary of the latest release; version and date come from site/data/release.json",
-      "en": "Guess the fly's pick before the reveal; scores unchanged.",
-      "zh": "果蝇开吃前可以先猜它选哪盘，揭晓时告诉你猜没猜中；分数不变。",
+      "en": "Share card fix: long dish names no longer covered.",
+      "zh": "修正分享卡上桌布盖住长菜名的问题；分数不变。",
       "max_length": 60
     },
     {
@@ -1289,7 +1289,7 @@
     {
       "key": "maleNote.brain",
       "context": "Male anterior view; {n}=neurons_male.json position_sources.synapse_centroid for indexed neurons; one appended readout is outside this count.",
-      "en": "MaleCNS v1.0 soma positions, anterior view. {n} neurons without a recorded soma or entry point are placed at their synapse centroid.",
+      "en": "MaleCNS v1.0 soma positions, anterior view. {n} neurons without a recorded soma or entry point are placed at the median of their synapse coordinates.",
       "zh": "MaleCNS v1.0 前视图，按胞体位置排布。其中 {n} 个没有胞体或入脑点记录的神经元，改用它们突触坐标的中位数定位。"
     },
     {

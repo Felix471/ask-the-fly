@@ -143,7 +143,7 @@ export const STRINGS = {
     "colIr94e": "Amino acids",
     "ir94eExplain": "Amino acids = the Ir94e channel: in this model free amino acids and glutamate put the fly off, so soy-, stock- and meat-heavy dishes score low. Which level a dish gets is our estimate; the suppression is the model's.",
     "lowInterest": "The fly didn't care much for any of these. This one was just the least uninteresting.",
-    "releaseSummary": "Guess the fly's pick before the reveal; scores unchanged.",
+    "releaseSummary": "Share card fix: long dish names no longer covered.",
     "releaseLink": "what's new",
     "stateV12": {
       "EatsLabel": "Eats",
@@ -192,7 +192,7 @@ export const STRINGS = {
       "label": "Why they may differ"
     },
     "maleNote": {
-      "brain": "MaleCNS v1.0 soma positions, anterior view. {n} neurons without a recorded soma or entry point are placed at their synapse centroid.",
+      "brain": "MaleCNS v1.0 soma positions, anterior view. {n} neurons without a recorded soma or entry point are placed at the median of their synapse coordinates.",
       "replay": "This replay is grid trial 0, one of the 30 trials behind the male score; not a live simulation.",
       "weight": "Male synaptic weight: 0.17875 mV = 0.65 × Shiu’s, a calibration from the independent fly-brain-minecraft project, replicated by us.",
       "bitterGate": "One of our four gates fails: bitter alone at 25 Hz gives 1.07 Hz MN9, above our 1.0 Hz limit but below our 5 Hz display threshold.",
@@ -448,7 +448,7 @@ export const STRINGS = {
     "colIr94e": "氨基酸",
     "ir94eExplain": "氨基酸对应 Ir94e 通道：在这个模型里，游离氨基酸和谷氨酸（常说的“鲜”）会让果蝇扫兴，所以酱油、高汤、肉多的菜得分很低。每道菜分到哪一档是我们估的，这种抑制反应来自模型本身。",
     "lowInterest": "这几样果蝇都不太想吃，勉强挑了这个。",
-    "releaseSummary": "果蝇开吃前可以先猜它选哪盘，揭晓时告诉你猜没猜中；分数不变。",
+    "releaseSummary": "修正分享卡上桌布盖住长菜名的问题；分数不变。",
     "releaseLink": "更新记录",
     "stateV12": {
       "EatsLabel": "吃",

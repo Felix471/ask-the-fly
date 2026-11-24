@@ -7,6 +7,8 @@ Try it: https://askthefly.app/
 
 **What's new** (full list in [CHANGELOG.md](CHANGELOG.md))
 
+- v2.3.1 (2026-11-24): fixes the standard share card so the tablecloth no longer covers a long dish name, and corrects one word in the English male brain note, with all scores and choices unchanged.
+
 - v2.3.0 (2026-11-24): adds a guess before the reveal: tap the dish you think the fly will take, then see whether you were right; a shared link now invites the recipient to guess first, with all scores and choices unchanged.
 
 - v2.2.0 (2026-11-23): adds a menu page with both flies' rankings of all 279 entries, a Xiaohongshu-sized share card, and an easier first visit with a one-tap example set, a sticky ask bar, and auto-scrolling results, with all scores and choices unchanged.
