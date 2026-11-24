@@ -7,6 +7,21 @@ ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / 'results/pixel-bubbles'
 
 
+def pass_guess_step(page):
+    """The page offers a guess before the fly starts; these checks are about the run itself."""
+    # Polled with evaluate: the page's CSP blocks the eval that wait_for_function relies on.
+    phase = "window.__askfly ? window.__askfly.snapshot().phase : 'input'"
+    for wanted in (('guess', 'tasting', 'result'), ('tasting', 'result')):
+        for _ in range(600):
+            if page.evaluate(phase) in wanted:
+                break
+            page.wait_for_timeout(50)
+        else:
+            raise AssertionError(f'phase {page.evaluate(phase)!r}, expected one of {wanted}')
+        if page.evaluate(phase) == 'guess':
+            page.locator('[data-panel="guess-watch"]:visible').click()
+
+
 def main():
     OUT.mkdir(parents=True, exist_ok=True)
     buckets = json.loads((ROOT / 'copy/fly_lines.json').read_text(encoding='utf8'))['buckets']
@@ -17,6 +32,7 @@ def main():
             errors=[]
             page.on('pageerror', lambda e: errors.append(str(e)))
             page.goto(f'http://127.0.0.1:8773/?d=apple,black-coffee&lang={lang}&seed=1')
+            pass_guess_step(page)
             page.locator('#fly-bubble').wait_for(state='visible')
             page.evaluate('()=>document.fonts.ready')
             assert page.locator('.bubble-text').inner_text() == ('就这味儿。' if lang=='zh' else "That's all it is.")

@@ -48,6 +48,7 @@ export class FlyPanel {
       if(this.el('brain-details').open && this.raster.rows.length) this.raster.setRows(this.raster.rows,this.raster.duration);
     };
     this.el('skip-btn').onclick=()=>this.host.skip();
+    this.el('guess-watch').onclick=()=>this.host.guessWatch?.();
     this.renderStrings();
   }
   renderResponse() {
@@ -102,10 +103,12 @@ export class FlyPanel {
     this.token?.cancel(); this.token=null;
     if(this.brain) {this.brain.stop();this.brain.setReplay(null);}
     this.scene?.stop();
+    this.scene?.clearPlateButtons();
+    this.scene?.markPlate(-1); // the old table may be seen again before it is replaced
     for(const key of ['responseItem','decision','sceneStatus','brainCaption','scenePlates','currentCell','currentItem','currentCellLevels']) this[key]=null;
     this.scored=[];this.variant='';this.appliedVariant='';this.variantRequest+=1;
     if(!this.root) return;
-    for(const key of ['response-detail','male-state-note','fly-bubble','mn9-pill']) this.el(key).hidden=true;
+    for(const key of ['response-detail','male-state-note','fly-bubble','mn9-pill','guess-watch']) this.el(key).hidden=true;
     for(const key of ['brain-caption','silence-caption']) this.el(key).textContent='';
     this.el('mn9-count').textContent='0';
     this.renderSilenceControls();
@@ -133,6 +136,10 @@ export class FlyPanel {
   renderSceneStatus() {
     const st = this.sceneStatus;
     if (!st) return;
+    if (st.raw) { // a caption that is the same for one fly and for both (the guess step)
+      this.el("scene-status").textContent = st.raw.split('.').reduce((value, part) => value?.[part], STRINGS[this.lang]) ?? '';
+      return;
+    }
     const values = {};
     for (const k of ["dish", "fly", "pick", "fly_pick", "human_pick"]) if (st[k]) values[k] = displayName(st[k], this.lang);
     this.el("scene-status").textContent = this.statusText(st.key, values);
@@ -160,6 +167,7 @@ export class FlyPanel {
   relabelPlates() {
     if (!this.scene || !this.scenePlates) return;
     this.scenePlates.forEach((item, i) => this.scene.relabel(i, displayName(item, this.lang), this.plateSub(item), this.host.notFoodBadge?.(item) || ''));
+    this.host.platesReady?.(this);
   }
 
   rasterLabels() {
@@ -306,6 +314,31 @@ export class FlyPanel {
     return Number(this.el("speed").value) || 1;
   }
 
+  platesFor(scored) {
+    return scored.map((item) => ({
+      key: item.entry ? item.entry.key : item.name,
+      label: displayName(item, this.lang),
+      badge: this.host.notFoodBadge?.(item) || '',
+      sub: this.plateSub(item),
+      slug: this.host.spriteSlug(item),
+    }));
+  }
+
+  // The table laid out with the fly waiting above it and nothing tasted: the guess step.
+  async showTable(decision, caption) {
+    const scored = [...decision.known, ...decision.misses];
+    for (const item of scored) { item.loading = false; item.tasted = false; }
+    this.scenePlates = scored;
+    this.sceneStatus = { raw: caption };
+    this.renderSceneStatus();
+    // The replays the run will need are fetched while the visitor decides.
+    for (const item of decision.known) this.loadReplay(cellIdFor(item.cell)).catch(error => console.warn("replay prefetch failed:", error));
+    Object.assign(this.scene.fly, { hidden: false, state: "idle", responseState: null });
+    this.scene.speech = null;
+    this.scene.highlight = -1;
+    await this.scene.setPlates(this.platesFor(scored));
+  }
+
   async runScene(decision, session) {
     if (this.token) this.token.cancel();
     const token = makeToken();
@@ -316,13 +349,7 @@ export class FlyPanel {
     const scored = [...decision.known, ...decision.misses];
     for (const item of scored) { item.loading = false; item.tasted = false; }
     this.scenePlates = scored;
-    const plates = scored.map((item) => ({
-      key: item.entry ? item.entry.key : item.name,
-      label: displayName(item, this.lang),
-      badge: this.host.notFoodBadge?.(item) || '',
-      sub: this.plateSub(item),
-      slug: this.host.spriteSlug(item),
-    }));
+    const plates = this.platesFor(scored);
     // Replays are fetched up front so the fly rarely waits at a plate.
     for (const item of decision.known) this.loadReplay(cellIdFor(item.cell)).catch(error => console.warn("replay prefetch failed:", error));
     const plan = scenePlan(decision, scored);
@@ -335,6 +362,7 @@ export class FlyPanel {
     this.el("hud-idle").hidden = false;
     this.brain.resize();
     await this.scene.setPlates(plates);
+    if (this.session === session) this.host.platesReady?.(this); // the tag on the guessed plate, also when skipped
     if (!live()) return;
     if (this.host.scrollToPanel) this.host.scrollToPanel(this);
     else window.scrollTo({ top: 0, behavior: this.host.scrollBehavior });

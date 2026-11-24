@@ -7,6 +7,8 @@ Try it: https://askthefly.app/
 
 **What's new** (full list in [CHANGELOG.md](CHANGELOG.md))
 
+- v2.3.0 (2026-11-24): adds a guess before the reveal: tap the dish you think the fly will take, then see whether you were right; a shared link now invites the recipient to guess first, with all scores and choices unchanged.
+
 - v2.2.0 (2026-11-23): adds a menu page with both flies' rankings of all 279 entries, a Xiaohongshu-sized share card, and an easier first visit with a one-tap example set, a sticky ask bar, and auto-scrolling results, with all scores and choices unchanged.
 
 - v2.1.1 (2026-11-23): corrected the scores on the link-preview image, clearer verdicts when nothing gets a clear response, an Ir94e row in the spike raster, and a rewrite of much of the Chinese copy with some Chinese section and dish names. No scores or choices changed.

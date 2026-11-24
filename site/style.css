@@ -266,6 +266,26 @@ body { padding: 0 16px 32px; max-width: 640px; margin: 0 auto; }
    without relaying out the plates or restarting an in-flight animation. */
 .plate-labels { position: absolute; inset: 2px; pointer-events: none; }
 .plate-label.has-not-food { height: auto; overflow: visible; }
+/* Guess step: a tap target over each plate with a score, and the tag on the tapped one. */
+.plate-guess {
+  position: absolute; transform: translateX(-50%); padding: 0; cursor: pointer; pointer-events: auto;
+  border: 2px dashed rgba(181, 71, 31, 0.55); border-radius: 12px; background: transparent;
+}
+.plate-guess:hover, .plate-guess:focus-visible { background: rgba(181, 71, 31, 0.12); border-style: solid; outline: none; }
+.plate-tag {
+  position: absolute; transform: translate(-50%, -50%); padding: 1px 7px; border-radius: 999px;
+  background: #b5471f; color: #fff; white-space: nowrap; pointer-events: none;
+  font: 600 11px/16px system-ui, -apple-system, 'Segoe UI', 'PingFang SC', 'Noto Sans CJK SC', sans-serif;
+}
+.guess-watch { display: block; margin: 10px auto 0; }
+.guess-watch[hidden] { display: none; }
+/* While the visitor is guessing only the stage is shown: nothing has been tasted yet. */
+.scene-panel.guessing > :not(.scene-head):not(.scene-stage):not(.guess-watch) { display: none; }
+.scene-panel.guessing .speed { display: none; }
+.guess-result { margin: 6px 0 10px; padding: 6px 10px; border-left: 3px solid var(--line); background: var(--soft); font-size: 0.95rem; }
+.guess-result.right { border-left-color: var(--accent); }
+.guess-result .guess-tally-note { color: var(--muted); font-variant-numeric: tabular-nums; }
+.guess-tally { margin-left: auto; margin-right: 8px; font-size: 0.85rem; color: var(--muted); font-variant-numeric: tabular-nums; }
 .plate-name { display: block; overflow: hidden; text-overflow: ellipsis; }
 .not-food-badge {
   display: inline-block; max-width: 100%; padding: 1px 4px;

@@ -40,6 +40,21 @@ def summarize(frames: list[float]) -> dict:
     }
 
 
+def pass_guess_step(page):
+    """The page offers a guess before the fly starts; these checks are about the run itself."""
+    # Polled with evaluate: the page's CSP blocks the eval that wait_for_function relies on.
+    phase = "window.__askfly ? window.__askfly.snapshot().phase : 'input'"
+    for wanted in (('guess', 'tasting', 'result'), ('tasting', 'result')):
+        for _ in range(600):
+            if page.evaluate(phase) in wanted:
+                break
+            page.wait_for_timeout(50)
+        else:
+            raise AssertionError(f'phase {page.evaluate(phase)!r}, expected one of {wanted}')
+        if page.evaluate(phase) == 'guess':
+            page.locator('[data-panel="guess-watch"]:visible').click()
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--url", default="http://192.168.1.160:8765/")
@@ -64,6 +79,7 @@ def main() -> int:
         page.evaluate("(v) => { document.getElementById('speed').value = v; }", args.speed)
         page.evaluate("window.__armed = true")
         page.click("#ask-btn")
+        pass_guess_step(page)
         page.wait_for_function("!document.getElementById('result-panel').hidden", timeout=120000)
         page.evaluate("window.__armed = false")
         frames = page.evaluate("window.__frames")
